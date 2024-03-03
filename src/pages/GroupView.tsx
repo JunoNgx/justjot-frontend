@@ -20,9 +20,14 @@ export default function GroupView() {
         console.log(list)
     }, []);
 
-    return <div>
-        {list?.map(item =>
-            <ItemComponent key={item.id} item={item} />
-        )}
-    </div>
+    return <main className="main-content">
+        <div className="main-content__top">
+            <div>Last updated</div>
+        </div>
+        <div className="main-content__main">
+            {list?.map(item =>
+                <ItemComponent key={item.id} item={item} />
+            )}
+        </div>
+    </main>
 }
