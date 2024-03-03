@@ -19,10 +19,10 @@ export default function GroupView() {
         fetch();
         console.log(list)
     }, []);
-    
-    return <div>
-        {list?.map(item => <ItemComponent key={item.id} item={item} />)
 
-        }
+    return <div>
+        {list?.map(item =>
+            <ItemComponent key={item.id} item={item} />
+        )}
     </div>
 }
