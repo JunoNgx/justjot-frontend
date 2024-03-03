@@ -6,21 +6,21 @@ export type Item = RecordModel | {
     group: string,
     title: string,
     content: string,
-    type: itemType,
-    defaultAction: defaultAction,
+    type: ItemType,
+    defaultAction: DefaultAction,
     isMarkedDone: boolean,
     // TODO: should validate these as ISO strings
     created: string,
     updated: string
 };
 
-export enum itemType {
+export enum ItemType {
     TEXT = "text",
     LINK = "link",
     TODO = "todo"
 };
 
-export enum defaultAction {
+export enum DefaultAction {
     COPY = "copy",
     EDIT = "edit",
     OPEN = "open"
