@@ -1,4 +1,5 @@
 import { Item, ItemType } from "../types";
+import { isDatetimeMoreThanOneYearOld } from "./misc";
 
 export const calculatePriText = (item: Item): string => {
     const isTodoItem = item.type === ItemType.TODO;
@@ -10,12 +11,16 @@ export const calculatePriText = (item: Item): string => {
 export const calculateDatetimeStr = (item: Item): string => {
     const datetimeDataToUse = item.updated || item.created;
     const dateTimeInstance = new Date(datetimeDataToUse);
+
+    const isMoreThanAYear = isDatetimeMoreThanOneYearOld(dateTimeInstance);
     const formatOptions: Intl.DateTimeFormatOptions = {
         day: "numeric",
         month: "short",
-        year: "2-digit",
+        year: isMoreThanAYear
+            ? "2-digit"
+            : undefined,
     };
-    // TODO; const isMoreThanOneYear
+
     return Intl.DateTimeFormat("en-US", formatOptions)
         .format(dateTimeInstance);
 };
