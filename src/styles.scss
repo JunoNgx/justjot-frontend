@@ -1,0 +1,21 @@
+.item {
+    // background-color: red;
+    border: solid 2px #000;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__left-side {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    &__primary-text {
+        text-transform: uppercase;
+    }
+
+    &__secondary-text {
+        font-family: monospace;;
+    }
+}

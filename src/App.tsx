@@ -10,6 +10,8 @@ import Redirect from "./pages/Redirect";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
+import "./styles.scss";
+
 function App() {
     return <div>
         <Header/>
