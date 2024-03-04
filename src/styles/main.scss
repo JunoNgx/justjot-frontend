@@ -1,4 +1,5 @@
-@use "./variables.scss";
+@use "./variables.scss" as v;
+@use "./mixins.scss" as m;
 @use "./item.scss";
 @use "./loginRegister.scss";
 
@@ -24,6 +25,24 @@ main {
 
 br {
     display: block;
+}
+
+button {
+    @include m.border;
+    cursor: pointer;
+
+    border-radius: 0;
+    padding: 0.5rem 1rem;
+
+    font-size: 1.25rem;
+    color: var(--col-pri);
+    background-color: var(--col-bg);
+
+    &:hover {
+        background-color: var(--col-bg);
+        color: var(--col-bg);
+        background-color: var(--col-pri);
+    }
 }
 
 .main-content {
