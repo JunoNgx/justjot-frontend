@@ -1,4 +1,4 @@
-@use "./variables.scss";
+@use "./variables.scss" as v;
 
 @mixin border {
     border: solid 2px var(--col-pri);
@@ -18,7 +18,7 @@
 }
 
 @mixin mobile {
-    @media screen and (max-width <= var(--breakpoint)) {
+    @media screen and (width <= v.$breakpoint) {
         @content;
     }
 }
