@@ -1,0 +1,28 @@
+@use "./variables.scss";
+@use "./item.scss";
+
+body {
+    max-width: 720px;
+    margin: auto;
+}
+
+br {
+    display: block;
+}
+
+.main-content {
+    &__top {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        border-bottom: solid 2px var(--col-pri);
+        padding-bottom: 8px;
+        margin-bottom: 16px;
+    }
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
