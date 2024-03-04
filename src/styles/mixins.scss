@@ -1,3 +1,5 @@
+@use "./variables.scss";
+
 @mixin border {
     border: solid 2px var(--col-pri);
 }
@@ -13,4 +15,10 @@
     height: 100%;
     display: grid;
     place-items: center;
+}
+
+@mixin mobile {
+    @media screen and (max-width <= var(--breakpoint)) {
+        @content;
+    }
 }
