@@ -4,11 +4,14 @@
     border: solid 2px var(--col-pri);
 }
 
-@mixin modal($width) {
+@mixin modal($width, $mobile-width) {
     @include border;
-    margin: auto;
-    padding: 1rem;
-    max-width: $width;
+    margin: 1rem;
+    min-width: $width;
+
+    @include mobile {
+        min-width: $mobile-width;
+    }
 }
 
 @mixin modal-container {
