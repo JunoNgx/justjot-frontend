@@ -1,0 +1,16 @@
+@mixin border {
+    border: solid 2px var(--col-pri);
+}
+
+@mixin modal($width) {
+    @include border;
+    margin: auto;
+    padding: 1rem;
+    max-width: $width;
+}
+
+@mixin modal-container {
+    height: 100%;
+    display: grid;
+    place-items: center;
+}

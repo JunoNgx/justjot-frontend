@@ -1,4 +1,8 @@
-@use "./variables.scss" as m;
+@use "./mixins" as m;
+
+.login-wrapper {
+    @include m.modal-container;
+}
 
 .login {
     @include m.modal(512px);
