@@ -5,5 +5,38 @@
 }
 
 .login {
-    @include m.modal(512px);
+    @include m.border;
+    @include m.modal(512px, 300px);
+    padding: 4rem;
+    // margin: 1rem;
+    // padding: 4rem;
+    // min-width: 512px;
+
+    @include m.mobile {
+        padding: 1rem;
+    }
+    
+    &__field {
+        margin: 2rem 0;
+    }
+
+    // &__label {
+
+    // }
+
+    &__input {
+        @include m.border;
+        box-sizing: border-box;
+        padding: 1rem;
+        width: 100%;
+    }
+
+    &__button-wrapper {
+        margin-top: 4rem;
+    }
+
+    &__button {
+        width: 100%;
+        padding: 1rem;
+    }
 }
