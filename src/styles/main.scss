@@ -3,6 +3,10 @@
 @use "./item.scss";
 @use "./loginRegister.scss";
 
+html {
+    accent-color: var(--col-bg);
+}
+
 body {
     max-width: 720px;
     height: 100dvh;
@@ -11,6 +15,11 @@ body {
 
 div#root {
     height: 100%;
+}
+
+::selection {
+    color: var(--col-bg);
+    background-color: var(--col-pri);
 }
 
 .app-container {
