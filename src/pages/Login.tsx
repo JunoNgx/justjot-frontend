@@ -7,13 +7,13 @@ export default function Login() {
                 <div className="login__field">
                     <label>
                         <div className="login__label">Email</div>
-                        <input className="login__input" required type="email"></input>
+                        <input className="login__input" required type="email" placeholder="Email"></input>
                     </label>
                 </div>
                 <div className="login__field">
                     <label>
                         <div className="login__label">Password</div>
-                        <input className="login__input" required type="password"></input>
+                        <input className="login__input" required type="password" placeholder="Password"></input>
                     </label>
                 </div>
                 <div className="login__button-wrapper">
