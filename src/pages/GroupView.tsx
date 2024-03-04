@@ -7,6 +7,8 @@ import { Item } from '../types';
 import ItemComponent from '../components/ItemComponent';
 
 export default function GroupView() {
+    // TODO: if !isLoggedIn Navigate to home
+    
     const [list, setList] = useState<Item[]>();
 
     useEffect(() => {

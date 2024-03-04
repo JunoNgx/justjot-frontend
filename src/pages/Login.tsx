@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 type LoginFormData = {email: string, password: string};
 
 export default function Login() {
+    // TODO: if isLoggedIn Navigate to /:username
+
     const { register, handleSubmit } = useForm<LoginFormData>();
 
     const attemptLogin = (data: LoginFormData) => {
