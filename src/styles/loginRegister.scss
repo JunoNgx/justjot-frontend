@@ -1,0 +1,5 @@
+@use "./variables.scss" as m;
+
+.login {
+    @include m.modal(512px);
+}

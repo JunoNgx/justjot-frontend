@@ -2,3 +2,14 @@
     --col-pri: #000;
     --col-bg: #fff;
 }
+
+@mixin border {
+    border: solid 2px var(--col-pri);
+}
+
+@mixin modal($width) {
+    @include border;
+    margin: auto;
+    padding: 1rem;
+    max-width: $width;
+}

@@ -1,3 +1,5 @@
 export default function Login() {
-    return <h1>Login route</h1>
+    return <main className="login">
+        Login route
+    </main>
 }
