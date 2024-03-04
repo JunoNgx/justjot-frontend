@@ -1,10 +1,19 @@
+import { useForm } from "react-hook-form";
+
+type LoginFormData = {email: string, password: string};
 
 export default function Login() {
+    const { register, handleSubmit } = useForm<LoginFormData>();
+
+    const attemptLogin = (data: LoginFormData) => {
+        // TODO submit to backend
+    }
+
     return <div className="login-wrapper">
         <div className="login">
             <h2>Login</h2>
 
-            <form className="login__form">
+            <form className="login__form" onSubmit={handleSubmit(attemptLogin)}>
                 <div className="login__field">
                     <label>
                         <div className="login__label">Email</div>
@@ -13,6 +22,7 @@ export default function Login() {
                             required
                             type="email"
                             placeholder="Email"
+                            {...register("email")}
                         />
                     </label>
                 </div>
@@ -24,6 +34,7 @@ export default function Login() {
                             required
                             type="password"
                             placeholder="Password"
+                            {...register("password")}
                         />
                     </label>
                 </div>
