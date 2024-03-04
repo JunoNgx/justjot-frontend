@@ -1,3 +1,4 @@
+
 export default function Login() {
     return <div className="login-wrapper">
         <div className="login">
@@ -7,13 +8,23 @@ export default function Login() {
                 <div className="login__field">
                     <label>
                         <div className="login__label">Email</div>
-                        <input className="login__input" required type="email" placeholder="Email"></input>
+                        <input
+                            className="login__input"
+                            required
+                            type="email"
+                            placeholder="Email"
+                        />
                     </label>
                 </div>
                 <div className="login__field">
                     <label>
                         <div className="login__label">Password</div>
-                        <input className="login__input" required type="password" placeholder="Password"></input>
+                        <input
+                            className="login__input"
+                            required
+                            type="password"
+                            placeholder="Password"
+                        />
                     </label>
                 </div>
                 <div className="login__button-wrapper">
