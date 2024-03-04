@@ -20,7 +20,7 @@ export default function GroupView() {
         console.log(list)
     }, []);
 
-    return <main className="main-content">
+    return <div className="main-content">
         <div className="main-content__top">
             <div>Last updated</div>
         </div>
@@ -29,5 +29,5 @@ export default function GroupView() {
                 <ItemComponent key={item.id} item={item} />
             )}
         </div>
-    </main>
+    </div>
 }

@@ -1,5 +1,5 @@
 export default function Login() {
-    return <main className="login">
+    return <div className="login">
         Login route
-    </main>
+    </div>
 }

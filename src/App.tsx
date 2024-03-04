@@ -13,19 +13,21 @@ import Register from "./pages/Register";
 import "./styles/main.scss";
 
 function App() {
-    return <div>
+    return <div className="app-container">
         <Header/>
-        <Routes>
-            <Route path="/" element={<LandingPage />}/>
-            <Route path="/help" element={<Help />}/>
-            <Route path="/:username">
-                <Route index element={<GroupView/>}/>
-                <Route path=":groupSlug" element={<GroupView />}/>
-            </Route>
-            <Route path="/login" element={<Login />}/>
-            <Route path="/register" element={<Register />}/>
-            <Route path="/*" element={<Redirect />}/>
-        </Routes>
+        <main>
+            <Routes>
+                <Route path="/" element={<LandingPage />}/>
+                <Route path="/help" element={<Help />}/>
+                <Route path="/:username">
+                    <Route index element={<GroupView/>}/>
+                    <Route path=":groupSlug" element={<GroupView />}/>
+                </Route>
+                <Route path="/login" element={<Login />}/>
+                <Route path="/register" element={<Register />}/>
+                <Route path="/*" element={<Redirect />}/>
+            </Routes>
+        </main>
     </div>
 }
 

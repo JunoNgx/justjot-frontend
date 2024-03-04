@@ -11,7 +11,19 @@ br {
     display: block;
 }
 
+.app-container {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 7;
+}
+
 .main-content {
+    height: 100%;
+
     &__top {
         display: flex;
         flex-direction: row;
