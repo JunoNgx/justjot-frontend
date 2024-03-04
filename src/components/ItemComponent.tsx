@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Item, ItemType } from "../types";
-import { calculatePriText, calculateDatetimeStr } from "../utils/itemUtils";
+import { calculatePriText, processDatetime } from "../utils/itemUtils";
+// import { DateTime } from "luxon";
 
 export default function ItemComponent({ item }: { item: Item }) {
 
@@ -15,6 +16,8 @@ export default function ItemComponent({ item }: { item: Item }) {
     //     console.log("set is focused", val)
     //     isFocused = val;
     // }
+
+    const { relativeDatetime, fullDatetime } = processDatetime(item);
 
     return <div className={"item " + (isFocused ? "item--is-active" : "")}
         onMouseEnter={() => { setIsFocused(true) }}
@@ -30,9 +33,9 @@ export default function ItemComponent({ item }: { item: Item }) {
         <div className="item__right-side">
             <div
                 className="item__datetime"
-                title={item.updated}
+                title={fullDatetime}
             >
-                {calculateDatetimeStr(item)}
+                {relativeDatetime}
             </div>
         </div>
     </div>

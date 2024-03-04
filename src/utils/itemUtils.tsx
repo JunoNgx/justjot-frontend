@@ -1,5 +1,6 @@
 import { Item, ItemType } from "../types";
 import { isDatetimeMoreThanOneYearOld } from "./misc";
+import { DateTime } from "luxon";
 
 export const calculatePriText = (item: Item): string => {
     const isTodoItem = item.type === ItemType.TODO;
@@ -8,19 +9,35 @@ export const calculatePriText = (item: Item): string => {
         : item.title;
 };
 
-export const calculateDatetimeStr = (item: Item): string => {
+// export const calculateDatetimeStr = (item: Item): string => {
+//     const datetimeDataToUse = item.updated || item.created;
+//     const dateTimeInstance = new Date(datetimeDataToUse);
+
+//     const isMoreThanAYear = isDatetimeMoreThanOneYearOld(dateTimeInstance);
+//     const formatOptions: Intl.DateTimeFormatOptions = {
+//         day: "numeric",
+//         month: "short",
+//         year: isMoreThanAYear
+//             ? "2-digit"
+//             : undefined,
+//     };
+
+//     return Intl.DateTimeFormat("en-US", formatOptions)
+//         .format(dateTimeInstance);
+// };
+
+type ItemDatetimeProcessOutput = {
+    relativeDatetime: string | null,
+    fullDatetime: string,
+}
+
+export const processDatetime =(item: Item): ItemDatetimeProcessOutput  => {
     const datetimeDataToUse = item.updated || item.created;
-    const dateTimeInstance = new Date(datetimeDataToUse);
+    // Luxon can't parse this for some reason
+    const itemDatetime = DateTime.fromJSDate(new Date(datetimeDataToUse));
+    
+    const relativeDatetime = itemDatetime.toRelative();
+    const fullDatetime = itemDatetime.toLocaleString(DateTime.DATETIME_FULL);
 
-    const isMoreThanAYear = isDatetimeMoreThanOneYearOld(dateTimeInstance);
-    const formatOptions: Intl.DateTimeFormatOptions = {
-        day: "numeric",
-        month: "short",
-        year: isMoreThanAYear
-            ? "2-digit"
-            : undefined,
-    };
-
-    return Intl.DateTimeFormat("en-US", formatOptions)
-        .format(dateTimeInstance);
-};
+    return { relativeDatetime, fullDatetime };
+}
