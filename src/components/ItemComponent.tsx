@@ -28,7 +28,12 @@ export default function ItemComponent({ item }: { item: Item }) {
                 <div className="item__secondary-text">{item.content}</div>}
         </div>
         <div className="item__right-side">
-            <div className="item__datetime">{calculateDatetimeStr(item)}</div>
+            <div
+                className="item__datetime"
+                title={item.updated}
+            >
+                {calculateDatetimeStr(item)}
+            </div>
         </div>
     </div>
 };
