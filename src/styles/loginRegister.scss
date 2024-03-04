@@ -32,11 +32,14 @@
     }
 
     &__button-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
         margin-top: 4rem;
     }
 
-    &__button {
-        width: 100%;
-        padding: 1rem;
-    }
+    // &__button {
+    //     width: 100%;
+    //     padding: 1rem;
+    // }
 }
