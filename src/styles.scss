@@ -7,7 +7,6 @@ br {
     display: block;
 }
 
-
 .main-content {
     &__top {
         display: flex;
@@ -34,6 +33,11 @@ br {
     box-sizing: border-box;
     border: solid 2px transparent;
     padding: 8px;
+    cursor: pointer;
+
+    &--is-active {
+        border: solid 2px black;
+    }
 
     &__left-side {
         display: flex;
