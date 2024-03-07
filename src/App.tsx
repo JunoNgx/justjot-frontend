@@ -35,7 +35,7 @@ function App() {
         header={{ height: 50}}
         padding="none"
     >
-        <ThemeModeContext.Provider value={ [themeMode, setThemeMode] }>
+        <ThemeModeContext.Provider value={ { themeMode, setThemeMode } }>
 
             <AppShell.Header>
                 <Header/>

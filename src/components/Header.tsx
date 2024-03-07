@@ -5,7 +5,7 @@ import { ThemeMode } from "../types";
 
 function Header() {
 
-    const [_themeMode, setThemeMode] = useContext(ThemeModeContext)
+    const { setThemeMode } = useContext(ThemeModeContext)
 
     return <Group
         className="header"

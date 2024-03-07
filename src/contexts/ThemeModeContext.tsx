@@ -3,7 +3,16 @@ import { createContext, useContext, useState, ReactNode, useEffect } from "react
 import { ThemeMode } from "../types";
 import { useMantineColorScheme } from "@mantine/core";
 
-export const ThemeModeContext = createContext(ThemeMode.DARK);
+type ThemeModeContextType = {
+    themeMode: ThemeMode,
+    setThemeMode: React.Dispatch<React.SetStateAction<ThemeMode>>
+}
+
+export const ThemeModeContext = createContext<ThemeModeContextType>({
+    themeMode: ThemeMode.DARK,
+    setThemeMode: () => {}
+});
+
 // const ThemeModeUpdateContext = createContext();
 
 // export function ThemeModeContextProvider({children}: {children: ReactNode}) {
