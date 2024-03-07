@@ -15,35 +15,33 @@ import Register from "./pages/Register";
 import "./styles/main.scss";
 
 function App() {
-    // return <div className="app-container">
     return <AppShell
-                header={{ height: 50}}
-                padding="none"
+        header={{ height: 50}}
+        padding="none"
+    >
+        <AppShell.Header>
+            <Header/>
+        </AppShell.Header>
+
+        <AppShell.Main>
+            <Center
+                className="center-container"
             >
-                <AppShell.Header>
-                    <Header/>
-                </AppShell.Header>
+                <Routes>
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/help" element={<Help />} />
+                    <Route path="/:username">
+                        <Route index element={<GroupView />} />
+                        <Route path=":groupSlug" element={<GroupView />} />
+                    </Route>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/*" element={<Redirect />} />
+                </Routes>
+            </Center>
+        </AppShell.Main>
 
-                <AppShell.Main>
-                    <Center
-                        className="center-container"
-                    >
-                        <Routes>
-                            <Route path="/" element={<LandingPage />} />
-                            <Route path="/help" element={<Help />} />
-                            <Route path="/:username">
-                                <Route index element={<GroupView />} />
-                                <Route path=":groupSlug" element={<GroupView />} />
-                            </Route>
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="/*" element={<Redirect />} />
-                        </Routes>
-                    </Center>
-                </AppShell.Main>
-
-        </AppShell>
-    // </div>
+    </AppShell>
 }
 
 export default App;
