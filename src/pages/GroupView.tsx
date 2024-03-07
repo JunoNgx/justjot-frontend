@@ -30,7 +30,6 @@ export default function GroupView() {
         <div className="main-content__top">
             <div>Last updated</div>
         </div>
-        {/* <div className="main-content__main"> */}
         <Stack
             // h={300}
             // bg="var(--mantine-color-body)"
@@ -40,6 +39,5 @@ export default function GroupView() {
                 <ItemComponent key={item.id} item={item} />
             )}
         </Stack>
-        {/* </div> */}
     </div>
 }
