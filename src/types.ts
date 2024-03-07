@@ -25,3 +25,9 @@ export enum DefaultAction {
     EDIT = "edit",
     OPEN = "open"
 };
+
+export enum ThemeMode {
+    LIGHT = "light",
+    DARK = "dark",
+    AUTO = "auto"
+};
