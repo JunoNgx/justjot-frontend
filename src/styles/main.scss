@@ -7,6 +7,21 @@
     height: 100dvh;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+
+    &__right-side {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: center;
+    }
+}
+
 // html {
 //     accent-color: var(--col-bg);
 // }
