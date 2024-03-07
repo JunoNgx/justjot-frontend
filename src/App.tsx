@@ -35,7 +35,6 @@ function App() {
                     className="center-container"
                 >
                     <Routes>
-                        // TODO: forget password
                         <Route path="/" element={<LandingPage />} />
                         <Route path="/help" element={<Help />} />
                         <Route path="/:username">
