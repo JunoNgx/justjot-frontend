@@ -17,7 +17,7 @@ import "./styles/main.scss";
 function App() {
     // return <div className="app-container">
     return <AppShell
-                header={{ height: 60}}
+                header={{ height: 50}}
                 padding="none"
             >
                 <AppShell.Header>
