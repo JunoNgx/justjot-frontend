@@ -27,7 +27,7 @@ export default function Login() {
             shadow="xs"
             p="xl"
         >
-            <Title order={1}>
+            <Title order={2}>
                 Login
             </Title>
 
