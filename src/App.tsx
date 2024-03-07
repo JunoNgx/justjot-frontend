@@ -1,8 +1,7 @@
 // import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
 
-import { AppShell, Center, useMantineColorScheme } from '@mantine/core';
+import { AppShell, Center } from '@mantine/core';
 
 import Header from "./components/Header";
 
@@ -16,26 +15,16 @@ import ResetPassword from "./pages/ResetPassword";
 
 import "./styles/main.scss";
 
-import { ThemeModeContext } from "./contexts/ThemeModeContext";
-import { ThemeMode } from "./types";
+import ThemeModeContextProvider from "./contexts/ThemeModeContext";
 
 function App() {
-
-    const [themeMode, setThemeMode] = useState(ThemeMode.DARK);
-    const {
-        setColorScheme: setMantineColorScheme,
-        // clearColorScheme: _clearMantineColorScheme
-    } = useMantineColorScheme();
-
-    useEffect(() => {
-        setMantineColorScheme(themeMode);
-    }, [themeMode]);
 
     return <AppShell
         header={{ height: 50}}
         padding="none"
     >
-        <ThemeModeContext.Provider value={ { themeMode, setThemeMode } }>
+
+        <ThemeModeContextProvider>
 
             <AppShell.Header>
                 <Header/>
@@ -61,7 +50,7 @@ function App() {
                 </Center>
             </AppShell.Main>
 
-        </ThemeModeContext.Provider>
+        </ThemeModeContextProvider>
 
     </AppShell>
 }
