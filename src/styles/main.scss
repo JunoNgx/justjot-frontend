@@ -3,38 +3,38 @@
 @use "./item.scss";
 @use "./loginRegister.scss";
 
-html {
-    accent-color: var(--col-bg);
-}
+// html {
+//     accent-color: var(--col-bg);
+// }
 
-body {
-    max-width: 720px;
-    height: 100dvh;
-    margin: auto;
-}
+// body {
+//     max-width: 720px;
+//     height: 100dvh;
+//     margin: auto;
+// }
 
-div#root {
-    height: 100%;
-}
+// div#root {
+//     height: 100%;
+// }
 
-::selection {
-    color: var(--col-bg);
-    background-color: var(--col-pri);
-}
+// ::selection {
+//     color: var(--col-bg);
+//     background-color: var(--col-pri);
+// }
 
-.app-container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
+// .app-container {
+//     height: 100%;
+//     display: flex;
+//     flex-direction: column;
+// }
 
-main {
-    flex-grow: 7;
-}
+// main {
+//     flex-grow: 7;
+// }
 
-br {
-    display: block;
-}
+// br {
+//     display: block;
+// }
 
 // button {
 //     @include m.border;
@@ -54,19 +54,19 @@ br {
 //     }
 // }
 
-button {
-    border: none;
-    cursor: pointer;
-    text-decoration: underline;
-    background-color: transparent;
-    font-size: 1.5rem;
-    // font-family: monospace;
+// button {
+//     border: none;
+//     cursor: pointer;
+//     text-decoration: underline;
+//     background-color: transparent;
+//     font-size: 1.5rem;
+//     // font-family: monospace;
 
-    &:hover {
-        background-color: var(--col-pri);
-        color: var(--col-bg);
-    }
-}
+//     &:hover {
+//         background-color: var(--col-pri);
+//         color: var(--col-bg);
+//     }
+// }
 
 // .main-content {
 //     height: 100%;
