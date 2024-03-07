@@ -1,8 +1,9 @@
-import { Container, Text, Title } from "@mantine/core";
+import { Button, Group, Text, Title } from "@mantine/core";
 
 function Header() {
-    return <Container
+    return <Group
         className="header"
+        justify="space-between"
     >
         <div className="header__left-side">
             <Title
@@ -12,15 +13,34 @@ function Header() {
             </Title>
         </div>
 
-        <div className="header__right-side">
-            <Container>
-                Dark mode switch
-            </Container>
+        <Group
+            className="header__right-side"
+            gap="md"
+        >
+            <Group className="header__theme-mode-container"
+                gap="sm"
+            >
+                <Button
+                    className="header__theme-mode-option"
+                >
+                    Auto
+                </Button>
+                <Button
+                    className="header__theme-mode-option"
+                >
+                    Light
+                </Button>
+                <Button
+                    className="header__theme-mode-option"
+                >
+                    Dark
+                </Button>
+            </Group>
             <Text>
                 Login / Register
             </Text>
-        </div>
-    </Container>
+        </Group>
+    </Group>
 }
 
 export default Header;
