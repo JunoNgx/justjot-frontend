@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 
 import { Item } from '../types';
 
+import { Stack } from '@mantine/core';
+
+import Searchbar from '../components/Searchbar';
 import ItemComponent from '../components/ItemComponent';
 
 export default function GroupView() {
@@ -23,13 +26,20 @@ export default function GroupView() {
     }, []);
 
     return <div className="main-content">
+        <Searchbar/>
         <div className="main-content__top">
             <div>Last updated</div>
         </div>
-        <div className="main-content__main">
+        {/* <div className="main-content__main"> */}
+        <Stack
+            // h={300}
+            // bg="var(--mantine-color-body)"
+            gap="xs"
+        >
             {list?.map(item =>
                 <ItemComponent key={item.id} item={item} />
             )}
-        </div>
+        </Stack>
+        {/* </div> */}
     </div>
 }
