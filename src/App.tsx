@@ -11,6 +11,7 @@ import GroupView from "./pages/GroupView";
 import Redirect from "./pages/Redirect";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ResetPassword from "./pages/ResetPassword";
 
 import "./styles/main.scss";
 
@@ -28,6 +29,7 @@ function App() {
                 className="center-container"
             >
                 <Routes>
+                    // TODO: forget password
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/help" element={<Help />} />
                     <Route path="/:username">
@@ -36,6 +38,7 @@ function App() {
                     </Route>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/reset" element={<ResetPassword />} />
                     <Route path="/*" element={<Redirect />} />
                 </Routes>
             </Center>
