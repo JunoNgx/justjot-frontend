@@ -18,14 +18,16 @@ function App() {
     // return <div className="app-container">
     return <AppShell
                 header={{ height: 60}}
-                padding="xl"
+                padding="none"
             >
                 <AppShell.Header>
                     <Header/>
                 </AppShell.Header>
 
                 <AppShell.Main>
-                    <Center>
+                    <Center
+                        className="center-container"
+                    >
                         <Routes>
                             <Route path="/" element={<LandingPage />} />
                             <Route path="/help" element={<Help />} />
