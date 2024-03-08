@@ -11,6 +11,7 @@ import GroupView from "./pages/GroupView";
 import Redirect from "./pages/Redirect";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ForgetPassword from "./pages/ForgetPassword";
 import ResetPassword from "./pages/ResetPassword";
 
 import "./styles/main.scss";
@@ -45,6 +46,7 @@ function App() {
                             </Route>
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
+                            <Route path="/forget" element={<ForgetPassword />} />
                             <Route path="/reset" element={<ResetPassword />} />
                             <Route path="/*" element={<Redirect />} />
                         </Routes>
