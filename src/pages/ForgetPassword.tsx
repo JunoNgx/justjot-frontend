@@ -56,7 +56,6 @@ export default function ForgetPassword() {
         </form>
 
     return <Stack
-        className="register"
         align="center"
         justify="center"
     >
