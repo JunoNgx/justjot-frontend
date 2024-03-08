@@ -1,5 +1,5 @@
 import { useForm } from '@mantine/form';
-import { Stack, Paper, TextInput, Button, Title, Group, Text, Container } from "@mantine/core";
+import { Stack, Paper, TextInput, Button, Title, Group, Text, Container, PasswordInput } from "@mantine/core";
 import { Link } from 'react-router-dom';
 
 type LoginFormData = {email: string, password: string};
@@ -45,7 +45,7 @@ export default function Login() {
                     type="email"
                     {...form.getInputProps('email')}
                 />
-                <TextInput
+                <PasswordInput
                     mt="md"
                     required
                     label="Password"
