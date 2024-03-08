@@ -1,5 +1,5 @@
 import { useForm } from '@mantine/form';
-import { Stack, Paper, TextInput, Button, Title, Group, Text } from "@mantine/core";
+import { Stack, Paper, TextInput, Button, Title, Group, Text, PasswordInput } from "@mantine/core";
 import { Link } from 'react-router-dom';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useContext, useState } from 'react';
@@ -48,7 +48,7 @@ export default function Register() {
             .create(submissionData)
             .then(async (_record) => {
                 setErrorList([]);
-                
+
                 await pbClient.collection(CollectionType.USERS)
                     .requestVerification(submissionData.email)
                     .then(() => {
@@ -98,34 +98,28 @@ export default function Register() {
                 />
                 <TextInput
                     mt="md"
+                    description="This can be empty and changed later."
                     label="Display name"
                     placeholder="Irina Beckett"
                     name="name"
                     type="text"
                     {...form.getInputProps('name')}
                 />
-                <Text mt="xs">
-                    This can be empty and changed later.
-                </Text>
 
-                <TextInput
-                    mt="md"
-                    required
+                <PasswordInput mt="md"
                     label="Password"
+                    description="The length must be between 8 and 72 characters."
+                    required
                     placeholder="IronMaus123"
                     type="password"
                     minLength={8}
                     maxLength={72}
                     {...form.getInputProps('password')}
                 />
-                <Text mt="xs">
-                    The length must be between 8 and 72 characters.
-                </Text>
 
-                <TextInput
-                    mt="md"
-                    required
+                <PasswordInput mt="md"
                     label="Password confirm"
+                    required
                     placeholder="IronMaus123"
                     type="password"
                     minLength={8}
