@@ -6,7 +6,10 @@ import { useContext, useState } from 'react';
 import { CollectionType } from '../types'
 import { useParams } from "react-router-dom"
 
-type PasswordResetFormData = {password: string, passwordConfirm: string};
+type PasswordResetFormData = {
+    password: string,
+    passwordConfirm: string
+};
 
 export default function ResetPassword() {
 
