@@ -48,21 +48,26 @@ export default function Register() {
             .create(submissionData)
             .then(async (_record) => {
                 setErrorList([]);
+                
                 await pbClient.collection(CollectionType.USERS)
-                    .requestVerification(submissionData.email);
-                // TODO: notice: please verify email and go to login
-                // TODO: reset form
+                    .requestVerification(submissionData.email)
+                    .then(() => {
+                        // TODO: display notice: please verify email and go to login
+                        // TODO: reset form
+                    })
+                    .catch(displayError)
             })
-            .catch((error: ClientResponseError) => {
-                console.log("error", error.response.data)
-                if (error.response.data) {
-                    // for (const [_key, value] of Object.entries(error.response.data)) {
-                    Object.entries(error.response.data).forEach((_key, value: any) => {
-                        setErrorList(errList => [...errList, value.message])
-                    });
-                };
-            });
+            .catch(displayError);
     }
+
+    const displayError = (error: ClientResponseError) => {
+        if (error.response.data) {
+            // for (const [_key, value] of Object.entries(error.response.data)) {
+            Object.entries(error.response.data).forEach((_key, value: any) => {
+                setErrorList(errList => [...errList, value.message])
+            });
+        };
+    };
 
     return <Stack
         className="register"
