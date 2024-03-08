@@ -1,5 +1,5 @@
 import { useForm } from '@mantine/form';
-import { Stack, Paper, TextInput, Button, Title, Group, Text, Container, PasswordInput } from "@mantine/core";
+import { Stack, Paper, TextInput, Button, Title, Group, Text, PasswordInput } from "@mantine/core";
 import { Link } from 'react-router-dom';
 
 type LoginFormData = {email: string, password: string};
