@@ -36,4 +36,10 @@ export enum UserType {
     USER = "user",
     ADMIN = "admin",
     POWERUSER = "poweruser"
-}
+};
+
+export enum CollectionType {
+    USERS = "users",
+    ITEMS = "items",
+    GROUP = "groups"
+};
