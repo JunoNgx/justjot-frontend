@@ -31,3 +31,9 @@ export enum ThemeMode {
     DARK = "dark",
     AUTO = "auto"
 };
+
+export enum UserType {
+    USER = "user",
+    ADMIN = "admin",
+    POWERUSER = "poweruser"
+}
