@@ -1,6 +1,10 @@
 import { useForm } from '@mantine/form';
 import { Stack, Paper, TextInput, Button, Title, Group, Text } from "@mantine/core";
 import { Link } from 'react-router-dom';
+import { BackendClientContext } from '../contexts/BackendClientContext';
+import { useContext, useState } from 'react';
+import { UserType, CollectionType } from '../types'
+import { ClientResponseError } from 'pocketbase';
 
 type RegisterFormData = {
     email: string,
@@ -9,8 +13,21 @@ type RegisterFormData = {
     passwordConfirm: string
 };
 
+type RegisterSubmission = {
+    email: string,
+    name: string,
+    password: string,
+    passwordConfirm: string,
+    username?: string,
+    emailVisibility?: boolean,
+    userType?: UserType,
+};
+
 export default function Register() {
     // TODO: if isLoggedIn Navigate to /:username
+
+    const pbClient = useContext(BackendClientContext);
+    const [errorList, setErrorList] = useState<string[]>([]);
     const form = useForm({
         initialValues: {
             email: "",
@@ -20,11 +37,33 @@ export default function Register() {
         }
     });
 
-    const attemptRegister = (data: RegisterFormData) => {
+    const attemptRegister = async (formData: RegisterFormData) => {
+        const submissionData: RegisterSubmission = {...formData};
+        // Workaround the username requirement
+        submissionData.username = formData.email.replace("@", "-");
+        submissionData.emailVisibility = false;
+        submissionData.userType = UserType.USER;
 
+        await pbClient.collection(CollectionType.USERS)
+            .create(submissionData)
+            .then((_record) => {
+                setErrorList([]);
+                // TODO: notice: please verify email and go to login
+                // TODO: reset form
+            })
+            .catch((error: ClientResponseError) => {
+                console.log("error", error.response.data)
+                if (error.response.data) {
+                    // for (const [_key, value] of Object.entries(error.response.data)) {
+                    Object.entries(error.response.data).forEach((_key, value: any) => {
+                        setErrorList(errList => [...errList, value.message])
+                    });
+                };
+            });
     }
 
     return <Stack
+        className="register"
         align="center"
         justify="center"
     >
@@ -98,6 +137,14 @@ export default function Register() {
                         Submit
                     </Button>
                 </Group>
+
+                <Stack className="register__error-list" mt="md">
+                    {errorList?.map(error => 
+                        <Text>
+                            {error}
+                        </Text>
+                    )}
+                </Stack>
 
             </form>
         </Paper>
