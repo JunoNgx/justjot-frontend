@@ -1,5 +1,6 @@
 import { useForm } from '@mantine/form';
-import { Stack, Paper, TextInput, Button, Title, Group } from "@mantine/core";
+import { Stack, Paper, TextInput, Button, Title, Group, Text } from "@mantine/core";
+import { Link } from 'react-router-dom';
 
 type LoginFormData = {email: string, password: string};
 
@@ -30,6 +31,10 @@ export default function Login() {
             <Title order={2}>
                 Login
             </Title>
+
+            <Text>
+                Don't have an account? <Link to="/register">Register</Link>
+            </Text>
 
             <form onSubmit={form.onSubmit(attemptLogin)}>
                 <TextInput
