@@ -1,11 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Button, Group, Text, Title } from "@mantine/core";
 import { ThemeModeContext } from "../contexts/ThemeModeContext";
 import { ThemeMode } from "../types";
+import { BackendClientContext } from "../contexts/BackendClientContext";
 
 function Header() {
 
     const { setThemeMode } = useContext(ThemeModeContext);
+    const pbClient = useContext(BackendClientContext);
+
+    // useEffect(() => {
+    //     console.log(pbClient)
+    // }, []);
 
     return <Group
         className="header"
@@ -45,8 +51,11 @@ function Header() {
                     Dark
                 </Button>
             </Group>
-            <Text>
+            {/* <Text>
                 Login / Register
+            </Text> */}
+            <Text>
+                Is logged in: {pbClient.authStore.isValid.toString()}
             </Text>
         </Group>
     </Group>

@@ -16,6 +16,7 @@ import ResetPassword from "./pages/ResetPassword";
 import "./styles/main.scss";
 
 import ThemeModeContextProvider from "./contexts/ThemeModeContext";
+import BackendClientContextProvider from "./contexts/BackendClientContext";
 
 function App() {
 
@@ -25,30 +26,32 @@ function App() {
     >
 
         <ThemeModeContextProvider>
+            <BackendClientContextProvider>
 
-            <AppShell.Header>
-                <Header/>
-            </AppShell.Header>
+                <AppShell.Header>
+                    <Header/>
+                </AppShell.Header>
 
-            <AppShell.Main>
-                <Center
-                    className="center-container"
-                >
-                    <Routes>
-                        <Route path="/" element={<LandingPage />} />
-                        <Route path="/help" element={<Help />} />
-                        <Route path="/:username">
-                            <Route index element={<GroupView />} />
-                            <Route path=":groupSlug" element={<GroupView />} />
-                        </Route>
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/reset" element={<ResetPassword />} />
-                        <Route path="/*" element={<Redirect />} />
-                    </Routes>
-                </Center>
-            </AppShell.Main>
+                <AppShell.Main>
+                    <Center
+                        className="center-container"
+                    >
+                        <Routes>
+                            <Route path="/" element={<LandingPage />} />
+                            <Route path="/help" element={<Help />} />
+                            <Route path="/:username">
+                                <Route index element={<GroupView />} />
+                                <Route path=":groupSlug" element={<GroupView />} />
+                            </Route>
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="/reset" element={<ResetPassword />} />
+                            <Route path="/*" element={<Redirect />} />
+                        </Routes>
+                    </Center>
+                </AppShell.Main>
 
+            </BackendClientContextProvider>
         </ThemeModeContextProvider>
 
     </AppShell>
