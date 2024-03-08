@@ -1,5 +1,5 @@
 import { useForm } from '@mantine/form';
-import { Stack, Paper, TextInput, Button, Title, Group, Text } from "@mantine/core";
+import { Stack, Paper, TextInput, Button, Title, Group, Text, Container } from "@mantine/core";
 import { Link } from 'react-router-dom';
 
 type LoginFormData = {email: string, password: string};
@@ -67,6 +67,10 @@ export default function Login() {
                 </Group>
 
             </form>
+
+            <Text mt="lg">
+                Forgot your password? <Link to="/reset">Reset</Link>
+            </Text>
         </Paper>
     </Stack>
 }
