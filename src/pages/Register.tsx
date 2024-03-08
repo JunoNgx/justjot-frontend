@@ -46,8 +46,10 @@ export default function Register() {
 
         await pbClient.collection(CollectionType.USERS)
             .create(submissionData)
-            .then((_record) => {
+            .then(async (_record) => {
                 setErrorList([]);
+                await pbClient.collection(CollectionType.USERS)
+                    .requestVerification(submissionData.email);
                 // TODO: notice: please verify email and go to login
                 // TODO: reset form
             })
