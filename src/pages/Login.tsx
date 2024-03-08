@@ -41,7 +41,7 @@ export default function Login() {
                     mt="md"
                     required
                     label="Email"
-                    placeholder="casey@domain.com"
+                    placeholder="lucatiel@mirrah.com"
                     type="email"
                     {...form.getInputProps('email')}
                 />
