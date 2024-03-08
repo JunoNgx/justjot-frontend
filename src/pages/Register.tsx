@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 type RegisterFormData = {
     email: string,
-    displayName: string,
+    name: string,
     password: string,
     passwordConfirm: string
 };
@@ -14,7 +14,7 @@ export default function Register() {
     const form = useForm({
         initialValues: {
             email: "",
-            displayName: "",
+            name: "",
             password: "",
             passwordConfirm: "",
         }
