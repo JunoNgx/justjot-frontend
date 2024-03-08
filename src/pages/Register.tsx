@@ -134,7 +134,7 @@ export default function Register() {
                         variant="filled"
                         type="submit"
                     >
-                        Submit
+                        Register
                     </Button>
                 </Group>
 
