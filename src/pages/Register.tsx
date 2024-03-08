@@ -35,6 +35,12 @@ export default function Register() {
             name: "",
             password: "",
             passwordConfirm: "",
+        },
+        validate: {
+            passwordConfirm: (passwordConfirmVal, formData: RegisterFormData) => 
+                formData.password !== passwordConfirmVal
+                    ? "Password confirmation does not match"
+                    : null
         }
     });
 

@@ -19,6 +19,12 @@ export default function ResetPassword() {
         initialValues: {
             password: "",
             passwordConfirm: ""
+        },
+        validate: {
+            passwordConfirm: (passwordConfirmVal, formData: PasswordResetFormData) => 
+                formData.password !== passwordConfirmVal
+                    ? "Password confirmation does not match"
+                    : null
         }
     });
 
