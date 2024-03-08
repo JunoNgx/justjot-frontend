@@ -69,7 +69,7 @@ export default function Login() {
             </form>
 
             <Text mt="lg">
-                Forgot your password? <Link to="/reset">Reset</Link>
+                Forgot your password? <Link to="/forget">Request reset</Link>
             </Text>
         </Paper>
     </Stack>
