@@ -68,6 +68,8 @@ export default function Register() {
                     label="Password"
                     placeholder="IronMaus123"
                     type="password"
+                    minLength={8}
+                    maxLength={72}
                     {...form.getInputProps('password')}
                 />
                 <Text mt="xs">
@@ -80,6 +82,8 @@ export default function Register() {
                     label="Password confirm"
                     placeholder="IronMaus123"
                     type="password"
+                    minLength={8}
+                    maxLength={72}
                     {...form.getInputProps('passwordConfirm')}
                 />
 
