@@ -82,18 +82,16 @@ export default function Register() {
         </Text>
 
         <form onSubmit={form.onSubmit(attemptRegister)}>
-            <TextInput
-                mt="md"
-                required
+            <TextInput mt="md"
                 label="Email"
+                required
                 placeholder="don.h@creo.com"
                 type="email"
                 {...form.getInputProps('email')}
             />
-            <TextInput
-                mt="md"
-                description="This can be empty and changed later."
+            <TextInput mt="md"
                 label="Display name"
+                description="This can be empty and changed later."
                 placeholder="Irina Beckett"
                 name="name"
                 type="text"
@@ -121,8 +119,7 @@ export default function Register() {
                 {...form.getInputProps('passwordConfirm')}
             />
 
-            <Group
-                mt="md"
+            <Group mt="md"
                 justify="flex-end"
             >
                 <Button
