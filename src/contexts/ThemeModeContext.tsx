@@ -9,12 +9,12 @@ type ThemeModeContextType = {
 }
 
 export const ThemeModeContext = createContext<ThemeModeContextType>({
-    themeMode: ThemeMode.DARK,
+    themeMode: ThemeMode.AUTO,
     setThemeMode: () => {}
 });
 
 export default function ThemeModeContextProvider({children}: {children: ReactNode}) {
-    const [themeMode, setThemeMode] = useState(ThemeMode.DARK);
+    const [themeMode, setThemeMode] = useState(ThemeMode.AUTO);
     const {
         setColorScheme: setMantineColorScheme,
         // clearColorScheme: _clearMantineColorScheme
