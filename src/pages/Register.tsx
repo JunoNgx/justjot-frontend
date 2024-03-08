@@ -1,6 +1,6 @@
 import { useForm } from '@mantine/form';
-import { Stack, Paper, TextInput, Button, Title, Group, Text, PasswordInput } from "@mantine/core";
-import { Link } from 'react-router-dom';
+import { Stack, Paper, TextInput, Button, Title, Group, Text, PasswordInput, Box } from "@mantine/core";
+import { Link, NavLink } from 'react-router-dom';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useContext, useState } from 'react';
 import { UserType, CollectionType } from '../types'
@@ -25,6 +25,7 @@ type RegisterSubmission = {
 
 export default function Register() {
     // TODO: if isLoggedIn Navigate to /:username
+    const [hasRequested, setHasRequested] = useState(false);
 
     const pbClient = useContext(BackendClientContext);
     const [errorList, setErrorList] = useState<string[]>([]);
@@ -51,9 +52,8 @@ export default function Register() {
 
                 await pbClient.collection(CollectionType.USERS)
                     .requestVerification(submissionData.email)
-                    .then(() => {
-                        // TODO: display notice: please verify email and go to login
-                        // TODO: reset form
+                    .then((_record) => {
+                        setHasRequested(true)
                     })
                     .catch(displayError)
             })
@@ -69,6 +69,80 @@ export default function Register() {
         };
     };
 
+    const successNotice = <Box mt="lg" p="none">
+        <Text>Registration request has been made.</Text>
+        <Text>Please check your inbox for the verification email.</Text>
+        <Text mt="lg">Proceed to <NavLink to="/login">Login</NavLink>.</Text>
+    </Box>
+
+
+    const registrationForm = <>
+        <Text>
+            Already have an account? <Link to="/login">Login</Link>
+        </Text>
+
+        <form onSubmit={form.onSubmit(attemptRegister)}>
+            <TextInput
+                mt="md"
+                required
+                label="Email"
+                placeholder="don.h@creo.com"
+                type="email"
+                {...form.getInputProps('email')}
+            />
+            <TextInput
+                mt="md"
+                description="This can be empty and changed later."
+                label="Display name"
+                placeholder="Irina Beckett"
+                name="name"
+                type="text"
+                {...form.getInputProps('name')}
+            />
+
+            <PasswordInput mt="md"
+                label="Password"
+                description="The length must be between 8 and 72 characters."
+                required
+                placeholder="IronMaus123"
+                type="password"
+                minLength={8}
+                maxLength={72}
+                {...form.getInputProps('password')}
+            />
+
+            <PasswordInput mt="md"
+                label="Password confirm"
+                required
+                placeholder="IronMaus123"
+                type="password"
+                minLength={8}
+                maxLength={72}
+                {...form.getInputProps('passwordConfirm')}
+            />
+
+            <Group
+                mt="md"
+                justify="flex-end"
+            >
+                <Button
+                    variant="filled"
+                    type="submit"
+                >
+                    Register
+                </Button>
+            </Group>
+
+            <Stack className="register__error-list" mt="md">
+                {errorList?.map(error => 
+                    <Text>
+                        {error}
+                    </Text>
+                )}
+            </Stack>
+        </form>
+    </>
+
     return <Stack
         className="register"
         align="center"
@@ -83,71 +157,11 @@ export default function Register() {
                 Register
             </Title>
 
-            <Text>
-                Already have an account? <Link to="/login">Login</Link>
-            </Text>
+                {hasRequested
+                    ? successNotice
+                    : registrationForm
+                }
 
-            <form onSubmit={form.onSubmit(attemptRegister)}>
-                <TextInput
-                    mt="md"
-                    required
-                    label="Email"
-                    placeholder="don.h@creo.com"
-                    type="email"
-                    {...form.getInputProps('email')}
-                />
-                <TextInput
-                    mt="md"
-                    description="This can be empty and changed later."
-                    label="Display name"
-                    placeholder="Irina Beckett"
-                    name="name"
-                    type="text"
-                    {...form.getInputProps('name')}
-                />
-
-                <PasswordInput mt="md"
-                    label="Password"
-                    description="The length must be between 8 and 72 characters."
-                    required
-                    placeholder="IronMaus123"
-                    type="password"
-                    minLength={8}
-                    maxLength={72}
-                    {...form.getInputProps('password')}
-                />
-
-                <PasswordInput mt="md"
-                    label="Password confirm"
-                    required
-                    placeholder="IronMaus123"
-                    type="password"
-                    minLength={8}
-                    maxLength={72}
-                    {...form.getInputProps('passwordConfirm')}
-                />
-
-                <Group
-                    mt="md"
-                    justify="flex-end"
-                >
-                    <Button
-                        variant="filled"
-                        type="submit"
-                    >
-                        Register
-                    </Button>
-                </Group>
-
-                <Stack className="register__error-list" mt="md">
-                    {errorList?.map(error => 
-                        <Text>
-                            {error}
-                        </Text>
-                    )}
-                </Stack>
-
-            </form>
         </Paper>
     </Stack>
 }
