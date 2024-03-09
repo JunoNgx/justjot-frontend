@@ -1,6 +1,6 @@
 import PocketBase from 'pocketbase';
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { Item } from '../types';
 
@@ -8,13 +8,17 @@ import { Stack } from '@mantine/core';
 
 import Searchbar from '../components/Searchbar';
 import ItemComponent from '../components/ItemComponent';
+import { BackendClientContext } from '../contexts/BackendClientContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function GroupView() {
-    // TODO: if !isLoggedIn Navigate to home
-    
-    const [list, setList] = useState<Item[]>();
+    const { isLoggedIn } = useContext(BackendClientContext);
 
     useEffect(() => {
+        if (!isLoggedIn) {
+            navigate(`/login`, { replace: true });
+        }
+
         const fetch = async () => {
             const pbClient = new PocketBase(import.meta.env.VITE_BACKEND_URL);
             const records: Item[] = await pbClient.collection("items").getFullList();
@@ -22,8 +26,10 @@ export default function GroupView() {
         };
 
         fetch();
-        console.log(list)
     }, []);
+
+    const navigate = useNavigate();
+    const [list, setList] = useState<Item[]>();
 
     return <div className="main-content">
         <Searchbar/>

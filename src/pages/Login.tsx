@@ -8,20 +8,20 @@ import { CollectionType } from '../types';
 type LoginFormData = {email: string, password: string};
 
 export default function Login() {
-    const pbClient = useContext(BackendClientContext);
+    const { pbClient, isLoggedIn, setIsLoggedIn } = useContext(BackendClientContext);
 
-    const navigate = useNavigate();
     useEffect(() => {
-        if (pbClient.authStore.isValid) {
-            navigate(`/${pbClient.authStore.model!.username}`, {
-                replace: true
-            });
-        }
+        if (isLoggedIn) navigateToMainView();
     }, []);
 
+    const navigate = useNavigate();
+    const navigateToMainView = () => {
+        navigate(`/${pbClient.authStore!.model!.username}`, {
+            replace: true
+        });
+    }
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
-
     const form = useForm({
         initialValues: {
             email: "",
@@ -37,6 +37,8 @@ export default function Login() {
             )
             .then(() => {
                 setIsSuccessful(true);
+                setIsLoggedIn(true);
+                navigateToMainView();
             })
             .catch(() => {
                 setIsSuccessful(false);

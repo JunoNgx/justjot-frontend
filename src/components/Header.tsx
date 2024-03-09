@@ -3,24 +3,19 @@ import { Box, Button, Container, Group, Menu, Text, Title, UnstyledButton } from
 import { ThemeModeContext } from "../contexts/ThemeModeContext";
 import { ThemeMode } from "../types";
 import { BackendClientContext } from "../contexts/BackendClientContext";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { IconChevronDown, IconLogout, IconSettings } from "@tabler/icons-react";
 
 function Header() {
 
     const { setThemeMode } = useContext(ThemeModeContext);
-    const pbClient = useContext(BackendClientContext);
+    const { logout, isLoggedIn, setIsLoggedIn } = useContext(BackendClientContext);
+    const navigate = useNavigate()
 
-    // useEffect(() => {
-    //     console.log(pbClient)
-    // }, []);
-
-    // const rightCorner = () => pbClient.authStore.isValid
-    //     ? LoginRegisterLink
-    //     : UsernameDropdown
-
-    const logout = () => {
-        pbClient.authStore.clear();
+    const attemptLogout = () => {
+        logout();
+        setIsLoggedIn(false);
+        navigate("/", { replace: true});
     };
     
     const LoginRegisterLink = <Group>
@@ -45,7 +40,7 @@ function Header() {
             <Menu.Item leftSection={<IconSettings size={14}/>}>User settings</Menu.Item>
             <Menu.Item
                 leftSection={<IconLogout size={14}/>}
-                onClick={logout}
+                onClick={attemptLogout}
             >
                 Logout
             </Menu.Item>
@@ -91,9 +86,12 @@ function Header() {
                         Dark
                     </Button>
                 </Group>
+                {/* <Button onClick={attemptLogout}>Logout</Button> */}
 
-                {/* {LoginRegisterLink} */}
-                {usernameDropdownMenu}
+                {isLoggedIn
+                    ? usernameDropdownMenu
+                    : LoginRegisterLink
+                }
 
             </Group>
         </Group>
