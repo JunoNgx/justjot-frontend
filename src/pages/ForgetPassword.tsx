@@ -1,8 +1,9 @@
 import { useForm } from '@mantine/form';
-import { Stack, Paper, TextInput, Button, Title, Group, Text, Box } from "@mantine/core";
+import { Stack, Paper, TextInput, Button, Title, Group, Text, Box, Anchor } from "@mantine/core";
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useContext, useState } from 'react';
 import { CollectionType } from '../types'
+import { NavLink } from 'react-router-dom';
 
 export default function ForgetPassword() {
 
@@ -29,6 +30,7 @@ export default function ForgetPassword() {
     const successNotice = <Box mt="lg" p="none">
         <Text>Password reset request has been made.</Text>
         <Text>Please check your inbox for the reset hyperlink.</Text>
+        <Text mt="lg">Proceed to <Anchor component={NavLink} to="login">Login</Anchor>.</Text>
     </Box>
 
     const resetRequestForm =
