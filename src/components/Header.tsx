@@ -99,13 +99,13 @@ function Header() {
                         <IconMoon size={18}/>
                     </ActionIcon>
                 </Group>
-            </Group>
-                {/* <Button onClick={attemptLogout}>Logout</Button> */}
+
 
                 {isLoggedIn
                     ? usernameDropdownMenu
                     : LoginRegisterLink
                 }
+            </Group>
 
         </Group>
     </Container>
