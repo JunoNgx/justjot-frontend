@@ -1,5 +1,5 @@
 import { useForm } from '@mantine/form';
-import { Stack, Paper, Button, Title, Group, Text, Box, PasswordInput } from "@mantine/core";
+import { Stack, Paper, Button, Title, Group, Text, Box, PasswordInput, Anchor } from "@mantine/core";
 import { NavLink } from 'react-router-dom';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useContext, useState } from 'react';
@@ -52,12 +52,12 @@ export default function ResetPassword() {
 
     const successNotice = <Box mt="lg" p="none">
         <Text>Your password has been successfully reset.</Text>
-        <Text mt="lg">Proceed to <NavLink to="/login">Login</NavLink>.</Text>
+        <Text mt="lg">Proceed to <Anchor component={NavLink} to="login">Login</Anchor></Text>
     </Box>
 
     const failureNotice = <Box mt="lg" p="none">
         <Text>Your password reset has been denied.</Text>
-        <Text mt="lg">Return to <NavLink to="/forget">Request password reset</NavLink>.</Text>
+        <Text mt="lg">Return to <Anchor component={NavLink} to="login">Login</Anchor>.</Text>
     </Box>
 
     const passwordResetForm =
