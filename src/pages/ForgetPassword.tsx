@@ -58,6 +58,7 @@ export default function ForgetPassword() {
         </form>
 
     return <Stack
+        className="account-modal account-modal--forget"
         align="center"
         justify="center"
     >

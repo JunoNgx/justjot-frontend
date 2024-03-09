@@ -48,6 +48,7 @@ export default function Login() {
     }
 
     return <Stack
+        className="account-modal account-modal--login"
         align="center"
         justify="center"
     >

@@ -155,7 +155,7 @@ export default function Register() {
     </>
 
     return <Stack
-        className="register"
+        className="account-modal account-modal--register"
         align="center"
         justify="center"
     >
