@@ -18,6 +18,10 @@ function Header() {
     // const rightCorner = () => pbClient.authStore.isValid
     //     ? LoginRegisterLink
     //     : UsernameDropdown
+
+    const logout = () => {
+        pbClient.authStore.clear();
+    };
     
     const LoginRegisterLink = <Group>
         <NavLink to="login">Login</NavLink>
@@ -39,7 +43,12 @@ function Header() {
 
         <Menu.Dropdown>
             <Menu.Item leftSection={<IconSettings size={14}/>}>User settings</Menu.Item>
-            <Menu.Item leftSection={<IconLogout size={14}/>}>Logout</Menu.Item>
+            <Menu.Item
+                leftSection={<IconLogout size={14}/>}
+                onClick={logout}
+            >
+                Logout
+            </Menu.Item>
         </Menu.Dropdown>
     </Menu>
 
