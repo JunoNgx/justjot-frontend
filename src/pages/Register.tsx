@@ -26,6 +26,7 @@ type RegisterSubmission = {
 
 export default function Register() {
     const [hasRequested, setHasRequested] = useState(false);
+    const [isSuccessful, setIsSuccessful] = useState(false);
 
     const { pbClient } = useContext(BackendClientContext);
     const [errorList, setErrorList] = useState<string[]>([]);
@@ -46,7 +47,6 @@ export default function Register() {
     });
 
     const attemptRegister = async (formData: RegisterFormData) => {
-        console.log("attempt register")
         const submissionData: RegisterSubmission = { ...formData };
         // Workaround the username requirement
         submissionData.emailVisibility = false;
@@ -56,22 +56,26 @@ export default function Register() {
             .create(submissionData)
             .then(async (_record) => {
                 setErrorList([]);
+                setIsSuccessful(true);
 
-                await pbClient.collection(CollectionType.USERS)
-                    .requestVerification(submissionData.email)
-                    .then((_record) => {
-                        setHasRequested(true)
-                    })
-                    .catch(displayError)
+                // TODO: backendLogic
+                // await pbClient.collection(CollectionType.USERS)
+                //     .requestVerification(submissionData.email)
+                //     .catch(displayError)
             })
             .catch(displayError);
+        
+        setHasRequested(true);
     }
 
     const displayError = (error: ClientResponseError) => {
+        setIsSuccessful(false);
+        setErrorList([]);
         if (error.response.data) {
-            // for (const [_key, value] of Object.entries(error.response.data)) {
-            Object.entries(error.response.data).forEach((_key, value: any) => {
-                setErrorList(errList => [...errList, value.message])
+            Object.entries(error.response.data).forEach((keyValArr, _index) => {
+                const value = keyValArr[1] as {code: string, message: string};
+                const errorMsg = value.message;
+                setErrorList(errList => [...errList, errorMsg])
             });
         };
     };
@@ -144,13 +148,16 @@ export default function Register() {
                 </Button>
             </Group>
 
-            <Stack className="register__error-list" mt="md">
-                {errorList?.map(error =>
-                    <Text>
-                        {error}
-                    </Text>
-                )}
-            </Stack>
+            {(hasRequested && !isSuccessful)
+                ? <Stack className="register__error-list" mt="md">
+                    {errorList?.map(error =>
+                        <Text c="red">
+                            {error}
+                        </Text>
+                    )}
+                </Stack>
+                : ""
+            }
         </form>
     </>
 
@@ -168,7 +175,7 @@ export default function Register() {
                 Register
             </Title>
 
-            {hasRequested
+            {hasRequested && isSuccessful
                 ? successNotice
                 : registrationForm
             }
