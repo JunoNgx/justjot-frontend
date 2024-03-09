@@ -1,5 +1,5 @@
-import { useContext, useEffect } from "react";
-import { Box, Button, Container, Group, Menu, Text, Title, UnstyledButton } from "@mantine/core";
+import { useContext } from "react";
+import { Button, Container, Group, Menu, Text, Title, UnstyledButton } from "@mantine/core";
 import { ThemeModeContext } from "../contexts/ThemeModeContext";
 import { ThemeMode } from "../types";
 import { BackendClientContext } from "../contexts/BackendClientContext";
