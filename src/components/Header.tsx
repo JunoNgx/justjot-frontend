@@ -18,8 +18,8 @@ function Header() {
         navigate("/", { replace: true});
     };
 
-    const username = user?.username || "User"
-    
+    const username = user?.displayName || user?.username;
+
     const LoginRegisterLink = <Group>
         <NavLink to="login">Login</NavLink>
         <Text>/</Text>
