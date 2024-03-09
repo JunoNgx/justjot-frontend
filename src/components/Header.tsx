@@ -1,9 +1,10 @@
 import { useContext, useEffect } from "react";
-import { Button, Container, Group, Text, Title } from "@mantine/core";
+import { Box, Button, Container, Group, Menu, Text, Title, UnstyledButton } from "@mantine/core";
 import { ThemeModeContext } from "../contexts/ThemeModeContext";
 import { ThemeMode } from "../types";
 import { BackendClientContext } from "../contexts/BackendClientContext";
 import { NavLink } from "react-router-dom";
+import { IconChevronDown, IconLogout, IconSettings } from "@tabler/icons-react";
 
 function Header() {
 
@@ -24,9 +25,23 @@ function Header() {
         <NavLink to="register">Register</NavLink>
     </Group>
 
-    const usernameDropdownMenu = <Group>
-        Username
-    </Group>
+    const usernameDropdownMenu = <Menu
+        position="bottom-end"
+    >
+        <Menu.Target>
+            <UnstyledButton>
+                <Group gap={6}>
+                    <Text>Sophisia</Text>
+                    <IconChevronDown size={14}/>
+                </Group>
+            </UnstyledButton>
+        </Menu.Target>
+
+        <Menu.Dropdown>
+            <Menu.Item leftSection={<IconSettings size={14}/>}>User settings</Menu.Item>
+            <Menu.Item leftSection={<IconLogout size={14}/>}>Logout</Menu.Item>
+        </Menu.Dropdown>
+    </Menu>
 
     return <Container>
         <Group
@@ -68,8 +83,8 @@ function Header() {
                     </Button>
                 </Group>
 
-                {LoginRegisterLink}
-                {/* {usernameDropdownMenu} */}
+                {/* {LoginRegisterLink} */}
+                {usernameDropdownMenu}
 
             </Group>
         </Group>
