@@ -64,7 +64,7 @@ function Header() {
                         variant="transparent"
                         component={NavLink} to="/"
                     >
-                            <IconNotebook size={40}/>
+                            <IconNotebook size={40} stroke={1.5}/>
                         </ActionIcon>
                 </Title>
             </div>
