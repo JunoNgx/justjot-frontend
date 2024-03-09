@@ -102,7 +102,7 @@ export default function Register() {
                 description="Must be unique, too."
                 required
                 placeholder="BlackCerberus1337"
-                type="email"
+                type="name"
                 {...form.getInputProps('username')}
             />
             <TextInput mt="md"
