@@ -1,19 +1,27 @@
 import { useForm } from '@mantine/form';
 import { Stack, Paper, TextInput, Button, Title, Group, Text, PasswordInput } from "@mantine/core";
-import { Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { CollectionType } from '../types';
 
 type LoginFormData = {email: string, password: string};
 
 export default function Login() {
-    // TODO: if isLoggedIn Navigate to /:username
+    const pbClient = useContext(BackendClientContext);
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (pbClient.authStore.isValid) {
+            navigate(`/${pbClient.authStore.model!.username}`, {
+                replace: true
+            });
+        }
+    }, []);
 
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
 
-    const pbClient = useContext(BackendClientContext);
     const form = useForm({
         initialValues: {
             email: "",
