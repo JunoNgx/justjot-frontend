@@ -25,7 +25,6 @@ type RegisterSubmission = {
 };
 
 export default function Register() {
-    // TODO: if isLoggedIn Navigate to /:username
     const [hasRequested, setHasRequested] = useState(false);
 
     const { pbClient } = useContext(BackendClientContext);
@@ -47,6 +46,7 @@ export default function Register() {
     });
 
     const attemptRegister = async (formData: RegisterFormData) => {
+        console.log("attempt register")
         const submissionData: RegisterSubmission = { ...formData };
         // Workaround the username requirement
         submissionData.emailVisibility = false;
