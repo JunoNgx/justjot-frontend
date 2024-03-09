@@ -175,7 +175,7 @@ export default function Register() {
                 Register
             </Title>
 
-            {hasRequested && isSuccessful
+            {(hasRequested && isSuccessful)
                 ? successNotice
                 : registrationForm
             }
