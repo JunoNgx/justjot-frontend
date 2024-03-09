@@ -14,8 +14,8 @@ import '@mantine/core/styles.css';
 
 const overrideTheme = createTheme({
     primaryColor: "teal",
-    // fontFamily: "",
-    // fontFamilyMonospace: "",
+    fontFamily: "IBM Plex Sans",
+    fontFamilyMonospace: "Cousine",
     defaultRadius: 0,
 });
 const mergedTheme = mergeMantineTheme(DEFAULT_THEME, overrideTheme);
