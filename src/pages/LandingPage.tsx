@@ -6,7 +6,7 @@ export default function LandingPage() {
     const { pbClient, isLoggedIn } = useContext(BackendClientContext);
 
     useEffect(() => {
-        if (isLoggedIn) navigate(`/${pbClient.authStore!.model!.username}`, {
+        if (isLoggedIn) navigate(`/${pbClient.authStore.model?.username}`, {
             replace: true
         });
     }, []);

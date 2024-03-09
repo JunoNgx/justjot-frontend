@@ -16,7 +16,7 @@ export default function Login() {
 
     const navigate = useNavigate();
     const navigateToMainView = () => {
-        navigate(`/${pbClient.authStore!.model!.username}`, {
+        navigate(`/${pbClient.authStore.model?.username}`, {
             replace: true
         });
     }
