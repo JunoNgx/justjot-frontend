@@ -18,7 +18,7 @@ export default function ResetPassword() {
     const [isSuccessful, setIsSuccessful] = useState(false);
     const { token } = useParams();
 
-    const pbClient = useContext(BackendClientContext);
+    const { pbClient } = useContext(BackendClientContext);
     const form = useForm({
         initialValues: {
             password: "",

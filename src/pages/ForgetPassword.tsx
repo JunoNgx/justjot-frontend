@@ -8,7 +8,7 @@ export default function ForgetPassword() {
 
     const [hasRequested, setHasRequested] = useState(false);
 
-    const pbClient = useContext(BackendClientContext);
+    const { pbClient } = useContext(BackendClientContext);
     const form = useForm({
         initialValues: {
             email: "",
