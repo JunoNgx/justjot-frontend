@@ -59,14 +59,12 @@ function Header() {
             justify="space-between"
         >
             <div className="header__left-side">
-                <Title order={1}>
-                    <ActionIcon
-                        variant="transparent"
-                        component={NavLink} to="/"
-                    >
-                            <IconNotebook size={40} stroke={1.5}/>
-                        </ActionIcon>
-                </Title>
+                <ActionIcon
+                    variant="transparent"
+                    component={NavLink} to="/"
+                >
+                    <IconNotebook size={40} stroke={1.5}/>
+                </ActionIcon>
             </div>
 
             <Group
