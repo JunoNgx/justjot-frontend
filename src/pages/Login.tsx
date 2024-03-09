@@ -1,12 +1,19 @@
 import { useForm } from '@mantine/form';
 import { Stack, Paper, TextInput, Button, Title, Group, Text, PasswordInput } from "@mantine/core";
 import { Link } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { BackendClientContext } from '../contexts/BackendClientContext';
+import { CollectionType } from '../types';
 
 type LoginFormData = {email: string, password: string};
 
 export default function Login() {
     // TODO: if isLoggedIn Navigate to /:username
 
+    const [hasAttempted, setHasAttempted] = useState(false);
+    const [isSuccessful, setIsSuccessful] = useState(false);
+
+    const pbClient = useContext(BackendClientContext);
     const form = useForm({
         initialValues: {
             email: "",
@@ -14,9 +21,20 @@ export default function Login() {
         }
     });
 
-    const attemptLogin = (data: LoginFormData) => {
-        console.log(data)
-        // TODO submit to backend
+    const attemptLogin = async (loginForm: LoginFormData) => {
+        await pbClient.collection (CollectionType.USERS)
+            .authWithPassword(
+                loginForm.email,
+                loginForm.password
+            )
+            .then(() => {
+                setIsSuccessful(true);
+            })
+            .catch(() => {
+                setIsSuccessful(false);
+            });
+        
+        setHasAttempted(true);
     }
 
     return <Stack
@@ -67,6 +85,13 @@ export default function Login() {
                 </Group>
 
             </form>
+
+            {hasAttempted && !isSuccessful
+                ? <Text mt="lg" c="red">
+                    Your login data is incorrect.
+                </Text>
+                : ""
+            }
 
             <Text mt="lg">
                 Forgot your password? <Link to="/forget">Request reset</Link>
