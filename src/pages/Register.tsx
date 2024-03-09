@@ -1,6 +1,6 @@
 import { useForm } from '@mantine/form';
-import { Stack, Paper, TextInput, Button, Title, Group, Text, PasswordInput, Box } from "@mantine/core";
-import { Link, NavLink } from 'react-router-dom';
+import { Stack, Paper, TextInput, Button, Title, Group, Text, PasswordInput, Box, Anchor } from "@mantine/core";
+import { NavLink } from 'react-router-dom';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useContext, useState } from 'react';
 import { UserType, CollectionType } from '../types'
@@ -79,13 +79,13 @@ export default function Register() {
     const successNotice = <Box mt="lg" p="none">
         <Text>Registration request has been made.</Text>
         <Text>Please check your inbox for the verification email.</Text>
-        <Text mt="lg">Proceed to <NavLink to="/login">Login</NavLink>.</Text>
+        <Text mt="lg">Proceed to <Anchor component={NavLink} to="login">Login</Anchor></Text>
     </Box>
 
 
     const registrationForm = <>
         <Text>
-            Already have an account? <Link to="/login">Login</Link>
+            Already have an account? <Anchor component={NavLink} to="login">Login</Anchor>
         </Text>
 
         <form onSubmit={form.onSubmit(attemptRegister)}>
