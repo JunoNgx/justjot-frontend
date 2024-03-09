@@ -4,7 +4,7 @@ import { ThemeModeContext } from "../contexts/ThemeModeContext";
 import { ThemeMode } from "../types";
 import { BackendClientContext } from "../contexts/BackendClientContext";
 import { NavLink, useNavigate } from "react-router-dom";
-import { IconChevronDown, IconLogout, IconMoon, IconSettings, IconSettingsCog, IconSun } from "@tabler/icons-react";
+import { IconChevronDown, IconLogout, IconMoon, IconNotebook, IconSettings, IconSettingsCog, IconSun } from "@tabler/icons-react";
 
 function Header() {
 
@@ -59,10 +59,13 @@ function Header() {
             justify="space-between"
         >
             <div className="header__left-side">
-                <Title
-                    order={1}
-                >
-                    JJ
+                <Title order={1}>
+                    <ActionIcon
+                        variant="transparent"
+                        component={NavLink} to="/"
+                    >
+                            <IconNotebook size={40}/>
+                        </ActionIcon>
                 </Title>
             </div>
 
