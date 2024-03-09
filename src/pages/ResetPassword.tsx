@@ -11,6 +11,7 @@ type PasswordResetFormData = {
     passwordConfirm: string
 };
 
+// This route is unused and handled by PocketBase
 export default function ResetPassword() {
 
     const [hasRequested, setHasRequested] = useState(false);
