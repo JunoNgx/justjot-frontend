@@ -18,6 +18,13 @@
         justify-content: center;
     }
 
+    &__user-corner {
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     // &__right-side {
     //     display: flex;
     //     flex-direction: row;

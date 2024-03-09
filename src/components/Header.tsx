@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ActionIcon, Anchor, Container, Group, Menu, Text, UnstyledButton } from "@mantine/core";
+import { ActionIcon, Anchor, Box, Container, Group, Menu, Text, UnstyledButton } from "@mantine/core";
 import { ThemeModeContext } from "../contexts/ThemeModeContext";
 import { ThemeMode } from "../types";
 import { BackendClientContext } from "../contexts/BackendClientContext";
@@ -101,11 +101,12 @@ function Header() {
                     </ActionIcon>
                 </Group>
 
-
-                {isLoggedIn
-                    ? usernameDropdownMenu
-                    : LoginRegisterLinks
-                }
+                <Box className="header__user-corner">
+                    {isLoggedIn
+                        ? usernameDropdownMenu
+                        : LoginRegisterLinks
+                    }
+                </Box>
             </Group>
 
         </Group>
