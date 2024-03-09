@@ -30,7 +30,7 @@ export default function LandingPage() {
 
         <section className="landing-page__section">
             <Title order={2}>Keyboard-first</Title>
-            <Text>Designed with the keyboard-first principle, JustJot prioritises keyboard interactions. Most actions and movements can be performed solely with the keyboard. An ample of keyboard shortcuts are provided to the user. While fully operable with pointer-based devices (for mobile access), users are recommended to spent time on learning to perform operations with hotkeys.</Text>
+            <Text>JustJot prioritises keyboard interactions. Most actions can be performed solely on a keyboard. While fully operable with pointer-based devices (for mobile access), users are recommended to spent time on learning to perform operations the optimal way. TODO: link to help page.</Text>
         </section>
 
         <section className="landing-page__section">
