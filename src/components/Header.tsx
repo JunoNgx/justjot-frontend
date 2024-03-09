@@ -1,16 +1,20 @@
 import { useContext } from "react";
-import { Button, Container, Group, Menu, Text, Title, UnstyledButton } from "@mantine/core";
+import { ActionIcon, Container, Group, Menu, Text, Title, UnstyledButton } from "@mantine/core";
 import { ThemeModeContext } from "../contexts/ThemeModeContext";
 import { ThemeMode } from "../types";
 import { BackendClientContext } from "../contexts/BackendClientContext";
 import { NavLink, useNavigate } from "react-router-dom";
-import { IconChevronDown, IconLogout, IconSettings } from "@tabler/icons-react";
+import { IconChevronDown, IconLogout, IconMoon, IconSettings, IconSettingsCog, IconSun } from "@tabler/icons-react";
 
 function Header() {
 
-    const { setThemeMode } = useContext(ThemeModeContext);
+    const { themeMode, setThemeMode } = useContext(ThemeModeContext);
     const { logout, isLoggedIn, setIsLoggedIn, user } = useContext(BackendClientContext);
     const navigate = useNavigate()
+
+    const isThemeModeLight = () => themeMode === ThemeMode.LIGHT;
+    const isThemeModeDark = () => themeMode === ThemeMode.DARK;
+    const isThemeModeAuto = () => themeMode === ThemeMode.AUTO;
 
     const attemptLogout = () => {
         logout();
@@ -65,29 +69,37 @@ function Header() {
             <Group
                 className="header__right-side"
                 gap="md"
+                justify="flex-end"
             >
                 <Group className="header__theme-mode-container"
                     gap="sm"
                 >
-                    <Button
+                    <ActionIcon
+                        variant={isThemeModeAuto() ? "outline" : "subtle"}
+                        radius="xl"
                         className="header__theme-mode-option"
                         onClick={() => {setThemeMode(ThemeMode.AUTO)}}
                     >
-                        Auto
-                    </Button>
-                    <Button
+                        <IconSettingsCog size={18}/>
+                    </ActionIcon>
+                    <ActionIcon
+                        variant={isThemeModeLight() ? "outline" : "subtle"}
+                        radius="xl"
                         className="header__theme-mode-option"
                         onClick={() => {setThemeMode(ThemeMode.LIGHT)}}
                     >
-                        Light
-                    </Button>
-                    <Button
+                        <IconSun size={18}/>
+                    </ActionIcon>
+                    <ActionIcon
+                        variant={isThemeModeDark() ? "outline" : "subtle"}
+                        radius="xl"
                         className="header__theme-mode-option"
                         onClick={() => {setThemeMode(ThemeMode.DARK)}}
                     >
-                        Dark
-                    </Button>
+                        <IconMoon size={18}/>
+                    </ActionIcon>
                 </Group>
+            </Group>
                 {/* <Button onClick={attemptLogout}>Logout</Button> */}
 
                 {isLoggedIn
@@ -95,7 +107,6 @@ function Header() {
                     : LoginRegisterLink
                 }
 
-            </Group>
         </Group>
     </Container>
 }
