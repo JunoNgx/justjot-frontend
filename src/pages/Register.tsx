@@ -107,7 +107,7 @@ export default function Register() {
             />
             <TextInput mt="md"
                 label="Display name"
-                description="This can be empty and changed later."
+                description="How to preferrably display you (optional)."
                 placeholder="Irina Beckett"
                 name="name"
                 type="text"
