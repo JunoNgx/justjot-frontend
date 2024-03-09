@@ -9,7 +9,7 @@ import { IconChevronDown, IconLogout, IconSettings } from "@tabler/icons-react";
 function Header() {
 
     const { setThemeMode } = useContext(ThemeModeContext);
-    const { logout, isLoggedIn, setIsLoggedIn } = useContext(BackendClientContext);
+    const { logout, isLoggedIn, setIsLoggedIn, user } = useContext(BackendClientContext);
     const navigate = useNavigate()
 
     const attemptLogout = () => {
@@ -17,6 +17,8 @@ function Header() {
         setIsLoggedIn(false);
         navigate("/", { replace: true});
     };
+
+    const username = user?.username || "User"
     
     const LoginRegisterLink = <Group>
         <NavLink to="login">Login</NavLink>
@@ -30,7 +32,7 @@ function Header() {
         <Menu.Target>
             <UnstyledButton>
                 <Group gap={6}>
-                    <Text>Sophisia</Text>
+                    <Text>{username}</Text>
                     <IconChevronDown size={14}/>
                 </Group>
             </UnstyledButton>
