@@ -22,6 +22,7 @@ export default function Login() {
     }
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
     const form = useForm({
         initialValues: {
             email: "",
@@ -40,8 +41,9 @@ export default function Login() {
                 setIsLoggedIn(true);
                 navigateToMainView();
             })
-            .catch(() => {
+            .catch((error) => {
                 setIsSuccessful(false);
+                setErrorMsg(error.response.message)
             });
         
         setHasAttempted(true);
@@ -100,7 +102,7 @@ export default function Login() {
 
             {hasAttempted && !isSuccessful
                 ? <Text mt="lg" c="red">
-                    Your login data is incorrect.
+                    {errorMsg}
                 </Text>
                 : ""
             }
