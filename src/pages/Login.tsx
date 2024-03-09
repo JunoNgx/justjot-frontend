@@ -31,7 +31,7 @@ export default function Login() {
 
     const attemptLogin = async (loginForm: LoginFormData) => {
         await pbClient.collection (CollectionType.USERS)
-            .authWithPassword(
+            .authWithPassword( // works for both email AND username
                 loginForm.email,
                 loginForm.password
             )
@@ -68,9 +68,10 @@ export default function Login() {
                 <TextInput
                     mt="md"
                     required
-                    label="Email"
+                    label="Email or Username"
+                    description="Both email and username are accepted"
                     placeholder="lucatiel@mirrah.com"
-                    type="email"
+                    type="text"
                     {...form.getInputProps('email')}
                 />
                 <PasswordInput
