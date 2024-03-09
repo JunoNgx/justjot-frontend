@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ActionIcon, Anchor, Container, Group, Menu, Text, Title, UnstyledButton } from "@mantine/core";
+import { ActionIcon, Anchor, Container, Group, Menu, Text, UnstyledButton } from "@mantine/core";
 import { ThemeModeContext } from "../contexts/ThemeModeContext";
 import { ThemeMode } from "../types";
 import { BackendClientContext } from "../contexts/BackendClientContext";
