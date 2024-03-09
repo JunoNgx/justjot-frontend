@@ -4,6 +4,23 @@
 @use "./item.scss";
 // @use "./loginRegister.scss";
 
+.landing-page {
+    max-width: 640px;
+    padding: 16px;
+
+    &__section {
+        margin-top: 32px;
+
+        ul {
+             margin: 0;
+        }
+
+        p {
+            hyphens: auto;
+        }
+    }
+}
+
 .center-container {
     height: 100dvh;
     overflow-y: scroll;
