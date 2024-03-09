@@ -1,6 +1,6 @@
 import { useForm } from '@mantine/form';
-import { Stack, Paper, TextInput, Button, Title, Group, Text, PasswordInput } from "@mantine/core";
-import { Link, useNavigate } from 'react-router-dom';
+import { Stack, Paper, TextInput, Button, Title, Group, Text, PasswordInput, Anchor } from "@mantine/core";
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { CollectionType } from '../types';
@@ -61,7 +61,7 @@ export default function Login() {
             </Title>
 
             <Text>
-                Don't have an account? <Link to="/register">Register</Link>
+                Don't have an account? <Anchor component={NavLink} to="/register">Register</Anchor>
             </Text>
 
             <form onSubmit={form.onSubmit(attemptLogin)}>
@@ -105,7 +105,7 @@ export default function Login() {
             }
 
             <Text mt="lg">
-                Forgot your password? <Link to="/forget">Request reset</Link>
+                Forgot your password? <Anchor component={NavLink} to="/forget">Request reset</Anchor>
             </Text>
         </Paper>
     </Stack>
