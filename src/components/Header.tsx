@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ActionIcon, Container, Group, Menu, Text, Title, UnstyledButton } from "@mantine/core";
+import { ActionIcon, Anchor, Container, Group, Menu, Text, Title, UnstyledButton } from "@mantine/core";
 import { ThemeModeContext } from "../contexts/ThemeModeContext";
 import { ThemeMode } from "../types";
 import { BackendClientContext } from "../contexts/BackendClientContext";
@@ -24,10 +24,10 @@ function Header() {
 
     const username = user?.displayName || user?.username;
 
-    const LoginRegisterLink = <Group>
-        <NavLink to="login">Login</NavLink>
+    const LoginRegisterLinks = <Group>
+        <Anchor component={NavLink} to="login">Login</Anchor>
         <Text>/</Text>
-        <NavLink to="register">Register</NavLink>
+        <Anchor component={NavLink} to="register">Register</Anchor>
     </Group>
 
     const usernameDropdownMenu = <Menu
@@ -103,7 +103,7 @@ function Header() {
 
                 {isLoggedIn
                     ? usernameDropdownMenu
-                    : LoginRegisterLink
+                    : LoginRegisterLinks
                 }
             </Group>
 
