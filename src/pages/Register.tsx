@@ -8,17 +8,18 @@ import { ClientResponseError } from 'pocketbase';
 
 type RegisterFormData = {
     email: string,
-    name: string,
+    username: string,
+    displayName: string,
     password: string,
     passwordConfirm: string
 };
 
 type RegisterSubmission = {
     email: string,
-    name: string,
+    username: string,
     password: string,
     passwordConfirm: string,
-    username?: string,
+    displayName?: string,
     emailVisibility?: boolean,
     userType?: UserType,
 };
@@ -27,17 +28,18 @@ export default function Register() {
     // TODO: if isLoggedIn Navigate to /:username
     const [hasRequested, setHasRequested] = useState(false);
 
-    const pbClient = useContext(BackendClientContext);
+    const { pbClient } = useContext(BackendClientContext);
     const [errorList, setErrorList] = useState<string[]>([]);
     const form = useForm({
         initialValues: {
             email: "",
-            name: "",
+            username: "",
+            displayName: "",
             password: "",
             passwordConfirm: "",
         },
         validate: {
-            passwordConfirm: (passwordConfirmVal, formData: RegisterFormData) => 
+            passwordConfirm: (passwordConfirmVal, formData: RegisterFormData) =>
                 formData.password !== passwordConfirmVal
                     ? "Password confirmation does not match"
                     : null
@@ -45,9 +47,8 @@ export default function Register() {
     });
 
     const attemptRegister = async (formData: RegisterFormData) => {
-        const submissionData: RegisterSubmission = {...formData};
+        const submissionData: RegisterSubmission = { ...formData };
         // Workaround the username requirement
-        submissionData.username = formData.email.replace("@", "-");
         submissionData.emailVisibility = false;
         submissionData.userType = UserType.USER;
 
@@ -90,10 +91,19 @@ export default function Register() {
         <form onSubmit={form.onSubmit(attemptRegister)}>
             <TextInput mt="md"
                 label="Email"
+                description="Must be unique."
                 required
                 placeholder="don.h@creo.com"
                 type="email"
                 {...form.getInputProps('email')}
+            />
+            <TextInput mt="md"
+                label="Username"
+                description="Must be unique, too."
+                required
+                placeholder="BlackCerberus1337"
+                type="email"
+                {...form.getInputProps('username')}
             />
             <TextInput mt="md"
                 label="Display name"
@@ -101,9 +111,8 @@ export default function Register() {
                 placeholder="Irina Beckett"
                 name="name"
                 type="text"
-                {...form.getInputProps('name')}
+                {...form.getInputProps('displayName')}
             />
-
             <PasswordInput mt="md"
                 label="Password"
                 description="The length must be between 8 and 72 characters."
@@ -114,7 +123,6 @@ export default function Register() {
                 maxLength={72}
                 {...form.getInputProps('password')}
             />
-
             <PasswordInput mt="md"
                 label="Password confirm"
                 required
@@ -137,7 +145,7 @@ export default function Register() {
             </Group>
 
             <Stack className="register__error-list" mt="md">
-                {errorList?.map(error => 
+                {errorList?.map(error =>
                     <Text>
                         {error}
                     </Text>
@@ -160,10 +168,10 @@ export default function Register() {
                 Register
             </Title>
 
-                {hasRequested
-                    ? successNotice
-                    : registrationForm
-                }
+            {hasRequested
+                ? successNotice
+                : registrationForm
+            }
 
         </Paper>
     </Stack>
