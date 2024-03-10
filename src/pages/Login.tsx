@@ -75,7 +75,7 @@ export default function Login() {
                     mt="md"
                     required
                     label="Email or Username"
-                    description="Both email and username are accepted"
+                    description="Either email or username is accepted."
                     placeholder="lucatiel@mirrah.com"
                     type="text"
                     {...form.getInputProps('email')}
