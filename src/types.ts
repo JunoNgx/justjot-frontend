@@ -44,7 +44,7 @@ export enum UserType {
     POWERUSER = "poweruser"
 };
 
-export enum CollectionType {
+export enum DbTable {
     USERS = "users",
     ITEMS = "items",
     COLLECTION = "itemCollections"

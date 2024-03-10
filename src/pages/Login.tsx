@@ -3,7 +3,7 @@ import { Paper, TextInput, Button, Title, Group, Text, PasswordInput, Anchor } f
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { BackendClientContext } from '../contexts/BackendClientContext';
-import { CollectionType } from '../types';
+import { DbTable } from '../types';
 
 type LoginFormData = {email: string, password: string};
 
@@ -33,7 +33,7 @@ export default function Login() {
 
     const attemptLogin = async (loginForm: LoginFormData) => {
         setIsLoading(true);
-        await pbClient.collection (CollectionType.USERS)
+        await pbClient.collection (DbTable.USERS)
             .authWithPassword( // works for both email AND username
                 loginForm.email,
                 loginForm.password

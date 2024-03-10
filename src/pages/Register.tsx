@@ -3,7 +3,7 @@ import { Stack, Paper, TextInput, Button, Title, Group, Text, PasswordInput, Box
 import { NavLink } from 'react-router-dom';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useContext, useState } from 'react';
-import { UserType, CollectionType } from '../types'
+import { UserType, DbTable } from '../types'
 import { ClientResponseError } from 'pocketbase';
 
 type RegisterFormData = {
@@ -54,14 +54,14 @@ export default function Register() {
         submissionData.userType = UserType.USER;
 
         setIsLoading(true);
-        await pbClient.collection(CollectionType.USERS)
+        await pbClient.collection(DbTable.USERS)
             .create(submissionData)
             .then(async (_record) => {
                 setErrorList([]);
                 setIsSuccessful(true);
 
                 // TODO: backendLogic
-                // await pbClient.collection(CollectionType.USERS)
+                // await pbClient.collection(DbTable.USERS)
                 //     .requestVerification(submissionData.email)
                 //     .catch(displayError)
             })

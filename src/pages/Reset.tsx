@@ -2,7 +2,7 @@ import { useForm } from '@mantine/form';
 import { Paper, TextInput, Button, Title, Group, Text, Box, Anchor } from "@mantine/core";
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useContext, useState } from 'react';
-import { CollectionType } from '../types'
+import { DbTable } from '../types'
 import { NavLink } from 'react-router-dom';
 
 export default function Reset() {
@@ -20,7 +20,7 @@ export default function Reset() {
     const attemptRequestResetPassword = async (formData: { email: string }) => {
         setIsLoading(true);
 
-        await pbClient.collection(CollectionType.USERS)
+        await pbClient.collection(DbTable.USERS)
             .requestPasswordReset(formData.email)
             .then(() => {
                 setHasRequested(true);
