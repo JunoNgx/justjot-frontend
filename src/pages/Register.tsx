@@ -165,25 +165,15 @@ export default function Register() {
         </form>
     </>
 
-    return <Stack
-        className="account-modal account-modal--register"
-        align="center"
-        justify="center"
-    >
-        <Paper
-            withBorder
-            shadow="xs"
-            p="xl"
-        >
-            <Title order={2}>
-                Register
-            </Title>
+    return <Paper className="account-route-modal account-route-modal--login">
+        <Title order={2}>
+            Register
+        </Title>
 
-            {(hasRequested && isSuccessful)
-                ? successNotice
-                : registrationForm
-            }
+        {(hasRequested && isSuccessful)
+            ? successNotice
+            : registrationForm
+        }
 
-        </Paper>
-    </Stack>
+    </Paper>
 }
