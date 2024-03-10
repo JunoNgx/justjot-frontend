@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { Item } from '../types';
 
-import { Input, Stack } from '@mantine/core';
+import { Box, Input, Stack } from '@mantine/core';
 
 import ItemComponent from '../components/ItemComponent';
 import { BackendClientContext } from '../contexts/BackendClientContext';
@@ -30,9 +30,11 @@ export default function MainView() {
     const navigate = useNavigate();
     const [list, setList] = useState<Item[]>();
 
-    return <div className="main-content">
-        <Input/>
-        <div className="main-content__top">
+    return <Box className="main-view">
+        <Input
+            className="main-view__input"
+        />
+        <div className="main-view__list-top">
             <div>Last updated</div>
         </div>
         <Stack
@@ -44,5 +46,5 @@ export default function MainView() {
                 <ItemComponent key={item.id} item={item} />
             )}
         </Stack>
-    </div>
+    </Box>
 }
