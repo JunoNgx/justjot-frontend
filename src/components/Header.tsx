@@ -37,6 +37,7 @@ function Header() {
 
     const usernameDropdownMenu = <Menu
         position="bottom-end"
+        offset={20}
     >
         <Menu.Target>
             <UnstyledButton>
