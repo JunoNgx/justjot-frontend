@@ -12,7 +12,6 @@ import { useNavigate } from 'react-router-dom';
 import { IconCircleTriangle } from '@tabler/icons-react';
 
 export default function MainView() {
-    const { isLoggedIn } = useContext(BackendClientContext);
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -29,14 +28,34 @@ export default function MainView() {
     }, []);
 
     const navigate = useNavigate();
+    const { isLoggedIn } = useContext(BackendClientContext);
+    const [ inputVal, setInputVal ] = useState("");
     const [list, setList] = useState<Item[]>();
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.code !== "Enter") return;
+        // TODO create new record
+    }
+
+    // TODO: move these to App for better coverage
+    const handleClickEvent = () => {
+        console.log("click")
+    }
+    const handleFocusEvent = (e) => {
+        console.log("focus", e)
+    };
 
     return <Stack className="main-view"
         gap="xl"
+        onClick={() => {handleClickEvent()}}
+        onFocus={handleFocusEvent}
     >
         <Input id="main-input" className="main-view__input"
             size="lg"
             leftSection={<IconCircleTriangle size={32} stroke={1}/>}
+            type="text"
+            value={inputVal}
+            onChange={(event) => setInputVal(event.currentTarget.value)}
+            onKeyDown={handleKeyDown}
         />
         {/* <Box className="main-view__list-top">
             <div>Last updated</div>
