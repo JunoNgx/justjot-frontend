@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ActionIcon, Anchor, Box, Container, Group, Menu, Text, UnstyledButton, getThemeColor, useComputedColorScheme } from "@mantine/core";
+import { ActionIcon, Anchor, Box, Container, Group, Menu, Text, UnstyledButton, useComputedColorScheme } from "@mantine/core";
 import { ThemeModeContext } from "../contexts/ThemeModeContext";
 import { ThemeMode, ComputedThemeMode } from "../types";
 import { BackendClientContext } from "../contexts/BackendClientContext";
@@ -58,9 +58,8 @@ function Header() {
         </Menu.Dropdown>
     </Menu>
 
-    return <Container>
-        <Group
-            className="header"
+    return <Container className="header">
+        <Group className="header__flex-wrapper"
             justify="space-between"
         >
             <Box className="header__left-side">
