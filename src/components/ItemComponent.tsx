@@ -23,14 +23,15 @@ export default function ItemComponent({ item }: { item: Item }) {
             wrap="nowrap"
         >
             <Group className="item__left-side"
+                justify="flex-start"
                 wrap="nowrap"
             >
                 <Center className="item__icon-wrapper">{icon}</Center>
-                <Text className="item__primary-text"
+                {item.title && <Text className="item__primary-text"
                     title={item.title}
                 >
                     {calculatePriText(item)}
-                </Text>
+                </Text>}
                 <Text className="item__secondary-text"
                     c="dimmed"
                     title={item.content}
