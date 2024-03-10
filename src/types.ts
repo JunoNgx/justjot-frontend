@@ -15,6 +15,16 @@ export type Item = RecordModel | {
     updated: string
 };
 
+export type ItemCollection = RecordModel | {
+    id: string,
+    owner: string,
+    name: string,
+    slug: string,
+    sortOrder: 0,
+    created: string,
+    updated: string
+};
+
 export enum ItemType {
     TEXT = "text",
     LINK = "link",
