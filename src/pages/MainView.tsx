@@ -4,11 +4,12 @@ import { useContext, useEffect, useState } from "react";
 
 import { Item } from '../types';
 
-import { Box, Input, Stack } from '@mantine/core';
+import { Input, Stack } from '@mantine/core';
 
 import ItemComponent from '../components/ItemComponent';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
+import { IconCircleTriangle } from '@tabler/icons-react';
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -30,21 +31,22 @@ export default function MainView() {
     const navigate = useNavigate();
     const [list, setList] = useState<Item[]>();
 
-    return <Box className="main-view">
-        <Input
-            className="main-view__input"
+    return <Stack className="main-view"
+        gap="xl"
+    >
+        <Input id="main-input" className="main-view__input"
+            size="lg"
+            leftSection={<IconCircleTriangle size={32} stroke={1}/>}
         />
-        <div className="main-view__list-top">
+        {/* <Box className="main-view__list-top">
             <div>Last updated</div>
-        </div>
-        <Stack
-            // h={300}
-            // bg="var(--mantine-color-body)"
+        </Box> */}
+        <Stack className="main-view__item-container"
             gap="xs"
         >
             {list?.map(item =>
                 <ItemComponent key={item.id} item={item} />
             )}
         </Stack>
-    </Box>
+    </Stack>
 }
