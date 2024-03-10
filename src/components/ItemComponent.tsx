@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Item, ItemType } from "../types";
 import { calculatePriText, processDatetime } from "../utils/itemUtils";
 import { Center, Group, Paper, Text } from "@mantine/core";
-import { IconClipboardText, IconNote, IconWorld } from "@tabler/icons-react";
+import { IconNote, IconNotes, IconWorld } from "@tabler/icons-react";
 
 export default function ItemComponent({ item }: { item: Item }) {
 
@@ -58,7 +58,7 @@ const computeIcon = (item: Item) => {
         case ItemType.TEXT:
         default:
             return item.shouldCopyUponClick
-                ? <IconClipboardText/>
-                : <IconNote/>
+                ? <IconNote/>
+                : <IconNotes/>
     }
 }
