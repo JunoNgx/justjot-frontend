@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { DbTable, Item, ItemCollection } from '../types';
-import { Group, Input, Stack, Text } from '@mantine/core';
+import { ActionIcon, Group, Input, Stack, Text } from '@mantine/core';
 import ItemComponent from '../components/ItemComponent';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
-import { IconCircleTriangle } from '@tabler/icons-react';
+import { IconArrowRightToArc, IconCircleTriangle } from '@tabler/icons-react';
 
 export default function MainView() {
 
@@ -65,9 +65,24 @@ export default function MainView() {
             })
     };
     
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.code === "Enter") {
-            pbClient.collection(DbTable.ITEMS)
+    const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.code === "Enter") createNewItemFromInput()
+    }
+
+    // TODO: move these to App for better coverage
+    const handleClickEvent = () => {
+        console.log("click")
+    }
+    const handleFocusEvent = (e) => {
+        console.log("focus", e)
+    };
+
+    /**
+     * Logic methods
+     */
+
+    const createNewItemFromInput = async () => {
+        pbClient.collection(DbTable.ITEMS)
                 .create({
                     owner: user?.id,
                     collection: currCollection?.id,
@@ -79,17 +94,8 @@ export default function MainView() {
                 })
                 .catch(error => {
                     console.error(error);
-                })
-        }
+                });
     }
-
-    // TODO: move these to App for better coverage
-    const handleClickEvent = () => {
-        console.log("click")
-    }
-    const handleFocusEvent = (e) => {
-        console.log("focus", e)
-    };
 
     return <Stack className="main-view"
         gap="xl"
@@ -107,6 +113,16 @@ export default function MainView() {
         <Input id="main-input" className="main-view__input"
             size="lg"
             leftSection={<IconCircleTriangle size={32} stroke={1}/>}
+            rightSectionPointerEvents="all"
+            rightSection={
+                <ActionIcon 
+                    variant="subtle"
+                    radius="xl"
+                    onClick={createNewItemFromInput}
+                >
+                    <IconArrowRightToArc size={32} stroke={1}/>
+                </ActionIcon>
+            }
             type="text"
             value={inputVal}
             onChange={(event) => setInputVal(event.currentTarget.value)}
