@@ -1,4 +1,5 @@
 // @use "./variables.scss";
+@use "./mixins.scss" as m;
 
 .item {
     cursor: pointer;
@@ -17,6 +18,10 @@
 
     &__right-side {
         flex-shrink: 0;
+        
+        @include m.mobile {
+            display: none;
+        }
     }
 
     &__primary-text,
