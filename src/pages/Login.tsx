@@ -103,7 +103,7 @@ export default function Login() {
         }
 
         <Text mt="lg">
-            Forgot your password? <Anchor component={NavLink} to="/forget">Request reset</Anchor>
+            Forgot your password? <Anchor component={NavLink} to="/reset">Request reset</Anchor>
         </Text>
     </Paper>
 }

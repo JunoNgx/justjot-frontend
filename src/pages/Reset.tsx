@@ -5,7 +5,7 @@ import { useContext, useState } from 'react';
 import { CollectionType } from '../types'
 import { NavLink } from 'react-router-dom';
 
-export default function ForgetPassword() {
+export default function Reset() {
 
     const [hasRequested, setHasRequested] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
