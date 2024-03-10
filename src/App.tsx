@@ -32,7 +32,7 @@ function App() {
                     <Header/>
                 </AppShell.Header>
 
-                <AppShell.Main>
+                <AppShell.Main className="appshell-main">
                     <Routes>
                         <Route path="/" element={<LandingPage />} />
                         <Route path="/help" element={<Help />} />

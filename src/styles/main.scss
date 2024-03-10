@@ -4,6 +4,10 @@
 @use "./item.scss";
 // @use "./loginRegister.scss";
 
+.appshell-main {
+    padding-top: 60px; // see: Header
+}
+
 .landing-page {
     max-width: 512px;
     padding: 16px;
