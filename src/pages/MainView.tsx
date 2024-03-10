@@ -48,6 +48,7 @@ export default function MainView() {
 
     return <Stack className="main-view"
         gap="xl"
+        p="sm"
         onClick={() => {handleClickEvent()}}
         onFocus={handleFocusEvent}
     >
