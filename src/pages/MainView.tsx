@@ -13,24 +13,26 @@ import { IconCircleTriangle } from '@tabler/icons-react';
 
 export default function MainView() {
 
+    const { pbClient, isLoggedIn } = useContext(BackendClientContext);
     useEffect(() => {
         if (!isLoggedIn) {
             navigate(`/login`, { replace: true });
         }
 
-        const fetch = async () => {
-            const pbClient = new PocketBase(import.meta.env.VITE_BACKEND_URL);
-            const records: Item[] = await pbClient.collection("items").getFullList();
-            setList(records)
-        };
-
-        fetch();
+        fetchItems();
     }, []);
 
+    const [items, setItems] = useState<Item[]>();
+    const [inputVal, setInputVal] = useState("");
     const navigate = useNavigate();
-    const { isLoggedIn } = useContext(BackendClientContext);
-    const [ inputVal, setInputVal ] = useState("");
-    const [list, setList] = useState<Item[]>();
+
+    const fetchItems = async () => {
+        const records: Item[] = await pbClient.collection("items").getFullList({
+            sort: "-created"
+        });
+        setItems(records)
+    };
+    
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.code !== "Enter") return;
         // TODO create new record
@@ -63,7 +65,7 @@ export default function MainView() {
         <Stack className="main-view__item-container"
             gap="xs"
         >
-            {list?.map(item =>
+            {items?.map(item =>
                 <ItemComponent key={item.id} item={item} />
             )}
         </Stack>
