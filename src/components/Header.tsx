@@ -58,43 +58,39 @@ function Header() {
             className="header"
             justify="space-between"
         >
-            <div className="header__left-side">
+            <Box className="header__left-side">
                 <ActionIcon
                     variant="transparent"
                     component={NavLink} to="/"
                 >
                     <IconNotebook size={40} stroke={1.5}/>
                 </ActionIcon>
-            </div>
+            </Box>
 
-            <Group
-                className="header__right-side"
+            <Group className="header__right-side"
                 gap="md"
                 justify="flex-end"
             >
                 <Group className="header__theme-mode-container"
                     gap="sm"
                 >
-                    <ActionIcon
+                    <ActionIcon className="header__theme-mode-btn"
                         variant={isThemeModeAuto() ? "outline" : "subtle"}
                         radius="xl"
-                        className="header__theme-mode-option"
                         onClick={() => {setThemeMode(ThemeMode.AUTO)}}
                     >
                         <IconSettingsCog size={18}/>
                     </ActionIcon>
-                    <ActionIcon
+                    <ActionIcon className="header__theme-mode-btn"
                         variant={isThemeModeLight() ? "outline" : "subtle"}
                         radius="xl"
-                        className="header__theme-mode-option"
                         onClick={() => {setThemeMode(ThemeMode.LIGHT)}}
                     >
                         <IconSun size={18}/>
                     </ActionIcon>
-                    <ActionIcon
+                    <ActionIcon className="header__theme-mode-btn"
                         variant={isThemeModeDark() ? "outline" : "subtle"}
                         radius="xl"
-                        className="header__theme-mode-option"
                         onClick={() => {setThemeMode(ThemeMode.DARK)}}
                     >
                         <IconMoon size={18}/>
