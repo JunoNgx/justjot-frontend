@@ -52,68 +52,58 @@ export default function Login() {
         setHasAttempted(true);
     }
 
-    return <Stack
-        className="account-modal account-modal--login"
-        align="center"
-        justify="center"
-    >
-        <Paper
-            withBorder
-            shadow="xs"
-            p="xl"
-        >
-            <Title order={2}>
-                Login
-            </Title>
+    return <Paper className="account-route-modal account-route-modal--login">
+        <Title order={2}>
+            Login
+        </Title>
 
-            <Text>
-                Don't have an account? <Anchor component={NavLink} to="/register">Register</Anchor>
-            </Text>
+        <Text>
+            Don't have an account? <Anchor component={NavLink} to="/register">Register</Anchor>
+        </Text>
 
-            <form onSubmit={form.onSubmit(attemptLogin)}>
-                <TextInput
-                    mt="md"
-                    required
-                    label="Email or Username"
-                    description="Either email or username is accepted."
-                    placeholder="lucatiel@mirrah.com"
-                    type="text"
-                    {...form.getInputProps('email')}
-                />
-                <PasswordInput
-                    mt="md"
-                    required
-                    label="Password"
-                    placeholder="BearSeekSeekLest"
-                    type="password"
-                    {...form.getInputProps('password')}
-                />
+        <form onSubmit={form.onSubmit(attemptLogin)}>
+            <TextInput
+                mt="md"
+                required
+                label="Email or Username"
+                description="Either email or username is accepted."
+                placeholder="lucatiel@mirrah.com"
+                type="text"
+                {...form.getInputProps('email')}
+            />
+            <PasswordInput
+                mt="md"
+                required
+                label="Password"
+                placeholder="BearSeekSeekLest"
+                type="password"
+                {...form.getInputProps('password')}
+            />
 
-                <Group
-                    mt="md"
-                    justify="flex-end"
+            <Group
+                mt="md"
+                justify="flex-end"
+            >
+                <Button
+                    variant="filled"
+                    type="submit"
+                    loading={isLoading}
                 >
-                    <Button
-                        variant="filled"
-                        type="submit"
-                        loading={isLoading}
-                    >
-                        Submit
-                    </Button>
-                </Group>
+                    Submit
+                </Button>
+            </Group>
 
-            </form>
+        </form>
 
-            {hasAttempted && !isSuccessful
-                ? <Text mt="lg" c="red">
-                    {errorMsg}
-                </Text>
-                : ""
-            }
-
-            <Text mt="lg">
-                Forgot your password? <Anchor component={NavLink} to="/forget">Request reset</Anchor>
+        {hasAttempted && !isSuccessful
+            ? <Text mt="lg" c="red">
+                {errorMsg}
             </Text>
-        </Paper>
-    </Stack>
+            : ""
+        }
+
+        <Text mt="lg">
+            Forgot your password? <Anchor component={NavLink} to="/forget">Request reset</Anchor>
+        </Text>
+    </Paper>
 }

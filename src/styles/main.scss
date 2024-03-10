@@ -41,13 +41,16 @@
     }
 }
 
-.account-modal {
+.account-route-modal {
+    margin: 0 auto;
+    max-width: 320px;
+
     &--register {
         margin-bottom: 40px;
     }
 
     &--login {
-        margin-top: 100px;
+        margin-top: 150px;
     }
 
     &--forget {
