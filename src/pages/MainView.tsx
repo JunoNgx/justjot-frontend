@@ -1,5 +1,3 @@
-import PocketBase from 'pocketbase';
-
 import { useContext, useEffect, useState } from "react";
 
 import { Item } from '../types';
