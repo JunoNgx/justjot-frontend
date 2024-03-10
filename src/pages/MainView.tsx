@@ -11,7 +11,7 @@ import ItemComponent from '../components/ItemComponent';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
 
-export default function GroupView() {
+export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
 
     useEffect(() => {
