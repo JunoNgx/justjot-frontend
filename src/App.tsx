@@ -33,22 +33,18 @@ function App() {
                 </AppShell.Header>
 
                 <AppShell.Main>
-                    <Center
-                        className="center-container"
-                    >
-                        <Routes>
-                            <Route path="/" element={<LandingPage />} />
-                            <Route path="/help" element={<Help />} />
-                            <Route path="/:username">
-                                <Route index element={<MainView />} />
-                                <Route path=":groupSlug" element={<MainView />} />
-                            </Route>
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="/forget" element={<ForgetPassword />} />
-                            <Route path="/*" element={<Redirect />} />
-                        </Routes>
-                    </Center>
+                    <Routes>
+                        <Route path="/" element={<LandingPage />} />
+                        <Route path="/help" element={<Help />} />
+                        <Route path="/:username">
+                            <Route index element={<MainView />} />
+                            <Route path=":groupSlug" element={<MainView />} />
+                        </Route>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/forget" element={<ForgetPassword />} />
+                        <Route path="/*" element={<Redirect />} />
+                    </Routes>
                 </AppShell.Main>
 
             </BackendClientContextProvider>
