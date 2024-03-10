@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Item, ItemType } from "../types";
 import { calculatePriText, processDatetime } from "../utils/itemUtils";
-import { Box, Center, Group, Paper, Text } from "@mantine/core";
+import { Center, Group, Paper, Text } from "@mantine/core";
 import { IconClipboardText, IconNote, IconWorld } from "@tabler/icons-react";
 
 export default function ItemComponent({ item }: { item: Item }) {
@@ -20,13 +20,19 @@ export default function ItemComponent({ item }: { item: Item }) {
     >
         <Group className="item__flex-wrapper"
             justify="space-between"
-
+            wrap="nowrap"
         >
-            <Group className="item__left-side">
-                {/* {isFocused} */}
+            <Group className="item__left-side"
+                wrap="nowrap"
+            >
                 <Center className="item__icon-wrapper">{icon}</Center>
-                <Text className="item__primary-text">{calculatePriText(item)}</Text>
-                <Text className="item__secondary-text">{item.content}</Text>
+                <Text className="item__primary-text"
+                >
+                    {calculatePriText(item)}
+                </Text>
+                <Text className="item__secondary-text">
+                    {item.content}
+                </Text>
             </Group>
             <Group className="item__right-side">
                 <Text
