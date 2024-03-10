@@ -15,16 +15,15 @@ export default function LandingPage() {
     const navigate = useNavigate();
 
     return <Box className="landing-page">
-        <Title order={1}>Welcome to JustJot</Title>
-
         <section className="landing-page__section">
             <Title order={2}>jot</Title>
             <Text fs="italic">/dʒɒt/</Text>
-            <Text>(verb) write (something) quickly</Text>
+            <Text>(verb)</Text>
+            <Text>write (something) quickly</Text>
         </section>
 
         <section className="landing-page__section">
-            <Title order={2}>JustJot</Title>
+            <Title order={1}>JustJot</Title>
             <Text>A keyboard-first note-taking Progressive Web App, tailored for fast information-recording operation.</Text>
         </section>
 
