@@ -27,6 +27,7 @@ type RegisterSubmission = {
 export default function Register() {
     const [hasRequested, setHasRequested] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const { pbClient } = useContext(BackendClientContext);
     const [errorList, setErrorList] = useState<string[]>([]);
@@ -52,6 +53,7 @@ export default function Register() {
         submissionData.emailVisibility = false;
         submissionData.userType = UserType.USER;
 
+        setIsLoading(true);
         await pbClient.collection(CollectionType.USERS)
             .create(submissionData)
             .then(async (_record) => {
@@ -65,6 +67,7 @@ export default function Register() {
             })
             .catch(displayError);
         
+        setIsLoading(false);
         setHasRequested(true);
     }
 
@@ -143,6 +146,7 @@ export default function Register() {
                 <Button
                     variant="filled"
                     type="submit"
+                    loading={isLoading}
                 >
                     Register
                 </Button>

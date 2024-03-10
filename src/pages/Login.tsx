@@ -22,6 +22,7 @@ export default function Login() {
     }
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
     const form = useForm({
         initialValues: {
@@ -31,6 +32,7 @@ export default function Login() {
     });
 
     const attemptLogin = async (loginForm: LoginFormData) => {
+        setIsLoading(true);
         await pbClient.collection (CollectionType.USERS)
             .authWithPassword( // works for both email AND username
                 loginForm.email,
@@ -46,6 +48,7 @@ export default function Login() {
                 setErrorMsg(error.response.message)
             });
         
+        setIsLoading(false);
         setHasAttempted(true);
     }
 
@@ -93,6 +96,7 @@ export default function Login() {
                     <Button
                         variant="filled"
                         type="submit"
+                        loading={isLoading}
                     >
                         Submit
                     </Button>

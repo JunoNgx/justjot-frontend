@@ -8,6 +8,7 @@ import { NavLink } from 'react-router-dom';
 export default function ForgetPassword() {
 
     const [hasRequested, setHasRequested] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const { pbClient } = useContext(BackendClientContext);
     const form = useForm({
@@ -17,6 +18,8 @@ export default function ForgetPassword() {
     });
 
     const attemptRequestResetPassword = async (formData: { email: string }) => {
+        setIsLoading(true);
+
         await pbClient.collection(CollectionType.USERS)
             .requestPasswordReset(formData.email)
             .then(() => {
@@ -25,6 +28,8 @@ export default function ForgetPassword() {
             .catch(error => {
                 console.log(error);
             });
+        
+        setIsLoading(false);
     }
 
     const successNotice = <Box mt="lg" p="none">
