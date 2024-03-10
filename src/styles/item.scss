@@ -1,6 +1,11 @@
-@use "./variables.scss";
+// @use "./variables.scss";
 
 .item {
+    border: solid 1px transparent;
+
+    &--is-active {
+        border-color: var(--mantine-color-text);
+    }
     // // background-color: red;
     // display: flex;
     // flex-direction: row;

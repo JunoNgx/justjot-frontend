@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Item, ItemType } from "../types";
 import { calculatePriText, processDatetime } from "../utils/itemUtils";
-import { Group, Paper, Text } from "@mantine/core";
+import { Box, Group, Paper, Text } from "@mantine/core";
 import { IconClipboardText, IconNote, IconWorld } from "@tabler/icons-react";
 
 export default function ItemComponent({ item }: { item: Item }) {
@@ -11,11 +11,9 @@ export default function ItemComponent({ item }: { item: Item }) {
     const [isFocused, setIsFocused] = useState(false);
     // const isTodoItem = item.type === ItemType.TODO;
     const { relativeDatetime, fullDatetime } = processDatetime(item);
-    const hasBorder = isFocused;
     const icon = computeIcon(item);
 
     return <Paper className={"item " + (isFocused ? "item--is-active" : "")}
-        withBorder={hasBorder}
         p="xs"
         onMouseEnter={() => { setIsFocused(true) }}
         onMouseLeave={() => { setIsFocused(false) }}
@@ -26,9 +24,9 @@ export default function ItemComponent({ item }: { item: Item }) {
         >
             <Group className="item__left-side">
                 {/* {isFocused} */}
-                <div className="item__icon">{icon}</div>
-                <div className="item__primary-text">{calculatePriText(item)}</div>
-                <div className="item__secondary-text">{item.content}</div>
+                <Box className="item__icon-wrapper">{icon}</Box>
+                <Text className="item__primary-text">{calculatePriText(item)}</Text>
+                <Text className="item__secondary-text">{item.content}</Text>
             </Group>
             <Group className="item__right-side">
                 <Text
