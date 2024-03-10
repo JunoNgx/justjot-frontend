@@ -7,6 +7,22 @@
     padding-top: 60px; // see: Header
 }
 
+.header {
+    height: 50px;
+
+    &__left-side {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__user-corner {
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
 .landing-page {
     max-width: 512px;
     padding: 16px;
@@ -39,22 +55,6 @@
 
     @include m.mobile {
         margin-top: 0;
-    }
-}
-
-.header {
-    height: 50px;
-
-    &__left-side {
-        display: flex;
-        justify-content: center;
-    }
-
-    &__user-corner {
-        max-width: 150px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
     }
 }
 
