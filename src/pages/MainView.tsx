@@ -4,9 +4,8 @@ import { useContext, useEffect, useState } from "react";
 
 import { Item } from '../types';
 
-import { Stack } from '@mantine/core';
+import { Input, Stack } from '@mantine/core';
 
-import Searchbar from '../components/Searchbar';
 import ItemComponent from '../components/ItemComponent';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
@@ -32,7 +31,7 @@ export default function MainView() {
     const [list, setList] = useState<Item[]>();
 
     return <div className="main-content">
-        <Searchbar/>
+        <Input/>
         <div className="main-content__top">
             <div>Last updated</div>
         </div>
