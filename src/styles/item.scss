@@ -1,6 +1,7 @@
 // @use "./variables.scss";
 
 .item {
+    cursor: pointer;
     border: solid 1px transparent;
     // flex-wrap: nowrap;
 
@@ -10,10 +11,26 @@
 
     &__left-side {
         // flex-wrap: nowrap;
+        min-width: 0;
+        flex-grow: 3;
     }
 
+    &__right-side {
+        flex-shrink: 0;
+    }
+
+    &__primary-text,
     &__secondary-text {
         // color: var(--mantine-color-dimmed);
+        // font-family: var(--mantine-font-family-monospace);
+        // min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    &__secondary-text {
+        max-width: calc(33%);
     }
     // // background-color: red;
     // display: flex;
