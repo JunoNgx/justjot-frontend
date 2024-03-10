@@ -57,5 +57,5 @@ export enum UserType {
 export enum DbTable {
     USERS = "users",
     ITEMS = "items",
-    COLLECTION = "itemCollections"
+    COLLECTIONS = "itemCollections"
 };
