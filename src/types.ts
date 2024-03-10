@@ -47,5 +47,5 @@ export enum UserType {
 export enum CollectionType {
     USERS = "users",
     ITEMS = "items",
-    GROUP = "groups"
+    COLLECTION = "itemCollections"
 };
