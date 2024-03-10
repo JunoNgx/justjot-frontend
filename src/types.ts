@@ -32,6 +32,11 @@ export enum ThemeMode {
     AUTO = "auto"
 };
 
+export enum ComputedThemeMode {
+    LIGHT = "light",
+    DARK = "dark"
+};
+
 export enum UserType {
     USER = "user",
     ADMIN = "admin",
