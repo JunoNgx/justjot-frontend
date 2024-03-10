@@ -1,33 +1,33 @@
 @use "./variables.scss";
 
 .item {
-    // background-color: red;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    // // background-color: red;
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: space-between;
 
-    box-sizing: border-box;
-    border: solid 2px transparent;
-    padding: 8px;
-    cursor: pointer;
+    // box-sizing: border-box;
+    // border: solid 2px transparent;
+    // padding: 8px;
+    // cursor: pointer;
 
-    &--is-active {
-        border: solid 2px var(--col-pri);
-    }
+    // &--is-active {
+    //     border: solid 2px var(--col-pri);
+    // }
 
-    &__left-side {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-        gap: 10px;
-    }
+    // &__left-side {
+    //     display: flex;
+    //     flex-direction: row;
+    //     align-items: flex-end;
+    //     gap: 10px;
+    // }
 
-    &__primary-text {
-        text-transform: uppercase;
-    }
+    // &__primary-text {
+    //     text-transform: uppercase;
+    // }
 
-    &__secondary-text {
-        font-family: monospace;
-        // font-size: 0.75rem;
-    }
+    // &__secondary-text {
+    //     font-family: monospace;
+    //     // font-size: 0.75rem;
+    // }
 }
