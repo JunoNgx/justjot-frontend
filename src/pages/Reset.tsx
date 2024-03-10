@@ -67,11 +67,16 @@ export default function Reset() {
         <Title order={2}>
             Request password reset
         </Title>
+        
+        <Text mt="lg">Well, that is inconvenient.</Text>
 
-            {hasRequested
-                ? successNotice
-                : resetRequestForm
-            }
+        {hasRequested
+            ? successNotice
+            : resetRequestForm
+        }
 
+        <Text mt="lg">
+            Memory retrieved? <Anchor component={NavLink} to="login">Login</Anchor>
+        </Text>
     </Paper>
 }
