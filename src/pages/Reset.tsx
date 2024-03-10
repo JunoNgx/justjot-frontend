@@ -1,5 +1,5 @@
 import { useForm } from '@mantine/form';
-import { Stack, Paper, TextInput, Button, Title, Group, Text, Box, Anchor } from "@mantine/core";
+import { Paper, TextInput, Button, Title, Group, Text, Box, Anchor } from "@mantine/core";
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useContext, useState } from 'react';
 import { CollectionType } from '../types'
@@ -56,31 +56,22 @@ export default function Reset() {
                 <Button
                     variant="filled"
                     type="submit"
+                    loading={isLoading}
                 >
-                    Request reset
+                    Request
                 </Button>
             </Group>
         </form>
 
-    return <Stack
-        className="account-modal account-modal--forget"
-        align="center"
-        justify="center"
-    >
-        <Paper
-            withBorder
-            shadow="xs"
-            p="xl"
-        >
-            <Title order={2}>
-                Forget password
-            </Title>
+    return <Paper className="account-route-modal account-route-modal--reset">
+        <Title order={2}>
+            Request password reset
+        </Title>
 
-                {hasRequested
-                    ? successNotice
-                    : resetRequestForm
-                }
+            {hasRequested
+                ? successNotice
+                : resetRequestForm
+            }
 
-        </Paper>
-    </Stack>
+    </Paper>
 }
