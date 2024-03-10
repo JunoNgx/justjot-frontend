@@ -27,11 +27,14 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        max-width: calc(50%);
     }
+
+    // &__primary-text {
+    // }
     
-    &__secondary-text {
-        max-width: calc(33%);
-    }
+    // &__secondary-text {
+    // }
     // // background-color: red;
     // display: flex;
     // flex-direction: row;
