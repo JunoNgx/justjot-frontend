@@ -62,7 +62,7 @@ export default function MainView() {
         {/* <Box className="main-view__list-top">
             <div>Last updated</div>
         </Box> */}
-        <Stack className="main-view__item-container"
+        <Stack className="main-view__items-container"
             gap="xs"
         >
             {items?.map(item =>
