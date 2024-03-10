@@ -1,7 +1,7 @@
 // import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 
-import { AppShell, Center } from '@mantine/core';
+import { AppShell } from '@mantine/core';
 
 import Header from "./components/Header";
 
