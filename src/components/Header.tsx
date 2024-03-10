@@ -1,15 +1,17 @@
 import { useContext } from "react";
-import { ActionIcon, Anchor, Box, Container, Group, Menu, Text, UnstyledButton } from "@mantine/core";
+import { ActionIcon, Anchor, Box, Container, Group, Menu, Text, UnstyledButton, getThemeColor, useComputedColorScheme } from "@mantine/core";
 import { ThemeModeContext } from "../contexts/ThemeModeContext";
-import { ThemeMode } from "../types";
+import { ThemeMode, ComputedThemeMode } from "../types";
 import { BackendClientContext } from "../contexts/BackendClientContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IconChevronDown, IconLogout, IconMoon, IconNotebook, IconSettings, IconSettingsCog, IconSun } from "@tabler/icons-react";
+import { justJotTheme } from "../theme";
 
 function Header() {
 
     const { themeMode, setThemeMode } = useContext(ThemeModeContext);
     const { logout, isLoggedIn, setIsLoggedIn, user } = useContext(BackendClientContext);
+    const computedThemeMode = useComputedColorScheme(ComputedThemeMode.LIGHT);
     const navigate = useNavigate()
 
     const isThemeModeLight = () => themeMode === ThemeMode.LIGHT;
@@ -22,6 +24,9 @@ function Header() {
         navigate("/", { replace: true});
     };
 
+    const themeModeBtnColour = computedThemeMode === ComputedThemeMode.LIGHT
+        ? justJotTheme.other.colText
+        : justJotTheme.other.colTextDark;
     const username = user?.displayName || user?.username;
 
     const LoginRegisterLinks = <Group>
@@ -76,6 +81,7 @@ function Header() {
                 >
                     <ActionIcon className="header__theme-mode-btn"
                         variant={isThemeModeAuto() ? "outline" : "subtle"}
+                        color={themeModeBtnColour}
                         radius="xl"
                         onClick={() => {setThemeMode(ThemeMode.AUTO)}}
                     >
@@ -83,6 +89,7 @@ function Header() {
                     </ActionIcon>
                     <ActionIcon className="header__theme-mode-btn"
                         variant={isThemeModeLight() ? "outline" : "subtle"}
+                        color={themeModeBtnColour}
                         radius="xl"
                         onClick={() => {setThemeMode(ThemeMode.LIGHT)}}
                     >
@@ -90,6 +97,7 @@ function Header() {
                     </ActionIcon>
                     <ActionIcon className="header__theme-mode-btn"
                         variant={isThemeModeDark() ? "outline" : "subtle"}
+                        color={themeModeBtnColour}
                         radius="xl"
                         onClick={() => {setThemeMode(ThemeMode.DARK)}}
                     >
