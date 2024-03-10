@@ -73,7 +73,7 @@ export default function Register() {
 
     const displayError = (error: ClientResponseError) => {
         setIsSuccessful(false);
-        setErrorList([]);
+        setErrorList(["Your submission encountered a problem."]);
         if (error.response.data) {
             Object.entries(error.response.data).forEach((keyValArr, _index) => {
                 const value = keyValArr[1] as {code: string, message: string};
