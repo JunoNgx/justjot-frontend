@@ -89,7 +89,7 @@ export default function Login() {
                     type="submit"
                     loading={isLoading}
                 >
-                    Submit
+                    Login
                 </Button>
             </Group>
 
