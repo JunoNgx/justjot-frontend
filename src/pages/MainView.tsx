@@ -16,25 +16,20 @@ export default function MainView() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("on mount use effect")
-        console.trace();
         if (!isLoggedIn) {
             navigate(`/login`, { replace: true });
             return;
         }
 
         const fetchCollections = async () => {
-            console.log("fetch collections")
             await pbClient
                 // .cancelAllRequests()
                 .collection(DbTable.COLLECTIONS)
                 .getFullList()
                 .then((records: ItemCollection[]) => {
                     setCollections(records);
-                    // TODO: search collection by slug from params
                 })
                 .catch(error => {
-                    console.log("fetch collection error")
                     console.error(error)
                 });
         };
@@ -42,33 +37,33 @@ export default function MainView() {
         fetchCollections();
     }, []);
 
-    // useEffect(() =>{
-    //     console.log("useEffect collections", collections);
-    //     if (!collections) return;
-    //     setCurrCollection(collections![0]);
-    // }, [collections]);
+    useEffect(() =>{
+        if (!collections) return;
+        // TODO calculate based on param slug
+        setCurrCollection(collections![0]);
+    }, [collections]);
 
-    // useEffect(() => {
-    //     const fetchItems = async () => {
-    //         console.log("fetch items")
-    //         await pbClient
-    //             .cancelAllRequests()
-    //             .collection(DbTable.ITEMS)
-    //             .getFullList({
-    //                 // TODO: fix this
-    //                 // filter: "collection = @currCollection.id",
-    //                 sort: "-created"
-    //             })
-    //             .then((records: Item[]) => {
-    //                 setItems(records);
-    //             })
-    //             .catch(error => {
-    //                 console.error(error);
-    //             })
-    //     };
+    useEffect(() => {
+        if (!currCollection) return;
+        fetchItems();
+    }, [currCollection]);
 
-    //     fetchItems();
-    // }, [currCollection]);
+    const fetchItems = async () => {
+        await pbClient
+            // .cancelAllRequests()
+            .collection(DbTable.ITEMS)
+            .getFullList({
+                // TODO: filter syntax
+                // filter: "collection = @currCollection.id",
+                sort: "-created"
+            })
+            .then((records: Item[]) => {
+                setItems(records);
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    };
     
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.code === "Enter") {
@@ -86,7 +81,6 @@ export default function MainView() {
                     console.error(error);
                 })
         }
-        // TODO create new record
     }
 
     // TODO: move these to App for better coverage
@@ -105,7 +99,7 @@ export default function MainView() {
     >
         current collection: {currCollection?.name}
         <Group className="main-view__collections-wrapper">
-            <Text>fjdslkfjkldsflsd</Text>
+            <Text>list of collections:</Text>
             {collections?.map(collection => <Text key={collection.id}>{collection.name}</Text>)
 
             }
