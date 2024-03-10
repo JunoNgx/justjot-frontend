@@ -30,7 +30,9 @@ export default function ItemComponent({ item }: { item: Item }) {
                 >
                     {calculatePriText(item)}
                 </Text>
-                <Text className="item__secondary-text">
+                <Text className="item__secondary-text"
+                    c="dimmed"
+                >
                     {item.content}
                 </Text>
             </Group>
