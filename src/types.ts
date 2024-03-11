@@ -9,7 +9,7 @@ export type Item = RecordModel | {
     type: ItemType,
     // defaultAction: DefaultAction,
     shouldCopyUponClick: boolean,
-    isMarkedDone: boolean,
+    faviconUrl: string,
     // TODO: should validate these as ISO strings
     created: string,
     updated: string
