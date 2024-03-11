@@ -23,8 +23,10 @@
     }
 
     &__icon-wrapper {
+        flex-shrink: 0;
+
         > img {
-            flex: auto
+            flex: auto;
         }
     }
 
