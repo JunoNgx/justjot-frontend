@@ -22,6 +22,12 @@
         }
     }
 
+    &__icon-wrapper {
+        > img {
+            flex: auto
+        }
+    }
+
     &__primary-text,
     &__secondary-text {
         white-space: nowrap;
@@ -29,4 +35,5 @@
         text-overflow: ellipsis;
         max-width: calc(50%);
     }
+
 }

@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { Item, ItemType } from "../types";
 import { calculatePriText, processDatetime } from "../utils/itemUtils";
-import { Center, Group, Paper, Text } from "@mantine/core";
+import { Center, Group, Image, Paper, Text } from "@mantine/core";
 import { IconNote, IconNotes, IconWorld } from "@tabler/icons-react";
+import { isValidUrl } from "../utils/misc";
 
 export default function ItemComponent({ item }: { item: Item }) {
 
@@ -54,11 +55,14 @@ export default function ItemComponent({ item }: { item: Item }) {
 const computeIcon = (item: Item) => {
     switch (item.type) {
         case ItemType.LINK:
-            return <IconWorld/>
+            console.log(item.faviconUrl)
+            return item.faviconUrl && isValidUrl(item.faviconUrl)
+                ? <Image h={24} src={item.faviconUrl}/>
+                : <IconWorld size={24}/>
         case ItemType.TEXT:
         default:
             return item.shouldCopyUponClick
-                ? <IconNote/>
-                : <IconNotes/>
+                ? <IconNote size={24}/>
+                : <IconNotes size={24}/>
     }
 }
