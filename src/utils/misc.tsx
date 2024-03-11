@@ -7,3 +7,12 @@ export const isDatetimeMoreThanOneYearOld = (datetime: Date): boolean => {
     return yearDiff > 1
         || yearDiff === 1 && dateDiff > 0;
 }
+
+export const isValidUrl = (url: string) => {
+    try { 
+        return Boolean(new URL(url)); 
+    }
+    catch(e){ 
+        return false; 
+    }
+}
