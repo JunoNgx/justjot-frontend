@@ -55,7 +55,6 @@ export default function ItemComponent({ item }: { item: Item }) {
 const computeIcon = (item: Item) => {
     switch (item.type) {
         case ItemType.LINK:
-            console.log(item.faviconUrl)
             return item.faviconUrl && isValidUrl(item.faviconUrl)
                 ? <Image h={24} src={item.faviconUrl}/>
                 : <IconWorld size={24}/>
