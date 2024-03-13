@@ -4,6 +4,35 @@
 }
 
 @font-face {
+    font-family: "Space Mono";
+    font-style: normal;
+    font-weight: 400;
+    src: url('../assets/fonts/SpaceMono-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Space Mono";
+    font-style: italic;
+    font-weight: 400;
+    src: url('../assets/fonts/SpaceMono-Italic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Space Mono";
+    font-style: normal;
+    font-weight: 700;
+    src: url('../assets/fonts/SpaceMono-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: "Space Mono";
+    font-style: italic;
+    font-weight: 700;
+    src: url('../assets/fonts/SpaceMono-BoldItalic.ttf') format('truetype');
+}
+
+
+@font-face {
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 300;
