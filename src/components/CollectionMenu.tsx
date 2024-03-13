@@ -1,4 +1,4 @@
-import { Group, Kbd, Menu, MenuDivider, MenuItem, Text, UnstyledButton } from "@mantine/core";
+import { Box, Group, Kbd, Menu, MenuDivider, MenuItem, Text, UnstyledButton } from "@mantine/core";
 import { ItemCollection } from "../types";
 import { IconEdit, IconPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
 
@@ -35,7 +35,10 @@ export default function CollectionMenu({ currCollection, collections }: Collecti
 }
 
 const computeNumericHotkey = (index: number) => {
-    return index < 10
+    if (index === 9)
+        return <Kbd>0</Kbd>
+
+    return index < 9
         ? <Kbd>{index + 1}</Kbd>
-        : ""
+        : <Box className="collection-menu-btn__number-placeholder"/>
 }
