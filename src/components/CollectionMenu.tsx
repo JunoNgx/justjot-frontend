@@ -1,6 +1,6 @@
 import { Group, Kbd, Menu, MenuDivider, MenuItem, Text, UnstyledButton } from "@mantine/core";
 import { ItemCollection } from "../types";
-import { IconPlus, IconSelector, IconSortAscendingShapes } from "@tabler/icons-react";
+import { IconEdit, IconPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
 
 type CollectionProp = {
     currCollection: ItemCollection | undefined,
@@ -27,14 +27,15 @@ export default function CollectionMenu({ currCollection, collections }: Collecti
         )}
             <MenuDivider/>
             <MenuItem leftSection={<IconPlus size={16}/>}>New collection</MenuItem>
-            <MenuItem leftSection={<IconSortAscendingShapes size={16}/>}>Sort collections</MenuItem>
-        </Menu.Dropdown>
-        
+            <MenuItem leftSection={<IconSortAscendingShapes size={16}/>}>Sort all collections</MenuItem>
+            <MenuItem leftSection={<IconEdit size={16}/>}>Edit this collection</MenuItem>
+            <MenuItem color="red" leftSection={<IconTrash size={16}/>}>Delete this collection</MenuItem>
+        </Menu.Dropdown>        
     </Menu>
 }
 
 const computeNumericHotkey = (index: number) => {
-    return index < 1
+    return index < 10
         ? <Kbd>{index + 1}</Kbd>
         : ""
 }
