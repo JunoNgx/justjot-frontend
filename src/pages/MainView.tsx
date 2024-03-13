@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { DbTable, Item, ItemCollection } from '../types';
-import { ActionIcon, Group, Input, Stack, Text } from '@mantine/core';
+import { ActionIcon, Button, Group, Input, Stack, Text } from '@mantine/core';
 import ItemComponent from '../components/ItemComponent';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
 import { IconArrowRightToArc, IconCircleTriangle } from '@tabler/icons-react';
+import CollectionMenu from "../components/CollectionMenu";
 
 export default function MainView() {
 
@@ -103,13 +104,19 @@ export default function MainView() {
         onClick={() => {handleClickEvent()}}
         onFocus={handleFocusEvent}
     >
-        current collection: {currCollection?.name}
+        {/* current collection: {currCollection?.name}
         <Group className="main-view__collections-wrapper">
             <Text>list of collections:</Text>
             {collections?.map(collection => <Text key={collection.id}>{collection.name}</Text>)
 
             }
-        </Group> 
+        </Group>  */}
+        <Group className="main-view__menu-flex-container">
+            <CollectionMenu
+                currCollection={currCollection}
+                collections={collections}
+            />
+        </Group>
         <Input id="main-input" className="main-view__input"
             size="lg"
             leftSection={<IconCircleTriangle size={32} stroke={1}/>}
