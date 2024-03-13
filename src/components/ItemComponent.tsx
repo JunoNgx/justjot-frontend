@@ -31,8 +31,20 @@ export default function ItemComponent({ item }: { item: Item }) {
         // onContextMenu={handleContextMenu}
         onContextMenu={showContextMenu([
             {
-                key: "refetch",
-                title: "refetch",
+                key: "copy",
+                onClick: () => {}
+            }, {
+                key: "edit",
+                onClick: () => {}
+            }, {
+                key: "delete",
+                color: "red",
+                onClick: () => {}
+            }, {
+                key: "move",
+                onClick: () => {}
+            }, {
+                key: "refetch link",
                 onClick: refetch
             }
         ])}
