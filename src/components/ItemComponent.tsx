@@ -6,6 +6,7 @@ import { calculatePriText, processDatetime } from "../utils/itemUtils";
 import { Center, Group, Image, Paper, Text } from "@mantine/core";
 import { IconNote, IconNotes, IconWorld } from "@tabler/icons-react";
 import { isValidUrl } from "../utils/misc";
+import { useContextMenu } from 'mantine-contextmenu';
 
 export default function ItemComponent({ item }: { item: Item }) {
 
@@ -14,10 +15,27 @@ export default function ItemComponent({ item }: { item: Item }) {
     const { relativeDatetime, fullDatetime } = processDatetime(item);
     const icon = computeIcon(item);
 
+    const { showContextMenu } = useContextMenu();
+
+    const refetch = async () => {
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}refetch/${item.id}`, {
+            method: "POST"
+        })
+        // TODO update items
+    }
+
     return <Paper className={"item " + (isFocused ? "item--is-active" : "")}
         p="xs"
         onMouseEnter={() => { setIsFocused(true) }}
         onMouseLeave={() => { setIsFocused(false) }}
+        // onContextMenu={handleContextMenu}
+        onContextMenu={showContextMenu([
+            {
+                key: "refetch",
+                title: "refetch",
+                onClick: refetch
+            }
+        ])}
     >
         <Group className="item__flex-wrapper"
             justify="space-between"
