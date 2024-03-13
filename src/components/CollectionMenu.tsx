@@ -35,10 +35,12 @@ export default function CollectionMenu({ currCollection, collections }: Collecti
 }
 
 const computeNumericHotkey = (index: number) => {
-    if (index === 9)
+    switch (true) {
+    case index === 9:
         return <Kbd>0</Kbd>
-
-    return index < 9
-        ? <Kbd>{index + 1}</Kbd>
-        : <Box className="collection-menu-btn__number-placeholder"/>
+    case index < 9:
+        return <Kbd>{index + 1}</Kbd>
+    default:
+        return <Box className="collection-menu-btn__number-placeholder"/>
+    }
 }
