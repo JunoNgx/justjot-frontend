@@ -22,9 +22,9 @@ export default function CollectionMenu({ currCollection, collections }: Collecti
         </Menu.Target>
 
         <Menu.Dropdown>
-        {collections?.map((collection: ItemCollection, index: number) =>
-            <MenuItem leftSection={computeNumericHotkey(index)}>{collection.name}</MenuItem>
-        )}
+            {collections?.map((collection: ItemCollection, index: number) =>
+                <MenuItem leftSection={computeNumericHotkey(index)}>{collection.name}</MenuItem>
+            )}
             <MenuDivider/>
             <MenuItem leftSection={<IconPlus size={16}/>}>New collection</MenuItem>
             <MenuItem leftSection={<IconSortAscendingShapes size={16}/>}>Sort all collections</MenuItem>
