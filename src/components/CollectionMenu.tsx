@@ -23,10 +23,10 @@ export default function CollectionMenu({ currCollection, collections }: Collecti
 
         <Menu.Dropdown>
             {collections?.map((collection: ItemCollection, index: number) =>
-                <MenuItem leftSection={computeNumericHotkey(index)}>{collection.name}</MenuItem>
+                <MenuItem rightSection={computeNumericHotkey(index)}>{collection.name}</MenuItem>
             )}
             <MenuDivider/>
-            <MenuItem leftSection={<IconPlus size={16}/>}>New collection</MenuItem>
+            <MenuItem leftSection={<IconPlus size={16}/>}>Create new collection</MenuItem>
             <MenuItem leftSection={<IconSortAscendingShapes size={16}/>}>Sort all collections</MenuItem>
             <MenuItem leftSection={<IconEdit size={16}/>}>Edit this collection</MenuItem>
             <MenuItem color="red" leftSection={<IconTrash size={16}/>}>Delete this collection</MenuItem>
