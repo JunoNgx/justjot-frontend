@@ -53,18 +53,18 @@ export default function MainView() {
     const createNewItemFromInput = async () => {
         setIsInputLoading(true);
         pbClient.collection(DbTable.ITEMS)
-                .create({
-                    owner: user?.id,
-                    collection: currCollection?.id,
-                    content: inputVal
-                })
-                .then((_record: Item) => {
-                    fetchItems();
-                    setInputVal("");
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+            .create({
+                owner: user?.id,
+                collection: currCollection?.id,
+                content: inputVal
+            })
+            .then((_record: Item) => {
+                fetchItems();
+                setInputVal("");
+            })
+            .catch(error => {
+                console.error(error);
+            });
         setIsInputLoading(false);
     }
 
