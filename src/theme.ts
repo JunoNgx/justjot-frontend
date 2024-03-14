@@ -19,10 +19,10 @@ const overrideTheme = createTheme({
             "#717171",
             "#656565",
             "#575757"
-          ]
+        ]
     },
     primaryColor: "black",
-    fontFamily: "Space Grotesk, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif, Segoe UI Emoji", 
+    fontFamily: "Space Grotesk, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif, Segoe UI Emoji",
     fontFamilyMonospace: "Space Mono, Menlo, Consolas, monospace",
     defaultRadius: 0,
     other: {
@@ -30,6 +30,9 @@ const overrideTheme = createTheme({
         colTextDark: "#C9C9C9", // --mantine-color-dark-0
         colLogo: "#86EAD4", // Mint
         iconStrokeWidth: 1.5,
+        iconSizeMenu: 16,
+        iconSizeItem: 24,
+        iconSizeThemeMode: 18,
     }
 });
 
