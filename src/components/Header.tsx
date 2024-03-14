@@ -71,6 +71,44 @@ function Header() {
         </Menu.Dropdown>
     </Menu>
 
+    const themeModeContainer = <Group className="header__theme-mode-container"
+        gap="sm"
+    >
+        <ActionIcon className="header__theme-mode-btn"
+            variant={isThemeModeAuto() ? "outline" : "subtle"}
+            color={themeModeBtnColour}
+            radius="xl"
+            onClick={() => {setThemeMode(ThemeMode.AUTO)}}
+        >
+            <IconSettingsCog
+                size={justJotTheme.other.iconSizeThemeMode}
+                stroke={justJotTheme.other.iconStrokeWidth}
+            />
+        </ActionIcon>
+        <ActionIcon className="header__theme-mode-btn"
+            variant={isThemeModeLight() ? "outline" : "subtle"}
+            color={themeModeBtnColour}
+            radius="xl"
+            onClick={() => {setThemeMode(ThemeMode.LIGHT)}}
+        >
+            <IconSun
+                size={justJotTheme.other.iconSizeThemeMode}
+                stroke={justJotTheme.other.iconStrokeWidth}
+            />
+        </ActionIcon>
+        <ActionIcon className="header__theme-mode-btn"
+            variant={isThemeModeDark() ? "outline" : "subtle"}
+            color={themeModeBtnColour}
+            radius="xl"
+            onClick={() => {setThemeMode(ThemeMode.DARK)}}
+        >
+            <IconMoon
+                size={justJotTheme.other.iconSizeThemeMode}
+                stroke={justJotTheme.other.iconStrokeWidth}
+            />
+        </ActionIcon>
+    </Group>
+
     return <Container className="header">
         <Group className="header__flex-wrapper"
             justify="space-between"
@@ -93,43 +131,7 @@ function Header() {
                 gap="md"
                 justify="flex-end"
             >
-                <Group className="header__theme-mode-container"
-                    gap="sm"
-                >
-                    <ActionIcon className="header__theme-mode-btn"
-                        variant={isThemeModeAuto() ? "outline" : "subtle"}
-                        color={themeModeBtnColour}
-                        radius="xl"
-                        onClick={() => {setThemeMode(ThemeMode.AUTO)}}
-                    >
-                        <IconSettingsCog
-                            size={justJotTheme.other.iconSizeThemeMode}
-                            stroke={justJotTheme.other.iconStrokeWidth}
-                        />
-                    </ActionIcon>
-                    <ActionIcon className="header__theme-mode-btn"
-                        variant={isThemeModeLight() ? "outline" : "subtle"}
-                        color={themeModeBtnColour}
-                        radius="xl"
-                        onClick={() => {setThemeMode(ThemeMode.LIGHT)}}
-                    >
-                        <IconSun
-                            size={justJotTheme.other.iconSizeThemeMode}
-                            stroke={justJotTheme.other.iconStrokeWidth}
-                        />
-                    </ActionIcon>
-                    <ActionIcon className="header__theme-mode-btn"
-                        variant={isThemeModeDark() ? "outline" : "subtle"}
-                        color={themeModeBtnColour}
-                        radius="xl"
-                        onClick={() => {setThemeMode(ThemeMode.DARK)}}
-                    >
-                        <IconMoon
-                            size={justJotTheme.other.iconSizeThemeMode}
-                            stroke={justJotTheme.other.iconStrokeWidth}
-                        />
-                    </ActionIcon>
-                </Group>
+                {themeModeContainer}
 
                 <Box className="header__user-corner">
                     {isLoggedIn
