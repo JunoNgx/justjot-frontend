@@ -43,15 +43,27 @@ function Header() {
             <UnstyledButton>
                 <Group gap={6}>
                     <Text>{username}</Text>
-                    <IconChevronDown size={14}/>
+                    <IconChevronDown
+                        size={justJotTheme.other.iconSizeHeaderUser}
+                        stroke={justJotTheme.other.iconStrokeWidth}
+                    />
                 </Group>
             </UnstyledButton>
         </Menu.Target>
 
         <Menu.Dropdown>
-            <Menu.Item leftSection={<IconSettings size={14}/>}>User settings</Menu.Item>
+            <Menu.Item leftSection={<IconSettings
+                    size={justJotTheme.other.iconSizeMenu}
+                    stroke={justJotTheme.other.iconStrokeWidth}
+                />}
+            >
+                User settings
+            </Menu.Item>
             <Menu.Item
-                leftSection={<IconLogout size={14}/>}
+                leftSection={<IconLogout
+                    size={justJotTheme.other.iconSizeMenu}
+                    stroke={justJotTheme.other.iconStrokeWidth}
+                />}
                 onClick={attemptLogout}
             >
                 Logout
@@ -67,8 +79,13 @@ function Header() {
                 <ActionIcon
                     variant="transparent"
                     component={NavLink} to="/"
+                    size="xl"
                 >
-                    <IconNotebook color={justJotTheme.other.colLogo} size={40} stroke={1.5}/>
+                    <IconNotebook
+                        color={justJotTheme.other.colLogo}
+                        size={justJotTheme.other.iconSizeHeaderLogo}
+                        stroke={justJotTheme.other.iconStrokeWidth}
+                    />
                 </ActionIcon>
             </Box>
 
@@ -85,7 +102,10 @@ function Header() {
                         radius="xl"
                         onClick={() => {setThemeMode(ThemeMode.AUTO)}}
                     >
-                        <IconSettingsCog size={18}/>
+                        <IconSettingsCog
+                            size={justJotTheme.other.iconSizeThemeMode}
+                            stroke={justJotTheme.other.iconStrokeWidth}
+                        />
                     </ActionIcon>
                     <ActionIcon className="header__theme-mode-btn"
                         variant={isThemeModeLight() ? "outline" : "subtle"}
@@ -93,7 +113,10 @@ function Header() {
                         radius="xl"
                         onClick={() => {setThemeMode(ThemeMode.LIGHT)}}
                     >
-                        <IconSun size={18}/>
+                        <IconSun
+                            size={justJotTheme.other.iconSizeThemeMode}
+                            stroke={justJotTheme.other.iconStrokeWidth}
+                        />
                     </ActionIcon>
                     <ActionIcon className="header__theme-mode-btn"
                         variant={isThemeModeDark() ? "outline" : "subtle"}
@@ -101,7 +124,10 @@ function Header() {
                         radius="xl"
                         onClick={() => {setThemeMode(ThemeMode.DARK)}}
                     >
-                        <IconMoon size={18}/>
+                        <IconMoon
+                            size={justJotTheme.other.iconSizeThemeMode}
+                            stroke={justJotTheme.other.iconStrokeWidth}
+                        />
                     </ActionIcon>
                 </Group>
 
