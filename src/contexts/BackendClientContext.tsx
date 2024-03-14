@@ -1,6 +1,7 @@
-import PocketBase, { BaseAuthStore, AuthModel } from 'pocketbase';
+import PocketBase, { AuthModel } from 'pocketbase';
 // import User, { BaseAuthStore } from 'pocketbase';
 import { ReactNode, createContext, useEffect, useState } from 'react';
+import { DbTable, Item, ItemCollection } from '../types';
 
 // type AuthContextType = { authStore: BaseAuthStore } | null;
 type BackendClientType = {
@@ -9,7 +10,16 @@ type BackendClientType = {
     user: AuthModel,
     isLoggedIn: boolean,
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
-    logout: () => void
+    logout: () => void,
+
+    currCollection: ItemCollection | undefined,
+    setCurrCollection: React.Dispatch<React.SetStateAction<ItemCollection | undefined>>,
+    collections: ItemCollection[] | undefined,
+    setCollections: React.Dispatch<React.SetStateAction<ItemCollection[] | undefined>>,
+    items: Item[] | undefined,
+    setItems: React.Dispatch<React.SetStateAction<Item[] | undefined>>,
+
+    fetchItems: () => void,
 };
 
 // export const AuthContext = createContext<AuthContextType>(null);
@@ -19,7 +29,16 @@ export const BackendClientContext = createContext<BackendClientType>({
     user: null,
     isLoggedIn: false,
     setIsLoggedIn: () => {},
-    logout: () => {}
+    logout: () => {},
+
+    currCollection: undefined,
+    setCurrCollection: () => {},
+    collections: undefined,
+    setCollections: () => {},
+    items: undefined,
+    setItems: () => {},
+
+    fetchItems: () => {},
 });
 
 export default function BackendClientContextProvider({children}: {children: ReactNode}) {
@@ -28,6 +47,55 @@ export default function BackendClientContextProvider({children}: {children: Reac
     const [ isLoggedIn, setIsLoggedIn ] = useState(pbClient.authStore.isValid);
     const logout = () => {
         pbClient.authStore.clear();
+    };
+
+    const [currCollection, setCurrCollection] = useState<ItemCollection>();
+    const [collections, setCollections] = useState<ItemCollection[]>();
+    const [items, setItems] = useState<Item[]>();
+
+    useEffect(() => {
+        const fetchCollections = async () => {
+            await pbClient
+                // .cancelAllRequests()
+                .collection(DbTable.COLLECTIONS)
+                .getFullList()
+                .then((records: ItemCollection[]) => {
+                    setCollections(records);
+                })
+                .catch(error => {
+                    console.error(error)
+                });
+        };
+
+        fetchCollections();
+    }, []);
+
+    useEffect(() =>{
+        if (!collections) return;
+        // TODO calculate based on param slug
+        setCurrCollection(collections![0]);
+    }, [collections]);
+
+    useEffect(() => {
+        if (!currCollection) return;
+        fetchItems();
+    }, [currCollection]);
+
+    const fetchItems = async () => {
+        await pbClient
+            // .cancelAllRequests()
+            .collection(DbTable.ITEMS)
+            .getFullList({
+                // TODO: filter syntax
+                // filter: "collection = @currCollection.id",
+                sort: "-created"
+            })
+            .then((records: Item[]) => {
+                setItems(records);
+            })
+            .catch(error => {
+                console.error(error);
+            })
     };
 
     // useEffect(() => {
@@ -43,7 +111,16 @@ export default function BackendClientContextProvider({children}: {children: Reac
             user: pbClient.authStore.model,
             isLoggedIn,
             setIsLoggedIn,
-            logout
+            logout,
+
+            currCollection,
+            setCurrCollection,
+            collections,
+            setCollections,
+            items,
+            setItems,
+
+            fetchItems,
         }}
     >
         {children}

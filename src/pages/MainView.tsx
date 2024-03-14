@@ -10,12 +10,17 @@ import { justJotTheme } from "../theme";
 
 export default function MainView() {
 
-    const { pbClient, isLoggedIn, user } = useContext(BackendClientContext);
-    const [currCollection, setCurrCollection] = useState<ItemCollection>();
-    const [collections, setCollections] = useState<ItemCollection[]>();
-    const [items, setItems] = useState<Item[]>();
-    const [inputVal, setInputVal] = useState("");
-    const [isInputLoading, setIsInputLoading] = useState(false);
+    const {
+        pbClient,
+        isLoggedIn,
+        user,
+
+        currCollection,
+        collections,
+        items,
+
+        fetchItems,
+    } = useContext(BackendClientContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,50 +28,11 @@ export default function MainView() {
             navigate(`/login`, { replace: true });
             return;
         }
+    });
 
-        const fetchCollections = async () => {
-            await pbClient
-                // .cancelAllRequests()
-                .collection(DbTable.COLLECTIONS)
-                .getFullList()
-                .then((records: ItemCollection[]) => {
-                    setCollections(records);
-                })
-                .catch(error => {
-                    console.error(error)
-                });
-        };
-
-        fetchCollections();
-    }, []);
-
-    useEffect(() =>{
-        if (!collections) return;
-        // TODO calculate based on param slug
-        setCurrCollection(collections![0]);
-    }, [collections]);
-
-    useEffect(() => {
-        if (!currCollection) return;
-        fetchItems();
-    }, [currCollection]);
-
-    const fetchItems = async () => {
-        await pbClient
-            // .cancelAllRequests()
-            .collection(DbTable.ITEMS)
-            .getFullList({
-                // TODO: filter syntax
-                // filter: "collection = @currCollection.id",
-                sort: "-created"
-            })
-            .then((records: Item[]) => {
-                setItems(records);
-            })
-            .catch(error => {
-                console.error(error);
-            })
-    };
+    const [inputVal, setInputVal] = useState("");
+    const [isInputLoading, setIsInputLoading] = useState(false);
+    
     
     const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.code === "Enter") createNewItemFromInput()
