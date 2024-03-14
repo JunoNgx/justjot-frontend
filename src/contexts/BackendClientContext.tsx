@@ -86,8 +86,8 @@ export default function BackendClientContextProvider({children}: {children: Reac
             // .cancelAllRequests()
             .collection(DbTable.ITEMS)
             .getFullList({
-                // TODO: filter syntax
-                // filter: "collection = @currCollection.id",
+                // Single relation can be used without specifying the id
+                filter: `collection="${currCollection?.id}"`,
                 sort: "-created"
             })
             .then((records: Item[]) => {
