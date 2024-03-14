@@ -68,7 +68,7 @@ function Header() {
                     variant="transparent"
                     component={NavLink} to="/"
                 >
-                    <IconNotebook size={40} stroke={1.5}/>
+                    <IconNotebook color={justJotTheme.other.colLogo} size={40} stroke={1.5}/>
                 </ActionIcon>
             </Box>
 
