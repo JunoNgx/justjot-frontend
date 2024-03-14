@@ -51,7 +51,7 @@ function Header() {
             </UnstyledButton>
         </Menu.Target>
 
-        <Menu.Dropdown>
+        <Menu.Dropdown className="dropdown-menu">
             <Menu.Item leftSection={<IconSettings
                     size={justJotTheme.other.iconSizeMenu}
                     stroke={justJotTheme.other.iconStrokeWidth}

@@ -25,7 +25,7 @@ export default function CollectionMenu({ currCollection, collections }: Collecti
             </UnstyledButton>
         </Menu.Target>
 
-        <Menu.Dropdown>
+        <Menu.Dropdown className="dropdown-menu">
             {collections?.map((collection: ItemCollection, index: number) =>
                 <MenuItem
                     key={collection.id}
