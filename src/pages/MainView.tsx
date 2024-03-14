@@ -6,6 +6,7 @@ import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
 import { IconArrowRightToArc, IconCircleTriangle } from '@tabler/icons-react';
 import CollectionMenu from "../components/CollectionMenu";
+import { justJotTheme } from "../theme";
 
 export default function MainView() {
 
@@ -119,7 +120,7 @@ export default function MainView() {
         </Group>
         <Input id="main-input" className="main-view__input"
             size="lg"
-            leftSection={<IconCircleTriangle size={32} stroke={1}/>}
+            leftSection={<IconCircleTriangle size={32} stroke={justJotTheme.other.iconStrokeWidth}/>}
             rightSectionPointerEvents="all"
             rightSection={
                 <ActionIcon 
@@ -127,7 +128,7 @@ export default function MainView() {
                     radius="xl"
                     onClick={createNewItemFromInput}
                 >
-                    <IconArrowRightToArc size={32} stroke={1}/>
+                    <IconArrowRightToArc size={32} stroke={justJotTheme.other.iconStrokeWidth}/>
                 </ActionIcon>
             }
             type="text"
