@@ -68,12 +68,12 @@ export default function ItemComponent({ item }: { item: Item }) {
                 >
                     {calculatePriText(item)}
                 </Text>}
-                <Text className="item__secondary-text"
+                {item.content&& <Text className="item__secondary-text"
                     c="dimmed"
                     title={item.content}
                 >
                     {item.content}
-                </Text>
+                </Text>}
             </Group>
             <Group className="item__right-side">
                 <Text
