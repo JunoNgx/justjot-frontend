@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { DbTable, Item, ItemCollection } from '../types';
-import { ActionIcon, Button, Group, Input, Loader, Stack, Text } from '@mantine/core';
+import { Group, Input, Loader, Stack } from '@mantine/core';
 import ItemComponent from '../components/ItemComponent';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
-import { IconArrowRightToArc, IconCircleTriangle } from '@tabler/icons-react';
+import { IconCircleTriangle } from '@tabler/icons-react';
 import CollectionMenu from "../components/CollectionMenu";
 import { justJotTheme } from "../theme";
 
@@ -123,16 +123,12 @@ export default function MainView() {
         </Group>
         <Input id="main-input" className="main-view__input"
             size="lg"
-            leftSection={<IconCircleTriangle size={32} stroke={justJotTheme.other.iconStrokeWidth}/>}
+            leftSection={<IconCircleTriangle
+                size={32}
+                stroke={justJotTheme.other.iconStrokeWidth}
+            />}
             rightSectionPointerEvents="all"
             rightSection={
-                // <ActionIcon 
-                //     variant="subtle"
-                //     radius="xl"
-                //     onClick={createNewItemFromInput}
-                // >
-                //     <IconArrowRightToArc size={32} stroke={justJotTheme.other.iconStrokeWidth}/>
-                // </ActionIcon>
                 isInputLoading && <Loader size="xs"/>
             }
             type="text"
