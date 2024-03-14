@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { DbTable, Item, ItemCollection } from '../types';
-import { ActionIcon, Button, Group, Input, Stack, Text } from '@mantine/core';
+import { ActionIcon, Button, Group, Input, Loader, Stack, Text } from '@mantine/core';
 import ItemComponent from '../components/ItemComponent';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +15,7 @@ export default function MainView() {
     const [collections, setCollections] = useState<ItemCollection[]>();
     const [items, setItems] = useState<Item[]>();
     const [inputVal, setInputVal] = useState("");
+    const [isInputLoading, setIsInputLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -84,6 +85,7 @@ export default function MainView() {
      */
 
     const createNewItemFromInput = async () => {
+        setIsInputLoading(true);
         pbClient.collection(DbTable.ITEMS)
                 .create({
                     owner: user?.id,
@@ -97,6 +99,7 @@ export default function MainView() {
                 .catch(error => {
                     console.error(error);
                 });
+        setIsInputLoading(false);
     }
 
     return <Stack className="main-view"
@@ -123,13 +126,14 @@ export default function MainView() {
             leftSection={<IconCircleTriangle size={32} stroke={justJotTheme.other.iconStrokeWidth}/>}
             rightSectionPointerEvents="all"
             rightSection={
-                <ActionIcon 
-                    variant="subtle"
-                    radius="xl"
-                    onClick={createNewItemFromInput}
-                >
-                    <IconArrowRightToArc size={32} stroke={justJotTheme.other.iconStrokeWidth}/>
-                </ActionIcon>
+                // <ActionIcon 
+                //     variant="subtle"
+                //     radius="xl"
+                //     onClick={createNewItemFromInput}
+                // >
+                //     <IconArrowRightToArc size={32} stroke={justJotTheme.other.iconStrokeWidth}/>
+                // </ActionIcon>
+                isInputLoading && <Loader size="xs"/>
             }
             type="text"
             value={inputVal}
