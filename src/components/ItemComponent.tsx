@@ -7,6 +7,7 @@ import { Center, Group, Image, Paper, Text } from "@mantine/core";
 import { IconNote, IconNotes, IconWorld } from "@tabler/icons-react";
 import { isValidUrl } from "../utils/misc";
 import { useContextMenu } from 'mantine-contextmenu';
+import { justJotTheme } from "../theme";
 
 export default function ItemComponent({ item }: { item: Item }) {
 
@@ -91,11 +92,20 @@ const computeIcon = (item: Item) => {
         case ItemType.LINK:
             return item.faviconUrl && isValidUrl(item.faviconUrl)
                 ? <Image h={24} src={item.faviconUrl}/>
-                : <IconWorld size={24}/>
+                : <IconWorld
+                    size={justJotTheme.other.iconSizeItem}
+                    stroke={justJotTheme.other.iconStrokeWidth}
+                />
         case ItemType.TEXT:
         default:
             return item.shouldCopyOnClick
-                ? <IconNote size={24}/>
-                : <IconNotes size={24}/>
+                ? <IconNote
+                    size={justJotTheme.other.iconSizeItem}
+                    stroke={justJotTheme.other.iconStrokeWidth}
+                />
+                : <IconNotes
+                    size={justJotTheme.other.iconSizeItem}
+                    stroke={justJotTheme.other.iconStrokeWidth}
+                />
     }
 }
