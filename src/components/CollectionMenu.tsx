@@ -1,6 +1,7 @@
 import { Box, Group, Kbd, Menu, MenuDivider, MenuItem, Text, UnstyledButton } from "@mantine/core";
 import { ItemCollection } from "../types";
 import { IconEdit, IconPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
+import { justJotTheme } from "../theme";
 
 type CollectionProp = {
     currCollection: ItemCollection | undefined,
@@ -16,7 +17,10 @@ export default function CollectionMenu({ currCollection, collections }: Collecti
             <UnstyledButton className="collection-menu-btn">
                 <Group>
                     <Text>{currCollection?.name}</Text>
-                    <IconSelector size={14}/>
+                    <IconSelector
+                        size={justJotTheme.other.iconSizeMenu}
+                        stroke={justJotTheme.other.iconStrokeWidth}
+                    />
                 </Group>
             </UnstyledButton>
         </Menu.Target>
@@ -26,10 +30,38 @@ export default function CollectionMenu({ currCollection, collections }: Collecti
                 <MenuItem rightSection={computeNumericHotkey(index)}>{collection.name}</MenuItem>
             )}
             <MenuDivider/>
-            <MenuItem leftSection={<IconPlus size={16}/>}>Create new collection</MenuItem>
-            <MenuItem leftSection={<IconSortAscendingShapes size={16}/>}>Sort all collections</MenuItem>
-            <MenuItem leftSection={<IconEdit size={16}/>}>Edit this collection</MenuItem>
-            <MenuItem color="red" leftSection={<IconTrash size={16}/>}>Delete this collection</MenuItem>
+            <MenuItem
+                leftSection={<IconPlus
+                    size={justJotTheme.other.iconSizeMenu}
+                    stroke={justJotTheme.other.iconStrokeWidth}
+                />}
+            >
+                Create new collection
+            </MenuItem>
+            <MenuItem
+                leftSection={<IconSortAscendingShapes
+                    size={justJotTheme.other.iconSizeMenu}
+                    stroke={justJotTheme.other.iconStrokeWidth}
+                />}
+            >
+                Sort all collections
+            </MenuItem>
+            <MenuItem leftSection={<IconEdit
+                    size={justJotTheme.other.iconSizeMenu}
+                    stroke={justJotTheme.other.iconStrokeWidth}
+                />}
+            >
+                Edit this collection
+            </MenuItem>
+            <MenuItem
+                color="red"
+                leftSection={<IconTrash
+                    size={justJotTheme.other.iconSizeMenu}
+                    stroke={justJotTheme.other.iconStrokeWidth}
+                />}
+            >
+                Delete this collection
+            </MenuItem>
         </Menu.Dropdown>        
     </Menu>
 }
