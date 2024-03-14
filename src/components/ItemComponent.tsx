@@ -30,31 +30,34 @@ export default function ItemComponent({ item }: { item: Item }) {
         onMouseEnter={() => { setIsFocused(true) }}
         onMouseLeave={() => { setIsFocused(false) }}
         // onContextMenu={handleContextMenu}
-        onContextMenu={showContextMenu([
-            {
-                key: "copy",
-                onClick: () => {}
-            }, {
-                key: "edit",
-                onClick: () => {}
-            }, {
-                key: "delete",
-                color: "red",
-                onClick: () => {}
-            }, {
-                key: "move",
-                onClick: () => {}
-            }, {
-                key: "refetch link",
-                onClick: refetch
-            }, {
-                key: "divider",
-            }, {
-                key: "Copy by default",
-                color: "blue",
-                onClick: () => {}
-            }
-        ])}
+        onContextMenu={showContextMenu(
+            [
+                {
+                    key: "copy",
+                    onClick: () => {}
+                }, {
+                    key: "edit",
+                    onClick: () => {}
+                }, {
+                    key: "delete",
+                    color: "red",
+                    onClick: () => {}
+                }, {
+                    key: "move",
+                    onClick: () => {}
+                }, {
+                    key: "refetch link",
+                    onClick: refetch
+                }, {
+                    key: "divider",
+                }, {
+                    key: "Copy by default",
+                    color: "blue",
+                    onClick: () => {}
+                }
+            ],
+            { className: "dropdown-menu" }
+        )}
     >
         <Group className="item__flex-wrapper"
             justify="space-between"
