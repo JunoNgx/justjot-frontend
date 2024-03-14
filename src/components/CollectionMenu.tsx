@@ -27,7 +27,12 @@ export default function CollectionMenu({ currCollection, collections }: Collecti
 
         <Menu.Dropdown>
             {collections?.map((collection: ItemCollection, index: number) =>
-                <MenuItem rightSection={computeNumericHotkey(index)}>{collection.name}</MenuItem>
+                <MenuItem
+                    key={collection.id}
+                    rightSection={computeNumericHotkey(index)}
+                >
+                    {collection.name}
+                </MenuItem>
             )}
             <MenuDivider/>
             <MenuItem
