@@ -48,7 +48,9 @@ export default function ItemComponent({ item }: { item: Item }) {
                 key: "refetch link",
                 onClick: refetch
             }, {
-                key: "Set copy as default action",
+                key: "divider",
+            }, {
+                key: "Copy by default",
                 color: "blue",
                 onClick: () => {}
             }
