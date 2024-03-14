@@ -58,7 +58,9 @@ export default function BackendClientContextProvider({children}: {children: Reac
             await pbClient
                 // .cancelAllRequests()
                 .collection(DbTable.COLLECTIONS)
-                .getFullList()
+                .getFullList({
+                    sort: "sortOrder"
+                })
                 .then((records: ItemCollection[]) => {
                     setCollections(records);
                 })
