@@ -29,7 +29,7 @@ const overrideTheme = createTheme({
         colText: "#000", // --mantine-colortext; --mantine-color-black
         colTextDark: "#C9C9C9", // --mantine-color-dark-0
         colLogo: "#86EAD4", // Mint
-        iconStrokeWidth: 1.5,
+        iconStrokeWidth: 1,
         iconSizeMenu: 16,
         iconSizeItem: 24,
         iconSizeHeaderLogo: 32,
