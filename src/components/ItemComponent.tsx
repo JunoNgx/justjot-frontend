@@ -94,7 +94,7 @@ const computeIcon = (item: Item) => {
                 : <IconWorld size={24}/>
         case ItemType.TEXT:
         default:
-            return item.shouldCopyUponClick
+            return item.shouldCopyOnClick
                 ? <IconNote size={24}/>
                 : <IconNotes size={24}/>
     }
