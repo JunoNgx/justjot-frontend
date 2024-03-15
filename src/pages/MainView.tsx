@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { DbTable, Item, ItemCollection } from '../types';
-import { Group, Input, Loader, Stack } from '@mantine/core';
+import { Button, Group, Input, Loader, Stack } from '@mantine/core';
 import ItemComponent from '../components/ItemComponent';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
 import { IconCircleTriangle } from '@tabler/icons-react';
 import CollectionMenu from "../components/CollectionMenu";
 import { justJotTheme } from "../theme";
+import { notifications, Notifications } from '@mantine/notifications';
 
 export default function MainView() {
 
@@ -74,6 +75,11 @@ export default function MainView() {
         onClick={() => {handleClickEvent()}}
         onFocus={handleFocusEvent}
     >
+        <Notifications
+            limit={5}
+            position="bottom-center"
+            autoClose={1000}
+        />
         {/* current collection: {currCollection?.name}
         <Group className="main-view__collections-wrapper">
             <Text>list of collections:</Text>
@@ -86,6 +92,15 @@ export default function MainView() {
                 currCollection={currCollection}
                 collections={collections}
             />
+            {/* <Button onClick={() => {
+                notifications.show({
+                    message: "Content copied",
+                    color: "none",
+                    withCloseButton: false
+                });
+            }}>
+                Make notification
+            </Button> */}
         </Group>
         <Input id="main-input" className="main-view__input"
             size="lg"
