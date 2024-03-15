@@ -1,6 +1,6 @@
 // import styled from 'styled-components';
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Item, ItemType } from "../types";
 import { calculatePriText, processDatetime } from "../utils/itemUtils";
 import { Center, Group, Image, Paper, Text } from "@mantine/core";
@@ -8,9 +8,11 @@ import { IconNote, IconNotes, IconWorld } from "@tabler/icons-react";
 import { isValidUrl } from "../utils/misc";
 import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "../theme";
+import { BackendClientContext } from "../contexts/BackendClientContext";
 
 export default function ItemComponent({ item }: { item: Item }) {
 
+    const { fetchItems } = useContext(BackendClientContext)
     const [isFocused, setIsFocused] = useState(false);
     // const isTodoItem = item.type === ItemType.TODO;
     const { relativeDatetime, fullDatetime } = processDatetime(item);
@@ -22,7 +24,9 @@ export default function ItemComponent({ item }: { item: Item }) {
         await fetch(`${import.meta.env.VITE_BACKEND_URL}refetch/${item.id}`, {
             method: "POST"
         })
-        // TODO update items
+        .then(() => {
+            fetchItems();
+        });
     }
 
     return <Paper className={"item " + (isFocused ? "item--is-active" : "")}
