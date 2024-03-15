@@ -111,45 +111,47 @@ function Header() {
         </ActionIcon>
     </Group>
 
+    const leftSideGroup = <Group className="header__left-side"
+        gap="md"
+    >
+        <ActionIcon
+            variant="transparent"
+            component={NavLink} to="/"
+            size="xl"
+        >
+            <IconNotebook
+                color={justJotTheme.other.colLogo}
+                size={justJotTheme.other.iconSizeHeaderLogo}
+                stroke={justJotTheme.other.iconStrokeWidth}
+            />
+        </ActionIcon>
+        <CollectionMenu
+            currCollection={currCollection}
+            collections={collections}
+            isInHeader={true}
+        />
+    </Group>
+
+    const rightSideGroup = <Group className="header__right-side"
+        gap="md"
+        justify="flex-end"
+    >
+        {themeModeContainer}
+
+        <Box className="header__user-corner">
+            {isLoggedIn
+                ? usernameDropdownMenu
+                : LoginRegisterLinks
+            }
+        </Box>
+    </Group>
+
     return <Container className="header">
         <Group className="header__flex-wrapper"
             justify="space-between"
         >
-            <Group className="header__left-side"
-                gap="md"
-            >
-                <ActionIcon
-                    variant="transparent"
-                    component={NavLink} to="/"
-                    size="xl"
-                >
-                    <IconNotebook
-                        color={justJotTheme.other.colLogo}
-                        size={justJotTheme.other.iconSizeHeaderLogo}
-                        stroke={justJotTheme.other.iconStrokeWidth}
-                    />
-                </ActionIcon>
-                <CollectionMenu
-                    currCollection={currCollection}
-                    collections={collections}
-                    isInHeader={true}
-                />
-            </Group>
-
-            <Group className="header__right-side"
-                gap="md"
-                justify="flex-end"
-            >
-                {themeModeContainer}
-
-                <Box className="header__user-corner">
-                    {isLoggedIn
-                        ? usernameDropdownMenu
-                        : LoginRegisterLinks
-                    }
-                </Box>
-            </Group>
-
+            {leftSideGroup}
+            {rightSideGroup}            
         </Group>
     </Container>
 }
