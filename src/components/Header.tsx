@@ -135,6 +135,7 @@ function Header() {
     const rightSideGroup = <Group className="header__right-side"
         gap="md"
         justify="flex-end"
+        mr={5}
     >
         {themeModeContainer}
 
@@ -146,7 +147,7 @@ function Header() {
         </Box>
     </Group>
 
-    return <Container className="header">
+    return <Container className="header" p={0}>
         <Group className="header__flex-wrapper"
             justify="space-between"
         >
