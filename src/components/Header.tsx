@@ -74,7 +74,7 @@ function Header() {
     </Menu>
 
     const themeModeContainer = <Group className="header__theme-mode-container"
-        gap="sm"
+        gap="xs"
     >
         <ActionIcon className="header__theme-mode-btn"
             variant={isThemeModeAuto() ? "outline" : "subtle"}
