@@ -147,7 +147,7 @@ function Header() {
         </Box>
     </Group>
 
-    return <Container className="header" p={0}>
+    return <Container className="header" pl={0} pr={5}>
         <Group className="header__flex-wrapper"
             justify="space-between"
         >
