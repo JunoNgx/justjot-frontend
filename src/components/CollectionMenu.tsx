@@ -2,6 +2,7 @@ import { Box, Group, Kbd, Menu, MenuDivider, MenuItem, Text, UnstyledButton } fr
 import { ItemCollection } from "../types";
 import { IconEdit, IconPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
 import { justJotTheme } from "../theme";
+import useCollectionMenuActions from "../hooks/useCollectionMenuActions";
 
 type CollectionProp = {
     currCollection: ItemCollection | undefined,
@@ -10,6 +11,8 @@ type CollectionProp = {
 }
 
 export default function CollectionMenu({ currCollection, collections, isInHeader }: CollectionProp) {
+
+    const { switchToCollectionById } = useCollectionMenuActions();
 
     return <Menu
         position="bottom-start"
@@ -37,6 +40,7 @@ export default function CollectionMenu({ currCollection, collections, isInHeader
                 <MenuItem
                     key={collection.id}
                     rightSection={computeNumericHotkey(index)}
+                    onClick={() => switchToCollectionById(collection.id)}
                 >
                     {collection.name}
                 </MenuItem>
