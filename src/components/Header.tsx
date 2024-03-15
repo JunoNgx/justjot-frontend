@@ -112,7 +112,7 @@ function Header() {
     </Group>
 
     const leftSideGroup = <Group className="header__left-side"
-        gap="md"
+        gap="xs"
     >
         <ActionIcon
             variant="transparent"
