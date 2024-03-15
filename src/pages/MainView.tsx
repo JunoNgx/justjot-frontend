@@ -80,13 +80,6 @@ export default function MainView() {
             position="bottom-center"
             autoClose={1000}
         />
-        {/* current collection: {currCollection?.name}
-        <Group className="main-view__collections-wrapper">
-            <Text>list of collections:</Text>
-            {collections?.map(collection => <Text key={collection.id}>{collection.name}</Text>)
-
-            }
-        </Group>  */}
         <Group className="main-view__menu-flex-container">
             <CollectionMenu
                 currCollection={currCollection}
@@ -117,9 +110,6 @@ export default function MainView() {
             onChange={(event) => setInputVal(event.currentTarget.value)}
             onKeyDown={handleKeyDown}
         />
-        {/* <Box className="main-view__list-top">
-            <div>Last updated</div>
-        </Box> */}
         <Stack className="main-view__items-container"
             gap="xs"
         >
