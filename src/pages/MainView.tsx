@@ -75,7 +75,7 @@ export default function MainView() {
         onClick={() => {handleClickEvent()}}
         onFocus={handleFocusEvent}
     >
-        <Notifications
+        <Notifications className="notifications-container"
             limit={5}
             position="bottom-center"
             autoClose={1000}
