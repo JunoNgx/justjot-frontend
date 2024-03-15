@@ -79,10 +79,32 @@
     }
 }
 
+.notifications-container {
+    @include m.mobile {
+        bottom: 60px;
+    }
+}
+
 .collection-menu-btn {
-    border: solid 1px var(--mantine-color-default-border);
-    background-color: var(--mantine-color-body);
-    padding: 0.4rem 0.8rem;
+    &--is-in-header {
+        @include m.mobile {
+            display: none;
+        }
+    }
+
+    &--is-sticky {
+        display: none;
+
+        @include m.mobile {
+            display: block;
+            position: fixed;
+            bottom: 0.8rem;
+    
+            border: solid 1px var(--mantine-color-default-border);
+            background-color: var(--mantine-color-body);
+            padding: 0.4rem 0.8rem;
+        }
+    }
 
     &__number-placeholder {
         width: 19.35px; // TODO: find a more reliable way to size this

@@ -5,16 +5,23 @@ import { justJotTheme } from "../theme";
 
 type CollectionProp = {
     currCollection: ItemCollection | undefined,
-    collections: ItemCollection[] | undefined
+    collections: ItemCollection[] | undefined,
+    isInHeader: boolean,
 }
 
-export default function CollectionMenu({ currCollection, collections }: CollectionProp) {
+export default function CollectionMenu({ currCollection, collections, isInHeader }: CollectionProp) {
 
     return <Menu
         position="bottom-start"
+        offset={isInHeader ? 20 : 10}
     >
         <Menu.Target>
-            <UnstyledButton className="collection-menu-btn">
+            <UnstyledButton className={"collection-menu-btn "
+                + (isInHeader
+                    ? "collection-menu-btn--is-in-header"
+                    : "collection-menu-btn--is-sticky"
+                )
+            }>
                 <Group>
                     <Text>{currCollection?.name}</Text>
                     <IconSelector
