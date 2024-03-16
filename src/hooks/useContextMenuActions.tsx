@@ -43,11 +43,11 @@ export default function useContextMenuActions() {
                 const newValStr = newShouldCopyOnClickVal
                     ? "enabled"
                     : "disabled";
-
+                fetchItems();
                 notifications.show({
                     message: "Copy as default item interaction: " + newValStr,
                     autoClose: AUTO_CLOSE_DEFAULT,
-                });
+                });                
             })
             .catch(err => {
                 console.log(err, {itemId: currItem!.id});
