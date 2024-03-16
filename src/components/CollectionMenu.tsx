@@ -4,7 +4,7 @@ import { IconEdit, IconPlus, IconSelector, IconSortAscendingShapes, IconTrash } 
 import { justJotTheme } from "../theme";
 import useCollectionMenuActions from "../hooks/useCollectionMenuActions";
 import { modals } from "@mantine/modals";
-import CreateUpdateCollectionModal from "./modals/CreateUpdateCollectionModal";
+import CollectionCreateUpdateModal from "./modals/CollectionCreateUpdateModal";
 import useDeleteCollectionConfirmation from "../hooks/useDeleteCollectionConfirmation";
 
 type CollectionProp = {
@@ -57,7 +57,7 @@ export default function CollectionMenu({ currCollection, collections, isInHeader
                 />}
                 onClick={() => modals.open({
                     title: "Create new Collection",
-                    children: (<CreateUpdateCollectionModal isEditMode={false}/>)
+                    children: (<CollectionCreateUpdateModal isEditMode={false}/>)
                 })}
             >
                 Create new collection
@@ -68,7 +68,7 @@ export default function CollectionMenu({ currCollection, collections, isInHeader
                 />}
                 onClick={() => modals.open({
                     title: "Create new Collection",
-                    children: (<CreateUpdateCollectionModal isEditMode={true}/>)
+                    children: (<CollectionCreateUpdateModal isEditMode={true}/>)
                 })}
             >
                 Edit this collection

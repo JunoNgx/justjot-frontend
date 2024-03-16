@@ -7,7 +7,7 @@ import { BackendClientContext } from "../../contexts/BackendClientContext";
 import { modals } from "@mantine/modals";
 import { getCurrHighestCollectionSortOrder } from "../../utils/collectionUtils";
 
-type CreateUpdateCollectionModalOptions = {
+type CollectionCreateUpdateModalOptions = {
     isEditMode?: boolean,
 };
 
@@ -16,8 +16,8 @@ type RegisterFormData = {
     slug: string,
 };
 
-export default function CreateUpdateCollectionModal(
-    { isEditMode }: CreateUpdateCollectionModalOptions
+export default function CollectionCreateUpdateModal(
+    { isEditMode }: CollectionCreateUpdateModalOptions
 ) {
 
     const { currCollection, collections, fetchCollections } = useContext(BackendClientContext);
