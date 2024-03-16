@@ -13,9 +13,15 @@ type useCreateCollectionOptions = {
     errorCallback?: () => {},
 }
 
+type useCreateCollectionReturnType = [
+    ({ name, slug }: createCollectionOptions) => Promise<void>,
+    boolean,
+    boolean,
+];
+
 export default function useCreateCollection(
     { successfulCallback, errorCallback }: useCreateCollectionOptions = {}
-) {
+): useCreateCollectionReturnType {
 
     const { pbClient } = useContext(BackendClientContext);
     const [isSuccessful, setIsSuccessful] = useState(false);
