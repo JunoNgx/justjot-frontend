@@ -1,17 +1,12 @@
 import { useContext, useState } from "react";
 import { BackendClientContext } from "../contexts/BackendClientContext";
-import { DbTable, ItemCollection } from "../types";
+import { DbTable, ItemCollection, requestCallbackOptions } from "../types";
 import { notifications } from "@mantine/notifications";
 
 type createCollectionOptions = {
     name: string,
     slug: string,
 };
-
-type useCreateCollectionOptions = {
-    successfulCallback?: () => {},
-    errorCallback?: () => {},
-}
 
 type useCreateCollectionReturnType = [
     ({ name, slug }: createCollectionOptions) => Promise<void>,
@@ -20,7 +15,7 @@ type useCreateCollectionReturnType = [
 ];
 
 export default function useCreateCollection(
-    { successfulCallback, errorCallback }: useCreateCollectionOptions = {}
+    { successfulCallback, errorCallback }: requestCallbackOptions = {}
 ): useCreateCollectionReturnType {
 
     const { pbClient } = useContext(BackendClientContext);
