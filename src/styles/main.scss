@@ -77,6 +77,12 @@
             border-color: var(--mantine-col-text)
         }
     }
+
+    @include m.mobile {
+        &__items-container {
+            padding-bottom: 5rem;
+        }
+    }
 }
 
 .notifications-container {
