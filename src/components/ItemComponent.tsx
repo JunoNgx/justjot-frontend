@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Item, ItemType } from "../types";
 import { calculatePriText, processDatetime } from "../utils/itemUtils";
-import { Center, Group, Image, Paper, Text } from "@mantine/core";
+import { Center, Group, Image, Kbd, Paper, Text } from "@mantine/core";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconNote, IconNotes, IconSquare, IconTrash, IconWorld } from "@tabler/icons-react";
 import { isValidUrl } from "../utils/misc";
 import { useContextMenu } from 'mantine-contextmenu';
@@ -43,6 +43,7 @@ export default function ItemComponent({ item }: { item: Item }) {
                         size={justJotTheme.other.iconSizeMenu}
                         stroke={justJotTheme.other.iconStrokeWidth}
                     />,
+                    iconRight: <Kbd>C</Kbd>,
                     onClick: () => {}
                 }, {
                     key: "edit",
@@ -50,6 +51,7 @@ export default function ItemComponent({ item }: { item: Item }) {
                         size={justJotTheme.other.iconSizeMenu}
                         stroke={justJotTheme.other.iconStrokeWidth}
                     />,
+                    iconRight: <Kbd>E</Kbd>,
                     onClick: () => {}
                 }, {
                     key: "move",
@@ -57,6 +59,16 @@ export default function ItemComponent({ item }: { item: Item }) {
                         size={justJotTheme.other.iconSizeMenu}
                         stroke={justJotTheme.other.iconStrokeWidth}
                     />,
+                    iconRight: <Kbd>M</Kbd>,
+                    onClick: () => {}
+                }, {
+                    key: "delete",
+                    icon: <IconTrash
+                        size={justJotTheme.other.iconSizeMenu}
+                        stroke={justJotTheme.other.iconStrokeWidth}
+                    />,
+                    iconRight: <Kbd>Del</Kbd>,
+                    color: "red",
                     onClick: () => {}
                 }, {
                     key: "refetch link",
@@ -65,14 +77,6 @@ export default function ItemComponent({ item }: { item: Item }) {
                         stroke={justJotTheme.other.iconStrokeWidth}
                     />,
                     onClick: () => {refetchTitleAndFavicon(item);}
-                }, {
-                    key: "delete",
-                    icon: <IconTrash
-                        size={justJotTheme.other.iconSizeMenu}
-                        stroke={justJotTheme.other.iconStrokeWidth}
-                    />,
-                    color: "red",
-                    onClick: () => {}
                 }, {
                     key: "divider",
                 }, {
