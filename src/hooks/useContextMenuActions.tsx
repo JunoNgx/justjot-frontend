@@ -1,30 +1,32 @@
-import { Item, ItemCollection } from "../types"
+import { DbTable, Item } from "../types"
 import { BackendClientContext } from "../contexts/BackendClientContext";
 import { useContext } from "react";
+import { notifications } from "@mantine/notifications";
+import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
 
 
 export default function useContextMenuActions() {
-    const { pbClient, fetchItems } = useContext(BackendClientContext);
+    const { pbClient, currItem, fetchItems } = useContext(BackendClientContext);
 
 
-    const copyItemContent = async (item: Item) => {
-
-    }
-
-    const openItemEditModal = async (item: Item) => {
+    const copyItemContent = async () => {
 
     }
 
-    const deleteItem = async (item: Item) => {
+    const openItemEditModal = async () => {
 
     }
 
-    const openMoveItemModal = async (item: Item, collections: ItemCollection[]) => {
+    const openMoveItemModal = async () => {
 
     }
 
-    const refetchTitleAndFavicon = async (item: Item) => {
-        await fetch(`${import.meta.env.VITE_BACKEND_URL}refetch/${item.id}`, {
+    const deleteItem = async () => {
+
+    }
+
+    const refetchTitleAndFavicon = async () => {
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}refetch/${currItem!.id}`, {
             method: "POST"
         })
         .then(() => {
@@ -32,8 +34,30 @@ export default function useContextMenuActions() {
         });
     }
 
-    const setShouldOpenOnClick = async (item: Item) => {
-    
+    const switchShouldOpenOnClick = async () => {
+        const newShouldCopyOnClickVal = !currItem!.shouldCopyOnClick;
+
+        pbClient.collection(DbTable.ITEMS)
+            .update(currItem!.id, {shouldCopyOnClick: newShouldCopyOnClickVal})
+            .then((_record) => {
+                const newValStr = newShouldCopyOnClickVal
+                    ? "enabled"
+                    : "disabled";
+
+                notifications.show({
+                    message: "Copy as default item interaction: " + newValStr,
+                    autoClose: AUTO_CLOSE_DEFAULT,
+                });
+            })
+            .catch(err => {
+                console.log(err, {itemId: currItem!.id});
+                notifications.show({
+                    message: "Error setting default action to item",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
+            })
     }
 
     return {
@@ -42,6 +66,6 @@ export default function useContextMenuActions() {
         deleteItem,
         openMoveItemModal,
         refetchTitleAndFavicon,
-        setShouldOpenOnClick,
+        switchShouldOpenOnClick,
     } 
 };
