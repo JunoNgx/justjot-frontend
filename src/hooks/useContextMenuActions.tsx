@@ -7,7 +7,7 @@ import { useClipboard } from "@mantine/hooks";
 
 
 export default function useContextMenuActions() {
-    const { pbClient, currItem, fetchItems } = useContext(BackendClientContext);
+    const { pbClient, currItem, setCurrItem, fetchItems } = useContext(BackendClientContext);
     const clipboard = useClipboard({ timeout: 1000 })
 
     const copyItemContent = async () => {
@@ -27,7 +27,25 @@ export default function useContextMenuActions() {
     }
 
     const deleteItem = async () => {
-
+        await pbClient.collection(DbTable.ITEMS)
+            .delete(currItem!.id)
+            .then((_isSuccessful) => {
+                setCurrItem(undefined);
+                fetchItems();
+                notifications.show({
+                    message: "Item deleted",
+                    autoClose: AUTO_CLOSE_DEFAULT,
+                });
+            })
+            .catch(err => {
+                console.error(err, { currItem });
+                notifications.show({
+                    message: "Error deleting item",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
+            });
     }
 
     const refetchTitleAndFavicon = async () => {
@@ -52,7 +70,7 @@ export default function useContextMenuActions() {
                 notifications.show({
                     message: "Copy as default item interaction: " + newValStr,
                     autoClose: AUTO_CLOSE_DEFAULT,
-                });                
+                });
             })
             .catch(err => {
                 console.log(err, {itemId: currItem!.id});
