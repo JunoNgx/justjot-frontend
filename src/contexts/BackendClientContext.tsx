@@ -54,6 +54,8 @@ export default function BackendClientContextProvider({children}: {children: Reac
     const [items, setItems] = useState<Item[]>();
 
     useEffect(() => {
+        if (!isLoggedIn) return;
+
         const fetchCollections = async () => {
             await pbClient
                 // .cancelAllRequests()
