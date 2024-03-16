@@ -59,3 +59,8 @@ export enum DbTable {
     ITEMS = "items",
     COLLECTIONS = "itemCollections"
 };
+
+export type requestCallbackOptions = {
+    successfulCallback?: () => {},
+    errorCallback?: () => {},
+};
