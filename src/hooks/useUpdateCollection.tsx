@@ -29,7 +29,7 @@ export default function useUpdateCollection({
                 errorCallback?.();
                 console.error(err, { currCollection });
                 notifications.show({
-                    message: "Error updating Collection",
+                    message: "Error updating collection",
                     color: "red",
                     autoClose: false,
                     withCloseButton: true,
