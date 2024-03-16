@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Item, ItemType } from "../types";
 import { calculatePriText, processDatetime } from "../utils/itemUtils";
 import { Center, Group, Image, Paper, Text } from "@mantine/core";
-import { IconNote, IconNotes, IconWorld } from "@tabler/icons-react";
+import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconNote, IconNotes, IconSquare, IconTrash, IconWorld } from "@tabler/icons-react";
 import { isValidUrl } from "../utils/misc";
 import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "../theme";
@@ -16,41 +16,72 @@ export default function ItemComponent({ item }: { item: Item }) {
 
     const [isFocused, setIsFocused] = useState(false);
     const { relativeDatetime, fullDatetime } = processDatetime(item);
-    const icon = computeIcon(item);
 
     const { refetchTitleAndFavicon } = useContextMenuActions();
-    const contextMenuItems = [
-        {
-            key: "copy",
-            onClick: () => {}
-        }, {
-            key: "edit",
-            onClick: () => {}
-        }, {
-            key: "move",
-            onClick: () => {}
-        }, {
-            key: "refetch link",
-            onClick: () => {refetchTitleAndFavicon(item)}
-        }, {
-            key: "delete",
-            color: "red",
-            onClick: () => {}
-        }, {
-            key: "divider",
-        }, {
-            key: "Copy by default",
-            color: "blue",
-            onClick: () => {}
-        }
-    ]
+
+    const contextMenuDefaultActionIcon = item.shouldCopyOnClick
+        ? <IconCheckbox
+            size={justJotTheme.other.iconSizeMenu}
+            stroke={justJotTheme.other.iconStrokeWidth}
+        />
+        : <IconSquare
+            size={justJotTheme.other.iconSizeMenu}
+            stroke={justJotTheme.other.iconStrokeWidth}
+        />
+    
+    const icon = computeIcon(item);    
 
     return <Paper className={"item " + (isFocused ? "item--is-active" : "")}
         p="xs"
         onMouseEnter={() => { setIsFocused(true) }}
         onMouseLeave={() => { setIsFocused(false) }}
         onContextMenu={showContextMenu(
-            contextMenuItems,
+            [
+                {
+                    key: "copy",
+                    icon: <IconCopy
+                        size={justJotTheme.other.iconSizeMenu}
+                        stroke={justJotTheme.other.iconStrokeWidth}
+                    />,
+                    onClick: () => {}
+                }, {
+                    key: "edit",
+                    icon: <IconEdit
+                        size={justJotTheme.other.iconSizeMenu}
+                        stroke={justJotTheme.other.iconStrokeWidth}
+                    />,
+                    onClick: () => {}
+                }, {
+                    key: "move",
+                    icon: <IconFileSymlink
+                        size={justJotTheme.other.iconSizeMenu}
+                        stroke={justJotTheme.other.iconStrokeWidth}
+                    />,
+                    onClick: () => {}
+                }, {
+                    key: "refetch link",
+                    icon: <IconDownload
+                        size={justJotTheme.other.iconSizeMenu}
+                        stroke={justJotTheme.other.iconStrokeWidth}
+                    />,
+                    onClick: () => {refetchTitleAndFavicon(item);}
+                }, {
+                    key: "delete",
+                    icon: <IconTrash
+                        size={justJotTheme.other.iconSizeMenu}
+                        stroke={justJotTheme.other.iconStrokeWidth}
+                    />,
+                    color: "red",
+                    onClick: () => {}
+                }, {
+                    key: "divider",
+                }, {
+                    key: "Copy on click",
+                    icon: contextMenuDefaultActionIcon,
+                    color: "blue",
+                    onClick: () => {}
+                }
+            ],
             { className: "dropdown-menu" }
         )}
     >
