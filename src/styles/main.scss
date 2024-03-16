@@ -129,3 +129,11 @@
         background-color: color.adjust(#2e2e2e, $alpha: -0.5);
     }
 }
+
+.info-modal-body {
+    &__flex-wrapper {
+        > svg {
+            flex-shrink: 0;
+        }
+    }
+}
