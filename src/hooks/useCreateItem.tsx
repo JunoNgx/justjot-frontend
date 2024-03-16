@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { BackendClientContext } from "../contexts/BackendClientContext";
 import { DbTable, RequestCallbackOptions, Item } from "../types";
 import { notifications } from "@mantine/notifications";
-import { AUTO_CLOSE_ERROR_TOAST, SORT_ORDER_INCREMENT_COLLECTION } from "../utils/constants";
+import { AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
 
 type useCreateItemReturnType = [
     ({ content }: { content: string }) => Promise<void>,
