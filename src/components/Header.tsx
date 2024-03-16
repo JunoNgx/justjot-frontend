@@ -125,11 +125,11 @@ function Header() {
                 stroke={justJotTheme.other.iconStrokeWidth}
             />
         </ActionIcon>
-        <CollectionMenu
+        {isLoggedIn && <CollectionMenu
             currCollection={currCollection}
             collections={collections}
             isInHeader={true}
-        />
+        />}
     </Group>
 
     const rightSideGroup = <Group className="header__right-side"
