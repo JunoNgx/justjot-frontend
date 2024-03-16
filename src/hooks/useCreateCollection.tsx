@@ -1,15 +1,10 @@
 import { useContext, useState } from "react";
 import { BackendClientContext } from "../contexts/BackendClientContext";
-import { DbTable, ItemCollection, RequestCallbackOptions } from "../types";
+import { DbTable, ItemCollection, CreateUpdateCollectionOptions, RequestCallbackOptions } from "../types";
 import { notifications } from "@mantine/notifications";
 
-type createCollectionOptions = {
-    name: string,
-    slug: string,
-};
-
 type useCreateCollectionReturnType = [
-    ({ name, slug }: createCollectionOptions) => Promise<void>,
+    ({ name, slug }: CreateUpdateCollectionOptions) => Promise<void>,
     boolean,
     boolean,
 ];
@@ -22,7 +17,7 @@ export default function useCreateCollection(
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const createCollection = async ({ name, slug }: createCollectionOptions) => {
+    const createCollection = async ({ name, slug }: CreateUpdateCollectionOptions) => {
         setIsLoading(true);
         await pbClient.collection(DbTable.COLLECTIONS)
             .create({ name, slug })
