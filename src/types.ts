@@ -64,3 +64,8 @@ export type RequestCallbackOptions = {
     successfulCallback?: () => {},
     errorCallback?: () => {},
 };
+
+export type CreateUpdateCollectionOptions = {
+    name: string,
+    slug: string
+};
