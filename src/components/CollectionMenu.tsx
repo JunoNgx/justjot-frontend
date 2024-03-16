@@ -72,6 +72,10 @@ export default function CollectionMenu({ currCollection, collections, isInHeader
                     size={justJotTheme.other.iconSizeMenu}
                     stroke={justJotTheme.other.iconStrokeWidth}
                 />}
+                onClick={() => modals.open({
+                    title: "Create new Collection",
+                    children: (<CreateUpdateCollectionModal isEditMode={true}/>)
+                })}
             >
                 Edit this collection
             </MenuItem>
