@@ -1,28 +1,31 @@
 import { useContext, useEffect, useState } from "react";
-import { DbTable, Item, ItemCollection } from '../types';
-import { Button, Group, Input, Loader, Stack } from '@mantine/core';
+import { Group, Input, Loader, Stack } from '@mantine/core';
 import ItemComponent from '../components/ItemComponent';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
 import { IconCircleTriangle } from '@tabler/icons-react';
 import CollectionMenu from "../components/CollectionMenu";
 import { justJotTheme } from "../theme";
-import { notifications, Notifications } from '@mantine/notifications';
+import { Notifications } from '@mantine/notifications';
+import useCreateItem from "../hooks/useCreateItem";
 
 export default function MainView() {
 
     const {
-        pbClient,
         isLoggedIn,
-        user,
-
         currCollection,
         collections,
         items,
-
         fetchItems,
     } = useContext(BackendClientContext);
+
     const navigate = useNavigate();
+    const [createItem, isCreateItemLoading] = useCreateItem({
+        successfulCallback: () => {
+            setInputVal("");
+            fetchItems();
+        }
+    });
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -32,11 +35,10 @@ export default function MainView() {
     });
 
     const [inputVal, setInputVal] = useState("");
-    const [isInputLoading, setIsInputLoading] = useState(false);
-    
-    
     const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.code === "Enter") createNewItemFromInput()
+        if (e.code === "Enter") {
+            createItem({ content: inputVal });
+        }
     }
 
     // TODO: move these to App for better coverage
@@ -46,28 +48,6 @@ export default function MainView() {
     const handleFocusEvent = (e) => {
         console.log("focus", e)
     };
-
-    /**
-     * Logic methods
-     */
-
-    const createNewItemFromInput = async () => {
-        setIsInputLoading(true);
-        pbClient.collection(DbTable.ITEMS)
-            .create({
-                owner: user?.id,
-                collection: currCollection?.id,
-                content: inputVal
-            })
-            .then((_record: Item) => {
-                fetchItems();
-                setInputVal("");
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        setIsInputLoading(false);
-    }
 
     return <Stack className="main-view"
         gap="xl"
@@ -94,7 +74,7 @@ export default function MainView() {
             />}
             rightSectionPointerEvents="all"
             rightSection={
-                isInputLoading && <Loader size="xs"/>
+                isCreateItemLoading && <Loader size="xs"/>
             }
             type="text"
             value={inputVal}
