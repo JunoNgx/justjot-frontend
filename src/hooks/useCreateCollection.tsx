@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { BackendClientContext } from "../contexts/BackendClientContext";
-import { DbTable, ItemCollection, requestCallbackOptions } from "../types";
+import { DbTable, ItemCollection, RequestCallbackOptions } from "../types";
 import { notifications } from "@mantine/notifications";
 
 type createCollectionOptions = {
@@ -15,7 +15,7 @@ type useCreateCollectionReturnType = [
 ];
 
 export default function useCreateCollection(
-    { successfulCallback, errorCallback }: requestCallbackOptions = {}
+    { successfulCallback, errorCallback }: RequestCallbackOptions = {}
 ): useCreateCollectionReturnType {
 
     const { pbClient } = useContext(BackendClientContext);
