@@ -36,7 +36,7 @@ export default function CreateUpdateCollectionModal(
         const { name, slug } = formData;
 
         if (isEditMode) {
-            await updateCollection(currCollection!.id, { name, slug });
+            await updateCollection({ name, slug });
             fetchCollections();
             return;
         }

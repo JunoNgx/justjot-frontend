@@ -4,7 +4,7 @@ import { DbTable, ItemCollection, CreateUpdateCollectionOptions, RequestCallback
 import { notifications } from "@mantine/notifications";
 
 type useUpdateCollectionReturnType = [
-    (collectionId: string, { name, slug }: CreateUpdateCollectionOptions) => Promise<void>,
+    ({ name, slug }: CreateUpdateCollectionOptions) => Promise<void>,
     boolean,
     boolean,
 ];
@@ -13,21 +13,21 @@ export default function useUpdateCollection({
     successfulCallback, errorCallback }: RequestCallbackOptions = {}
 ): useUpdateCollectionReturnType {
 
-    const {pbClient, user} = useContext(BackendClientContext);
+    const {pbClient, currCollection, user} = useContext(BackendClientContext);
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const updateCollection = async (collectionId: string, { name, slug }: CreateUpdateCollectionOptions) => {
+    const updateCollection = async ({ name, slug }: CreateUpdateCollectionOptions) => {
         setIsLoading(true);
         await pbClient.collection(DbTable.COLLECTIONS)
-            .update(collectionId, { name, slug, owner: user!.id })
+            .update(currCollection!.id, { name, slug, owner: user!.id })
             .then((_record: ItemCollection) => {
                 setIsSuccessful(true);
                 successfulCallback?.();
             })
             .catch(err => {
                 errorCallback?.();
-                console.error(err, { collectionId });
+                console.error(err, { currCollection });
                 notifications.show({
                     message: "Error updating Collection",
                     color: "red",
