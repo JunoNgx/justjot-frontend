@@ -3,14 +3,19 @@ import { BackendClientContext } from "../contexts/BackendClientContext";
 import { useContext } from "react";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
+import { useClipboard } from "@mantine/hooks";
 
 
 export default function useContextMenuActions() {
     const { pbClient, currItem, fetchItems } = useContext(BackendClientContext);
-
+    const clipboard = useClipboard({ timeout: 1000 })
 
     const copyItemContent = async () => {
-
+        clipboard.copy(currItem?.content);
+        notifications.show({
+            message: "Copied item content",
+            autoClose: AUTO_CLOSE_DEFAULT,
+        });
     }
 
     const openItemEditModal = async () => {
