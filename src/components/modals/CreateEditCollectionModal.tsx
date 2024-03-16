@@ -3,6 +3,8 @@ import { useForm } from "@mantine/form";
 import useCreateCollection from "../../hooks/useCreateCollection";
 import { ItemCollection } from "../../types";
 import useUpdateCollection from "../../hooks/useUpdateCollection";
+import { useContext } from "react";
+import { BackendClientContext } from "../../contexts/BackendClientContext";
 
 type CreateEditCollectionModalOptions = {
     collection?: ItemCollection,
@@ -19,6 +21,7 @@ export default function CreateEditCollectionModal(
     { isEditMode, collection, closeModalCallBackFn }: CreateEditCollectionModalOptions
 ) {
 
+    const { fetchCollections } = useContext(BackendClientContext);
     const form = useForm({
         initialValues: {
             name: isEditMode ? collection?.name : "",
@@ -35,11 +38,12 @@ export default function CreateEditCollectionModal(
 
         if (isEditMode) {
             await updateCollection(collection!.id, { name, slug });
-
+            fetchCollections();
             return;
         }
 
         await createCollection({ name, slug });
+        fetchCollections();
     }
 
     return <form onSubmit={form.onSubmit(handleSubmit)}>
