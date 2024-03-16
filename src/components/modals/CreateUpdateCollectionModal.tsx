@@ -5,6 +5,7 @@ import useUpdateCollection from "../../hooks/useUpdateCollection";
 import { useContext } from "react";
 import { BackendClientContext } from "../../contexts/BackendClientContext";
 import { modals } from "@mantine/modals";
+import { getCurrHighestCollectionSortOrder } from "../../utils/collectionUtils";
 
 type CreateUpdateCollectionModalOptions = {
     isEditMode?: boolean,
@@ -19,7 +20,7 @@ export default function CreateUpdateCollectionModal(
     { isEditMode }: CreateUpdateCollectionModalOptions
 ) {
 
-    const { currCollection, fetchCollections } = useContext(BackendClientContext);
+    const { currCollection, collections, fetchCollections } = useContext(BackendClientContext);
     const form = useForm({
         initialValues: {
             name: isEditMode ? currCollection?.name : "",
@@ -40,7 +41,8 @@ export default function CreateUpdateCollectionModal(
             return;
         }
 
-        await createCollection({ name, slug });
+        const currHighestSortOrder = getCurrHighestCollectionSortOrder(collections);
+        await createCollection({ name, slug }, currHighestSortOrder);
         fetchCollections();
     }
 
