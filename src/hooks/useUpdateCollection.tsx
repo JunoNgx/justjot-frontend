@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { BackendClientContext } from "../contexts/BackendClientContext";
 import { DbTable, ItemCollection, CreateUpdateCollectionOptions, RequestCallbackOptions } from "../types";
 import { notifications } from "@mantine/notifications";
-import { SHOULD_AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
+import { AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
 
 type useUpdateCollectionReturnType = [
     ({ name, slug }: CreateUpdateCollectionOptions) => Promise<void>,
@@ -32,7 +32,7 @@ export default function useUpdateCollection({
                 notifications.show({
                     message: "Error updating collection",
                     color: "red",
-                    autoClose: SHOULD_AUTO_CLOSE_ERROR_TOAST,
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
                     withCloseButton: true,
                 });
             });
