@@ -5,6 +5,7 @@ import { justJotTheme } from "../theme";
 import useCollectionMenuActions from "../hooks/useCollectionMenuActions";
 import { modals } from "@mantine/modals";
 import CreateUpdateCollectionModal from "./modals/CreateUpdateCollectionModal";
+import useDeleteCollectionConfirmation from "../hooks/useDeleteCollectionConfirmation";
 
 type CollectionProp = {
     currCollection: ItemCollection | undefined,
@@ -15,6 +16,7 @@ type CollectionProp = {
 export default function CollectionMenu({ currCollection, collections, isInHeader }: CollectionProp) {
 
     const { switchToCollectionById } = useCollectionMenuActions();
+    const confirmDeletion = useDeleteCollectionConfirmation();
 
     return <Menu
         position="bottom-start"
@@ -88,6 +90,7 @@ export default function CollectionMenu({ currCollection, collections, isInHeader
                     size={justJotTheme.other.iconSizeMenu}
                     stroke={justJotTheme.other.iconStrokeWidth}
                 />}
+                onClick={confirmDeletion}
             >
                 Delete this collection
             </MenuItem>
