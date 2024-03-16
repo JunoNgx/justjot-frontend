@@ -13,14 +13,14 @@ export default function useCreateCollection(
     { successfulCallback, errorCallback }: RequestCallbackOptions = {}
 ): useCreateCollectionReturnType {
 
-    const { pbClient } = useContext(BackendClientContext);
+    const { pbClient, user } = useContext(BackendClientContext);
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const createCollection = async ({ name, slug }: CreateUpdateCollectionOptions) => {
         setIsLoading(true);
         await pbClient.collection(DbTable.COLLECTIONS)
-            .create({ name, slug })
+            .create({ name, slug, owner: user!.id })
             .then((_record: ItemCollection) => {
                 setIsSuccessful(true);
                 successfulCallback?.();
