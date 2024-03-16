@@ -61,8 +61,8 @@ export enum DbTable {
 };
 
 export type RequestCallbackOptions = {
-    successfulCallback?: () => {},
-    errorCallback?: () => {},
+    successfulCallback?: () => void,
+    errorCallback?: () => void,
 };
 
 export type CreateUpdateCollectionOptions = {
