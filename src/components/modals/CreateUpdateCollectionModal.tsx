@@ -49,6 +49,7 @@ export default function CreateUpdateCollectionModal(
     return <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
             <TextInput
+                data-autofocus
                 label="Collection name"
                 description="Must be between 1 and 50 characters."
                 required
