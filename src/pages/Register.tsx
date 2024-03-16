@@ -106,10 +106,12 @@ export default function Register() {
             />
             <TextInput mt="md"
                 label="Username"
-                description="Must be unique, too."
+                description="Must be unique and between 3 and 150 characters."
                 required
                 placeholder="BlackCerberus1337"
                 type="name"
+                minLength={3}
+                maxLength={150}
                 {...form.getInputProps('username')}
             />
             <TextInput mt="md"
@@ -122,7 +124,7 @@ export default function Register() {
             />
             <PasswordInput mt="md"
                 label="Password"
-                description="The length must be between 8 and 72 characters."
+                description="Must be between 8 and 72 characters."
                 required
                 placeholder="IronMaus123"
                 type="password"
