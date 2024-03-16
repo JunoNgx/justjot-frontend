@@ -1,6 +1,6 @@
 // import styled from 'styled-components';
 
-import { useState } from "react";
+import { useContext } from "react";
 import { Item, ItemType } from "../types";
 import { calculatePriText, processDatetime } from "../utils/itemUtils";
 import { Center, Group, Image, Kbd, Paper, Text } from "@mantine/core";
@@ -9,14 +9,24 @@ import { isValidUrl } from "../utils/misc";
 import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "../theme";
 import useContextMenuActions from "../hooks/useContextMenuActions";
+import { BackendClientContext } from "../contexts/BackendClientContext";
 
 export default function ItemComponent({ item }: { item: Item }) {
 
+    const { currItem, setCurrItem } = useContext(BackendClientContext)
     const { showContextMenu } = useContextMenu();
 
-    const [isFocused, setIsFocused] = useState(false);
-    const { relativeDatetime, fullDatetime } = processDatetime(item);
+    // useEffect(() => {
+    //     if (!currItem) {
+    //         setIsFocused(false);
+    //         return;
+    //     }
 
+    //     setIsFocused(currItem.id === item.id);
+    // }, [currItem]);
+
+    // const [isFocused, setIsFocused] = useState(false);
+    const { relativeDatetime, fullDatetime } = processDatetime(item);
     const { refetchTitleAndFavicon } = useContextMenuActions();
 
     const contextMenuDefaultActionIcon = item.shouldCopyOnClick
@@ -28,13 +38,13 @@ export default function ItemComponent({ item }: { item: Item }) {
             size={justJotTheme.other.iconSizeMenu}
             stroke={justJotTheme.other.iconStrokeWidth}
         />
-    
     const icon = computeIcon(item);    
+    const isFocused = currItem?.id === item.id;
 
     return <Paper className={"item " + (isFocused ? "item--is-active" : "")}
         p="xs"
-        onMouseEnter={() => { setIsFocused(true) }}
-        onMouseLeave={() => { setIsFocused(false) }}
+        onMouseEnter={() => { setCurrItem(item) }}
+        onMouseLeave={() => { setCurrItem(undefined) }}
         onContextMenu={showContextMenu(
             [
                 {
