@@ -18,6 +18,8 @@ type BackendClientType = {
     setCollections: React.Dispatch<React.SetStateAction<ItemCollection[] | undefined>>,
     items: Item[] | undefined,
     setItems: React.Dispatch<React.SetStateAction<Item[] | undefined>>,
+    currItem: Item | undefined,
+    setCurrItem: React.Dispatch<React.SetStateAction<Item | undefined>>,
 
     fetchItems: () => void,
     fetchCollections: () => void,
@@ -38,6 +40,8 @@ export const BackendClientContext = createContext<BackendClientType>({
     setCollections: () => { },
     items: undefined,
     setItems: () => { },
+    currItem: undefined,
+    setCurrItem: () => { },
 
     fetchItems: () => { },
     fetchCollections: () => { },
@@ -54,6 +58,7 @@ export default function BackendClientContextProvider({ children }: { children: R
     const [currCollection, setCurrCollection] = useState<ItemCollection>();
     const [collections, setCollections] = useState<ItemCollection[]>();
     const [items, setItems] = useState<Item[]>();
+    const [currItem, setCurrItem] = useState<Item>();
 
     useEffect(() => {
         if (!isLoggedIn) return;
@@ -124,6 +129,8 @@ export default function BackendClientContextProvider({ children }: { children: R
             setCollections,
             items,
             setItems,
+            currItem,
+            setCurrItem,
 
             fetchItems,
             fetchCollections,
