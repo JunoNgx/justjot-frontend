@@ -1,15 +1,13 @@
 import { Button, Group, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import useCreateCollection from "../../hooks/useCreateCollection";
-import { ItemCollection } from "../../types";
 import useUpdateCollection from "../../hooks/useUpdateCollection";
 import { useContext } from "react";
 import { BackendClientContext } from "../../contexts/BackendClientContext";
+import { modals } from "@mantine/modals";
 
 type CreateUpdateCollectionModalOptions = {
-    collection?: ItemCollection,
     isEditMode?: boolean,
-    closeModalCallBackFn?: () => void,
 };
 
 type RegisterFormData = {
@@ -18,26 +16,26 @@ type RegisterFormData = {
 };
 
 export default function CreateUpdateCollectionModal(
-    { isEditMode, collection, closeModalCallBackFn }: CreateUpdateCollectionModalOptions
+    { isEditMode }: CreateUpdateCollectionModalOptions
 ) {
 
-    const { fetchCollections } = useContext(BackendClientContext);
+    const { currCollection, fetchCollections } = useContext(BackendClientContext);
     const form = useForm({
         initialValues: {
-            name: isEditMode ? collection?.name : "",
-            slug: isEditMode ? collection?.slug : ""
+            name: isEditMode ? currCollection?.name : "",
+            slug: isEditMode ? currCollection?.slug : ""
         }
     });
     const [ createCollection, isCreateLoading ]
-        = useCreateCollection({ successfulCallback: closeModalCallBackFn});
+        = useCreateCollection({ successfulCallback: modals.closeAll});
     const [ updateCollection, isUpdateLoading ]
-        = useUpdateCollection({ successfulCallback: closeModalCallBackFn});
+        = useUpdateCollection({ successfulCallback: modals.closeAll});
 
     const handleSubmit = async (formData: RegisterFormData) => {
         const { name, slug } = formData;
 
         if (isEditMode) {
-            await updateCollection(collection!.id, { name, slug });
+            await updateCollection(currCollection!.id, { name, slug });
             fetchCollections();
             return;
         }

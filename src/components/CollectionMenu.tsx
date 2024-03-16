@@ -55,10 +55,7 @@ export default function CollectionMenu({ currCollection, collections, isInHeader
                 />}
                 onClick={() => modals.open({
                     title: "Create new Collection",
-                    children: (<CreateUpdateCollectionModal
-                        isEditMode={false}
-                        closeModalCallBackFn={modals.closeAll}
-                    />)
+                    children: (<CreateUpdateCollectionModal isEditMode={false}/>)
                 })}
             >
                 Create new collection
