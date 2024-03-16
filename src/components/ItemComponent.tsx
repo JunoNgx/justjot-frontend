@@ -27,7 +27,14 @@ export default function ItemComponent({ item }: { item: Item }) {
 
     // const [isFocused, setIsFocused] = useState(false);
     const { relativeDatetime, fullDatetime } = processDatetime(item);
-    const { refetchTitleAndFavicon } = useContextMenuActions();
+    const {
+        copyItemContent,
+        openItemEditModal,
+        openMoveItemModal,
+        deleteItem,
+        switchShouldOpenOnClick,
+        refetchTitleAndFavicon
+    } = useContextMenuActions();
 
     const contextMenuDefaultActionIcon = item.shouldCopyOnClick
         ? <IconCheckbox
@@ -44,7 +51,7 @@ export default function ItemComponent({ item }: { item: Item }) {
     return <Paper className={"item " + (isFocused ? "item--is-active" : "")}
         p="xs"
         onMouseEnter={() => { setCurrItem(item) }}
-        onMouseLeave={() => { setCurrItem(undefined) }}
+        // onMouseLeave={() => { setCurrItem(undefined) }}
         onContextMenu={showContextMenu(
             [
                 {
@@ -54,7 +61,7 @@ export default function ItemComponent({ item }: { item: Item }) {
                         stroke={justJotTheme.other.iconStrokeWidth}
                     />,
                     iconRight: <Kbd>C</Kbd>,
-                    onClick: () => {}
+                    onClick: () => {copyItemContent()}
                 }, {
                     key: "edit",
                     icon: <IconEdit
@@ -62,7 +69,7 @@ export default function ItemComponent({ item }: { item: Item }) {
                         stroke={justJotTheme.other.iconStrokeWidth}
                     />,
                     iconRight: <Kbd>E</Kbd>,
-                    onClick: () => {}
+                    onClick: () => {openItemEditModal()}
                 }, {
                     key: "move",
                     icon: <IconFileSymlink
@@ -70,7 +77,7 @@ export default function ItemComponent({ item }: { item: Item }) {
                         stroke={justJotTheme.other.iconStrokeWidth}
                     />,
                     iconRight: <Kbd>M</Kbd>,
-                    onClick: () => {}
+                    onClick: () => {openMoveItemModal()}
                 }, {
                     key: "delete",
                     icon: <IconTrash
@@ -79,21 +86,21 @@ export default function ItemComponent({ item }: { item: Item }) {
                     />,
                     iconRight: <Kbd>Del</Kbd>,
                     color: "red",
-                    onClick: () => {}
+                    onClick: () => {deleteItem()}
                 }, {
                     key: "refetch link",
                     icon: <IconDownload
                         size={justJotTheme.other.iconSizeMenu}
                         stroke={justJotTheme.other.iconStrokeWidth}
                     />,
-                    onClick: () => {refetchTitleAndFavicon(item);}
+                    onClick: () => {refetchTitleAndFavicon();}
                 }, {
                     key: "divider",
                 }, {
                     key: "Copy on click",
                     icon: contextMenuDefaultActionIcon,
                     color: "blue",
-                    onClick: () => {}
+                    onClick: () => {switchShouldOpenOnClick()}
                 }
             ],
             { className: "dropdown-menu" }
