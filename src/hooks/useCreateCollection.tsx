@@ -43,7 +43,7 @@ export default function useCreateCollection(
                 errorCallback?.();
                 console.error(err);
                 notifications.show({
-                    message: "Error creating new Collection",
+                    message: "Error creating new collection",
                     color: "red",
                     autoClose: false,
                     withCloseButton: true,
