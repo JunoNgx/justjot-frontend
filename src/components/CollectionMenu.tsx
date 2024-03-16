@@ -60,14 +60,6 @@ export default function CollectionMenu({ currCollection, collections, isInHeader
             >
                 Create new collection
             </MenuItem>
-            <MenuItem
-                leftSection={<IconSortAscendingShapes
-                    size={justJotTheme.other.iconSizeMenu}
-                    stroke={justJotTheme.other.iconStrokeWidth}
-                />}
-            >
-                Sort all collections
-            </MenuItem>
             <MenuItem leftSection={<IconEdit
                     size={justJotTheme.other.iconSizeMenu}
                     stroke={justJotTheme.other.iconStrokeWidth}
@@ -79,6 +71,17 @@ export default function CollectionMenu({ currCollection, collections, isInHeader
             >
                 Edit this collection
             </MenuItem>
+            <MenuItem
+                leftSection={<IconSortAscendingShapes
+                    size={justJotTheme.other.iconSizeMenu}
+                    stroke={justJotTheme.other.iconStrokeWidth}
+                />}
+            >
+                Sort all collections
+            </MenuItem>
+
+            <MenuDivider/>
+
             <MenuItem
                 color="red"
                 leftSection={<IconTrash
