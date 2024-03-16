@@ -50,7 +50,7 @@ export default function useContextMenuActions() {
 
     const refetchTitleAndFavicon = async () => {
         await fetch(`${import.meta.env.VITE_BACKEND_URL}refetch/${currItem!.id}`, {
-            method: "POST"
+            method: "PATCH"
         })
         .then(() => {
             fetchItems();
