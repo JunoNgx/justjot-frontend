@@ -13,7 +13,9 @@ type useCreateCollectionOptions = {
     errorCallback?: () => {},
 }
 
-export default function useCreateCollection({ successfulCallback, errorCallback }: useCreateCollectionOptions) {
+export default function useCreateCollection(
+    { successfulCallback, errorCallback }: useCreateCollectionOptions = {}
+) {
 
     const { pbClient } = useContext(BackendClientContext);
     const [isSuccessful, setIsSuccessful] = useState(false);
@@ -41,9 +43,9 @@ export default function useCreateCollection({ successfulCallback, errorCallback 
         setIsLoading(false);
     };
 
-    return {
+    return [
         createCollection,
-        isSuccessful,
         isLoading,
-    };
+        isSuccessful,
+    ];
 };
