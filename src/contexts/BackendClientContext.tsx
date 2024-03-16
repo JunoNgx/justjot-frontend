@@ -28,23 +28,23 @@ export const BackendClientContext = createContext<BackendClientType>({
     // authStore: null,
     user: null,
     isLoggedIn: false,
-    setIsLoggedIn: () => {},
-    logout: () => {},
+    setIsLoggedIn: () => { },
+    logout: () => { },
 
     currCollection: undefined,
-    setCurrCollection: () => {},
+    setCurrCollection: () => { },
     collections: undefined,
-    setCollections: () => {},
+    setCollections: () => { },
     items: undefined,
-    setItems: () => {},
+    setItems: () => { },
 
-    fetchItems: () => {},
+    fetchItems: () => { },
 });
 
-export default function BackendClientContextProvider({children}: {children: ReactNode}) {
+export default function BackendClientContextProvider({ children }: { children: ReactNode }) {
     const pbClient = new PocketBase(import.meta.env.VITE_BACKEND_URL);
     // const [ authStore, setAuthStore ] = useState(pbClient.authStore);
-    const [ isLoggedIn, setIsLoggedIn ] = useState(pbClient.authStore.isValid);
+    const [isLoggedIn, setIsLoggedIn] = useState(pbClient.authStore.isValid);
     const logout = () => {
         pbClient.authStore.clear();
     };
@@ -55,26 +55,10 @@ export default function BackendClientContextProvider({children}: {children: Reac
 
     useEffect(() => {
         if (!isLoggedIn) return;
-
-        const fetchCollections = async () => {
-            await pbClient
-                // .cancelAllRequests()
-                .collection(DbTable.COLLECTIONS)
-                .getFullList({
-                    sort: "sortOrder"
-                })
-                .then((records: ItemCollection[]) => {
-                    setCollections(records);
-                })
-                .catch(error => {
-                    console.error(error)
-                });
-        };
-
         fetchCollections();
     }, []);
 
-    useEffect(() =>{
+    useEffect(() => {
         if (!collections) return;
         // TODO calculate based on param slug
         setCurrCollection(collections![0]);
@@ -84,6 +68,21 @@ export default function BackendClientContextProvider({children}: {children: Reac
         if (!currCollection) return;
         fetchItems();
     }, [currCollection]);
+
+    const fetchCollections = async () => {
+        await pbClient
+            // .cancelAllRequests()
+            .collection(DbTable.COLLECTIONS)
+            .getFullList({
+                sort: "sortOrder"
+            })
+            .then((records: ItemCollection[]) => {
+                setCollections(records);
+            })
+            .catch(error => {
+                console.error(error)
+            });
+    };
 
     const fetchItems = async () => {
         await pbClient
