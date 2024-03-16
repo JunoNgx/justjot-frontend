@@ -85,15 +85,6 @@ export default function MainView() {
                 currCollection={currCollection}
                 collections={collections}
             />
-            {/* <Button onClick={() => {
-                notifications.show({
-                    message: "Content copied",
-                    color: "none",
-                    withCloseButton: false
-                });
-            }}>
-                Make notification
-            </Button> */}
         </Group>
         <Input id="main-input" className="main-view__input"
             size="lg"
