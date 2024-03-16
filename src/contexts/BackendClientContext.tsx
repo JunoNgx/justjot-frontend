@@ -20,6 +20,7 @@ type BackendClientType = {
     setItems: React.Dispatch<React.SetStateAction<Item[] | undefined>>,
 
     fetchItems: () => void,
+    fetchCollections: () => void,
 };
 
 // export const AuthContext = createContext<AuthContextType>(null);
@@ -39,6 +40,7 @@ export const BackendClientContext = createContext<BackendClientType>({
     setItems: () => { },
 
     fetchItems: () => { },
+    fetchCollections: () => { },
 });
 
 export default function BackendClientContextProvider({ children }: { children: ReactNode }) {
@@ -124,6 +126,7 @@ export default function BackendClientContextProvider({ children }: { children: R
             setItems,
 
             fetchItems,
+            fetchCollections,
         }}
     >
         {children}
