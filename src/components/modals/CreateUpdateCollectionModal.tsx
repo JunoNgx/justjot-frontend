@@ -6,7 +6,7 @@ import useUpdateCollection from "../../hooks/useUpdateCollection";
 import { useContext } from "react";
 import { BackendClientContext } from "../../contexts/BackendClientContext";
 
-type CreateEditCollectionModalOptions = {
+type CreateUpdateCollectionModalOptions = {
     collection?: ItemCollection,
     isEditMode?: boolean,
     closeModalCallBackFn?: () => void,
@@ -17,8 +17,8 @@ type RegisterFormData = {
     slug: string,
 };
 
-export default function CreateEditCollectionModal(
-    { isEditMode, collection, closeModalCallBackFn }: CreateEditCollectionModalOptions
+export default function CreateUpdateCollectionModal(
+    { isEditMode, collection, closeModalCallBackFn }: CreateUpdateCollectionModalOptions
 ) {
 
     const { fetchCollections } = useContext(BackendClientContext);
