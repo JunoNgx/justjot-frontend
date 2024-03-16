@@ -1,8 +1,9 @@
+
 import { useContext, useState } from "react";
 import { BackendClientContext } from "../contexts/BackendClientContext";
 import { DbTable, RequestCallbackOptions } from "../types";
 import { notifications } from "@mantine/notifications";
-import { SHOULD_AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
+import { AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
 
 type useDeleteCollectionReturnType = [
     () => Promise<void>,
@@ -32,7 +33,7 @@ export default function useDeleteCollection({
                 notifications.show({
                     message: "Error deleting collection",
                     color: "red",
-                    autoClose: SHOULD_AUTO_CLOSE_ERROR_TOAST,
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
                     withCloseButton: true,
                 });
             });
