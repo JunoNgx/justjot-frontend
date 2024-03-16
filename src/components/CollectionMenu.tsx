@@ -3,11 +3,13 @@ import { ItemCollection } from "../types";
 import { IconEdit, IconPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
 import { justJotTheme } from "../theme";
 import useCollectionMenuActions from "../hooks/useCollectionMenuActions";
+import { modals } from "@mantine/modals";
+import CreateEditCollectionModal from "./modals/CreateEditCollectionModal";
 
 type CollectionProp = {
     currCollection: ItemCollection | undefined,
     collections: ItemCollection[] | undefined,
-    isInHeader: boolean,
+    isInHeader?: boolean,
 }
 
 export default function CollectionMenu({ currCollection, collections, isInHeader }: CollectionProp) {
@@ -51,6 +53,13 @@ export default function CollectionMenu({ currCollection, collections, isInHeader
                     size={justJotTheme.other.iconSizeMenu}
                     stroke={justJotTheme.other.iconStrokeWidth}
                 />}
+                onClick={() => modals.open({
+                    title: "Create new Collection",
+                    children: (<CreateEditCollectionModal
+                        isEditMode={false}
+                        closeModalCallBackFn={modals.closeAll}
+                    />)
+                })}
             >
                 Create new collection
             </MenuItem>
