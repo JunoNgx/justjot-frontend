@@ -25,6 +25,7 @@ import 'mantine-contextmenu/styles.layer.css';
 import './styles/layers.css';
 
 import "./styles/main.scss";
+import InfoModal from "./components/modals/InfoModal";
 
 function App() {
 
@@ -35,7 +36,9 @@ function App() {
 
         <ThemeModeContextProvider>
             <BackendClientContextProvider>
-                <ModalsProvider>
+                <ModalsProvider
+                    modals={{ infoModal: InfoModal}}
+                >
                     <ContextMenuProvider>
 
                         <AppShell.Header>
