@@ -8,7 +8,6 @@ import { CurrentItemContext } from "../contexts/CurrentItemContext";
 import { ItemsContext } from "../contexts/ItemsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 
-
 export default function useContextMenuActions() {
     const { pbClient, user } = useContext(BackendClientContext);
     const { currItem, setCurrItem } = useContext(CurrentItemContext);
@@ -22,10 +21,6 @@ export default function useContextMenuActions() {
             message: "Copied item content",
             autoClose: AUTO_CLOSE_DEFAULT,
         });
-    }
-
-    const openItemEditModal = async () => {
-
     }
 
     const openMoveItemModal = async () => {
@@ -114,7 +109,6 @@ export default function useContextMenuActions() {
 
     return {
         copyItemContent,
-        openItemEditModal,
         deleteItem,
         openMoveItemModal,
         refetchTitleAndFavicon,

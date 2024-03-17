@@ -1,6 +1,6 @@
 // import styled from 'styled-components';
 
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { Item, ItemType } from "../types";
 import { calculatePriText, processDatetime } from "../utils/itemUtils";
 import { Center, Group, Image, Kbd, Paper, Text } from "@mantine/core";
@@ -9,7 +9,8 @@ import { isValidUrl } from "../utils/misc";
 import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "../theme";
 import useContextMenuActions from "../hooks/useContextMenuActions";
-import { CurrentItemContext } from "../contexts/CurrentItemContext";
+import { modals } from "@mantine/modals";
+import ItemUpdateModal from "./modals/ItemUpdateModal";
 
 type ItemComponentOptions = {
     item: Item,
@@ -34,7 +35,6 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
     const { relativeDatetime, fullDatetime } = processDatetime(item);
     const {
         copyItemContent,
-        openItemEditModal,
         openMoveItemModal,
         deleteItem,
         switchShouldOpenOnClick,
@@ -78,7 +78,10 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
                         stroke={justJotTheme.other.iconStrokeWidth}
                     />,
                     iconRight: <Kbd>E</Kbd>,
-                    onClick: () => {openItemEditModal()}
+                    onClick: () => {modals.open({
+                        title: "Edit item",
+                        children: (<ItemUpdateModal item={item}/>)
+                    })}
                 }, {
                     key: "move",
                     icon: <IconFileSymlink
