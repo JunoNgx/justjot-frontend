@@ -8,14 +8,15 @@ import { BackendClientContext } from "../contexts/BackendClientContext";
 
 export default function HeaderLeftSide() {
 
-    const { currCollection, collections } = useContext(BackendClientContext);
+    const { currCollection, collections, user } = useContext(BackendClientContext);
     
     return <Group className="header__left-side"
         gap="xs"
     >
         <ActionIcon
             variant="transparent"
-            component={NavLink} to="/"
+            component={NavLink}
+            to={user ? `/${user.username}` : "/"}
             size="xl"
         >
             <IconNotebook
