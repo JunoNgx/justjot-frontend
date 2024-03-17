@@ -1,10 +1,9 @@
-import { Box, Button, Group, Stack, Text, TextInput, Textarea } from "@mantine/core";
-import { modals } from "@mantine/modals";
+import { Box, Group, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { Item } from "../../types";
 import useUpdateItem from "../../hooks/useUpdateItem";
 import { DateTime } from "luxon";
-import { useDebounceCallback, useDebouncedState } from "@mantine/hooks";
-import { useState } from "react";
+import { useDebounceCallback } from "@mantine/hooks";
+import { useEffect, useState } from "react";
 
 // type ItemUpdateFormData = {
 //     title: string,
@@ -17,26 +16,31 @@ export default function ItemUpdateModal({item}: {item: Item}) {
 
     const [ titleVal, setTitleVal ] = useState(item.title);
     const [ contentVal, setContentVal ] = useState(item.content);
+    const [ hasSaved, setHasSaved ] = useState(false);
     const [ relativeUpdatedTimeStr, setRelativeUpdatedTimeStr] = useState("");
-    const [ updateItemTitle, updateItemContent ]
+    const { updateItemTitle, updateItemContent }
         = useUpdateItem({ successfulCallback: () => {
             setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
         }});
 
-    const debouncedAutosaveItemTitle = useDebounceCallback(
-        () => updateItemTitle({ itemId: item.id, title: titleVal }
-    ), DEBOUNCED_TIME);
+    const debouncedAutosaveItemTitle = useDebounceCallback(() => {
+        updateItemTitle({ itemId: item.id, title: titleVal });
+        setHasSaved(true);
+    }, DEBOUNCED_TIME);
 
-    const debouncedAutosaveItemContent = useDebounceCallback(
-        () => updateItemContent({ itemId: item.id, content: contentVal }
-    ), DEBOUNCED_TIME);
+    const debouncedAutosaveItemContent = useDebounceCallback(() => {
+        updateItemContent({ itemId: item.id, content: contentVal });
+        setHasSaved(true);
+    }, DEBOUNCED_TIME);
 
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setHasSaved(false);
         setTitleVal(event.currentTarget.value);
         debouncedAutosaveItemTitle();
     };
 
     const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setHasSaved(false);
         setContentVal(event.currentTarget.value);
         debouncedAutosaveItemContent();
     };
@@ -73,7 +77,9 @@ export default function ItemUpdateModal({item}: {item: Item}) {
 
         <Group justify="space-between">
             <Box h="xl"/>
-            {relativeUpdatedTimeStr && <Text>Saved at {relativeUpdatedTimeStr}</Text>}
+            {(hasSaved && relativeUpdatedTimeStr)
+                && <Text>Saved at {relativeUpdatedTimeStr}</Text>
+            }
         </Group>
     </Stack>
 };
