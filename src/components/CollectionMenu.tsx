@@ -1,4 +1,4 @@
-import { Box, Group, Kbd, Menu, MenuDivider, MenuItem, Text, UnstyledButton } from "@mantine/core";
+import { Box, Group, Kbd, Menu, MenuDivider, MenuItem, Text, UnstyledButton, em } from "@mantine/core";
 import { ItemCollection } from "../types";
 import { IconEdit, IconPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
 import { justJotTheme } from "../theme";
@@ -6,29 +6,25 @@ import useCollectionMenuActions from "../hooks/useCollectionMenuActions";
 import { modals } from "@mantine/modals";
 import CollectionCreateUpdateModal from "./modals/CollectionCreateUpdateModal";
 import useDeleteCollectionConfirmation from "../hooks/useDeleteCollectionConfirmation";
+import { useMediaQuery } from "@mantine/hooks";
 
 type CollectionProp = {
     currCollection: ItemCollection | undefined,
     collections: ItemCollection[] | undefined,
-    isInHeader?: boolean,
 }
 
-export default function CollectionMenu({ currCollection, collections, isInHeader }: CollectionProp) {
+export default function CollectionMenu({ currCollection, collections }: CollectionProp) {
 
     const { switchToCollectionById } = useCollectionMenuActions();
     const confirmDeletion = useDeleteCollectionConfirmation();
+    const isMobile = useMediaQuery(`(max-width: ${em(720)})`);
 
     return <Menu
         position="bottom-start"
-        offset={isInHeader ? 20 : 10}
+        offset={isMobile ? 10 : 20}
     >
         <Menu.Target>
-            <UnstyledButton className={"collection-menu-btn "
-                + (isInHeader
-                    ? "collection-menu-btn--is-in-header"
-                    : "collection-menu-btn--is-sticky"
-                )
-            }>
+            <UnstyledButton className={"collection-menu-btn"}>
                 <Group>
                     <Text>{currCollection?.name}</Text>
                     <IconSelector

@@ -92,24 +92,35 @@
 }
 
 .collection-menu-btn {
-    &--is-in-header {
-        @include m.mobile {
-            display: none;
-        }
-    }
+    // &--is-in-header {
+    //     @include m.mobile {
+    //         display: none;
+    //     }
+    // }
 
-    &--is-sticky {
-        display: none;
+    // &--is-sticky {
+    //     display: none;
 
-        @include m.mobile {
-            display: block;
-            position: fixed;
-            bottom: 0.8rem;
+    //     @include m.mobile {
+    //         // display: block;
+    //         position: fixed;
+    //         bottom: 0.8rem;
     
-            border: solid 1px var(--mantine-color-default-border);
-            background-color: var(--mantine-color-body);
-            padding: 0.4rem 0.8rem;
-        }
+    //         border: solid 1px var(--mantine-color-default-border);
+    //         background-color: var(--mantine-color-body);
+    //         padding: 0.4rem 0.8rem;
+    //     }
+    // }
+
+    @include m.mobile {
+        // display: block;
+        position: fixed;
+        bottom: 0.8rem;
+        left: 0.5rem;
+
+        border: solid 1px var(--mantine-color-default-border);
+        background-color: var(--mantine-color-body);
+        padding: 0.4rem 0.8rem;
     }
 
     &__number-placeholder {

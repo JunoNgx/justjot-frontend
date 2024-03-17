@@ -4,7 +4,6 @@ import ItemComponent from '../components/ItemComponent';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
 import { IconCircleTriangle } from '@tabler/icons-react';
-import CollectionMenu from "../components/CollectionMenu";
 import { justJotTheme } from "../theme";
 import { Notifications } from '@mantine/notifications';
 import useCreateItem from "../hooks/useCreateItem";
@@ -13,8 +12,6 @@ export default function MainView() {
 
     const {
         isLoggedIn,
-        currCollection,
-        collections,
         items,
         fetchItems,
     } = useContext(BackendClientContext);
@@ -61,10 +58,6 @@ export default function MainView() {
             autoClose={1000}
         />
         <Group className="main-view__menu-flex-container">
-            <CollectionMenu
-                currCollection={currCollection}
-                collections={collections}
-            />
         </Group>
         <Input id="main-input" className="main-view__input"
             size="lg"

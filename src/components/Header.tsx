@@ -128,7 +128,6 @@ function Header() {
         {isLoggedIn && <CollectionMenu
             currCollection={currCollection}
             collections={collections}
-            isInHeader={true}
         />}
     </Group>
 
