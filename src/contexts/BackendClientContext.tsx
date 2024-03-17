@@ -1,6 +1,6 @@
 import PocketBase, { AuthModel } from 'pocketbase';
 // import User, { BaseAuthStore } from 'pocketbase';
-import { ReactNode, createContext, useEffect, useState } from 'react';
+import { ReactNode, createContext, useCallback, useEffect, useState } from 'react';
 import { DbTable, Item, ItemCollection } from '../types';
 
 // type AuthContextType = { authStore: BaseAuthStore } | null;
@@ -49,11 +49,11 @@ export const BackendClientContext = createContext<BackendClientType>({
 
 export default function BackendClientContextProvider({ children }: { children: ReactNode }) {
     const pbClient = new PocketBase(import.meta.env.VITE_BACKEND_URL);
-    // const [ authStore, setAuthStore ] = useState(pbClient.authStore);
     const [isLoggedIn, setIsLoggedIn] = useState(pbClient.authStore.isValid);
-    const logout = () => {
+    const logout = useCallback(() => {
         pbClient.authStore.clear();
-    };
+        setIsLoggedIn(false);
+    }, []);
 
     const [currCollection, setCurrCollection] = useState<ItemCollection>();
     const [collections, setCollections] = useState<ItemCollection[]>();
@@ -107,13 +107,6 @@ export default function BackendClientContextProvider({ children }: { children: R
                 console.error(error);
             })
     };
-
-    // useEffect(() => {
-    //     console.log("on mount backend context")
-    //     pbClient.authStore.onChange((_token: any, _model: any) => {
-    //         setIsLoggedIn(pbClient.authStore.isValid);
-    //     });
-    // }, []);
 
     return <BackendClientContext.Provider value=
         {{
