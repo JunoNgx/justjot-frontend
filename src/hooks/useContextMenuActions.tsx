@@ -1,14 +1,18 @@
-import { DbTable, Item } from "../types"
+import { DbTable } from "../types"
 import { BackendClientContext } from "../contexts/BackendClientContext";
 import { useContext } from "react";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
 import { useClipboard } from "@mantine/hooks";
+import { CurrentItemContext } from "../contexts/CurrentItemContext";
+import { ItemsContext } from "../contexts/ItemsContext";
 
 
 export default function useContextMenuActions() {
-    const { pbClient, currItem, setCurrItem, fetchItems, user } = useContext(BackendClientContext);
-    const clipboard = useClipboard({ timeout: 1000 })
+    const { pbClient, user } = useContext(BackendClientContext);
+    const { currItem, setCurrItem } = useContext(CurrentItemContext);
+    const { fetchItems } = useContext(ItemsContext);
+    const clipboard = useClipboard({ timeout: 1000 });
 
     const copyItemContent = async () => {
         clipboard.copy(currItem?.content);

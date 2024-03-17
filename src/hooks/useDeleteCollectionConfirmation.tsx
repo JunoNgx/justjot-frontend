@@ -7,10 +7,13 @@ import { AUTO_CLOSE_DEFAULT } from "../utils/constants";
 import { IconExclamationCircle } from "@tabler/icons-react";
 import { justJotTheme } from "../theme";
 import { Text } from "@mantine/core";
+import { CollectionsContext } from "../contexts/CollectionsContext";
+import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 
 export default function useDeleteCollectionConfirmation() {
     
-    const { collections, currCollection, fetchCollections } = useContext(BackendClientContext);
+    const { collections, fetchCollections } = useContext(CollectionsContext);
+    const { currCollection } = useContext(CurrentCollectionContext);
     
     useEffect(() => {
         if (!collections) return;

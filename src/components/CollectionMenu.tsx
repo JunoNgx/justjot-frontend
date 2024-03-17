@@ -7,13 +7,31 @@ import { modals } from "@mantine/modals";
 import CollectionCreateUpdateModal from "./modals/CollectionCreateUpdateModal";
 import useDeleteCollectionConfirmation from "../hooks/useDeleteCollectionConfirmation";
 import { useMediaQuery } from "@mantine/hooks";
+import { CollectionsContext } from "../contexts/CollectionsContext";
+import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
+import { useContext, useEffect } from "react";
 
-type CollectionProp = {
-    currCollection: ItemCollection | undefined,
-    collections: ItemCollection[] | undefined,
-}
+// type CollectionProp = {
+//     currCollection: ItemCollection | undefined,
+//     collections: ItemCollection[] | undefined,
+// }
 
-export default function CollectionMenu({ currCollection, collections }: CollectionProp) {
+export default function CollectionMenu() {
+    const { collections, fetchCollections } = useContext(CollectionsContext);
+    const { currCollection, setCurrCollection  } = useContext(CurrentCollectionContext);
+
+    useEffect(() => {
+        console.log("fetch collections")
+        fetchCollections();
+    }, []);
+
+    useEffect(() => {
+        console.log("use effect collections", collections)
+        if (!collections) return;
+        // TODO set from param
+        console.log("setting")
+        setCurrCollection(collections[0]);
+    }, [collections]);
 
     const { switchToCollectionById } = useCollectionMenuActions();
     const confirmDeletion = useDeleteCollectionConfirmation();

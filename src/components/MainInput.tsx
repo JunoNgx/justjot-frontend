@@ -2,17 +2,19 @@ import { useContext, useState } from "react";
 import { Input, Loader } from "@mantine/core";
 import { IconCircleTriangle } from "@tabler/icons-react";
 import { justJotTheme } from "../theme";
-import { BackendClientContext } from "../contexts/BackendClientContext";
 import useCreateItem from "../hooks/useCreateItem";
+import { ItemsContext } from "../contexts/ItemsContext";
+import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 
 export default function MainInput() {
-    const { fetchItems } = useContext(BackendClientContext);
+    const { currCollection } = useContext(CurrentCollectionContext)
+    const { fetchItems } = useContext(ItemsContext);
     const [inputVal, setInputVal] = useState("");
 
     const [createItem, isCreateItemLoading] = useCreateItem({
         successfulCallback: () => {
             setInputVal("");
-            fetchItems();
+            fetchItems(currCollection);
         }
     });
 

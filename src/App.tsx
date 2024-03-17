@@ -6,6 +6,10 @@ import { ModalsProvider } from '@mantine/modals';
 
 import ThemeModeContextProvider from "./contexts/ThemeModeContext";
 import BackendClientContextProvider from "./contexts/BackendClientContext";
+import CollectionsContextProvider from "./contexts/CollectionsContext";
+import CurrentCollectionContextProvider from "./contexts/CurrentCollectionContext";
+import ItemsContextProvider from "./contexts/ItemsContext";
+import CurrentItemContextProvider from "./contexts/CurrentItemContext";
 
 import Header from "./components/Header";
 import LandingPage from "./pages/LandingPage";
@@ -33,38 +37,48 @@ function App() {
         header={{ height: 50}}
         padding="none"
     >
-
         <ThemeModeContextProvider>
+
             <BackendClientContextProvider>
-                <ModalsProvider
-                    modals={{ infoModal: InfoModal}}
-                >
-                    <ContextMenuProvider>
+                <CollectionsContextProvider>
+                    <CurrentCollectionContextProvider>
+                        <ItemsContextProvider>
+                            <CurrentItemContextProvider>
 
-                        <AppShell.Header>
-                            <Header/>
-                        </AppShell.Header>
+                                <ModalsProvider
+                                    modals={{ infoModal: InfoModal}}
+                                >
+                                    <ContextMenuProvider>
 
-                        <AppShell.Main className="appshell-main">
-                            <Routes>
-                                <Route path="/" element={<LandingPage />} />
-                                <Route path="/help" element={<Help />} />
-                                <Route path="/:username">
-                                    <Route index element={<MainView />} />
-                                    <Route path=":groupSlug" element={<MainView />} />
-                                </Route>
-                                <Route path="/login" element={<Login />} />
-                                <Route path="/register" element={<Register />} />
-                                <Route path="/reset" element={<Reset />} />
-                                <Route path="/*" element={<Redirect />} />
-                            </Routes>
-                        </AppShell.Main>
+                                        <AppShell.Header>
+                                            <Header/>
+                                        </AppShell.Header>
 
-                    </ContextMenuProvider>
-                </ModalsProvider>
+                                        <AppShell.Main className="appshell-main">
+                                            <Routes>
+                                                <Route path="/" element={<LandingPage />} />
+                                                <Route path="/help" element={<Help />} />
+                                                <Route path="/:username">
+                                                    <Route index element={<MainView />} />
+                                                    <Route path=":groupSlug" element={<MainView />} />
+                                                </Route>
+                                                <Route path="/login" element={<Login />} />
+                                                <Route path="/register" element={<Register />} />
+                                                <Route path="/reset" element={<Reset />} />
+                                                <Route path="/*" element={<Redirect />} />
+                                            </Routes>
+                                        </AppShell.Main>
+
+                                    </ContextMenuProvider>
+                                </ModalsProvider>
+
+                            </CurrentItemContextProvider>
+                        </ItemsContextProvider>
+                    </CurrentCollectionContextProvider>
+                </CollectionsContextProvider>
             </BackendClientContextProvider>
-        </ThemeModeContextProvider>
 
+        </ThemeModeContextProvider>
     </AppShell>
 }
 

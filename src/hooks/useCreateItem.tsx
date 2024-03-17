@@ -3,6 +3,7 @@ import { BackendClientContext } from "../contexts/BackendClientContext";
 import { DbTable, RequestCallbackOptions, Item } from "../types";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
+import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 
 type useCreateItemReturnType = [
     ({ content }: { content: string }) => Promise<void>,
@@ -14,7 +15,8 @@ export default function useCreateItem(
     { successfulCallback, errorCallback }: RequestCallbackOptions = {}
 ): useCreateItemReturnType {
 
-    const { pbClient, currCollection, user } = useContext(BackendClientContext);
+    const { pbClient, user } = useContext(BackendClientContext);
+    const { currCollection } = useContext(CurrentCollectionContext);
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 

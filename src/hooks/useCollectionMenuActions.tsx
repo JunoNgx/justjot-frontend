@@ -1,9 +1,10 @@
-// import { Item, ItemCollection } from "../types"
-import { BackendClientContext } from "../contexts/BackendClientContext";
 import { useContext } from "react";
+import { CollectionsContext } from "../contexts/CollectionsContext";
+import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 
 export default function useCollectionMenuActions() {
-    const { collections, setCurrCollection } = useContext(BackendClientContext);
+    const { collections,  } = useContext(CollectionsContext);
+    const { setCurrCollection } = useContext(CurrentCollectionContext);
 
     const switchToCollectionById = (collectionId: string) => {
         const index = collections?.map(c => c.id)

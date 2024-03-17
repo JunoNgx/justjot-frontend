@@ -8,7 +8,7 @@ import { BackendClientContext } from "../contexts/BackendClientContext";
 
 export default function HeaderLeftSide() {
 
-    const { currCollection, collections, user } = useContext(BackendClientContext);
+    const { isLoggedIn, user } = useContext(BackendClientContext);
     
     return <Group className="header__left-side"
         gap="xs"
@@ -25,9 +25,6 @@ export default function HeaderLeftSide() {
                 stroke={justJotTheme.other.iconStrokeWidth}
             />
         </ActionIcon>
-        {currCollection && <CollectionMenu
-            currCollection={currCollection}
-            collections={collections}
-        />}
+        {isLoggedIn && <CollectionMenu/>}
     </Group>
 }
