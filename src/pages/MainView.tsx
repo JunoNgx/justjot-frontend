@@ -19,7 +19,7 @@ export default function MainView() {
             navigate(`/login`, { replace: true });
             return;
         }
-    });
+    }, []);
 
     // TODO: move these to App for better coverage
     const handleClickEvent = () => {
