@@ -3,6 +3,7 @@ import { BackendClientContext } from "../contexts/BackendClientContext";
 import { DbTable, ItemCollection, CreateUpdateCollectionOptions, RequestCallbackOptions } from "../types";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
+import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 
 type useUpdateCollectionReturnType = [
     ({ name, slug }: CreateUpdateCollectionOptions) => Promise<void>,
@@ -14,7 +15,8 @@ export default function useUpdateCollection({
     successfulCallback, errorCallback }: RequestCallbackOptions = {}
 ): useUpdateCollectionReturnType {
 
-    const {pbClient, currCollection, user} = useContext(BackendClientContext);
+    const {pbClient, user} = useContext(BackendClientContext);
+    const { currCollection } = useContext(CurrentCollectionContext);
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 

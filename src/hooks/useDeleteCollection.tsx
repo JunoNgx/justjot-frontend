@@ -4,6 +4,7 @@ import { BackendClientContext } from "../contexts/BackendClientContext";
 import { DbTable, RequestCallbackOptions } from "../types";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
+import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 
 type useDeleteCollectionReturnType = [
     () => Promise<void>,
@@ -15,7 +16,8 @@ export default function useDeleteCollection({
     successfulCallback, errorCallback }: RequestCallbackOptions = {}
 ): useDeleteCollectionReturnType {
 
-    const {pbClient, currCollection} = useContext(BackendClientContext);
+    const { pbClient } = useContext(BackendClientContext);
+    const { currCollection } = useContext(CurrentCollectionContext);
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
