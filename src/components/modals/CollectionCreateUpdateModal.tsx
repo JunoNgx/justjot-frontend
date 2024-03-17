@@ -3,7 +3,6 @@ import { useForm } from "@mantine/form";
 import useCreateCollection from "../../hooks/useCreateCollection";
 import useUpdateCollection from "../../hooks/useUpdateCollection";
 import { useContext } from "react";
-import { BackendClientContext } from "../../contexts/BackendClientContext";
 import { modals } from "@mantine/modals";
 import { getCurrHighestCollectionSortOrder } from "../../utils/collectionUtils";
 import { CurrentCollectionContext } from "../../contexts/CurrentCollectionContext";
@@ -13,7 +12,7 @@ type CollectionCreateUpdateModalOptions = {
     isEditMode?: boolean,
 };
 
-type RegisterFormData = {
+type CollectionCreateUpdateFormData = {
     name: string,
     slug: string,
 };
@@ -35,7 +34,7 @@ export default function CollectionCreateUpdateModal(
     const [ updateCollection, isUpdateLoading ]
         = useUpdateCollection({ successfulCallback: modals.closeAll});
 
-    const handleSubmit = async (formData: RegisterFormData) => {
+    const handleSubmit = async (formData: CollectionCreateUpdateFormData) => {
         const { name, slug } = formData;
 
         if (isEditMode) {
