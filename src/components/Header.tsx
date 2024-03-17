@@ -6,12 +6,11 @@ import { BackendClientContext } from "../contexts/BackendClientContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IconChevronDown, IconLogout, IconMoon, IconNotebook, IconSettings, IconSettingsCog, IconSun } from "@tabler/icons-react";
 import { justJotTheme } from "../theme";
-import CollectionMenu from "./CollectionMenu";
+import HeaderLeftSide from "./HeaderLeftSide";
 
 function Header() {
 
     const { themeMode, setThemeMode } = useContext(ThemeModeContext);
-    const { collections, currCollection } = useContext(BackendClientContext);
     const { logout, isLoggedIn, setIsLoggedIn, user } = useContext(BackendClientContext);
     const computedThemeMode = useComputedColorScheme(ComputedThemeMode.LIGHT);
     const navigate = useNavigate()
@@ -111,26 +110,6 @@ function Header() {
         </ActionIcon>
     </Group>
 
-    const leftSideGroup = <Group className="header__left-side"
-        gap="xs"
-    >
-        <ActionIcon
-            variant="transparent"
-            component={NavLink} to="/"
-            size="xl"
-        >
-            <IconNotebook
-                color={justJotTheme.other.colLogo}
-                size={justJotTheme.other.iconSizeHeaderLogo}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />
-        </ActionIcon>
-        {isLoggedIn && <CollectionMenu
-            currCollection={currCollection}
-            collections={collections}
-        />}
-    </Group>
-
     const rightSideGroup = <Group className="header__right-side"
         gap="md"
         justify="flex-end"
@@ -150,7 +129,7 @@ function Header() {
         <Group className="header__flex-wrapper"
             justify="space-between"
         >
-            {leftSideGroup}
+            <HeaderLeftSide/>
             {rightSideGroup}            
         </Group>
     </Container>
