@@ -1,4 +1,4 @@
-import { DbTable } from "../types"
+import { DbTable, Item } from "../types"
 import { BackendClientContext } from "../contexts/BackendClientContext";
 import { useContext } from "react";
 import { notifications } from "@mantine/notifications";
@@ -32,9 +32,19 @@ export default function useContextMenuActions() {
 
     }
 
-    const deleteItem = async () => {
+    const deleteItem = async (item: Item) => {
+        if (!item) {
+            notifications.show({
+                message: "No item was selected for deletion",
+                color: "red",
+                autoClose: AUTO_CLOSE_DEFAULT,
+                withCloseButton: true,
+            });
+            return;
+        }
+        
         await pbClient.collection(DbTable.ITEMS)
-            .delete(currItem!.id)
+            .delete(item.id)
             .then((_isSuccessful: boolean) => {
                 setCurrItem(undefined);
                 fetchItems(currCollection);
@@ -54,8 +64,18 @@ export default function useContextMenuActions() {
             });
     }
 
-    const refetchTitleAndFavicon = async () => {
-        await fetch(`${import.meta.env.VITE_BACKEND_URL}refetch/${user!.id}/${currItem!.id}`, {
+    const refetchTitleAndFavicon = async (item: Item) => {
+        if (!item) {
+            notifications.show({
+                message: "No link item was selected for refetch",
+                color: "red",
+                autoClose: AUTO_CLOSE_DEFAULT,
+                withCloseButton: true,
+            });
+            return;
+        }
+    
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}refetch/${user!.id}/${item!.id}`, {
             method: "PATCH",
             headers: {
                 authorization: pbClient.authStore.token

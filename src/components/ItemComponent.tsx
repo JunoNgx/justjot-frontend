@@ -95,14 +95,14 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
                     />,
                     iconRight: <Kbd>Del</Kbd>,
                     color: "red",
-                    onClick: () => {deleteItem()}
+                    onClick: () => {deleteItem(item)}
                 }, {
                     key: "refetch link",
                     icon: <IconDownload
                         size={justJotTheme.other.iconSizeMenu}
                         stroke={justJotTheme.other.iconStrokeWidth}
                     />,
-                    onClick: () => {refetchTitleAndFavicon();}
+                    onClick: () => {refetchTitleAndFavicon(item);}
                 }, {
                     key: "divider",
                 }, {
