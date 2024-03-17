@@ -6,11 +6,13 @@ import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
 import { useClipboard } from "@mantine/hooks";
 import { CurrentItemContext } from "../contexts/CurrentItemContext";
 import { ItemsContext } from "../contexts/ItemsContext";
+import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 
 
 export default function useContextMenuActions() {
     const { pbClient, user } = useContext(BackendClientContext);
     const { currItem, setCurrItem } = useContext(CurrentItemContext);
+    const { currCollection } = useContext(CurrentCollectionContext);
     const { fetchItems } = useContext(ItemsContext);
     const clipboard = useClipboard({ timeout: 1000 });
 
@@ -33,9 +35,9 @@ export default function useContextMenuActions() {
     const deleteItem = async () => {
         await pbClient.collection(DbTable.ITEMS)
             .delete(currItem!.id)
-            .then((_isSuccessful) => {
+            .then((_isSuccessful: boolean) => {
                 setCurrItem(undefined);
-                fetchItems();
+                fetchItems(currCollection);
                 notifications.show({
                     message: "Item deleted",
                     autoClose: AUTO_CLOSE_DEFAULT,
@@ -60,7 +62,7 @@ export default function useContextMenuActions() {
             },
         })
         .then(() => {
-            fetchItems();
+            fetchItems(currCollection);
         });
     }
 
@@ -73,7 +75,7 @@ export default function useContextMenuActions() {
                 const newValStr = newShouldCopyOnClickVal
                     ? "enabled"
                     : "disabled";
-                fetchItems();
+                fetchItems(currCollection);
                 notifications.show({
                     message: "Copy as default item interaction: " + newValStr,
                     autoClose: AUTO_CLOSE_DEFAULT,
