@@ -51,7 +51,7 @@ export default function ItemComponent({ item }: { item: Item }) {
     return <Paper className={"item " + (isFocused ? "item--is-active" : "")}
         p="xs"
         onMouseEnter={() => { setCurrItem(item) }}
-        // onMouseLeave={() => { setCurrItem(undefined) }}
+        onMouseLeave={() => { setCurrItem(undefined) }}
         onContextMenu={showContextMenu(
             [
                 {
