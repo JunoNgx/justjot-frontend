@@ -14,10 +14,17 @@ type UpdateItemContentOptions = {
     content: string,
 };
 
-type useUpdateItemReturnType = [
-    (options: UpdateItemTitleOptions) => Promise<void>,
-    (options: UpdateItemContentOptions) => Promise<void>,
-];
+type UpdateItemTitleAndContentOptions = {
+    itemId: string,
+    title: string,
+    content: string,
+};
+
+type useUpdateItemReturnType = {
+    updateItemTitle: (options: UpdateItemTitleOptions) => Promise<void>,
+    updateItemContent: (options: UpdateItemContentOptions) => Promise<void>,
+    updateItemTitleAndContent: (options: UpdateItemTitleAndContentOptions) => Promise<void>,
+};
 
 export default function useUpdateItem(
     { successfulCallback, errorCallback }: RequestCallbackOptions = {}
@@ -61,8 +68,27 @@ export default function useUpdateItem(
             });
     };
 
-    return [
+    const updateItemTitleAndContent = async ({ itemId, title, content }: UpdateItemTitleAndContentOptions) => {
+        pbClient.collection(DbTable.ITEMS)
+            .update(itemId, { title, content })
+            .then((_record: Item) => {
+                successfulCallback?.();
+            })
+            .catch(err => {
+                errorCallback?.();
+                console.error(err);
+                notifications.show({
+                    message: "Error autosaving content",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
+            });
+    };
+
+    return {
         updateItemTitle,
         updateItemContent,
-    ];
+        updateItemTitleAndContent,
+    };
 };
