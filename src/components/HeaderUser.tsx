@@ -7,13 +7,12 @@ import { justJotTheme } from "../theme";
 
 export default function HeaderUser() {
 
-    const { logout, setIsLoggedIn, user } = useContext(BackendClientContext);
+    const { logout, user } = useContext(BackendClientContext);
     const navigate = useNavigate()
     const username = user?.displayName || user?.username;
 
     const attemptLogout = () => {
         logout();
-        setIsLoggedIn(false);
         navigate("/", { replace: true});
     };
 
