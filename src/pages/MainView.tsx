@@ -5,12 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import { Notifications } from '@mantine/notifications';
 import ItemComponent from '../components/ItemComponent';
 import MainInput from "../components/MainInput";
+import { ItemsContext } from "../contexts/ItemsContext";
+import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 
 export default function MainView() {
-    const {
-        isLoggedIn,
-        items,
-    } = useContext(BackendClientContext);
+    const { isLoggedIn } = useContext(BackendClientContext);
+    const { items, fetchItems } = useContext(ItemsContext);
+    const { currCollection } = useContext(CurrentCollectionContext);
 
     const navigate = useNavigate();
 
@@ -20,6 +21,11 @@ export default function MainView() {
             return;
         }
     }, []);
+
+    useEffect(() => {
+        if (!currCollection) return;
+        fetchItems(currCollection);
+    }, [currCollection]);
 
     // TODO: move these to App for better coverage
     const handleClickEvent = () => {

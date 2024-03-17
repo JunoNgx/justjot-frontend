@@ -1,6 +1,6 @@
 // import styled from 'styled-components';
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Item, ItemType } from "../types";
 import { calculatePriText, processDatetime } from "../utils/itemUtils";
 import { Center, Group, Image, Kbd, Paper, Text } from "@mantine/core";
@@ -9,11 +9,11 @@ import { isValidUrl } from "../utils/misc";
 import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "../theme";
 import useContextMenuActions from "../hooks/useContextMenuActions";
-import { BackendClientContext } from "../contexts/BackendClientContext";
+import { CurrentItemContext } from "../contexts/CurrentItemContext";
 
 export default function ItemComponent({ item }: { item: Item }) {
 
-    const { currItem, setCurrItem } = useContext(BackendClientContext)
+    const { currItem, setCurrItem } = useContext(CurrentItemContext)
     const { showContextMenu } = useContextMenu();
 
     // useEffect(() => {
