@@ -21,15 +21,12 @@ export default function CollectionMenu() {
     const { currCollection, setCurrCollection  } = useContext(CurrentCollectionContext);
 
     useEffect(() => {
-        console.log("fetch collections")
         fetchCollections();
     }, []);
 
     useEffect(() => {
-        console.log("use effect collections", collections)
         if (!collections) return;
         // TODO set from param
-        console.log("setting")
         setCurrCollection(collections[0]);
     }, [collections]);
 
