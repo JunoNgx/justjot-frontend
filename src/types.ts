@@ -69,3 +69,9 @@ export type CreateUpdateCollectionOptions = {
     name: string,
     slug: string
 };
+
+export type UpdateItemOptions = {
+    itemId: string,
+    title: string,
+    content: string,
+};
