@@ -148,3 +148,10 @@
         }
     }
 }
+
+.item-update-modal {
+    &__input input,
+    &__input textarea {
+        font-family: var(--mantine-font-family-monospace);
+    }
+}
