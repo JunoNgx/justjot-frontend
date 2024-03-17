@@ -7,7 +7,7 @@ import { useClipboard } from "@mantine/hooks";
 
 
 export default function useContextMenuActions() {
-    const { pbClient, currItem, setCurrItem, fetchItems } = useContext(BackendClientContext);
+    const { pbClient, currItem, setCurrItem, fetchItems, user } = useContext(BackendClientContext);
     const clipboard = useClipboard({ timeout: 1000 })
 
     const copyItemContent = async () => {
@@ -49,8 +49,11 @@ export default function useContextMenuActions() {
     }
 
     const refetchTitleAndFavicon = async () => {
-        await fetch(`${import.meta.env.VITE_BACKEND_URL}refetch/${currItem!.id}`, {
-            method: "PATCH"
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}refetch/${user!.id}/${currItem!.id}`, {
+            method: "PATCH",
+            headers: {
+                authorization: pbClient.authStore.token
+            },
         })
         .then(() => {
             fetchItems();
