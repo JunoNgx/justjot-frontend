@@ -51,8 +51,8 @@ export default function MainView() {
         <Stack className="main-view__items-container"
             gap="xs"
         >
-            {items?.map(item =>
-                <ItemComponent key={item.id} item={item} />
+            {items?.map((item, index) =>
+                <ItemComponent key={item.id} item={item} index={index}/>
             )}
         </Stack>
     </Stack>

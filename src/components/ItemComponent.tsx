@@ -1,6 +1,6 @@
 // import styled from 'styled-components';
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Item, ItemType } from "../types";
 import { calculatePriText, processDatetime } from "../utils/itemUtils";
 import { Center, Group, Image, Kbd, Paper, Text } from "@mantine/core";
@@ -11,9 +11,14 @@ import { justJotTheme } from "../theme";
 import useContextMenuActions from "../hooks/useContextMenuActions";
 import { CurrentItemContext } from "../contexts/CurrentItemContext";
 
-export default function ItemComponent({ item }: { item: Item }) {
+type ItemComponentOptions = {
+    item: Item,
+    index: number,
+}
 
-    const { currItem, setCurrItem } = useContext(CurrentItemContext)
+export default function ItemComponent({ item, index}: ItemComponentOptions) {
+
+    // const { currItem, setCurrItem } = useContext(CurrentItemContext)
     const { showContextMenu } = useContextMenu();
 
     // useEffect(() => {
@@ -25,7 +30,7 @@ export default function ItemComponent({ item }: { item: Item }) {
     //     setIsFocused(currItem.id === item.id);
     // }, [currItem]);
 
-    // const [isFocused, setIsFocused] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
     const { relativeDatetime, fullDatetime } = processDatetime(item);
     const {
         copyItemContent,
@@ -46,12 +51,16 @@ export default function ItemComponent({ item }: { item: Item }) {
             stroke={justJotTheme.other.iconStrokeWidth}
         />
     const icon = computeIcon(item);    
-    const isFocused = currItem?.id === item.id;
+    // const isFocused = currItem?.id === item.id;
 
     return <Paper className={"item " + (isFocused ? "item--is-active" : "")}
+        data-is-focused={isFocused}
+        data-index={index}
         p="xs"
-        onMouseEnter={() => { setCurrItem(item) }}
-        onMouseLeave={() => { setCurrItem(undefined) }}
+        onMouseEnter={() => { setIsFocused(true) }}
+        onMouseLeave={() => { setIsFocused(false) }}
+        // onMouseEnter={() => { setCurrItem(item) }}
+        // onMouseLeave={() => { setCurrItem(undefined) }}
         onContextMenu={showContextMenu(
             [
                 {
