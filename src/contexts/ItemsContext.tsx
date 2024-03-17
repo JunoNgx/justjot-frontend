@@ -25,7 +25,7 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
         if (!currCollection) return;
 
         await pbClient
-            // .cancelAllRequests()
+            .cancelAllRequests()
             .collection(DbTable.ITEMS)
             .getFullList({
                 // Single relation can be used without specifying the id

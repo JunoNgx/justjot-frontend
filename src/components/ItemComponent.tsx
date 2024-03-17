@@ -1,9 +1,9 @@
 // import styled from 'styled-components';
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Item, ItemType } from "../types";
 import { calculatePriText, processDatetime } from "../utils/itemUtils";
-import { Center, Group, Image, Kbd, Paper, Text } from "@mantine/core";
+import { Center, Group, Image, Kbd, Modal, Paper, Text } from "@mantine/core";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconNote, IconNotes, IconSquare, IconTrash, IconWorld } from "@tabler/icons-react";
 import { isValidUrl } from "../utils/misc";
 import { useContextMenu } from 'mantine-contextmenu';
@@ -11,6 +11,9 @@ import { justJotTheme } from "../theme";
 import useContextMenuActions from "../hooks/useContextMenuActions";
 import { modals } from "@mantine/modals";
 import ItemUpdateModal from "./modals/ItemUpdateModal";
+import { useDisclosure } from "@mantine/hooks";
+import { ItemsContext } from "../contexts/ItemsContext";
+import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 
 type ItemComponentOptions = {
     item: Item,
@@ -20,7 +23,18 @@ type ItemComponentOptions = {
 export default function ItemComponent({ item, index}: ItemComponentOptions) {
 
     // const { currItem, setCurrItem } = useContext(CurrentItemContext)
+    const { currCollection } = useContext(CurrentCollectionContext);
+    const { fetchItems } = useContext(ItemsContext);
     const { showContextMenu } = useContextMenu();
+
+    const [isItemUpdateOpened, {
+        open: openItemUpdate,
+        close: closeItemUpdate }] = useDisclosure(false);
+
+    const closeItemUpdateModal = () => {
+        closeItemUpdate();
+        fetchItems(currCollection);
+    }
 
     // useEffect(() => {
     //     if (!currItem) {
@@ -53,6 +67,16 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
     const icon = computeIcon(item);    
     // const isFocused = currItem?.id === item.id;
 
+    const itemUpdateModal = <Modal
+        centered
+        size={512}
+        opened={isItemUpdateOpened}
+        onClose={closeItemUpdateModal}
+        title="Edit item"
+    >
+        <ItemUpdateModal item={item}/>
+    </Modal>
+
     return <Paper className={"item " + (isFocused ? "item--is-active" : "")}
         data-is-focused={isFocused}
         data-index={index}
@@ -78,10 +102,8 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
                         stroke={justJotTheme.other.iconStrokeWidth}
                     />,
                     iconRight: <Kbd>E</Kbd>,
-                    onClick: () => {modals.open({
-                        title: "Edit item",
-                        children: (<ItemUpdateModal item={item}/>)
-                    })}
+                    // onClick: () => {},
+                    onClick: () => {openItemUpdate()},
                 }, {
                     key: "move",
                     icon: <IconFileSymlink
@@ -148,6 +170,8 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
                 </Text>
             </Group>
         </Group>
+
+        {itemUpdateModal}
     </Paper>
 };
 
