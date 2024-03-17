@@ -3,7 +3,7 @@ import { Item } from "../../types";
 import useUpdateItem from "../../hooks/useUpdateItem";
 import { DateTime } from "luxon";
 import { useDebounceCallback } from "@mantine/hooks";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // type ItemUpdateFormData = {
 //     title: string,
@@ -14,11 +14,31 @@ const DEBOUNCED_TIME = 2000;
 
 export default function ItemUpdateModal({item}: {item: Item}) {
 
+    useEffect(() => () => {
+        if (!hasSaved) {
+            updateItemTitleAndContent({
+                itemId: item.id,
+                title: titleValRef.current,
+                content: contentValRef.current,
+            });
+        }
+    }, []);
+
     const [ titleVal, setTitleVal ] = useState(item.title);
     const [ contentVal, setContentVal ] = useState(item.content);
+    const titleValRef = useRef(titleVal);
+    const contentValRef = useRef(contentVal);
+
+    useEffect(() => {
+        titleValRef.current = titleVal;
+    }, [titleVal]);
+    useEffect(() => {
+        contentValRef.current = contentVal;
+    }, [contentVal]);
+
     const [ hasSaved, setHasSaved ] = useState(false);
     const [ relativeUpdatedTimeStr, setRelativeUpdatedTimeStr] = useState("");
-    const { updateItemTitle, updateItemContent }
+    const { updateItemTitle, updateItemContent, updateItemTitleAndContent }
         = useUpdateItem({ successfulCallback: () => {
             setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
         }});
@@ -35,13 +55,14 @@ export default function ItemUpdateModal({item}: {item: Item}) {
 
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setHasSaved(false);
-        setTitleVal(event.currentTarget.value);
+        setTitleVal(event.target.value);
         debouncedAutosaveItemTitle();
     };
 
     const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setHasSaved(false);
-        setContentVal(event.currentTarget.value);
+        setContentVal(event.target.value);
+        contentValRef.current = contentVal;
         debouncedAutosaveItemContent();
     };
 
@@ -52,7 +73,7 @@ export default function ItemUpdateModal({item}: {item: Item}) {
             placeholder=""
             type="text"
             maxLength={200}
-            defaultValue={titleVal}
+            value={titleVal}
             onChange={handleTitleChange}
         />
         <Group justify="flex-end">
@@ -68,7 +89,7 @@ export default function ItemUpdateModal({item}: {item: Item}) {
             maxLength={10000}
             minRows={20}
             maxRows={30}
-            defaultValue={contentVal}
+            value={contentVal}
             onChange={handleContentChange}
         />
         <Group justify="flex-end">

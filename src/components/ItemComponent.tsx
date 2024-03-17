@@ -9,7 +9,6 @@ import { isValidUrl } from "../utils/misc";
 import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "../theme";
 import useContextMenuActions from "../hooks/useContextMenuActions";
-import { modals } from "@mantine/modals";
 import ItemUpdateModal from "./modals/ItemUpdateModal";
 import { useDisclosure } from "@mantine/hooks";
 import { ItemsContext } from "../contexts/ItemsContext";
@@ -33,7 +32,7 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
 
     const closeItemUpdateModal = () => {
         closeItemUpdate();
-        fetchItems(currCollection);
+        setTimeout(() => {fetchItems(currCollection)}, 500);
     }
 
     // useEffect(() => {

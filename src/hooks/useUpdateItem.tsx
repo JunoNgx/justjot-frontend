@@ -69,7 +69,9 @@ export default function useUpdateItem(
     };
 
     const updateItemTitleAndContent = async ({ itemId, title, content }: UpdateItemTitleAndContentOptions) => {
-        pbClient.collection(DbTable.ITEMS)
+        pbClient
+            .cancelAllRequests()
+            .collection(DbTable.ITEMS)
             .update(itemId, { title, content })
             .then((_record: Item) => {
                 successfulCallback?.();
