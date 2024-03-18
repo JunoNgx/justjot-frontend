@@ -67,6 +67,7 @@ export default function CollectionMenu() {
                     stroke={justJotTheme.other.iconStrokeWidth}
                 />}
                 onClick={() => modals.open({
+                    centered: true,
                     title: "Create new Collection",
                     children: (<CollectionCreateUpdateModal isEditMode={false}/>)
                 })}
@@ -78,6 +79,7 @@ export default function CollectionMenu() {
                     stroke={justJotTheme.other.iconStrokeWidth}
                 />}
                 onClick={() => modals.open({
+                    centered: true,
                     title: "Create new Collection",
                     children: (<CollectionCreateUpdateModal isEditMode={true}/>)
                 })}
