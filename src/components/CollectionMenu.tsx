@@ -11,6 +11,7 @@ import { CollectionsContext } from "../contexts/CollectionsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 import { useContext, useEffect } from "react";
 import CollectionHotkey from "./CollectionHotkey";
+import CollectionsSortModal from "./modals/CollectionsSortModal";
 
 export default function CollectionMenu() {
     const { collections, fetchCollections } = useContext(CollectionsContext);
@@ -87,6 +88,12 @@ export default function CollectionMenu() {
                     size={justJotTheme.other.iconSizeMenu}
                     stroke={justJotTheme.other.iconStrokeWidth}
                 />}
+                onClick={() => modals.open({
+                    size: "xl",
+                    centered: true,
+                    title: "Sort Collections",
+                    children: <CollectionsSortModal/>
+                })}
             >
                 Sort all collections
             </MenuItem>
