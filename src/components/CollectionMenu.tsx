@@ -1,4 +1,4 @@
-import { Box, Group, Kbd, Menu, MenuDivider, MenuItem, Text, UnstyledButton, em } from "@mantine/core";
+import { Group, Menu, MenuDivider, MenuItem, Text, UnstyledButton, em } from "@mantine/core";
 import { ItemCollection } from "../types";
 import { IconEdit, IconPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
 import { justJotTheme } from "../theme";
@@ -11,11 +11,6 @@ import { CollectionsContext } from "../contexts/CollectionsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 import { useContext, useEffect } from "react";
 import CollectionHotkey from "./CollectionHotkey";
-
-// type CollectionProp = {
-//     currCollection: ItemCollection | undefined,
-//     collections: ItemCollection[] | undefined,
-// }
 
 export default function CollectionMenu() {
     const { collections, fetchCollections } = useContext(CollectionsContext);
