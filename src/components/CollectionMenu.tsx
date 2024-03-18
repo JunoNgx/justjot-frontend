@@ -10,6 +10,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { CollectionsContext } from "../contexts/CollectionsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 import { useContext, useEffect } from "react";
+import CollectionHotkey from "./CollectionHotkey";
 
 // type CollectionProp = {
 //     currCollection: ItemCollection | undefined,
@@ -54,7 +55,7 @@ export default function CollectionMenu() {
             {collections?.map((collection: ItemCollection, index: number) =>
                 <MenuItem
                     key={collection.id}
-                    rightSection={computeNumericHotkey(index)}
+                    rightSection={<CollectionHotkey index={index}/>}
                     onClick={() => switchToCollectionById(collection.id)}
                 >
                     {collection.name}
@@ -109,15 +110,4 @@ export default function CollectionMenu() {
             </MenuItem>
         </Menu.Dropdown>        
     </Menu>
-}
-
-const computeNumericHotkey = (index: number) => {
-    switch (true) {
-    case index === 9:
-        return <Kbd>0</Kbd>
-    case index < 9:
-        return <Kbd>{index + 1}</Kbd>
-    default:
-        return <Box className="collection-menu-btn__number-placeholder"/>
-    }
 }
