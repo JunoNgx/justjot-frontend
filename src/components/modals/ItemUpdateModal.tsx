@@ -15,7 +15,7 @@ const DEBOUNCED_TIME = 2000;
 export default function ItemUpdateModal({item}: {item: Item}) {
 
     useEffect(() => () => {
-        if (!hasSaved) {
+        if (hasChangedRef.current && !hasSavedRef.current) {
             updateItemTitleAndContent({
                 itemId: item.id,
                 title: titleValRef.current,
@@ -26,8 +26,12 @@ export default function ItemUpdateModal({item}: {item: Item}) {
 
     const [ titleVal, setTitleVal ] = useState(item.title);
     const [ contentVal, setContentVal ] = useState(item.content);
+    const [ hasSaved, setHasSaved ] = useState(false);
+    const [ hasChanged, setHasChanged ] = useState(false);
     const titleValRef = useRef(titleVal);
     const contentValRef = useRef(contentVal);
+    const hasSavedRef = useRef(hasSaved);
+    const hasChangedRef = useRef(hasChanged);
 
     useEffect(() => {
         titleValRef.current = titleVal;
@@ -35,8 +39,13 @@ export default function ItemUpdateModal({item}: {item: Item}) {
     useEffect(() => {
         contentValRef.current = contentVal;
     }, [contentVal]);
+    useEffect(() => {
+        hasSavedRef.current = hasSaved;
+    }, [hasSaved]);
+    useEffect(() => {
+        hasChangedRef.current = hasChanged;
+    }, [hasChanged]);
 
-    const [ hasSaved, setHasSaved ] = useState(false);
     const [ relativeUpdatedTimeStr, setRelativeUpdatedTimeStr] = useState("");
     const { updateItemTitle, updateItemContent, updateItemTitleAndContent }
         = useUpdateItem({ successfulCallback: () => {
@@ -54,12 +63,15 @@ export default function ItemUpdateModal({item}: {item: Item}) {
     }, DEBOUNCED_TIME);
 
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setHasChanged(true);
         setHasSaved(false);
         setTitleVal(event.target.value);
+        titleValRef.current = titleVal;
         debouncedAutosaveItemTitle();
     };
 
     const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setHasChanged(true);
         setHasSaved(false);
         setContentVal(event.target.value);
         contentValRef.current = contentVal;

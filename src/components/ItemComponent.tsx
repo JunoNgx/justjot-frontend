@@ -34,7 +34,6 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
         closeItemUpdate();
         setTimeout(() => {fetchItems(currCollection)}, 500);
     }
-
     // useEffect(() => {
     //     if (!currItem) {
     //         setIsFocused(false);
