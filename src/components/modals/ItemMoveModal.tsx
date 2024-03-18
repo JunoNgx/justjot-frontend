@@ -9,12 +9,12 @@ import CollectionHotkey from "../CollectionHotkey";
 import { ItemsContext } from "../../contexts/ItemsContext";
 import { CurrentCollectionContext } from "../../contexts/CurrentCollectionContext";
 
-type ItemMoveModalOptions = {
-    item: Item | undefined,
-    collectionList: ItemCollection[] | undefined
+type ItemMoveModal = {
+    item: Item,
+    collectionList: ItemCollection[]
 };
 
-export default function ItemMoveModal({ item, collectionList}: ItemMoveModalOptions) {
+export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
 
     const { fetchItems } = useContext(ItemsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
@@ -32,20 +32,6 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModalOpti
         }
     });
 
-    const moveItem = (itemId?: string, collectionId?: string) => {
-        if (!itemId || !collectionId) {
-            notifications.show({
-                message: "Requested moving item, but received missing data",
-                color: "red",
-                autoClose: AUTO_CLOSE_ERROR_TOAST,
-                withCloseButton: true,
-            });
-            return;
-        }
-
-        moveItemToCollection({itemId, collectionId});
-    };
-
     return <Stack className="item-update-modal"
         p="lg"
     >
@@ -56,7 +42,10 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModalOpti
             <Button
                 w="70%"
                 // variant="outline"
-                onClick={() => moveItem(item?.id, collection.id)}
+                // onClick={() => moveItem(item?.id, collection.id)}
+                onClick={() => moveItemToCollection({
+                    itemId: item.id, collectionId: collection.id})
+                }
                 disabled={isLoading || item?.collection === collection.id}
             >
                 {/* {item?.collection === collection.id && <Text>[Current]</Text>} */}

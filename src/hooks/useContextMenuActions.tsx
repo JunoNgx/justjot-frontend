@@ -1,4 +1,4 @@
-import { DbTable, Item } from "../types"
+import { DbTable, Item, ItemCollection } from "../types"
 import { BackendClientContext } from "../contexts/BackendClientContext";
 import { useContext } from "react";
 import { notifications } from "@mantine/notifications";
@@ -7,6 +7,13 @@ import { useClipboard } from "@mantine/hooks";
 import { CurrentItemContext } from "../contexts/CurrentItemContext";
 import { ItemsContext } from "../contexts/ItemsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
+import { modals } from "@mantine/modals";
+import ItemMoveModal from "../components/modals/ItemMoveModal";
+
+type ItemMoveModalOptions = {
+    item: Item | undefined,
+    collectionList: ItemCollection[] | undefined
+};
 
 export default function useContextMenuActions() {
     const { pbClient, user } = useContext(BackendClientContext);
@@ -23,8 +30,26 @@ export default function useContextMenuActions() {
         });
     }
 
-    const openMoveItemModal = async () => {
+    const openMoveItemModal = async ({item, collectionList}: ItemMoveModalOptions) => {
+        if (!item || !collectionList) {
+            notifications.show({
+                message: "Requested moving item, but received missing data",
+                color: "red",
+                autoClose: AUTO_CLOSE_ERROR_TOAST,
+                withCloseButton: true,
+            });
+            return;
+        }
 
+        modals.open({
+            centered: true,
+            size: "sm",
+            title: "Move to another collection",
+            children: <ItemMoveModal
+                item={item}
+                collectionList={collectionList}
+            />
+        });
     }
 
     const deleteItem = async (item: Item) => {

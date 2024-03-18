@@ -13,8 +13,6 @@ import ItemUpdateModal from "./modals/ItemUpdateModal";
 import { useDisclosure } from "@mantine/hooks";
 import { ItemsContext } from "../contexts/ItemsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
-import { modals } from "@mantine/modals";
-import ItemMoveModal from "./modals/ItemMoveModal";
 import { CollectionsContext } from "../contexts/CollectionsContext";
 
 type ItemComponentOptions = {
@@ -51,6 +49,7 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
     const { relativeDatetime, fullDatetime } = processDatetime(item);
     const {
         copyItemContent,
+        openMoveItemModal,
         deleteItem,
         switchShouldOpenOnClick,
         refetchTitleAndFavicon
@@ -112,15 +111,7 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
                         stroke={justJotTheme.other.iconStrokeWidth}
                     />,
                     iconRight: <Kbd>M</Kbd>,
-                    onClick: () => {modals.open({
-                        centered: true,
-                        size: "sm",
-                        title: "Move to another collection",
-                        children: <ItemMoveModal
-                            item={item}
-                            collectionList={collections}
-                        />
-                    })}
+                    onClick: () => {openMoveItemModal({item, collectionList: collections})},
                 }, {
                     key: "delete",
                     icon: <IconTrash
