@@ -51,5 +51,10 @@ export default function LandingPage() {
             <Title order={2}>Get started</Title>
             <Text><Anchor component={NavLink} to="/login">Login</Anchor> to your existing account or <Anchor component={NavLink} to="/register">register</Anchor> a new one.</Text>
         </section>
+
+        <section className="landing-page__section">
+            <Title order={2}>Manual</Title>
+            <Text>TODO: <Anchor component={NavLink} to="/help">link to manual</Anchor>.</Text>
+        </section>
     </Box>
 }
