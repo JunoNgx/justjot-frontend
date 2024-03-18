@@ -1,0 +1,29 @@
+{
+    "rewrites": [
+        {
+            "source": "/",
+            "destination": "/"
+        }, {
+            "source": "/help",
+            "destination": "/help"
+        }, {
+            "source": "/:path",
+            "destination": "/:path"
+        }, {
+            "source": "/:path/:path",
+            "destination": "/:path/:path"
+        }, {
+            "source": "/login",
+            "destination": "/login"
+        }, {
+            "source": "/register",
+            "destination": "/register"
+        }, {
+            "source": "/reset",
+            "destination": "/reset"
+        }, {
+            "source": "/*",
+            "destination": "/*"
+        }
+    ]
+}
