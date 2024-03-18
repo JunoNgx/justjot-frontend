@@ -123,10 +123,10 @@
         padding: 0.4rem 0.8rem;
     }
 
-    &__number-placeholder {
-        width: 19.35px; // TODO: find a more reliable way to size this
-        height: 28.6px;
-    }
+    // &__number-placeholder {
+    //     width: 19.35px; // TODO: find a more reliable way to size this
+    //     height: 28.6px;
+    // }
 }
 
 .dropdown-menu {
@@ -154,4 +154,9 @@
     &__input textarea {
         font-family: var(--mantine-font-family-monospace);
     }
+}
+
+.collection-number-placeholder {
+    width: 19.35px; // TODO: find a more reliable way to size this
+    height: 28.6px;
 }
