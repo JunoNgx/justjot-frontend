@@ -1,7 +1,5 @@
-import { Button, Group, Paper, Stack, Text } from "@mantine/core";
-import { ItemCollection } from "../../types"
-import { DragDropContext, Droppable, Draggable, OnDragEndResponder, DropResult } from '@hello-pangea/dnd';
-import CollectionHotkey from "../CollectionHotkey";
+import {  Paper, Stack } from "@mantine/core";
+import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { useListState } from "@mantine/hooks";
 import { useContext } from "react";
 import { CollectionsContext } from "../../contexts/CollectionsContext";

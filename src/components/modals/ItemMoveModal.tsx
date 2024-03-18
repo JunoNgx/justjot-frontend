@@ -4,7 +4,7 @@ import { useContext } from "react";
 import useMoveItem from "../../hooks/useMoveItem";
 import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
-import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "../../utils/constants";
+import { AUTO_CLOSE_DEFAULT } from "../../utils/constants";
 import CollectionHotkey from "../CollectionHotkey";
 import { ItemsContext } from "../../contexts/ItemsContext";
 import { CurrentCollectionContext } from "../../contexts/CurrentCollectionContext";
