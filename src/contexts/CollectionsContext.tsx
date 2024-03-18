@@ -1,5 +1,4 @@
-import PocketBase from 'pocketbase';
-import { ReactNode, createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { ReactNode, createContext, useCallback, useContext, useState } from 'react';
 import { DbTable, ItemCollection } from '../types';
 import { BackendClientContext } from './BackendClientContext';
 

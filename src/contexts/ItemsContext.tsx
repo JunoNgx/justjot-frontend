@@ -1,7 +1,6 @@
 import { ReactNode, createContext, useCallback, useContext, useState } from 'react';
 import { DbTable, Item, ItemCollection } from '../types';
 import { BackendClientContext } from './BackendClientContext';
-import { CurrentCollectionContext } from './CurrentCollectionContext';
 
 type ItemsContextType = {
     items: Item[] | undefined,

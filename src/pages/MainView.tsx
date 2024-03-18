@@ -31,7 +31,7 @@ export default function MainView() {
     const handleClickEvent = () => {
         console.log("click")
     }
-    const handleFocusEvent = (e) => {
+    const handleFocusEvent = (e: React.FocusEvent<HTMLDivElement, Element>) => {
         console.log("focus", e)
     };
 
@@ -39,7 +39,7 @@ export default function MainView() {
         gap="xl"
         p="sm"
         onClick={() => {handleClickEvent()}}
-        onFocus={handleFocusEvent}
+        onFocus={(e) => handleFocusEvent(e)}
     >
         <Notifications className="notifications-container"
             limit={5}

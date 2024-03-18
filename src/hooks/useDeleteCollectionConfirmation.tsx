@@ -1,4 +1,3 @@
-import { BackendClientContext } from "../contexts/BackendClientContext";
 import { useContext, useEffect, useState } from "react";
 import { modals } from "@mantine/modals";
 import useDeleteCollection from "./useDeleteCollection";
