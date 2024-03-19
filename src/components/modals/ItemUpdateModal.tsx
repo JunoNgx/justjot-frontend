@@ -1,9 +1,10 @@
-import { Group, Stack, Text, TextInput, Textarea } from "@mantine/core";
+import { Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { Item } from "../../types";
 import useUpdateItem from "../../hooks/useUpdateItem";
 import { DateTime } from "luxon";
-import { useDebounceCallback } from "@mantine/hooks";
+import { getHotkeyHandler, useDebounceCallback, useHotkeys } from "@mantine/hooks";
 import { useEffect, useRef, useState } from "react";
+import { notifications } from "@mantine/notifications";
 
 // type ItemUpdateFormData = {
 //     title: string,
@@ -23,6 +24,7 @@ export default function ItemUpdateModal({item}: {item: Item}) {
             });
         }
     }, []);
+
 
     const [ titleVal, setTitleVal ] = useState(item.title);
     const [ contentVal, setContentVal ] = useState(item.content);
@@ -44,11 +46,13 @@ export default function ItemUpdateModal({item}: {item: Item}) {
     }, [hasSaved]);
     useEffect(() => {
         hasChangedRef.current = hasChanged;
+        setRelativeUpdatedTimeStr("");
     }, [hasChanged]);
 
     const [ relativeUpdatedTimeStr, setRelativeUpdatedTimeStr] = useState("");
     const { updateItemTitle, updateItemContent, updateItemTitleAndContent }
         = useUpdateItem({ successfulCallback: () => {
+            console.log("update timestamp for successful callbacks")
             setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
         }});
 
@@ -78,6 +82,17 @@ export default function ItemUpdateModal({item}: {item: Item}) {
         debouncedAutosaveItemContent();
     };
 
+    const handleSave = () => {
+        updateItemTitleAndContent({
+            itemId: item.id,
+            title: titleValRef.current,
+            content: contentValRef.current,
+        });
+        setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
+        setHasChanged(false);
+        setHasSaved(true);
+    };
+
     return <Stack className="item-update-modal">
         <TextInput className="item-update-modal__input item-update-modal__input--title"
             label="Title"
@@ -87,6 +102,9 @@ export default function ItemUpdateModal({item}: {item: Item}) {
             maxLength={200}
             value={titleVal}
             onChange={handleTitleChange}
+            onKeyDown={getHotkeyHandler([
+                ["mod+S", handleSave, {preventDefault: true}]
+            ])}
         />
         <Group justify="flex-end">
             <Text>{titleVal.length}/200</Text>
@@ -103,8 +121,12 @@ export default function ItemUpdateModal({item}: {item: Item}) {
             maxRows={30}
             value={contentVal}
             onChange={handleContentChange}
+            onKeyDown={getHotkeyHandler([
+                ["mod+S", handleSave, {preventDefault: true}]
+            ])}
         />
-        <Group justify="flex-end">
+        <Group justify="space-between">
+            <Text>Save <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>
             <Text>{contentVal.length}/10000</Text>
         </Group>
 
