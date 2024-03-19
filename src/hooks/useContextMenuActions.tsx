@@ -17,7 +17,7 @@ type ItemMoveModalOptions = {
 
 export default function useContextMenuActions() {
     const { pbClient, user } = useContext(BackendClientContext);
-    const { currItem, setCurrItem } = useContext(CurrentItemContext);
+    const { setCurrItem } = useContext(CurrentItemContext);
     const { currCollection } = useContext(CurrentCollectionContext);
     const { fetchItems } = useContext(ItemsContext);
     const clipboard = useClipboard({ timeout: 1000 });
@@ -74,7 +74,7 @@ export default function useContextMenuActions() {
                 });
             })
             .catch(err => {
-                console.error(err, { currItem });
+                console.error(err, { item });
                 notifications.show({
                     message: "Error deleting item",
                     color: "red",
