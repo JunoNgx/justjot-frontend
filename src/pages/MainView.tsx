@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { Stack } from '@mantine/core';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import ItemComponent from '../components/ItemComponent';
 import MainInput from "../components/MainInput";
 import { ItemsContext } from "../contexts/ItemsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
+import { useHotkeys } from "@mantine/hooks";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -27,6 +28,8 @@ export default function MainView() {
         fetchItems(currCollection);
     }, [currCollection]);
 
+
+
     // TODO: move these to App for better coverage
     const handleClickEvent = () => {
         console.log("click")
@@ -34,6 +37,15 @@ export default function MainView() {
     const handleFocusEvent = (e: React.FocusEvent<HTMLDivElement, Element>) => {
         console.log("focus", e)
     };
+
+    const mainInputRef = useRef<HTMLInputElement>(null);
+    const focusOnMainInput = () => {
+        mainInputRef.current?.focus();
+    }
+
+    useHotkeys(
+        [["mod+F", focusOnMainInput]]
+    );
 
     return <Stack className="main-view"
         gap="xl"
@@ -47,7 +59,7 @@ export default function MainView() {
             autoClose={1000}
         />
 
-        <MainInput/>
+        <MainInput ref={mainInputRef}/>
         <Stack className="main-view__items-container"
             gap="xs"
         >
