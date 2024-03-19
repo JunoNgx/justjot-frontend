@@ -34,6 +34,11 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
 
     const closeItemUpdateModal = () => {
         closeItemUpdate();
+        /**
+         * It is possible to attempt to close modals that aren't even opened.
+         * This will block off the unintended attempt to update the item list.
+         */
+        if (!isItemUpdateOpened) return;
         setTimeout(() => {fetchItems(currCollection)}, 500);
     }
     // useEffect(() => {
