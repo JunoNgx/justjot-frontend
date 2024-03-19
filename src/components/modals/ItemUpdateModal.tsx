@@ -51,10 +51,14 @@ export default function ItemUpdateModal({item}: {item: Item}) {
 
     const [ relativeUpdatedTimeStr, setRelativeUpdatedTimeStr] = useState("");
     const { updateItemTitle, updateItemContent, updateItemTitleAndContent }
-        = useUpdateItem({ successfulCallback: () => {
-            console.log("update timestamp for successful callbacks")
-            setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
-        }});
+        = useUpdateItem({
+            successfulCallback: () => {
+                setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
+            },
+            errorCallback: () => {
+                setRelativeUpdatedTimeStr("");
+            },
+        });
 
     const debouncedAutosaveItemTitle = useDebounceCallback(() => {
         updateItemTitle({ itemId: item.id, title: titleVal });
