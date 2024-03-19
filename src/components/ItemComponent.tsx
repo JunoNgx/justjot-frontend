@@ -139,7 +139,7 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
                     key: "Copy on click",
                     icon: contextMenuDefaultActionIcon,
                     color: "blue",
-                    onClick: () => {switchShouldOpenOnClick()}
+                    onClick: () => {switchShouldOpenOnClick(item)}
                 }
             ],
             { className: "dropdown-menu" }

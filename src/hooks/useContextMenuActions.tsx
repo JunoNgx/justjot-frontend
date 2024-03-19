@@ -106,11 +106,11 @@ export default function useContextMenuActions() {
         });
     }
 
-    const switchShouldOpenOnClick = async () => {
-        const newShouldCopyOnClickVal = !currItem!.shouldCopyOnClick;
+    const switchShouldOpenOnClick = async (item: Item) => {
+        const newShouldCopyOnClickVal = item.shouldCopyOnClick;
 
         pbClient.collection(DbTable.ITEMS)
-            .update(currItem!.id, {shouldCopyOnClick: newShouldCopyOnClickVal})
+            .update(item.id, {shouldCopyOnClick: newShouldCopyOnClickVal})
             .then((_record) => {
                 const newValStr = newShouldCopyOnClickVal
                     ? "enabled"
@@ -122,7 +122,7 @@ export default function useContextMenuActions() {
                 });
             })
             .catch(err => {
-                console.log(err, {itemId: currItem!.id});
+                console.log(err, {itemId: item.id});
                 notifications.show({
                     message: "Error setting default action to item",
                     color: "red",
