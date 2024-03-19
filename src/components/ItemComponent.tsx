@@ -94,7 +94,7 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
                         stroke={justJotTheme.other.iconStrokeWidth}
                     />,
                     iconRight: <Kbd>C</Kbd>,
-                    onClick: () => {copyItemContent()}
+                    onClick: () => {copyItemContent(item)}
                 }, {
                     key: "edit",
                     icon: <IconEdit

@@ -22,8 +22,8 @@ export default function useContextMenuActions() {
     const { fetchItems } = useContext(ItemsContext);
     const clipboard = useClipboard({ timeout: 1000 });
 
-    const copyItemContent = async () => {
-        clipboard.copy(currItem?.content);
+    const copyItemContent = async (item: Item) => {
+        clipboard.copy(item.content);
         notifications.show({
             message: "Copied item content",
             autoClose: AUTO_CLOSE_DEFAULT,
