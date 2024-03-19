@@ -99,7 +99,7 @@ export default function ItemUpdateModal({item}: {item: Item}) {
             placeholder="Enter your note content here"
             autosize
             maxLength={10000}
-            minRows={20}
+            minRows={10}
             maxRows={30}
             value={contentVal}
             onChange={handleContentChange}
