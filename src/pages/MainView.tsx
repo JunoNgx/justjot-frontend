@@ -43,9 +43,9 @@ export default function MainView() {
         mainInputRef.current?.focus();
     }
 
-    useHotkeys(
-        [["mod+F", focusOnMainInput]]
-    );
+    useHotkeys([
+        ["mod+F", focusOnMainInput],
+    ]);
 
     return <Stack className="main-view"
         gap="xl"
