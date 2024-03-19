@@ -1,4 +1,4 @@
-import { Group, Space, Stack, Text, TextInput, Textarea } from "@mantine/core";
+import { Group, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { Item } from "../../types";
 import useUpdateItem from "../../hooks/useUpdateItem";
 import { DateTime } from "luxon";
@@ -108,8 +108,7 @@ export default function ItemUpdateModal({item}: {item: Item}) {
             <Text>{contentVal.length}/10000</Text>
         </Group>
 
-        <Group justify="space-between">
-            <Space h="xl"/>
+        <Group justify="flex-end">
             {(hasSaved && relativeUpdatedTimeStr)
                 && <Text>Saved at {relativeUpdatedTimeStr}</Text>
             }
