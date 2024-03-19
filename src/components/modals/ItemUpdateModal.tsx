@@ -2,9 +2,8 @@ import { Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { Item } from "../../types";
 import useUpdateItem from "../../hooks/useUpdateItem";
 import { DateTime } from "luxon";
-import { getHotkeyHandler, useDebounceCallback, useHotkeys } from "@mantine/hooks";
+import { getHotkeyHandler, useDebounceCallback } from "@mantine/hooks";
 import { useEffect, useRef, useState } from "react";
-import { notifications } from "@mantine/notifications";
 
 // type ItemUpdateFormData = {
 //     title: string,
