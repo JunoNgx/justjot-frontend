@@ -6,5 +6,5 @@ export const getCurrHighestCollectionSortOrder = (collections: ItemCollection[] 
     const collectionCount = collections?.length;
     const lastCollectionIndex = collectionCount - 1;
 
-    return collections[lastCollectionIndex - 1].sortOrder;
+    return collections[lastCollectionIndex].sortOrder;
 }
