@@ -108,7 +108,7 @@ export default function useContextMenuActions() {
     }
 
     const switchShouldOpenOnClick = async (item: Item) => {
-        const newShouldCopyOnClickVal = item.shouldCopyOnClick;
+        const newShouldCopyOnClickVal = !item.shouldCopyOnClick;
 
         pbClient.collection(DbTable.ITEMS)
             .update(item.id, {shouldCopyOnClick: newShouldCopyOnClickVal})
