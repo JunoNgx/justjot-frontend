@@ -41,6 +41,7 @@ export default function Reset() {
     const resetRequestForm =
         <form onSubmit={form.onSubmit(attemptRequestResetPassword)}>
             <TextInput mt="md"
+                autoFocus
                 label="Email"
                 description="Enter email address to request password reset"
                 required

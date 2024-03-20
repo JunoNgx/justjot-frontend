@@ -63,6 +63,7 @@ export default function Login() {
 
         <form onSubmit={form.onSubmit(attemptLogin)}>
             <TextInput
+                autoFocus
                 mt="md"
                 required
                 label="Email or Username"

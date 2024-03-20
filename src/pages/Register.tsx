@@ -97,6 +97,7 @@ export default function Register() {
 
         <form onSubmit={form.onSubmit(attemptRegister)}>
             <TextInput mt="md"
+                autoFocus
                 label="Email"
                 description="Must be unique."
                 required
