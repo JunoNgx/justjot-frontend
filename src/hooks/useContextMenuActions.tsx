@@ -70,6 +70,7 @@ export default function useContextMenuActions() {
                 fetchItems(currCollection);
                 notifications.show({
                     message: "Item deleted",
+                    color: "none",
                     autoClose: AUTO_CLOSE_DEFAULT,
                 });
             })
