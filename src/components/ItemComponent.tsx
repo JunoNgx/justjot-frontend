@@ -122,15 +122,19 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
     ];
 
     const handleDefaultAction = () => {
+
+        if (item.shouldCopyOnClick) {
+            copyItemContent(item);
+            return;
+        }
+
         if (item.type === ItemType.LINK) {
             window.open(item.content, "_blank");
             return;
         }
 
         item.shouldCopyOnClick
-            ? copyItemContent(item)
-            : openItemUpdate();
-        return;
+            openItemUpdate();
     };
 
     // const isFocused = currItem?.id === item.id;
