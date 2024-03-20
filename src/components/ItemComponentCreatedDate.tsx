@@ -3,7 +3,8 @@ import { DateTime } from "luxon";
 import { useMemo } from "react";
 
 export default function ItemComponentCreatedDate(
-    { createdDatetime }: { createdDatetime: string }
+    { createdDatetime, className }:
+    { createdDatetime: string, className: string}
 ) {
 
     const itemDatetime = useMemo(() => DateTime
@@ -16,7 +17,7 @@ export default function ItemComponentCreatedDate(
         .toRelative({padding: 60000}),
     [createdDatetime])
 
-    return <Text className="item__datetime"
+    return <Text className={className}
         title={fullDateTime}
     >
         {relativeDateTime}
