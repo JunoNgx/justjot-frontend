@@ -1,8 +1,8 @@
 // import styled from 'styled-components';
 
 import { useContext, useState } from "react";
-import { Item } from "../types";
-import { Center, Group, Image, Kbd, Modal, Paper, Text } from "@mantine/core";
+import { Item, ItemType } from "../types";
+import { Center, Group, Kbd, Modal, Paper, Text } from "@mantine/core";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconNote, IconNotes, IconSquare, IconTrash, IconWorld } from "@tabler/icons-react";
 import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "../theme";
@@ -121,6 +121,18 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
         }
     ];
 
+    const handleDefaultAction = () => {
+        if (item.type === ItemType.LINK) {
+            window.open(item.content, "_blank");
+            return;
+        }
+
+        item.shouldCopyOnClick
+            ? copyItemContent(item)
+            : openItemUpdate();
+        return;
+    };
+
     // const isFocused = currItem?.id === item.id;
 
     const itemUpdateModal = <Modal
@@ -133,53 +145,55 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
         <ItemUpdateModal item={item}/>
     </Modal>
 
-    return <Paper className={"item " + (isFocused ? "item--is-active" : "")}
-        data-is-focused={isFocused}
-        data-index={index}
-        p="xs"
-        onMouseEnter={() => { setIsFocused(true) }}
-        onMouseLeave={() => { setIsFocused(false) }}
-        // onMouseEnter={() => { setCurrItem(item) }}
-        // onMouseLeave={() => { setCurrItem(undefined) }}
-        onContextMenu={showContextMenu(
+    const props = {
+        className: "item " + (isFocused ? "item--is-active" : ""),
+        "data-is-focused": isFocused,
+        "data-index": index,
+        "p": "xs",
+        "onMouseEnter": () => { setIsFocused(true) },
+        "onMouseLeave": () => { setIsFocused(false) },
+        "onClick": handleDefaultAction,
+        "onContextMenu": showContextMenu(
             contextMenuOptions,
             { className: "dropdown-menu" }
-        )}
-    >
-        <Group className="item__flex-wrapper"
-            justify="space-between"
-            wrap="nowrap"
-        >
-            <Group className="item__left-side"
-                justify="flex-start"
+        ),
+    };
+
+    return <Paper {...props}>
+            <Group className="item__flex-wrapper"
+                justify="space-between"
                 wrap="nowrap"
             >
-                <Center className="item__icon-wrapper">
-                    <ItemComponentIcon
-                        type={item.type}
-                        faviconUrl={item.faviconUrl}
-                        shouldCopyOnClick={item.shouldCopyOnClick}
+                <Group className="item__left-side"
+                    justify="flex-start"
+                    wrap="nowrap"
+                >
+                    <Center className="item__icon-wrapper">
+                        <ItemComponentIcon
+                            type={item.type}
+                            faviconUrl={item.faviconUrl}
+                            shouldCopyOnClick={item.shouldCopyOnClick}
+                        />
+                    </Center>
+                    {item.title && <Text className="item__primary-text"
+                        title={item.title}
+                    >
+                        {item.title}
+                    </Text>}
+                    {item.content&& <Text className="item__secondary-text"
+                        c="dimmed"
+                        title={item.content}
+                    >
+                        {item.content}
+                    </Text>}
+                </Group>
+                <Group className="item__right-side">
+                    <ItemComponentCreatedDate className="item__datetime"
+                        createdDatetime={item.created}
                     />
-                </Center>
-                {item.title && <Text className="item__primary-text"
-                    title={item.title}
-                >
-                    {item.title}
-                </Text>}
-                {item.content&& <Text className="item__secondary-text"
-                    c="dimmed"
-                    title={item.content}
-                >
-                    {item.content}
-                </Text>}
+                </Group>
             </Group>
-            <Group className="item__right-side">
-                <ItemComponentCreatedDate className="item__datetime"
-                    createdDatetime={item.created}
-                />
-            </Group>
-        </Group>
 
-        {itemUpdateModal}
-    </Paper>
+            {itemUpdateModal}
+        </Paper>
 };
