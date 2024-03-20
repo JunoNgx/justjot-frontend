@@ -5,8 +5,11 @@
     cursor: pointer;
     border: solid 1px transparent;
 
-    &--is-active {
-        border-color: var(--mantine-color-text);
+
+    @media (hover: hover) {
+        &:hover {
+            border-color: var(--mantine-color-text);
+        }
     }
 
     &__left-side {
