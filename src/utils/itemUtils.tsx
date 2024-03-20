@@ -1,6 +1,6 @@
 import { Item, ItemType } from "../types";
 // import { isDatetimeMoreThanOneYearOld } from "./misc";
-import { DateTime } from "luxon";
+// import { DateTime } from "luxon";
 
 export const calculatePriText = (item: Item): string => {
     const isTodoItem = item.type === ItemType.TODO;

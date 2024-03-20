@@ -3,7 +3,7 @@
 import { useContext, useState } from "react";
 import { Item, ItemType } from "../types";
 import { Center, Group, Kbd, Modal, Paper, Text } from "@mantine/core";
-import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconNote, IconNotes, IconSquare, IconTrash, IconWorld } from "@tabler/icons-react";
+import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink,  IconSquare, IconTrash } from "@tabler/icons-react";
 import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "../theme";
 import useContextMenuActions from "../hooks/useContextMenuActions";
