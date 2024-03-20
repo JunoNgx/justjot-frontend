@@ -2,7 +2,6 @@
 
 import { useContext, useState } from "react";
 import { Item } from "../types";
-import { calculatePriText } from "../utils/itemUtils";
 import { Center, Group, Image, Kbd, Modal, Paper, Text } from "@mantine/core";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconNote, IconNotes, IconSquare, IconTrash, IconWorld } from "@tabler/icons-react";
 import { useContextMenu } from 'mantine-contextmenu';
@@ -162,7 +161,7 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
                 {item.title && <Text className="item__primary-text"
                     title={item.title}
                 >
-                    {calculatePriText(item)}
+                    {item.title}
                 </Text>}
                 {item.content&& <Text className="item__secondary-text"
                     c="dimmed"
