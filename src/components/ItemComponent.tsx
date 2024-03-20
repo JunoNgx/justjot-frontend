@@ -68,6 +68,59 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
             size={justJotTheme.other.iconSizeMenu}
             stroke={justJotTheme.other.iconStrokeWidth}
         />
+
+    const contextMenuOptions = [
+        {
+            key: "copy",
+            icon: <IconCopy
+                size={justJotTheme.other.iconSizeMenu}
+                stroke={justJotTheme.other.iconStrokeWidth}
+            />,
+            iconRight: <Kbd>C</Kbd>,
+            onClick: () => {copyItemContent(item)}
+        }, {
+            key: "edit",
+            icon: <IconEdit
+                size={justJotTheme.other.iconSizeMenu}
+                stroke={justJotTheme.other.iconStrokeWidth}
+            />,
+            iconRight: <Kbd>E</Kbd>,
+            // onClick: () => {},
+            onClick: () => {openItemUpdate()},
+        }, {
+            key: "move",
+            icon: <IconFileSymlink
+                size={justJotTheme.other.iconSizeMenu}
+                stroke={justJotTheme.other.iconStrokeWidth}
+            />,
+            iconRight: <Kbd>M</Kbd>,
+            onClick: () => {openMoveItemModal({item, collectionList: collections})},
+        }, {
+            key: "delete",
+            icon: <IconTrash
+                size={justJotTheme.other.iconSizeMenu}
+                stroke={justJotTheme.other.iconStrokeWidth}
+            />,
+            iconRight: <Kbd>Del</Kbd>,
+            color: "red",
+            onClick: () => {deleteItem(item)}
+        }, {
+            key: "refetch link",
+            icon: <IconDownload
+                size={justJotTheme.other.iconSizeMenu}
+                stroke={justJotTheme.other.iconStrokeWidth}
+            />,
+            onClick: () => {refetchTitleAndFavicon(item);}
+        }, {
+            key: "divider",
+        }, {
+            key: "Copy on click",
+            icon: contextMenuDefaultActionIcon,
+            color: "blue",
+            onClick: () => {switchShouldOpenOnClick(item)}
+        }
+    ];
+
     // const isFocused = currItem?.id === item.id;
 
     const itemUpdateModal = <Modal
@@ -89,57 +142,7 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
         // onMouseEnter={() => { setCurrItem(item) }}
         // onMouseLeave={() => { setCurrItem(undefined) }}
         onContextMenu={showContextMenu(
-            [
-                {
-                    key: "copy",
-                    icon: <IconCopy
-                        size={justJotTheme.other.iconSizeMenu}
-                        stroke={justJotTheme.other.iconStrokeWidth}
-                    />,
-                    iconRight: <Kbd>C</Kbd>,
-                    onClick: () => {copyItemContent(item)}
-                }, {
-                    key: "edit",
-                    icon: <IconEdit
-                        size={justJotTheme.other.iconSizeMenu}
-                        stroke={justJotTheme.other.iconStrokeWidth}
-                    />,
-                    iconRight: <Kbd>E</Kbd>,
-                    // onClick: () => {},
-                    onClick: () => {openItemUpdate()},
-                }, {
-                    key: "move",
-                    icon: <IconFileSymlink
-                        size={justJotTheme.other.iconSizeMenu}
-                        stroke={justJotTheme.other.iconStrokeWidth}
-                    />,
-                    iconRight: <Kbd>M</Kbd>,
-                    onClick: () => {openMoveItemModal({item, collectionList: collections})},
-                }, {
-                    key: "delete",
-                    icon: <IconTrash
-                        size={justJotTheme.other.iconSizeMenu}
-                        stroke={justJotTheme.other.iconStrokeWidth}
-                    />,
-                    iconRight: <Kbd>Del</Kbd>,
-                    color: "red",
-                    onClick: () => {deleteItem(item)}
-                }, {
-                    key: "refetch link",
-                    icon: <IconDownload
-                        size={justJotTheme.other.iconSizeMenu}
-                        stroke={justJotTheme.other.iconStrokeWidth}
-                    />,
-                    onClick: () => {refetchTitleAndFavicon(item);}
-                }, {
-                    key: "divider",
-                }, {
-                    key: "Copy on click",
-                    icon: contextMenuDefaultActionIcon,
-                    color: "blue",
-                    onClick: () => {switchShouldOpenOnClick(item)}
-                }
-            ],
+            contextMenuOptions,
             { className: "dropdown-menu" }
         )}
     >
