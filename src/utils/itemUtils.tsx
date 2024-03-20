@@ -26,18 +26,18 @@ export const calculatePriText = (item: Item): string => {
 //         .format(dateTimeInstance);
 // };
 
-type ItemDatetimeProcessOutput = {
-    relativeDatetime: string | null,
-    fullDatetime: string,
-}
+// type ItemDatetimeProcessOutput = {
+//     relativeDatetime: string | null,
+//     fullDatetime: string,
+// }
 
-export const processDatetime =(item: Item): ItemDatetimeProcessOutput  => {
-    const datetimeDataToUse = item.updated || item.created;
-    // Luxon can't parse this for some reason
-    const itemDatetime = DateTime.fromJSDate(new Date(datetimeDataToUse));
+// export const processDatetime =(item: Item): ItemDatetimeProcessOutput  => {
+//     const datetimeDataToUse = item.updated || item.created;
+//     // Luxon can't parse this for some reason
+//     const itemDatetime = DateTime.fromJSDate(new Date(datetimeDataToUse));
     
-    const relativeDatetime = itemDatetime.toRelative();
-    const fullDatetime = itemDatetime.toLocaleString(DateTime.DATETIME_FULL);
+//     const relativeDatetime = itemDatetime.toRelative();
+//     const fullDatetime = itemDatetime.toLocaleString(DateTime.DATETIME_FULL);
 
-    return { relativeDatetime, fullDatetime };
-}
+//     return { relativeDatetime, fullDatetime };
+// }

@@ -2,7 +2,7 @@
 
 import { useContext, useState } from "react";
 import { Item, ItemType } from "../types";
-import { calculatePriText, processDatetime } from "../utils/itemUtils";
+import { calculatePriText } from "../utils/itemUtils";
 import { Center, Group, Image, Kbd, Modal, Paper, Text } from "@mantine/core";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconNote, IconNotes, IconSquare, IconTrash, IconWorld } from "@tabler/icons-react";
 import { isValidUrl } from "../utils/misc";
@@ -14,6 +14,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { ItemsContext } from "../contexts/ItemsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 import { CollectionsContext } from "../contexts/CollectionsContext";
+import ItemComponentCreatedDate from "./ItemComponentCreatedDate";
 
 type ItemComponentOptions = {
     item: Item,
@@ -51,7 +52,6 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
     // }, [currItem]);
 
     const [isFocused, setIsFocused] = useState(false);
-    const { relativeDatetime, fullDatetime } = processDatetime(item);
     const {
         copyItemContent,
         openMoveItemModal,
@@ -167,12 +167,9 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
                 </Text>}
             </Group>
             <Group className="item__right-side">
-                <Text
-                    className="item__datetime"
-                    title={fullDatetime}
-                >
-                    {relativeDatetime}
-                </Text>
+                <ItemComponentCreatedDate className="item__datetime"
+                    createdDatetime={item.created}
+                />
             </Group>
         </Group>
 
