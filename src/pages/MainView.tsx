@@ -57,7 +57,7 @@ export default function MainView() {
         onClose={closeItemUpdateModal}
         title="Edit item"
     >
-        <ItemUpdateModal item={currItem}/>
+        <ItemUpdateModal item={currItem!}/>
     </Modal>
 
     // TODO: move these to App for better coverage
@@ -98,7 +98,7 @@ export default function MainView() {
                     key={item.id}
                     item={item}
                     index={index}
-                    openItemUpdate={openItemUpdate}
+                    openItemUpdate={openItemUpdateModal}
                 />
             )}
         </Stack>
