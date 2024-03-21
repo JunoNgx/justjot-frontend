@@ -12,11 +12,9 @@ import { useEffect, useRef, useState } from "react";
 
 const DEBOUNCED_TIME = 2000;
 
-export default function ItemUpdateModal({item}: {item: Item | undefined}) {
+export default function ItemUpdateModal({item}: {item: Item}) {
 
     useEffect(() => () => {
-        if (!item) return;
-
         if (hasChangedRef.current && !hasSavedRef.current) {
             updateItemTitleAndContent({
                 itemId: item.id,

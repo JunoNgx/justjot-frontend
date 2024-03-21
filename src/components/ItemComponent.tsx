@@ -1,16 +1,12 @@
 // import styled from 'styled-components';
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Item, ItemType } from "../types";
-import { Center, Group, Kbd, Modal, Paper, Text } from "@mantine/core";
+import { Center, Group, Kbd, Paper, Text } from "@mantine/core";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink,  IconSquare, IconTrash } from "@tabler/icons-react";
 import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "../theme";
 import useContextMenuActions from "../hooks/useContextMenuActions";
-import ItemUpdateModal from "./modals/ItemUpdateModal";
-import { useDisclosure } from "@mantine/hooks";
-import { ItemsContext } from "../contexts/ItemsContext";
-import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 import { CollectionsContext } from "../contexts/CollectionsContext";
 import ItemComponentCreatedDate from "./ItemComponentCreatedDate";
 import ItemComponentIcon from "./ItemComponentIcon";
@@ -24,11 +20,8 @@ type ItemComponentOptions = {
 
 export default function ItemComponent({ item, index, openItemUpdate}: ItemComponentOptions) {
 
-    // const { currItem, setCurrItem } = useContext(CurrentItemContext)
-    const { currCollection } = useContext(CurrentCollectionContext);
+    const { currItem, setCurrItem } = useContext(CurrentItemContext)
     const { collections } = useContext(CollectionsContext);
-    const { fetchItems } = useContext(ItemsContext);
-    const { currItem, setCurrItem } = useContext(CurrentItemContext);
     const { showContextMenu } = useContextMenu();
 
     const {
@@ -38,18 +31,6 @@ export default function ItemComponent({ item, index, openItemUpdate}: ItemCompon
         switchShouldOpenOnClick,
         refetchTitleAndFavicon
     } = useContextMenuActions();
-
-
-    // useEffect(() => {
-    //     if (!currItem) {
-    //         setIsFocused(false);
-    //         return;
-    //     }
-
-    //     setIsFocused(currItem.id === item.id);
-    // }, [currItem]);
-
-    // const [isFocused, setIsFocused] = useState(false);
 
     const contextMenuDefaultActionIcon = item.shouldCopyOnClick
         ? <IconCheckbox
@@ -77,7 +58,6 @@ export default function ItemComponent({ item, index, openItemUpdate}: ItemCompon
                 stroke={justJotTheme.other.iconStrokeWidth}
             />,
             iconRight: <Kbd>E</Kbd>,
-            // onClick: () => {},
             onClick: () => {openItemUpdate(item)},
         }, {
             key: "move",

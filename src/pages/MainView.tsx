@@ -7,10 +7,8 @@ import ItemComponent from '../components/ItemComponent';
 import MainInput from "../components/MainInput";
 import { ItemsContext } from "../contexts/ItemsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
-import { useDisclosure, useHotkeys, useSetState } from "@mantine/hooks";
-import useContextMenuActions from "../hooks/useContextMenuActions";
+import { useDisclosure, useHotkeys } from "@mantine/hooks";
 import ItemUpdateModal from "../components/modals/ItemUpdateModal";
-import { Item } from "../types";
 import { CurrentItemContext } from "../contexts/CurrentItemContext";
 
 export default function MainView() {
@@ -61,7 +59,6 @@ export default function MainView() {
     >
         <ItemUpdateModal item={currItem}/>
     </Modal>
-
 
     // TODO: move these to App for better coverage
     const handleClickEvent = () => {
