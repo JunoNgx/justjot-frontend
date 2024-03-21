@@ -1,4 +1,4 @@
-import { Box, Image } from "@mantine/core";
+import { Image } from "@mantine/core";
 import { ItemType } from "../types";
 import { IconNote, IconNotes, IconWorld } from "@tabler/icons-react";
 import { justJotTheme } from "../theme";
