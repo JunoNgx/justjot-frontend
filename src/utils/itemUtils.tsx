@@ -11,7 +11,7 @@ export const calculatePriText = (item: Item): string => {
 
 
 export const isValidHexColourCode = (str: string): boolean => {
-    const hexColourCodeRegEx = /(^#[0-9A-F]{6}$)/;
+    const hexColourCodeRegEx = /(^#[A-Fa-f0-9]{6}$)/;
     return hexColourCodeRegEx.test(str);
 }
 
