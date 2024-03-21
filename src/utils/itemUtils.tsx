@@ -9,6 +9,12 @@ export const calculatePriText = (item: Item): string => {
         : item.title;
 };
 
+
+export const isValidHexColourCode = (str: string): boolean => {
+    const hexColourCodeRegEx = /(^#[0-9A-F]{6}$)/;
+    return hexColourCodeRegEx.test(str);
+}
+
 // export const calculateDatetimeStr = (item: Item): string => {
 //     const datetimeDataToUse = item.updated || item.created;
 //     const dateTimeInstance = new Date(datetimeDataToUse);
