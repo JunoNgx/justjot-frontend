@@ -141,6 +141,7 @@ export default function ItemComponent({ item, index, openItemUpdate}: ItemCompon
                             type={item.type}
                             faviconUrl={item.faviconUrl}
                             shouldCopyOnClick={item.shouldCopyOnClick}
+                            firstSevenChars={item.content.substring(0, 7)}
                         />
                     </Center>
                     {item.title && <Text className="item__primary-text"
