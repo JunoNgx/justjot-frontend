@@ -6,11 +6,15 @@
     border: solid 1px transparent;
 
 
-    @media (hover: hover) {
-        &:hover {
-            border-color: var(--mantine-color-text);
-        }
+    &--is-active {
+        border-color: var(--mantine-color-text);
     }
+
+    // @media (hover: hover) {
+    //     &:hover {
+    //         border-color: var(--mantine-color-text);
+    //     }
+    // }
 
     &__left-side {
         min-width: 0;

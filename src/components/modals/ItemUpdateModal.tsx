@@ -12,9 +12,11 @@ import { useEffect, useRef, useState } from "react";
 
 const DEBOUNCED_TIME = 2000;
 
-export default function ItemUpdateModal({item}: {item: Item}) {
+export default function ItemUpdateModal({item}: {item: Item | undefined}) {
 
     useEffect(() => () => {
+        if (!item) return;
+
         if (hasChangedRef.current && !hasSavedRef.current) {
             updateItemTitleAndContent({
                 itemId: item.id,
@@ -25,8 +27,8 @@ export default function ItemUpdateModal({item}: {item: Item}) {
     }, []);
 
 
-    const [ titleVal, setTitleVal ] = useState(item.title);
-    const [ contentVal, setContentVal ] = useState(item.content);
+    const [ titleVal, setTitleVal ] = useState(item?.title);
+    const [ contentVal, setContentVal ] = useState(item?.content);
     const [ hasSaved, setHasSaved ] = useState(false);
     const [ hasChanged, setHasChanged ] = useState(false);
     const titleValRef = useRef(titleVal);
@@ -60,12 +62,12 @@ export default function ItemUpdateModal({item}: {item: Item}) {
         });
 
     const debouncedAutosaveItemTitle = useDebounceCallback(() => {
-        updateItemTitle({ itemId: item.id, title: titleVal });
+        updateItemTitle({ itemId: item?.id, title: titleVal });
         setHasSaved(true);
     }, DEBOUNCED_TIME);
 
     const debouncedAutosaveItemContent = useDebounceCallback(() => {
-        updateItemContent({ itemId: item.id, content: contentVal });
+        updateItemContent({ itemId: item?.id, content: contentVal });
         setHasSaved(true);
     }, DEBOUNCED_TIME);
 
@@ -87,7 +89,7 @@ export default function ItemUpdateModal({item}: {item: Item}) {
 
     const handleSave = () => {
         updateItemTitleAndContent({
-            itemId: item.id,
+            itemId: item?.id,
             title: titleValRef.current,
             content: contentValRef.current,
         });

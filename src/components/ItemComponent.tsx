@@ -14,33 +14,32 @@ import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 import { CollectionsContext } from "../contexts/CollectionsContext";
 import ItemComponentCreatedDate from "./ItemComponentCreatedDate";
 import ItemComponentIcon from "./ItemComponentIcon";
+import { CurrentItemContext } from "../contexts/CurrentItemContext";
 
 type ItemComponentOptions = {
     item: Item,
     index: number,
+    openItemUpdate: (item: Item) => void,
 }
 
-export default function ItemComponent({ item, index}: ItemComponentOptions) {
+export default function ItemComponent({ item, index, openItemUpdate}: ItemComponentOptions) {
 
     // const { currItem, setCurrItem } = useContext(CurrentItemContext)
     const { currCollection } = useContext(CurrentCollectionContext);
     const { collections } = useContext(CollectionsContext);
     const { fetchItems } = useContext(ItemsContext);
+    const { currItem, setCurrItem } = useContext(CurrentItemContext);
     const { showContextMenu } = useContextMenu();
 
-    const [isItemUpdateOpened, {
-        open: openItemUpdate,
-        close: closeItemUpdate }] = useDisclosure(false);
+    const {
+        copyItemContent,
+        openMoveItemModal,
+        deleteItem,
+        switchShouldOpenOnClick,
+        refetchTitleAndFavicon
+    } = useContextMenuActions();
 
-    const closeItemUpdateModal = () => {
-        closeItemUpdate();
-        /**
-         * It is possible to attempt to close modals that aren't even opened.
-         * This will block off the unintended attempt to update the item list.
-         */
-        if (!isItemUpdateOpened) return;
-        setTimeout(() => {fetchItems(currCollection)}, 500);
-    }
+
     // useEffect(() => {
     //     if (!currItem) {
     //         setIsFocused(false);
@@ -50,14 +49,7 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
     //     setIsFocused(currItem.id === item.id);
     // }, [currItem]);
 
-    const [isFocused, setIsFocused] = useState(false);
-    const {
-        copyItemContent,
-        openMoveItemModal,
-        deleteItem,
-        switchShouldOpenOnClick,
-        refetchTitleAndFavicon
-    } = useContextMenuActions();
+    // const [isFocused, setIsFocused] = useState(false);
 
     const contextMenuDefaultActionIcon = item.shouldCopyOnClick
         ? <IconCheckbox
@@ -86,7 +78,7 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
             />,
             iconRight: <Kbd>E</Kbd>,
             // onClick: () => {},
-            onClick: () => {openItemUpdate()},
+            onClick: () => {openItemUpdate(item)},
         }, {
             key: "move",
             icon: <IconFileSymlink
@@ -134,28 +126,20 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
         }
 
         item.shouldCopyOnClick
-            openItemUpdate();
+            openItemUpdate(item);
     };
 
-    // const isFocused = currItem?.id === item.id;
-
-    const itemUpdateModal = <Modal
-        centered
-        size={512}
-        opened={isItemUpdateOpened}
-        onClose={closeItemUpdateModal}
-        title="Edit item"
-    >
-        <ItemUpdateModal item={item}/>
-    </Modal>
+    const isFocused = currItem?.id === item.id;
 
     const props = {
         className: "item " + (isFocused ? "item--is-active" : ""),
         "data-is-focused": isFocused,
         "data-index": index,
         "p": "xs",
-        "onMouseEnter": () => { setIsFocused(true) },
-        "onMouseLeave": () => { setIsFocused(false) },
+        // "onMouseEnter": () => { setIsFocused(true) },
+        // "onMouseLeave": () => { setIsFocused(false) },
+        "onMouseEnter": () => { setCurrItem(item) },
+        // "onMouseLeave": () => { setCurrItem(undefined) },
         "onClick": handleDefaultAction,
         "onContextMenu": showContextMenu(
             contextMenuOptions,
@@ -198,6 +182,5 @@ export default function ItemComponent({ item, index}: ItemComponentOptions) {
                 </Group>
             </Group>
 
-            {itemUpdateModal}
         </Paper>
 };
