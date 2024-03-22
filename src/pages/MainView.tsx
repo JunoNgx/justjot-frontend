@@ -50,6 +50,12 @@ export default function MainView() {
         selectItem(selectedIndex.current -1);
     }
 
+    const performPrimaryAction = () => {
+        const itemListWrapper = document.querySelector("#displayed-list");
+        const currSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>("[data-is-selected]");
+        currSelectedItem?.click();
+    }
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -126,6 +132,7 @@ export default function MainView() {
             ref={mainInputRef}
             selectNextItem={selectNextItem}
             selectPrevItem={selectPrevItem}
+            performPrimaryAction={performPrimaryAction}
         />
         <Stack className="main-view__items-container"
             id="displayed-list"

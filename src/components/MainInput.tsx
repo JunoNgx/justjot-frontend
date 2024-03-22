@@ -10,6 +10,7 @@ import { getHotkeyHandler } from "@mantine/hooks";
 interface MainInputParams extends InputProps {
     selectNextItem: () => void,
     selectPrevItem: () => void,
+    performPrimaryAction: () => void,
 }
 
 const MainInput = forwardRef<HTMLInputElement, MainInputParams>((props, ref) => {
@@ -63,6 +64,7 @@ const MainInput = forwardRef<HTMLInputElement, MainInputParams>((props, ref) => 
             ["ArrowUp", props.selectPrevItem],
             ["ArrowDown", props.selectNextItem],
             ["Enter", handleEnter],
+            ["mod+Enter", props.performPrimaryAction]
         ])}
     />
 });
