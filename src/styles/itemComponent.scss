@@ -6,7 +6,7 @@
     border: solid 1px transparent;
 
 
-    &--is-active {
+    &[data-is-selected=true] {
         border-color: var(--mantine-color-text);
     }
 
