@@ -5,7 +5,7 @@ import useMoveItem from "../../hooks/useMoveItem";
 import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_DEFAULT } from "../../utils/constants";
-import CollectionHotkey from "../CollectionHotkey";
+import CollectionHotkey from "../misc/CollectionHotkey";
 import { ItemsContext } from "../../contexts/ItemsContext";
 import { CurrentCollectionContext } from "../../contexts/CurrentCollectionContext";
 

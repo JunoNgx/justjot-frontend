@@ -10,7 +10,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { CollectionsContext } from "../contexts/CollectionsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 import { useContext, useEffect } from "react";
-import CollectionHotkey from "./CollectionHotkey";
+import CollectionHotkey from "./misc/CollectionHotkey";
 import CollectionsSortModal from "./modals/CollectionsSortModal";
 
 export default function CollectionMenu() {
