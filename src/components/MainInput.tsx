@@ -6,7 +6,12 @@ import useCreateItem from "../hooks/useCreateItem";
 import { ItemsContext } from "../contexts/ItemsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 
-const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+interface MainInputFactory extends InputProps {
+    selectNextItem: () => void,
+    selectPrevItem: () => void,
+}
+
+const MainInput = forwardRef<HTMLInputElement, MainInputFactory>((props, ref) => {
     const { currCollection } = useContext(CurrentCollectionContext)
     const { fetchItems } = useContext(ItemsContext);
     const [inputVal, setInputVal] = useState("");
@@ -19,6 +24,14 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     });
 
     const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.code === "ArrowDown") {
+            props.selectNextItem();
+        }
+
+        if (e.code === "ArrowUp") {
+            props.selectPrevItem();
+        }
+
         if (e.code === "Enter") {
             createItem({ content: inputVal });
         }
