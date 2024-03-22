@@ -5,6 +5,7 @@ import { justJotTheme } from "../theme";
 import useCreateItem from "../hooks/useCreateItem";
 import { ItemsContext } from "../contexts/ItemsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
+import { getHotkeyHandler } from "@mantine/hooks";
 
 interface MainInputParams extends InputProps {
     selectNextItem: () => void,
@@ -23,20 +24,25 @@ const MainInput = forwardRef<HTMLInputElement, MainInputParams>((props, ref) => 
         }
     });
 
-    const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.code === "ArrowDown") {
-            props.selectNextItem();
-        }
+    // const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    //     if (e.code === "ArrowDown") {
+    //         props.selectNextItem();
+    //     }
 
-        if (e.code === "ArrowUp") {
-            props.selectPrevItem();
-        }
+    //     if (e.code === "ArrowUp") {
+    //         props.selectPrevItem();
+    //     }
 
-        if (e.code === "Enter") {
-            if (!inputVal) return;
-            createItem({ content: inputVal });
-        }
-    }
+    //     if (e.code === "Enter") {
+    //         if (!inputVal) return;
+    //         createItem({ content: inputVal });
+    //     }
+    // }
+
+    const handleEnter = () => {
+        if (!inputVal) return;
+        createItem({ content: inputVal });
+    };
 
     return <Input id="main-input" className="main-view__input"
         ref={ref}
@@ -53,7 +59,11 @@ const MainInput = forwardRef<HTMLInputElement, MainInputParams>((props, ref) => 
         type="text"
         value={inputVal}
         onChange={(event) => setInputVal(event.currentTarget.value)}
-        onKeyDown={handleKeyDown}
+        onKeyDown={getHotkeyHandler([
+            ["ArrowUp", props.selectPrevItem],
+            ["ArrowDown", props.selectNextItem],
+            ["Enter", handleEnter],
+        ])}
     />
 });
 
