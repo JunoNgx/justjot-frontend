@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Box, Group } from "@mantine/core";
-import { BackendClientContext } from "../../contexts/BackendClientContext";
+import { BackendClientContext } from "src/contexts/BackendClientContext";
 import HeaderThemeModeGroup from "./HeaderThemeModeGroup";
 import HeaderLoginRegisterBox from "./HeaderLoginRegisterBox";
 import HeaderUser from "./HeaderUser";

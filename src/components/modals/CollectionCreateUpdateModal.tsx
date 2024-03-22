@@ -1,12 +1,12 @@
 import { Button, Group, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import useCreateCollection from "../../hooks/useCreateCollection";
-import useUpdateCollection from "../../hooks/useUpdateCollection";
+import useCreateCollection from "src/hooks/useCreateCollection";
+import useUpdateCollection from "src/hooks/useUpdateCollection";
 import { useContext } from "react";
 import { modals } from "@mantine/modals";
-import { getCurrHighestCollectionSortOrder } from "../../utils/collectionUtils";
-import { CurrentCollectionContext } from "../../contexts/CurrentCollectionContext";
-import { CollectionsContext } from "../../contexts/CollectionsContext";
+import { getCurrHighestCollectionSortOrder } from "src/utils/collectionUtils";
+import { CurrentCollectionContext } from "src/contexts/CurrentCollectionContext";
+import { CollectionsContext } from "src/contexts/CollectionsContext";
 
 type CollectionCreateUpdateModalOptions = {
     isEditMode?: boolean,
