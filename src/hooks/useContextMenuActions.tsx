@@ -114,12 +114,11 @@ export default function useContextMenuActions() {
         pbClient.collection(DbTable.ITEMS)
             .update(item.id, {shouldCopyOnClick: newShouldCopyOnClickVal})
             .then((_record) => {
-                const newValStr = newShouldCopyOnClickVal
-                    ? "enabled"
-                    : "disabled";
                 fetchItems(currCollection);
                 notifications.show({
-                    message: "Copy as default item interaction: " + newValStr,
+                    message: newShouldCopyOnClickVal
+                        ? "Primary action set: copy"
+                        : "Primary action set: edit",
                     color: "none",
                     autoClose: AUTO_CLOSE_DEFAULT,
                 });
