@@ -10,7 +10,7 @@ import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 import { clamp, useDisclosure, useHotkeys } from "@mantine/hooks";
 import ItemUpdateModal from "src/components/modals/ItemUpdateModal";
 import { CurrentItemContext } from "src/contexts/CurrentItemContext";
-import { isElementInViewport } from "src/utils/misc";
+import { isElementInViewport } from "src/utils/miscUtils";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
