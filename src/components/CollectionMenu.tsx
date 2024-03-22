@@ -7,7 +7,7 @@ import { IconEdit, IconPlus, IconSelector, IconSortAscendingShapes, IconTrash } 
 
 import { justJotTheme } from "src/theme";
 import useCollectionMenuActions from "src/hooks/useCollectionMenuActions";
-import CollectionCreateUpdateModal from "./modals/CollectionCreateUpdateModal";
+import CollectionCreateUpdateModal from "src/components/modals/CollectionCreateUpdateModal";
 import useDeleteCollectionConfirmation from "src/hooks/useDeleteCollectionConfirmation";
 import { CollectionsContext } from "src/contexts/CollectionsContext";
 import { CurrentCollectionContext } from "src/contexts/CurrentCollectionContext";
