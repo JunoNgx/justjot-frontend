@@ -7,7 +7,7 @@ import ItemComponent from '../components/ItemComponent';
 import MainInput from "../components/MainInput";
 import { ItemsContext } from "../contexts/ItemsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
-import { useDisclosure, useHotkeys } from "@mantine/hooks";
+import { clamp, useDisclosure, useHotkeys } from "@mantine/hooks";
 import ItemUpdateModal from "../components/modals/ItemUpdateModal";
 import { CurrentItemContext } from "../contexts/CurrentItemContext";
 
@@ -16,6 +16,39 @@ export default function MainView() {
     const { items, fetchItems } = useContext(ItemsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
     const { currItem } = useContext(CurrentItemContext);
+
+    const selectedIndex = useRef(-1);
+
+    const selectItem = (index: number) => {
+        const itemListWrapper = document.querySelector(`#displayed-list`);
+        const itemList = itemListWrapper?.querySelectorAll<HTMLBaseElement>("[data-is-item]") ?? [];
+        const newSelectedIndex = clamp(index, 0, itemList.length - 1);
+
+        const oldSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>("[data-is-selected]");
+        oldSelectedItem?.removeAttribute("data-is-selected");
+
+        const newSelectedItem = itemList[newSelectedIndex];
+        newSelectedItem.scrollIntoView({block: "end"});
+        newSelectedItem.setAttribute("data-is-selected", "true");
+
+        selectedIndex.current = newSelectedIndex;
+    }
+
+    const deselectItem = () => {
+        const itemListWrapper = document.querySelector(`#displayed-list}`);
+        const currSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>("[data-is-selected]");
+        currSelectedItem?.removeAttribute("data-selected");
+
+        selectedIndex.current = -1;
+    }
+
+    const selectNextItem = () => {
+        selectItem(selectedIndex.current + 1);
+    }
+
+    const selectPrevItem = () => {
+        selectItem(selectedIndex.current -1);
+    }
 
     const navigate = useNavigate();
 
@@ -89,8 +122,13 @@ export default function MainView() {
             autoClose={1000}
         />
 
-        <MainInput ref={mainInputRef}/>
+        <MainInput
+            ref={mainInputRef}
+            selectNextItem={selectNextItem}
+            selectPrevItem={selectPrevItem}
+        />
         <Stack className="main-view__items-container"
+            id="displayed-list"
             gap="xs"
         >
             {items?.map((item, index) =>
