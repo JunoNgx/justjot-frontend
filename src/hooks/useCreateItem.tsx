@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
-import { BackendClientContext } from "../contexts/BackendClientContext";
-import { DbTable, RequestCallbackOptions, Item } from "../types";
+import { BackendClientContext } from "src/contexts/BackendClientContext";
+import { DbTable, RequestCallbackOptions, Item } from "src/types";
 import { notifications } from "@mantine/notifications";
-import { AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
-import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
+import { AUTO_CLOSE_ERROR_TOAST } from "src/utils/constants";
+import { CurrentCollectionContext } from "src/contexts/CurrentCollectionContext";
 
 type useCreateItemReturnType = [
     ({ content }: { content: string }) => Promise<void>,

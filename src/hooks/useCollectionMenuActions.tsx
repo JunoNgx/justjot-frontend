@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { CollectionsContext } from "../contexts/CollectionsContext";
-import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
+import { CollectionsContext } from "src/contexts/CollectionsContext";
+import { CurrentCollectionContext } from "src/contexts/CurrentCollectionContext";
 
 export default function useCollectionMenuActions() {
     const { collections,  } = useContext(CollectionsContext);

@@ -1,14 +1,14 @@
 import { DbTable, Item, ItemCollection } from "../types"
-import { BackendClientContext } from "../contexts/BackendClientContext";
+import { BackendClientContext } from "src/contexts/BackendClientContext";
 import { useContext } from "react";
 import { notifications } from "@mantine/notifications";
-import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
+import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "src/utils/constants";
 import { useClipboard } from "@mantine/hooks";
-import { CurrentItemContext } from "../contexts/CurrentItemContext";
-import { ItemsContext } from "../contexts/ItemsContext";
-import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
+import { CurrentItemContext } from "src/contexts/CurrentItemContext";
+import { ItemsContext } from "src/contexts/ItemsContext";
+import { CurrentCollectionContext } from "src/contexts/CurrentCollectionContext";
 import { modals } from "@mantine/modals";
-import ItemMoveModal from "../components/modals/ItemMoveModal";
+import ItemMoveModal from "src/components/modals/ItemMoveModal";
 
 type ItemMoveModalOptions = {
     item: Item | undefined,

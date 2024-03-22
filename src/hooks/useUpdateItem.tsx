@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { BackendClientContext } from "../contexts/BackendClientContext";
-import { DbTable, RequestCallbackOptions, Item } from "../types";
+import { BackendClientContext } from "src/contexts/BackendClientContext";
+import { DbTable, RequestCallbackOptions, Item } from "src/types";
 import { notifications } from "@mantine/notifications";
-import { AUTO_CLOSE_ERROR_TOAST } from "../utils/constants";
+import { AUTO_CLOSE_ERROR_TOAST } from "src/utils/constants";
 
 type UpdateItemTitleOptions = {
     itemId: string,
