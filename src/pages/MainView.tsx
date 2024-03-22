@@ -1,16 +1,16 @@
 import { useContext, useEffect, useRef } from "react";
 import { Modal, Stack } from '@mantine/core';
-import { BackendClientContext } from '../contexts/BackendClientContext';
+import { BackendClientContext } from 'src/contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
 import { Notifications } from '@mantine/notifications';
-import ItemComponent from '../components/itemComponent/ItemComponent';
+import ItemComponent from 'src/components/itemComponent/ItemComponent';
 import MainInput from "../components/MainInput";
-import { ItemsContext } from "../contexts/ItemsContext";
+import { ItemsContext } from "src/contexts/ItemsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 import { clamp, useDisclosure, useHotkeys } from "@mantine/hooks";
-import ItemUpdateModal from "../components/modals/ItemUpdateModal";
-import { CurrentItemContext } from "../contexts/CurrentItemContext";
-import { isElementInViewport } from "../utils/misc";
+import ItemUpdateModal from "src/components/modals/ItemUpdateModal";
+import { CurrentItemContext } from "src/contexts/CurrentItemContext";
+import { isElementInViewport } from "src/utils/misc";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
