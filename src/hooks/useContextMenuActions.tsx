@@ -26,6 +26,7 @@ export default function useContextMenuActions() {
         clipboard.copy(item.content);
         notifications.show({
             message: "Copied item content",
+            color: "none",
             autoClose: AUTO_CLOSE_DEFAULT,
         });
     }
@@ -119,6 +120,7 @@ export default function useContextMenuActions() {
                 fetchItems(currCollection);
                 notifications.show({
                     message: "Copy as default item interaction: " + newValStr,
+                    color: "none",
                     autoClose: AUTO_CLOSE_DEFAULT,
                 });
             })
