@@ -1,4 +1,4 @@
-import { Item, ItemType } from "../types";
+import { Item, ItemType } from "src/types";
 // import { isDatetimeMoreThanOneYearOld } from "./misc";
 // import { DateTime } from "luxon";
 
