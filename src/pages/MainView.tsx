@@ -10,6 +10,7 @@ import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 import { clamp, useDisclosure, useHotkeys } from "@mantine/hooks";
 import ItemUpdateModal from "../components/modals/ItemUpdateModal";
 import { CurrentItemContext } from "../contexts/CurrentItemContext";
+import { isElementInViewport } from "../utils/misc";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -28,7 +29,9 @@ export default function MainView() {
         oldSelectedItem?.removeAttribute("data-is-selected");
 
         const newSelectedItem = itemList[newSelectedIndex];
-        newSelectedItem.scrollIntoView({block: "end"});
+        if (!isElementInViewport(newSelectedItem)) {
+            newSelectedItem.scrollIntoView({block: "end"});
+        }
         newSelectedItem.setAttribute("data-is-selected", "true");
 
         selectedIndex.current = newSelectedIndex;
