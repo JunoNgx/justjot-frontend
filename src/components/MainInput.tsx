@@ -33,6 +33,7 @@ const MainInput = forwardRef<HTMLInputElement, MainInputParams>((props, ref) => 
         }
 
         if (e.code === "Enter") {
+            if (!inputVal) return;
             createItem({ content: inputVal });
         }
     }
