@@ -20,7 +20,7 @@ type ItemComponentOptions = {
 
 export default function ItemComponent({ item, index, openItemUpdate}: ItemComponentOptions) {
 
-    const { currItem, setCurrItem } = useContext(CurrentItemContext)
+    const { currItem } = useContext(CurrentItemContext)
     const { collections } = useContext(CollectionsContext);
     const { showContextMenu } = useContextMenu();
 
@@ -113,12 +113,13 @@ export default function ItemComponent({ item, index, openItemUpdate}: ItemCompon
 
     const props = {
         className: "item " + (isFocused ? "item--is-active" : ""),
-        "data-is-focused": isFocused,
+        "data-is-item": true,
+        // "data-is-focused": isFocused,
         "data-index": index,
         "p": "xs",
         // "onMouseEnter": () => { setIsFocused(true) },
         // "onMouseLeave": () => { setIsFocused(false) },
-        "onMouseEnter": () => { setCurrItem(item) },
+        // "onMouseEnter": () => { setCurrItem(item) },
         // "onMouseLeave": () => { setCurrItem(undefined) },
         "onClick": handleDefaultAction,
         "onContextMenu": showContextMenu(
