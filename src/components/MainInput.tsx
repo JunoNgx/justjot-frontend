@@ -6,12 +6,12 @@ import useCreateItem from "../hooks/useCreateItem";
 import { ItemsContext } from "../contexts/ItemsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
 
-interface MainInputFactory extends InputProps {
+interface MainInputParams extends InputProps {
     selectNextItem: () => void,
     selectPrevItem: () => void,
 }
 
-const MainInput = forwardRef<HTMLInputElement, MainInputFactory>((props, ref) => {
+const MainInput = forwardRef<HTMLInputElement, MainInputParams>((props, ref) => {
     const { currCollection } = useContext(CurrentCollectionContext)
     const { fetchItems } = useContext(ItemsContext);
     const [inputVal, setInputVal] = useState("");
