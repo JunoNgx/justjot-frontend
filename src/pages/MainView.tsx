@@ -3,7 +3,7 @@ import { Modal, Stack } from '@mantine/core';
 import { BackendClientContext } from '../contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
 import { Notifications } from '@mantine/notifications';
-import ItemComponent from '../components/ItemComponent';
+import ItemComponent from '../components/itemComponent/ItemComponent';
 import MainInput from "../components/MainInput";
 import { ItemsContext } from "../contexts/ItemsContext";
 import { CurrentCollectionContext } from "../contexts/CurrentCollectionContext";
