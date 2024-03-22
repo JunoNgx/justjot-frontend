@@ -11,7 +11,7 @@ import CurrentCollectionContextProvider from "./contexts/CurrentCollectionContex
 import ItemsContextProvider from "./contexts/ItemsContext";
 import CurrentItemContextProvider from "./contexts/CurrentItemContext";
 
-import Header from "./components/Header";
+import Header from "./components/header/Header";
 import LandingPage from "./pages/LandingPage";
 import Help from "./pages/Help";
 import MainView from "./pages/MainView";

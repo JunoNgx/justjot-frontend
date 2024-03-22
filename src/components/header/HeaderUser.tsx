@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { Group, Menu, Text, UnstyledButton } from "@mantine/core";
-import { BackendClientContext } from "../contexts/BackendClientContext";
+import { BackendClientContext } from "../../contexts/BackendClientContext";
 import { useNavigate } from "react-router-dom";
 import { IconChevronDown, IconLogout, IconSettings } from "@tabler/icons-react";
-import { justJotTheme } from "../theme";
+import { justJotTheme } from "../../theme";
 
 export default function HeaderUser() {
 

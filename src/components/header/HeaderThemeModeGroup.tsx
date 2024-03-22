@@ -1,10 +1,10 @@
 import { useContext } from "react";
 
 import { ActionIcon, Group, useComputedColorScheme } from "@mantine/core";
-import { ThemeModeContext } from "../contexts/ThemeModeContext";
-import { ThemeMode, ComputedThemeMode } from "../types";
+import { ThemeModeContext } from "../../contexts/ThemeModeContext";
+import { ThemeMode, ComputedThemeMode } from "../../types";
 import { IconMoon, IconSettingsCog, IconSun } from "@tabler/icons-react";
-import { justJotTheme } from "../theme";
+import { justJotTheme } from "../../theme";
 
 
 export default function HeaderThemeModeGroup() {
