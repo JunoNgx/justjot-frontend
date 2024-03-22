@@ -137,6 +137,8 @@ export default function MainView() {
                     item={item}
                     index={index}
                     openItemUpdate={openItemUpdateModal}
+                    selectItem={selectItem}
+                    deselectItem={deselectItem}
                 />
             )}
         </Stack>

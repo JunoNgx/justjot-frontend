@@ -39,7 +39,7 @@ const MainInput = forwardRef<HTMLInputElement, MainInputParams>((props, ref) => 
 
     return <Input id="main-input" className="main-view__input"
         ref={ref}
-        {...props}
+        // {...props}
         size="lg"
         leftSection={<IconCircleTriangle
             size={32}

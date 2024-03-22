@@ -16,9 +16,13 @@ type ItemComponentOptions = {
     item: Item,
     index: number,
     openItemUpdate: (item: Item) => void,
+    selectItem: (index: number) => void,
+    deselectItem: () => void,
 }
 
-export default function ItemComponent({ item, index, openItemUpdate}: ItemComponentOptions) {
+export default function ItemComponent(
+    { item, index, openItemUpdate, selectItem, deselectItem }: ItemComponentOptions
+) {
 
     const { currItem } = useContext(CurrentItemContext)
     const { collections } = useContext(CollectionsContext);
@@ -117,6 +121,8 @@ export default function ItemComponent({ item, index, openItemUpdate}: ItemCompon
         // "data-is-focused": isFocused,
         "data-index": index,
         "p": "xs",
+        "onMouseEnter": () => { selectItem(index) },
+        "onMouseLeave": () => { deselectItem() },
         // "onMouseEnter": () => { setIsFocused(true) },
         // "onMouseLeave": () => { setIsFocused(false) },
         // "onMouseEnter": () => { setCurrItem(item) },
