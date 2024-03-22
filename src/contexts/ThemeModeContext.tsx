@@ -1,6 +1,6 @@
 import { createContext, useState, ReactNode, useEffect } from "react";
 
-import { ThemeMode } from "../types";
+import { ThemeMode } from "src/types";
 import { useMantineColorScheme } from "@mantine/core";
 
 type ThemeModeContextType = {

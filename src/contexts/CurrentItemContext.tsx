@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState } from 'react';
-import { Item } from '../types';
+import { Item } from 'src/types';
 
 type CurrentItemContextType = {
     currItem: Item | undefined,

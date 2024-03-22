@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
-import { ItemCollection } from '../types';
-import { CollectionsContext } from './CollectionsContext';
+import { ItemCollection } from 'src/types';
+import { CollectionsContext } from 'src/contexts/CollectionsContext';
 
 type CurrentCollectionContextType = {
     currCollection: ItemCollection | undefined,
