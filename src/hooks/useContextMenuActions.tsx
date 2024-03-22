@@ -1,4 +1,4 @@
-import { DbTable, Item, ItemCollection } from "../types"
+import { DbTable, Item, ItemCollection } from "src/types"
 import { BackendClientContext } from "src/contexts/BackendClientContext";
 import { useContext } from "react";
 import { notifications } from "@mantine/notifications";

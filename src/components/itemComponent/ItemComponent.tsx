@@ -8,8 +8,8 @@ import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "src/theme";
 import useContextMenuActions from "src/hooks/useContextMenuActions";
 import { CollectionsContext } from "src/contexts/CollectionsContext";
-import ItemComponentCreatedDate from "./ItemComponentCreatedDate";
-import ItemComponentIcon from "./ItemComponentIcon";
+import ItemComponentCreatedDate from "src/components/itemComponent/ItemComponentCreatedDate";
+import ItemComponentIcon from "src/components/itemComponent/ItemComponentIcon";
 import { CurrentItemContext } from "src/contexts/CurrentItemContext";
 
 type ItemComponentOptions = {
