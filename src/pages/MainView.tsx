@@ -37,7 +37,7 @@ export default function MainView() {
     const deselectItem = () => {
         const itemListWrapper = document.querySelector("#displayed-list");
         const currSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>("[data-is-selected]");
-        currSelectedItem?.removeAttribute("data-selected");
+        currSelectedItem?.removeAttribute("data-is-selected");
 
         selectedIndex.current = -1;
     }
