@@ -8,7 +8,7 @@ import MainInput from "@/components/MainInput";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { useDisclosure, useHotkeys } from "@mantine/hooks";
-import ItemUpdateModal from "@/components/modals/ItemUpdateModal";
+// import ItemUpdateModal from "@/components/modals/ItemUpdateModal";
 import { CurrentItemContext } from "@/contexts/CurrentItemContext";
 import { MainViewContext } from "@/contexts/MainViewContext";
 
@@ -33,34 +33,34 @@ export default function MainView() {
         fetchItems(currCollection);
     }, [currCollection]);
 
-    const [isItemUpdateOpened, {
-        open: openItemUpdate,
-        close: closeItemUpdate }] = useDisclosure(false);
+    // const [isItemUpdateOpened, {
+    //     open: openItemUpdate,
+    //     close: closeItemUpdate }] = useDisclosure(false);
 
-    const closeItemUpdateModal = () => {
-        closeItemUpdate();
-        /**
-         * It is possible to attempt to close modals that aren't even opened.
-         * This will block off the unintended attempt to update the item list.
-         */
-        if (!isItemUpdateOpened) return;
-        setTimeout(() => {fetchItems(currCollection)}, 500);
-    }
+    // const closeItemUpdateModal = () => {
+    //     closeItemUpdate();
+    //     /**
+    //      * It is possible to attempt to close modals that aren't even opened.
+    //      * This will block off the unintended attempt to update the item list.
+    //      */
+    //     if (!isItemUpdateOpened) return;
+    //     setTimeout(() => {fetchItems(currCollection)}, 500);
+    // }
 
-    const openItemUpdateModal = () => {
-        if (!currItem) return;
-        openItemUpdate();
-    }
+    // const openItemUpdateModal = () => {
+    //     if (!currItem) return;
+    //     openItemUpdate();
+    // }
 
-    const itemUpdateModal = <Modal
-        centered
-        size={512}
-        opened={isItemUpdateOpened}
-        onClose={closeItemUpdateModal}
-        title="Edit item"
-    >
-        <ItemUpdateModal item={currItem!}/>
-    </Modal>
+    // const itemUpdateModal = <Modal
+    //     centered
+    //     size={512}
+    //     opened={isItemUpdateOpened}
+    //     onClose={closeItemUpdateModal}
+    //     title="Edit item"
+    // >
+    //     <ItemUpdateModal item={currItem!}/>
+    // </Modal>
 
     // TODO: move these to App for better coverage
     const handleClickEvent = () => {
@@ -76,7 +76,7 @@ export default function MainView() {
     ]);
 
     return <Box className="main-view-wrapper">
-        {itemUpdateModal}
+        {/* {itemUpdateModal} */}
 
         <Stack className="main-view"
             gap="xl"
@@ -102,7 +102,6 @@ export default function MainView() {
                         key={item.id}
                         item={item}
                         index={index}
-                        openItemUpdate={openItemUpdateModal}
                     />
                 )}
             </Stack>

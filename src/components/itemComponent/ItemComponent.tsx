@@ -16,13 +16,13 @@ import { MainViewContext } from "@/contexts/MainViewContext";
 type ItemComponentOptions = {
     item: Item,
     index: number,
-    openItemUpdate: (item: Item) => void,
+    // openItemUpdate: (item: Item) => void,
     // selectItem: (index: number) => void,
     // deselectItem: () => void,
 }
 
 export default function ItemComponent(
-    { item, index, openItemUpdate }: ItemComponentOptions
+    { item, index }: ItemComponentOptions
 ) {
 
     const { currItem } = useContext(CurrentItemContext)
@@ -35,6 +35,7 @@ export default function ItemComponent(
 
     const {
         copyItemContent,
+        openUpdateItemModal,
         openMoveItemModal,
         deleteItem,
         switchShouldOpenOnClick,
@@ -67,7 +68,7 @@ export default function ItemComponent(
                 stroke={justJotTheme.other.iconStrokeWidth}
             />,
             iconRight: <Kbd>E</Kbd>,
-            onClick: () => {openItemUpdate(item)},
+            onClick: () => {openUpdateItemModal(item)},
         }, {
             key: "move",
             icon: <IconFileSymlink
