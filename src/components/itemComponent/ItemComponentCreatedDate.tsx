@@ -6,7 +6,7 @@ export default function ItemComponentCreatedDate(
     { createdDatetime: string, className: string}
 ) {
 
-    const itemDatetime = DateTime.fromJSDate(new Date(createdDatetime));
+    const itemDatetime = DateTime.fromSQL(createdDatetime);
     const fullDateTime = itemDatetime.toLocaleString(DateTime.DATETIME_FULL);
     const isOlderThanOneDay = itemDatetime <= DateTime.now().minus({days: 1});
     const isOlderThanOneYear = itemDatetime <= DateTime.now().minus({year: 1});
