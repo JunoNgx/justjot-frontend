@@ -24,7 +24,6 @@ export default function useMoveItem(
     const moveItemToCollection = async ({ itemId, collectionId }: MoveItemOptions) => {
         setIsLoading(true);
         pbClient
-            // .cancelAllRequests()
             .collection(DbTable.ITEMS)
             .update(itemId, { collection: collectionId })
             .then((_record: Item) => {

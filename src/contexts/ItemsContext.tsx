@@ -15,9 +15,7 @@ export const ItemsContext = createContext<ItemsContextType>({
 });
 
 export default function ItemsContextProvider({ children }: { children: ReactNode }) {
-    // const { isLoggedIn } = useContext(BackendClientContext);
     const { pbClient } = useContext(BackendClientContext);
-    // const {  } = useContext(CurrentCollectionContext);
     const [ items, setItems ] = useState<Item[]>();
 
     const fetchItems = useCallback(async (currCollection: ItemCollection | undefined) => {
@@ -38,9 +36,6 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
             })
     }, []);
 
-    // const fetchItems = () => {
-    //     console.log("yo");
-    // }
 
     return <ItemsContext.Provider value=
         {{
