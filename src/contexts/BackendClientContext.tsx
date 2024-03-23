@@ -49,6 +49,7 @@ export const BackendClientContext = createContext<BackendClientType>({
 
 export default function BackendClientContextProvider({ children }: { children: ReactNode }) {
     const pbClient = new PocketBase(import.meta.env.VITE_BACKEND_URL);
+    // pbClient.autoCancellation(false);
     const [isLoggedIn, setIsLoggedIn] = useState(pbClient.authStore.isValid);
     const logout = useCallback(() => {
         pbClient.authStore.clear();
