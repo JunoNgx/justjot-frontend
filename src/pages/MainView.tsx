@@ -18,6 +18,11 @@ export default function MainView() {
 
     const navigate = useNavigate();
 
+    const mainInputRef = useRef<HTMLInputElement>(null);
+    useHotkeys([
+        ["mod+F", () => focusOnMainInput(mainInputRef)],
+    ]);
+
     useEffect(() => {
         if (!isLoggedIn) {
             navigate(`/login`, { replace: true });
@@ -44,11 +49,6 @@ export default function MainView() {
             lastRoutineUpdateTimestamp.current = Date.now();
         }
     }
-
-    const mainInputRef = useRef<HTMLInputElement>(null);
-    useHotkeys([
-        ["mod+F", () => focusOnMainInput(mainInputRef)],
-    ]);
 
     return <Box className="main-view-wrapper">
         {/* For non-item components */}
