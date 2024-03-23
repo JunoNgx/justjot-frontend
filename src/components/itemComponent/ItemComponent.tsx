@@ -93,14 +93,14 @@ export default function ItemComponent(
                 stroke={justJotTheme.other.iconStrokeWidth}
             />,
             iconRight: <>
-                <Kbd>Ctrl/⌘</Kbd><Kbd>⇧</Kbd><Kbd>P</Kbd>
+                <Kbd>Ctrl/⌘</Kbd><Kbd>⇧</Kbd><Kbd>Q</Kbd>
             </>,
             onClick: () => {refetchTitleAndFavicon(item);}
         }, {
             key: "divider",
         }, {
             key: "switchPrimaryAction",
-            title: "Copy as Primary Action",
+            title: "Copy as PriAct",
             icon: contextMenuDefaultActionIcon,
             iconRight: <>
                 <Kbd>Ctrl/⌘</Kbd><Kbd>⇧</Kbd><Kbd>O</Kbd>
