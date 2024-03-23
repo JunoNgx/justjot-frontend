@@ -109,6 +109,12 @@ export default function useItemContextMenuActions() {
             return;
         }
     
+        notifications.show({
+            message: "Requested fetch metadata",
+            color: "none",
+            autoClose: AUTO_CLOSE_DEFAULT,
+            withCloseButton: true,
+        });
         await fetch(`${import.meta.env.VITE_BACKEND_URL}refetch/${user!.id}/${item!.id}`, {
             method: "PATCH",
             headers: {
