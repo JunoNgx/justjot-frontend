@@ -9,12 +9,6 @@ import { ItemsContext } from "@/contexts/ItemsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { MainViewContext } from "@/contexts/MainViewContext";
 
-// interface MainInputParams extends InputProps {
-//     selectNextItem: () => void,
-//     selectPrevItem: () => void,
-//     performPrimaryAction: () => void,
-// }
-
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { currCollection } = useContext(CurrentCollectionContext)
     const { fetchItems } = useContext(ItemsContext);
@@ -33,21 +27,6 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             fetchItems(currCollection);
         }
     });
-
-    // const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    //     if (e.code === "ArrowDown") {
-    //         props.selectNextItem();
-    //     }
-
-    //     if (e.code === "ArrowUp") {
-    //         props.selectPrevItem();
-    //     }
-
-    //     if (e.code === "Enter") {
-    //         if (!inputVal) return;
-    //         createItem({ content: inputVal });
-    //     }
-    // }
 
     const handleEnter = () => {
         if (!inputVal) return;
