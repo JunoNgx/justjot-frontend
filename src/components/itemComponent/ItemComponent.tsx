@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 import { Item, ItemType } from "@/types";
-import { Box, Center, Group, Kbd, Paper, Text } from "@mantine/core";
+import { Box, Center, Group, Kbd, Menu, Paper, Text } from "@mantine/core";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink,  IconSquare, IconTrash } from "@tabler/icons-react";
 import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "@/theme";
@@ -19,6 +19,7 @@ type ItemComponentOptions = {
     openItemUpdate: (item: Item) => void,
     // selectItem: (index: number) => void,
     // deselectItem: () => void,
+    // handleContextMenu: React.MouseEventHandler<HTMLDivElement>,
 }
 
 export default function ItemComponent(
@@ -29,7 +30,8 @@ export default function ItemComponent(
     const { collections } = useContext(CollectionsContext);
     const {
         selectItem,
-        deselectItem
+        deselectItem,
+        handleContextMenu,
     } = useContext(MainViewContext);
     const { showContextMenu } = useContextMenu();
 
@@ -117,12 +119,6 @@ export default function ItemComponent(
         openItemUpdate(item);
     };
 
-    const handleContextMenu: React.MouseEventHandler<HTMLDivElement> =
-        (event: React.MouseEvent<HTMLDivElement, MouseEvent>
-    ) => {
-        console.log("handleContextMenu")
-        event.preventDefault();
-    };
 
     const isFocused = currItem?.id === item.id;
 

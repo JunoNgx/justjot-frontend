@@ -1,14 +1,29 @@
 import { isElementInViewport } from "@/utils/miscUtils";
 import { clamp } from "@mantine/hooks";
-import { createContext, useRef } from "react";
+import { createContext, useRef, useState } from "react";
 
-export const MainViewContext = createContext({
+type MainViewContextType = {
+    focusOnMainInput: (mainInputRef: React.RefObject<HTMLInputElement>) => void,
+    selectItem: (index: number) => void,
+    deselectItem: () => void,
+    selectNextItem: () => void,
+    selectPrevItem: () => void,
+    execPrimaryAction: () => void,
+    isContextMenuOpened: boolean,
+    setIsContextMenuOpened: React.Dispatch<React.SetStateAction<boolean>>,
+    handleContextMenu: React.MouseEventHandler<HTMLDivElement>,
+};
+
+export const MainViewContext = createContext<MainViewContextType>({
     focusOnMainInput: (_mainInputRef: React.RefObject<HTMLInputElement>) => {},
     selectItem: (_index: number) => {},
     deselectItem: () => {},
     selectNextItem: () => {},
     selectPrevItem: () => {},
     execPrimaryAction: () => {},
+    isContextMenuOpened: false,
+    setIsContextMenuOpened: () => {},
+    handleContextMenu: () => {},
 })
 
 export default function MainViewContextProvider(
@@ -59,6 +74,16 @@ export default function MainViewContextProvider(
         currSelectedItem?.click();
     }
 
+    const [ isContextMenuOpened, setIsContextMenuOpened ] = useState(false);
+
+    const handleContextMenu: React.MouseEventHandler<HTMLDivElement> =
+        (event: React.MouseEvent<HTMLDivElement, MouseEvent>
+    ) => {
+        console.log("handleContextMenu")
+        event.preventDefault();
+        setIsContextMenuOpened(true);
+    };
+
     return <MainViewContext.Provider value={{
         focusOnMainInput,
         selectItem,
@@ -66,6 +91,9 @@ export default function MainViewContextProvider(
         selectNextItem,
         selectPrevItem,
         execPrimaryAction,
+        isContextMenuOpened,
+        setIsContextMenuOpened,
+        handleContextMenu,
     }}>
         {children}
     </MainViewContext.Provider>

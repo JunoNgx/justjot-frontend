@@ -1,5 +1,5 @@
-import { useContext, useEffect, useRef } from "react";
-import { Modal, Stack } from '@mantine/core';
+import { useContext, useEffect, useRef, useState } from "react";
+import { Menu, Modal, Stack } from '@mantine/core';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
 import { Notifications } from '@mantine/notifications';
@@ -105,5 +105,18 @@ export default function MainView() {
         </Stack>
 
         {itemUpdateModal}
+        {/* <Menu opened={isContextMenuOpened} onChange={setIsContextMenuOpened}>
+            <Menu.Dropdown>
+                <Menu.Item>
+                    fkjdsklfdskfkdlsfds
+                </Menu.Item>
+                <Menu.Item>
+                    fkjdsklfdskfkdlsfds
+                </Menu.Item>
+                <Menu.Item>
+                    fkjdsklfdskfkdlsfds
+                </Menu.Item>
+            </Menu.Dropdown>
+        </Menu> */}
     </Stack>
 }
