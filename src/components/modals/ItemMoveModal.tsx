@@ -1,8 +1,9 @@
-import { Box, Button, Group, Loader, Stack } from "@mantine/core";
-import { Item, ItemCollection } from "@/types";
 import { useContext } from "react";
-import useMoveItem from "@/hooks/apiCalls/useMoveItem";
+import { Box, Button, Group, Loader, Stack } from "@mantine/core";
 import { modals } from "@mantine/modals";
+import { Item, ItemCollection } from "@/types";
+
+import useMoveItem from "@/hooks/apiCalls/useMoveItem";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_DEFAULT } from "@/utils/constants";
 import CollectionHotkey from "@/components//misc/CollectionHotkey";
@@ -38,18 +39,14 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
         {collectionList?.map((collection, index) => <Group
             key={index}
             justify="center"
-            // pl="xl" pr="xl"
         >
             <Button className="item-move-modal__move-btn"
                 w="70%"
-                // variant="outline"
-                // onClick={() => moveItem(item?.id, collection.id)}
                 onClick={() => moveItemToCollection({
                     itemId: item.id, collectionId: collection.id})
                 }
                 disabled={isLoading || item?.collection === collection.id}
             >
-                {/* {item?.collection === collection.id && <Text>[Current]</Text>} */}
                 {collection.name}    
             </Button>
 
