@@ -79,6 +79,7 @@ export default function ItemComponent(
         }, {
             key: "refetch",
             title: "Refetch metadata",
+            hidden: item.type !== ItemType.LINK,
             icon: <IconDownload
                 size={justJotTheme.other.iconSizeMenu}
                 stroke={justJotTheme.other.iconStrokeWidth}
