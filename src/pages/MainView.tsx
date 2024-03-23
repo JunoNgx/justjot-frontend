@@ -9,18 +9,31 @@ import { ItemsContext } from "@/contexts/ItemsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { useHotkeys } from "@mantine/hooks";
 import { MainViewContext } from "@/contexts/MainViewContext";
+import useCollectionMenuActions from "@/hooks/useCollectionMenuActions";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
     const { items, fetchItems } = useContext(ItemsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
     const { focusOnMainInput } = useContext(MainViewContext);
+    const { switchToCollectionByNumricKey } = useCollectionMenuActions();
+
 
     const navigate = useNavigate();
 
     const mainInputRef = useRef<HTMLInputElement>(null);
     useHotkeys([
         ["mod+F", () => focusOnMainInput(mainInputRef)],
+        ["1", () => switchToCollectionByNumricKey(1)],
+        ["2", () => switchToCollectionByNumricKey(2)],
+        ["3", () => switchToCollectionByNumricKey(3)],
+        ["4", () => switchToCollectionByNumricKey(4)],
+        ["5", () => switchToCollectionByNumricKey(5)],
+        ["6", () => switchToCollectionByNumricKey(6)],
+        ["7", () => switchToCollectionByNumricKey(7)],
+        ["8", () => switchToCollectionByNumricKey(8)],
+        ["9", () => switchToCollectionByNumricKey(9)],
+        ["0", () => switchToCollectionByNumricKey(0)],
     ]);
 
     useEffect(() => {
