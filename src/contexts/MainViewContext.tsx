@@ -2,7 +2,20 @@ import { isElementInViewport } from "@/utils/miscUtils";
 import { clamp } from "@mantine/hooks";
 import { createContext, useRef } from "react";
 
-export const MainViewContext = createContext({
+interface MainViewContextType {
+    // selectedIndex: React.MutableRefObject<number>,
+    focusOnMainInput: (_mainInputRef: React.RefObject<HTMLInputElement>) => void,
+    blurMainInput: () => void,
+    selectItem: (_index: number) => void,
+    deselectItem: () => void,
+    selectNextItem: () => void,
+    selectPrevItem: () => void,
+    execPrimaryAction: () => void,
+    scrollToTop: () => void,
+};
+
+export const MainViewContext = createContext<MainViewContextType>({
+    // selectedIndex: ,
     focusOnMainInput: (_mainInputRef: React.RefObject<HTMLInputElement>) => {},
     blurMainInput: () => {},
     selectItem: (_index: number) => {},
@@ -11,7 +24,7 @@ export const MainViewContext = createContext({
     selectPrevItem: () => {},
     execPrimaryAction: () => {},
     scrollToTop: () => {},
-})
+});
 
 export default function MainViewContextProvider(
     {children}: {children: React.ReactNode}
