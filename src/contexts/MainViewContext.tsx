@@ -4,6 +4,7 @@ import { createContext, useRef } from "react";
 
 export const MainViewContext = createContext({
     focusOnMainInput: (_mainInputRef: React.RefObject<HTMLInputElement>) => {},
+    blurMainInput: () => {},
     selectItem: (_index: number) => {},
     deselectItem: () => {},
     selectNextItem: () => {},
@@ -19,6 +20,11 @@ export default function MainViewContextProvider(
     const focusOnMainInput = (mainInputRef: React.RefObject<HTMLInputElement>) => {
         mainInputRef.current?.focus();
     }
+
+    const blurMainInput = () => {
+        const mainInputEl = document.querySelector<HTMLInputElement>("#main-input");
+        mainInputEl?.blur();
+    };
 
     const selectItem = (index: number) => {
         const itemListWrapper = document.querySelector(`#displayed-list`);
@@ -61,6 +67,7 @@ export default function MainViewContextProvider(
 
     return <MainViewContext.Provider value={{
         focusOnMainInput,
+        blurMainInput,
         selectItem,
         deselectItem,
         selectNextItem,
