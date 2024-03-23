@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
-import { Modal, Stack } from '@mantine/core';
+import { Box, Modal, Stack } from '@mantine/core';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
 import { Notifications } from '@mantine/notifications';
@@ -75,35 +75,37 @@ export default function MainView() {
         ["mod+F", () => focusOnMainInput(mainInputRef)],
     ]);
 
-    return <Stack className="main-view"
-        gap="xl"
-        p="sm"
-        onClick={() => {handleClickEvent()}}
-        onFocus={(e) => handleFocusEvent(e)}
-    >
-        <Notifications className="notifications-container"
-            limit={5}
-            position="bottom-center"
-            autoClose={1000}
-        />
-
-        <MainInput
-            ref={mainInputRef}
-        />
-        <Stack className="main-view__items-container"
-            id="displayed-list"
-            gap="xs"
-        >
-            {items?.map((item, index) =>
-                <ItemComponent
-                    key={item.id}
-                    item={item}
-                    index={index}
-                    openItemUpdate={openItemUpdateModal}
-                />
-            )}
-        </Stack>
-
+    return <Box className="main-view-wrapper">
         {itemUpdateModal}
-    </Stack>
+
+        <Stack className="main-view"
+            gap="xl"
+            p="sm"
+            onClick={() => {handleClickEvent()}}
+            onFocus={(e) => handleFocusEvent(e)}
+        >
+            <Notifications className="notifications-container"
+                limit={5}
+                position="bottom-center"
+                autoClose={1000}
+            />
+
+            <MainInput
+                ref={mainInputRef}
+            />
+            <Stack className="main-view__items-container"
+                id="displayed-list"
+                gap="xs"
+            >
+                {items?.map((item, index) =>
+                    <ItemComponent
+                        key={item.id}
+                        item={item}
+                        index={index}
+                        openItemUpdate={openItemUpdateModal}
+                    />
+                )}
+            </Stack>
+        </Stack>
+    </Box>
 }
