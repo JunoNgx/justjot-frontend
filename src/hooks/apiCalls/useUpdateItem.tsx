@@ -40,13 +40,16 @@ export default function useUpdateItem(
             })
             .catch(err => {
                 errorCallback?.();
-                console.error(err);
-                notifications.show({
-                    message: "Error autosaving title",
-                    color: "red",
-                    autoClose: AUTO_CLOSE_ERROR_TOAST,
-                    withCloseButton: true,
-                });
+                if (!err.isAbort) {
+                    console.error(err);
+                    console.warn("Non cancellation error")
+                    notifications.show({
+                        message: "Error autosaving title",
+                        color: "red",
+                        autoClose: AUTO_CLOSE_ERROR_TOAST,
+                        withCloseButton: true,
+                    });
+                }
             });
     };
 
@@ -58,13 +61,16 @@ export default function useUpdateItem(
             })
             .catch(err => {
                 errorCallback?.();
-                console.error(err);
-                notifications.show({
-                    message: "Error autosaving content",
-                    color: "red",
-                    autoClose: AUTO_CLOSE_ERROR_TOAST,
-                    withCloseButton: true,
-                });
+                if (!err.isAbort) {
+                    console.error(err);
+                    console.warn("Non cancellation error")
+                    notifications.show({
+                        message: "Error autosaving content",
+                        color: "red",
+                        autoClose: AUTO_CLOSE_ERROR_TOAST,
+                        withCloseButton: true,
+                    });
+                }
             });
     };
 
@@ -78,13 +84,16 @@ export default function useUpdateItem(
             })
             .catch(err => {
                 errorCallback?.();
-                console.error(err);
-                notifications.show({
-                    message: "Error autosaving content",
-                    color: "red",
-                    autoClose: AUTO_CLOSE_ERROR_TOAST,
-                    withCloseButton: true,
-                });
+                if (!err.isAbort) {
+                    console.warn("Non cancellation error")
+                    console.error(err);
+                    notifications.show({
+                        message: "Error autosaving upon exiting item edit modal",
+                        color: "red",
+                        autoClose: AUTO_CLOSE_ERROR_TOAST,
+                        withCloseButton: true,
+                    });
+                }
             });
     };
 
