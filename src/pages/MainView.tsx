@@ -7,57 +7,17 @@ import ItemComponent from '@/components/itemComponent/ItemComponent';
 import MainInput from "@/components/MainInput";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
-import { clamp, useDisclosure, useHotkeys } from "@mantine/hooks";
+import { useDisclosure, useHotkeys } from "@mantine/hooks";
 import ItemUpdateModal from "@/components/modals/ItemUpdateModal";
 import { CurrentItemContext } from "@/contexts/CurrentItemContext";
-import { isElementInViewport } from "@/utils/miscUtils";
+import { MainViewContext } from "@/contexts/MainViewContext";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
     const { items, fetchItems } = useContext(ItemsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
     const { currItem } = useContext(CurrentItemContext);
-
-    const selectedIndex = useRef(-1);
-
-    const selectItem = (index: number) => {
-        const itemListWrapper = document.querySelector(`#displayed-list`);
-        const itemList = itemListWrapper?.querySelectorAll<HTMLBaseElement>("[data-is-item]") ?? [];
-        const newSelectedIndex = clamp(index, 0, itemList.length - 1);
-
-        const oldSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>("[data-is-selected]");
-        oldSelectedItem?.removeAttribute("data-is-selected");
-
-        const newSelectedItem = itemList[newSelectedIndex];
-        if (!isElementInViewport(newSelectedItem)) {
-            newSelectedItem.scrollIntoView({block: "end"});
-        }
-        newSelectedItem.setAttribute("data-is-selected", "true");
-
-        selectedIndex.current = newSelectedIndex;
-    }
-
-    const deselectItem = () => {
-        const itemListWrapper = document.querySelector("#displayed-list");
-        const currSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>("[data-is-selected]");
-        currSelectedItem?.removeAttribute("data-is-selected");
-
-        selectedIndex.current = -1;
-    }
-
-    const selectNextItem = () => {
-        selectItem(selectedIndex.current + 1);
-    }
-
-    const selectPrevItem = () => {
-        selectItem(selectedIndex.current -1);
-    }
-
-    const performPrimaryAction = () => {
-        const itemListWrapper = document.querySelector("#displayed-list");
-        const currSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>("[data-is-selected]");
-        currSelectedItem?.click();
-    }
+    const { focusOnMainInput } = useContext(MainViewContext);
 
     const navigate = useNavigate();
 
@@ -111,12 +71,10 @@ export default function MainView() {
     };
 
     const mainInputRef = useRef<HTMLInputElement>(null);
-    const focusOnMainInput = () => {
-        mainInputRef.current?.focus();
-    }
-
     useHotkeys([
-        ["mod+F", focusOnMainInput],
+        ["mod+F", () => {
+            focusOnMainInput(mainInputRef);
+        }],
     ]);
 
     return <Stack className="main-view"
@@ -133,9 +91,6 @@ export default function MainView() {
 
         <MainInput
             ref={mainInputRef}
-            selectNextItem={selectNextItem}
-            selectPrevItem={selectPrevItem}
-            performPrimaryAction={performPrimaryAction}
         />
         <Stack className="main-view__items-container"
             id="displayed-list"
@@ -147,8 +102,6 @@ export default function MainView() {
                     item={item}
                     index={index}
                     openItemUpdate={openItemUpdateModal}
-                    selectItem={selectItem}
-                    deselectItem={deselectItem}
                 />
             )}
         </Stack>

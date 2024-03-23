@@ -7,18 +7,24 @@ import { justJotTheme } from "@/theme";
 import useCreateItem from "@/hooks/useCreateItem";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
+import { MainViewContext } from "@/contexts/MainViewContext";
 
-interface MainInputParams extends InputProps {
-    selectNextItem: () => void,
-    selectPrevItem: () => void,
-    performPrimaryAction: () => void,
-}
+// interface MainInputParams extends InputProps {
+//     selectNextItem: () => void,
+//     selectPrevItem: () => void,
+//     performPrimaryAction: () => void,
+// }
 
-const MainInput = forwardRef<HTMLInputElement, MainInputParams>((props, ref) => {
+const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { currCollection } = useContext(CurrentCollectionContext)
     const { fetchItems } = useContext(ItemsContext);
-    const [inputVal, setInputVal] = useState("");
+    const {
+        selectPrevItem,
+        selectNextItem,
+        execPrimaryAction,
+    } = useContext(MainViewContext);
 
+    const [inputVal, setInputVal] = useState("");
     const [createItem, isCreateItemLoading] = useCreateItem({
         successfulCallback: () => {
             setInputVal("");
@@ -48,7 +54,7 @@ const MainInput = forwardRef<HTMLInputElement, MainInputParams>((props, ref) => 
 
     return <Input id="main-input" className="main-view__input"
         ref={ref}
-        // {...props}
+        {...props}
         size="lg"
         leftSection={<IconCircleTriangle
             size={32}
@@ -62,10 +68,10 @@ const MainInput = forwardRef<HTMLInputElement, MainInputParams>((props, ref) => 
         value={inputVal}
         onChange={(event) => setInputVal(event.currentTarget.value)}
         onKeyDown={getHotkeyHandler([
-            ["ArrowUp", props.selectPrevItem],
-            ["ArrowDown", props.selectNextItem],
+            ["ArrowUp", selectPrevItem],
+            ["ArrowDown", selectNextItem],
             ["Enter", handleEnter],
-            ["mod+Enter", props.performPrimaryAction]
+            ["mod+Enter", execPrimaryAction]
         ])}
     />
 });
