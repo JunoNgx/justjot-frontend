@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { modals } from "@mantine/modals";
-import useDeleteCollection from "@/hooks/useDeleteCollection";
+import useDeleteCollection from "@/hooks/apiCalls/useDeleteCollection";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_DEFAULT } from "@/utils/constants";
 import { IconExclamationCircle } from "@tabler/icons-react";

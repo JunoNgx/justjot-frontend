@@ -1,7 +1,7 @@
 import { Button, Group, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import useCreateCollection from "@/hooks/useCreateCollection";
-import useUpdateCollection from "@/hooks/useUpdateCollection";
+import useCreateCollection from "@/hooks/apiCalls/useCreateCollection";
+import useUpdateCollection from "@/hooks/apiCalls/useUpdateCollection";
 import { useContext } from "react";
 import { modals } from "@mantine/modals";
 import { getCurrHighestCollectionSortOrder } from "@/utils/collectionUtils";

@@ -4,7 +4,7 @@ import { getHotkeyHandler } from "@mantine/hooks";
 import { IconCircleTriangle } from "@tabler/icons-react";
 
 import { justJotTheme } from "@/theme";
-import useCreateItem from "@/hooks/useCreateItem";
+import useCreateItem from "@/hooks/apiCalls/useCreateItem";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { MainViewContext } from "@/contexts/MainViewContext";
