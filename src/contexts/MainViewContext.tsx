@@ -10,6 +10,7 @@ export const MainViewContext = createContext({
     selectNextItem: () => {},
     selectPrevItem: () => {},
     execPrimaryAction: () => {},
+    scrollToTop: () => {},
 })
 
 export default function MainViewContextProvider(
@@ -65,6 +66,11 @@ export default function MainViewContextProvider(
         currSelectedItem?.click();
     }
 
+    const scrollToTop = () => {
+        window.scrollTo(0, 0);
+        selectItem(0);
+    }
+
     return <MainViewContext.Provider value={{
         focusOnMainInput,
         blurMainInput,
@@ -73,6 +79,7 @@ export default function MainViewContextProvider(
         selectNextItem,
         selectPrevItem,
         execPrimaryAction,
+        scrollToTop,
     }}>
         {children}
     </MainViewContext.Provider>

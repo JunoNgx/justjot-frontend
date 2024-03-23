@@ -23,6 +23,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         selectNextItem,
         execPrimaryAction,
         blurMainInput,
+        scrollToTop,
     } = useContext(MainViewContext);
 
     const [inputVal, setInputVal] = useState("");
@@ -74,6 +75,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["Enter", handleEnter],
             ["mod+Enter", execPrimaryAction],
             ["Escape", blurMainInput],
+            ["Home", scrollToTop],
         ])}
     />
 });
