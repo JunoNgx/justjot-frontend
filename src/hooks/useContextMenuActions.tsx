@@ -9,6 +9,7 @@ import { ItemsContext } from "@/contexts/ItemsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { modals } from "@mantine/modals";
 import ItemMoveModal from "@/components/modals/ItemMoveModal";
+import ItemCreateUpdateModal from "@/components/modals/ItemCreateUpdateModal";
 
 type ItemMoveModalOptions = {
     item: Item | undefined,
@@ -30,6 +31,17 @@ export default function useContextMenuActions() {
             autoClose: AUTO_CLOSE_DEFAULT,
         });
     }
+
+    const openUpdateItemModal = (item: Item) => {
+        modals.open({
+            title: "Edit item",
+            centered: true,
+            children: (<ItemCreateUpdateModal
+                item={item}
+                isEditMode={true}
+            />),
+        });
+    };
 
     const openMoveItemModal = async ({item, collectionList}: ItemMoveModalOptions) => {
         if (!item || !collectionList) {
@@ -136,6 +148,7 @@ export default function useContextMenuActions() {
 
     return {
         copyItemContent,
+        openUpdateItemModal,
         deleteItem,
         openMoveItemModal,
         refetchTitleAndFavicon,
