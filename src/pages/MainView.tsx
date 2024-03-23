@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Menu, Modal, Stack } from '@mantine/core';
+import { Box, Menu, Modal, Stack } from '@mantine/core';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useNavigate } from 'react-router-dom';
 import { Notifications } from '@mantine/notifications';
@@ -11,6 +11,7 @@ import { useDisclosure, useHotkeys } from "@mantine/hooks";
 import ItemUpdateModal from "@/components/modals/ItemUpdateModal";
 import { CurrentItemContext } from "@/contexts/CurrentItemContext";
 import { MainViewContext } from "@/contexts/MainViewContext";
+import ItemComponentContextMenu from "@/components/itemComponent/ItemComponentContextMenu";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -75,48 +76,39 @@ export default function MainView() {
         ["mod+F", () => focusOnMainInput(mainInputRef)],
     ]);
 
-    return <Stack className="main-view"
-        gap="xl"
-        p="sm"
-        onClick={() => {handleClickEvent()}}
-        onFocus={(e) => handleFocusEvent(e)}
+    return <Box className="main-view-wrapper"
     >
-        <Notifications className="notifications-container"
-            limit={5}
-            position="bottom-center"
-            autoClose={1000}
-        />
-
-        <MainInput
-            ref={mainInputRef}
-        />
-        <Stack className="main-view__items-container"
-            id="displayed-list"
-            gap="xs"
-        >
-            {items?.map((item, index) =>
-                <ItemComponent
-                    key={item.id}
-                    item={item}
-                    index={index}
-                    openItemUpdate={openItemUpdateModal}
-                />
-            )}
-        </Stack>
-
         {itemUpdateModal}
-        {/* <Menu opened={isContextMenuOpened} onChange={setIsContextMenuOpened}>
-            <Menu.Dropdown>
-                <Menu.Item>
-                    fkjdsklfdskfkdlsfds
-                </Menu.Item>
-                <Menu.Item>
-                    fkjdsklfdskfkdlsfds
-                </Menu.Item>
-                <Menu.Item>
-                    fkjdsklfdskfkdlsfds
-                </Menu.Item>
-            </Menu.Dropdown>
-        </Menu> */}
-    </Stack>
+        <ItemComponentContextMenu/>
+        <Stack className="main-view"
+            gap="xl"
+            p="sm"
+            onClick={() => {handleClickEvent()}}
+            onFocus={(e) => handleFocusEvent(e)}
+        >
+            <Notifications className="notifications-container"
+                limit={5}
+                position="bottom-center"
+                autoClose={1000}
+            />
+
+            <MainInput
+                ref={mainInputRef}
+            />
+            <Stack className="main-view__items-container"
+                id="displayed-list"
+                gap="xs"
+            >
+                {items?.map((item, index) =>
+                    <ItemComponent
+                        key={item.id}
+                        item={item}
+                        index={index}
+                        openItemUpdate={openItemUpdateModal}
+                    />
+                )}
+            </Stack>
+
+        </Stack>
+    </Box>
 }

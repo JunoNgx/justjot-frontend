@@ -22,11 +22,18 @@ export default function ItemComponentContextMenu(
         if (dropdownRef.current
             && !dropdownRef.current.contains(ev.target as Node)
         ) {
+            console.log("fkjdsklfjsd")
+            ev.preventDefault();
+            ev.stopPropagation();
             setIsContextMenuOpened(false);
         }
     }
 
-    const { isContextMenuOpened, setIsContextMenuOpened } = useContext(ContextMenuContext);
+    const {
+        contextMenuPosition,
+        isContextMenuOpened,
+        setIsContextMenuOpened
+    } = useContext(ContextMenuContext);
 
     // const primaryActionIcon = item.shouldCopyOnClick
     //     ? <IconCheckbox
@@ -46,6 +53,10 @@ export default function ItemComponentContextMenu(
     return <Menu
         opened={isContextMenuOpened}
         onChange={setIsContextMenuOpened}
+        transitionProps={{
+            transition: "skew-up",
+            duration: 150
+        }}
     >
         {/* <Menu.Target>
             <ActionIcon
@@ -59,7 +70,11 @@ export default function ItemComponentContextMenu(
             </ActionIcon>
         </Menu.Target> */}
 
-        <Menu.Dropdown ref={dropdownRef}>
+        <Menu.Dropdown
+            ref={dropdownRef}
+            top={contextMenuPosition.y}
+            left={contextMenuPosition.x}
+        >
             <Menu.Item
                 leftSection={<IconCopy
                     size={justJotTheme.other.iconSizeMenu}

@@ -69,3 +69,8 @@ export type CreateUpdateCollectionOptions = {
     name: string,
     slug: string
 };
+
+export type Position = {
+    x: number,
+    y: number,
+};
