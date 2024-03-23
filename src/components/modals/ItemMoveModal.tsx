@@ -37,7 +37,7 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
     >
         {collectionList?.map((collection, index) => <Group
             key={index}
-            justify="space-between"
+            justify="center"
             // pl="xl" pr="xl"
         >
             <Button className="item-move-modal__move-btn"
