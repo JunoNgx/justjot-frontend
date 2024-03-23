@@ -1,24 +1,53 @@
+import { ContextMenuContext } from "@/contexts/ContextMenuContext";
 import { justJotTheme } from "@/theme";
-import { Item } from "@/types";
-import { ActionIcon, Kbd, Menu } from "@mantine/core";
+import { Kbd, Menu } from "@mantine/core";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFolders, IconMenu, IconSquare, IconTrash } from "@tabler/icons-react";
+import { useContext, useEffect, useRef } from "react";
 
-export default function ItemComponentExtendedMenu(
-    {item}: {item: Item}
+export default function ItemComponentContextMenu(
+    // {item}: {item: Item}
 ) {
 
-    const primaryActionIcon = item.shouldCopyOnClick
-        ? <IconCheckbox
-            size={justJotTheme.other.iconSizeMenu}
-            stroke={justJotTheme.other.iconStrokeWidth}
-        />
-        : <IconSquare
-            size={justJotTheme.other.iconSizeMenu}
-            stroke={justJotTheme.other.iconStrokeWidth}
-        />
+    useEffect(() => {
+        document.addEventListener("click", handleClick);
 
-    return<Menu>
-        <Menu.Target>
+        return () => {
+            document.removeEventListener("click", handleClick);
+        };
+    }, []);
+
+    const dropdownRef = useRef<HTMLBaseElement>(null);
+
+    const handleClick = (ev: MouseEvent) => {
+        if (dropdownRef.current
+            && !dropdownRef.current.contains(ev.target as Node)
+        ) {
+            setIsContextMenuOpened(false);
+        }
+    }
+
+    const { isContextMenuOpened, setIsContextMenuOpened } = useContext(ContextMenuContext);
+
+    // const primaryActionIcon = item.shouldCopyOnClick
+    //     ? <IconCheckbox
+    //         size={justJotTheme.other.iconSizeMenu}
+    //         stroke={justJotTheme.other.iconStrokeWidth}
+    //     />
+    //     : <IconSquare
+    //         size={justJotTheme.other.iconSizeMenu}
+    //         stroke={justJotTheme.other.iconStrokeWidth}
+    //     />
+
+    const primaryActionIcon = <IconCheckbox
+        size={justJotTheme.other.iconSizeMenu}
+        stroke={justJotTheme.other.iconStrokeWidth}
+    />
+
+    return <Menu
+        opened={isContextMenuOpened}
+        onChange={setIsContextMenuOpened}
+    >
+        {/* <Menu.Target>
             <ActionIcon
                 variant="subtle"
                 aria-label="extended action menu"
@@ -28,9 +57,9 @@ export default function ItemComponentExtendedMenu(
                     stroke={justJotTheme.other.iconStrokeWidth}
                 />
             </ActionIcon>
-        </Menu.Target>
+        </Menu.Target> */}
 
-        <Menu.Dropdown>
+        <Menu.Dropdown ref={dropdownRef}>
             <Menu.Item
                 leftSection={<IconCopy
                     size={justJotTheme.other.iconSizeMenu}
