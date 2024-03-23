@@ -8,14 +8,14 @@ export default function ItemComponentCreatedDate(
 
     const itemDatetime = DateTime.fromJSDate(new Date(createdDatetime));
     const fullDateTime = itemDatetime.toLocaleString(DateTime.DATETIME_FULL);
-    const isOlderThanOneWeek = itemDatetime <= DateTime.now().minus({days: 7});
+    const isOlderThanOneDay = itemDatetime <= DateTime.now().minus({days: 1});
     const isOlderThanOneYear = itemDatetime <= DateTime.now().minus({year: 1});
     
     const computeDisplayedDateTime = () => {
         switch(true) {
         case isOlderThanOneYear:
             return itemDatetime.toFormat("LLL dd yyyy");
-        case isOlderThanOneWeek:
+        case isOlderThanOneDay:
             return itemDatetime.toFormat("LLL dd");
         default:
             // return itemDatetime.toRelative({padding: 60000}); // Will not show less than a minute
