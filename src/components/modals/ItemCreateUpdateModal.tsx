@@ -142,8 +142,7 @@ export default function ItemCreateUpdateModal(
             placeholder="Enter your note content here"
             autosize
             maxLength={10000}
-            minRows={10}
-            maxRows={30}
+            minRows={5}
             value={contentVal}
             onChange={handleContentChange}
             onKeyDown={getHotkeyHandler([
