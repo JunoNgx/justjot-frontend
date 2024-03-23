@@ -23,6 +23,11 @@ export default function MainView() {
             navigate(`/login`, { replace: true });
             return;
         }
+
+        window.addEventListener("focus", tryRoutineUpdate);
+        return () => {
+            window.removeEventListener("focus", tryRoutineUpdate);
+        };
     }, []);
 
     useEffect(() => {
@@ -30,13 +35,15 @@ export default function MainView() {
         fetchItems(currCollection);
     }, [currCollection]);
 
-    // TODO: move these to App for better coverage
-    const handleClickEvent = () => {
-        console.log("click")
+    const lastRoutineUpdateTimestamp = useRef<number>(Date.now());
+    const tryRoutineUpdate = () => {
+        console.log("try routine update")
+        if (Date.now() - lastRoutineUpdateTimestamp.current >= 15000) {
+            console.log("routine update fetch")
+            fetchItems(currCollection);
+            lastRoutineUpdateTimestamp.current = Date.now();
+        }
     }
-    const handleFocusEvent = (e: React.FocusEvent<HTMLDivElement, Element>) => {
-        console.log("focus", e)
-    };
 
     const mainInputRef = useRef<HTMLInputElement>(null);
     useHotkeys([
@@ -49,8 +56,7 @@ export default function MainView() {
         <Stack className="main-view"
             gap="xl"
             p="sm"
-            onClick={() => {handleClickEvent()}}
-            onFocus={(e) => handleFocusEvent(e)}
+            onFocus={() => tryRoutineUpdate()}
         >
             <Notifications className="notifications-container"
                 limit={5}
