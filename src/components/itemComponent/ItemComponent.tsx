@@ -102,7 +102,7 @@ export default function ItemComponent(
         }
     ];
 
-    const handleDefaultAction = () => {
+    const handlePrimaryAction = () => {
 
         if (item.shouldCopyOnClick) {
             copyItemContent(item);
@@ -131,7 +131,7 @@ export default function ItemComponent(
         // "onMouseLeave": () => { setIsFocused(false) },
         // "onMouseEnter": () => { setCurrItem(item) },
         // "onMouseLeave": () => { setCurrItem(undefined) },
-        "onClick": handleDefaultAction,
+        "onClick": handlePrimaryAction,
         "onContextMenu": showContextMenu(
             contextMenuOptions,
             { className: "dropdown-menu" }
