@@ -10,29 +10,19 @@ import useContextMenuActions from "@/hooks/useContextMenuActions";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCreatedDate";
 import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
-import { CurrentItemContext } from "@/contexts/CurrentItemContext";
 import { MainViewContext } from "@/contexts/MainViewContext";
 
-type ItemComponentOptions = {
+type ItemComponentParams = {
     item: Item,
     index: number,
-    // openItemUpdate: (item: Item) => void,
-    // selectItem: (index: number) => void,
-    // deselectItem: () => void,
 }
 
 export default function ItemComponent(
-    { item, index }: ItemComponentOptions
+    { item, index }: ItemComponentParams
 ) {
-
-    const { currItem } = useContext(CurrentItemContext)
     const { collections } = useContext(CollectionsContext);
-    const {
-        selectItem,
-        deselectItem
-    } = useContext(MainViewContext);
+    const { selectItem, deselectItem } = useContext(MainViewContext);
     const { showContextMenu } = useContextMenu();
-
     const {
         copyItemContent,
         openUpdateItemModal,
@@ -104,7 +94,6 @@ export default function ItemComponent(
     ];
 
     const handlePrimaryAction = () => {
-
         if (item.shouldCopyOnClick) {
             copyItemContent(item);
             return;
@@ -118,28 +107,19 @@ export default function ItemComponent(
         openUpdateItemModal(item);
     };
 
-    const isFocused = currItem?.id === item.id;
+    return <Paper className="item"
+        p="xs"
+        data-is-item={true}
+        data-index={index}
 
-    const props = {
-        className: "item " + (isFocused ? "item--is-active" : ""),
-        "data-is-item": true,
-        // "data-is-focused": isFocused,
-        "data-index": index,
-        "p": "xs",
-        "onMouseEnter": () => { selectItem(index) },
-        "onMouseLeave": () => { deselectItem() },
-        // "onMouseEnter": () => { setIsFocused(true) },
-        // "onMouseLeave": () => { setIsFocused(false) },
-        // "onMouseEnter": () => { setCurrItem(item) },
-        // "onMouseLeave": () => { setCurrItem(undefined) },
-        "onClick": handlePrimaryAction,
-        "onContextMenu": showContextMenu(
+        onMouseEnter={() => { selectItem(index)}}
+        onMouseLeave={() => { deselectItem()}}
+        onClick={handlePrimaryAction}
+        onContextMenu={showContextMenu(
             contextMenuOptions,
             { className: "dropdown-menu" }
-        ),
-    };
-
-    return <Paper {...props}>
+        )}
+    >
             <Group className="item__flex-wrapper"
                 justify="space-between"
                 wrap="nowrap"
