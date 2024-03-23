@@ -12,7 +12,9 @@ import { useEffect, useRef, useState } from "react";
 
 const DEBOUNCED_TIME = 2000;
 
-export default function ItemUpdateModal({item}: {item: Item}) {
+export default function ItemCreateUpdateModal(
+    {item, isEditMode}: {item: Item, isEditMode: boolean}
+) {
 
     useEffect(() => () => {
         if (hasChangedRef.current && !hasSavedRef.current) {
@@ -24,9 +26,16 @@ export default function ItemUpdateModal({item}: {item: Item}) {
         }
     }, []);
 
+    const [ titleVal, setTitleVal ] = useState(
+        isEditMode
+            ? item.title
+            : "");
+    const [ contentVal, setContentVal ] = useState(
+        isEditMode
+            ? item.content
+            : ""
+        );
 
-    const [ titleVal, setTitleVal ] = useState(item?.title);
-    const [ contentVal, setContentVal ] = useState(item?.content);
     const [ hasSaved, setHasSaved ] = useState(false);
     const [ hasChanged, setHasChanged ] = useState(false);
     const titleValRef = useRef(titleVal);
