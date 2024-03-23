@@ -114,8 +114,7 @@ export default function ItemComponent(
             return;
         }
 
-        item.shouldCopyOnClick
-            openItemUpdate(item);
+        openItemUpdate(item);
     };
 
     const isFocused = currItem?.id === item.id;
