@@ -9,14 +9,14 @@ import { ItemsContext } from "@/contexts/ItemsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { useHotkeys } from "@mantine/hooks";
 import { MainViewContext } from "@/contexts/MainViewContext";
-import useCollectionMenuActions from "@/hooks/useCollectionMenuActions";
+import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
     const { items, fetchItems } = useContext(ItemsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
     const { focusOnMainInput } = useContext(MainViewContext);
-    const { switchToCollectionByNumricKey } = useCollectionMenuActions();
+    const { switchToCollectionByNumricKey } = useCollectionNavActions();
 
 
     const navigate = useNavigate();

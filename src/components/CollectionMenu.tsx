@@ -6,7 +6,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { IconEdit, IconPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
 
 import { justJotTheme } from "@/theme";
-import useCollectionMenuActions from "@/hooks/useCollectionMenuActions";
+import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 import CollectionCreateUpdateModal from "@/components/modals/CollectionCreateUpdateModal";
 import useDeleteCollectionConfirmation from "@/hooks/useDeleteCollectionConfirmation";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
@@ -28,7 +28,7 @@ export default function CollectionMenu() {
         setCurrCollection(collections[0]);
     }, [collections]);
 
-    const { switchToCollectionById } = useCollectionMenuActions();
+    const { switchToCollectionById } = useCollectionNavActions();
     const confirmDeletion = useDeleteCollectionConfirmation();
     const isMobile = useMediaQuery(`(max-width: ${em(720)})`);
 
