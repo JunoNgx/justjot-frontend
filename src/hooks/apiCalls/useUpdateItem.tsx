@@ -40,16 +40,16 @@ export default function useUpdateItem(
             })
             .catch(err => {
                 errorCallback?.();
+                console.error(err);
                 if (!err.isAbort) {
-                    console.error(err);
                     console.warn("Non cancellation error")
-                    notifications.show({
-                        message: "Error autosaving title",
-                        color: "red",
-                        autoClose: AUTO_CLOSE_ERROR_TOAST,
-                        withCloseButton: true,
-                    });
                 }
+                notifications.show({
+                    message: "Error autosaving title",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
             });
     };
 
@@ -61,16 +61,16 @@ export default function useUpdateItem(
             })
             .catch(err => {
                 errorCallback?.();
+                console.error(err);
                 if (!err.isAbort) {
-                    console.error(err);
                     console.warn("Non cancellation error")
-                    notifications.show({
-                        message: "Error autosaving content",
-                        color: "red",
-                        autoClose: AUTO_CLOSE_ERROR_TOAST,
-                        withCloseButton: true,
-                    });
                 }
+                notifications.show({
+                    message: "Error autosaving content",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
             });
     };
 
@@ -78,23 +78,27 @@ export default function useUpdateItem(
         pbClient
             // .cancelAllRequests()
             .collection(DbTable.ITEMS)
-            .update(itemId, { title, content },
-                {requestKey: null}) // This disables auto-cancel from PbClien
+            .update(itemId,
+                { title, content },
+                // { requestKey: null }, // This disables auto-cancel from PbClient
+                { requestKey: "item-update-both" }
+            )
             .then((_record: Item) => {
                 successfulCallback?.();
             })
             .catch(err => {
                 errorCallback?.();
+                console.error(err);
+
                 if (!err.isAbort) {
                     console.warn("Non cancellation error")
-                    console.error(err);
-                    notifications.show({
-                        message: "Error autosaving upon exiting item edit modal",
-                        color: "red",
-                        autoClose: AUTO_CLOSE_ERROR_TOAST,
-                        withCloseButton: true,
-                    });
                 }
+                notifications.show({
+                    message: "Error autosaving upon exiting item edit modal",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
             });
     };
 
