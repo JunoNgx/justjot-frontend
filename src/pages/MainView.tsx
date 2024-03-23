@@ -72,9 +72,7 @@ export default function MainView() {
 
     const mainInputRef = useRef<HTMLInputElement>(null);
     useHotkeys([
-        ["mod+F", () => {
-            focusOnMainInput(mainInputRef);
-        }],
+        ["mod+F", () => focusOnMainInput(mainInputRef)],
     ]);
 
     return <Stack className="main-view"
