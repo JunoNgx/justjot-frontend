@@ -70,7 +70,7 @@ export default function useUpdateItem(
 
     const updateItemTitleAndContent = async ({ itemId, title, content }: UpdateItemTitleAndContentOptions) => {
         pbClient
-            .cancelAllRequests()
+            // .cancelAllRequests()
             .collection(DbTable.ITEMS)
             .update(itemId, { title, content })
             .then((_record: Item) => {
