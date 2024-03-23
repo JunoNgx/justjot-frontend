@@ -32,7 +32,7 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
         }
     });
 
-    return <Stack className="item-update-modal"
+    return <Stack className="item-move-modal"
         p="lg"
     >
         {collectionList?.map((collection, index) => <Group
