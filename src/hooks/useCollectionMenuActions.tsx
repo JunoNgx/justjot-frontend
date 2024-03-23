@@ -28,8 +28,8 @@ export default function useCollectionMenuActions() {
 
     const switchToCollectionByNumricKey = (inputNumber: number) => {
         let transcribedIndex;
-        if (inputNumber < 0 || 9 > inputNumber) return;
-        else if (inputNumber = 0) transcribedIndex = 9;
+        if (inputNumber < 0 || inputNumber > 9) return;
+        else if (inputNumber === 0) transcribedIndex = 9;
         else transcribedIndex = inputNumber - 1;
 
         const targetCollection = collections?.[transcribedIndex];
