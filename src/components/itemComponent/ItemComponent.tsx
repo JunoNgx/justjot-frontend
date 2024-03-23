@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 import { Item, ItemType } from "@/types";
-import { Center, Group, Kbd, Paper, Text } from "@mantine/core";
+import { Box, Center, Group, Kbd, Paper, Text } from "@mantine/core";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink,  IconSquare, IconTrash } from "@tabler/icons-react";
 import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "@/theme";
@@ -51,56 +51,56 @@ export default function ItemComponent(
             stroke={justJotTheme.other.iconStrokeWidth}
         />
 
-    const contextMenuOptions = [
-        {
-            key: "copy",
-            icon: <IconCopy
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
-            iconRight: <Kbd>C</Kbd>,
-            onClick: () => {copyItemContent(item)}
-        }, {
-            key: "edit",
-            icon: <IconEdit
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
-            iconRight: <Kbd>E</Kbd>,
-            onClick: () => {openItemUpdate(item)},
-        }, {
-            key: "move",
-            icon: <IconFileSymlink
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
-            iconRight: <Kbd>M</Kbd>,
-            onClick: () => {openMoveItemModal({item, collectionList: collections})},
-        }, {
-            key: "delete",
-            icon: <IconTrash
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
-            iconRight: <Kbd>Del</Kbd>,
-            color: "red",
-            onClick: () => {deleteItem(item)}
-        }, {
-            key: "refetch link",
-            icon: <IconDownload
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
-            onClick: () => {refetchTitleAndFavicon(item);}
-        }, {
-            key: "divider",
-        }, {
-            key: "Copy on click",
-            icon: contextMenuDefaultActionIcon,
-            color: "blue",
-            onClick: () => {switchShouldOpenOnClick(item)}
-        }
-    ];
+    // const contextMenuOptions = [
+    //     {
+    //         key: "copy",
+    //         icon: <IconCopy
+    //             size={justJotTheme.other.iconSizeMenu}
+    //             stroke={justJotTheme.other.iconStrokeWidth}
+    //         />,
+    //         iconRight: <Kbd>C</Kbd>,
+    //         onClick: () => {copyItemContent(item)}
+    //     }, {
+    //         key: "edit",
+    //         icon: <IconEdit
+    //             size={justJotTheme.other.iconSizeMenu}
+    //             stroke={justJotTheme.other.iconStrokeWidth}
+    //         />,
+    //         iconRight: <Kbd>E</Kbd>,
+    //         onClick: () => {openItemUpdate(item)},
+    //     }, {
+    //         key: "move",
+    //         icon: <IconFileSymlink
+    //             size={justJotTheme.other.iconSizeMenu}
+    //             stroke={justJotTheme.other.iconStrokeWidth}
+    //         />,
+    //         iconRight: <Kbd>M</Kbd>,
+    //         onClick: () => {openMoveItemModal({item, collectionList: collections})},
+    //     }, {
+    //         key: "delete",
+    //         icon: <IconTrash
+    //             size={justJotTheme.other.iconSizeMenu}
+    //             stroke={justJotTheme.other.iconStrokeWidth}
+    //         />,
+    //         iconRight: <Kbd>Del</Kbd>,
+    //         color: "red",
+    //         onClick: () => {deleteItem(item)}
+    //     }, {
+    //         key: "refetch link",
+    //         icon: <IconDownload
+    //             size={justJotTheme.other.iconSizeMenu}
+    //             stroke={justJotTheme.other.iconStrokeWidth}
+    //         />,
+    //         onClick: () => {refetchTitleAndFavicon(item);}
+    //     }, {
+    //         key: "divider",
+    //     }, {
+    //         key: "Copy on click",
+    //         icon: contextMenuDefaultActionIcon,
+    //         color: "blue",
+    //         onClick: () => {switchShouldOpenOnClick(item)}
+    //     }
+    // ];
 
     const handlePrimaryAction = () => {
 
@@ -115,6 +115,13 @@ export default function ItemComponent(
         }
 
         openItemUpdate(item);
+    };
+
+    const handleContextMenu: React.MouseEventHandler<HTMLDivElement> =
+        (event: React.MouseEvent<HTMLDivElement, MouseEvent>
+    ) => {
+        console.log("handleContextMenu")
+        event.preventDefault();
     };
 
     const isFocused = currItem?.id === item.id;
@@ -132,13 +139,14 @@ export default function ItemComponent(
         // "onMouseEnter": () => { setCurrItem(item) },
         // "onMouseLeave": () => { setCurrItem(undefined) },
         "onClick": handlePrimaryAction,
-        "onContextMenu": showContextMenu(
-            contextMenuOptions,
-            { className: "dropdown-menu" }
-        ),
+        // "onContextMenu": showContextMenu(
+        //     contextMenuOptions,
+        //     { className: "dropdown-menu" }
+        // ),
+        "onContextMenu": handleContextMenu,
     };
 
-    return <Paper {...props}>
+    return <Box {...props}>
             <Group className="item__flex-wrapper"
                 justify="space-between"
                 wrap="nowrap"
@@ -174,5 +182,5 @@ export default function ItemComponent(
                 </Group>
             </Group>
 
-        </Paper>
+        </Box>
 };
