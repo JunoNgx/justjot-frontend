@@ -78,7 +78,8 @@ export default function useUpdateItem(
         pbClient
             // .cancelAllRequests()
             .collection(DbTable.ITEMS)
-            .update(itemId, { title, content })
+            .update(itemId, { title, content },
+                {requestKey: null}) // This disables auto-cancel from PbClien
             .then((_record: Item) => {
                 successfulCallback?.();
             })
