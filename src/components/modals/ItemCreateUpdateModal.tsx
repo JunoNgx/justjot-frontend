@@ -21,16 +21,23 @@ export default function ItemCreateUpdateModal(
     const { fetchItems } = useContext(ItemsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
 
-    useEffect(() => () => {
+    useEffect(() => {
+        return () => {
+            saveOnClose();
+        }
+    }, []);
+
+    const saveOnClose = async () => {
         if (hasChangedRef.current && !hasSavedRef.current) {
-            updateItemTitleAndContent({
+            await updateItemTitleAndContent({
                 itemId: item.id,
                 title: titleValRef.current,
                 content: contentValRef.current,
             });
+
             fetchItems(currCollection);
         }
-    }, []);
+    }
 
     const [ titleVal, setTitleVal ] = useState(
         isEditMode
