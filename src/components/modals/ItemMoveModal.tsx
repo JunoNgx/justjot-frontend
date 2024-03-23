@@ -36,6 +36,7 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
         p="lg"
     >
         {collectionList?.map((collection, index) => <Group
+            key={index}
             justify="space-between"
             // pl="xl" pr="xl"
         >
