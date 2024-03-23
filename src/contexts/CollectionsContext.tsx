@@ -22,16 +22,16 @@ export default function CollectionsContextProvider({ children }: { children: Rea
         if (!isLoggedIn) return;
 
         await pbClient
-            // .cancelAllRequests()
             .collection(DbTable.COLLECTIONS)
             .getFullList({
-                sort: "sortOrder"
+                sort: "sortOrder",
+                requestKey: "collection-get-all",
             })
             .then((records: ItemCollection[]) => {
                 setCollections(records);
             })
-            .catch(error => {
-                console.error(error)
+            .catch(err => {
+                console.error(err)
             });
     }, []);
 
