@@ -1,4 +1,4 @@
-import { ItemCollection } from "src/types";
+import { ItemCollection } from "@/types";
 
 export const getCurrHighestCollectionSortOrder = (collections: ItemCollection[] | undefined) => {
     if (!collections) return null;

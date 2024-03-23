@@ -1,8 +1,8 @@
 import { Image } from "@mantine/core";
-import { ItemType } from "src/types";
+import { ItemType } from "@/types";
 import { IconNote, IconNotes, IconWorld } from "@tabler/icons-react";
-import { justJotTheme } from "src/theme";
-import { isValidHexColourCode } from "src/utils/itemUtils";
+import { justJotTheme } from "@/theme";
+import { isValidHexColourCode } from "@/utils/itemUtils";
 // import { isValidUrl } from "../utils/misc";
 
 export default function ItemComponentIcon(

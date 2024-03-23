@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
-import { BackendClientContext } from "src/contexts/BackendClientContext";
-import { DbTable, ItemCollection, CreateUpdateCollectionOptions, RequestCallbackOptions } from "src/types";
+import { BackendClientContext } from "@/contexts/BackendClientContext";
+import { DbTable, ItemCollection, CreateUpdateCollectionOptions, RequestCallbackOptions } from "@/types";
 import { notifications } from "@mantine/notifications";
-import { AUTO_CLOSE_ERROR_TOAST, SORT_ORDER_INCREMENT_COLLECTION } from "src/utils/constants";
+import { AUTO_CLOSE_ERROR_TOAST, SORT_ORDER_INCREMENT_COLLECTION } from "@/utils/constants";
 
 type useCreateCollectionReturnType = [
     (

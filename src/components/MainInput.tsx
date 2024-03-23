@@ -3,10 +3,10 @@ import { Input, InputProps, Loader } from "@mantine/core";
 import { getHotkeyHandler } from "@mantine/hooks";
 import { IconCircleTriangle } from "@tabler/icons-react";
 
-import { justJotTheme } from "src/theme";
-import useCreateItem from "src/hooks/useCreateItem";
-import { ItemsContext } from "src/contexts/ItemsContext";
-import { CurrentCollectionContext } from "src/contexts/CurrentCollectionContext";
+import { justJotTheme } from "@/theme";
+import useCreateItem from "@/hooks/useCreateItem";
+import { ItemsContext } from "@/contexts/ItemsContext";
+import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 
 interface MainInputParams extends InputProps {
     selectNextItem: () => void,

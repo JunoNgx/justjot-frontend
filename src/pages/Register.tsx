@@ -1,9 +1,9 @@
 import { useForm } from '@mantine/form';
 import { Stack, Paper, TextInput, Button, Title, Group, Text, PasswordInput, Box, Anchor } from "@mantine/core";
 import { NavLink } from 'react-router-dom';
-import { BackendClientContext } from 'src/contexts/BackendClientContext';
+import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useContext, useState } from 'react';
-import { UserType, DbTable } from 'src/types'
+import { UserType, DbTable } from '@/types'
 import { ClientResponseError } from 'pocketbase';
 
 type RegisterFormData = {

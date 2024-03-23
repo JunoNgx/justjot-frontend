@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { modals } from "@mantine/modals";
-import useDeleteCollection from "src/hooks/useDeleteCollection";
+import useDeleteCollection from "@/hooks/useDeleteCollection";
 import { notifications } from "@mantine/notifications";
-import { AUTO_CLOSE_DEFAULT } from "src/utils/constants";
+import { AUTO_CLOSE_DEFAULT } from "@/utils/constants";
 import { IconExclamationCircle } from "@tabler/icons-react";
-import { justJotTheme } from "src/theme";
+import { justJotTheme } from "@/theme";
 import { Text } from "@mantine/core";
-import { CollectionsContext } from "src/contexts/CollectionsContext";
-import { CurrentCollectionContext } from "src/contexts/CurrentCollectionContext";
+import { CollectionsContext } from "@/contexts/CollectionsContext";
+import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 
 export default function useDeleteCollectionConfirmation() {
     

@@ -2,8 +2,8 @@ import { useForm } from '@mantine/form';
 import { Paper, TextInput, Button, Title, Group, Text, PasswordInput, Anchor } from "@mantine/core";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
-import { BackendClientContext } from 'src/contexts/BackendClientContext';
-import { DbTable } from 'src/types';
+import { BackendClientContext } from '@/contexts/BackendClientContext';
+import { DbTable } from '@/types';
 
 type LoginFormData = {email: string, password: string};
 

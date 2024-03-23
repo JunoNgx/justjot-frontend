@@ -1,16 +1,16 @@
 // import styled from 'styled-components';
 
 import { useContext } from "react";
-import { Item, ItemType } from "src/types";
+import { Item, ItemType } from "@/types";
 import { Center, Group, Kbd, Paper, Text } from "@mantine/core";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink,  IconSquare, IconTrash } from "@tabler/icons-react";
 import { useContextMenu } from 'mantine-contextmenu';
-import { justJotTheme } from "src/theme";
-import useContextMenuActions from "src/hooks/useContextMenuActions";
-import { CollectionsContext } from "src/contexts/CollectionsContext";
-import ItemComponentCreatedDate from "src/components/itemComponent/ItemComponentCreatedDate";
-import ItemComponentIcon from "src/components/itemComponent/ItemComponentIcon";
-import { CurrentItemContext } from "src/contexts/CurrentItemContext";
+import { justJotTheme } from "@/theme";
+import useContextMenuActions from "@/hooks/useContextMenuActions";
+import { CollectionsContext } from "@/contexts/CollectionsContext";
+import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCreatedDate";
+import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
+import { CurrentItemContext } from "@/contexts/CurrentItemContext";
 
 type ItemComponentOptions = {
     item: Item,

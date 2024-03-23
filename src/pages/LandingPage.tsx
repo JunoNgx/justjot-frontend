@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react"
-import { BackendClientContext } from "src/contexts/BackendClientContext";
+import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Anchor, Box, Text, Title } from "@mantine/core";
 

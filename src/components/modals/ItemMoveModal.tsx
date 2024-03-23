@@ -1,13 +1,13 @@
 import { Button, Group, Loader, Stack } from "@mantine/core";
-import { Item, ItemCollection } from "src/types";
+import { Item, ItemCollection } from "@/types";
 import { useContext } from "react";
-import useMoveItem from "src/hooks/useMoveItem";
+import useMoveItem from "@/hooks/useMoveItem";
 import { modals } from "@mantine/modals";
 import { notifications } from "@mantine/notifications";
-import { AUTO_CLOSE_DEFAULT } from "src/utils/constants";
-import CollectionHotkey from "src/components//misc/CollectionHotkey";
-import { ItemsContext } from "src/contexts/ItemsContext";
-import { CurrentCollectionContext } from "src/contexts/CurrentCollectionContext";
+import { AUTO_CLOSE_DEFAULT } from "@/utils/constants";
+import CollectionHotkey from "@/components//misc/CollectionHotkey";
+import { ItemsContext } from "@/contexts/ItemsContext";
+import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 
 type ItemMoveModal = {
     item: Item,

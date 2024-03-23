@@ -1,6 +1,6 @@
 import { Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
-import { Item } from "src/types";
-import useUpdateItem from "src/hooks/useUpdateItem";
+import { Item } from "@/types";
+import useUpdateItem from "@/hooks/useUpdateItem";
 import { DateTime } from "luxon";
 import { getHotkeyHandler, useDebounceCallback } from "@mantine/hooks";
 import { useEffect, useRef, useState } from "react";

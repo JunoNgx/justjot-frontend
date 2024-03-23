@@ -1,10 +1,10 @@
 import { ActionIcon, Group } from "@mantine/core";
 import { IconNotebook } from "@tabler/icons-react";
-import { justJotTheme } from "src/theme";
+import { justJotTheme } from "@/theme";
 import { NavLink } from "react-router-dom";
-import CollectionMenu from "src/components/CollectionMenu";
+import CollectionMenu from "@/components/CollectionMenu";
 import { useContext } from "react";
-import { BackendClientContext } from "src/contexts/BackendClientContext";
+import { BackendClientContext } from "@/contexts/BackendClientContext";
 
 export default function HeaderLeftSide() {
 

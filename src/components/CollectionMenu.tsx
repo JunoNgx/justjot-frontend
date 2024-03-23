@@ -1,18 +1,18 @@
 import { useContext, useEffect } from "react";
 import { Group, Menu, MenuDivider, MenuItem, Text, UnstyledButton, em } from "@mantine/core";
 import { modals } from "@mantine/modals";
-import { ItemCollection } from "src/types";
+import { ItemCollection } from "@/types";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconEdit, IconPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
 
-import { justJotTheme } from "src/theme";
-import useCollectionMenuActions from "src/hooks/useCollectionMenuActions";
-import CollectionCreateUpdateModal from "src/components/modals/CollectionCreateUpdateModal";
-import useDeleteCollectionConfirmation from "src/hooks/useDeleteCollectionConfirmation";
-import { CollectionsContext } from "src/contexts/CollectionsContext";
-import { CurrentCollectionContext } from "src/contexts/CurrentCollectionContext";
-import CollectionHotkey from "src/components/misc/CollectionHotkey";
-import CollectionsSortModal from "src/components/modals/CollectionsSortModal";
+import { justJotTheme } from "@/theme";
+import useCollectionMenuActions from "@/hooks/useCollectionMenuActions";
+import CollectionCreateUpdateModal from "@/components/modals/CollectionCreateUpdateModal";
+import useDeleteCollectionConfirmation from "@/hooks/useDeleteCollectionConfirmation";
+import { CollectionsContext } from "@/contexts/CollectionsContext";
+import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
+import CollectionHotkey from "@/components/misc/CollectionHotkey";
+import CollectionsSortModal from "@/components/modals/CollectionsSortModal";
 
 export default function CollectionMenu() {
     const { collections, fetchCollections } = useContext(CollectionsContext);

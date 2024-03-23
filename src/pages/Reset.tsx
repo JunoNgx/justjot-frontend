@@ -1,8 +1,8 @@
 import { useForm } from '@mantine/form';
 import { Paper, TextInput, Button, Title, Group, Text, Box, Anchor } from "@mantine/core";
-import { BackendClientContext } from 'src/contexts/BackendClientContext';
+import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useContext, useState } from 'react';
-import { DbTable } from 'src/types'
+import { DbTable } from '@/types'
 import { NavLink } from 'react-router-dom';
 
 export default function Reset() {
