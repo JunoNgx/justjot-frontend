@@ -6,7 +6,7 @@ import { Center, Group, Kbd, Paper, Text } from "@mantine/core";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink,  IconSquare, IconTrash } from "@tabler/icons-react";
 import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "@/theme";
-import useContextMenuActions from "@/hooks/useContextMenuActions";
+import useItemContextMenuActions from "@/hooks/useItemContextMenuActions";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCreatedDate";
 import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
@@ -30,7 +30,7 @@ export default function ItemComponent(
         deleteItem,
         switchShouldOpenOnClick,
         refetchTitleAndFavicon
-    } = useContextMenuActions();
+    } = useItemContextMenuActions();
 
     const contextMenuDefaultActionIcon = item.shouldCopyOnClick
         ? <IconCheckbox

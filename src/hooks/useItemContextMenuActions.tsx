@@ -16,7 +16,7 @@ type ItemMoveModalOptions = {
     collectionList: ItemCollection[] | undefined
 };
 
-export default function useContextMenuActions() {
+export default function useItemContextMenuActions() {
     const { pbClient, user } = useContext(BackendClientContext);
     const { setCurrItem } = useContext(CurrentItemContext);
     const { currCollection } = useContext(CurrentCollectionContext);
