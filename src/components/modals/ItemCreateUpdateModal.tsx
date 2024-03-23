@@ -3,7 +3,9 @@ import { Item } from "@/types";
 import useUpdateItem from "@/hooks/useUpdateItem";
 import { DateTime } from "luxon";
 import { getHotkeyHandler, useDebounceCallback } from "@mantine/hooks";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { ItemsContext } from "@/contexts/ItemsContext";
+import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 
 // type ItemUpdateFormData = {
 //     title: string,
@@ -16,6 +18,9 @@ export default function ItemCreateUpdateModal(
     {item, isEditMode}: {item: Item, isEditMode: boolean}
 ) {
 
+    const { fetchItems } = useContext(ItemsContext);
+    const { currCollection } = useContext(CurrentCollectionContext);
+
     useEffect(() => () => {
         if (hasChangedRef.current && !hasSavedRef.current) {
             updateItemTitleAndContent({
@@ -23,6 +28,7 @@ export default function ItemCreateUpdateModal(
                 title: titleValRef.current,
                 content: contentValRef.current,
             });
+            fetchItems(currCollection);
         }
     }, []);
 
