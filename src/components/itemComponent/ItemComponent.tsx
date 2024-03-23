@@ -115,7 +115,7 @@ export default function ItemComponent(
             return;
         }
 
-        openItemUpdate(item);
+        openUpdateItemModal(item);
     };
 
     const isFocused = currItem?.id === item.id;
