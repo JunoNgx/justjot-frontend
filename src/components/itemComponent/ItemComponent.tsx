@@ -12,6 +12,7 @@ import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCr
 import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
 import { CurrentItemContext } from "@/contexts/CurrentItemContext";
 import { MainViewContext } from "@/contexts/MainViewContext";
+import { ContextMenuContext } from "@/contexts/ContextMenuContext";
 
 type ItemComponentOptions = {
     item: Item,
@@ -28,11 +29,8 @@ export default function ItemComponent(
 
     const { currItem } = useContext(CurrentItemContext)
     const { collections } = useContext(CollectionsContext);
-    const {
-        selectItem,
-        deselectItem,
-        handleContextMenu,
-    } = useContext(MainViewContext);
+    const { selectItem, deselectItem } = useContext(MainViewContext);
+    const { handleContextMenu } = useContext(ContextMenuContext);
     const { showContextMenu } = useContextMenu();
 
     const {

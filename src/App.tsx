@@ -31,6 +31,7 @@ import '@/styles/layers.css';
 
 import "@/styles/main.scss";
 import InfoModal from "@/components/modals/InfoModal";
+import ContextMenuContextProvider from "./contexts/ContextMenuContext";
 
 function App() {
 
@@ -46,35 +47,37 @@ function App() {
                         <ItemsContextProvider>
                             <CurrentItemContextProvider>
                                 <MainViewContextProvider>
+                                    <ContextMenuContextProvider>
 
-                                    <ModalsProvider
-                                        modals={{ infoModal: InfoModal}}
-                                    >
-                                        <ContextMenuProvider>
+                                        <ModalsProvider
+                                            modals={{ infoModal: InfoModal}}
+                                        >
+                                            <ContextMenuProvider>
 
-                                            <AppShell.Header>
-                                                <Header/>
-                                            </AppShell.Header>
+                                                <AppShell.Header>
+                                                    <Header/>
+                                                </AppShell.Header>
 
-                                            <AppShell.Main className="appshell-main">
-                                                <Routes>
-                                                    <Route path="/" element={<LandingPage />} />
-                                                    <Route path="/help" element={<Help />} />
-                                                    <Route path="/:username">
-                                                        <Route index element={<MainView />} />
-                                                        <Route path=":groupSlug" element={<MainView />} />
-                                                    </Route>
-                                                    <Route path="/login" element={<Login />} />
-                                                    <Route path="/register" element={<Register />} />
-                                                    <Route path="/reset" element={<Reset />} />
-                                                    <Route path="/*" element={<Redirect />} />
-                                                </Routes>
-                                            </AppShell.Main>
+                                                <AppShell.Main className="appshell-main">
+                                                    <Routes>
+                                                        <Route path="/" element={<LandingPage />} />
+                                                        <Route path="/help" element={<Help />} />
+                                                        <Route path="/:username">
+                                                            <Route index element={<MainView />} />
+                                                            <Route path=":groupSlug" element={<MainView />} />
+                                                        </Route>
+                                                        <Route path="/login" element={<Login />} />
+                                                        <Route path="/register" element={<Register />} />
+                                                        <Route path="/reset" element={<Reset />} />
+                                                        <Route path="/*" element={<Redirect />} />
+                                                    </Routes>
+                                                </AppShell.Main>
 
-                                        </ContextMenuProvider>
-                                    </ModalsProvider>
+                                            </ContextMenuProvider>
+                                        </ModalsProvider>
+
+                                    </ContextMenuContextProvider>
                                 </MainViewContextProvider>
-
                             </CurrentItemContextProvider>
                         </ItemsContextProvider>
                     </CurrentCollectionContextProvider>
