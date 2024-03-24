@@ -1,4 +1,4 @@
-import { DbTable, Item, ItemCollection } from "@/types"
+import { DbTable, Item, ItemCollection, ItemType } from "@/types"
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { useContext } from "react";
 import { notifications } from "@mantine/notifications";
@@ -133,10 +133,15 @@ export default function useItemContextMenuActions() {
             .update(item.id, {shouldCopyOnClick: newShouldCopyOnClickVal})
             .then((_record) => {
                 fetchItems(currCollection);
+
+                const nonCopyMessage = item.type === ItemType.TEXT
+                    ? "Primary action set: edit"
+                    : "Primary action set: open";
+
                 notifications.show({
                     message: newShouldCopyOnClickVal
                         ? "Primary action set: copy"
-                        : "Primary action set: edit",
+                        : nonCopyMessage,
                     color: "none",
                     autoClose: AUTO_CLOSE_DEFAULT,
                 });
