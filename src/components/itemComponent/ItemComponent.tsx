@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 import { Item, ItemType } from "@/types";
-import { Center, Group, Kbd, Paper, Text } from "@mantine/core";
+import { Center, Group, Paper, Text } from "@mantine/core";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink,  IconSquare, IconTrash } from "@tabler/icons-react";
 import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "@/theme";
@@ -49,9 +49,6 @@ export default function ItemComponent(
                 size={justJotTheme.other.iconSizeMenu}
                 stroke={justJotTheme.other.iconStrokeWidth}
             />,
-            iconRight: <>
-                <Kbd>Ctrl/⌘</Kbd><Kbd>C</Kbd>
-            </>,
             onClick: () => {copyItemContent(item)}
         }, {
             key: "edit",
@@ -59,9 +56,6 @@ export default function ItemComponent(
                 size={justJotTheme.other.iconSizeMenu}
                 stroke={justJotTheme.other.iconStrokeWidth}
             />,
-            iconRight: <>
-                <Kbd>Ctrl/⌘</Kbd><Kbd>E</Kbd>
-            </>,
             onClick: () => {openUpdateItemModal(item)},
         }, {
             key: "move",
@@ -69,9 +63,6 @@ export default function ItemComponent(
                 size={justJotTheme.other.iconSizeMenu}
                 stroke={justJotTheme.other.iconStrokeWidth}
             />,
-            iconRight: <>
-                <Kbd>Ctrl/⌘</Kbd><Kbd>M</Kbd>
-            </>,
             onClick: () => {openMoveItemModal({item, collectionList: collections})},
         }, {
             key: "delete",
@@ -79,9 +70,6 @@ export default function ItemComponent(
                 size={justJotTheme.other.iconSizeMenu}
                 stroke={justJotTheme.other.iconStrokeWidth}
             />,
-            iconRight: <>
-                <Kbd>Ctrl/⌘</Kbd><Kbd>Del</Kbd>
-            </>,
             color: "red",
             onClick: () => {deleteItem(item)}
         }, {
@@ -92,9 +80,6 @@ export default function ItemComponent(
                 size={justJotTheme.other.iconSizeMenu}
                 stroke={justJotTheme.other.iconStrokeWidth}
             />,
-            iconRight: <>
-                <Kbd>Ctrl/⌘</Kbd><Kbd>⇧</Kbd><Kbd>Q</Kbd>
-            </>,
             onClick: () => {refetchTitleAndFavicon(item);}
         }, {
             key: "divider",
@@ -102,9 +87,6 @@ export default function ItemComponent(
             key: "switchPrimaryAction",
             title: "Copy as PriAct",
             icon: contextMenuDefaultActionIcon,
-            iconRight: <>
-                <Kbd>Ctrl/⌘</Kbd><Kbd>⇧</Kbd><Kbd>O</Kbd>
-            </>,
             color: "blue",
             onClick: () => {switchShouldOpenOnClick(item)}
         }
