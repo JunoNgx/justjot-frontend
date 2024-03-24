@@ -16,7 +16,6 @@ import Header from "@/components/header/Header";
 import LandingPage from "@/pages/LandingPage";
 import Help from "@/pages/Help";
 import MainView from "@/pages/MainView";
-import Redirect from "@/pages/Redirect";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Reset from "@/pages/Reset";
@@ -62,12 +61,11 @@ function App() {
                                                     <Route path="/help" element={<Help />} />
                                                     <Route path="/:username">
                                                         <Route index element={<MainView />} />
-                                                        <Route path=":groupSlug" element={<MainView />} />
+                                                        <Route path=":collectionSlug" element={<MainView />} />
                                                     </Route>
                                                     <Route path="/login" element={<Login />} />
                                                     <Route path="/register" element={<Register />} />
                                                     <Route path="/reset" element={<Reset />} />
-                                                    <Route path="/*" element={<Redirect />} />
                                                 </Routes>
                                             </AppShell.Main>
 
