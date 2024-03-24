@@ -22,6 +22,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
         if (!isLoggedIn) return;
 
         await pbClient
+            .cancelRequest("collection-get-all")
             .collection(DbTable.COLLECTIONS)
             .getFullList({
                 sort: "sortOrder",
@@ -32,6 +33,9 @@ export default function CollectionsContextProvider({ children }: { children: Rea
             })
             .catch(err => {
                 console.error(err)
+                if (!err.isAbort) {
+                    console.warn("Non cancellation error")
+                }
             });
     }, []);
 
