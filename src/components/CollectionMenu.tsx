@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Group, Menu, MenuDivider, MenuItem, Text, UnstyledButton, em } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { ItemCollection } from "@/types";
@@ -13,16 +13,10 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import CollectionHotkey from "@/components/misc/CollectionHotkey";
 import CollectionsSortModal from "@/components/modals/CollectionsSortModal";
-import { BackendClientContext } from "@/contexts/BackendClientContext";
 
 export default function CollectionMenu({isInMainView}: {isInMainView?: boolean}) {
-    const { isLoggedIn } = useContext(BackendClientContext);
-    const { collections, fetchCollections } = useContext(CollectionsContext);
+    const { collections } = useContext(CollectionsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
-
-    useEffect(() => {
-        fetchCollections();
-    }, [isLoggedIn]);
 
     const { switchToCollectionById } = useCollectionNavActions();
     const confirmDeletion = useDeleteCollectionConfirmation();

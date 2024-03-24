@@ -15,7 +15,7 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
-    const { collections } = useContext(CollectionsContext);
+    const { collections, fetchCollections } = useContext(CollectionsContext);
     const { currCollection, setCurrCollection } = useContext(CurrentCollectionContext);
     const { items, fetchItems } = useContext(ItemsContext);
     const { focusOnMainInput } = useContext(MainViewContext);
@@ -51,6 +51,10 @@ export default function MainView() {
             window.removeEventListener("focus", tryRoutineUpdate);
         };
     }, []);
+
+    useEffect(() => {
+        fetchCollections();
+    }, [isLoggedIn]);
 
     useEffect(() => {
         if (!collections) return;
