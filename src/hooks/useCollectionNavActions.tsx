@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
+import { MainViewContext } from "@/contexts/MainViewContext";
 
 export default function useCollectionMenuActions() {
     const { collections,  } = useContext(CollectionsContext);
     const { setCurrCollection } = useContext(CurrentCollectionContext);
+    const { deselectItem } = useContext(MainViewContext);
 
     const switchToCollectionById = (collectionId: string) => {
         const index = collections?.map(c => c.id)
@@ -14,6 +16,7 @@ export default function useCollectionMenuActions() {
 
         const targetCollection = collections?.[index!];
         setCurrCollection(targetCollection);
+        deselectItem();
     };
 
     const switchToCollectionBySlug = (collectionSlug: string) => {
@@ -24,6 +27,7 @@ export default function useCollectionMenuActions() {
 
         const targetCollection = collections?.[index!];
         setCurrCollection(targetCollection);
+        deselectItem();
     };
 
     const switchToCollectionByNumricKey = (inputNumber: number) => {
@@ -35,6 +39,7 @@ export default function useCollectionMenuActions() {
         const targetCollection = collections?.[transcribedIndex];
         if (!targetCollection) return;
         setCurrCollection(targetCollection);
+        deselectItem();
     };
 
     return {
