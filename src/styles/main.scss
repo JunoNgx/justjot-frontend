@@ -15,6 +15,19 @@ html {
     padding-top: 60px; // see: Header
 }
 
+header {
+    backdrop-filter: blur(10px);
+
+    [data-mantine-color-scheme="light"] & {
+        background-color: color.adjust(#fff, $alpha: -0.5);
+    }
+
+    [data-mantine-color-scheme="dark"] & {
+        // --mantine-color-body; --mantine-color-dark-7
+        background-color: color.adjust(#242424, $alpha: -0.5);
+    }
+}
+
 .header {
     &__left-side {
         display: flex;
