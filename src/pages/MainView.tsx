@@ -20,7 +20,7 @@ export default function MainView() {
     const { items, fetchItems } = useContext(ItemsContext);
     const { focusOnMainInput } = useContext(MainViewContext);
     const {
-        switchToCollectionByNumricKey,
+        trySwitchToCollectionByNumricKey,
         switchToCollectionBySlug,
         tryNavigateToCollection,
     } = useCollectionNavActions();
@@ -32,16 +32,16 @@ export default function MainView() {
     const mainInputRef = useRef<HTMLInputElement>(null);
     useHotkeys([
         ["mod+F", () => focusOnMainInput(mainInputRef)],
-        ["1", () => switchToCollectionByNumricKey(1)],
-        ["2", () => switchToCollectionByNumricKey(2)],
-        ["3", () => switchToCollectionByNumricKey(3)],
-        ["4", () => switchToCollectionByNumricKey(4)],
-        ["5", () => switchToCollectionByNumricKey(5)],
-        ["6", () => switchToCollectionByNumricKey(6)],
-        ["7", () => switchToCollectionByNumricKey(7)],
-        ["8", () => switchToCollectionByNumricKey(8)],
-        ["9", () => switchToCollectionByNumricKey(9)],
-        ["0", () => switchToCollectionByNumricKey(0)],
+        ["1", () => trySwitchToCollectionByNumricKey(1)],
+        ["2", () => trySwitchToCollectionByNumricKey(2)],
+        ["3", () => trySwitchToCollectionByNumricKey(3)],
+        ["4", () => trySwitchToCollectionByNumricKey(4)],
+        ["5", () => trySwitchToCollectionByNumricKey(5)],
+        ["6", () => trySwitchToCollectionByNumricKey(6)],
+        ["7", () => trySwitchToCollectionByNumricKey(7)],
+        ["8", () => trySwitchToCollectionByNumricKey(8)],
+        ["9", () => trySwitchToCollectionByNumricKey(9)],
+        ["0", () => trySwitchToCollectionByNumricKey(0)],
     ]);
 
     useEffect(() => {
