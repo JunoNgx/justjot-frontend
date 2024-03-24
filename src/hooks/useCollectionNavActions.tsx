@@ -6,7 +6,7 @@ import { ItemCollection } from "@/types";
 import { useNavigate } from "react-router-dom";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 
-export default function useCollectionMenuActions() {
+export default function useCollectionNavActions() {
     const { user } = useContext(BackendClientContext);
     const { collections,  } = useContext(CollectionsContext);
     const { setCurrCollection } = useContext(CurrentCollectionContext);
