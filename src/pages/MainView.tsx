@@ -21,7 +21,7 @@ export default function MainView() {
     const { focusOnMainInput } = useContext(MainViewContext);
     const {
         trySwitchToCollectionByNumricKey,
-        switchToCollectionBySlug,
+        trySwitchToCollectionBySlug,
         tryNavigateToCollection,
     } = useCollectionNavActions();
     const { collectionSlug } = useParams();
@@ -65,7 +65,7 @@ export default function MainView() {
         if (!collectionSlug) tryNavigateToCollection(collections[0]);
         if (collectionSlug === currCollection?.slug) return;
 
-        switchToCollectionBySlug(collectionSlug);
+        trySwitchToCollectionBySlug(collectionSlug);
     }, [collections]);
 
     useEffect(() => {
