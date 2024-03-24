@@ -18,7 +18,7 @@ export default function HeaderUser() {
 
     return <Menu
         position="bottom-end"
-        offset={20}
+        offset={15}
     >
         <Menu.Target>
             <UnstyledButton>

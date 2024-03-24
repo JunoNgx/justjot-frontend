@@ -24,7 +24,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
 
     return <Menu
         position="bottom-start"
-        offset={isMobile ? 10 : 20}
+        offset={isMobile ? 5 : 15}
     >
         <Menu.Target>
             <UnstyledButton className={"collection-menu-btn "
