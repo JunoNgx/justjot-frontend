@@ -13,14 +13,16 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import CollectionHotkey from "@/components/misc/CollectionHotkey";
 import CollectionsSortModal from "@/components/modals/CollectionsSortModal";
+import { BackendClientContext } from "@/contexts/BackendClientContext";
 
 export default function CollectionMenu({isInMainView}: {isInMainView?: boolean}) {
+    const { isLoggedIn } = useContext(BackendClientContext);
     const { collections, fetchCollections } = useContext(CollectionsContext);
     const { currCollection, setCurrCollection  } = useContext(CurrentCollectionContext);
 
     useEffect(() => {
         fetchCollections();
-    }, []);
+    }, [isLoggedIn]);
 
     useEffect(() => {
         if (!collections) return;
