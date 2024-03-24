@@ -35,7 +35,7 @@ import InfoModal from "@/components/modals/InfoModal";
 function App() {
 
     return <AppShell
-        header={{ height: 50}}
+        header={{ height: 45}}
         padding="none"
     >
         <ThemeModeContextProvider>
