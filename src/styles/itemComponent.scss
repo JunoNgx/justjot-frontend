@@ -48,13 +48,18 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: calc(50%);
         user-select: none;
     }
 
+    &__primary-text {
+        max-width: calc(70%);
+    }
+
     &__secondary-text {
+        max-width: calc(50%);
         font-family: var(--mantine-font-family-monospace);
         font-size: 0.8rem;
+        flex-shrink: 5;
     }
 
 }
