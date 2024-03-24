@@ -16,10 +16,14 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
     const { collections, fetchCollections } = useContext(CollectionsContext);
-    const { currCollection, setCurrCollection } = useContext(CurrentCollectionContext);
+    const { currCollection } = useContext(CurrentCollectionContext);
     const { items, fetchItems } = useContext(ItemsContext);
     const { focusOnMainInput } = useContext(MainViewContext);
-    const { switchToCollectionByNumricKey, switchToCollectionBySlug } = useCollectionNavActions();
+    const {
+        switchToCollectionByNumricKey,
+        switchToCollectionBySlug,
+        tryNavigateToCollection,
+    } = useCollectionNavActions();
     const { collectionSlug } = useParams();
 
 
@@ -58,7 +62,8 @@ export default function MainView() {
 
     useEffect(() => {
         if (!collections) return;
-        if (!collectionSlug) setCurrCollection(collections[0]);
+        if (!collectionSlug) tryNavigateToCollection(collections[0]);
+        if (collectionSlug === currCollection?.slug) return;
 
         switchToCollectionBySlug(collectionSlug);
     }, [collections]);
