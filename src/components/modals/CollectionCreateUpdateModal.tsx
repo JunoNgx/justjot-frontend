@@ -7,6 +7,7 @@ import { modals } from "@mantine/modals";
 import { getCurrHighestCollectionSortOrder } from "@/utils/collectionUtils";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
+import { slugify } from "@/utils/miscUtils";
 
 type CollectionCreateUpdateModalOptions = {
     isEditMode?: boolean,
@@ -35,7 +36,8 @@ export default function CollectionCreateUpdateModal(
         = useUpdateCollection({ successfulCallback: modals.closeAll});
 
     const handleSubmit = async (formData: CollectionCreateUpdateFormData) => {
-        const { name, slug } = formData;
+        const { name, slug: originalSlug } = formData;
+        const slug = slugify(originalSlug);
 
         if (isEditMode) {
             await updateCollection({ name, slug });
@@ -46,6 +48,21 @@ export default function CollectionCreateUpdateModal(
         const currHighestSortOrder = getCurrHighestCollectionSortOrder(collections);
         await createCollection({ name, slug }, currHighestSortOrder);
         fetchCollections();
+    }
+
+    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newVal = e.target.value;
+
+        form.setValues({
+            name: newVal,
+            slug: slugify(newVal)
+        });
+    }
+
+    const handleSlugChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        form.setValues({
+            slug: slugify(e.target.value)
+        });
     }
 
     return <form onSubmit={form.onSubmit(handleSubmit)}>
@@ -60,6 +77,7 @@ export default function CollectionCreateUpdateModal(
                 minLength={1}
                 maxLength={50}
                 {...form.getInputProps("name")}
+                onChange={handleNameChange}
             />
             <TextInput
                 label="Collection slug"
@@ -67,6 +85,7 @@ export default function CollectionCreateUpdateModal(
                 placeholder="my-collection"
                 type="text"
                 {...form.getInputProps("slug")}
+                onChange={handleSlugChange}
             />
             <Group mt="xl" justify="flex-end">
                 <Button
