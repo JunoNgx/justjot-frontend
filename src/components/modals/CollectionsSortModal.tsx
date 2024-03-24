@@ -75,8 +75,16 @@ export default function CollectionsSortModal() {
                 index={index}
                 draggableId={collection.id}
             >
-                {(provided, _snapshot) =>
-                    <div
+                {(provided, _snapshot) => {
+                    if (_snapshot.isDragging) {
+                        // Hackfix: https://github.com/atlassian/react-beautiful-dnd/issues/1881
+                        // @ts-expect-error
+                        provided.draggableProps.style.left = provided.draggableProps.style.offsetLeft;
+                        // @ts-expect-error
+                        provided.draggableProps.style.top = provided.draggableProps.style.offsetTop;
+                    }
+
+                    return <div
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
@@ -84,7 +92,7 @@ export default function CollectionsSortModal() {
                         <Paper withBorder m="sm" p="sm">{collection.name}</Paper>
 
                     </div>
-                }
+                }}
                 
             </Draggable>
         )
