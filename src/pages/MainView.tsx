@@ -54,8 +54,9 @@ export default function MainView() {
 
     useEffect(() => {
         if (!collections) return;
-        if (!collectionSlug) setCurrCollection(collections[0])
-        else switchToCollectionBySlug(collectionSlug);
+        if (!collectionSlug) setCurrCollection(collections[0]);
+
+        switchToCollectionBySlug(collectionSlug);
     }, [collections]);
 
     useEffect(() => {
