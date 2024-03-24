@@ -95,6 +95,10 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         const item = getItemByIndex(selectedIndex);
         if (!item) return;
         deleteItem(item);
+        
+        setTimeout(() => {
+            selectPrevItem();
+        }, 500);
     }
 
     const hotkeyRefetchTitleAndFavicon = () => {
