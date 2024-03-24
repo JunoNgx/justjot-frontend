@@ -14,7 +14,7 @@ export default function useCollectionMenuActions() {
 
     const navigate = useNavigate();
 
-    const switchToCollectionById = (collectionId: string) => {
+    const trySwitchToCollectionById = (collectionId: string) => {
         const index = collections?.map(c => c.id)
             .indexOf(collectionId);
 
@@ -56,7 +56,7 @@ export default function useCollectionMenuActions() {
     };
 
     return {
-        switchToCollectionById,
+        trySwitchToCollectionById,
         trySwitchToCollectionBySlug,
         trySwitchToCollectionByNumricKey,
         tryNavigateToCollection,

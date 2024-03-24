@@ -18,7 +18,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
     const { collections } = useContext(CollectionsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
 
-    const { switchToCollectionById } = useCollectionNavActions();
+    const { trySwitchToCollectionById } = useCollectionNavActions();
     const confirmDeletion = useDeleteCollectionConfirmation();
     const isMobile = useMediaQuery(`(max-width: ${em(720)})`);
 
@@ -45,7 +45,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
                 <MenuItem
                     key={collection.id}
                     rightSection={<CollectionHotkey index={index}/>}
-                    onClick={() => switchToCollectionById(collection.id)}
+                    onClick={() => trySwitchToCollectionById(collection.id)}
                 >
                     {collection.name}
                 </MenuItem>
