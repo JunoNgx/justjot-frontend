@@ -1,5 +1,6 @@
 import {
     createTheme,
+    CSSVariablesResolver,
     DEFAULT_THEME,
     mergeMantineTheme,
 } from '@mantine/core';
@@ -29,12 +30,28 @@ const overrideTheme = createTheme({
         colText: "#000", // --mantine-colortext; --mantine-color-black
         colTextDark: "#C9C9C9", // --mantine-color-dark-0
         colLogo: "#86EAD4", // Mint
+        colBlack: "#C9C9C9",
+        colWhite: "#FFFFFF",
         iconStrokeWidth: 1,
         iconSizeMenu: 16,
         iconSizeItem: 24,
         iconSizeHeaderLogo: 32,
         iconSizeHeaderUser: 24,
         iconSizeThemeMode: 18,
+    }
+});
+
+export const justJotCssVarsResolver: CSSVariablesResolver = (theme) => ({
+    variables: {
+        // None for now
+    },
+    light: {
+        "--justjot-col-pri": theme.other.colBlack,
+        "--justjot-col-bg": theme.other.colWhite,
+    },
+    dark: {
+        "--justjot-col-pri": theme.other.colWhite,
+        "--justjot-col-bg": theme.other.colBlack,
     }
 });
 
