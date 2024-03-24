@@ -35,7 +35,9 @@ export default function ItemCreateUpdateModal(
                 content: contentValRef.current,
             });
 
-            fetchItems(currCollection);
+            setTimeout(() => {
+                fetchItems(currCollection);
+            }, 1500);
         }
     }
 
