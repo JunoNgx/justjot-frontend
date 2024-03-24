@@ -5,6 +5,12 @@
 @use "./fonts.scss";
 @use "./itemComponent.scss";
 
+html {
+    @include m.mobile {
+        font-size: 14px;
+    }
+}
+
 .appshell-main {
     padding-top: 60px; // see: Header
 }
