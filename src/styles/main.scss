@@ -16,16 +16,7 @@ html {
 }
 
 header {
-    backdrop-filter: blur(10px);
-
-    [data-mantine-color-scheme="light"] & {
-        background-color: color.adjust(#fff, $alpha: -0.5);
-    }
-
-    [data-mantine-color-scheme="dark"] & {
-        // --mantine-color-body; --mantine-color-dark-7
-        background-color: color.adjust(#242424, $alpha: -0.5);
-    }
+    @include m.glass-blur;
 }
 
 .header {
@@ -153,16 +144,7 @@ header {
 }
 
 .dropdown-menu {
-    backdrop-filter: blur(10px);
-
-    // Syntax from `postcss-color-alpha`
-    [data-mantine-color-scheme="light"] & {
-        background-color: var(--mantine-color-white)(.5);
-    }
-
-    [data-mantine-color-scheme="dark"] & {
-        background-color: var(--mantine-color-dark-6)(.5);
-    }
+    @include m.glass-blur;
 }
 
 .info-modal-body {
