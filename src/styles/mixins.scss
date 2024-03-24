@@ -20,6 +20,19 @@
 //     place-items: center;
 // }
 
+@mixin glass-blur {
+    backdrop-filter: blur(10px);
+
+    // Syntax from `postcss-color-alpha`
+    [data-mantine-color-scheme="light"] & {
+        background-color: var(--mantine-color-white)(.5);
+    }
+
+    [data-mantine-color-scheme="dark"] & {
+        background-color: var(--mantine-color-dark-6)(.5);
+    }
+}
+
 @mixin mobile {
     @media screen and (width <= v.$breakpoint) {
         @content;
