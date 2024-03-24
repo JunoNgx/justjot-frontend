@@ -21,8 +21,7 @@ export default function useCollectionMenuActions() {
         if (index === -1) return;
 
         const targetCollection = collections?.[index!];
-        setCurrCollection(targetCollection);
-        deselectItem();
+        tryNavigateToCollection(targetCollection);
     };
 
     const switchToCollectionBySlug = (collectionSlug?: string) => {
@@ -34,8 +33,7 @@ export default function useCollectionMenuActions() {
         if (index === -1) return;
 
         const targetCollection = collections?.[index!];
-        setCurrCollection(targetCollection);
-        deselectItem();
+        tryNavigateToCollection(targetCollection);
     };
 
     const switchToCollectionByNumricKey = (inputNumber: number) => {
@@ -46,8 +44,7 @@ export default function useCollectionMenuActions() {
 
         const targetCollection = collections?.[transcribedIndex];
         if (!targetCollection) return;
-        setCurrCollection(targetCollection);
-        deselectItem();
+        tryNavigateToCollection(targetCollection);
     };
 
     const tryNavigateToCollection = (collection?: ItemCollection) => {
