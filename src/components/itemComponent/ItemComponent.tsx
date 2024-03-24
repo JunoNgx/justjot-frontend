@@ -74,7 +74,7 @@ export default function ItemComponent(
             onClick: () => {deleteItem(item)}
         }, {
             key: "refetch",
-            title: "Refetch metadata",
+            title: "Refetch",
             hidden: item.type !== ItemType.LINK,
             icon: <IconDownload
                 size={justJotTheme.other.iconSizeMenu}
@@ -85,7 +85,7 @@ export default function ItemComponent(
             key: "divider",
         }, {
             key: "switchPrimaryAction",
-            title: "Copy as PriAct",
+            title: "To copy",
             icon: contextMenuDefaultActionIcon,
             color: "blue",
             onClick: () => {switchShouldOpenOnClick(item)}
