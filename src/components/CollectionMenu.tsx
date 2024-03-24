@@ -14,7 +14,7 @@ import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import CollectionHotkey from "@/components/misc/CollectionHotkey";
 import CollectionsSortModal from "@/components/modals/CollectionsSortModal";
 
-export default function CollectionMenu() {
+export default function CollectionMenu({isInMainView}: {isInMainView?: boolean}) {
     const { collections, fetchCollections } = useContext(CollectionsContext);
     const { currCollection, setCurrCollection  } = useContext(CurrentCollectionContext);
 
@@ -37,7 +37,9 @@ export default function CollectionMenu() {
         offset={isMobile ? 10 : 20}
     >
         <Menu.Target>
-            <UnstyledButton className={"collection-menu-btn"}>
+            <UnstyledButton className={"collection-menu-btn "
+                + (isInMainView && "collection-menu-btn--is-in-main-view")}
+            >
                 <Group>
                     <Text>{currCollection?.name}</Text>
                     <IconSelector

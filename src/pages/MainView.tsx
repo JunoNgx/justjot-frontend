@@ -10,6 +10,7 @@ import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { useHotkeys } from "@mantine/hooks";
 import { MainViewContext } from "@/contexts/MainViewContext";
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
+import CollectionMenu from "@/components/CollectionMenu";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -65,6 +66,7 @@ export default function MainView() {
 
     return <Box className="main-view-wrapper">
         {/* For non-item components */}
+        <CollectionMenu isInMainView={true} />
 
         <Stack className="main-view"
             gap="xl"

@@ -126,17 +126,25 @@ header {
     //         padding: 0.4rem 0.8rem;
     //     }
     // }
-
     @include m.mobile {
-        // display: block;
-        position: fixed;
-        bottom: 0.8rem;
-        left: 0.8rem;
-
-        border: solid 1px var(--mantine-color-default-border);
-        background-color: var(--mantine-color-body);
-        padding: 0.4rem 0.8rem;
+        display: none;
     }
+
+    &--is-in-main-view {
+        display: none;
+
+        @include m.mobile {
+            display: block;
+            position: fixed;
+            bottom: 0.8rem;
+            left: 0.8rem;
+    
+            border: solid 1px var(--mantine-color-default-border);
+            background-color: var(--mantine-color-body);
+            padding: 0.4rem 0.8rem;
+        }
+    }
+
 
     // &__number-placeholder {
     //     width: 19.35px; // TODO: find a more reliable way to size this
