@@ -18,17 +18,11 @@ import { BackendClientContext } from "@/contexts/BackendClientContext";
 export default function CollectionMenu({isInMainView}: {isInMainView?: boolean}) {
     const { isLoggedIn } = useContext(BackendClientContext);
     const { collections, fetchCollections } = useContext(CollectionsContext);
-    const { currCollection, setCurrCollection  } = useContext(CurrentCollectionContext);
+    const { currCollection } = useContext(CurrentCollectionContext);
 
     useEffect(() => {
         fetchCollections();
     }, [isLoggedIn]);
-
-    useEffect(() => {
-        if (!collections) return;
-        // TODO set from param
-        setCurrCollection(collections[0]);
-    }, [collections]);
 
     const { switchToCollectionById } = useCollectionNavActions();
     const confirmDeletion = useDeleteCollectionConfirmation();

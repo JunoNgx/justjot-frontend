@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef } from "react";
 import { Box, Stack } from '@mantine/core';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Notifications } from '@mantine/notifications';
 import ItemComponent from '@/components/itemComponent/ItemComponent';
 import MainInput from "@/components/MainInput";
@@ -11,13 +11,16 @@ import { useHotkeys } from "@mantine/hooks";
 import { MainViewContext } from "@/contexts/MainViewContext";
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 import CollectionMenu from "@/components/CollectionMenu";
+import { CollectionsContext } from "@/contexts/CollectionsContext";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
+    const { collections } = useContext(CollectionsContext);
+    const { currCollection, setCurrCollection } = useContext(CurrentCollectionContext);
     const { items, fetchItems } = useContext(ItemsContext);
-    const { currCollection } = useContext(CurrentCollectionContext);
     const { focusOnMainInput } = useContext(MainViewContext);
-    const { switchToCollectionByNumricKey } = useCollectionNavActions();
+    const { switchToCollectionByNumricKey, switchToCollectionBySlug } = useCollectionNavActions();
+    const { collectionSlug } = useParams();
 
 
     const navigate = useNavigate();
@@ -48,6 +51,12 @@ export default function MainView() {
             window.removeEventListener("focus", tryRoutineUpdate);
         };
     }, []);
+
+    useEffect(() => {
+        if (!collections) return;
+        if (!collectionSlug) setCurrCollection(collections[0])
+        else switchToCollectionBySlug(collectionSlug);
+    }, [collections]);
 
     useEffect(() => {
         if (!currCollection) return;
