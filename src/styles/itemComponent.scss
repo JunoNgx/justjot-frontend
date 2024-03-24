@@ -49,6 +49,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: calc(50%);
+        user-select: none;
     }
 
     &__secondary-text {
