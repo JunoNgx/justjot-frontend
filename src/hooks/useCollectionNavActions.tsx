@@ -19,7 +19,9 @@ export default function useCollectionMenuActions() {
         deselectItem();
     };
 
-    const switchToCollectionBySlug = (collectionSlug: string) => {
+    const switchToCollectionBySlug = (collectionSlug?: string) => {
+        if (!collectionSlug) return;
+
         const index = collections?.map(c => c.slug)
             .indexOf(collectionSlug);
 
