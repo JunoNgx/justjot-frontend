@@ -51,3 +51,10 @@ export const slugify = (str: string) => {
     .replace(/\s+/g, '-') // replace spaces with hyphens
     .replace(/-+/g, '-'); // remove consecutive hyphens
 }
+
+export const findSelectedIndex = () => {
+    const itemListWrapper = document.querySelector(`#displayed-list`);
+    const selectedItem = itemListWrapper?.querySelector<HTMLBaseElement>("[data-is-selected]");
+    const index = selectedItem?.getAttribute("data-index");
+    return Number(index);
+};

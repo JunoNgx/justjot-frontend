@@ -54,13 +54,6 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         return targetItem;
     };
 
-    const findIndex = () => {
-        const itemListWrapper = document.querySelector(`#displayed-list`);
-        const selectedItem = itemListWrapper?.querySelector<HTMLBaseElement>("[data-is-selected]");
-        const index = selectedItem?.getAttribute("data-index");
-        return Number(index);
-    };
-
     const hotkeyCopyContent = () => {
         // const selectedIndex = findIndex();
         // if (!isValidIndex(selectedIndex)) return;
