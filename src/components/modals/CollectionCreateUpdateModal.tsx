@@ -32,7 +32,7 @@ export default function CollectionCreateUpdateModal(
     });
     const [ createCollection, isCreateLoading ]
         = useCreateCollection({ successfulCallback: modals.closeAll});
-    const [ updateCollection, isUpdateLoading ]
+    const [ updateCollection, _, isUpdateLoading ]
         = useUpdateCollection({ successfulCallback: modals.closeAll});
 
     const handleSubmit = async (formData: CollectionCreateUpdateFormData) => {
