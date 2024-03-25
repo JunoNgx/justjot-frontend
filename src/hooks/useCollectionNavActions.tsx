@@ -36,7 +36,7 @@ export default function useCollectionNavActions() {
         tryNavigateToCollection(targetCollection);
     };
 
-    const trySwitchToCollectionByNumricKey = (inputNumber: number) => {
+    const trySwitchToCollectionByNumericKey = (inputNumber: number) => {
         let transcribedIndex;
         if (inputNumber < 0 || inputNumber > 9) return;
         else if (inputNumber === 0) transcribedIndex = 9;
@@ -58,7 +58,7 @@ export default function useCollectionNavActions() {
     return {
         trySwitchToCollectionById,
         trySwitchToCollectionBySlug,
-        trySwitchToCollectionByNumricKey,
+        trySwitchToCollectionByNumericKey,
         tryNavigateToCollection,
     }
 };
