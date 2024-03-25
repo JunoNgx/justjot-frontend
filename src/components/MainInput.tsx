@@ -30,7 +30,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const {
         copyItemContent,
         openUpdateItemModal,
-        deleteWithManipulation,
+        deleteItemWithManipulation,
         openMoveItemModal,
         refetchTitleAndFavicon,
         switchShouldOpenOnClick,
@@ -82,7 +82,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         if (!item) return;
 
         selectItem(selectedIndex?.current + 1);
-        deleteWithManipulation(item);
+        deleteItemWithManipulation(item);
     }
 
     const hotkeyRefetchTitleAndFavicon = () => {

@@ -98,7 +98,7 @@ export default function useItemContextMenuActions() {
             });
     }
 
-    const deleteWithManipulation = async (item: Item) => {
+    const deleteItemWithManipulation = async (item: Item) => {
         const index = items?.map(item => item.id)
             .indexOf(item.id);
         
@@ -175,7 +175,7 @@ export default function useItemContextMenuActions() {
         copyItemContent,
         openUpdateItemModal,
         deleteItem,
-        deleteWithManipulation,
+        deleteItemWithManipulation,
         openMoveItemModal,
         refetchTitleAndFavicon,
         switchShouldOpenOnClick,

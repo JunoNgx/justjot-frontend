@@ -27,7 +27,7 @@ export default function ItemComponent(
         copyItemContent,
         openUpdateItemModal,
         openMoveItemModal,
-        deleteWithManipulation,
+        deleteItemWithManipulation,
         switchShouldOpenOnClick,
         refetchTitleAndFavicon
     } = useItemContextMenuActions();
@@ -71,7 +71,7 @@ export default function ItemComponent(
                 stroke={justJotTheme.other.iconStrokeWidth}
             />,
             color: "red",
-            onClick: () => {deleteWithManipulation(item)}
+            onClick: () => {deleteItemWithManipulation(item)}
         }, {
             key: "refetch",
             title: "Refetch",
