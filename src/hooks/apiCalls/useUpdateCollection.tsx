@@ -15,7 +15,7 @@ export default function useUpdateCollection({
     successfulCallback, errorCallback }: RequestCallbackOptions = {}
 ): useUpdateCollectionReturnType {
 
-    const {pbClient, user} = useContext(BackendClientContext);
+    const {pbClient} = useContext(BackendClientContext);
     const { currCollection } = useContext(CurrentCollectionContext);
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +23,11 @@ export default function useUpdateCollection({
     const updateCollection = async ({ name, slug }: CreateUpdateCollectionOptions) => {
         setIsLoading(true);
         await pbClient.collection(DbTable.COLLECTIONS)
-            .update(currCollection!.id, { name, slug, owner: user!.id })
+            .update(currCollection!.id,
+                {
+                    name,
+                    slug,
+                })
             .then((_record: ItemCollection) => {
                 setIsSuccessful(true);
                 successfulCallback?.();
