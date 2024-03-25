@@ -25,6 +25,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         execPrimaryAction,
         blurMainInput,
         scrollToTop,
+        scrollToBottom,
     } = useContext(MainViewContext);
     const {
         copyItemContent,
@@ -123,6 +124,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["mod+Enter", execPrimaryAction],
             ["Escape", blurMainInput],
             ["Home", scrollToTop],
+            ["End", scrollToBottom],
             ["mod+C", hotkeyCopyContent],
             ["mod+E", hotkeyOpenUpdateItemModal],
             ["mod+M", hotkeyOpenMoveItemModal],
