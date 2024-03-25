@@ -3,7 +3,7 @@ import { clamp } from "@mantine/hooks";
 import { createContext, useRef } from "react";
 
 interface MainViewContextType {
-    // selectedIndex: React.MutableRefObject<number>,
+    selectedIndex: React.MutableRefObject<number> | null,
     focusOnMainInput: (_mainInputRef: React.RefObject<HTMLInputElement>) => void,
     blurMainInput: () => void,
     selectItem: (_index: number) => void,
@@ -15,7 +15,7 @@ interface MainViewContextType {
 };
 
 export const MainViewContext = createContext<MainViewContextType>({
-    // selectedIndex: ,
+    selectedIndex: null,
     focusOnMainInput: (_mainInputRef: React.RefObject<HTMLInputElement>) => {},
     blurMainInput: () => {},
     selectItem: (_index: number) => {},
@@ -85,6 +85,7 @@ export default function MainViewContextProvider(
     }
 
     return <MainViewContext.Provider value={{
+        selectedIndex,
         focusOnMainInput,
         blurMainInput,
         selectItem,
