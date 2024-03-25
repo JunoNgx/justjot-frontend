@@ -24,12 +24,13 @@ export default function useCreateItem(
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const createItem = async ({ content }: { content?: string }) => {
+    const createItem = async ({ title, content }: ItemCreateUpdateType) => {
         setIsLoading(true);
         pbClient.collection(DbTable.ITEMS)
             .create({
                 owner: user!.id,
                 collection: currCollection!.id,
+                title,
                 content,
             })
             .then((_record: Item) => {
