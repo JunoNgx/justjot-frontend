@@ -58,7 +58,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
                 />}
                 onClick={() => modals.open({
                     centered: true,
-                    title: "Create new Collection",
+                    title: "Create New Collection",
                     children: (<CollectionCreateUpdateModal isEditMode={false}/>)
                 })}
             >
@@ -70,7 +70,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
                 />}
                 onClick={() => modals.open({
                     centered: true,
-                    title: "Create new Collection",
+                    title: "Edit Collection",
                     children: (<CollectionCreateUpdateModal isEditMode={true}/>)
                 })}
             >
