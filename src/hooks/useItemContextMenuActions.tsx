@@ -18,7 +18,6 @@ type ItemMoveModalOptions = {
 
 export default function useItemContextMenuActions() {
     const { pbClient, user } = useContext(BackendClientContext);
-    const { setCurrItem } = useContext(CurrentItemContext);
     const { currCollection } = useContext(CurrentCollectionContext);
     const { fetchItems } = useContext(ItemsContext);
     const { items, setItems } = useContext(ItemsContext);
