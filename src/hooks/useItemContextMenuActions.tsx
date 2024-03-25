@@ -21,6 +21,7 @@ export default function useItemContextMenuActions() {
     const { setCurrItem } = useContext(CurrentItemContext);
     const { currCollection } = useContext(CurrentCollectionContext);
     const { fetchItems } = useContext(ItemsContext);
+    const { items, setItems } = useContext(ItemsContext);
     const clipboard = useClipboard({ timeout: 1000 });
 
     const copyItemContent = async (item: Item) => {
@@ -98,6 +99,18 @@ export default function useItemContextMenuActions() {
             });
     }
 
+    const deleteWithManipulation = async (item: Item) => {
+        const index = items?.map(item => item.id)
+            .indexOf(item.id);
+        
+        if (!index) return;
+
+        const newArray = items?.slice(0, index)
+            .concat(items.slice(index + 1, items.length));
+
+        setItems(newArray);
+    }
+
     const refetchTitleAndFavicon = async (item: Item) => {
         if (!item) {
             notifications.show({
@@ -161,6 +174,7 @@ export default function useItemContextMenuActions() {
         copyItemContent,
         openUpdateItemModal,
         deleteItem,
+        deleteWithManipulation,
         openMoveItemModal,
         refetchTitleAndFavicon,
         switchShouldOpenOnClick,
