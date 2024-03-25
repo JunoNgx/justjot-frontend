@@ -166,3 +166,41 @@ header {
     width: 19.35px; // TODO: find a more reliable way to size this
     height: 28.6px;
 }
+
+// .collections-sort-modal {
+    // display: flex;
+    // justify-content: space-around;
+//     display: grid;
+//     grid-template-columns: [left-most] 1fr [left-border] 8fr [mid-line] 2fr [right-border] 1fr [right-most];
+
+
+    // &__collection-item {
+//         // grid-column-start: left-border;
+//         // grid-column-end: mid-line;
+//         // grid-column-start: 2;
+//         // grid-column-end: 3;
+//         // grid-row: 1;
+//         // word-wrap: none;
+//         overflow: hidden;
+//         white-space: nowrap;
+//         text-overflow: ellipsis;
+        // max-width: 30rem;
+        // margin: auto;
+    // }
+
+    // &__number-item {
+//         // grid-column-start: mid-line;
+//         // grid-column-end: right-border;
+//         // grid-column-start: 3;
+//         // grid-column-end: 4;
+//         border-width: 1px;
+//         grid-row: 1;
+        // margin: 0.75rem;
+        // padding: 0.75rem;
+        // height: 3.15rem;
+
+        // @include m.mobile {
+        //     display: none;
+        // }
+    // }
+// }

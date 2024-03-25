@@ -1,4 +1,4 @@
-import { Paper, Stack } from "@mantine/core";
+import { Box, Button, Center, Container, Flex, Grid, Group, Paper, Stack, Text } from "@mantine/core";
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { useListState } from "@mantine/hooks";
 import { useContext, useEffect, useRef } from "react";
@@ -6,6 +6,7 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { COLLECTION_SORT_ORDER_MAG } from "@/utils/constants";
 import useUpdateCollection from "@/hooks/apiCalls/useUpdateCollection";
 import { ItemCollection } from "@/types";
+import CollectionHotkey from "../misc/CollectionHotkey";
 
 export default function CollectionsSortModal() {
 
@@ -100,12 +101,21 @@ export default function CollectionsSortModal() {
                     provided.draggableProps.style.top = provided.draggableProps.style.offsetTop;
                 }
 
-                return <div
+                return <div className="collections-sort-modal__collection-item"
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
                 >
-                    <Paper withBorder m="sm" p="sm">{collection.name}/{collection.sortOrder}</Paper>
+                    <Paper withBorder m="xs" p="xs">
+                        {/* <Center> */}
+                            <Group
+                                justify="space-between"
+                            >
+                                <Text>{collection.name} (value: {collection.sortOrder})</Text>
+                                <CollectionHotkey index={index}/>
+                            </Group>
+                        {/* </Center> */}
+                    </Paper>
 
                 </div>
             }}
@@ -136,8 +146,22 @@ export default function CollectionsSortModal() {
     )
 
     return (
-        <Stack className="collections-sort-modal" p="xl">
-            {draggableArea}
-        </Stack>
+        <div className="collections-sort-modal"
+        >
+            <Center>
+                <div className="collections-sort-modal__left-side"
+                >
+                    {draggableArea}
+                </div>
+            </Center>
+            {/* <div className="collections-sort-modal__right-side"
+            >
+                {collections?.map((_, index) =>
+                    <div className="collections-sort-modal__number-item">
+                        <CollectionHotkey index={index}/>
+                    </div>
+                )}
+            </div> */}
+        </div>
     )
 }
