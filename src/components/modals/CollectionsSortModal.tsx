@@ -1,7 +1,7 @@
 import { Paper, Stack } from "@mantine/core";
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { useListState } from "@mantine/hooks";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { COLLECTION_SORT_ORDER_MAG } from "@/utils/constants";
 import useUpdateCollection from "@/hooks/apiCalls/useUpdateCollection";
@@ -12,11 +12,11 @@ export default function CollectionsSortModal() {
     const { collections, fetchCollections } = useContext(CollectionsContext);
     const [state, handlers] = useListState(collections);
     const [_, updateCollectionSortOrder] = useUpdateCollection();
-    const [hasChanged, setHasChanged] = useState(false);
+    const hasChanged = useRef(false);
 
     useEffect(() => {
         return () => {
-            if (hasChanged) {
+            if (hasChanged.current) {
                 fetchCollections();
             }
         };
@@ -82,7 +82,7 @@ export default function CollectionsSortModal() {
         updateCollectionSortOrder({
             collectionId: movedCollection.id, newSortOrderValue
         });
-        setHasChanged(true);
+        hasChanged.current = true;
     }
 
     const draggableItemList = (
