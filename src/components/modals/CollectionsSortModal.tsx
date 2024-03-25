@@ -15,6 +15,23 @@ export default function CollectionsSortModal() {
             to: destination?.index || 0
         });
 
+        if (!destination?.index) return;
+
+        if (source.index === destination.index) {
+            console.log("not changed");
+            return;
+        }
+
+        if (destination.index === 0) {
+            console.log("move to top")
+            return;
+        }
+
+        if (destination.index === collections?.length! - 1) {
+            console.log("move to bottom")
+            return;
+        }
+
         // TODO: calculate new sort order
         // TODO: updateSortOrder
     };
