@@ -25,7 +25,6 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         blurMainInput,
         scrollToTop,
     } = useContext(MainViewContext);
-    // const { getItemByIndex } = useItemNavActions(items);
     const {
         copyItemContent,
         openUpdateItemModal,
@@ -55,8 +54,6 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     };
 
     const hotkeyCopyContent = () => {
-        // const selectedIndex = findIndex();
-        // if (!isValidIndex(selectedIndex)) return;
         if (!selectedIndex?.current) return;
         const item = getItemByIndex(selectedIndex?.current);
         if (!item) return;
@@ -64,8 +61,6 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     }
 
     const hotkeyOpenUpdateItemModal = () => {
-        // const selectedIndex = findIndex();
-        // if (!isValidIndex(selectedIndex)) return;
         if (!selectedIndex?.current) return;
         const item = getItemByIndex(selectedIndex?.current);
         if (!item) return;
@@ -73,8 +68,6 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     }
 
     const hotkeyOpenMoveItemModal = () => {
-        // const selectedIndex = findIndex();
-        // if (!isValidIndex(selectedIndex)) return;
         if (!selectedIndex?.current) return;
         const item = getItemByIndex(selectedIndex?.current);
         if (!item) return;
@@ -82,8 +75,6 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     }
 
     const hotkeyDeleteItem = () => {
-        // const selectedIndex = findIndex();
-        // if (!isValidIndex(selectedIndex)) return;
         if (!selectedIndex?.current) return;
         const item = getItemByIndex(selectedIndex?.current);
         if (!item) return;
@@ -95,8 +86,6 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     }
 
     const hotkeyRefetchTitleAndFavicon = () => {
-        // const selectedIndex = findIndex();
-        // if (!isValidIndex(selectedIndex)) return;
         if (!selectedIndex?.current) return;
         const item = getItemByIndex(selectedIndex?.current);
         if (!item) return;
@@ -105,8 +94,6 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     }
 
     const hotkeySwitchShouldOpenOnClick = () => {
-        // const selectedIndex = findIndex();
-        // if (!isValidIndex(selectedIndex)) return;
         if (!selectedIndex?.current) return;
         const item = getItemByIndex(selectedIndex?.current);
         if (!item) return;
