@@ -19,6 +19,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { fetchItems } = useContext(ItemsContext);
     const {
         selectedIndex,
+        selectItem,
         selectPrevItem,
         selectNextItem,
         execPrimaryAction,
@@ -81,8 +82,8 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         deleteItem(item);
         
         setTimeout(() => {
-            selectPrevItem();
-        }, 500);
+            selectItem(selectedIndex?.current);
+        }, 200);
     }
 
     const hotkeyRefetchTitleAndFavicon = () => {
