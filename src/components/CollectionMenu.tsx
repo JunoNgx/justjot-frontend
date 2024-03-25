@@ -62,7 +62,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
                     children: (<CollectionCreateUpdateModal isEditMode={false}/>)
                 })}
             >
-                Create new collection
+                Create collection
             </MenuItem>
             <MenuItem leftSection={<IconEdit
                     size={justJotTheme.other.iconSizeMenu}
@@ -74,7 +74,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
                     children: (<CollectionCreateUpdateModal isEditMode={true}/>)
                 })}
             >
-                Edit this collection
+                Edit collection
             </MenuItem>
             <MenuItem
                 leftSection={<IconSortAscendingShapes
@@ -88,7 +88,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
                     children: <CollectionsSortModal/>
                 })}
             >
-                Sort all collections
+                Sort collections
             </MenuItem>
 
             <MenuDivider/>
@@ -101,7 +101,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
                 />}
                 onClick={confirmDeletion}
             >
-                Delete this collection
+                Delete collection
             </MenuItem>
         </Menu.Dropdown>        
     </Menu>
