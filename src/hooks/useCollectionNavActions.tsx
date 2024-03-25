@@ -30,7 +30,10 @@ export default function useCollectionNavActions() {
         const index = collections?.map(c => c.slug)
             .indexOf(collectionSlug);
 
-        if (index === -1) return;
+        if (index === -1) {
+            tryNavigateToCollection(collections![0]);
+            return;
+        }
 
         const targetCollection = collections?.[index!];
         tryNavigateToCollection(targetCollection);
