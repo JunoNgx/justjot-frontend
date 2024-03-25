@@ -3,6 +3,7 @@ import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea
 import { useListState } from "@mantine/hooks";
 import { useContext } from "react";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
+import { COLLECTION_SORT_ORDER_MAG } from "@/utils/constants";
 
 export default function CollectionsSortModal() {
 
@@ -15,15 +16,25 @@ export default function CollectionsSortModal() {
             to: destination?.index || 0
         });
 
-        if (!destination?.index) return;
+        if (!collections) return;
+
+        if (!destination
+            || destination.index === null
+            || destination.index === undefined
+        ) return;
 
         if (source.index === destination.index) {
-            console.log("not changed");
             return;
         }
 
+        const sourceCollection = collections[source.index];
+
         if (destination.index === 0) {
-            console.log("move to top")
+            console.log("move to top", source)
+            const firstCollection = collections[0];
+            const newSortOrderValue = firstCollection.sortOrder - COLLECTION_SORT_ORDER_MAG;
+            processUpdateCollectionSortOrder(
+                sourceCollection.id, newSortOrderValue);
             return;
         }
 
@@ -35,6 +46,12 @@ export default function CollectionsSortModal() {
         // TODO: calculate new sort order
         // TODO: updateSortOrder
     };
+
+    const processUpdateCollectionSortOrder = (
+        collectionId: string, newSortOrderValue: number
+    ) => {
+        console.log("processUpdateCollectionSortOrder", collectionId, newSortOrderValue)
+    }
 
     const draggableItemList = (
         state.map((collection, index) => <Draggable
