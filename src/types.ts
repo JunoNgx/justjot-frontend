@@ -20,7 +20,7 @@ export type ItemCollection = RecordModel | {
     owner: string,
     name: string,
     slug: string,
-    sortOrder: 0,
+    sortOrder: number,
     created: string,
     updated: string
 };
