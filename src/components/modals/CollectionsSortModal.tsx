@@ -1,16 +1,28 @@
-import {  Paper, Stack } from "@mantine/core";
+import { Paper, Stack } from "@mantine/core";
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { useListState } from "@mantine/hooks";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { COLLECTION_SORT_ORDER_MAG } from "@/utils/constants";
+import useUpdateCollection from "@/hooks/apiCalls/useUpdateCollection";
+import { ItemCollection } from "@/types";
 
 export default function CollectionsSortModal() {
 
-    const {collections} = useContext(CollectionsContext);
+    const { collections, fetchCollections } = useContext(CollectionsContext);
     const [state, handlers] = useListState(collections);
+    const [_, updateCollectionSortOrder] = useUpdateCollection();
+    const [hasChanged, setHasChanged] = useState(false);
 
-    const handleDragEnd = ({destination, source}: DropResult) => {
+    useEffect(() => {
+        return () => {
+            if (hasChanged) {
+                fetchCollections();
+            }
+        };
+    }, []);
+
+    const handleDragEnd = ({ destination, source }: DropResult) => {
         handlers.reorder({
             from: source.index,
             to: destination?.index || 0
@@ -27,65 +39,78 @@ export default function CollectionsSortModal() {
             return;
         }
 
-        const movedCollection = collections[source.index];
+        /**
+         * This implementation displays outcomme optimistically.
+         * All displayed data comes from the immediate manipulated
+         * `listState`, not from the actual real changes.
+         */
+
+        const movedCollection = state[source.index];
 
         if (destination.index === 0) {
-            const firstCollection = collections[0];
+            const firstCollection = state[0];
             const newSortOrderValue = firstCollection.sortOrder
                 - COLLECTION_SORT_ORDER_MAG;
             processUpdateCollectionSortOrder(
-                movedCollection.id, newSortOrderValue);
+                movedCollection, destination.index, newSortOrderValue);
             return;
         }
 
-        if (destination.index === collections?.length! - 1) {
-            const lastCollection = collections[collections.length - 1];
+        if (destination.index === state.length - 1) {
+            const lastCollection = state[state.length - 1];
             const newSortOrderValue = lastCollection.sortOrder
                 + COLLECTION_SORT_ORDER_MAG;
             processUpdateCollectionSortOrder(
-                movedCollection.id, newSortOrderValue);
+                movedCollection, destination.index, newSortOrderValue);
             return;
         }
 
-        const prevCollection = collections[destination.index - 1];
-        const nextCollection = collections[destination.index];
-        const newSortOrderValue = (prevCollection.sortOrder + nextCollection.sortOrder)/2
+        const prevCollection = state[destination.index - 1];
+        const nextCollection = state[destination.index];
+        const newSortOrderValue = (prevCollection.sortOrder + nextCollection.sortOrder) / 2
         processUpdateCollectionSortOrder(
-            movedCollection.id, newSortOrderValue);
+            movedCollection, destination.index, newSortOrderValue);
     };
 
-    const processUpdateCollectionSortOrder = (
-        collectionId: string, newSortOrderValue: number
+    const processUpdateCollectionSortOrder = async (
+        movedCollection: ItemCollection, newIndex: number, newSortOrderValue: number
     ) => {
-        console.log("processUpdateCollectionSortOrder", collectionId, newSortOrderValue)
+        handlers.setItem(
+            newIndex,
+            { ...movedCollection, sortOrder: newSortOrderValue }
+        );
+        updateCollectionSortOrder({
+            collectionId: movedCollection.id, newSortOrderValue
+        });
+        setHasChanged(true);
     }
 
     const draggableItemList = (
         state.map((collection, index) => <Draggable
-                key={collection.id}
-                index={index}
-                draggableId={collection.id}
-            >
-                {(provided, _snapshot) => {
-                    if (_snapshot.isDragging) {
-                        // Hackfix: https://github.com/atlassian/react-beautiful-dnd/issues/1881
-                        // @ts-expect-error
-                        provided.draggableProps.style.left = provided.draggableProps.style.offsetLeft;
-                        // @ts-expect-error
-                        provided.draggableProps.style.top = provided.draggableProps.style.offsetTop;
-                    }
+            key={collection.id}
+            index={index}
+            draggableId={collection.id}
+        >
+            {(provided, _snapshot) => {
+                if (_snapshot.isDragging) {
+                    // Hackfix: https://github.com/atlassian/react-beautiful-dnd/issues/1881
+                    // @ts-expect-error
+                    provided.draggableProps.style.left = provided.draggableProps.style.offsetLeft;
+                    // @ts-expect-error
+                    provided.draggableProps.style.top = provided.draggableProps.style.offsetTop;
+                }
 
-                    return <div
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                    >
-                        <Paper withBorder m="sm" p="sm">{collection.name}</Paper>
+                return <div
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    ref={provided.innerRef}
+                >
+                    <Paper withBorder m="sm" p="sm">{collection.name}/{collection.sortOrder}</Paper>
 
-                    </div>
-                }}
-                
-            </Draggable>
+                </div>
+            }}
+
+        </Draggable>
         )
     )
 
