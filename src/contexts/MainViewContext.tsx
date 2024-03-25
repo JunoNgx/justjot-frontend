@@ -12,6 +12,7 @@ interface MainViewContextType {
     selectPrevItem: () => void,
     execPrimaryAction: () => void,
     scrollToTop: () => void,
+    scrollToBottom: () => void,
 };
 
 export const MainViewContext = createContext<MainViewContextType>({
@@ -24,12 +25,19 @@ export const MainViewContext = createContext<MainViewContextType>({
     selectPrevItem: () => {},
     execPrimaryAction: () => {},
     scrollToTop: () => {},
+    scrollToBottom: () => {},
 });
 
 export default function MainViewContextProvider(
     {children}: {children: React.ReactNode}
 ) {
     const selectedIndex = useRef(-1);
+
+    const findItemCount = () => {
+        const itemListWrapper = document.querySelector(`#displayed-list`);
+        const itemList = itemListWrapper?.querySelectorAll<HTMLBaseElement>("[data-is-item]") ?? [];
+        return itemList.length;
+    }
 
     const focusOnMainInput = (mainInputRef: React.RefObject<HTMLInputElement>) => {
         mainInputRef.current?.focus();
@@ -84,6 +92,11 @@ export default function MainViewContextProvider(
         selectItem(0);
     }
 
+    const scrollToBottom = () => {
+        window.scrollTo(0, document.body.scrollHeight);
+        selectItem(findItemCount() - 1);
+    }
+
     return <MainViewContext.Provider value={{
         selectedIndex,
         focusOnMainInput,
@@ -94,6 +107,7 @@ export default function MainViewContextProvider(
         selectPrevItem,
         execPrimaryAction,
         scrollToTop,
+        scrollToBottom,
     }}>
         {children}
     </MainViewContext.Provider>
