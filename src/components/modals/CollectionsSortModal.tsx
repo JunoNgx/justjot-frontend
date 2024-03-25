@@ -27,24 +27,31 @@ export default function CollectionsSortModal() {
             return;
         }
 
-        const sourceCollection = collections[source.index];
+        const movedCollection = collections[source.index];
 
         if (destination.index === 0) {
-            console.log("move to top", source)
             const firstCollection = collections[0];
-            const newSortOrderValue = firstCollection.sortOrder - COLLECTION_SORT_ORDER_MAG;
+            const newSortOrderValue = firstCollection.sortOrder
+                - COLLECTION_SORT_ORDER_MAG;
             processUpdateCollectionSortOrder(
-                sourceCollection.id, newSortOrderValue);
+                movedCollection.id, newSortOrderValue);
             return;
         }
 
         if (destination.index === collections?.length! - 1) {
-            console.log("move to bottom")
+            const lastCollection = collections[collections.length - 1];
+            const newSortOrderValue = lastCollection.sortOrder
+                + COLLECTION_SORT_ORDER_MAG;
+            processUpdateCollectionSortOrder(
+                movedCollection.id, newSortOrderValue);
             return;
         }
 
-        // TODO: calculate new sort order
-        // TODO: updateSortOrder
+        const prevCollection = collections[destination.index - 1];
+        const nextCollection = collections[destination.index];
+        const newSortOrderValue = (prevCollection.sortOrder + nextCollection.sortOrder)/2
+        processUpdateCollectionSortOrder(
+            movedCollection.id, newSortOrderValue);
     };
 
     const processUpdateCollectionSortOrder = (
