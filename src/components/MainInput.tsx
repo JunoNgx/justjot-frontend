@@ -37,16 +37,18 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     } = useItemContextMenuActions();
 
     const [inputVal, setInputVal] = useState("");
-    const [createItem, isCreateItemLoading] = useCreateItem({
-        successfulCallback: () => {
-            setInputVal("");
-            fetchItems(currCollection);
-        }
+    const [_createItem, createItemWithManipulation, isCreateItemLoading] = useCreateItem({
+        // successfulCallback: () => {
+        //     // setInputVal("");
+        //     // fetchItems(currCollection);
+        // }
     });
 
     const handleEnter = () => {
         if (!inputVal) return;
-        createItem({ content: inputVal });
+        setInputVal("");
+        createItemWithManipulation({ content: inputVal });
+        fetchItems(currCollection);
     };
 
     const getItemByIndex = (index: number) => {
