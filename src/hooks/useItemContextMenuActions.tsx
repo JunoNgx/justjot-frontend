@@ -80,7 +80,7 @@ export default function useItemContextMenuActions() {
         await pbClient.collection(DbTable.ITEMS)
             .delete(item.id)
             .then((_isSuccessful: boolean) => {
-                setCurrItem(undefined);
+                console.log("kfjdslfksdlfjsd")
                 fetchItems(currCollection);
                 notifications.show({
                     message: "Item deleted",
@@ -109,6 +109,8 @@ export default function useItemContextMenuActions() {
             .concat(items.slice(index + 1, items.length));
 
         setItems(newArray);
+
+        deleteItem(item);
     }
 
     const refetchTitleAndFavicon = async (item: Item) => {
