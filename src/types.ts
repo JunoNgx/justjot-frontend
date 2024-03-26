@@ -60,7 +60,7 @@ export enum DbTable {
     COLLECTIONS = "itemCollections"
 };
 
-export type RequestCallbackOptions = {
+export interface RequestCallbackOptions {
     successfulCallback?: () => void,
     errorCallback?: () => void,
 };
