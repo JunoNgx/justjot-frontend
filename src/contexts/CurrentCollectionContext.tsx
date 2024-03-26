@@ -16,11 +16,6 @@ export default function CurrentCollectionContextProvider({ children }: { childre
     const { collections } = useContext(CollectionsContext);
     const [currCollection, setCurrCollection] = useState<ItemCollection>();
 
-    useEffect(() => {
-        if (!collections) return;
-        setCurrCollection(collections[0]);
-    }, []);
-
     return <CurrentCollectionContext.Provider value=
         {{
             currCollection,
