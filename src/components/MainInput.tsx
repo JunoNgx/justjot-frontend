@@ -11,6 +11,7 @@ import { MainViewContext } from "@/contexts/MainViewContext";
 import useItemContextMenuActions from "@/hooks/useItemContextMenuActions";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { ItemType } from "@/types";
+import { isValidIndex } from "@/utils/miscUtils";
 
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { collections } = useContext(CollectionsContext);
@@ -56,46 +57,46 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     };
 
     const hotkeyCopyContent = () => {
-        if (!selectedIndex?.current) return;
-        const item = getItemByIndex(selectedIndex?.current);
+        if (!isValidIndex(selectedIndex?.current)) return;
+        const item = getItemByIndex(selectedIndex!.current);
         if (!item) return;
         copyItemContent(item);
     }
 
     const hotkeyOpenUpdateItemModal = () => {
-        if (!selectedIndex?.current) return;
-        const item = getItemByIndex(selectedIndex?.current);
+        if (!isValidIndex(selectedIndex?.current)) return;
+        const item = getItemByIndex(selectedIndex!.current);
         if (!item) return;
         openUpdateItemModal(item);
     }
 
     const hotkeyOpenMoveItemModal = () => {
-        if (!selectedIndex?.current) return;
-        const item = getItemByIndex(selectedIndex?.current);
+        if (!isValidIndex(selectedIndex?.current)) return;
+        const item = getItemByIndex(selectedIndex!.current);
         if (!item) return;
         openMoveItemModal({item, collectionList: collections});
     }
 
     const hotkeyDeleteItem = () => {
-        if (!selectedIndex?.current) return;
-        const item = getItemByIndex(selectedIndex?.current);
+        if (!isValidIndex(selectedIndex?.current)) return;
+        const item = getItemByIndex(selectedIndex!.current);
         if (!item) return;
 
-        selectItem(selectedIndex?.current - 1);
+        selectItem(selectedIndex!.current - 1);
         deleteItemWithManipulation(item);
     }
 
     const hotkeyRefetchTitleAndFavicon = () => {
-        if (!selectedIndex?.current) return;
-        const item = getItemByIndex(selectedIndex?.current);
+        if (!isValidIndex(selectedIndex?.current)) return;
+        const item = getItemByIndex(selectedIndex!.current);
         if (!item) return;
         if (item.type !== ItemType.LINK) return;
         refetchTitleAndFavicon(item);
     }
 
     const hotkeySwitchShouldOpenOnClick = () => {
-        if (!selectedIndex?.current) return;
-        const item = getItemByIndex(selectedIndex?.current);
+        if (!isValidIndex(selectedIndex?.current)) return;
+        const item = getItemByIndex(selectedIndex!.current);
         if (!item) return;
         switchShouldOpenOnClick(item);
     }
