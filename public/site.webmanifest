@@ -7,7 +7,7 @@
     "display": "standalone",
     "theme_color": "#000000",
     "background_color": "#000000",
-    "start_url": "/",
+    "start_url": "https:/justjot.app",
     "prefer_related_applications": false,
     "icons": [
         {
