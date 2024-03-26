@@ -17,7 +17,7 @@ export const isValidUrl = (url: string) => {
     }
 }
 
-export const isValidIndex = (n: number) => {
+export const isValidIndex = (n?: number) => {
     return typeof n === "number"
         && n >= 0
         && n !== undefined
