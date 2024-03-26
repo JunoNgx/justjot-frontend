@@ -46,6 +46,7 @@ export default function MainViewContextProvider(
     const blurMainInput = () => {
         const mainInputEl = document.querySelector<HTMLInputElement>("#main-input");
         mainInputEl?.blur();
+        deselectItem();
     };
 
     const selectItem = (index: number) => {
