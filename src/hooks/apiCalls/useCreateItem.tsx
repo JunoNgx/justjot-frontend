@@ -57,7 +57,7 @@ export default function useCreateItem(
         console.log(currDateTime)
 
         return {
-            id: DateTime.now().toUnixInteger().toString(),
+            id: new Date().getTime().toString(),
             owner: user?.id as string,
             collection: currCollection?.id as string,
             title: title as string,
