@@ -1,14 +1,19 @@
-import { ActionIcon, Group } from "@mantine/core";
-import { IconNotebook } from "@tabler/icons-react";
+import { ActionIcon, Group, useComputedColorScheme } from "@mantine/core";
 import { justJotTheme } from "@/theme";
 import { NavLink } from "react-router-dom";
 import CollectionMenu from "@/components/CollectionMenu";
 import { useContext } from "react";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
+import { JustJotIcon } from "../JustJotIcon.";
+import { ComputedThemeMode } from "@/types";
 
 export default function HeaderLeftSide() {
 
     const { isLoggedIn, user } = useContext(BackendClientContext);
+    const computedThemeMode = useComputedColorScheme(ComputedThemeMode.LIGHT);
+    const themeModeBtnColour = computedThemeMode === ComputedThemeMode.LIGHT
+        ? justJotTheme.other.colText
+        : justJotTheme.other.colTextDark;
     
     return <Group className="header__left-side"
         gap="xs"
@@ -19,8 +24,8 @@ export default function HeaderLeftSide() {
             to={user ? `/${user.username}` : "/"}
             size="xl"
         >
-            <IconNotebook
-                color={justJotTheme.other.colLogo}
+            <JustJotIcon
+                color={themeModeBtnColour}
                 size={justJotTheme.other.iconSizeHeaderLogo}
                 stroke={justJotTheme.other.iconStrokeWidth}
             />
