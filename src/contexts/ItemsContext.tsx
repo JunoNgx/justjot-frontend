@@ -33,8 +33,10 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
             .then((records: Item[]) => {
                 setItems(records);
             })
-            .catch(error => {
-                console.error(error);
+            .catch(err => {
+                if (!err.isAbort) {
+                    console.error(err);
+                }
             })
     }, []);
 
