@@ -78,7 +78,6 @@ export default function useItemContextMenuActions() {
         await pbClient.collection(DbTable.ITEMS)
             .delete(item.id)
             .then((_isSuccessful: boolean) => {
-                console.log("kfjdslfksdlfjsd")
                 fetchItems(currCollection);
                 notifications.show({
                     message: "Item deleted",
