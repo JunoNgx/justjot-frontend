@@ -8,7 +8,7 @@ import { DbTable } from '@/types';
 type LoginFormData = {email: string, password: string};
 
 export default function Login() {
-    const { pbClient, isLoggedIn, setIsLoggedIn } = useContext(BackendClientContext);
+    const { pbClient, isLoggedIn } = useContext(BackendClientContext);
 
     useEffect(() => {
         if (isLoggedIn) navigateToMainView();
