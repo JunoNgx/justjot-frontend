@@ -22,12 +22,14 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
         if (!currCollection) return;
 
         await pbClient
+            .cancelRequest("fetch-items")
             .collection(DbTable.ITEMS)
             .getFullList({
                 // Single relation can be used without specifying the id
                 filter: `collection="${currCollection?.id}"`,
-                sort: "-created"
-            })
+                sort: "-created",
+                requestKey: "fetch-items",
+            }, )
             .then((records: Item[]) => {
                 setItems(records);
             })
