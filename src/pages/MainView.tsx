@@ -62,7 +62,11 @@ export default function MainView() {
 
     useEffect(() => {
         if (!collections) return;
-        if (!collectionSlug) tryNavigateToCollection(collections[0]);
+        if (!collectionSlug) {
+            tryNavigateToCollection(collections[0])
+            return;
+        };
+
         if (collectionSlug === currCollection?.slug) return;
 
         trySwitchToCollectionBySlug(collectionSlug);
