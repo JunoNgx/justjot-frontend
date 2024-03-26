@@ -32,7 +32,7 @@ export default function useCreateItem(
                 collection: currCollection!.id,
                 title,
                 content,
-            })
+            }, { requestKey: null })
             .then((_record: Item) => {
                 setIsSuccessful(true);
                 successfulCallback?.();
