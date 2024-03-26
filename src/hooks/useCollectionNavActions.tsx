@@ -4,6 +4,7 @@ import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { ItemCollection } from "@/types";
 import { useNavigate } from "react-router-dom";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
+import { APP_NAME } from "@/utils/constants";
 
 export default function useCollectionNavActions() {
     const { user } = useContext(BackendClientContext);
@@ -53,6 +54,7 @@ export default function useCollectionNavActions() {
 
         setCurrCollection(collection);
         navigate(`/${user?.username}/${collection.slug}`);
+        document.title = `${collection.name} — ${APP_NAME}`;
     };
 
     return {
