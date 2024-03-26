@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
-import { MainViewContext } from "@/contexts/MainViewContext";
 import { ItemCollection } from "@/types";
 import { useNavigate } from "react-router-dom";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
@@ -10,7 +9,6 @@ export default function useCollectionNavActions() {
     const { user } = useContext(BackendClientContext);
     const { collections,  } = useContext(CollectionsContext);
     const { setCurrCollection } = useContext(CurrentCollectionContext);
-    const { deselectItem } = useContext(MainViewContext);
 
     const navigate = useNavigate();
 
@@ -54,7 +52,6 @@ export default function useCollectionNavActions() {
         if (!collection) return;
 
         setCurrCollection(collection);
-        deselectItem();
         navigate(`/${user?.username}/${collection.slug}`);
     };
 
