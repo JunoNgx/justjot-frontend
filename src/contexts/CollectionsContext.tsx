@@ -15,8 +15,16 @@ export const CollectionsContext = createContext<CollectionsContextType>({
 });
 
 export default function CollectionsContextProvider({ children }: { children: ReactNode }) {
-    const { isLoggedIn, pbClient } = useContext(BackendClientContext);
+    const { isLoggedIn, setIsLoggedIn, pbClient } = useContext(BackendClientContext);
     const [collections, setCollections] = useState<ItemCollection[]>();
+
+    // @ts-expect-error
+    const removeLoginStatusListener = pbClient.authStore.onChange((_token, _model) => {
+        setIsLoggedIn(pbClient.authStore.isValid);
+        if (pbClient.authStore.isValid) {
+            fetchCollections();
+        }
+    });
 
     const fetchCollections = useCallback(async () => {
         if (!isLoggedIn) return;
@@ -37,7 +45,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
                     console.warn("Non cancellation error")
                 }
             });
-    }, []);
+    }, [isLoggedIn]);
 
     return <CollectionsContext.Provider value=
         {{
