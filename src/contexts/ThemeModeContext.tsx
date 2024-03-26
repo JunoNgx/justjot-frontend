@@ -1,7 +1,8 @@
-import { createContext, useState, ReactNode, useEffect } from "react";
+import { createContext, ReactNode, useEffect } from "react";
 
 import { ThemeMode } from "@/types";
 import { useMantineColorScheme } from "@mantine/core";
+import { useLocalStorage } from "@mantine/hooks";
 
 type ThemeModeContextType = {
     themeMode: ThemeMode,
@@ -14,7 +15,11 @@ export const ThemeModeContext = createContext<ThemeModeContextType>({
 });
 
 export default function ThemeModeContextProvider({children}: {children: ReactNode}) {
-    const [themeMode, setThemeMode] = useState(ThemeMode.AUTO);
+    const [themeMode, setThemeMode] = useLocalStorage<ThemeMode>({
+        key: "color-scheme",
+        defaultValue: ThemeMode.AUTO,
+    });
+
     const {
         setColorScheme: setMantineColorScheme,
         // clearColorScheme: _clearMantineColorScheme
