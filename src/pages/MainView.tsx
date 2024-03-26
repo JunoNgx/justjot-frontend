@@ -50,15 +50,13 @@ export default function MainView() {
             return;
         }
 
+        fetchCollections();
+
         window.addEventListener("focus", tryRoutineUpdate);
         return () => {
             window.removeEventListener("focus", tryRoutineUpdate);
         };
     }, []);
-
-    useEffect(() => {
-        fetchCollections();
-    }, [isLoggedIn]);
 
     useEffect(() => {
         if (!collections) return;
