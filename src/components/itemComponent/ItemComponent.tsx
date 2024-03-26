@@ -71,7 +71,10 @@ export default function ItemComponent(
                 stroke={justJotTheme.other.iconStrokeWidth}
             />,
             color: "red",
-            onClick: () => {deleteItemWithManipulation(item)}
+            onClick: () => {
+                deleteItemWithManipulation(item);
+                deselectItem();
+            }
         }, {
             key: "refetch",
             title: "Refetch",

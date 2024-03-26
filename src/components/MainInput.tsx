@@ -81,7 +81,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         const item = getItemByIndex(selectedIndex?.current);
         if (!item) return;
 
-        selectItem(selectedIndex?.current + 1);
+        selectItem(selectedIndex?.current - 1);
         deleteItemWithManipulation(item);
     }
 
