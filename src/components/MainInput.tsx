@@ -38,17 +38,15 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
     const [inputVal, setInputVal] = useState("");
     const [_createItem, createItemWithManipulation, isCreateItemLoading] = useCreateItem({
-        // successfulCallback: () => {
-        //     // setInputVal("");
-        //     // fetchItems(currCollection);
-        // }
+        successfulCallback: () => {
+            fetchItems(currCollection);
+        }
     });
 
     const handleEnter = () => {
         if (!inputVal) return;
         setInputVal("");
         createItemWithManipulation({ content: inputVal });
-        fetchItems(currCollection);
     };
 
     const getItemByIndex = (index: number) => {
