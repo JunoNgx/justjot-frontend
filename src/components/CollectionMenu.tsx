@@ -30,7 +30,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
             <UnstyledButton className={"collection-menu-btn "
                 + (isInMainView && "collection-menu-btn--is-in-main-view")}
             >
-                <Group>
+                <Group gap="xs">
                     <Text>{currCollection?.name}</Text>
                     <IconSelector
                         size={justJotTheme.other.iconSizeMenu}
