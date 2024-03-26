@@ -7,6 +7,7 @@ import { COLLECTION_SORT_ORDER_MAG } from "@/utils/constants";
 import useUpdateCollection from "@/hooks/apiCalls/useUpdateCollection";
 import { ItemCollection } from "@/types";
 import CollectionHotkey from "../misc/CollectionHotkey";
+import { isValidIndex } from "@/utils/miscUtils";
 
 export default function CollectionsSortModal() {
 
@@ -30,13 +31,9 @@ export default function CollectionsSortModal() {
         });
 
         if (!collections) return;
+        if (!isValidIndex(destination?.index)) return;
 
-        if (!destination
-            || destination.index === null
-            || destination.index === undefined
-        ) return;
-
-        if (source.index === destination.index) {
+        if (source.index === destination!.index) {
             return;
         }
 
@@ -48,29 +45,29 @@ export default function CollectionsSortModal() {
 
         const movedCollection = state[source.index];
 
-        if (destination.index === 0) {
+        if (destination!.index === 0) {
             const firstCollection = state[0];
             const newSortOrderValue = firstCollection.sortOrder
                 - COLLECTION_SORT_ORDER_MAG;
             processUpdateCollectionSortOrder(
-                movedCollection, destination.index, newSortOrderValue);
+                movedCollection, destination!.index, newSortOrderValue);
             return;
         }
 
-        if (destination.index === state.length - 1) {
+        if (destination!.index === state.length - 1) {
             const lastCollection = state[state.length - 1];
             const newSortOrderValue = lastCollection.sortOrder
                 + COLLECTION_SORT_ORDER_MAG;
             processUpdateCollectionSortOrder(
-                movedCollection, destination.index, newSortOrderValue);
+                movedCollection, destination!.index, newSortOrderValue);
             return;
         }
 
-        const prevCollection = state[destination.index - 1];
-        const nextCollection = state[destination.index];
+        const prevCollection = state[destination!.index - 1];
+        const nextCollection = state[destination!.index];
         const newSortOrderValue = (prevCollection.sortOrder + nextCollection.sortOrder) / 2
         processUpdateCollectionSortOrder(
-            movedCollection, destination.index, newSortOrderValue);
+            movedCollection, destination!.index, newSortOrderValue);
     };
 
     const processUpdateCollectionSortOrder = async (
