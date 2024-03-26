@@ -9,6 +9,7 @@ import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { modals } from "@mantine/modals";
 import ItemMoveModal from "@/components/modals/ItemMoveModal";
 import ItemCreateUpdateModal from "@/components/modals/ItemCreateUpdateModal";
+import { isValidIndex } from "@/utils/miscUtils";
 
 type ItemMoveModalOptions = {
     item: Item | undefined,
@@ -100,10 +101,10 @@ export default function useItemContextMenuActions() {
         const index = items?.map(item => item.id)
             .indexOf(item.id);
         
-        if (!index) return;
+        if (!isValidIndex(index)) return;
 
         const newArray = items?.slice(0, index)
-            .concat(items.slice(index + 1, items.length));
+            .concat(items.slice(index! + 1, items.length));
 
         setItems(newArray);
 
