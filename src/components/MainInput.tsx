@@ -21,6 +21,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const {
         selectedIndex,
         selectItem,
+        deselectItem,
         selectPrevItem,
         selectNextItem,
         execPrimaryAction,
@@ -82,7 +83,11 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         const item = getItemByIndex(selectedIndex!.current);
         if (!item) return;
 
-        selectItem(selectedIndex!.current - 1);
+        if (selectedIndex!.current === 0)
+            deselectItem();
+        else
+            selectItem(selectedIndex!.current - 1);
+
         deleteItemWithManipulation(item);
     }
 
