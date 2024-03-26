@@ -54,7 +54,6 @@ export default function useCreateItem(
         { title, content }: ItemCreateUpdateType
     ): Item => {
         const currDateTime = DateTime.now().toFormat("yyyy-MM-dd HH:mm:ss");
-        console.log(currDateTime)
 
         return {
             id: new Date().getTime().toString(),
