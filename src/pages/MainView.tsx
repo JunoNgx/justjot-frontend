@@ -23,6 +23,8 @@ export default function MainView() {
         trySwitchToCollectionByNumericKey,
         trySwitchToCollectionBySlug,
         tryNavigateToCollection,
+        trySwitchToPrevCollection,
+        trySwitchToNextCollection,
     } = useCollectionNavActions();
     const { collectionSlug } = useParams();
 
@@ -42,6 +44,8 @@ export default function MainView() {
         ["8", () => trySwitchToCollectionByNumericKey(8)],
         ["9", () => trySwitchToCollectionByNumericKey(9)],
         ["0", () => trySwitchToCollectionByNumericKey(0)],
+        ["ArrowLeft", trySwitchToPrevCollection],
+        ["ArrowRight", trySwitchToNextCollection],
     ]);
 
     useEffect(() => {
