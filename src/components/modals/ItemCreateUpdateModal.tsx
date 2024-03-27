@@ -23,11 +23,13 @@ export default function ItemCreateUpdateModal(
 
     useEffect(() => {
         return () => {
-            saveOnClose();
+            handleOnCloseItemUpdateModal();
         }
     }, []);
 
-    const saveOnClose = async () => {
+    const handleOnCloseItemUpdateModal = async () => {
+
+        // Try post unsaved changes
         if (hasChangedRef.current && !hasSavedRef.current) {
             await updateItemTitleAndContent({
                 itemId: item.id,
@@ -37,6 +39,11 @@ export default function ItemCreateUpdateModal(
                     fetchItems(currCollection);
                 }
             });
+            return;
+        }
+
+        if (hasChangedRef.current) {
+            fetchItems(currCollection);
         }
     }
 
