@@ -109,7 +109,7 @@ export default function ItemComponent(
         openUpdateItemModal(item);
     };
 
-    return <Paper className="item"
+    return <Paper className={computeClassnames(item)}
         p="xs"
         data-is-item={true}
         data-index={index}
@@ -159,3 +159,14 @@ export default function ItemComponent(
 
         </Paper>
 };
+
+const computeClassnames = (item: Item) => {
+    const noPrimaryTextModifier = !item.title
+        && "item--has-no-primary-text";
+    const noSecondaryTextModifier = !item.content
+        && "item--has-no-secondary-text";
+
+    return "item "
+        + noPrimaryTextModifier
+        + noSecondaryTextModifier;
+}
