@@ -93,7 +93,7 @@ header {
 
 .notifications-container {
     @include m.mobile {
-        bottom: 60px;
+        bottom: 5rem;
     }
 }
 
@@ -127,8 +127,8 @@ header {
         @include m.mobile {
             display: block;
             position: fixed;
-            bottom: 0.8rem;
-            left: 0.8rem;
+            bottom: 1.5rem;
+            left: 1.5rem;
     
             border: solid 1px var(--mantine-color-default-border);
             background-color: var(--mantine-color-body);
