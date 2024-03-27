@@ -58,6 +58,10 @@
         flex-shrink: 4;
     }
 
+    &__datetime {
+        user-select: none;
+    }
+
     &--has-no-primary-text {
         .item__primary-text {
             display: none;
