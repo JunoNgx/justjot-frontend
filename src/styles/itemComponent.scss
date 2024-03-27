@@ -49,13 +49,13 @@
         overflow: hidden;
         text-overflow: ellipsis;
         user-select: none;
-        max-width: calc(70%);
+        max-width: calc(80%);
     }
 
     &__secondary-text {
         font-family: var(--mantine-font-family-monospace);
         font-size: 0.8rem;
-        flex-shrink: 5;
+        flex-shrink: 4;
     }
 
     &--has-no-primary-text {
