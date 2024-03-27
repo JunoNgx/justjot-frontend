@@ -161,10 +161,12 @@ export default function ItemComponent(
 };
 
 const computeClassnames = (item: Item) => {
-    const noPrimaryTextModifier = !item.title
-        && "item--has-no-primary-text";
-    const noSecondaryTextModifier = !item.content
-        && "item--has-no-secondary-text";
+    const noPrimaryTextModifier = item.title
+        ? " "
+        : "item--has-no-primary-text";
+    const noSecondaryTextModifier = item.content
+        ? " "
+        : "item--has-no-secondary-text";
 
     return "item "
         + noPrimaryTextModifier
