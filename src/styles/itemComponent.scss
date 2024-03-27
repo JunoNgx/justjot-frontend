@@ -6,6 +6,9 @@
     user-select: none;
     border: solid 1px transparent;
 
+    // override the anchor styles
+    text-decoration: none;
+    color: var(--mantine-color-text);
 
     &[data-is-selected=true] {
         border-color: var(--mantine-color-text);

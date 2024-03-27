@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 import { Item, ItemType } from "@/types";
-import { Center, Group, Paper, Text } from "@mantine/core";
+import { Box, Center, Group, Text } from "@mantine/core";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink,  IconSquare, IconTrash } from "@tabler/icons-react";
 import { useContextMenu } from 'mantine-contextmenu';
 import { justJotTheme } from "@/theme";
@@ -102,14 +102,28 @@ export default function ItemComponent(
         }
 
         if (item.type === ItemType.LINK) {
-            window.open(item.content, "_blank");
+            // Let the <a> tag handle the click
+            // window.open(item.content, "_blank");
             return;
         }
 
         openUpdateItemModal(item);
     };
 
-    return <Paper className={computeClassnames(item)}
+    const isLink = item.type === ItemType.LINK;
+    const anchorProps = isLink
+    ? {
+        component: "a" as any,
+        href: item.content,
+        rel: "noopener noreferrer",
+        target: "_blank",
+    }
+    : {};
+
+    return <Box
+        {...anchorProps}
+
+        className={computeClassnames(item)}
         p="xs"
         data-is-item={true}
         data-index={index}
@@ -157,7 +171,7 @@ export default function ItemComponent(
                 </Group>
             </Group>
 
-        </Paper>
+        </Box>
 };
 
 const computeClassnames = (item: Item) => {
