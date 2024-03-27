@@ -7,18 +7,18 @@ import { AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 type UpdateItemTitleOptions = {
     itemId: string,
     title: string,
-};
+} & RequestCallbackOptions;
 
 type UpdateItemContentOptions = {
     itemId: string,
     content: string,
-};
+} & RequestCallbackOptions;
 
 type UpdateItemTitleAndContentOptions = {
     itemId: string,
     title: string,
     content: string,
-};
+} & RequestCallbackOptions;
 
 type useUpdateItemReturnType = {
     updateItemTitle: (options: UpdateItemTitleOptions) => Promise<void>,
@@ -26,13 +26,13 @@ type useUpdateItemReturnType = {
     updateItemTitleAndContent: (options: UpdateItemTitleAndContentOptions) => Promise<void>,
 };
 
-export default function useUpdateItem(
-    { successfulCallback, errorCallback }: RequestCallbackOptions = {}
-): useUpdateItemReturnType {
+export default function useUpdateItem(): useUpdateItemReturnType {
 
     const { pbClient } = useContext(BackendClientContext);
 
-    const updateItemTitle = async ({ itemId, title }: UpdateItemTitleOptions) => {
+    const updateItemTitle = async (
+        { itemId, title, successfulCallback, errorCallback }: UpdateItemTitleOptions
+    ) => {
         pbClient.collection(DbTable.ITEMS)
             .update(itemId, { title })
             .then((_record: Item) => {
@@ -53,7 +53,9 @@ export default function useUpdateItem(
             });
     };
 
-    const updateItemContent = async ({ itemId, content }: UpdateItemContentOptions) => {
+    const updateItemContent = async (
+        { itemId, content, successfulCallback, errorCallback }: UpdateItemContentOptions
+    ) => {
         pbClient.collection(DbTable.ITEMS)
             .update(itemId, { content })
             .then((_record: Item) => {
@@ -74,7 +76,9 @@ export default function useUpdateItem(
             });
     };
 
-    const updateItemTitleAndContent = async ({ itemId, title, content }: UpdateItemTitleAndContentOptions) => {
+    const updateItemTitleAndContent = async (
+        { itemId, title, content, successfulCallback, errorCallback }: UpdateItemTitleAndContentOptions
+    ) => {
         pbClient
             .collection(DbTable.ITEMS)
             .update(itemId,

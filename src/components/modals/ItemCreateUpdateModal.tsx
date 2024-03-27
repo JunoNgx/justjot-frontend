@@ -33,11 +33,10 @@ export default function ItemCreateUpdateModal(
                 itemId: item.id,
                 title: titleValRef.current,
                 content: contentValRef.current,
+                successfulCallback: () => {
+                    fetchItems(currCollection);
+                }
             });
-
-            setTimeout(() => {
-                fetchItems(currCollection);
-            }, 1500);
         }
     }
 
@@ -74,7 +73,12 @@ export default function ItemCreateUpdateModal(
 
     const [ relativeUpdatedTimeStr, setRelativeUpdatedTimeStr] = useState("");
     const { updateItemTitle, updateItemContent, updateItemTitleAndContent }
-        = useUpdateItem({
+        = useUpdateItem();
+
+    const debouncedAutosaveItemTitle = useDebounceCallback(() => {
+        updateItemTitle({
+            itemId: item?.id,
+            title: titleVal,
             successfulCallback: () => {
                 setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
             },
@@ -82,14 +86,20 @@ export default function ItemCreateUpdateModal(
                 setRelativeUpdatedTimeStr("");
             },
         });
-
-    const debouncedAutosaveItemTitle = useDebounceCallback(() => {
-        updateItemTitle({ itemId: item?.id, title: titleVal });
         setHasSaved(true);
     }, DEBOUNCED_TIME);
 
     const debouncedAutosaveItemContent = useDebounceCallback(() => {
-        updateItemContent({ itemId: item?.id, content: contentVal });
+        updateItemContent({
+            itemId: item?.id,
+            content: contentVal,
+            successfulCallback: () => {
+                setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
+            },
+            errorCallback: () => {
+                setRelativeUpdatedTimeStr("");
+            },
+        });
         setHasSaved(true);
     }, DEBOUNCED_TIME);
 
