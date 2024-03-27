@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useRef, useState } from 'react';
+import { ReactNode, createContext, useRef, useState } from 'react';
 import { ItemCollection } from '@/types';
 
 type CurrentCollectionContextType = {
