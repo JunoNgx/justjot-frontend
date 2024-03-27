@@ -59,21 +59,21 @@
     }
 
     &--has-no-primary-text {
-        &__primary-text {
+        .item__primary-text {
             display: none;
         }
 
-        &__secondary-text {
+        .item__secondary-text {
             max-width: calc(100%);
         }
     }
 
     &--has-no-secondary-text {
-        &__primary-text {
+        .item__primary-text {
             max-width: calc(100%);
         }
         
-        &__secondary-text {
+        .item__secondary-text {
             display: none;
         }
     }
