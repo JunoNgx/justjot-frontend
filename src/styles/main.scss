@@ -5,11 +5,11 @@
 @use "./itemComponent.scss";
 @use '@mantine/core/styles/global.css';
 
-html {
-    @include m.mobile {
-        font-size: 14px;
-    }
-}
+// html {
+//     @include m.mobile {
+//         font-size: 14px;
+//     }
+// }
 
 .appshell-main {
     padding-top: 60px; // see: Header
