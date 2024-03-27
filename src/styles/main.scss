@@ -5,11 +5,13 @@
 @use "./itemComponent.scss";
 @use '@mantine/core/styles/global.css';
 
-// html {
+html {
+    -webkit-tap-highlight-color: transparent;
+
 //     @include m.mobile {
 //         font-size: 14px;
 //     }
-// }
+}
 
 .appshell-main {
     padding-top: 60px; // see: Header
