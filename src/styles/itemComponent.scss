@@ -49,17 +49,32 @@
         overflow: hidden;
         text-overflow: ellipsis;
         user-select: none;
-    }
-
-    &__primary-text {
         max-width: calc(70%);
     }
 
     &__secondary-text {
-        max-width: calc(50%);
         font-family: var(--mantine-font-family-monospace);
         font-size: 0.8rem;
         flex-shrink: 5;
     }
 
+    &--has-no-primary-text {
+        &__primary-text {
+            display: none;
+        }
+
+        &__secondary-text {
+            max-width: calc(100%);
+        }
+    }
+
+    &--has-no-secondary-text {
+        &__primary-text {
+            max-width: calc(100%);
+        }
+        
+        &__secondary-text {
+            display: none;
+        }
+    }
 }
