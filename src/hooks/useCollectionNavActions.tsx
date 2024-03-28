@@ -19,10 +19,12 @@ export default function useCollectionNavActions() {
         const index = collections?.map(c => c.id)
             .indexOf(collectionId);
 
-        if (index === -1) return;
+        if (index === -1 || index === undefined || index === null) return;
 
-        const targetCollection = collections?.[index!];
-        tryNavigateToCollection(targetCollection);
+        const targetCollection = collections?.[index];
+        if (!targetCollection) return;
+
+        tryNavigateToCollection(targetCollection, index);
     };
 
     const trySwitchToCollectionBySlug = (collectionSlug?: string) => {
@@ -31,13 +33,15 @@ export default function useCollectionNavActions() {
         const index = collections?.map(c => c.slug)
             .indexOf(collectionSlug);
 
-        if (index === -1) {
-            tryNavigateToCollection(collections![0]);
+        if (index === -1 || index === undefined || index === null) {
+            tryNavigateToCollection(collections![0], 0);
             return;
         }
 
-        const targetCollection = collections?.[index!];
-        tryNavigateToCollection(targetCollection);
+        const targetCollection = collections?.[index];
+        if (!targetCollection) return;
+
+        tryNavigateToCollection(targetCollection, index);
     };
 
     const trySwitchToCollectionByNumericKey = (inputNumber: number) => {
@@ -50,21 +54,24 @@ export default function useCollectionNavActions() {
     };
 
     const trySwitchToPrevCollection = () => {
-        if (!isValidIndex(currentSelectedCollectionIndexRef?.current)) return;
-        if (currentSelectedCollectionIndexRef?.current === 0) return;
+        if (!currentSelectedCollectionIndexRef) return;
+        if (currentSelectedCollectionIndexRef.current === 0
+            || currentSelectedCollectionIndexRef.current === undefined
+            || currentSelectedCollectionIndexRef.current === null
+        ) return;
 
-        // @ts-expect-error
-        currentSelectedCollectionIndexRef.current -= 1;
-        trySwitchToCollectionByIndex(currentSelectedCollectionIndexRef?.current!);
+        trySwitchToCollectionByIndex(currentSelectedCollectionIndexRef?.current - 1);
     }
 
     const trySwitchToNextCollection = () => {
-        if (!isValidIndex(currentSelectedCollectionIndexRef?.current)) return;
-        if (currentSelectedCollectionIndexRef?.current === collections?.length! - 1) return;
+        console.log("trySwitchToNextCollection")
+        if (!currentSelectedCollectionIndexRef) return;
+        if (currentSelectedCollectionIndexRef.current === collections?.length! - 1
+            || currentSelectedCollectionIndexRef.current === undefined
+            || currentSelectedCollectionIndexRef.current === null
+        ) return;
 
-        // @ts-expect-error
-        currentSelectedCollectionIndexRef.current += 1;
-        trySwitchToCollectionByIndex(currentSelectedCollectionIndexRef?.current!);
+        trySwitchToCollectionByIndex(currentSelectedCollectionIndexRef?.current + 1);
     }
 
     const trySwitchToCollectionByIndex = (index: number) => {
@@ -72,13 +79,17 @@ export default function useCollectionNavActions() {
 
         const targetCollection = collections?.[index];
         if (!targetCollection) return;
-        tryNavigateToCollection(targetCollection);
+        tryNavigateToCollection(targetCollection, index);
     };
 
-    const tryNavigateToCollection = (collection?: ItemCollection) => {
-        if (!collection) return;
+    const tryNavigateToCollection = (
+        collection: ItemCollection, index: number
+    ) => {
+        if (!currentSelectedCollectionIndexRef) return;
 
         setCurrCollection(collection);
+        currentSelectedCollectionIndexRef.current = index;
+
         navigate(`/${user?.username}/${collection.slug}`);
         document.title = `${collection.name} — ${APP_NAME}`;
     };
