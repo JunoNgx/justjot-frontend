@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { Item, ItemType } from "@/types";
 import { Box, Center, Group, Text } from "@mantine/core";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink,  IconSquare, IconTrash } from "@tabler/icons-react";
-import { useContextMenu } from 'mantine-contextmenu';
+import { useContextMenu } from '@/libs/mantine-contextmenu';
 import { justJotTheme } from "@/theme";
 import useItemContextMenuActions from "@/hooks/useItemContextMenuActions";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
