@@ -11,6 +11,7 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCreatedDate";
 import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
 import { MainViewContext } from "@/contexts/MainViewContext";
+import useLongPress from "@/libs/useLongPress";
 
 type ItemComponentParams = {
     item: Item,
@@ -95,7 +96,9 @@ export default function ItemComponent(
         }
     ];
 
-    const handlePrimaryAction = () => {
+    const handlePrimaryAction = (
+        _e: React.MouseEvent<Element> | React.TouchEvent<Element>
+    ) => {
         if (item.shouldCopyOnClick) {
             copyItemContent(item);
             return;
@@ -109,6 +112,23 @@ export default function ItemComponent(
 
         openUpdateItemModal(item);
     };
+
+    const handleLongPress = (
+        e: React.MouseEvent<Element> | React.TouchEvent<Element>
+    ) => {
+        showContextMenu(
+            contextMenuOptions,
+            { className: "dropdown-menu" }
+        )(e as React.MouseEvent<Element>);
+    };
+
+    const longPressEvent = useLongPress<Element>({
+        onLongPress: handleLongPress,
+        onClick: handlePrimaryAction,
+    }, {
+        delay: 800,
+        shouldPreventDefault: true,
+    });
 
     const isLink = item.type === ItemType.LINK;
     const anchorProps = isLink
@@ -127,10 +147,11 @@ export default function ItemComponent(
         p="xs"
         data-is-item={true}
         data-index={index}
+        {...longPressEvent}
 
         onMouseEnter={() => { selectItem(index)}}
         onMouseLeave={() => { deselectItem()}}
-        onClick={handlePrimaryAction}
+        // onClick={handlePrimaryAction}
         onContextMenu={showContextMenu(
             contextMenuOptions,
             { className: "dropdown-menu" }
