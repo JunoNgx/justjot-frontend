@@ -99,6 +99,7 @@ export default function ItemComponent(
     const handlePrimaryAction = (
         _e: React.MouseEvent<Element> | React.TouchEvent<Element>
     ) => {
+        console.log("handle primary click", item)
         if (item.shouldCopyOnClick) {
             copyItemContent(item);
             return;
@@ -155,7 +156,7 @@ export default function ItemComponent(
 
         onMouseEnter={() => { selectItem(index)}}
         onMouseLeave={() => { deselectItem()}}
-        // onClick={handlePrimaryAction}
+        onClick={handlePrimaryAction}
         onContextMenu={showContextMenu(
             contextMenuOptions,
             { className: "dropdown-menu" }
