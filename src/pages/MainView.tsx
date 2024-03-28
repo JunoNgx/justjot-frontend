@@ -20,11 +20,11 @@ export default function MainView() {
     const { items, fetchItems } = useContext(ItemsContext);
     const { focusOnMainInput } = useContext(MainViewContext);
     const {
-        trySwitchToCollectionByNumericKey,
         trySwitchToCollectionBySlug,
-        tryNavigateToCollection,
+        trySwitchToCollectionByNumericKey,
         trySwitchToPrevCollection,
         trySwitchToNextCollection,
+        trySwitchToCollectionByIndex,
     } = useCollectionNavActions();
     const { collectionSlug } = useParams();
 
@@ -65,7 +65,7 @@ export default function MainView() {
     useEffect(() => {
         if (!collections) return;
         if (!collectionSlug) {
-            tryNavigateToCollection(collections[0])
+            trySwitchToCollectionByIndex(0)
             return;
         };
 
