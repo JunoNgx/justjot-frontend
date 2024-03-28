@@ -7,6 +7,8 @@
 
 html {
     -webkit-tap-highlight-color: transparent;
+    // Disable the long press pop up on ios
+    -webkit-touch-callout: none;
 
 //     @include m.mobile {
 //         font-size: 14px;
