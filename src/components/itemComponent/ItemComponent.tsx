@@ -116,10 +116,14 @@ export default function ItemComponent(
     const handleLongPress = (
         e: React.MouseEvent<Element> | React.TouchEvent<Element>
     ) => {
-        showContextMenu(
+        const handleEventWithContextMenu = showContextMenu(
             contextMenuOptions,
             { className: "dropdown-menu" }
-        )(e as React.MouseEvent<Element>);
+        )
+        handleEventWithContextMenu(e as
+            React.MouseEvent<Element>
+            & React.TouchEvent<Element>
+        );
     };
 
     const longPressEvent = useLongPress<Element>({
