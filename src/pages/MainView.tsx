@@ -82,7 +82,7 @@ export default function MainView() {
     const lastRoutineUpdateTimestamp = useRef<number>(Date.now());
     const tryRoutineUpdate = () => {
         console.log("try routine update")
-        if (Date.now() - lastRoutineUpdateTimestamp.current >= 15000) {
+        if (Date.now() - lastRoutineUpdateTimestamp.current >= 120000) {
             console.log("routine update fetch")
             fetchItems(currCollection);
             lastRoutineUpdateTimestamp.current = Date.now();
