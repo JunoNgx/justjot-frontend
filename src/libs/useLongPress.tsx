@@ -37,6 +37,11 @@ export default function useLongPress<T>(
 
     const start = useCallback(
         (e: React.MouseEvent<T> | React.TouchEvent<T>) => {
+            // Prevent right mouse click/contextmenu interference
+            if (("button" in e) && e.button === 2) {
+                return;
+            }
+
             /**
              * Juno's note:
              * Remove the use of `e.persist()` and the use of cloned events
@@ -69,6 +74,11 @@ export default function useLongPress<T>(
         e: React.MouseEvent<T> | React.TouchEvent<T>,
         shouldTriggerClick = true
     ) => {
+        // Prevent right mouse click/contextmenu interference
+        if (("button" in e) && e.button === 2) {
+            return;
+        }
+
         timeout.current && clearTimeout(timeout.current);
         shouldTriggerClick && !longPressTriggered && onClick?.(e);
 
