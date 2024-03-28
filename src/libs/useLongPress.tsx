@@ -37,8 +37,16 @@ export default function useLongPress<T>(
 
     const start = useCallback(
         (e: React.MouseEvent<T> | React.TouchEvent<T>) => {
-            e.persist();
-            const clonedEvent = { ...e };
+            /**
+             * Juno's note:
+             * Remove the use of `e.persist()` and the use of cloned events
+             * for two reasons:
+             * - This is no-op since React v17
+             * - `mantine-contextmenu` needs to `preventDefault` on its own.
+             * Preferrably: I should fork it and add an optional chaining opterator.
+             */
+            // e.persist();
+            // const clonedEvent = { ...e };
 
             if (shouldPreventDefault && e.target) {
                 e.target.addEventListener(
@@ -50,7 +58,7 @@ export default function useLongPress<T>(
             }
 
             timeout.current = setTimeout(() => {
-                onLongPress(clonedEvent);
+                onLongPress(e);
                 setLongPressTriggered(true);
             }, delay);
         },
