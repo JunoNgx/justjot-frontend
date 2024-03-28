@@ -100,6 +100,7 @@ export default function useCollectionNavActions() {
         trySwitchToCollectionByNumericKey,
         trySwitchToPrevCollection,
         trySwitchToNextCollection,
+        trySwitchToCollectionByIndex,
         tryNavigateToCollection,
     }
 };
