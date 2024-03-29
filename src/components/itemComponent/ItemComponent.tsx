@@ -97,9 +97,9 @@ export default function ItemComponent(
     ];
 
     const handlePrimaryAction = (
-        _e: React.MouseEvent<Element> | React.TouchEvent<Element>
+        _e: React.MouseEvent | React.TouchEvent
     ) => {
-        console.log("handle primary click", item)
+        // console.log("handle primary click")
         if (item.shouldCopyOnClick) {
             copyItemContent(item);
             return;
@@ -114,25 +114,25 @@ export default function ItemComponent(
         openUpdateItemModal(item);
     };
 
-    const handleLongPress = (
-        e: React.MouseEvent<Element> | React.TouchEvent<Element>
+    const handleSecondaryAction = (
+        e: React.MouseEvent | React.TouchEvent
     ) => {
+        // console.log("handle secondary click")
         const handleEventWithContextMenu = showContextMenu(
             contextMenuOptions,
             { className: "dropdown-menu" }
         )
         handleEventWithContextMenu(e as
-            React.MouseEvent<Element>
-            & React.TouchEvent<Element>
+            React.MouseEvent
+            & React.TouchEvent
         );
     };
 
-    const longPressEvent = useLongPress<Element>({
-        onLongPress: handleLongPress,
+    const longPressEvent = useLongPress({
         onClick: handlePrimaryAction,
+        onLongPress: handleSecondaryAction,
     }, {
         delay: 800,
-        shouldPreventDefault: true,
     });
 
     const isLink = item.type === ItemType.LINK;
@@ -156,11 +156,11 @@ export default function ItemComponent(
 
         onMouseEnter={() => { selectItem(index)}}
         onMouseLeave={() => { deselectItem()}}
-        onClick={handlePrimaryAction}
-        onContextMenu={showContextMenu(
-            contextMenuOptions,
-            { className: "dropdown-menu" }
-        )}
+        // onClick={handlePrimaryAction}
+        // onContextMenu={showContextMenu(
+        //     contextMenuOptions,
+        //     { className: "dropdown-menu" }
+        // )}
     >
             <Group className="item__flex-wrapper"
                 justify="space-between"
