@@ -12,12 +12,12 @@ type CollectionApiCallsCommonOptions = {
     setLoadingState?: React.Dispatch<React.SetStateAction<boolean>>
 } & ApiRequestCallbackOptions;
 
-type createCollectionParams = {
+type CreateCollectionParams = {
     currHighestSortOrder: number
 } & CreateUpdateCollectionOptions
 & CollectionApiCallsCommonOptions;
 
-type deleteCollectionParams = {
+type DeleteCollectionParams = {
     collection: ItemCollection
 } & CollectionApiCallsCommonOptions;
 
@@ -28,7 +28,7 @@ export default function useCollectionApiCalls() {
     const createCollection = async (
         {name, slug, currHighestSortOrder,
             successfulCallback, errorCallback, setLoadingState
-        }: createCollectionParams    
+        }: CreateCollectionParams    
     ) => {
         const newSortOrderVal: number = currHighestSortOrder
             ? currHighestSortOrder + SORT_ORDER_INCREMENT_COLLECTION
@@ -54,7 +54,7 @@ export default function useCollectionApiCalls() {
     const deleteCollection = async (
         { collection,
             successfulCallback, errorCallback, setLoadingState
-        }: deleteCollectionParams
+        }: DeleteCollectionParams
     ) => {
         setLoadingState?.(true);
         await pbClient.collection(DbTable.COLLECTIONS)
