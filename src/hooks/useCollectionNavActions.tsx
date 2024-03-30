@@ -64,7 +64,6 @@ export default function useCollectionNavActions() {
     }
 
     const trySwitchToNextCollection = () => {
-        console.log("trySwitchToNextCollection")
         if (!currentSelectedCollectionIndexRef) return;
         if (currentSelectedCollectionIndexRef.current === collections?.length! - 1
             || currentSelectedCollectionIndexRef.current === undefined
@@ -95,7 +94,6 @@ export default function useCollectionNavActions() {
     };
 
     const tryRetrackCurrentSelectedIndexWithId = () => {
-        console.log("try retrack")
         if (collections.length === 0) return;
         if (!currCollection) return;
 
