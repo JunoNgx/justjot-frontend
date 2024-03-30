@@ -94,7 +94,11 @@ export default function useCollectionNavActions() {
         document.title = `${collection.name} — ${APP_NAME}`;
     };
 
-    const tryRetrackCurrentSelectedIndex = () => {
+    const tryRetrackCurrentSelectedIndexWithId = () => {
+        console.log("try retrack")
+        if (collections.length === 0) return;
+        if (!currCollection) return;
+
         const index = collections.map(collection => collection.id)
             .indexOf(currCollection!.id);
         currentSelectedCollectionIndexRef!.current = index;
@@ -108,6 +112,6 @@ export default function useCollectionNavActions() {
         trySwitchToNextCollection,
         trySwitchToCollectionByIndex,
         tryNavigateToCollection,
-        tryRetrackCurrentSelectedIndex,
+        tryRetrackCurrentSelectedIndexWithId,
     }
 };
