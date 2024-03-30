@@ -9,7 +9,7 @@ type UpdateCollectionOptions = {
     slug: string,
 } & ApiRequestCallbackOptions;
 
-type CreateCollectionParams = {
+type CreateCollectionOptions = {
     name: string,
     slug: string,
     currHighestSortOrder: number
@@ -31,7 +31,7 @@ export default function useCollectionApiCalls() {
     const createCollection = async (
         { name, slug, currHighestSortOrder,
             successfulCallback, errorCallback, setLoadingState
-        }: CreateCollectionParams
+        }: CreateCollectionOptions
     ) => {
         const newSortOrderVal: number = currHighestSortOrder
             ? currHighestSortOrder + SORT_ORDER_INCREMENT_COLLECTION
