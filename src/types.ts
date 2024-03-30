@@ -67,6 +67,11 @@ export type ApiRequestCallbackOptions = {
     setLoadingState?: React.Dispatch<React.SetStateAction<boolean>>,
 };
 
+export type CreateItemOptions = {
+    title: string,
+    content: string,
+} & ApiRequestCallbackOptions;
+
 export type CreateUpdateCollectionOptions = {
     name: string,
     slug: string

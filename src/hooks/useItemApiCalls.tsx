@@ -1,12 +1,7 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
-import { ApiRequestCallbackOptions, DbTable, Item } from "@/types";
+import { CreateItemOptions, DbTable, Item } from "@/types";
 import { useContext } from "react";
-
-type CreateItemOptions = {
-    title: string,
-    content: string,
-} & ApiRequestCallbackOptions;
 
 export default function useItemApiCalls() {
 
