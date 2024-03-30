@@ -3,28 +3,21 @@ import { ApiRequestCallbackOptions, DbTable, ItemCollection } from "@/types";
 import { SORT_ORDER_INCREMENT_COLLECTION } from "@/utils/constants";
 import { useContext } from "react";
 
-type CreateUpdateCollectionOptions = {
+type UpdateCollectionOptions = {
+    collectionId: string,
     name: string,
-    slug: string
-};
-
-type CollectionApiCallsCommonOptions = {
-    setLoadingState?: React.Dispatch<React.SetStateAction<boolean>>
+    slug: string,
 } & ApiRequestCallbackOptions;
 
-type UpdateCollectionOptions = {
-    collectionId: string
-} & CreateUpdateCollectionOptions
-& CollectionApiCallsCommonOptions;
-
 type CreateCollectionParams = {
+    name: string,
+    slug: string,
     currHighestSortOrder: number
-} &  CreateUpdateCollectionOptions
-& CollectionApiCallsCommonOptions;
+} & ApiRequestCallbackOptions;
 
 type DeleteCollectionOptions = {
     collection: ItemCollection
-} & CollectionApiCallsCommonOptions;
+} & ApiRequestCallbackOptions;
 
 export default function useCollectionApiCalls() {
 
