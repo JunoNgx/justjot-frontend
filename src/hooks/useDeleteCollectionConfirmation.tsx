@@ -66,7 +66,8 @@ export default function useDeleteCollectionConfirmation() {
         setShouldNavigateAway(false);
     }, [collections, shouldNavigateAway]);
 
-    const handleErroredDeletion = (_err: ClientResponseError) => {
+    const handleErroredDeletion = (err: ClientResponseError) => {
+        console.error(err);
         notifications.show({
             message: "Error deleting collection",
             color: "red",

@@ -47,7 +47,6 @@ export default function useCollectionApiCalls() {
             })
             .catch(err => {
                 errorCallback?.(err);
-                console.error(err);
             });
         setLoadingState?.(false);
     };
@@ -64,8 +63,7 @@ export default function useCollectionApiCalls() {
                 successfulCallback?.();
             })
             .catch(err => {
-                errorCallback?.();
-                console.error(err);
+                errorCallback?.(err);
             });
         
         setLoadingState?.(false);
