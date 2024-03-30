@@ -29,7 +29,7 @@ export default function ItemComponent(
         openUpdateItemModal,
         openMoveItemModal,
         deleteItemWithManipulation,
-        switchShouldOpenOnClick,
+        toggleItemShouldCopyOnClick,
         refetchTitleAndFavicon,
         switchIsDone,
     } = useItemContextMenuActions();
@@ -93,7 +93,7 @@ export default function ItemComponent(
             title: "To copy",
             icon: contextMenuDefaultActionIcon,
             color: "blue",
-            onClick: () => {switchShouldOpenOnClick(item)}
+            onClick: () => {toggleItemShouldCopyOnClick(item)}
         }
     ];
 

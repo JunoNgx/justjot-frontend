@@ -139,7 +139,7 @@ export default function useItemContextMenuActions() {
         });
     }
 
-    const switchShouldOpenOnClick = async (item: Item) => {
+    const toggleItemShouldCopyOnClick = async (item: Item) => {
         const newShouldCopyOnClickVal = !item.shouldCopyOnClick;
 
         pbClient.collection(DbTable.ITEMS)
@@ -207,7 +207,7 @@ export default function useItemContextMenuActions() {
         deleteItemWithManipulation,
         openMoveItemModal,
         refetchTitleAndFavicon,
-        switchShouldOpenOnClick,
+        toggleItemShouldCopyOnClick,
         switchIsDone,
     } 
 };

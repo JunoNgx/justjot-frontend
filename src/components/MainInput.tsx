@@ -35,7 +35,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         deleteItemWithManipulation,
         openMoveItemModal,
         refetchTitleAndFavicon,
-        switchShouldOpenOnClick,
+        toggleItemShouldCopyOnClick,
     } = useItemContextMenuActions();
 
     const [inputVal, setInputVal] = useState("");
@@ -99,11 +99,11 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         refetchTitleAndFavicon(item);
     }
 
-    const hotkeySwitchShouldOpenOnClick = () => {
+    const hotkeytoggleItemShouldCopyOnClick = () => {
         if (!isValidIndex(selectedIndex?.current)) return;
         const item = getItemByIndex(selectedIndex!.current);
         if (!item) return;
-        switchShouldOpenOnClick(item);
+        toggleItemShouldCopyOnClick(item);
     }
 
     return <Input id="main-input" className="main-view__input"
@@ -134,7 +134,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["mod+M", hotkeyOpenMoveItemModal],
             ["mod+Backspace", hotkeyDeleteItem],
             ["mod+shift+Q", hotkeyRefetchTitleAndFavicon],
-            ["mod+shift+O", hotkeySwitchShouldOpenOnClick],
+            ["mod+shift+O", hotkeytoggleItemShouldCopyOnClick],
         ])}
     />
 });
