@@ -24,7 +24,10 @@ export default function useItemContextMenuActions() {
     const clipboard = useClipboard({ timeout: 1000 });
 
     const copyItemContent = async (item: Item) => {
-        clipboard.copy(item.content);
+        item.type === ItemType.TODO
+            ? clipboard.copy(item.title)
+            : clipboard.copy(item.content);
+
         notifications.show({
             message: "Copied item content",
             color: "none",
