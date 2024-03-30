@@ -1,27 +1,30 @@
-import { ReactNode, createContext, useRef, useState } from 'react';
+import { ReactNode, createContext, useState } from 'react';
 import { ItemCollection } from '@/types';
 
 type CurrentCollectionContextType = {
     currCollection: ItemCollection | undefined,
     setCurrCollection: React.Dispatch<React.SetStateAction<ItemCollection | undefined>>,
-    currentSelectedCollectionIndexRef: React.MutableRefObject<number> | null,
+    currSelectedCollectionIndex: number,
+    setCurrSelectedCollectionIndex: React.Dispatch<React.SetStateAction<number>>
 };
 
 export const CurrentCollectionContext = createContext<CurrentCollectionContextType>({
     currCollection: undefined,
     setCurrCollection: () => {},
-    currentSelectedCollectionIndexRef: null,
+    currSelectedCollectionIndex: 0,
+    setCurrSelectedCollectionIndex: () => {},
 });
 
 export default function CurrentCollectionContextProvider({ children }: { children: ReactNode }) {
     const [currCollection, setCurrCollection] = useState<ItemCollection>();
-    const currentSelectedCollectionIndexRef = useRef(0);
+    const [currSelectedCollectionIndex, setCurrSelectedCollectionIndex] = useState<number>(0);
 
     return <CurrentCollectionContext.Provider value=
         {{
             currCollection,
             setCurrCollection,
-            currentSelectedCollectionIndexRef,
+            currSelectedCollectionIndex,
+            setCurrSelectedCollectionIndex,
         }}
     >
         {children}
