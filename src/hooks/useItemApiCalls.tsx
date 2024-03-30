@@ -1,6 +1,6 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
-import { CreateItemOptions, DbTable, Item } from "@/types";
+import { CreateItemOptions, MoveItemOptions, DbTable, Item } from "@/types";
 import { useContext } from "react";
 
 export default function useItemApiCalls() {
@@ -30,7 +30,29 @@ export default function useItemApiCalls() {
         setLoadingState?.(false);
     };
 
+    const moveItem = async (
+        { itemId, collectionId,
+            successfulCallback, errorCallback, setLoadingState,
+        }: MoveItemOptions
+    ) => {
+        setLoadingState?.(true);
+        pbClient
+            .collection(DbTable.ITEMS)
+            .update(itemId,
+                { collection: collectionId },
+                { requestKey: "item-move"},
+            )
+            .then((record: Item) => {
+                successfulCallback?.(record);
+            })
+            .catch(err => {
+                errorCallback?.(err);
+            });
+        setLoadingState?.(false);
+    };
+
     return {
         createItem,
+        moveItem,
     }
 }
