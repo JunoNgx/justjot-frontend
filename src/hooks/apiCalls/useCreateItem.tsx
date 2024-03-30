@@ -20,7 +20,7 @@ export default function useCreateItem(
 
     const { pbClient, user } = useContext(BackendClientContext);
     const { currCollection } = useContext(CurrentCollectionContext);
-    const { items, itemsHandlers } = useContext(ItemsContext);
+    const { items, setItems } = useContext(ItemsContext);
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -74,7 +74,7 @@ export default function useCreateItem(
         { title, content }: ItemCreateUpdateType
     ) => {
         const newItem = generatePlaceholderItem({title, content});
-        itemsHandlers.setState([newItem, ...items || []]);
+        setItems([newItem, ...items || []]);
         createItem({ content });
     };
 

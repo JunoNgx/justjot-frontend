@@ -1,11 +1,10 @@
-import { ReactNode, createContext, useCallback, useContext } from 'react';
+import { ReactNode, SetStateAction, createContext, useCallback, useContext, useState } from 'react';
 import { DbTable, Item, ItemCollection } from '@/types';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
-import { UseListStateHandlers, useListState } from '@mantine/hooks';
 
 type ItemsContextType = {
     items: Item[],
-    itemsHandlers: UseListStateHandlers<Item>,
+    setItems: React.Dispatch<SetStateAction<Item[]>>,
     fetchItems: (currCollection: ItemCollection | undefined) => void,
 };
 
@@ -15,7 +14,7 @@ export const ItemsContext = createContext<ItemsContextType>(
 
 export default function ItemsContextProvider({ children }: { children: ReactNode }) {
     const { pbClient } = useContext(BackendClientContext);
-    const [ items, itemsHandlers ] = useListState<Item>([]);
+    const [ items, setItems ] = useState<Item[]>([]);
 
     const fetchItems = useCallback(async (currCollection: ItemCollection | undefined) => {
         if (!currCollection) return;
@@ -30,7 +29,7 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
                 requestKey: "fetch-items",
             }, )
             .then((records: Item[]) => {
-                itemsHandlers.setState(records);
+                setItems(records);
             })
             .catch(err => {
                 if (!err.isAbort) {
@@ -43,7 +42,7 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
     return <ItemsContext.Provider value=
         {{
             items,
-            itemsHandlers,
+            setItems,
             fetchItems
         }}
     >

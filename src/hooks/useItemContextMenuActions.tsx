@@ -20,7 +20,7 @@ export default function useItemContextMenuActions() {
     const { pbClient, user } = useContext(BackendClientContext);
     const { currCollection } = useContext(CurrentCollectionContext);
     const { fetchItems } = useContext(ItemsContext);
-    const { items, itemsHandlers } = useContext(ItemsContext);
+    const { items, setItems } = useContext(ItemsContext);
     const clipboard = useClipboard({ timeout: 1000 });
 
     const copyItemContent = async (item: Item) => {
@@ -109,7 +109,7 @@ export default function useItemContextMenuActions() {
         const newArray = items?.slice(0, index)
             .concat(items.slice(index! + 1, items.length));
 
-        itemsHandlers.setState(newArray);
+        setItems(newArray);
 
         deleteItem(item);
     }
@@ -217,7 +217,7 @@ export default function useItemContextMenuActions() {
             .concat([tempNewItem])
             .concat(items.slice(index! + 1, items.length));
 
-        itemsHandlers.setState(newArray);
+        setItems(newArray);
         toggleIsTodoDone(item, newIsTodoDoneVal);
     }
 
