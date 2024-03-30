@@ -1,14 +1,13 @@
-import { Item, ItemType } from "@/types";
+import { Item } from "@/types";
 // import { isDatetimeMoreThanOneYearOld } from "./misc";
 // import { DateTime } from "luxon";
 
-export const calculatePriText = (item: Item): string => {
-    const isTodoItem = item.type === ItemType.TODO;
-    return isTodoItem
-        ? item.content
-        : item.title;
-};
-
+// export const calculatePriText = (item: Item): string => {
+//     const isTodoItem = item.type === ItemType.TODO;
+//     return isTodoItem
+//         ? item.content
+//         : item.title;
+// };
 
 export const isValidHexColourCode = (str: string): boolean => {
     const hexColourCodeRegEx = /(^#[A-Fa-f0-9]{6}$)/;
