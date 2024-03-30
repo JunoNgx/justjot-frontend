@@ -29,7 +29,7 @@ export type ItemCollection = RecordModel | {
 export enum ItemType {
     TEXT = "text",
     LINK = "link",
-    TODO = "todoList"
+    TODO = "todo"
 };
 
 // export enum DefaultAction {
