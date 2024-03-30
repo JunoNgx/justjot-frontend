@@ -100,7 +100,6 @@ export default function ItemComponent(
     const handlePrimaryAction = (
         _e: React.MouseEvent | React.TouchEvent
     ) => {
-        // console.log("handle primary click")
         if (item.type === ItemType.TODO) {
             switchIsDone(item);
             return;
@@ -123,7 +122,6 @@ export default function ItemComponent(
     const handleSecondaryAction = (
         e: React.MouseEvent | React.TouchEvent
     ) => {
-        // console.log("handle secondary click")
         const handleEventWithContextMenu = showContextMenu(
             contextMenuOptions,
             { className: "dropdown-menu" }
@@ -162,11 +160,6 @@ export default function ItemComponent(
 
         onMouseEnter={() => { selectItem(index)}}
         onMouseLeave={() => { deselectItem()}}
-        // onClick={handlePrimaryAction}
-        // onContextMenu={showContextMenu(
-        //     contextMenuOptions,
-        //     { className: "dropdown-menu" }
-        // )}
     >
             <Group className="item__flex-wrapper"
                 justify="space-between"
