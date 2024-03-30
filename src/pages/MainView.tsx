@@ -25,6 +25,7 @@ export default function MainView() {
         trySwitchToPrevCollection,
         trySwitchToNextCollection,
         trySwitchToCollectionByIndex,
+        tryRetrackCurrentSelectedIndexWithId,
     } = useCollectionNavActions();
     const { collectionSlug } = useParams();
 
@@ -68,6 +69,8 @@ export default function MainView() {
             trySwitchToCollectionByIndex(0)
             return;
         };
+
+        tryRetrackCurrentSelectedIndexWithId();
 
         if (collectionSlug === currCollection?.slug) return;
 
