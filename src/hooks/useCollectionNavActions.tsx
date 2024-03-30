@@ -10,7 +10,7 @@ import { isValidIndex } from "@/utils/miscUtils";
 export default function useCollectionNavActions() {
     const { user } = useContext(BackendClientContext);
     const { collections } = useContext(CollectionsContext);
-    const { setCurrCollection } = useContext(CurrentCollectionContext);
+    const { currCollection, setCurrCollection } = useContext(CurrentCollectionContext);
     const { currentSelectedCollectionIndexRef } = useContext(CurrentCollectionContext);
 
     const navigate = useNavigate();
@@ -94,6 +94,12 @@ export default function useCollectionNavActions() {
         document.title = `${collection.name} — ${APP_NAME}`;
     };
 
+    const tryRetrackCurrentSelectedIndex = () => {
+        const index = collections.map(collection => collection.id)
+            .indexOf(currCollection!.id);
+        currentSelectedCollectionIndexRef!.current = index;
+    };
+
     return {
         trySwitchToCollectionById,
         trySwitchToCollectionBySlug,
@@ -102,5 +108,6 @@ export default function useCollectionNavActions() {
         trySwitchToNextCollection,
         trySwitchToCollectionByIndex,
         tryNavigateToCollection,
+        tryRetrackCurrentSelectedIndex,
     }
 };
