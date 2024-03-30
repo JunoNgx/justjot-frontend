@@ -152,7 +152,7 @@ export default function ItemComponent(
     return <Box
         {...anchorProps}
 
-        className={computeClassnames(item)}
+        className={computeClassname(item)}
         p="xs"
         data-is-item={true}
         data-index={index}
@@ -199,7 +199,7 @@ export default function ItemComponent(
         </Box>
 };
 
-const computeClassnames = (item: Item) => {
+const computeClassname = (item: Item) => {
     const noPrimaryTextModifier = item.title
         ? " "
         : "item--has-no-primary-text ";
