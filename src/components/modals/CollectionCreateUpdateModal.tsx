@@ -1,13 +1,19 @@
 import { Button, Group, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import useCreateCollection from "@/hooks/apiCalls/useCreateCollection";
 import useUpdateCollection from "@/hooks/apiCalls/useUpdateCollection";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { modals } from "@mantine/modals";
 import { getCurrHighestCollectionSortOrder } from "@/utils/collectionUtils";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { slugify } from "@/utils/miscUtils";
+import useCollectionApiCalls from "@/hooks/useCollectionApiCalls";
+import { ItemCollection } from "@/types";
+import { ClientResponseError } from "pocketbase";
+import { notifications } from "@mantine/notifications";
+import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
+import useManageListState from "@/libs/useManageListState";
+import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 
 type CollectionCreateUpdateModalOptions = {
     isEditMode?: boolean,
@@ -22,7 +28,7 @@ export default function CollectionCreateUpdateModal(
     { isEditMode }: CollectionCreateUpdateModalOptions
 ) {
 
-    const { collections, fetchCollections } = useContext(CollectionsContext);
+    const { collections, setCollections, fetchCollections } = useContext(CollectionsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
     const form = useForm({
         initialValues: {
@@ -30,9 +36,13 @@ export default function CollectionCreateUpdateModal(
             slug: isEditMode ? currCollection?.slug : ""
         }
     });
-    const [ createCollection, isCreateLoading ]
-        = useCreateCollection({ successfulCallback: modals.closeAll});
-    const [ updateCollection, _, isUpdateLoading ]
+    const [isLoading, setIsLoading] = useState(false);
+    const [newlyCreatedCollection, setNewlyCreatedCollection] = useState<ItemCollection|null>(null);
+    const handlers = useManageListState(setCollections);
+    const { trySwitchToCollectionById } = useCollectionNavActions();
+
+    const { createCollection } = useCollectionApiCalls();
+    const [ updateCollection]
         = useUpdateCollection({ successfulCallback: modals.closeAll});
 
     const handleSubmit = async (formData: CollectionCreateUpdateFormData) => {
@@ -46,8 +56,12 @@ export default function CollectionCreateUpdateModal(
         }
 
         const currHighestSortOrder = getCurrHighestCollectionSortOrder(collections);
-        await createCollection({ name, slug }, currHighestSortOrder);
-        fetchCollections();
+        await createCollection({
+            name, slug, currHighestSortOrder,
+            setLoadingState: setIsLoading,
+            successfulCallback: handleSuccessfulCreation,
+            errorCallback: handleErroredCreation,
+        });
     }
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,6 +78,35 @@ export default function CollectionCreateUpdateModal(
             slug: slugify(e.target.value)
         });
     }
+
+    const handleSuccessfulCreation = (newCollection: ItemCollection) => {
+        handlers.append(newCollection);
+        setNewlyCreatedCollection(newCollection);
+        notifications.show({
+            message: "Collection created: " + newCollection.name,
+            color: "none",
+            autoClose: AUTO_CLOSE_DEFAULT,
+            withCloseButton: true,
+        });
+
+        modals.closeAll();
+    };
+
+    // Will trigger navigating to the newly created collection
+    useEffect(() => {
+        if (!newlyCreatedCollection) return;
+        trySwitchToCollectionById(newlyCreatedCollection.id);
+    }, [newlyCreatedCollection]);
+
+    const handleErroredCreation = (_err: ClientResponseError) => {
+        console.log(_err);
+        notifications.show({
+            message: "Error creating new collection",
+            color: "red",
+            autoClose: AUTO_CLOSE_ERROR_TOAST,
+            withCloseButton: true,
+        });
+    };
 
     return <form onSubmit={form.onSubmit(handleSubmit)}>
         <Stack>
@@ -91,10 +134,7 @@ export default function CollectionCreateUpdateModal(
                 <Button
                     variant="filled"
                     type="submit"
-                    loading={isEditMode
-                        ? isCreateLoading
-                        : isUpdateLoading
-                    }
+                    loading={isLoading}
                 >
                     {isEditMode
                         ? "Update collection"
