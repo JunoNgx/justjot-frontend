@@ -89,7 +89,7 @@ export default function ItemComponent(
         }, {
             key: "divider",
         }, {
-            key: "switchPrimaryAction",
+            key: "togglePrimaryAction",
             title: "To copy",
             icon: contextMenuDefaultActionIcon,
             color: "blue",
