@@ -81,3 +81,8 @@ export type ItemCreateUpdateType = {
     title?: string,
     content?: string
 };
+
+export type MoveItemOptions = {
+    itemId: string,
+    collectionId: string,
+} & ApiRequestCallbackOptions;
