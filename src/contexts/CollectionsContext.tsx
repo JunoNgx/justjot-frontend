@@ -5,7 +5,7 @@ import { BackendClientContext } from '@/contexts/BackendClientContext';
 type CollectionsContextType = {
     collections: ItemCollection[],
     setCollections: React.Dispatch<React.SetStateAction<ItemCollection[]>>,
-    fetchCollections: ({successfulCallback, errorCallback}: ApiRequestCallbackOptions) => void,
+    fetchCollections: ({successfulCallback, errorCallback}?: ApiRequestCallbackOptions) => void,
 };
 
 export const CollectionsContext = createContext<CollectionsContextType>({} as CollectionsContextType);
