@@ -1,5 +1,5 @@
 import { Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
-import { Item } from "@/types";
+import { Item, ItemType } from "@/types";
 import useUpdateItem from "@/hooks/apiCalls/useUpdateItem";
 import { DateTime } from "luxon";
 import { getHotkeyHandler, useDebounceCallback } from "@mantine/hooks";
@@ -137,9 +137,14 @@ export default function ItemCreateUpdateModal(
         setHasSaved(true);
     };
 
+    const isTodoItem = item.type !== ItemType.TODO;
+
     return <Stack className="item-update-modal">
         <TextInput className="item-update-modal__input item-update-modal__input--title"
-            label="Title"
+            label={isTodoItem
+                ? "Title"
+                : "Todo task name"
+            }
             description="Optional, must be or fewer than 200 characters."
             placeholder=""
             type="text"
@@ -154,24 +159,26 @@ export default function ItemCreateUpdateModal(
             <Text>{titleVal.length}/200</Text>
         </Group>
 
-        <Textarea className="item-update-modal__input item-update-modal__input--content"
-            data-autofocus
-            label="Content"
-            description="Optional, must be or fewer than 10000 characters."
-            placeholder="Enter your note content here"
-            autosize
-            maxLength={10000}
-            minRows={5}
-            value={contentVal}
-            onChange={handleContentChange}
-            onKeyDown={getHotkeyHandler([
-                ["mod+S", handleSave, {preventDefault: true}]
-            ])}
-        />
-        <Group justify="space-between">
-            <Text>Save <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>
-            <Text>{contentVal.length}/10000</Text>
-        </Group>
+        {isTodoItem && <>
+            <Textarea className="item-update-modal__input item-update-modal__input--content"
+                data-autofocus
+                label="Content"
+                description="Optional, must be or fewer than 10000 characters."
+                placeholder="Enter your note content here"
+                autosize
+                maxLength={10000}
+                minRows={5}
+                value={contentVal}
+                onChange={handleContentChange}
+                onKeyDown={getHotkeyHandler([
+                    ["mod+S", handleSave, {preventDefault: true}]
+                ])}
+            />
+            <Group justify="space-between">
+                <Text>Save <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>
+                <Text>{contentVal.length}/10000</Text>
+            </Group>
+        </>}
 
         <Group justify="flex-end">
             {(hasSaved && relativeUpdatedTimeStr)
