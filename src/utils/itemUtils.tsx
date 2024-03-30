@@ -15,6 +15,10 @@ export const isValidHexColourCode = (str: string): boolean => {
     return hexColourCodeRegEx.test(str);
 }
 
+export const findIndexInItemList = (item: Item, itemList: Item[]) => {
+    return itemList.map(item => item.id).indexOf(item.id);
+};
+
 // export const calculateDatetimeStr = (item: Item): string => {
 //     const datetimeDataToUse = item.updated || item.created;
 //     const dateTimeInstance = new Date(datetimeDataToUse);
