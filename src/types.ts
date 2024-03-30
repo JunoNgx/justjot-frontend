@@ -61,9 +61,10 @@ export enum DbTable {
     COLLECTIONS = "itemCollections"
 };
 
-export interface ApiRequestCallbackOptions {
-    successfulCallback?: () => void,
-    errorCallback?: () => void,
+export type ApiRequestCallbackOptions = {
+    successfulCallback?: (response?: any) => void,
+    errorCallback?: (err?: any) => void,
+    setLoadingState?: React.Dispatch<React.SetStateAction<boolean>>,
 };
 
 export type CreateUpdateCollectionOptions = {
