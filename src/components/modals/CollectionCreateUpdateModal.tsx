@@ -28,8 +28,8 @@ export default function CollectionCreateUpdateModal(
     { isEditMode }: CollectionCreateUpdateModalOptions
 ) {
 
-    const { collections, setCollections, fetchCollections } = useContext(CollectionsContext);
-    const { currCollection } = useContext(CurrentCollectionContext);
+    const { collections, setCollections } = useContext(CollectionsContext);
+    const { currCollection, currSelectedCollectionIndex } = useContext(CurrentCollectionContext);
     const form = useForm({
         initialValues: {
             name: isEditMode ? currCollection?.name : "",
@@ -39,11 +39,12 @@ export default function CollectionCreateUpdateModal(
     const [isLoading, setIsLoading] = useState(false);
     const [newlyCreatedCollection, setNewlyCreatedCollection] = useState<ItemCollection | null>(null);
     const handlers = useManageListState(setCollections);
-    const { trySwitchToCollectionById } = useCollectionNavActions();
+    const {
+        trySwitchToCollectionById,
+        tryNavigateToCollection,
+    } = useCollectionNavActions();
 
-    const { createCollection } = useCollectionApiCalls();
-    const [ updateCollection]
-        = useUpdateCollection({ successfulCallback: modals.closeAll});
+    const { createCollection, updateCollection } = useCollectionApiCalls();
 
     useEffect(() => {
         setNewlyCreatedCollection(null);
@@ -57,8 +58,13 @@ export default function CollectionCreateUpdateModal(
         const slug = slugify(originalSlug);
 
         if (isEditMode) {
-            await updateCollection({ name, slug });
-            fetchCollections();
+            await updateCollection({
+                name, slug,
+                collectionId: currCollection!.id,
+                setLoadingState: setIsLoading,
+                successfulCallback: handleSuccessfulUpdate,
+                errorCallback: handleErroredUpdate
+            });
             return;
         }
 
@@ -109,6 +115,30 @@ export default function CollectionCreateUpdateModal(
         console.log(err);
         notifications.show({
             message: "Error creating new collection",
+            color: "red",
+            autoClose: AUTO_CLOSE_ERROR_TOAST,
+            withCloseButton: true,
+        });
+    };
+
+    const handleSuccessfulUpdate = (newCollection: ItemCollection) => {
+        handlers.replace(currSelectedCollectionIndex, newCollection);
+        // Must update route slug, else it would default back to collections[0]
+        tryNavigateToCollection(newCollection, currSelectedCollectionIndex);
+        notifications.show({
+            message: `Collection ${newCollection.name} has been updated successfully`,
+            color: "none",
+            autoClose: AUTO_CLOSE_DEFAULT,
+            withCloseButton: true,
+        });
+
+        modals.closeAll();
+    };
+
+    const handleErroredUpdate = (err: ClientResponseError) => {
+        console.log(err);
+        notifications.show({
+            message: "Error updating collection",
             color: "red",
             autoClose: AUTO_CLOSE_ERROR_TOAST,
             withCloseButton: true,
