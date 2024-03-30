@@ -37,13 +37,20 @@ export default function CollectionCreateUpdateModal(
         }
     });
     const [isLoading, setIsLoading] = useState(false);
-    const [newlyCreatedCollection, setNewlyCreatedCollection] = useState<ItemCollection|null>(null);
+    const [newlyCreatedCollection, setNewlyCreatedCollection] = useState<ItemCollection | null>(null);
     const handlers = useManageListState(setCollections);
     const { trySwitchToCollectionById } = useCollectionNavActions();
 
     const { createCollection } = useCollectionApiCalls();
     const [ updateCollection]
         = useUpdateCollection({ successfulCallback: modals.closeAll});
+
+    useEffect(() => {
+        setNewlyCreatedCollection(null);
+        return () => {
+            setNewlyCreatedCollection(null);
+        }
+    }, []);
 
     const handleSubmit = async (formData: CollectionCreateUpdateFormData) => {
         const { name, slug: originalSlug } = formData;
