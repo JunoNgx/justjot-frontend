@@ -30,7 +30,8 @@ export default function ItemComponent(
         openMoveItemModal,
         deleteItemWithManipulation,
         switchShouldOpenOnClick,
-        refetchTitleAndFavicon
+        refetchTitleAndFavicon,
+        switchIsDone,
     } = useItemContextMenuActions();
 
     const contextMenuDefaultActionIcon = item.shouldCopyOnClick
@@ -100,6 +101,11 @@ export default function ItemComponent(
         _e: React.MouseEvent | React.TouchEvent
     ) => {
         // console.log("handle primary click")
+        if (item.type === ItemType.TODO) {
+            switchIsDone(item);
+            return;
+        }
+
         if (item.shouldCopyOnClick) {
             copyItemContent(item);
             return;
@@ -175,6 +181,7 @@ export default function ItemComponent(
                             type={item.type}
                             faviconUrl={item.faviconUrl}
                             shouldCopyOnClick={item.shouldCopyOnClick}
+                            isTodoDone={item.isTodoDone}
                             firstSevenChars={item.content.substring(0, 7)}
                         />
                     </Center>

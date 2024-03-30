@@ -1,13 +1,21 @@
 import { Image } from "@mantine/core";
 import { ItemType } from "@/types";
-import { IconNote, IconNotes, IconWorld } from "@tabler/icons-react";
+import { IconCheckbox, IconNote, IconNotes, IconSquare, IconWorld } from "@tabler/icons-react";
 import { justJotTheme } from "@/theme";
 import { isValidHexColourCode } from "@/utils/itemUtils";
 // import { isValidUrl } from "../utils/misc";
 
+type ItemComponentIconParams = {
+    type: ItemType,
+    faviconUrl: string,
+    shouldCopyOnClick: boolean,
+    isTodoDone: boolean,
+    firstSevenChars: string
+}
+
 export default function ItemComponentIcon(
-    {type, faviconUrl, shouldCopyOnClick, firstSevenChars}:
-    {type: ItemType, faviconUrl: string, shouldCopyOnClick: boolean, firstSevenChars: string}
+    {type, faviconUrl, shouldCopyOnClick, isTodoDone, firstSevenChars}:
+    ItemComponentIconParams
 ) {
     if (isValidHexColourCode(firstSevenChars))
         return <div className="item__icon-colour"
@@ -15,6 +23,16 @@ export default function ItemComponentIcon(
         />
 
     switch (type) {
+        case ItemType.TODO:
+            return isTodoDone
+                ? <IconCheckbox
+                    size={justJotTheme.other.iconSizeItem}
+                    stroke={justJotTheme.other.iconStrokeWidth}
+                />
+                : <IconSquare
+                    size={justJotTheme.other.iconSizeItem}
+                    stroke={justJotTheme.other.iconStrokeWidth}
+                />
         case ItemType.LINK:
             // validating data should not be done on the frontend
             // return faviconUrl && isValidUrl(faviconUrl)
