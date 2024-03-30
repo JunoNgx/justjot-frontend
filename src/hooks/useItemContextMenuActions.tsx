@@ -170,7 +170,7 @@ export default function useItemContextMenuActions() {
             })
     }
 
-    const switchIsDone = async (
+    const toggleIsTodoDone = async (
         item: Item
     ) => {
         const newIsTodoDone = !item.isTodoDone;
@@ -208,6 +208,6 @@ export default function useItemContextMenuActions() {
         openMoveItemModal,
         refetchTitleAndFavicon,
         toggleItemShouldCopyOnClick,
-        switchIsDone,
+        toggleIsTodoDone,
     } 
 };

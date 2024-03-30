@@ -31,7 +31,7 @@ export default function ItemComponent(
         deleteItemWithManipulation,
         toggleItemShouldCopyOnClick,
         refetchTitleAndFavicon,
-        switchIsDone,
+        toggleIsTodoDone,
     } = useItemContextMenuActions();
 
     const contextMenuDefaultActionIcon = item.shouldCopyOnClick
@@ -101,7 +101,7 @@ export default function ItemComponent(
         _e: React.MouseEvent | React.TouchEvent
     ) => {
         if (item.type === ItemType.TODO) {
-            switchIsDone(item);
+            toggleIsTodoDone(item);
             return;
         }
 
