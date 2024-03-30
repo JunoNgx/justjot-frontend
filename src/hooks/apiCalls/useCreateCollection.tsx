@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
-import { DbTable, ItemCollection, CreateUpdateCollectionOptions, RequestCallbackOptions } from "@/types";
+import { DbTable, ItemCollection, CreateUpdateCollectionOptions, ApiRequestCallbackOptions } from "@/types";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_ERROR_TOAST, SORT_ORDER_INCREMENT_COLLECTION } from "@/utils/constants";
 
@@ -14,7 +14,7 @@ type useCreateCollectionReturnType = [
 ];
 
 export default function useCreateCollection(
-    { successfulCallback, errorCallback }: RequestCallbackOptions = {}
+    { successfulCallback, errorCallback }: ApiRequestCallbackOptions = {}
 ): useCreateCollectionReturnType {
 
     const { pbClient, user } = useContext(BackendClientContext);

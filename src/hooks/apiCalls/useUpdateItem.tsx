@@ -1,24 +1,24 @@
 import { useContext } from "react";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
-import { DbTable, RequestCallbackOptions, Item } from "@/types";
+import { DbTable, ApiRequestCallbackOptions, Item } from "@/types";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 
 type UpdateItemTitleOptions = {
     itemId: string,
     title: string,
-} & RequestCallbackOptions;
+} & ApiRequestCallbackOptions;
 
 type UpdateItemContentOptions = {
     itemId: string,
     content: string,
-} & RequestCallbackOptions;
+} & ApiRequestCallbackOptions;
 
 type UpdateItemTitleAndContentOptions = {
     itemId: string,
     title: string,
     content: string,
-} & RequestCallbackOptions;
+} & ApiRequestCallbackOptions;
 
 type useUpdateItemReturnType = {
     updateItemTitle: (options: UpdateItemTitleOptions) => Promise<void>,

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
-import { DbTable, ItemCollection, CreateUpdateCollectionOptions, RequestCallbackOptions } from "@/types";
+import { DbTable, ItemCollection, CreateUpdateCollectionOptions, ApiRequestCallbackOptions } from "@/types";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
@@ -18,7 +18,7 @@ type UpdateCollectionSortOrderParams = {
 };
 
 export default function useUpdateCollection({
-    successfulCallback, errorCallback }: RequestCallbackOptions = {}
+    successfulCallback, errorCallback }: ApiRequestCallbackOptions = {}
 ): useUpdateCollectionReturnType {
 
     const {pbClient} = useContext(BackendClientContext);

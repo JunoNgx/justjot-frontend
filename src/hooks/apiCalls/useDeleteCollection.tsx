@@ -1,7 +1,7 @@
 
 import { useContext, useState } from "react";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
-import { DbTable, RequestCallbackOptions } from "@/types";
+import { DbTable, ApiRequestCallbackOptions } from "@/types";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
@@ -13,7 +13,7 @@ type useDeleteCollectionReturnType = [
 ];
 
 export default function useDeleteCollection({
-    successfulCallback, errorCallback }: RequestCallbackOptions = {}
+    successfulCallback, errorCallback }: ApiRequestCallbackOptions = {}
 ): useDeleteCollectionReturnType {
 
     const { pbClient } = useContext(BackendClientContext);

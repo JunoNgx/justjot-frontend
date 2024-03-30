@@ -61,7 +61,7 @@ export enum DbTable {
     COLLECTIONS = "itemCollections"
 };
 
-export interface RequestCallbackOptions {
+export interface ApiRequestCallbackOptions {
     successfulCallback?: () => void,
     errorCallback?: () => void,
 };

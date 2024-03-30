@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
-import { DbTable, RequestCallbackOptions, Item, ItemType, ItemCreateUpdateType } from "@/types";
+import { DbTable, ApiRequestCallbackOptions, Item, ItemType, ItemCreateUpdateType } from "@/types";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
@@ -15,7 +15,7 @@ type useCreateItemReturnType = [
 ];
 
 export default function useCreateItem(
-    { successfulCallback, errorCallback }: RequestCallbackOptions = {}
+    { successfulCallback, errorCallback }: ApiRequestCallbackOptions = {}
 ): useCreateItemReturnType {
 
     const { pbClient, user } = useContext(BackendClientContext);
