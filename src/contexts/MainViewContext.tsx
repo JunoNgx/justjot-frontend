@@ -15,18 +15,7 @@ interface MainViewContextType {
     scrollToBottom: () => void,
 };
 
-export const MainViewContext = createContext<MainViewContextType>({
-    selectedIndex: null,
-    focusOnMainInput: (_mainInputRef: React.RefObject<HTMLInputElement>) => {},
-    blurMainInput: () => {},
-    selectItem: (_index: number) => {},
-    deselectItem: () => {},
-    selectNextItem: () => {},
-    selectPrevItem: () => {},
-    execPrimaryAction: () => {},
-    scrollToTop: () => {},
-    scrollToBottom: () => {},
-});
+export const MainViewContext = createContext<MainViewContextType>({} as MainViewContextType);
 
 export default function MainViewContextProvider(
     {children}: {children: React.ReactNode}
