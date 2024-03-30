@@ -91,6 +91,7 @@ export default function ItemComponent(
         }, {
             key: "togglePrimaryAction",
             title: "To copy",
+            hidden: item.type === ItemType.TODO,
             icon: contextMenuDefaultActionIcon,
             color: "blue",
             onClick: () => {toggleItemShouldCopyOnClick(item)}
