@@ -63,7 +63,7 @@ export default function MainView() {
     }, []);
 
     useEffect(() => {
-        if (!collections) return;
+        if (collections.length === 0) return;
         if (!collectionSlug) {
             trySwitchToCollectionByIndex(0)
             return;

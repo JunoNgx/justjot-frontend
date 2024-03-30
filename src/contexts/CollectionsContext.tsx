@@ -3,20 +3,16 @@ import { DbTable, ItemCollection } from '@/types';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 
 type CollectionsContextType = {
-    collections: ItemCollection[] | undefined,
-    setCollections: React.Dispatch<React.SetStateAction<ItemCollection[] | undefined>>,
+    collections: ItemCollection[],
+    setCollections: React.Dispatch<React.SetStateAction<ItemCollection[]>>,
     fetchCollections: () => void,
 };
 
-export const CollectionsContext = createContext<CollectionsContextType>({
-    collections: undefined,
-    setCollections: () => {},
-    fetchCollections: () => {},
-});
+export const CollectionsContext = createContext<CollectionsContextType>({} as CollectionsContextType);
 
 export default function CollectionsContextProvider({ children }: { children: ReactNode }) {
     const { isLoggedIn, setIsLoggedIn, pbClient } = useContext(BackendClientContext);
-    const [collections, setCollections] = useState<ItemCollection[]>();
+    const [collections, setCollections] = useState<ItemCollection[]>([]);
 
     // @ts-expect-error
     const removeLoginStatusListener = pbClient.authStore.onChange((_token, _model) => {

@@ -30,7 +30,7 @@ export default function CollectionsSortModal() {
             to: destination?.index || 0
         });
 
-        if (!collections) return;
+        if (collections.length === 0) return;
         if (!isValidIndex(destination?.index)) return;
 
         if (source.index === destination!.index) {

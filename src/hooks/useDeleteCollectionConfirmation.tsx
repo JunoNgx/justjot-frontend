@@ -15,7 +15,7 @@ export default function useDeleteCollectionConfirmation() {
     const { currCollection } = useContext(CurrentCollectionContext);
     
     useEffect(() => {
-        if (!collections) return;
+        if (collections.length === 0) return;
         setCanDelete(collections.length > 1);
     }, [collections]);
     
