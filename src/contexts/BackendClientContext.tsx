@@ -1,7 +1,7 @@
 import PocketBase, { AuthModel } from 'pocketbase';
 import { ReactNode, createContext, useCallback, useState } from 'react';
 
-type BackendClientType = {
+type BackendClientContextType = {
     pbClient: PocketBase,
     user: AuthModel,
     isLoggedIn: boolean,
@@ -9,7 +9,7 @@ type BackendClientType = {
     logout: () => void,
 };
 
-export const BackendClientContext = createContext<BackendClientType>({
+export const BackendClientContext = createContext<BackendClientContextType>({
     pbClient: new PocketBase(import.meta.env.VITE_BACKEND_URL),
     user: null,
     isLoggedIn: false,
