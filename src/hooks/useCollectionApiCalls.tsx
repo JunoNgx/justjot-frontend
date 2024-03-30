@@ -1,14 +1,22 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
-import { ApiRequestCallbackOptions, CreateUpdateCollectionOptions, DbTable, ItemCollection } from "@/types";
+import { ApiRequestCallbackOptions, DbTable, ItemCollection } from "@/types";
 import { SORT_ORDER_INCREMENT_COLLECTION } from "@/utils/constants";
 import { useContext } from "react";
 
+type CreateUpdateCollectionOptions = {
+    name: string,
+    slug: string
+};
+
+type CollectionApiCallsCommonOptions = {
+    setLoadingState?: React.Dispatch<React.SetStateAction<boolean>>
+} & ApiRequestCallbackOptions;
+
 type createCollectionParams = {
     currHighestSortOrder: number
-    setLoadingState?: React.Dispatch<React.SetStateAction<boolean>>
 } & CreateUpdateCollectionOptions
-& ApiRequestCallbackOptions;
-
+& CollectionApiCallsCommonOptions;
+    
 export default function useCollectionApiCalls() {
 
     const { pbClient, user } = useContext(BackendClientContext);
