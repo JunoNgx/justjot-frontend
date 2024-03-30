@@ -174,22 +174,20 @@ export default function useItemContextMenuActions() {
     }
 
     const toggleIsTodoDone = async (
-        item: Item
+        item: Item, newIsTodoDoneVal: boolean
     ) => {
-        const newIsTodoDone = !item.isTodoDone;
-
         await pbClient.collection(DbTable.ITEMS)
             .update(item.id,
-                { isTodoDone: newIsTodoDone },
+                { isTodoDone: newIsTodoDoneVal },
                 { requestKey: null},
             )
             .then((_record: ItemCollection) => {
-                // TODO: update list
+                // TODO: update one item only
                 fetchItems(currCollection);
             })
             .catch(err => {
                 console.error(err);
-                // fetchItems(currCollection);
+                fetchItems(currCollection);
 
                 if (!err.isAbort) {
                     console.warn("Non cancellation error")
@@ -201,6 +199,26 @@ export default function useItemContextMenuActions() {
                     withCloseButton: true,
                 });
             });
+    };
+
+    const toggleIsTodoDoneWithManipulation = async (item: Item) => {
+        const newIsTodoDoneVal = !item.isTodoDone;
+        const tempNewItem = {
+            ...item,
+            isTodoDone: newIsTodoDoneVal
+        };
+
+        const index = items?.map(item => item.id)
+            .indexOf(item.id);
+    
+        if (!isValidIndex(index)) return;
+
+        const newArray = items?.slice(0, index)
+            .concat([tempNewItem])
+            .concat(items.slice(index! + 1, items.length));
+
+        setItems(newArray);
+        toggleIsTodoDone(item, newIsTodoDoneVal);
     }
 
     return {
@@ -211,6 +229,7 @@ export default function useItemContextMenuActions() {
         openMoveItemModal,
         refetchTitleAndFavicon,
         toggleItemShouldCopyOnClick,
-        toggleIsTodoDone,
+        // toggleIsTodoDone,
+        toggleIsTodoDoneWithManipulation,
     } 
 };
