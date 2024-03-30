@@ -68,7 +68,7 @@ export type ApiRequestCallbackOptions = {
 };
 
 export type CreateItemOptions = {
-    title: string,
+    title?: string,
     content: string,
 } & ApiRequestCallbackOptions;
 
