@@ -38,8 +38,8 @@ export default function useCollectionApiCalls() {
                 owner: user!.id,
                 sortOrder: newSortOrderVal
             })
-            .then((_record: ItemCollection) => {
-                successfulCallback?.(_record);
+            .then((record: ItemCollection) => {
+                successfulCallback?.(record);
             })
             .catch(err => {
                 errorCallback?.(err);
