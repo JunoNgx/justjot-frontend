@@ -210,12 +210,18 @@ export default function ItemComponent(
 const computeClassnames = (item: Item) => {
     const noPrimaryTextModifier = item.title
         ? " "
-        : "item--has-no-primary-text";
+        : "item--has-no-primary-text ";
     const noSecondaryTextModifier = item.content
         ? " "
-        : "item--has-no-secondary-text";
+        : "item--has-no-secondary-text ";
+
+    const isTodoItem = item.type === ItemType.TODO;
+    const isTodoItemDoneModifier = isTodoItem && item.isTodoDone
+        ? "item--is-todo-done "
+        : " "
 
     return "item "
         + noPrimaryTextModifier
-        + noSecondaryTextModifier;
+        + noSecondaryTextModifier
+        + isTodoItemDoneModifier;
 }
