@@ -69,9 +69,6 @@ export default function MainView() {
             trySwitchToCollectionByIndex(0)
             return;
         };
-
-        tryRetrackCurrentSelectedIndexWithId();
-
         if (collectionSlug === currCollection?.slug) return;
 
         trySwitchToCollectionBySlug(collectionSlug);
@@ -81,6 +78,10 @@ export default function MainView() {
         if (!currCollection) return;
         fetchItems(currCollection);
     }, [currCollection]);
+
+    useEffect(() => {
+        tryRetrackCurrentSelectedIndexWithId(currCollection);
+    }, [currCollection, collections]);
 
     const lastRoutineUpdateTimestamp = useRef<number>(Date.now());
     const tryRoutineUpdate = () => {
