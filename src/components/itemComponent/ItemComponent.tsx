@@ -191,7 +191,6 @@ export default function ItemComponent(
                         {item.title}
                     </Text>}
                     {item.content&& <Text className="item__secondary-text"
-                        c="dimmed"
                         title={item.content}
                     >
                         {item.content}
