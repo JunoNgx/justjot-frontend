@@ -98,8 +98,8 @@ export default function CollectionCreateUpdateModal(
         trySwitchToCollectionById(newlyCreatedCollection.id);
     }, [newlyCreatedCollection]);
 
-    const handleErroredCreation = (_err: ClientResponseError) => {
-        console.log(_err);
+    const handleErroredCreation = (err: ClientResponseError) => {
+        console.log(err);
         notifications.show({
             message: "Error creating new collection",
             color: "red",
