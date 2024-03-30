@@ -11,7 +11,7 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCreatedDate";
 import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
 import { MainViewContext } from "@/contexts/MainViewContext";
-import useLongPress from "@/libs/useLongPress";
+import useHandleContextMenuWithLongPress from "@/libs/useHandleContextMenuWithLongPress";
 
 type ItemComponentParams = {
     item: Item,
@@ -134,7 +134,7 @@ export default function ItemComponent(
         );
     };
 
-    const longPressEvent = useLongPress({
+    const longPressEvent = useHandleContextMenuWithLongPress({
         onClick: handlePrimaryAction,
         onLongPress: handleSecondaryAction,
     }, {

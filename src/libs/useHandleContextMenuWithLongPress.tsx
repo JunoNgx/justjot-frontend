@@ -25,7 +25,7 @@ interface Options {
     // shouldPreventDefault?: boolean
 }
 
-export default function useLongPress(
+export default function useHandleContextMenuWithLongPress(
     { onClick, onLongPress }: PressHandlers,
     { delay = 300 } : Options = {},
 ) {
