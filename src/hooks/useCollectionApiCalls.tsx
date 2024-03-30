@@ -19,14 +19,19 @@ type DeleteCollectionOptions = {
     collection: ItemCollection
 } & ApiRequestCallbackOptions;
 
+type SortCollectionOptions = {
+    collectionId: string,
+    newSortOrderValue: number,
+} & ApiRequestCallbackOptions;
+
 export default function useCollectionApiCalls() {
 
     const { pbClient, user } = useContext(BackendClientContext);
 
     const createCollection = async (
-        {name, slug, currHighestSortOrder,
+        { name, slug, currHighestSortOrder,
             successfulCallback, errorCallback, setLoadingState
-        }: CreateCollectionParams    
+        }: CreateCollectionParams
     ) => {
         const newSortOrderVal: number = currHighestSortOrder
             ? currHighestSortOrder + SORT_ORDER_INCREMENT_COLLECTION
@@ -64,7 +69,7 @@ export default function useCollectionApiCalls() {
             .catch(err => {
                 errorCallback?.(err);
             });
-        
+
         setLoadingState?.(false);
     };
 
@@ -82,13 +87,36 @@ export default function useCollectionApiCalls() {
             .catch(err => {
                 errorCallback?.(err);
             });
-        
+
         setLoadingState?.(false);
     };
+
+    const sortCollection = async (
+        { collectionId, newSortOrderValue,
+            successfulCallback, errorCallback, setLoadingState
+        }: SortCollectionOptions
+    ) => {
+        setLoadingState?.(true);
+        await pbClient.collection(DbTable.COLLECTIONS)
+            .update(collectionId,
+                { sortOrder: newSortOrderValue },
+                // { requestKey: "collection-sort" }
+                { requestKey: null } // Allow repeated request, no auto-cancelation
+            )
+            .then((record: ItemCollection) => {
+                successfulCallback?.(record);
+            })
+            .catch(err => {
+                errorCallback?.(err);
+            });
+
+        setLoadingState?.(false);
+    }
 
     return {
         createCollection,
         deleteCollection,
         updateCollection,
+        sortCollection,
     };
 };
