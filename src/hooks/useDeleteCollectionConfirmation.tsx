@@ -1,18 +1,26 @@
 import { useContext, useEffect, useState } from "react";
 import { modals } from "@mantine/modals";
-import useDeleteCollection from "@/hooks/apiCalls/useDeleteCollection";
 import { notifications } from "@mantine/notifications";
-import { AUTO_CLOSE_DEFAULT } from "@/utils/constants";
+import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import { IconExclamationCircle } from "@tabler/icons-react";
 import { justJotTheme } from "@/theme";
 import { Text } from "@mantine/core";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
+import useCollectionApiCalls from "./useCollectionApiCalls";
+import { ClientResponseError } from "pocketbase";
+import useCollectionNavActions from "./useCollectionNavActions";
+import useManageListState from "@/libs/useManageListState";
 
 export default function useDeleteCollectionConfirmation() {
     
-    const { collections, fetchCollections } = useContext(CollectionsContext);
-    const { currCollection } = useContext(CurrentCollectionContext);
+    const { collections, setCollections, fetchCollections } = useContext(CollectionsContext);
+    const {
+        currCollection,
+        currSelectedCollectionIndex,
+    } = useContext(CurrentCollectionContext);
+    const { trySwitchToCollectionByIndex } = useCollectionNavActions();
+    const handlers = useManageListState(setCollections);
     
     useEffect(() => {
         if (collections.length === 0) return;
@@ -20,19 +28,51 @@ export default function useDeleteCollectionConfirmation() {
     }, [collections]);
     
     const [canDelete, setCanDelete] = useState(false);
-    const [deleteCollection] = useDeleteCollection({
-        successfulCallback: () => {
-            notifications.show({
-                message: "Collection has been deleted successfully.",
-                color: "none",
-                autoClose: AUTO_CLOSE_DEFAULT
-            });
-        },
-    }); 
+    const [isLoading, setIsLoading] = useState(false);
+    const [shouldNavigateAway, setShouldNavigateAway] = useState(false);
+    const { deleteCollection } = useCollectionApiCalls();
 
     const proceedWithDeletion = () => {
-        deleteCollection();
+        if (!currCollection) return;
+
+        deleteCollection({
+            collection: currCollection,
+            setLoadingState: setIsLoading,
+            successfulCallback: handleSuccessfulDeletion,
+            errorCallback: handleErroredDeletion,
+        });
         fetchCollections();
+    };
+
+    const handleSuccessfulDeletion = () => {
+        console.log("handleSuccessfulDeletion", currSelectedCollectionIndex)
+        handlers.remove(currSelectedCollectionIndex);
+        setShouldNavigateAway(true);
+        notifications.show({
+            message: "Collection has been deleted successfully.",
+            color: "none",
+            autoClose: AUTO_CLOSE_DEFAULT
+        });
+    };
+
+    useEffect(() => {
+        if (!shouldNavigateAway) return;
+
+        let modifier = 0;
+        if (currSelectedCollectionIndex > collections.length - 1) {
+            modifier = -1;
+        }
+        trySwitchToCollectionByIndex(currSelectedCollectionIndex + modifier);
+        setShouldNavigateAway(false);
+    }, [collections, shouldNavigateAway]);
+
+    const handleErroredDeletion = (_err: ClientResponseError) => {
+        notifications.show({
+            message: "Error deleting collection",
+            color: "red",
+            autoClose: AUTO_CLOSE_ERROR_TOAST,
+            withCloseButton: true,
+        });
     };
 
     const confirmDeletion = () => {
@@ -49,7 +89,10 @@ export default function useDeleteCollectionConfirmation() {
                     confirm: "Delete collection",
                     cancel: "Cancel"
                 },
-                confirmProps: { color: "red" },
+                confirmProps: {
+                    color: "red",
+                    loading: isLoading
+                },
                 onConfirm: proceedWithDeletion
             });
             return;
