@@ -35,11 +35,20 @@ export default function useManageListState<T>(
         });
     };
 
+    const replace = (index: number, item: T) => {
+        setState(curr => {
+            const tempArr = [...curr];
+            tempArr[index] = item;
+            return tempArr;
+        });
+    }
+
     return {
         prepend,
         append,
         pop,
         remove,
         insert,
+        replace,
     };
 };
