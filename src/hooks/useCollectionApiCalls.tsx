@@ -12,9 +12,14 @@ type CollectionApiCallsCommonOptions = {
     setLoadingState?: React.Dispatch<React.SetStateAction<boolean>>
 } & ApiRequestCallbackOptions;
 
+type UpdateCollectionParams = {
+    collectionId: string
+} & CreateUpdateCollectionOptions
+& CollectionApiCallsCommonOptions;
+
 type CreateCollectionParams = {
     currHighestSortOrder: number
-} & CreateUpdateCollectionOptions
+} &  CreateUpdateCollectionOptions
 & CollectionApiCallsCommonOptions;
 
 type DeleteCollectionParams = {
@@ -51,6 +56,25 @@ export default function useCollectionApiCalls() {
         setLoadingState?.(false);
     };
 
+    const updateCollection = async (
+        { collectionId, name, slug,
+            successfulCallback, errorCallback, setLoadingState,
+        }: UpdateCollectionParams
+    ) => {
+        setLoadingState?.(true);
+        await pbClient.collection(DbTable.COLLECTIONS)
+            .update(collectionId,
+                { name, slug, })
+            .then((record: ItemCollection) => {
+                successfulCallback?.(record);
+            })
+            .catch(err => {
+                errorCallback?.(err);
+            });
+        
+        setLoadingState?.(false);
+    };
+
     const deleteCollection = async (
         { collection,
             successfulCallback, errorCallback, setLoadingState
@@ -72,5 +96,6 @@ export default function useCollectionApiCalls() {
     return {
         createCollection,
         deleteCollection,
+        updateCollection,
     };
 };
