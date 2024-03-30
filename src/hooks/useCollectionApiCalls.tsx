@@ -16,7 +16,11 @@ type createCollectionParams = {
     currHighestSortOrder: number
 } & CreateUpdateCollectionOptions
 & CollectionApiCallsCommonOptions;
-    
+
+type deleteCollectionParams = {
+    collection: ItemCollection
+} & CollectionApiCallsCommonOptions;
+
 export default function useCollectionApiCalls() {
 
     const { pbClient, user } = useContext(BackendClientContext);
@@ -48,7 +52,27 @@ export default function useCollectionApiCalls() {
         setLoadingState?.(false);
     };
 
+    const deleteCollection = async (
+        { collection,
+            successfulCallback, errorCallback, setLoadingState
+        }: deleteCollectionParams
+    ) => {
+        setLoadingState?.(true);
+        await pbClient.collection(DbTable.COLLECTIONS)
+            .delete(collection.id)
+            .then((_isSuccessful: boolean) => {
+                successfulCallback?.();
+            })
+            .catch(err => {
+                errorCallback?.();
+                console.error(err);
+            });
+        
+        setLoadingState?.(false);
+    };
+
     return {
-        createCollection
+        createCollection,
+        deleteCollection,
     };
 };
