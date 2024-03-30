@@ -10,8 +10,11 @@ import { isValidIndex } from "@/utils/miscUtils";
 export default function useCollectionNavActions() {
     const { user } = useContext(BackendClientContext);
     const { collections } = useContext(CollectionsContext);
-    const { currCollection, setCurrCollection } = useContext(CurrentCollectionContext);
-    const { currentSelectedCollectionIndexRef } = useContext(CurrentCollectionContext);
+    const {
+        setCurrCollection,
+        currSelectedCollectionIndex,
+        setCurrSelectedCollectionIndex,
+    } = useContext(CurrentCollectionContext);
 
     const navigate = useNavigate();
 
@@ -54,23 +57,16 @@ export default function useCollectionNavActions() {
     };
 
     const trySwitchToPrevCollection = () => {
-        if (!currentSelectedCollectionIndexRef) return;
-        if (currentSelectedCollectionIndexRef.current === 0
-            || currentSelectedCollectionIndexRef.current === undefined
-            || currentSelectedCollectionIndexRef.current === null
-        ) return;
+        if (currSelectedCollectionIndex === 0) return;
 
-        trySwitchToCollectionByIndex(currentSelectedCollectionIndexRef?.current - 1);
+        trySwitchToCollectionByIndex(currSelectedCollectionIndex - 1);
     }
 
     const trySwitchToNextCollection = () => {
-        if (!currentSelectedCollectionIndexRef) return;
-        if (currentSelectedCollectionIndexRef.current === collections?.length! - 1
-            || currentSelectedCollectionIndexRef.current === undefined
-            || currentSelectedCollectionIndexRef.current === null
-        ) return;
+        if (currSelectedCollectionIndex === collections?.length! - 1)
+            return;
 
-        trySwitchToCollectionByIndex(currentSelectedCollectionIndexRef?.current + 1);
+        trySwitchToCollectionByIndex(currSelectedCollectionIndex + 1);
     }
 
     const trySwitchToCollectionByIndex = (index: number) => {
@@ -84,22 +80,21 @@ export default function useCollectionNavActions() {
     const tryNavigateToCollection = (
         collection: ItemCollection, index: number
     ) => {
-        if (!currentSelectedCollectionIndexRef) return;
 
         setCurrCollection(collection);
-        currentSelectedCollectionIndexRef.current = index;
+        setCurrSelectedCollectionIndex(index);
 
         navigate(`/${user?.username}/${collection.slug}`);
         document.title = `${collection.name} — ${APP_NAME}`;
     };
 
-    const tryRetrackCurrentSelectedIndexWithId = () => {
-        if (collections.length === 0) return;
+    const tryRetrackCurrentSelectedIndexWithId = (currCollection?: ItemCollection) => {
         if (!currCollection) return;
+        if (collections.length === 0) return;
 
         const index = collections.map(collection => collection.id)
             .indexOf(currCollection!.id);
-        currentSelectedCollectionIndexRef!.current = index;
+        setCurrSelectedCollectionIndex(index);
     };
 
     return {
