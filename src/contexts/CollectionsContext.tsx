@@ -1,11 +1,11 @@
 import { ReactNode, createContext, useCallback, useContext, useState } from 'react';
-import { DbTable, ItemCollection } from '@/types';
+import { ApiRequestCallbackOptions, DbTable, ItemCollection } from '@/types';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 
 type CollectionsContextType = {
     collections: ItemCollection[],
     setCollections: React.Dispatch<React.SetStateAction<ItemCollection[]>>,
-    fetchCollections: () => void,
+    fetchCollections: ({successfulCallback, errorCallback}: ApiRequestCallbackOptions) => void,
 };
 
 export const CollectionsContext = createContext<CollectionsContextType>({} as CollectionsContextType);
@@ -22,7 +22,9 @@ export default function CollectionsContextProvider({ children }: { children: Rea
         }
     });
 
-    const fetchCollections = useCallback(async () => {
+    const fetchCollections = useCallback(async (
+        {successfulCallback, errorCallback}: ApiRequestCallbackOptions = {}
+    ) => {
         if (!isLoggedIn) return;
 
         await pbClient
@@ -33,9 +35,11 @@ export default function CollectionsContextProvider({ children }: { children: Rea
                 requestKey: "collection-get-all",
             })
             .then((records: ItemCollection[]) => {
+                successfulCallback?.();
                 setCollections(records);
             })
             .catch(err => {
+                errorCallback?.();
                 console.error(err)
                 if (!err.isAbort) {
                     console.warn("Non cancellation error")
