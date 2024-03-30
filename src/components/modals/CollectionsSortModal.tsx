@@ -3,17 +3,18 @@ import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea
 import { useListState } from "@mantine/hooks";
 import { useContext, useEffect, useRef } from "react";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
-import { COLLECTION_SORT_ORDER_MAG } from "@/utils/constants";
-import useUpdateCollection from "@/hooks/apiCalls/useUpdateCollection";
+import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, COLLECTION_SORT_ORDER_MAG } from "@/utils/constants";
 import { ItemCollection } from "@/types";
 import CollectionHotkey from "../misc/CollectionHotkey";
 import { isValidIndex } from "@/utils/miscUtils";
+import useCollectionApiCalls from "@/hooks/useCollectionApiCalls";
+import { notifications } from "@mantine/notifications";
 
 export default function CollectionsSortModal() {
 
     const { collections, fetchCollections } = useContext(CollectionsContext);
     const [state, handlers] = useListState(collections);
-    const [_, updateCollectionSortOrder] = useUpdateCollection();
+    const { sortCollection } = useCollectionApiCalls();
     const hasChanged = useRef(false);
 
     useEffect(() => {
@@ -77,8 +78,25 @@ export default function CollectionsSortModal() {
             newIndex,
             { ...movedCollection, sortOrder: newSortOrderValue }
         );
-        updateCollectionSortOrder({
-            collectionId: movedCollection.id, newSortOrderValue
+        sortCollection({
+            collectionId: movedCollection.id,
+            newSortOrderValue,
+            successfulCallback: () => {
+                notifications.show({
+                    message: "Collections sorting updated",
+                    color: "none",
+                    autoClose: AUTO_CLOSE_DEFAULT,
+                    withCloseButton: true,
+                });
+            },
+            errorCallback: () => {
+                notifications.show({
+                    message: "Error sorting collection",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
+            }
         });
         hasChanged.current = true;
     }
@@ -108,7 +126,7 @@ export default function CollectionsSortModal() {
                             <Group
                                 justify="space-between"
                             >
-                                <Text>{collection.name} (value: {collection.sortOrder})</Text>
+                                <Text>{collection.name} ({collection.sortOrder})</Text>
                                 <CollectionHotkey index={index}/>
                             </Group>
                         {/* </Center> */}
