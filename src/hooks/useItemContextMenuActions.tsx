@@ -170,6 +170,36 @@ export default function useItemContextMenuActions() {
             })
     }
 
+    const switchIsDone = async (
+        item: Item
+    ) => {
+        const newIsTodoDone = !item.isTodoDone;
+
+        await pbClient.collection(DbTable.ITEMS)
+            .update(item.id,
+                { isTodoDone: newIsTodoDone },
+                { requestKey: null},
+            )
+            .then((_record: ItemCollection) => {
+                // TODO: update list
+                fetchItems(currCollection);
+            })
+            .catch(err => {
+                console.error(err);
+                // fetchItems(currCollection);
+
+                if (!err.isAbort) {
+                    console.warn("Non cancellation error")
+                }
+                notifications.show({
+                    message: "Error updateing TODO status",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
+            });
+    }
+
     return {
         copyItemContent,
         openUpdateItemModal,
@@ -178,5 +208,6 @@ export default function useItemContextMenuActions() {
         openMoveItemModal,
         refetchTitleAndFavicon,
         switchShouldOpenOnClick,
+        switchIsDone,
     } 
 };
