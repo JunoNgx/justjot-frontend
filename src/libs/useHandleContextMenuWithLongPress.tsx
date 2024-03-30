@@ -1,5 +1,16 @@
-// Courtesy of Sunyatasattva
-// https://stackoverflow.com/a/66089276
+/**
+ * This package is to circumvent the iOS version of webkit not handling the
+ * `contextmenu` event.
+ * 
+ * This works by manually calling the function that would otherwise have
+ * normally been assigned to `onContextMenu` when a long press is detected.
+ * 
+ * Adapted from the following sources and tailored to fit into this project:
+ * (Courtesy of Sunyatasattva)
+ * https://stackoverflow.com/a/66089276
+ * (Courtesy of Finomnis)
+ * https://github.com/facebook/react/issues/17596#issuecomment-565524946
+ */
 
 import { useCallback, useRef } from "react";
 
