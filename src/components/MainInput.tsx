@@ -12,11 +12,12 @@ import useItemContextMenuActions from "@/hooks/useItemContextMenuActions";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { ItemType } from "@/types";
 import { isValidIndex } from "@/utils/miscUtils";
+import useItemActions from "@/hooks/useItemActions";
 
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { collections } = useContext(CollectionsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
-    const { items } = useContext(ItemsContext);
+    const { items, updateQueue } = useContext(ItemsContext);
     const { fetchItems } = useContext(ItemsContext);
     const {
         selectedIndex,
@@ -39,7 +40,10 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     } = useItemContextMenuActions();
 
     const [inputVal, setInputVal] = useState("");
-    const [_createItem, createItemWithManipulation, isCreateItemLoading] = useCreateItem({
+    const {
+        createItemWithOptimisticUpdate
+    } = useItemActions();
+    const [_createItem] = useCreateItem({
         successfulCallback: () => {
             fetchItems(currCollection);
         }
@@ -48,7 +52,9 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const handleEnter = () => {
         if (!inputVal) return;
         setInputVal("");
-        createItemWithManipulation({ content: inputVal });
+        createItemWithOptimisticUpdate({
+            content: inputVal,
+        });
     };
 
     const getItemByIndex = (index: number) => {
@@ -116,7 +122,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         />}
         rightSectionPointerEvents="all"
         rightSection={
-            isCreateItemLoading && <Loader size="xs"/>
+            updateQueue.length > 0 && <Loader size="xs"/>
         }
         type="text"
         value={inputVal}
