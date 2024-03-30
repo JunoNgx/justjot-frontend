@@ -63,6 +63,7 @@ export default function useCreateItem(
             content: content as string,
             type: ItemType.TEXT as ItemType,
             shouldCopyOnClick: false as boolean,
+            isTodoDone: false,
             faviconUrl: "",
             created: currDateTime,
             updated: currDateTime,
