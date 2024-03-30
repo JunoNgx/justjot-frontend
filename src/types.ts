@@ -86,3 +86,19 @@ export type MoveItemOptions = {
     itemId: string,
     collectionId: string,
 } & ApiRequestCallbackOptions;
+
+export type UpdateItemTitleOptions = {
+    itemId: string,
+    title: string,
+} & ApiRequestCallbackOptions;
+
+export type UpdateItemContentOptions = {
+    itemId: string,
+    content: string,
+} & ApiRequestCallbackOptions;
+
+export type UpdateItemTitleAndContentOptions = {
+    itemId: string,
+    title: string,
+    content: string,
+} & ApiRequestCallbackOptions;

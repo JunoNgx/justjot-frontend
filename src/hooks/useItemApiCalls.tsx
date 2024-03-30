@@ -1,6 +1,6 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
-import { CreateItemOptions, MoveItemOptions, DbTable, Item } from "@/types";
+import { CreateItemOptions, MoveItemOptions, DbTable, Item, UpdateItemTitleOptions, UpdateItemContentOptions, UpdateItemTitleAndContentOptions } from "@/types";
 import { useContext } from "react";
 
 export default function useItemApiCalls() {
@@ -51,8 +51,71 @@ export default function useItemApiCalls() {
         setLoadingState?.(false);
     };
 
+    const updateItemTitle = async (
+        { itemId, title,
+            successfulCallback, errorCallback, setLoadingState
+        }: UpdateItemTitleOptions
+    ) => {
+        setLoadingState?.(true);
+        pbClient.collection(DbTable.ITEMS)
+            .update(itemId, { title })
+            .then((record: Item) => {
+                successfulCallback?.(record);
+            })
+            .catch(err => {
+                errorCallback?.(err);
+            });
+        setLoadingState?.(false);
+    };
+
+    const updateItemContent = async (
+        { itemId, content,
+            successfulCallback, errorCallback, setLoadingState
+        }: UpdateItemContentOptions
+    ) => {
+        setLoadingState?.(true);
+        pbClient.collection(DbTable.ITEMS)
+            .update(itemId, { content })
+            .then((_record: Item) => {
+                successfulCallback?.();
+            })
+            .catch(err => {
+                errorCallback?.();
+                console.error(err);
+                if (!err.isAbort) {
+                    console.warn("Non cancellation error")
+                }
+
+            });
+        setLoadingState?.(false);
+    };
+
+    const updateItemTitleAndContent = async (
+        { itemId, title, content,
+            successfulCallback, errorCallback, setLoadingState
+        }: UpdateItemTitleAndContentOptions
+    ) => {
+        setLoadingState?.(true);
+        pbClient
+            .collection(DbTable.ITEMS)
+            .update(itemId,
+                { title, content },
+                { requestKey: "item-update-both" }
+            )
+            .then((record: Item) => {
+                successfulCallback?.(record);
+            })
+            .catch(err => {
+                errorCallback?.(err);
+            });
+        setLoadingState?.(false);
+    };
+
     return {
         createItem,
         moveItem,
+        updateItemTitle,
+        updateItemContent,
+        updateItemTitleAndContent,
     }
 }
