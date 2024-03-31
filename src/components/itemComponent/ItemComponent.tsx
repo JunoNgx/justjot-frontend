@@ -3,15 +3,13 @@
 import { useContext } from "react";
 import { Item, ItemType } from "@/types";
 import { Box, Center, Group, Text } from "@mantine/core";
-import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink,  IconSquare, IconTrash } from "@tabler/icons-react";
 import { useContextMenu } from '@/libs/mantine-contextmenu';
-import { justJotTheme } from "@/theme";
-import useItemContextMenuActions from "@/hooks/useItemContextMenuActions";
-import { CollectionsContext } from "@/contexts/CollectionsContext";
 import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCreatedDate";
 import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
 import { MainViewContext } from "@/contexts/MainViewContext";
 import useHandleContextMenuWithLongPress from "@/libs/useHandleContextMenuWithLongPress";
+import useItemActions from "@/hooks/useItemActions";
+import useItemContextMenuOptions from "@/hooks/useItemContextMenuOptions";
 
 type ItemComponentParams = {
     item: Item,
@@ -21,88 +19,33 @@ type ItemComponentParams = {
 export default function ItemComponent(
     { item, index }: ItemComponentParams
 ) {
-    const { collections } = useContext(CollectionsContext);
     const { selectItem, deselectItem } = useContext(MainViewContext);
     const { showContextMenu } = useContextMenu();
     const {
+        deleteItemWithOptimisticUpdate,
         copyItemContent,
         openUpdateItemModal,
         openMoveItemModal,
-        deleteItemWithManipulation,
-        toggleItemShouldCopyOnClick,
-        refetchTitleAndFavicon,
-        toggleIsTodoDoneWithManipulation,
-    } = useItemContextMenuActions();
-
-    const contextMenuDefaultActionIcon = item.shouldCopyOnClick
-        ? <IconCheckbox
-            size={justJotTheme.other.iconSizeMenu}
-            stroke={justJotTheme.other.iconStrokeWidth}
-        />
-        : <IconSquare
-            size={justJotTheme.other.iconSizeMenu}
-            stroke={justJotTheme.other.iconStrokeWidth}
-        />
-
-    const contextMenuOptions = [
-        {
-            key: "copy",
-            icon: <IconCopy
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
-            onClick: () => {copyItemContent(item)}
-        }, {
-            key: "edit",
-            icon: <IconEdit
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
-            onClick: () => {openUpdateItemModal(item)},
-        }, {
-            key: "move",
-            icon: <IconFileSymlink
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
-            onClick: () => {openMoveItemModal({item, collectionList: collections})},
-        }, {
-            key: "delete",
-            icon: <IconTrash
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
-            color: "red",
-            onClick: () => {
-                deleteItemWithManipulation(item);
-                deselectItem();
-            }
-        }, {
-            key: "refetch",
-            title: "Refetch",
-            hidden: item.type !== ItemType.LINK,
-            icon: <IconDownload
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
-            onClick: () => {refetchTitleAndFavicon(item);}
-        }, {
-            key: "divider",
-        }, {
-            key: "togglePrimaryAction",
-            title: "To copy",
-            hidden: item.type === ItemType.TODO,
-            icon: contextMenuDefaultActionIcon,
-            color: "blue",
-            onClick: () => {toggleItemShouldCopyOnClick(item)}
-        }
-    ];
+        refetchLink,
+        toggleItemShouldCopyOnClickWithOptimisticUpdate,
+        toggleItemIsTodoDoneWithOptimisticUpdate,
+    } = useItemActions();
+    const itemContextMenuOptions = useItemContextMenuOptions({
+        item,
+        copyFn: copyItemContent,
+        editFn: openUpdateItemModal,
+        moveFn: openMoveItemModal,
+        deleteFn: deleteItemWithOptimisticUpdate,
+        refetchFn: refetchLink,
+        toggleCopyFn: toggleItemShouldCopyOnClickWithOptimisticUpdate,
+        deselectFn: deselectItem
+    });
 
     const handlePrimaryAction = (
         _e: React.MouseEvent | React.TouchEvent
     ) => {
         if (item.type === ItemType.TODO) {
-            toggleIsTodoDoneWithManipulation(item);
+            toggleItemIsTodoDoneWithOptimisticUpdate({item});
             return;
         }
 
@@ -124,7 +67,7 @@ export default function ItemComponent(
         e: React.MouseEvent | React.TouchEvent
     ) => {
         const handleEventWithContextMenu = showContextMenu(
-            contextMenuOptions,
+            itemContextMenuOptions,
             { className: "dropdown-menu" }
         )
         handleEventWithContextMenu(e as
