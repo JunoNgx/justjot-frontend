@@ -86,7 +86,8 @@ export default function ItemComponent(
     });
 
     const isLink = item.type === ItemType.LINK;
-    const anchorProps = isLink && !item.shouldCopyOnClick
+    const shouldRenderAsAnchor = isLink && !item.shouldCopyOnClick;
+    const anchorProps = shouldRenderAsAnchor
     ? {
         component: "a" as any,
         href: item.content,
