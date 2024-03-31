@@ -126,6 +126,7 @@ export default function ItemCreateUpdateModal(
     };
 
     const handleErroredAutosave = (err: ClientResponseError) => {
+        console.error(err);
         setRelativeUpdatedTimeStr("");
         notifications.show({
             message: "Error autosaving",
