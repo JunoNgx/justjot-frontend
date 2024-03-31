@@ -20,7 +20,11 @@ export default function useItemActions() {
     const { user } = useContext(BackendClientContext);
     const { currCollection } = useContext(CurrentCollectionContext);
     const { items, setItems, setUpdateQueue } = useContext(ItemsContext);
-    const { createItem, deleteItem } = useItemApiCalls();
+    const {
+        createItem,
+        deleteItem,
+        toggleItemIsTodoDone,
+    } = useItemApiCalls();
     const itemsHandlers = useManageListState(setItems);
     const updateQueueHandlers = useManageListState(setUpdateQueue);
 
@@ -101,6 +105,34 @@ export default function useItemActions() {
         });
     };
 
+    const toggleItemIsTodoDoneWithOptimisticUpdate = (
+        { item }: { item: Item }
+    ) => {
+        const newIsTodoDoneVal = !item.isTodoDone;
+
+        toggleItemIsTodoDone({
+            item,
+            isTodoDone: newIsTodoDoneVal,
+            successfulCallback: () => {
+                const index = findIndexById(item.id, items)
+                if (index === -1) return;
+                itemsHandlers.replace(
+                    index,
+                    {...item, isTodoDone: newIsTodoDoneVal}
+                );
+            },
+            errorCallback: (err: ClientResponseError) => {
+                console.error(err);
+                notifications.show({
+                    message: "Error toggling todo task status",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
+            },
+        })
+    };
+
     const clipboard = useClipboard({ timeout: 1000 });
     const copyItemContent = async (item: Item) => {
         item.type === ItemType.TODO
@@ -155,5 +187,6 @@ export default function useItemActions() {
         copyItemContent,
         openUpdateItemModal,
         openMoveItemModal,
+        toggleItemIsTodoDoneWithOptimisticUpdate,
     }
 };
