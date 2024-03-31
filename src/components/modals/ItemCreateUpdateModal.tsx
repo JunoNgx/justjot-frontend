@@ -6,20 +6,28 @@ import { getHotkeyHandler, useDebounceCallback } from "@mantine/hooks";
 import { useContext, useEffect, useRef, useState } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
+import useItemApiCalls from "@/hooks/useItemApiCalls";
+import useManageListState from "@/libs/useManageListState";
+import { notifications } from "@mantine/notifications";
+import { AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
+import { ClientResponseError } from "pocketbase";
 
 // type ItemUpdateFormData = {
 //     title: string,
 //     content: string,
 // };
 
-const DEBOUNCED_TIME = 2000;
+const DEBOUNCED_TIME = 5000;
 
 export default function ItemCreateUpdateModal(
     {item, isEditMode}: {item: Item, isEditMode: boolean}
 ) {
 
-    const { fetchItems } = useContext(ItemsContext);
-    const { currCollection } = useContext(CurrentCollectionContext);
+    // const { fetchItems } = useContext(ItemsContext);
+    // const { currCollection } = useContext(CurrentCollectionContext);
+
+    const { items, setItems } = useContext(ItemsContext);
+    const itemsHandlers = useManageListState(setItems);
 
     useEffect(() => {
         return () => {
@@ -36,14 +44,23 @@ export default function ItemCreateUpdateModal(
                 title: titleValRef.current,
                 content: contentValRef.current,
                 successfulCallback: () => {
-                    fetchItems(currCollection);
-                }
+                    // fetchItems(currCollection);
+
+                },
+                errorCallback: (err: ClientQueryOptions) => {
+                    notifications.show({
+                        message: "Error autosaving upon exiting item edit modal",
+                        color: "red",
+                        autoClose: AUTO_CLOSE_ERROR_TOAST,
+                        withCloseButton: true,
+                    });
+                },
             });
             return;
         }
 
         if (hasChangedRef.current) {
-            fetchItems(currCollection);
+            // fetchItems(currCollection);
         }
     }
 
@@ -75,23 +92,21 @@ export default function ItemCreateUpdateModal(
     }, [hasSaved]);
     useEffect(() => {
         hasChangedRef.current = hasChanged;
-        setRelativeUpdatedTimeStr("");
+        if (hasChanged) setRelativeUpdatedTimeStr("");
     }, [hasChanged]);
 
     const [ relativeUpdatedTimeStr, setRelativeUpdatedTimeStr] = useState("");
+    // const { updateItemTitle, updateItemContent, updateItemTitleAndContent }
+    //     = useUpdateItem();
     const { updateItemTitle, updateItemContent, updateItemTitleAndContent }
-        = useUpdateItem();
+        = useItemApiCalls();
 
     const debouncedAutosaveItemTitle = useDebounceCallback(() => {
         updateItemTitle({
             itemId: item?.id,
             title: titleVal,
-            successfulCallback: () => {
-                setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
-            },
-            errorCallback: () => {
-                setRelativeUpdatedTimeStr("");
-            },
+            successfulCallback: handleSuccessfulAutosave,
+            errorCallback: handleErroredAutosave,
         });
         setHasSaved(true);
     }, DEBOUNCED_TIME);
@@ -100,15 +115,25 @@ export default function ItemCreateUpdateModal(
         updateItemContent({
             itemId: item?.id,
             content: contentVal,
-            successfulCallback: () => {
-                setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
-            },
-            errorCallback: () => {
-                setRelativeUpdatedTimeStr("");
-            },
+            successfulCallback: handleSuccessfulAutosave,
+            errorCallback: handleErroredAutosave,
         });
         setHasSaved(true);
     }, DEBOUNCED_TIME);
+
+    const handleSuccessfulAutosave = (_record: Item) => {
+        setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
+    };
+
+    const handleErroredAutosave = (err: ClientResponseError) => {
+        setRelativeUpdatedTimeStr("");
+        notifications.show({
+            message: "Error autosaving",
+            color: "red",
+            autoClose: AUTO_CLOSE_ERROR_TOAST,
+            withCloseButton: true,
+        });
+    };
 
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setHasChanged(true);
@@ -126,7 +151,7 @@ export default function ItemCreateUpdateModal(
         debouncedAutosaveItemContent();
     };
 
-    const handleSave = () => {
+    const handleActiveSave = () => {
         updateItemTitleAndContent({
             itemId: item?.id,
             title: titleValRef.current,
@@ -152,7 +177,7 @@ export default function ItemCreateUpdateModal(
             value={titleVal}
             onChange={handleTitleChange}
             onKeyDown={getHotkeyHandler([
-                ["mod+S", handleSave, {preventDefault: true}]
+                ["mod+S", handleActiveSave, {preventDefault: true}]
             ])}
         />
         <Group justify="flex-end">
@@ -171,7 +196,7 @@ export default function ItemCreateUpdateModal(
                 value={contentVal}
                 onChange={handleContentChange}
                 onKeyDown={getHotkeyHandler([
-                    ["mod+S", handleSave, {preventDefault: true}]
+                    ["mod+S", handleActiveSave, {preventDefault: true}]
                 ])}
             />
             <Group justify="space-between">
