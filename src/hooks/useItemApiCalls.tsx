@@ -170,6 +170,25 @@ export default function useItemApiCalls() {
         setLoadingState?.(false);
     };
 
+    const toggleItemIsTodoDone = async (
+        { item, newIsTodoDoneVal, successfulCallback, errorCallback, setLoadingState }:
+        { item: Item, newIsTodoDoneVal: boolean } & ApiRequestCallbackOptions
+    ) => {
+        setLoadingState?.(true);
+        pbClient.collection(DbTable.ITEMS)
+        .update(item.id,
+            {isTodoDone: newIsTodoDoneVal},
+            { requestKey: null},
+        )
+        .then((record) => {
+            successfulCallback?.(record);
+        })
+        .catch(err => {
+            errorCallback?.(err);
+        });
+        setLoadingState?.(false);
+    };
+
     return {
         createItem,
         moveItem,
@@ -179,5 +198,6 @@ export default function useItemApiCalls() {
         deleteItem,
         refetchLinkTitleAndFavicon,
         toggleItemShouldCopyOnClick,
+        toggleItemIsTodoDone,
     }
 }
