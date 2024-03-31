@@ -86,7 +86,7 @@ export default function ItemComponent(
     });
 
     const isLink = item.type === ItemType.LINK;
-    const anchorProps = isLink
+    const anchorProps = isLink && !item.shouldCopyOnClick
     ? {
         component: "a" as any,
         href: item.content,
