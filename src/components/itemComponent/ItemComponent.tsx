@@ -10,6 +10,8 @@ import { MainViewContext } from "@/contexts/MainViewContext";
 import useHandleContextMenuWithLongPress from "@/libs/useHandleContextMenuWithLongPress";
 import useItemActions from "@/hooks/useItemActions";
 import useItemContextMenuOptions from "@/hooks/useItemContextMenuOptions";
+import { justJotTheme } from "@/theme";
+import { IconClipboardCopy } from "@tabler/icons-react";
 
 type ItemComponentParams = {
     item: Item,
@@ -132,7 +134,13 @@ export default function ItemComponent(
                         {item.content}
                     </Text>}
                 </Group>
-                <Group className="item__right-side">
+                <Group className="item__right-side"
+                    gap="xs"
+                >
+                    {item.shouldCopyOnClick && <IconClipboardCopy
+                        size={justJotTheme.other.iconSizeItem}
+                        stroke={justJotTheme.other.iconStrokeWidth}
+                    />}
                     <ItemComponentCreatedDate className="item__datetime"
                         createdDatetime={item.created}
                     />

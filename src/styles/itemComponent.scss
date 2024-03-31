@@ -27,10 +27,6 @@
 
     &__right-side {
         flex-shrink: 0;
-        
-        @include m.mobile {
-            display: none;
-        }
     }
 
     &__icon-wrapper {
@@ -68,6 +64,10 @@
 
     &__datetime {
         user-select: none;
+
+        @include m.mobile {
+            display: none;
+        }
     }
 
     &--has-no-primary-text {
