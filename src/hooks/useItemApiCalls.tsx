@@ -171,14 +171,14 @@ export default function useItemApiCalls() {
     };
 
     const toggleItemIsTodoDone = async (
-        { item, newIsTodoDoneVal, successfulCallback, errorCallback, setLoadingState }:
-        { item: Item, newIsTodoDoneVal: boolean } & ApiRequestCallbackOptions
+        { item, isTodoDone, successfulCallback, errorCallback, setLoadingState }:
+        { item: Item, isTodoDone: boolean } & ApiRequestCallbackOptions
     ) => {
         setLoadingState?.(true);
         pbClient.collection(DbTable.ITEMS)
         .update(item.id,
-            {isTodoDone: newIsTodoDoneVal},
-            { requestKey: null},
+            {isTodoDone: isTodoDone},
+            {requestKey: null},
         )
         .then((record) => {
             successfulCallback?.(record);
