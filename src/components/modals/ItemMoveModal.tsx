@@ -55,7 +55,7 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
             </Box>
         </Group>)}
 
-        {isLoading && <Group justify="flex-end">
+        {isLoading && <Group mt="md" justify="flex-end">
             <Loader type="bars"/>
         </Group>}
     </Stack>
