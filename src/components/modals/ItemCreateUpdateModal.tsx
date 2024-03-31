@@ -96,8 +96,6 @@ export default function ItemCreateUpdateModal(
     }, [hasChanged]);
 
     const [ relativeUpdatedTimeStr, setRelativeUpdatedTimeStr] = useState("");
-    // const { updateItemTitle, updateItemContent, updateItemTitleAndContent }
-    //     = useUpdateItem();
     const { updateItemTitle, updateItemContent, updateItemTitleAndContent }
         = useItemApiCalls();
 
