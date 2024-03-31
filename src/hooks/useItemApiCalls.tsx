@@ -1,5 +1,6 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
+import { ItemsContext } from "@/contexts/ItemsContext";
 import { CreateItemOptions, MoveItemOptions, DbTable, Item, UpdateItemTitleOptions, UpdateItemContentOptions, UpdateItemTitleAndContentOptions, ApiRequestCallbackOptions } from "@/types";
 import { useContext } from "react";
 
@@ -7,6 +8,7 @@ export default function useItemApiCalls() {
 
     const { pbClient, user } = useContext(BackendClientContext);
     const { currCollection } = useContext(CurrentCollectionContext);
+    const { fetchItems } = useContext(ItemsContext);
 
     const createItem = async (
         { title, content,
@@ -127,6 +129,28 @@ export default function useItemApiCalls() {
         setLoadingState?.(false);
     };
 
+    const refetchLinkTitleAndFavicon = async (
+        { item, successfulCallback, errorCallback, setLoadingState }:
+        { item: Item } & ApiRequestCallbackOptions
+    ) => {
+        setLoadingState?.(true);
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}refetch/${user!.id}/${item!.id}`, {
+            method: "PATCH",
+            headers: {
+                authorization: pbClient.authStore.token
+            },
+        })
+        .then((record) => {
+            successfulCallback?.(record);
+            // TODO: read from response
+            fetchItems(currCollection);
+        })
+        .catch(err => {
+            errorCallback?.(err);
+        });
+        setLoadingState?.(false);
+    };
+
     return {
         createItem,
         moveItem,
@@ -134,5 +158,6 @@ export default function useItemApiCalls() {
         updateItemContent,
         updateItemTitleAndContent,
         deleteItem,
+        refetchLinkTitleAndFavicon,
     }
 }
