@@ -152,13 +152,13 @@ export default function useItemApiCalls() {
     };
 
     const toggleItemShouldCopyOnClick = async (
-        { item, newShouldCopyOnClickVal, successfulCallback, errorCallback, setLoadingState }:
-        { item: Item, newShouldCopyOnClickVal: boolean } & ApiRequestCallbackOptions
+        { item, shouldCopyOnClick, successfulCallback, errorCallback, setLoadingState }:
+        { item: Item, shouldCopyOnClick: boolean } & ApiRequestCallbackOptions
     ) => {
         setLoadingState?.(true);
         pbClient.collection(DbTable.ITEMS)
         .update(item.id,
-            {shouldCopyOnClick: newShouldCopyOnClickVal},
+            {shouldCopyOnClick},
             {requestKey: null},
         )
         .then((record) => {
