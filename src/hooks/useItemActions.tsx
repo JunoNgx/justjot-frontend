@@ -112,16 +112,20 @@ export default function useItemActions() {
     ) => {
         const newShouldCopyOnClickVal = !item.shouldCopyOnClick;
 
+        const index = findIndexById(item.id, items)
+        if (index === -1) return;
+        itemsHandlers.replace(
+            index,
+            {...item, shouldCopyOnClick: newShouldCopyOnClickVal}
+        );
+
         toggleItemShouldCopyOnClick({
             item,
             shouldCopyOnClick: newShouldCopyOnClickVal,
-            successfulCallback: () => {
+            successfulCallback: (record: Item) => {
                 const index = findIndexById(item.id, items)
                 if (index === -1) return;
-                itemsHandlers.replace(
-                    index,
-                    {...item, shouldCopyOnClick: newShouldCopyOnClickVal}
-                );
+                itemsHandlers.replace(index, record);
             },
             errorCallback: (err: ClientResponseError) => {
                 console.error(err);
@@ -140,16 +144,20 @@ export default function useItemActions() {
     ) => {
         const newIsTodoDoneVal = !item.isTodoDone;
 
+        const index = findIndexById(item.id, items)
+        if (index === -1) return;
+        itemsHandlers.replace(
+            index,
+            {...item, isTodoDone: newIsTodoDoneVal}
+        );
+
         toggleItemIsTodoDone({
             item,
             isTodoDone: newIsTodoDoneVal,
-            successfulCallback: () => {
+            successfulCallback: (record: Item) => {
                 const index = findIndexById(item.id, items)
                 if (index === -1) return;
-                itemsHandlers.replace(
-                    index,
-                    {...item, isTodoDone: newIsTodoDoneVal}
-                );
+                itemsHandlers.replace(index, record);
             },
             errorCallback: (err: ClientResponseError) => {
                 console.error(err);
