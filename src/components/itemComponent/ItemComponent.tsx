@@ -117,7 +117,6 @@ export default function ItemComponent(
                         <ItemComponentIcon
                             type={item.type}
                             faviconUrl={item.faviconUrl}
-                            shouldCopyOnClick={item.shouldCopyOnClick}
                             isTodoDone={item.isTodoDone}
                             hexColourCode={item.content.substring(item.content.length - 7)}
                         />

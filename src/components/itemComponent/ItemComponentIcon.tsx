@@ -1,6 +1,6 @@
 import { Image } from "@mantine/core";
 import { ItemType } from "@/types";
-import { IconCheckbox, IconNote, IconNotes, IconSquare, IconWorld } from "@tabler/icons-react";
+import { IconCheckbox, IconFileText, IconSquare, IconWorld } from "@tabler/icons-react";
 import { justJotTheme } from "@/theme";
 import { isValidHexColourCode } from "@/utils/itemUtils";
 // import { isValidUrl } from "../utils/misc";
@@ -8,13 +8,12 @@ import { isValidHexColourCode } from "@/utils/itemUtils";
 type ItemComponentIconParams = {
     type: ItemType,
     faviconUrl: string,
-    shouldCopyOnClick: boolean,
     isTodoDone: boolean,
     hexColourCode: string
 }
 
 export default function ItemComponentIcon(
-    {type, faviconUrl, shouldCopyOnClick, isTodoDone, hexColourCode}:
+    {type, faviconUrl, isTodoDone, hexColourCode}:
     ItemComponentIconParams
 ) {
     if (isValidHexColourCode(hexColourCode) && type !== ItemType.TODO)
@@ -49,14 +48,9 @@ export default function ItemComponentIcon(
                 />
         case ItemType.TEXT:
         default:
-            return shouldCopyOnClick
-                ? <IconNote
-                    size={justJotTheme.other.iconSizeItem}
-                    stroke={justJotTheme.other.iconStrokeWidth}
-                />
-                : <IconNotes
-                    size={justJotTheme.other.iconSizeItem}
-                    stroke={justJotTheme.other.iconStrokeWidth}
-                />
+            return <IconFileText
+                size={justJotTheme.other.iconSizeItem}
+                stroke={justJotTheme.other.iconStrokeWidth}
+            />
     }
 };
