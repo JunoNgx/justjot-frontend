@@ -23,6 +23,7 @@ export default function useItemActions() {
     const {
         createItem,
         deleteItem,
+        toggleItemShouldCopyOnClick,
         toggleItemIsTodoDone,
     } = useItemApiCalls();
     const itemsHandlers = useManageListState(setItems);
@@ -103,6 +104,34 @@ export default function useItemActions() {
                 });
             },
         });
+    };
+
+    const toggleItemShouldCopyOnClickWithOptimisticUpdate = (
+        { item }: { item: Item }
+    ) => {
+        const newShouldCopyOnClickVal = !item.shouldCopyOnClick;
+
+        toggleItemShouldCopyOnClick({
+            item,
+            shouldCopyOnClick: newShouldCopyOnClickVal,
+            successfulCallback: () => {
+                const index = findIndexById(item.id, items)
+                if (index === -1) return;
+                itemsHandlers.replace(
+                    index,
+                    {...item, shouldCopyOnClick: newShouldCopyOnClickVal}
+                );
+            },
+            errorCallback: (err: ClientResponseError) => {
+                console.error(err);
+                notifications.show({
+                    message: "Error toggling copy as primary action",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
+            },
+        })
     };
 
     const toggleItemIsTodoDoneWithOptimisticUpdate = (
@@ -187,6 +216,7 @@ export default function useItemActions() {
         copyItemContent,
         openUpdateItemModal,
         openMoveItemModal,
+        toggleItemShouldCopyOnClickWithOptimisticUpdate,
         toggleItemIsTodoDoneWithOptimisticUpdate,
     }
 };
