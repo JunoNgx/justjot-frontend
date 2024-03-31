@@ -10,16 +10,16 @@ type ItemComponentIconParams = {
     faviconUrl: string,
     shouldCopyOnClick: boolean,
     isTodoDone: boolean,
-    firstSevenChars: string
+    hexColourCode: string
 }
 
 export default function ItemComponentIcon(
-    {type, faviconUrl, shouldCopyOnClick, isTodoDone, firstSevenChars}:
+    {type, faviconUrl, shouldCopyOnClick, isTodoDone, hexColourCode}:
     ItemComponentIconParams
 ) {
-    if (isValidHexColourCode(firstSevenChars))
+    if (isValidHexColourCode(hexColourCode))
         return <div className="item__icon-colour"
-            style={{backgroundColor: firstSevenChars}}
+            style={{backgroundColor: hexColourCode}}
         />
 
     switch (type) {
