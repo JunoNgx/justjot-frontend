@@ -2,7 +2,7 @@ import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useManageListState from "@/libs/useManageListState";
-import { CreateItemOptions, Item, ItemType } from "@/types";
+import { CreateItemOptions, Item, ItemCollection, ItemType } from "@/types";
 import { DateTime } from "luxon";
 import { useContext } from "react";
 import useItemApiCalls from "./useItemApiCalls";
@@ -10,6 +10,9 @@ import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import { ClientResponseError } from "pocketbase";
 import { useClipboard } from "@mantine/hooks";
+import { modals } from "@mantine/modals";
+import ItemCreateUpdateModal from "@/components/modals/ItemCreateUpdateModal";
+import ItemMoveModal from "@/components/modals/ItemMoveModal";
 
 export default function useItemActions() {
 
@@ -80,10 +83,47 @@ export default function useItemActions() {
             color: "none",
             autoClose: AUTO_CLOSE_DEFAULT,
         });
-    } 
+    }
+
+    const openUpdateItemModal = (item: Item) => {
+        modals.open({
+            title: "Edit item",
+            centered: true,
+            children: (<ItemCreateUpdateModal
+                item={item}
+                isEditMode={true}
+            />),
+        });
+    };
+
+    const openMoveItemModal = async (
+        {item, collectionList}: {item: Item, collectionList: ItemCollection[] }
+    ) => {
+        if (!item || collectionList.length === 0) {
+            notifications.show({
+                message: "Requested moving item, but received missing data",
+                color: "red",
+                autoClose: AUTO_CLOSE_ERROR_TOAST,
+                withCloseButton: true,
+            });
+            return;
+        }
+
+        modals.open({
+            centered: true,
+            size: "sm",
+            title: "Move to another collection",
+            children: <ItemMoveModal
+                item={item}
+                collectionList={collectionList}
+            />
+        });
+    }
 
     return {
         createItemWithOptimisticUpdate,
         copyItemContent,
+        openUpdateItemModal,
+        openMoveItemModal
     }
 };
