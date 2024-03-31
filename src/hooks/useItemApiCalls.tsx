@@ -17,18 +17,18 @@ export default function useItemApiCalls() {
     ) => {
         setLoadingState?.(true);
         pbClient.collection(DbTable.ITEMS)
-            .create({
-                owner: user!.id,
-                collection: currCollection!.id,
-                title,
-                content,
-            }, { requestKey: null })
-            .then((record: Item) => {
-                successfulCallback?.(record);
-            })
-            .catch(err => {
-                errorCallback?.(err);
-            });
+        .create({
+            owner: user!.id,
+            collection: currCollection!.id,
+            title,
+            content,
+        }, { requestKey: null })
+        .then((record: Item) => {
+            successfulCallback?.(record);
+        })
+        .catch(err => {
+            errorCallback?.(err);
+        });
         setLoadingState?.(false);
     };
 
@@ -39,17 +39,17 @@ export default function useItemApiCalls() {
     ) => {
         setLoadingState?.(true);
         pbClient
-            .collection(DbTable.ITEMS)
-            .update(itemId,
-                { collection: collectionId },
-                { requestKey: "item-move"},
-            )
-            .then((record: Item) => {
-                successfulCallback?.(record);
-            })
-            .catch(err => {
-                errorCallback?.(err);
-            });
+        .collection(DbTable.ITEMS)
+        .update(itemId,
+            { collection: collectionId },
+            { requestKey: "item-move"},
+        )
+        .then((record: Item) => {
+            successfulCallback?.(record);
+        })
+        .catch(err => {
+            errorCallback?.(err);
+        });
         setLoadingState?.(false);
     };
 
@@ -60,13 +60,13 @@ export default function useItemApiCalls() {
     ) => {
         setLoadingState?.(true);
         pbClient.collection(DbTable.ITEMS)
-            .update(itemId, { title })
-            .then((record: Item) => {
-                successfulCallback?.(record);
-            })
-            .catch(err => {
-                errorCallback?.(err);
-            });
+        .update(itemId, { title })
+        .then((record: Item) => {
+            successfulCallback?.(record);
+        })
+        .catch(err => {
+            errorCallback?.(err);
+        });
         setLoadingState?.(false);
     };
 
@@ -77,18 +77,18 @@ export default function useItemApiCalls() {
     ) => {
         setLoadingState?.(true);
         pbClient.collection(DbTable.ITEMS)
-            .update(itemId, { content })
-            .then((_record: Item) => {
-                successfulCallback?.();
-            })
-            .catch(err => {
-                errorCallback?.();
-                console.error(err);
-                if (!err.isAbort) {
-                    console.warn("Non cancellation error")
-                }
+        .update(itemId, { content })
+        .then((_record: Item) => {
+            successfulCallback?.();
+        })
+        .catch(err => {
+            errorCallback?.();
+            console.error(err);
+            if (!err.isAbort) {
+                console.warn("Non cancellation error")
+            }
 
-            });
+        });
         setLoadingState?.(false);
     };
 
@@ -99,17 +99,17 @@ export default function useItemApiCalls() {
     ) => {
         setLoadingState?.(true);
         pbClient
-            .collection(DbTable.ITEMS)
-            .update(itemId,
-                { title, content },
-                { requestKey: "item-update-both" }
-            )
-            .then((record: Item) => {
-                successfulCallback?.(record);
-            })
-            .catch(err => {
-                errorCallback?.(err);
-            });
+        .collection(DbTable.ITEMS)
+        .update(itemId,
+            { title, content },
+            { requestKey: "item-update-both" }
+        )
+        .then((record: Item) => {
+            successfulCallback?.(record);
+        })
+        .catch(err => {
+            errorCallback?.(err);
+        });
         setLoadingState?.(false);
     };
 
@@ -119,13 +119,13 @@ export default function useItemApiCalls() {
 
         setLoadingState?.(true);
         await pbClient.collection(DbTable.ITEMS)
-            .delete(item.id)
-            .then((_isSuccessful: boolean) => {
-                successfulCallback?.();
-            })
-            .catch(err => {
-                errorCallback?.(err);
-            });
+        .delete(item.id)
+        .then((_isSuccessful: boolean) => {
+            successfulCallback?.();
+        })
+        .catch(err => {
+            errorCallback?.(err);
+        });
         setLoadingState?.(false);
     };
 
