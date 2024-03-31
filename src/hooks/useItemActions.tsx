@@ -13,13 +13,14 @@ import { useClipboard } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
 import ItemCreateUpdateModal from "@/components/modals/ItemCreateUpdateModal";
 import ItemMoveModal from "@/components/modals/ItemMoveModal";
+import { findIndexById } from "@/utils/itemUtils";
 
 export default function useItemActions() {
 
     const { user } = useContext(BackendClientContext);
     const { currCollection } = useContext(CurrentCollectionContext);
-    const { setItems, setUpdateQueue } = useContext(ItemsContext);
-    const { createItem } = useItemApiCalls();
+    const { items, setItems, setUpdateQueue } = useContext(ItemsContext);
+    const { createItem, deleteItem } = useItemApiCalls();
     const itemsHandlers = useManageListState(setItems);
     const updateQueueHandlers = useManageListState(setUpdateQueue);
 
@@ -64,6 +65,34 @@ export default function useItemActions() {
                 console.error(err);
                 notifications.show({
                     message: "Error creating new item",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
+            },
+        });
+    };
+
+    const deleteItemWithOptimisticUpdate = (
+        { item }: { item: Item }
+    ) => {
+        const index = findIndexById(item.id, items)
+        if (index === -1) return;
+        itemsHandlers.remove(index);
+
+        deleteItem({
+            item,
+            successfulCallback: () => {
+                notifications.show({
+                    message: "Item deleted successfully",
+                    color: "none",
+                    autoClose: AUTO_CLOSE_DEFAULT,
+                });
+            },
+            errorCallback: (err: ClientResponseError) => {
+                console.error(err);
+                notifications.show({
+                    message: "Error deleting item",
                     color: "red",
                     autoClose: AUTO_CLOSE_ERROR_TOAST,
                     withCloseButton: true,
@@ -122,8 +151,9 @@ export default function useItemActions() {
 
     return {
         createItemWithOptimisticUpdate,
+        deleteItemWithOptimisticUpdate,
         copyItemContent,
         openUpdateItemModal,
-        openMoveItemModal
+        openMoveItemModal,
     }
 };
