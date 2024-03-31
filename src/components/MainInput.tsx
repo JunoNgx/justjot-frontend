@@ -4,9 +4,7 @@ import { getHotkeyHandler } from "@mantine/hooks";
 import { IconCircleTriangle } from "@tabler/icons-react";
 
 import { justJotTheme } from "@/theme";
-import useCreateItem from "@/hooks/apiCalls/useCreateItem";
 import { ItemsContext } from "@/contexts/ItemsContext";
-import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { MainViewContext } from "@/contexts/MainViewContext";
 import useItemContextMenuActions from "@/hooks/useItemContextMenuActions";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
@@ -16,9 +14,7 @@ import useItemActions from "@/hooks/useItemActions";
 
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { collections } = useContext(CollectionsContext);
-    const { currCollection } = useContext(CurrentCollectionContext);
     const { items, updateQueue } = useContext(ItemsContext);
-    const { fetchItems } = useContext(ItemsContext);
     const {
         selectedIndex,
         selectItem,
@@ -43,11 +39,6 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const {
         createItemWithOptimisticUpdate
     } = useItemActions();
-    const [_createItem] = useCreateItem({
-        successfulCallback: () => {
-            fetchItems(currCollection);
-        }
-    });
 
     const handleEnter = () => {
         if (!inputVal) return;
