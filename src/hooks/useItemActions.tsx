@@ -80,7 +80,7 @@ export default function useItemActions() {
     };
 
     const deleteItemWithOptimisticUpdate = (
-        item: Item
+        { item }: { item: Item }
     ) => {
         const index = findIndexById(item.id, items)
         if (index === -1) return;
