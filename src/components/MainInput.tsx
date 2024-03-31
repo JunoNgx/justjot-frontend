@@ -6,7 +6,6 @@ import { IconCircleTriangle } from "@tabler/icons-react";
 import { justJotTheme } from "@/theme";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { MainViewContext } from "@/contexts/MainViewContext";
-import useItemContextMenuActions from "@/hooks/useItemContextMenuActions";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { ItemType } from "@/types";
 import { isValidIndex } from "@/utils/miscUtils";
@@ -29,11 +28,11 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const {
         copyItemContent,
         openUpdateItemModal,
-        deleteItemWithManipulation,
+        deleteItemWithOptimisticUpdate,
         openMoveItemModal,
-        refetchTitleAndFavicon,
-        toggleItemShouldCopyOnClick,
-    } = useItemContextMenuActions();
+        refetchLink,
+        toggleItemShouldCopyOnClickWithOptimisticUpdate,
+    } = useItemActions();
 
     const [inputVal, setInputVal] = useState("");
     const {
@@ -85,7 +84,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         else
             selectItem(selectedIndex!.current - 1);
 
-        deleteItemWithManipulation(item);
+        deleteItemWithOptimisticUpdate({item});
     }
 
     const hotkeyRefetchTitleAndFavicon = () => {
@@ -93,14 +92,14 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         const item = getItemByIndex(selectedIndex!.current);
         if (!item) return;
         if (item.type !== ItemType.LINK) return;
-        refetchTitleAndFavicon(item);
+        refetchLink(item);
     }
 
     const hotkeytoggleItemShouldCopyOnClick = () => {
         if (!isValidIndex(selectedIndex?.current)) return;
         const item = getItemByIndex(selectedIndex!.current);
         if (!item) return;
-        toggleItemShouldCopyOnClick(item);
+        toggleItemShouldCopyOnClickWithOptimisticUpdate({item});
     }
 
     return <Input id="main-input" className="main-view__input"
