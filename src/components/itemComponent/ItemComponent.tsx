@@ -119,7 +119,7 @@ export default function ItemComponent(
                             faviconUrl={item.faviconUrl}
                             shouldCopyOnClick={item.shouldCopyOnClick}
                             isTodoDone={item.isTodoDone}
-                            hexColourCode={item.content.substring(0, 7)}
+                            hexColourCode={item.content.substring(item.content.length - 7)}
                         />
                     </Center>
                     {item.title && <Text className="item__primary-text"
