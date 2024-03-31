@@ -17,7 +17,7 @@ export default function ItemComponentIcon(
     {type, faviconUrl, shouldCopyOnClick, isTodoDone, hexColourCode}:
     ItemComponentIconParams
 ) {
-    if (isValidHexColourCode(hexColourCode))
+    if (isValidHexColourCode(hexColourCode) && type !== ItemType.TODO)
         return <div className="item__icon-colour"
             style={{backgroundColor: hexColourCode}}
         />
