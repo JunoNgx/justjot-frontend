@@ -10,12 +10,15 @@ import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import { ClientResponseError } from "pocketbase";
 import { findIndexById } from "@/utils/itemUtils";
+import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 
 const DEBOUNCED_TIME = 5000;
 
 export default function ItemCreateUpdateModal(
     {item, isEditMode}: {item: Item, isEditMode: boolean}
 ) {
+    const { currCollection } = useContext(CurrentCollectionContext);
+    const { fetchItems } = useContext(ItemsContext);
     const { items, setItems } = useContext(ItemsContext);
     const itemsHandlers = useManageListState(setItems);
 
@@ -39,6 +42,7 @@ export default function ItemCreateUpdateModal(
                     itemsHandlers.replace(index, record);
                 },
                 errorCallback: (err: ClientQueryOptions) => {
+                    fetchItems(currCollection);
                     console.error(err)
                     notifications.show({
                         message: "Error autosaving upon exiting item edit modal",
