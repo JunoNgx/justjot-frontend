@@ -7,8 +7,9 @@ import { DateTime } from "luxon";
 import { useContext } from "react";
 import useItemApiCalls from "./useItemApiCalls";
 import { notifications } from "@mantine/notifications";
-import { AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
+import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import { ClientResponseError } from "pocketbase";
+import { useClipboard } from "@mantine/hooks";
 
 export default function useItemActions() {
 
@@ -68,7 +69,21 @@ export default function useItemActions() {
         });
     };
 
+    const clipboard = useClipboard({ timeout: 1000 });
+    const copyItemContent = async (item: Item) => {
+        item.type === ItemType.TODO
+            ? clipboard.copy(item.title)
+            : clipboard.copy(item.content);
+
+        notifications.show({
+            message: "Copied item content",
+            color: "none",
+            autoClose: AUTO_CLOSE_DEFAULT,
+        });
+    } 
+
     return {
         createItemWithOptimisticUpdate,
+        copyItemContent,
     }
 };
