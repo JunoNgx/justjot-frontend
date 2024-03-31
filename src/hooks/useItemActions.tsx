@@ -19,12 +19,13 @@ export default function useItemActions() {
 
     const { user } = useContext(BackendClientContext);
     const { currCollection } = useContext(CurrentCollectionContext);
-    const { items, setItems, setUpdateQueue } = useContext(ItemsContext);
+    const { items, setItems, fetchItems, setUpdateQueue } = useContext(ItemsContext);
     const {
         createItem,
         deleteItem,
         toggleItemShouldCopyOnClick,
         toggleItemIsTodoDone,
+        refetchLinkTitleAndFavicon,
     } = useItemApiCalls();
     const itemsHandlers = useManageListState(setItems);
     const updateQueueHandlers = useManageListState(setUpdateQueue);
@@ -210,12 +211,23 @@ export default function useItemActions() {
         });
     }
 
+    const refetchLink = async (item: Item) => {
+        refetchLinkTitleAndFavicon({
+            item,
+            successfulCallback: () => {
+                // TODO: read from response
+                fetchItems(currCollection);
+            },
+        })
+    };
+
     return {
         createItemWithOptimisticUpdate,
         deleteItemWithOptimisticUpdate,
         copyItemContent,
         openUpdateItemModal,
         openMoveItemModal,
+        refetchLink,
         toggleItemShouldCopyOnClickWithOptimisticUpdate,
         toggleItemIsTodoDoneWithOptimisticUpdate,
     }
