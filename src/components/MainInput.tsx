@@ -45,6 +45,9 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         createItemWithOptimisticUpdate({
             content: inputVal,
         });
+
+        if (!selectedIndex) return;
+        selectedIndex.current += 1;
     };
 
     const getItemByIndex = (index: number) => {
