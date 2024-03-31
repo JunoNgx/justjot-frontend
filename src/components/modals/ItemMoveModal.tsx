@@ -1,14 +1,16 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Box, Button, Group, Loader, Stack } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { Item, ItemCollection } from "@/types";
 
-import useMoveItem from "@/hooks/apiCalls/useMoveItem";
 import { notifications } from "@mantine/notifications";
-import { AUTO_CLOSE_DEFAULT } from "@/utils/constants";
+import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import CollectionHotkey from "@/components//misc/CollectionHotkey";
 import { ItemsContext } from "@/contexts/ItemsContext";
-import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
+import useItemApiCalls from "@/hooks/useItemApiCalls";
+import { ClientResponseError } from "pocketbase";
+import { findIndexById } from "@/utils/itemUtils";
+import useManageListState from "@/libs/useManageListState";
 
 type ItemMoveModal = {
     item: Item,
@@ -17,21 +19,53 @@ type ItemMoveModal = {
 
 export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
 
-    const { fetchItems } = useContext(ItemsContext);
-    const { currCollection } = useContext(CurrentCollectionContext);
+    const { items, setItems } = useContext(ItemsContext);
+    const itemsHandlers = useManageListState(setItems);
+    const { moveItem } = useItemApiCalls();
 
-    const [moveItemToCollection, isLoading] = useMoveItem({
-        successfulCallback: () =>{
-            modals.closeAll();
-            fetchItems(currCollection);
-            notifications.show({
-                message: "Item moved",
-                color: "none",
-                autoClose: AUTO_CLOSE_DEFAULT,
-                withCloseButton: true,
-            });
-        }
-    });
+    const [ isLoading, setIsLoading ] = useState(false);
+
+    const moveItemToCollection = (
+        { itemId, collectionId }: { itemId: string, collectionId: string }
+    ) => {
+        setIsLoading(true);
+        moveItem({
+            itemId,
+            collectionId,
+            // TODO: Figure out why this line breaks things
+            // setLoadingState: setIsLoading,
+            successfulCallback: handleSuccessfulMove,
+            errorCallback: handleErroredMove
+        });
+    };
+
+    const handleSuccessfulMove = (record: Item) => {
+        const index = findIndexById(record.id, items);
+        if (index === -1) return;
+
+        itemsHandlers.remove(index);
+        notifications.show({
+            message: "Item moved successfully",
+            color: "none",
+            autoClose: AUTO_CLOSE_DEFAULT,
+            withCloseButton: true,
+        });
+
+        setIsLoading(false);
+        modals.closeAll();
+    };
+
+    const handleErroredMove = (err: ClientResponseError) => {
+        setIsLoading(true);
+
+        console.error(err);
+        notifications.show({
+            message: "Error moving item",
+            color: "red",
+            autoClose: AUTO_CLOSE_ERROR_TOAST,
+            withCloseButton: true,
+        });
+    };
 
     return <Stack className="item-move-modal"
         p="lg"
