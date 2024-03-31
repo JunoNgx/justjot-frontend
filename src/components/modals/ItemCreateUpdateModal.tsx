@@ -1,31 +1,21 @@
 import { Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { Item, ItemType } from "@/types";
-import useUpdateItem from "@/hooks/apiCalls/useUpdateItem";
 import { DateTime } from "luxon";
 import { getHotkeyHandler, useDebounceCallback } from "@mantine/hooks";
 import { useContext, useEffect, useRef, useState } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
-import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import useItemApiCalls from "@/hooks/useItemApiCalls";
 import useManageListState from "@/libs/useManageListState";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import { ClientResponseError } from "pocketbase";
-
-// type ItemUpdateFormData = {
-//     title: string,
-//     content: string,
-// };
+import { findIndexById } from "@/utils/itemUtils";
 
 const DEBOUNCED_TIME = 5000;
 
 export default function ItemCreateUpdateModal(
     {item, isEditMode}: {item: Item, isEditMode: boolean}
 ) {
-
-    // const { fetchItems } = useContext(ItemsContext);
-    // const { currCollection } = useContext(CurrentCollectionContext);
-
     const { items, setItems } = useContext(ItemsContext);
     const itemsHandlers = useManageListState(setItems);
 
@@ -43,11 +33,13 @@ export default function ItemCreateUpdateModal(
                 itemId: item.id,
                 title: titleValRef.current,
                 content: contentValRef.current,
-                successfulCallback: () => {
-                    // fetchItems(currCollection);
-
+                successfulCallback: (record: Item) => {
+                    const index = findIndexById(record.id, items)
+                    if (index === -1) return;
+                    itemsHandlers.replace(index, record);
                 },
                 errorCallback: (err: ClientQueryOptions) => {
+                    console.error(err)
                     notifications.show({
                         message: "Error autosaving upon exiting item edit modal",
                         color: "red",
@@ -60,7 +52,15 @@ export default function ItemCreateUpdateModal(
         }
 
         if (hasChangedRef.current) {
-            // fetchItems(currCollection);
+            const newerItem = {
+                ...item,
+                title: titleValRef.current,
+                content: contentValRef.current,
+            };
+
+            const index = findIndexById(newerItem.id, items)
+            if (index === -1) return;
+            itemsHandlers.replace(index, newerItem);
         }
     }
 
