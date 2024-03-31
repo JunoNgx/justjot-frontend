@@ -151,6 +151,25 @@ export default function useItemApiCalls() {
         setLoadingState?.(false);
     };
 
+    const toggleItemShouldCopyOnClick = async (
+        { item, newShouldCopyOnClickVal, successfulCallback, errorCallback, setLoadingState }:
+        { item: Item, newShouldCopyOnClickVal: boolean } & ApiRequestCallbackOptions
+    ) => {
+        setLoadingState?.(true);
+        pbClient.collection(DbTable.ITEMS)
+        .update(item.id,
+            {shouldCopyOnClick: newShouldCopyOnClickVal},
+            {requestKey: null},
+        )
+        .then((record) => {
+            successfulCallback?.(record);
+        })
+        .catch(err => {
+            errorCallback?.(err);
+        });
+        setLoadingState?.(false);
+    };
+
     return {
         createItem,
         moveItem,
@@ -159,5 +178,6 @@ export default function useItemApiCalls() {
         updateItemTitleAndContent,
         deleteItem,
         refetchLinkTitleAndFavicon,
+        toggleItemShouldCopyOnClick,
     }
 }
