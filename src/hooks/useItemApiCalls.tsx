@@ -1,6 +1,6 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
-import { CreateItemOptions, MoveItemOptions, DbTable, Item, UpdateItemTitleOptions, UpdateItemContentOptions, UpdateItemTitleAndContentOptions } from "@/types";
+import { CreateItemOptions, MoveItemOptions, DbTable, Item, UpdateItemTitleOptions, UpdateItemContentOptions, UpdateItemTitleAndContentOptions, ApiRequestCallbackOptions } from "@/types";
 import { useContext } from "react";
 
 export default function useItemApiCalls() {
@@ -111,11 +111,28 @@ export default function useItemApiCalls() {
         setLoadingState?.(false);
     };
 
+    const deleteItem = async ({
+        item, successfulCallback, errorCallback, setLoadingState
+    }: {item: Item,} & ApiRequestCallbackOptions) => {
+
+        setLoadingState?.(true);
+        await pbClient.collection(DbTable.ITEMS)
+            .delete(item.id)
+            .then((_isSuccessful: boolean) => {
+                successfulCallback?.();
+            })
+            .catch(err => {
+                errorCallback?.(err);
+            });
+        setLoadingState?.(false);
+    };
+
     return {
         createItem,
         moveItem,
         updateItemTitle,
         updateItemContent,
         updateItemTitleAndContent,
+        deleteItem,
     }
 }
