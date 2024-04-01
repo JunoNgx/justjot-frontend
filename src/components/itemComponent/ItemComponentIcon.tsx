@@ -3,7 +3,6 @@ import { ItemType } from "@/types";
 import { IconCheckbox, IconFileText, IconSquare, IconWorld } from "@tabler/icons-react";
 import { justJotTheme } from "@/theme";
 import { isValidHexColourCode } from "@/utils/itemUtils";
-// import { isValidUrl } from "../utils/misc";
 
 type ItemComponentIconParams = {
     type: ItemType,
@@ -33,13 +32,6 @@ export default function ItemComponentIcon(
                     stroke={justJotTheme.other.iconStrokeWidth}
                 />
         case ItemType.LINK:
-            // validating data should not be done on the frontend
-            // return faviconUrl && isValidUrl(faviconUrl)
-            //     ? <Image h={24} src={faviconUrl}/>
-            //     : <IconWorld
-            //         size={justJotTheme.other.iconSizeItem}
-            //         stroke={justJotTheme.other.iconStrokeWidth}
-            //     />
             return faviconUrl
                 ? <Image h={24} src={faviconUrl}/>
                 : <IconWorld
