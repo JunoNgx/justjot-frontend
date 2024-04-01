@@ -123,11 +123,11 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         onKeyDown={getHotkeyHandler([
             ["ArrowUp", selectPrevItem],
             ["ArrowDown", selectNextItem],
+            ["mod+Shift+ArrowUp", scrollToTop],
+            ["mod+Shift+ArrowDown", scrollToBottom],
             ["Enter", handleEnter],
             ["mod+Enter", execPrimaryAction],
             ["Escape", blurMainInput],
-            ["Home", scrollToTop],
-            ["End", scrollToBottom],
             ["mod+C", hotkeyCopyContent],
             ["mod+E", hotkeyOpenUpdateItemModal],
             ["mod+M", hotkeyOpenMoveItemModal],
