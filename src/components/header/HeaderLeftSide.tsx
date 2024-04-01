@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import CollectionMenu from "@/components/CollectionMenu";
 import { useContext } from "react";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
-import { JustJotIcon } from "../JustJotIcon.";
+import { JustJotIcon } from "@/components/misc/JustJotIcon";
 import { ComputedThemeMode } from "@/types";
 
 export default function HeaderLeftSide() {
