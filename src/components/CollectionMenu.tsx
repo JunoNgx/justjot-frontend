@@ -13,8 +13,10 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import CollectionHotkey from "@/components/misc/CollectionHotkey";
 import CollectionsSortModal from "@/components/modals/CollectionsSortModal";
+import { BackendClientContext } from "@/contexts/BackendClientContext";
 
 export default function CollectionMenu({isInMainView}: {isInMainView?: boolean}) {
+    const { isLoggedIn } = useContext(BackendClientContext);
     const { collections } = useContext(CollectionsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
 
@@ -22,7 +24,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
     const confirmDeletion = useDeleteCollectionConfirmation();
     const isMobile = useMediaQuery(`(max-width: ${em(720)})`);
 
-    return <Menu
+    const collectionMenu = <Menu
         position="bottom-start"
         offset={isMobile ? 5 : 15}
     >
@@ -105,4 +107,6 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
             </MenuItem>
         </Menu.Dropdown>        
     </Menu>
+
+    return (isLoggedIn && currCollection) && collectionMenu;
 }
