@@ -20,6 +20,8 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         deselectItem,
         selectPrevItem,
         selectNextItem,
+        selectNextItemFarther,
+        selectPrevItemFarther,
         execPrimaryAction,
         blurMainInput,
         scrollToTop,
@@ -123,6 +125,8 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         onKeyDown={getHotkeyHandler([
             ["ArrowUp", selectPrevItem],
             ["ArrowDown", selectNextItem],
+            ["Shift+ArrowUp", selectPrevItemFarther],
+            ["Shift+ArrowDown", selectNextItemFarther],
             ["mod+Shift+ArrowUp", scrollToTop],
             ["mod+Shift+ArrowDown", scrollToBottom],
             ["Enter", handleEnter],
