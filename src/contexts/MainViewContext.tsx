@@ -8,8 +8,10 @@ interface MainViewContextType {
     blurMainInput: () => void,
     selectItem: (_index: number) => void,
     deselectItem: () => void,
-    selectNextItem: () => void,
-    selectPrevItem: () => void,
+    selectNextItem: (_e?: KeyboardEvent, distance?: number) => void,
+    selectPrevItem: (_e?: KeyboardEvent, distance?: number) => void,
+    selectNextItemFarther: (e: KeyboardEvent) => void,
+    selectPrevItemFarther: (e: KeyboardEvent) => void,
     execPrimaryAction: () => void,
     scrollToTop: () => void,
     scrollToBottom: () => void,
@@ -63,12 +65,20 @@ export default function MainViewContextProvider(
         selectedIndex.current = -1;
     }
 
-    const selectNextItem = () => {
-        selectItem(selectedIndex.current + 1);
+    const selectNextItem = (_e?: KeyboardEvent, distance: number = 1) => {
+        selectItem(selectedIndex.current + distance);
     }
 
-    const selectPrevItem = () => {
-        selectItem(selectedIndex.current -1);
+    const selectPrevItem = (_e?: KeyboardEvent, distance: number = 1) => {
+        selectItem(selectedIndex.current - distance);
+    }
+
+    const selectNextItemFarther = (e: KeyboardEvent) => {
+        selectNextItem(e, 5);
+    }
+
+    const selectPrevItemFarther = (e: KeyboardEvent) => {
+        selectPrevItem(e, 5);
     }
 
     const execPrimaryAction = () => {
@@ -95,6 +105,8 @@ export default function MainViewContextProvider(
         deselectItem,
         selectNextItem,
         selectPrevItem,
+        selectNextItemFarther,
+        selectPrevItemFarther,
         execPrimaryAction,
         scrollToTop,
         scrollToBottom,
