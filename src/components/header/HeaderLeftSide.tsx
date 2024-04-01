@@ -9,7 +9,7 @@ import { ComputedThemeMode } from "@/types";
 
 export default function HeaderLeftSide() {
 
-    const { isLoggedIn, user } = useContext(BackendClientContext);
+    const { user } = useContext(BackendClientContext);
     const computedThemeMode = useComputedColorScheme(ComputedThemeMode.LIGHT);
     const themeModeBtnColour = computedThemeMode === ComputedThemeMode.LIGHT
         ? justJotTheme.other.colText
@@ -30,6 +30,6 @@ export default function HeaderLeftSide() {
                 stroke={justJotTheme.other.iconStrokeWidth}
             />
         </ActionIcon>
-        {isLoggedIn && <CollectionMenu/>}
+        <CollectionMenu/>
     </Group>
 }
