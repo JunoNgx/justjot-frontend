@@ -188,6 +188,7 @@ export default function useItemActions() {
         modals.open({
             title: "Edit item",
             centered: true,
+            size: "50rem",
             children: (<ItemCreateUpdateModal
                 item={item}
                 isEditMode={true}
