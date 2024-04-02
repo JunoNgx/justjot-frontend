@@ -1,4 +1,5 @@
 import {
+    Anchor,
     Button,
     createTheme,
     CSSVariablesResolver,
@@ -32,7 +33,7 @@ const overrideTheme = createTheme({
         colText: "#000", // --mantine-colortext; --mantine-color-black
         colTextDark: "#C9C9C9", // --mantine-color-dark-0
         colLogo: "#86EAD4", // Mint
-        colBlack: "#C9C9C9",
+        colBlack: "#000000",
         colWhite: "#FFFFFF",
         iconStrokeWidth: 1,
         iconSizeMenu: 16,
@@ -42,9 +43,14 @@ const overrideTheme = createTheme({
         iconSizeThemeMode: 18,
     },
     components: {
+        Anchor: Anchor.extend({
+            defaultProps: {
+                underline: "always",
+            },
+        }),
         Button: Button.extend({
             classNames: classes,
-        })
+        }),
     }
 });
 
@@ -53,10 +59,22 @@ export const justJotCssVarsResolver: CSSVariablesResolver = (theme) => ({
         // None for now
     },
     light: {
+        "--mantine-color-body": theme.other.colWhite,
+        "--app-shell-border-color": theme.other.colBlack,
+        "--mantine-color-text": theme.other.colBlack,
+        "--mantine-color-dimmed": "#777",
+        "--mantine-color-anchor": "#444",
+        "--mantine-color-default-color": theme.other.colBlack,
         "--justjot-col-pri": theme.other.colBlack,
         "--justjot-col-bg": theme.other.colWhite,
     },
     dark: {
+        "--mantine-color-body": theme.other.colBlack,
+        "--app-shell-border-color": theme.other.colWhite,
+        "--mantine-color-text": theme.other.colWhite,
+        "--mantine-color-dimmed": "#999",
+        "--mantine-color-anchor": "#AAA",
+        "--mantine-color-default-color": theme.other.colWhite,
         "--justjot-col-pri": theme.other.colWhite,
         "--justjot-col-bg": theme.other.colBlack,
     }

@@ -102,10 +102,13 @@ header {
     margin: 120px auto 12px;
 
     #main-input {
-        border-width: 2px;
+        border-width: 1px;
 
         &:focus-within {
-            border-color: var(--mantine-col-text)
+            outline-offset: 4px;
+            outline-style: solid;
+            outline-width: 2px;
+            outline-color: var(--mantine-color-text);
         }
     }
 
@@ -155,7 +158,7 @@ header {
             bottom: 1.5rem;
             left: 1.5rem;
     
-            border: solid 1px var(--mantine-color-default-border);
+            border: solid 1px var(--mantine-color-text);
             background-color: var(--mantine-color-body);
             padding: 0.4rem 0.8rem;
         }
@@ -229,3 +232,42 @@ header {
         // }
     // }
 // }
+
+.mantine-Modal-content {
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--mantine-color-text);
+}
+
+.mantine-Modal-overlay {
+    // TODO: This is incorrect, but it works. Should find out why
+    background-color: var(--mantine-color-body) 0.5;
+    backdrop-filter: blur(7px);
+}
+
+input,
+textarea,
+input[type="password"] {
+    border-style: solid;
+    border-width: 1px;
+
+    @include mantine.light {
+        background-color: var(--mantine-color-body);
+        border-color: var(--mantine-color-text);
+    }
+
+    @include mantine.dark {
+        background-color: var(--mantine-color-body);
+        border-color: var(--mantine-color-text);
+    }
+
+    // [data-mantine-color-scheme="light"] & {
+    //     background-color: white;
+    //     border-color: black;
+    // }
+    
+    // [data-mantine-color-scheme="dark"] & {
+    //     background-color: black;
+    //     border-color: white;
+    // }
+}
