@@ -5,11 +5,13 @@ import { ThemeModeContext } from "@/contexts/ThemeModeContext";
 import { ThemeMode, ComputedThemeMode } from "@/types";
 import { IconMoon, IconSettingsCog, IconSun } from "@tabler/icons-react";
 import { justJotTheme } from "@/theme";
-
+import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 
 export default function HeaderThemeModeGroup() {
     const { themeMode, setThemeMode } = useContext(ThemeModeContext);
     const computedThemeMode = useComputedColorScheme(ComputedThemeMode.LIGHT);
+
+    const iconProps = useIconPropsFromTheme();
 
     const isThemeModeLight = () => themeMode === ThemeMode.LIGHT;
     const isThemeModeDark = () => themeMode === ThemeMode.DARK;
@@ -28,10 +30,7 @@ export default function HeaderThemeModeGroup() {
             radius="xl"
             onClick={() => {setThemeMode(ThemeMode.AUTO)}}
         >
-            <IconSettingsCog
-                size={justJotTheme.other.iconSizeThemeMode}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />
+            <IconSettingsCog {...iconProps} />
         </ActionIcon>
         <ActionIcon className="header__theme-mode-btn"
             variant={isThemeModeLight() ? "outline" : "subtle"}
@@ -39,10 +38,7 @@ export default function HeaderThemeModeGroup() {
             radius="xl"
             onClick={() => {setThemeMode(ThemeMode.LIGHT)}}
         >
-            <IconSun
-                size={justJotTheme.other.iconSizeThemeMode}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />
+            <IconSun {...iconProps} />
         </ActionIcon>
         <ActionIcon className="header__theme-mode-btn"
             variant={isThemeModeDark() ? "outline" : "subtle"}
@@ -50,10 +46,7 @@ export default function HeaderThemeModeGroup() {
             radius="xl"
             onClick={() => {setThemeMode(ThemeMode.DARK)}}
         >
-            <IconMoon
-                size={justJotTheme.other.iconSizeThemeMode}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />
+            <IconMoon {...iconProps} />
         </ActionIcon>
     </Group>
 }
