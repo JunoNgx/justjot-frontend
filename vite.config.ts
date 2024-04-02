@@ -7,7 +7,8 @@ export default defineConfig({
     css: {
       preprocessorOptions: {
          scss: {
-            additionalData: `@use "./src/_mantine";`,
+            // TODO: create PR to update Mantine doc, Usage with Sass
+            additionalData: `@use "./src/_mantine" as mantine;`,
          }
       }
     },
