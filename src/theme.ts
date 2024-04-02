@@ -50,6 +50,9 @@ const overrideTheme = createTheme({
         }),
         Button: Button.extend({
             classNames: classes,
+            defaultProps: {
+                variant: "mono",
+            }
         }),
     }
 });
