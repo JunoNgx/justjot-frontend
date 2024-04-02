@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Box, Button, Group, Loader, Stack } from "@mantine/core";
+import { Box, Button, FocusTrap, Group, Loader, Stack } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { Item, ItemCollection } from "@/types";
 
@@ -11,6 +11,8 @@ import useItemApiCalls from "@/hooks/useItemApiCalls";
 import { ClientResponseError } from "pocketbase";
 import { findIndexById } from "@/utils/itemUtils";
 import useManageListState from "@/libs/useManageListState";
+import { getHotkeyHandler } from "@mantine/hooks";
+import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
 
 type ItemMoveModal = {
     item: Item,
@@ -22,8 +24,28 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
     const { items, setItems } = useContext(ItemsContext);
     const itemsHandlers = useManageListState(setItems);
     const { moveItem } = useItemApiCalls();
+    const {
+        computeIndexFromNumericKey,
+        generateNumericHotkeyOptions,
+    } = useNumericHotkeyUtils();
 
     const [ isLoading, setIsLoading ] = useState(false);
+    const moveItemToCollectionByNumericKey = (inputNumber: number) => {
+        const targetIndex = computeIndexFromNumericKey(inputNumber);
+        if (targetIndex === -1) return;
+
+        const targetCollection = collectionList[targetIndex];
+        if (!targetCollection) return;
+
+        moveItemToCollection({
+            itemId: item.id,
+            collectionId: targetCollection.id
+        });
+    };
+    const numericKeysHotkeyOptions = generateNumericHotkeyOptions({
+        callback: moveItemToCollectionByNumericKey,
+        preventDefault: true,
+    });
 
     const moveItemToCollection = (
         { itemId, collectionId }: { itemId: string, collectionId: string }
@@ -67,30 +89,38 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
         });
     };
 
-    return <Stack className="item-move-modal"
-        p="lg"
-    >
-        {collectionList?.map((collection, index) => <Group
-            key={index}
-            justify="center"
+    return <FocusTrap> 
+        <Stack className="item-move-modal"
+            p="lg"
+            /**
+             * Use this as initial focused element, so the numeric hotkeys
+             * can work for keyboard users.
+             */
+            data-autofocus={true} 
+            onKeyDown={getHotkeyHandler([...numericKeysHotkeyOptions])}
         >
-            <Button className="item-move-modal__move-btn"
-                w="70%"
-                onClick={() => moveItemToCollection({
-                    itemId: item.id, collectionId: collection.id})
-                }
-                disabled={isLoading || item?.collection === collection.id}
+            {collectionList?.map((collection, index) => <Group
+                key={index}
+                justify="center"
             >
-                {collection.name}    
-            </Button>
+                <Button className="item-move-modal__move-btn"
+                    w="70%"
+                    onClick={() => moveItemToCollection({
+                        itemId: item.id, collectionId: collection.id})
+                    }
+                    disabled={isLoading || item?.collection === collection.id}
+                >
+                    {collection.name}    
+                </Button>
 
-            <Box className="item-move-modal__collection-hotkey">
-                <CollectionHotkey index={index}/>
-            </Box>
-        </Group>)}
+                <Box className="item-move-modal__collection-hotkey">
+                    <CollectionHotkey index={index}/>
+                </Box>
+            </Group>)}
 
-        {isLoading && <Group mt="md" justify="center">
-            <Loader type="bars"/>
-        </Group>}
-    </Stack>
+            {isLoading && <Group mt="md" justify="center">
+                <Loader type="bars"/>
+            </Group>}
+        </Stack>
+    </FocusTrap>  
 };
