@@ -1,6 +1,7 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
-import { CreateItemOptions, MoveItemOptions, DbTable, Item, UpdateItemTitleOptions, UpdateItemContentOptions, UpdateItemTitleAndContentOptions, ApiRequestCallbackOptions } from "@/types";
+import { CreateItemOptions, MoveItemOptions, DbTable, Item, UpdateItemTitleOptions, UpdateItemContentOptions, UpdateItemTitleAndContentOptions, ApiRequestCallbackOptions, ItemType } from "@/types";
+import { MAX_TITLE_LENGTH } from "@/utils/constants";
 import { useContext } from "react";
 
 export default function useItemApiCalls() {
@@ -185,6 +186,29 @@ export default function useItemApiCalls() {
         setLoadingState?.(false);
     };
 
+    const convertItemToTodo = async (
+        { item, successfulCallback, errorCallback, setLoadingState }:
+        { item: Item } & ApiRequestCallbackOptions
+    ) => {
+        setLoadingState?.(true);
+        pbClient.collection(DbTable.ITEMS)
+        .update(item.id,
+            {
+                title: item.content.slice(0, MAX_TITLE_LENGTH),
+                content: "",
+                type: ItemType.TODO,
+            },
+            {requestKey: null},
+        )
+        .then((record) => {
+            successfulCallback?.(record);
+        })
+        .catch(err => {
+            errorCallback?.(err);
+        });
+        setLoadingState?.(false);
+    };
+
     return {
         createItem,
         moveItem,
@@ -195,5 +219,6 @@ export default function useItemApiCalls() {
         refetchLinkTitleAndFavicon,
         toggleItemShouldCopyOnClick,
         toggleItemIsTodoDone,
+        convertItemToTodo,
     }
 }
