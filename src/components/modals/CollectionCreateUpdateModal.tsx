@@ -168,7 +168,6 @@ export default function CollectionCreateUpdateModal(
             />
             <Group mt="xl" justify="flex-end">
                 <Button
-                    variant="filled"
                     type="submit"
                     loading={isLoading}
                 >

@@ -85,7 +85,6 @@ export default function Login() {
                 justify="flex-end"
             >
                 <Button
-                    variant="filled"
                     type="submit"
                     loading={isLoading}
                 >

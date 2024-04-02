@@ -55,7 +55,6 @@ export default function Reset() {
                 justify="flex-end"
             >
                 <Button
-                    variant="filled"
                     type="submit"
                     loading={isLoading}
                 >

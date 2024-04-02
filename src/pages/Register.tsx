@@ -147,7 +147,6 @@ export default function Register() {
                 justify="flex-end"
             >
                 <Button
-                    variant="filled"
                     type="submit"
                     loading={isLoading}
                 >
