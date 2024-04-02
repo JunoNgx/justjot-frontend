@@ -10,8 +10,8 @@ import { MainViewContext } from "@/contexts/MainViewContext";
 import useHandleContextMenuWithLongPress from "@/libs/useHandleContextMenuWithLongPress";
 import useItemActions from "@/hooks/useItemActions";
 import useItemContextMenuOptions from "@/hooks/useItemContextMenuOptions";
-import { justJotTheme } from "@/theme";
 import { IconClipboardCopy } from "@tabler/icons-react";
+import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 
 type ItemComponentParams = {
     item: Item,
@@ -42,6 +42,7 @@ export default function ItemComponent(
         toggleCopyFn: toggleItemShouldCopyOnClickWithOptimisticUpdate,
         deselectFn: deselectItem
     });
+    const iconProps = useIconPropsFromTheme();
 
     const handlePrimaryAction = (
         _e: React.MouseEvent | React.TouchEvent
@@ -138,10 +139,7 @@ export default function ItemComponent(
                 <Group className="item__right-side"
                     gap="xs"
                 >
-                    {item.shouldCopyOnClick && <IconClipboardCopy
-                        size={justJotTheme.other.iconSizeItem}
-                        stroke={justJotTheme.other.iconStrokeWidth}
-                    />}
+                    {item.shouldCopyOnClick && <IconClipboardCopy {...iconProps} />}
                     <ItemComponentCreatedDate className="item__datetime"
                         createdDatetime={item.created}
                     />
