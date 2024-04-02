@@ -9,7 +9,7 @@ export default function useNumericHotkeyUtils() {
         case (inputNumber === 0):
             return 9;
         default:
-            return inputNumber;
+            return inputNumber - 1;
         }
     };
 
