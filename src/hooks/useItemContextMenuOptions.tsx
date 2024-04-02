@@ -1,8 +1,8 @@
 import { CollectionsContext } from "@/contexts/CollectionsContext";
-import { justJotTheme } from "@/theme";
 import { Item, ItemCollection, ItemType } from "@/types";
 import { IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconSquare, IconTrash } from "@tabler/icons-react";
 import { useContext } from "react";
+import useIconPropsFromTheme from "./useIconPropsFromTheme";
 
 type ItemContextMenuOptionsParams = {
     item: Item,
@@ -20,46 +20,28 @@ export default function useItemContextMenuOptions(
     ItemContextMenuOptionsParams
 ) {
     const { collections } = useContext(CollectionsContext);
-
+    const iconProps = useIconPropsFromTheme();
 
     const contextMenuDefaultActionIcon = item.shouldCopyOnClick
-        ? <IconCheckbox
-            size={justJotTheme.other.iconSizeMenu}
-            stroke={justJotTheme.other.iconStrokeWidth}
-        />
-        : <IconSquare
-            size={justJotTheme.other.iconSizeMenu}
-            stroke={justJotTheme.other.iconStrokeWidth}
-        />
+        ? <IconCheckbox {...iconProps} />
+        : <IconSquare {...iconProps} />
 
     const contextMenuOptions = [
         {
             key: "copy",
-            icon: <IconCopy
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
+            icon: <IconCopy {...iconProps} />,
             onClick: () => {copyFn(item)}
         }, {
             key: "edit",
-            icon: <IconEdit
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
+            icon: <IconEdit {...iconProps} />,
             onClick: () => {editFn(item)},
         }, {
             key: "move",
-            icon: <IconFileSymlink
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
+            icon: <IconFileSymlink {...iconProps} />,
             onClick: () => {moveFn({item, collectionList: collections})},
         }, {
             key: "delete",
-            icon: <IconTrash
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
+            icon: <IconTrash {...iconProps} />,
             color: "red",
             onClick: () => {
                 deleteFn({item});
@@ -69,10 +51,7 @@ export default function useItemContextMenuOptions(
             key: "refetch",
             title: "Refetch",
             hidden: item.type !== ItemType.LINK,
-            icon: <IconDownload
-                size={justJotTheme.other.iconSizeMenu}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />,
+            icon: <IconDownload {...iconProps} />,
             onClick: () => {refetchFn(item);}
         }, {
             key: "divider",
