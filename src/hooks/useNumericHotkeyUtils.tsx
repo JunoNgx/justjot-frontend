@@ -13,7 +13,7 @@ export default function useNumericHotkeyUtils() {
         }
     };
 
-    const generateNumericHotkeyOptions = (
+    const generateNumericHotkeyHandlers = (
         { callback, preventDefault = false }:
         { callback: (n: number) => void, preventDefault?: boolean }
     ): HotkeyItem[] => {
@@ -27,7 +27,7 @@ export default function useNumericHotkeyUtils() {
 
     return {
         computeIndexFromNumericKey,
-        generateNumericHotkeyOptions,
+        generateNumericHotkeyHandlers,
     };
 };
 

@@ -28,7 +28,7 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
     const { moveItem } = useItemApiCalls();
     const {
         computeIndexFromNumericKey,
-        generateNumericHotkeyOptions,
+        generateNumericHotkeyHandlers,
     } = useNumericHotkeyUtils();
 
     const [ isLoading, setIsLoading ] = useState(false);
@@ -46,7 +46,7 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
             collectionId: targetCollection.id
         });
     };
-    const numericKeysHotkeyOptions = generateNumericHotkeyOptions({
+    const numericKeysHotkeyOptions = generateNumericHotkeyHandlers({
         callback: moveItemToCollectionByNumericKey,
         preventDefault: true,
     });

@@ -29,11 +29,11 @@ export default function MainView() {
         tryRetrackCurrentSelectedIndexWithId,
     } = useCollectionNavActions();
     const { collectionSlug } = useParams();
-    const { generateNumericHotkeyOptions } = useNumericHotkeyUtils();
+    const { generateNumericHotkeyHandlers } = useNumericHotkeyUtils();
 
     const navigate = useNavigate();
     const mainInputRef = useRef<HTMLInputElement>(null);
-    const numericKeysHotkeyOptions = generateNumericHotkeyOptions({
+    const numericKeysHotkeyOptions = generateNumericHotkeyHandlers({
         callback: (inputKey: number) => {
             /**
              * TODO: mildly hacky solution.
