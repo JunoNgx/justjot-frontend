@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { APP_NAME } from "@/utils/constants";
 import { isValidIndex } from "@/utils/miscUtils";
+import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
 
 export default function useCollectionNavActions() {
     const { user } = useContext(BackendClientContext);
@@ -15,6 +16,7 @@ export default function useCollectionNavActions() {
         currSelectedCollectionIndex,
         setCurrSelectedCollectionIndex,
     } = useContext(CurrentCollectionContext);
+    const { computeIndexFromNumericKey } = useNumericHotkeyUtils();
 
     const navigate = useNavigate();
 
@@ -48,12 +50,10 @@ export default function useCollectionNavActions() {
     };
 
     const trySwitchToCollectionByNumericKey = (inputNumber: number) => {
-        let transcribedIndex;
-        if (inputNumber < 0 || inputNumber > 9) return;
-        else if (inputNumber === 0) transcribedIndex = 9;
-        else transcribedIndex = inputNumber - 1;
+        const targetIndex = computeIndexFromNumericKey(inputNumber);
+        if (targetIndex === -1) return;
 
-        trySwitchToCollectionByIndex(transcribedIndex);
+        trySwitchToCollectionByIndex(targetIndex);
     };
 
     const trySwitchToPrevCollection = () => {
