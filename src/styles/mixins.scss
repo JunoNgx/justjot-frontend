@@ -22,14 +22,11 @@
 
 @mixin glass-blur {
     backdrop-filter: blur(10px);
-
-    // Syntax from `postcss-color-alpha`
-    [data-mantine-color-scheme="light"] & {
-        background-color: var(--mantine-color-white)(.5);
-    }
-
+    // Attributes to overwrite specificity
+    [data-mantine-color-scheme="light"] &,
     [data-mantine-color-scheme="dark"] & {
-        background-color: var(--mantine-color-dark-6)(.5);
+        // TODO: sigh, somehow this works
+        background-color: var(--nonsensical-variable);
     }
 }
 
