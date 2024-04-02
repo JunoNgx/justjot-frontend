@@ -3,7 +3,7 @@ import { Group, Menu, Text, UnstyledButton } from "@mantine/core";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { useNavigate } from "react-router-dom";
 import { IconChevronDown, IconLogout, IconSettings } from "@tabler/icons-react";
-import { justJotTheme } from "@/theme";
+import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 
 export default function HeaderUser() {
 
@@ -16,6 +16,8 @@ export default function HeaderUser() {
         navigate("/", { replace: true});
     };
 
+    const iconProps = useIconPropsFromTheme();
+
     return <Menu
         position="bottom-end"
         offset={15}
@@ -24,27 +26,18 @@ export default function HeaderUser() {
             <UnstyledButton>
                 <Group gap={6}>
                     <Text>{username}</Text>
-                    <IconChevronDown
-                        size={justJotTheme.other.iconSizeHeaderUser}
-                        stroke={justJotTheme.other.iconStrokeWidth}
-                    />
+                    <IconChevronDown {...iconProps} />
                 </Group>
             </UnstyledButton>
         </Menu.Target>
 
         <Menu.Dropdown className="dropdown-menu">
-            <Menu.Item leftSection={<IconSettings
-                    size={justJotTheme.other.iconSizeMenu}
-                    stroke={justJotTheme.other.iconStrokeWidth}
-                />}
+            <Menu.Item leftSection={<IconSettings {...iconProps} />}
             >
                 User settings
             </Menu.Item>
             <Menu.Item
-                leftSection={<IconLogout
-                    size={justJotTheme.other.iconSizeMenu}
-                    stroke={justJotTheme.other.iconStrokeWidth}
-                />}
+                leftSection={<IconLogout {...iconProps} />}
                 onClick={attemptLogout}
             >
                 Logout
