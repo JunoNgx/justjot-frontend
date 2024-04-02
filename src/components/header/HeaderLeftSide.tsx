@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { JustJotIcon } from "@/components/misc/JustJotIcon";
 import { ComputedThemeMode } from "@/types";
+import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 
 export default function HeaderLeftSide() {
 
@@ -14,6 +15,7 @@ export default function HeaderLeftSide() {
     const themeModeBtnColour = computedThemeMode === ComputedThemeMode.LIGHT
         ? justJotTheme.other.colText
         : justJotTheme.other.colTextDark;
+    const iconProps = useIconPropsFromTheme();
     
     return <Group className="header__left-side"
         gap="xs"
@@ -24,11 +26,7 @@ export default function HeaderLeftSide() {
             to={user ? `/${user.username}` : "/"}
             size="xl"
         >
-            <JustJotIcon
-                color={themeModeBtnColour}
-                size={justJotTheme.other.iconSizeHeaderLogo}
-                stroke={justJotTheme.other.iconStrokeWidth}
-            />
+            <JustJotIcon {...iconProps} color={themeModeBtnColour} />
         </ActionIcon>
         <CollectionMenu/>
     </Group>
