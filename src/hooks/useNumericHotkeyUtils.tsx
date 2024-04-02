@@ -13,7 +13,7 @@ export default function useNumericHotkeyUtils() {
         }
     };
 
-    const useGenerateNumericHotkeyOptions = (
+    const generateNumericHotkeyOptions = (
         {callback}: {callback: (n: number) => void}
     ): HotkeyItem[] => {
         return Array.from(Array(9).keys())
@@ -25,7 +25,7 @@ export default function useNumericHotkeyUtils() {
 
     return {
         computeIndexFromNumericKey,
-        useGenerateNumericHotkeyOptions,
+        generateNumericHotkeyOptions,
     };
 };
 
