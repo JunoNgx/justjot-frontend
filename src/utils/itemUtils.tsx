@@ -15,7 +15,7 @@ export const isValidHexColourCode = (str: string): boolean => {
 }
 
 export const findIndexById = (id: string, itemList: Item[]) => {
-    return itemList.map(item => item.id).indexOf(id);
+    return itemList.findIndex(item => item.id === id);
 };
 
 

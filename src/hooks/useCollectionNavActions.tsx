@@ -21,32 +21,28 @@ export default function useCollectionNavActions() {
     const navigate = useNavigate();
 
     const trySwitchToCollectionById = (collectionId: string) => {
-        const index = collections?.map(c => c.id)
-            .indexOf(collectionId);
+        const targetIndex = collections?.findIndex(c => c.id === collectionId);
+        if (targetIndex === -1) return;
 
-        if (index === -1 || index === undefined || index === null) return;
-
-        const targetCollection = collections?.[index];
+        const targetCollection = collections?.[targetIndex];
         if (!targetCollection) return;
 
-        tryNavigateToCollection(targetCollection, index);
+        tryNavigateToCollection(targetCollection, targetIndex);
     };
 
     const trySwitchToCollectionBySlug = (collectionSlug?: string) => {
         if (!collectionSlug) return;
 
-        const index = collections?.map(c => c.slug)
-            .indexOf(collectionSlug);
-
-        if (index === -1 || index === undefined || index === null) {
+        const targetIndex = collections?.findIndex(c => c.slug === collectionSlug);
+        if (targetIndex === -1) {
             tryNavigateToCollection(collections![0], 0);
             return;
         }
 
-        const targetCollection = collections?.[index];
+        const targetCollection = collections?.[targetIndex];
         if (!targetCollection) return;
 
-        tryNavigateToCollection(targetCollection, index);
+        tryNavigateToCollection(targetCollection, targetIndex);
     };
 
     const trySwitchToCollectionByNumericKey = (inputNumber: number) => {
@@ -92,9 +88,8 @@ export default function useCollectionNavActions() {
         if (!currCollection) return;
         if (collections.length === 0) return;
 
-        const index = collections.map(collection => collection.id)
-            .indexOf(currCollection!.id);
-        setCurrSelectedCollectionIndex(index);
+        const targetIndex = collections.findIndex(c => c.id === currCollection!.id);
+        setCurrSelectedCollectionIndex(targetIndex);
     };
 
     return {
