@@ -31,6 +31,7 @@ export default function ItemComponent(
         refetchLink,
         toggleItemShouldCopyOnClickWithOptimisticUpdate,
         toggleItemIsTodoDoneWithOptimisticUpdate,
+        convertToTodo,
     } = useItemActions();
     const itemContextMenuOptions = useItemContextMenuOptions({
         item,
@@ -40,7 +41,8 @@ export default function ItemComponent(
         deleteFn: deleteItemWithOptimisticUpdate,
         refetchFn: refetchLink,
         toggleCopyFn: toggleItemShouldCopyOnClickWithOptimisticUpdate,
-        deselectFn: deselectItem
+        deselectFn: deselectItem,
+        convertToTodoFn: convertToTodo,
     });
     const iconProps = useIconPropsFromTheme();
 
