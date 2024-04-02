@@ -34,7 +34,12 @@ export default function MainView() {
     const navigate = useNavigate();
     const mainInputRef = useRef<HTMLInputElement>(null);
     const numericKeysHotkeyOptions = generateNumericHotkeyOptions({
-        callback: trySwitchToCollectionByNumericKey
+        callback: (inputKey: number) => {
+            const hasActiveModal = document.querySelectorAll(".mantine-Modal-overlay").length > 0;
+            if (hasActiveModal) return;
+
+            trySwitchToCollectionByNumericKey(inputKey);
+        },
     });
     useHotkeys([
         ["mod+F", () => focusOnMainInput(mainInputRef)],
