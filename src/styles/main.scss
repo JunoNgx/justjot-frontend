@@ -19,6 +19,10 @@ html {
     padding-top: 60px; // see: Header
 }
 
+.appshell-header {
+    border-bottom: none;
+}
+
 header {
     @include m.glass-blur;
 }

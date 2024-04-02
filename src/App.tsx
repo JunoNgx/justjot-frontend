@@ -48,7 +48,7 @@ function App() {
                                 >
                                     <ContextMenuProvider>
 
-                                        <AppShell.Header>
+                                        <AppShell.Header className="appshell-header">
                                             <Header/>
                                         </AppShell.Header>
 
