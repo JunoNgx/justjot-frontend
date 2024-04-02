@@ -25,6 +25,7 @@
     // Attributes to overwrite specificity
     [data-mantine-color-scheme="light"] &,
     [data-mantine-color-scheme="dark"] & {
+        border-color: var(--mantine-color-text);
         // TODO: sigh, somehow this works
         background-color: var(--nonsensical-variable);
     }
