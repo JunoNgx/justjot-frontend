@@ -14,12 +14,14 @@ export default function useNumericHotkeyUtils() {
     };
 
     const generateNumericHotkeyOptions = (
-        {callback}: {callback: (n: number) => void}
+        { callback, preventDefault = false }:
+        { callback: (n: number) => void, preventDefault?: boolean }
     ): HotkeyItem[] => {
         return Array.from(Array(9).keys())
             .map(n => [
                 n.toString(),
-                () => { callback(n)}
+                () => { callback(n)},
+                { preventDefault },
             ])
     };
 
