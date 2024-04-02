@@ -26,6 +26,7 @@ export default function useItemActions() {
         toggleItemShouldCopyOnClick,
         toggleItemIsTodoDone,
         refetchLinkTitleAndFavicon,
+        convertItemToTodo,
     } = useItemApiCalls();
     const itemsHandlers = useManageListState(setItems);
     const updateQueueHandlers = useManageListState(setUpdateQueue);
@@ -230,6 +231,26 @@ export default function useItemActions() {
         })
     };
 
+    const convertToTodo = async ({item}: {item: Item}) => {
+        convertItemToTodo({
+            item,
+            successfulCallback: (record: Item) => {
+                const index = findIndexById(item.id, items)
+                if (index === -1) return;
+                itemsHandlers.replace(index, record);
+            },
+            errorCallback: (err: ClientResponseError) => {
+                console.error(err);
+                notifications.show({
+                    message: "Error converting item to todo",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
+            },
+        });
+    };
+
     return {
         createItemWithOptimisticUpdate,
         deleteItemWithOptimisticUpdate,
@@ -239,5 +260,6 @@ export default function useItemActions() {
         refetchLink,
         toggleItemShouldCopyOnClickWithOptimisticUpdate,
         toggleItemIsTodoDoneWithOptimisticUpdate,
+        convertToTodo,
     }
 };
