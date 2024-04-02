@@ -1,4 +1,5 @@
 import {
+    Button,
     createTheme,
     CSSVariablesResolver,
     DEFAULT_THEME,
@@ -6,6 +7,7 @@ import {
 } from '@mantine/core';
 
 import '@mantine/core/styles.css';
+import classes from "./theme.module.scss";
 
 const overrideTheme = createTheme({
     colors: {
@@ -38,6 +40,11 @@ const overrideTheme = createTheme({
         // iconSizeHeaderLogo: 24,
         iconSizeHeaderUser: 24,
         iconSizeThemeMode: 18,
+    },
+    components: {
+        Button: Button.extend({
+            classNames: classes,
+        })
     }
 });
 

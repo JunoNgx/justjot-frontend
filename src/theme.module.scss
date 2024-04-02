@@ -1,0 +1,13 @@
+.root {
+    &[data-variant='mono'] {
+        @include mantine.light {
+            background-color: #000;
+            color: #fff;
+        }
+
+        @include mantine.dark {
+            background-color: #fff;
+            color: #000;
+        }
+    }
+}
