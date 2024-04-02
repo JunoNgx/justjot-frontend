@@ -12,7 +12,7 @@ import { MainViewContext } from "@/contexts/MainViewContext";
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 import CollectionMenu from "@/components/CollectionMenu";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
-import useGenerateNumericHotkeyOptions from "@/hooks/useGenerateNumericHotkeyOptions";
+import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -29,10 +29,11 @@ export default function MainView() {
         tryRetrackCurrentSelectedIndexWithId,
     } = useCollectionNavActions();
     const { collectionSlug } = useParams();
+    const { generateNumericHotkeyOptions } = useNumericHotkeyUtils();
 
     const navigate = useNavigate();
     const mainInputRef = useRef<HTMLInputElement>(null);
-    const numericKeysHotkeyOptions = useGenerateNumericHotkeyOptions({
+    const numericKeysHotkeyOptions = generateNumericHotkeyOptions({
         callback: trySwitchToCollectionByNumericKey
     });
     useHotkeys([
