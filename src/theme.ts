@@ -35,7 +35,7 @@ const overrideTheme = createTheme({
         iconStrokeWidth: 1,
         iconSizeMenu: 16,
         iconSizeItem: 24,
-        iconSizeHeaderLogo: 24,
+        // iconSizeHeaderLogo: 24,
         iconSizeHeaderUser: 24,
         iconSizeThemeMode: 18,
     }
