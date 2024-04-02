@@ -251,6 +251,10 @@ header {
     border: solid 1px var(--mantine-color-text);
 }
 
+.mantine-Kbd-root {
+    border-radius: 0;
+}
+
 input,
 textarea,
 input[type="password"] {
