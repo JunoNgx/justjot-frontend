@@ -30,7 +30,10 @@ export default function HeaderThemeModeGroup() {
             radius="xl"
             onClick={() => {setThemeMode(ThemeMode.AUTO)}}
         >
-            <IconSettingsCog {...iconProps} />
+            <IconSettingsCog
+                {...iconProps}
+                size={justJotTheme.other.iconSizeThemeMode}
+            />
         </ActionIcon>
         <ActionIcon className="header__theme-mode-btn"
             variant={isThemeModeLight() ? "outline" : "subtle"}
@@ -38,7 +41,10 @@ export default function HeaderThemeModeGroup() {
             radius="xl"
             onClick={() => {setThemeMode(ThemeMode.LIGHT)}}
         >
-            <IconSun {...iconProps} />
+            <IconSun
+                {...iconProps}
+                size={justJotTheme.other.iconSizeThemeMode}
+            />
         </ActionIcon>
         <ActionIcon className="header__theme-mode-btn"
             variant={isThemeModeDark() ? "outline" : "subtle"}
@@ -46,7 +52,10 @@ export default function HeaderThemeModeGroup() {
             radius="xl"
             onClick={() => {setThemeMode(ThemeMode.DARK)}}
         >
-            <IconMoon {...iconProps} />
+            <IconMoon
+                {...iconProps}
+                size={justJotTheme.other.iconSizeThemeMode}
+            />
         </ActionIcon>
     </Group>
 }
