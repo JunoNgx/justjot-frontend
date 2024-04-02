@@ -39,6 +39,19 @@ header {
         text-overflow: ellipsis;
         white-space: nowrap;
     }
+
+    &__theme-mode-btn {
+        color: var(--mantine-color-text);
+
+        &--is-selected {
+            border-color: var(--mantine-color-text);
+        }
+
+        &:hover {
+            background-color: transparent;
+            color: var(--mantine-color-text);
+        }
+    }
 }
 
 .landing-page {
