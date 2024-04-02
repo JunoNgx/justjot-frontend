@@ -35,6 +35,10 @@ export default function MainView() {
     const mainInputRef = useRef<HTMLInputElement>(null);
     const numericKeysHotkeyOptions = generateNumericHotkeyOptions({
         callback: (inputKey: number) => {
+            /**
+             * TODO: mildly hacky solution.
+             * To consider refactor this with a context variable.
+             */
             const hasActiveModal = document.querySelectorAll(".mantine-Modal-overlay").length > 0;
             if (hasActiveModal) return;
 
