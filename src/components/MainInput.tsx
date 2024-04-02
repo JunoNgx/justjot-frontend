@@ -3,13 +3,13 @@ import { Input, InputProps, Loader } from "@mantine/core";
 import { getHotkeyHandler } from "@mantine/hooks";
 import { IconCircleTriangle } from "@tabler/icons-react";
 
-import { justJotTheme } from "@/theme";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { MainViewContext } from "@/contexts/MainViewContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { ItemType } from "@/types";
 import { isValidIndex } from "@/utils/miscUtils";
 import useItemActions from "@/hooks/useItemActions";
+import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { collections } = useContext(CollectionsContext);
@@ -35,6 +35,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         refetchLink,
         toggleItemShouldCopyOnClickWithOptimisticUpdate,
     } = useItemActions();
+    const iconProps = useIconPropsFromTheme();
 
     const [inputVal, setInputVal] = useState("");
     const {
@@ -112,8 +113,8 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         {...props}
         size="lg"
         leftSection={<IconCircleTriangle
+            {...iconProps} 
             size={32}
-            stroke={justJotTheme.other.iconStrokeWidth}
         />}
         rightSectionPointerEvents="all"
         rightSection={
