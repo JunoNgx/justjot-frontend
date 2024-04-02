@@ -5,7 +5,6 @@ import { ItemCollection } from "@/types";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconEdit, IconPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
 
-import { justJotTheme } from "@/theme";
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 import CollectionCreateUpdateModal from "@/components/modals/CollectionCreateUpdateModal";
 import useDeleteCollectionConfirmation from "@/hooks/useDeleteCollectionConfirmation";
@@ -14,6 +13,7 @@ import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import CollectionHotkey from "@/components/misc/CollectionHotkey";
 import CollectionsSortModal from "@/components/modals/CollectionsSortModal";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
+import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 
 export default function CollectionMenu({isInMainView}: {isInMainView?: boolean}) {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -23,6 +23,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
     const { trySwitchToCollectionById } = useCollectionNavActions();
     const confirmDeletion = useDeleteCollectionConfirmation();
     const isMobile = useMediaQuery(`(max-width: ${em(720)})`);
+    const iconProps = useIconPropsFromTheme();
 
     const collectionMenu = <Menu
         position="bottom-start"
@@ -34,10 +35,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
             >
                 <Group gap="xs">
                     <Text>{currCollection?.name}</Text>
-                    <IconSelector
-                        size={justJotTheme.other.iconSizeMenu}
-                        stroke={justJotTheme.other.iconStrokeWidth}
-                    />
+                    <IconSelector {...iconProps} />
                 </Group>
             </UnstyledButton>
         </Menu.Target>
@@ -54,10 +52,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
             )}
             <MenuDivider/>
             <MenuItem
-                leftSection={<IconPlus
-                    size={justJotTheme.other.iconSizeMenu}
-                    stroke={justJotTheme.other.iconStrokeWidth}
-                />}
+                leftSection={<IconPlus {...iconProps} />}
                 onClick={() => modals.open({
                     centered: true,
                     title: "Create New Collection",
@@ -66,10 +61,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
             >
                 Create collection
             </MenuItem>
-            <MenuItem leftSection={<IconEdit
-                    size={justJotTheme.other.iconSizeMenu}
-                    stroke={justJotTheme.other.iconStrokeWidth}
-                />}
+            <MenuItem leftSection={<IconEdit {...iconProps} />}
                 onClick={() => modals.open({
                     centered: true,
                     title: "Edit Collection",
@@ -79,10 +71,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
                 Edit collection
             </MenuItem>
             <MenuItem
-                leftSection={<IconSortAscendingShapes
-                    size={justJotTheme.other.iconSizeMenu}
-                    stroke={justJotTheme.other.iconStrokeWidth}
-                />}
+                leftSection={<IconSortAscendingShapes {...iconProps} />}
                 onClick={() => modals.open({
                     size: "35rem",
                     centered: true,
@@ -97,15 +86,12 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
 
             <MenuItem
                 color="red"
-                leftSection={<IconTrash
-                    size={justJotTheme.other.iconSizeMenu}
-                    stroke={justJotTheme.other.iconStrokeWidth}
-                />}
+                leftSection={<IconTrash {...iconProps} />}
                 onClick={confirmDeletion}
             >
                 Delete collection
             </MenuItem>
-        </Menu.Dropdown>        
+        </Menu.Dropdown>
     </Menu>
 
     return (isLoggedIn && currCollection) && collectionMenu;
