@@ -245,6 +245,12 @@ header {
     backdrop-filter: blur(7px);
 }
 
+.mantine-Notifications-notification {
+    color: var(--mantine-color-text);
+    background-color: var(--mantine-color-body);
+    border: solid 1px var(--mantine-color-text);
+}
+
 input,
 textarea,
 input[type="password"] {
