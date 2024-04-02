@@ -13,6 +13,7 @@ import { findIndexById } from "@/utils/itemUtils";
 import useManageListState from "@/libs/useManageListState";
 import { getHotkeyHandler } from "@mantine/hooks";
 import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
+import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 
 type ItemMoveModal = {
     item: Item,
@@ -21,6 +22,7 @@ type ItemMoveModal = {
 
 export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
 
+    const { currCollection } = useContext(CurrentCollectionContext);
     const { items, setItems } = useContext(ItemsContext);
     const itemsHandlers = useManageListState(setItems);
     const { moveItem } = useItemApiCalls();
@@ -36,6 +38,8 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
 
         const targetCollection = collectionList[targetIndex];
         if (!targetCollection) return;
+
+        if (targetCollection.id === currCollection?.id) return;
 
         moveItemToCollection({
             itemId: item.id,
