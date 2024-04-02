@@ -12,6 +12,7 @@ import { MainViewContext } from "@/contexts/MainViewContext";
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 import CollectionMenu from "@/components/CollectionMenu";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
+import useGenerateNumericHotkeyOptions from "@/hooks/useGenerateNumericHotkeyOptions";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -29,24 +30,16 @@ export default function MainView() {
     } = useCollectionNavActions();
     const { collectionSlug } = useParams();
 
-
     const navigate = useNavigate();
-
     const mainInputRef = useRef<HTMLInputElement>(null);
+    const numericKeysHotkeyOptions = useGenerateNumericHotkeyOptions({
+        callback: trySwitchToCollectionByNumericKey
+    });
     useHotkeys([
         ["mod+F", () => focusOnMainInput(mainInputRef)],
-        ["1", () => trySwitchToCollectionByNumericKey(1)],
-        ["2", () => trySwitchToCollectionByNumericKey(2)],
-        ["3", () => trySwitchToCollectionByNumericKey(3)],
-        ["4", () => trySwitchToCollectionByNumericKey(4)],
-        ["5", () => trySwitchToCollectionByNumericKey(5)],
-        ["6", () => trySwitchToCollectionByNumericKey(6)],
-        ["7", () => trySwitchToCollectionByNumericKey(7)],
-        ["8", () => trySwitchToCollectionByNumericKey(8)],
-        ["9", () => trySwitchToCollectionByNumericKey(9)],
-        ["0", () => trySwitchToCollectionByNumericKey(0)],
         ["ArrowLeft", trySwitchToPrevCollection],
         ["ArrowRight", trySwitchToNextCollection],
+        ...numericKeysHotkeyOptions
     ]);
 
     useEffect(() => {
