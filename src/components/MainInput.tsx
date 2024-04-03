@@ -105,6 +105,8 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         if (!isValidIndex(selectedIndex?.current)) return;
         const item = getItemByIndex(selectedIndex!.current);
         if (!item) return;
+        if (item.type !== ItemType.TEXT && item.type !== ItemType.LINK)
+            return;
         toggleItemShouldCopyOnClickWithOptimisticUpdate({item});
     }
 
