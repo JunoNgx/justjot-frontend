@@ -238,6 +238,12 @@ export default function useItemActions() {
                 const index = findIndexById(item.id, items)
                 if (index === -1) return;
                 itemsHandlers.replace(index, record);
+
+                notifications.show({
+                    message: "Item successfully converted to Todo task",
+                    color: "none",
+                    autoClose: AUTO_CLOSE_DEFAULT,
+                });
             },
             errorCallback: (err: ClientResponseError) => {
                 console.error(err);
