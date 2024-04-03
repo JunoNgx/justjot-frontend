@@ -145,6 +145,10 @@ header {
     //         padding: 0.4rem 0.8rem;
     //     }
     // }
+    &__label {
+        user-select: none;
+    }
+
     @include m.mobile {
         display: none;
     }
