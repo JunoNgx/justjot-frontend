@@ -46,7 +46,7 @@ export default function MainView() {
         },
     });
     useHotkeys([
-        ["mod+F", () => focusOnMainInput(mainInputRef)],
+        ["mod+F", () => focusOnMainInput(mainInputRef), { preventDefault: true }],
         ["ArrowLeft", trySwitchToPrevCollection],
         ["ArrowRight", trySwitchToNextCollection],
         ...numericKeysHotkeyOptions
