@@ -136,7 +136,8 @@ export default function ItemCreateUpdateModal(
         setHasSaved(false);
         setTitleVal(event.target.value);
         titleValRef.current = titleVal;
-        debouncedAutosaveItemTitle();
+
+        if (isEditMode) debouncedAutosaveItemTitle();
     };
 
     const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -144,7 +145,8 @@ export default function ItemCreateUpdateModal(
         setHasSaved(false);
         setContentVal(event.target.value);
         contentValRef.current = contentVal;
-        debouncedAutosaveItemContent();
+
+        if (isEditMode) debouncedAutosaveItemContent();
     };
 
     const handleActiveSave = () => {
@@ -202,7 +204,7 @@ export default function ItemCreateUpdateModal(
         </>}
 
         <Group justify="flex-end">
-            {(hasSaved && relativeUpdatedTimeStr)
+            {(isEditMode && hasSaved && relativeUpdatedTimeStr)
                 && <Text>Saved at {relativeUpdatedTimeStr}</Text>
             }
         </Group>
