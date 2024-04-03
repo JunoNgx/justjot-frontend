@@ -1,4 +1,4 @@
-import { Item } from "@/types";
+import { Item, ItemType } from "@/types";
 // import { isDatetimeMoreThanOneYearOld } from "./misc";
 // import { DateTime } from "luxon";
 
@@ -17,6 +17,22 @@ export const isValidHexColourCode = (str: string): boolean => {
 export const findIndexById = (id: string, itemList: Item[]) => {
     return itemList.findIndex(item => item.id === id);
 };
+
+export const canToggleItemShouldCopyOnClick = (item: Item) => {
+    return item.type === ItemType.TEXT
+        || item.type === ItemType.LINK;
+}
+
+export const canRefetchItem = (item: Item) => {
+    return item.type === ItemType.LINK;
+};
+
+export const canConvertItemToTodo = (item: Item) => {
+    return !item.title
+        && item.content
+        && item.type === ItemType.TEXT;
+}
+
 
 
 // export const calculateDatetimeStr = (item: Item): string => {
