@@ -1,8 +1,9 @@
 import { CollectionsContext } from "@/contexts/CollectionsContext";
-import { Item, ItemCollection, ItemType } from "@/types";
+import { Item, ItemCollection } from "@/types";
 import { IconArrowMoveRight, IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconSquare, IconTrash } from "@tabler/icons-react";
 import { useContext } from "react";
 import useIconPropsFromTheme from "./useIconPropsFromTheme";
+import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
 
 type ItemContextMenuOptionsParams = {
     item: Item,
@@ -60,13 +61,13 @@ export default function useItemContextMenuOptions(
         }, {
             key: "refetch",
             title: "Refetch",
-            hidden: item.type !== ItemType.LINK,
+            hidden: !canRefetchItem(item),
             icon: <IconDownload {...iconProps} />,
             onClick: () => {refetchFn(item);}
         }, {
             key: "convertToTodo",
             title: "Convert to Todo",
-            hidden: item.title || !item.content || item.type !== ItemType.TEXT,
+            hidden: !canConvertItemToTodo(item),
             icon: <IconArrowMoveRight {...iconProps} />,
             color: "orange",
             onClick: () => {convertToTodoFn({item});}
@@ -75,7 +76,7 @@ export default function useItemContextMenuOptions(
         }, {
             key: "togglePrimaryAction",
             title: "To copy",
-            hidden: item.type === ItemType.TODO,
+            hidden: !canToggleItemShouldCopyOnClick(item),
             icon: contextMenuDefaultActionIcon,
             color: "blue",
             onClick: () => {toggleCopyFn({item})}

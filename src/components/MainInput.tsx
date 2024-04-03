@@ -6,10 +6,10 @@ import { IconCircleTriangle } from "@tabler/icons-react";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { MainViewContext } from "@/contexts/MainViewContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
-import { ItemType } from "@/types";
 import { isValidIndex } from "@/utils/miscUtils";
 import useItemActions from "@/hooks/useItemActions";
 import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
+import { canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
 
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { collections } = useContext(CollectionsContext);
@@ -97,7 +97,8 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         if (!isValidIndex(selectedIndex?.current)) return;
         const item = getItemByIndex(selectedIndex!.current);
         if (!item) return;
-        if (item.type !== ItemType.LINK) return;
+        if (!canRefetchItem(item)) return;
+
         refetchLink(item);
     }
 
@@ -105,8 +106,8 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         if (!isValidIndex(selectedIndex?.current)) return;
         const item = getItemByIndex(selectedIndex!.current);
         if (!item) return;
-        if (item.type !== ItemType.TEXT && item.type !== ItemType.LINK)
-            return;
+        if (!canToggleItemShouldCopyOnClick(item)) return;
+
         toggleItemShouldCopyOnClickWithOptimisticUpdate({item});
     }
 
