@@ -9,7 +9,7 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { isValidIndex } from "@/utils/miscUtils";
 import useItemActions from "@/hooks/useItemActions";
 import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
-import { canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
+import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
 
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { collections } = useContext(CollectionsContext);
@@ -34,6 +34,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         openMoveItemModal,
         refetchLink,
         toggleItemShouldCopyOnClickWithOptimisticUpdate,
+        convertToTodo,
     } = useItemActions();
     const iconProps = useIconPropsFromTheme();
 
@@ -111,6 +112,15 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         toggleItemShouldCopyOnClickWithOptimisticUpdate({item});
     }
 
+    const hotkeyToggleConvertToTodoItem = () => {
+        if (!isValidIndex(selectedIndex?.current)) return;
+        const item = getItemByIndex(selectedIndex!.current);
+        if (!item) return;
+     
+        if (!canConvertItemToTodo(item)) return;
+        convertToTodo({item});
+    }
+
     return <Input id="main-input" className="main-view__input"
         ref={ref}
         {...props}
@@ -142,6 +152,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["mod+Shift+Backspace", hotkeyDeleteItem, { preventDefault: true }],
             ["mod+Shift+Digit4", hotkeyToggleItemShouldCopyOnClick, { preventDefault: true }],
             ["mod+Shift+Digit5", hotkeyRefetchTitleAndFavicon, { preventDefault: true }],
+            ["mod+Shift+Digit6", hotkeyToggleConvertToTodoItem, { preventDefault: true }],
         ])}
     />
 });
