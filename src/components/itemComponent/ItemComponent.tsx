@@ -123,6 +123,7 @@ export default function ItemComponent(
                             type={item.type}
                             faviconUrl={item.faviconUrl}
                             isTodoDone={item.isTodoDone}
+                            isPending={item.isPending}
                             hexColourCode={item.content.substring(item.content.length - 7)}
                         />
                     </Center>
