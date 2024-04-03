@@ -61,7 +61,7 @@ export default function MainViewContextProvider(
 
     const clickOnSelectedItem = () => {
         const itemListWrapper = document.querySelector("#displayed-list");
-        const currSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>("[data-is-selected]");
+        const currSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>(".item--is-selected");
         currSelectedItem?.click();
     }
 
