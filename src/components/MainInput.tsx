@@ -137,8 +137,8 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["mod+E", hotkeyOpenUpdateItemModal],
             ["mod+M", hotkeyOpenMoveItemModal],
             ["mod+Shift+Backspace", hotkeyDeleteItem],
-            ["mod+shift+Q", hotkeyRefetchTitleAndFavicon],
-            ["mod+shift+O", hotkeytoggleItemShouldCopyOnClick],
+            ["mod+Shift+Digit4", hotkeytoggleItemShouldCopyOnClick],
+            ["mod+Shift+Digit5", hotkeyRefetchTitleAndFavicon],
         ])}
     />
 });
