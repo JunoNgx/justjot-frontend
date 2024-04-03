@@ -1,8 +1,10 @@
 import { isElementInViewport } from "@/utils/miscUtils";
 import { clamp } from "@mantine/hooks";
-import { createContext, useRef } from "react";
+import { SetStateAction, createContext, useRef, useState } from "react";
 
 interface MainViewContextType {
+    inputVal: string,
+    setInputVal: React.Dispatch<SetStateAction<string>>,
     selectedIndex: React.MutableRefObject<number> | null,
     focusOnMainInput: (_mainInputRef: React.RefObject<HTMLInputElement>) => void,
     blurMainInput: () => void,
@@ -22,6 +24,7 @@ export const MainViewContext = createContext<MainViewContextType>({} as MainView
 export default function MainViewContextProvider(
     {children}: {children: React.ReactNode}
 ) {
+    const [inputVal, setInputVal] = useState("");
     const selectedIndex = useRef(-1);
 
     const findItemCount = () => {
@@ -98,6 +101,8 @@ export default function MainViewContextProvider(
     }
 
     return <MainViewContext.Provider value={{
+        inputVal,
+        setInputVal,
         selectedIndex,
         focusOnMainInput,
         blurMainInput,

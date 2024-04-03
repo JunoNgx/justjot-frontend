@@ -1,4 +1,4 @@
-import { forwardRef, useContext, useState } from "react";
+import { forwardRef, useContext } from "react";
 import { Input, InputProps, Loader } from "@mantine/core";
 import { getHotkeyHandler } from "@mantine/hooks";
 import { IconCircleTriangle } from "@tabler/icons-react";
@@ -26,6 +26,8 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         blurMainInput,
         scrollToTop,
         scrollToBottom,
+        inputVal,
+        setInputVal,
     } = useContext(MainViewContext);
     const {
         copyItemContent,
@@ -38,7 +40,6 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     } = useItemActions();
     const iconProps = useIconPropsFromTheme();
 
-    const [inputVal, setInputVal] = useState("");
     const {
         createItemWithOptimisticUpdate
     } = useItemActions();
