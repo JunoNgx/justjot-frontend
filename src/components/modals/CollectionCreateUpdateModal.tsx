@@ -37,7 +37,7 @@ export default function CollectionCreateUpdateModal(
     });
     const [isLoading, setIsLoading] = useState(false);
     const [newlyCreatedCollection, setNewlyCreatedCollection] = useState<ItemCollection | null>(null);
-    const handlers = useManageListState(setCollections);
+    const itemsHandlers = useManageListState(setCollections);
     const {
         trySwitchToCollectionById,
         tryNavigateToCollection,
@@ -92,7 +92,7 @@ export default function CollectionCreateUpdateModal(
     }
 
     const handleSuccessfulCreation = (newCollection: ItemCollection) => {
-        handlers.append(newCollection);
+        itemsHandlers.append(newCollection);
         setNewlyCreatedCollection(newCollection);
         notifications.show({
             message: "Collection created: " + newCollection.name,
@@ -121,7 +121,7 @@ export default function CollectionCreateUpdateModal(
     };
 
     const handleSuccessfulUpdate = (newCollection: ItemCollection) => {
-        handlers.replace(currSelectedCollectionIndex, newCollection);
+        itemsHandlers.replace(currSelectedCollectionIndex, newCollection);
         // Must update route slug, else it would default back to collections[0]
         tryNavigateToCollection(newCollection, currSelectedCollectionIndex);
         notifications.show({

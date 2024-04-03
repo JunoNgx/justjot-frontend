@@ -13,7 +13,7 @@ import { notifications } from "@mantine/notifications";
 export default function CollectionsSortModal() {
 
     const { collections, fetchCollections } = useContext(CollectionsContext);
-    const [state, handlers] = useListState(collections);
+    const [state, itemsHandlers] = useListState(collections);
     const { sortCollection } = useCollectionApiCalls();
     const hasChanged = useRef(false);
 
@@ -26,7 +26,7 @@ export default function CollectionsSortModal() {
     }, []);
 
     const handleDragEnd = ({ destination, source }: DropResult) => {
-        handlers.reorder({
+        itemsHandlers.reorder({
             from: source.index,
             to: destination?.index || 0
         });
@@ -74,7 +74,7 @@ export default function CollectionsSortModal() {
     const processUpdateCollectionSortOrder = async (
         movedCollection: ItemCollection, newIndex: number, newSortOrderValue: number
     ) => {
-        handlers.setItem(
+        itemsHandlers.setItem(
             newIndex,
             { ...movedCollection, sortOrder: newSortOrderValue }
         );

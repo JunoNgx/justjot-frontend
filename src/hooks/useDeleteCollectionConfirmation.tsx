@@ -20,7 +20,7 @@ export default function useDeleteCollectionConfirmation() {
         currSelectedCollectionIndex,
     } = useContext(CurrentCollectionContext);
     const { trySwitchToCollectionByIndex } = useCollectionNavActions();
-    const handlers = useManageListState(setCollections);
+    const itemsHandlers = useManageListState(setCollections);
     
     useEffect(() => {
         if (collections.length === 0) return;
@@ -45,7 +45,7 @@ export default function useDeleteCollectionConfirmation() {
     };
 
     const handleSuccessfulDeletion = () => {
-        handlers.remove(currSelectedCollectionIndex);
+        itemsHandlers.remove(currSelectedCollectionIndex);
         setShouldNavigateAway(true);
         notifications.show({
             message: "Collection has been deleted successfully.",
