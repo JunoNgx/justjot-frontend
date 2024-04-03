@@ -5,13 +5,13 @@
         }
 
         @include mantine.light {
-            background-color: #000;
-            color: #fff;
+            background-color: var(--mantine-color-text);
+            color: var(--mantine-color-body);
         }
 
         @include mantine.dark {
-            background-color: #fff;
-            color: #000;
+            background-color: var(--mantine-color-text);
+            color: var(--mantine-color-body);
         }
     }
 }
