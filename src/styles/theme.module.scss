@@ -1,5 +1,9 @@
 .root {
     &[data-variant='mono'] {
+        &[disabled] {
+            opacity: 0.5;
+        }
+
         @include mantine.light {
             background-color: #000;
             color: #fff;
