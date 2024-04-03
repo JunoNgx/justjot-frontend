@@ -101,7 +101,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         refetchLink(item);
     }
 
-    const hotkeytoggleItemShouldCopyOnClick = () => {
+    const hotkeyToggleItemShouldCopyOnClick = () => {
         if (!isValidIndex(selectedIndex?.current)) return;
         const item = getItemByIndex(selectedIndex!.current);
         if (!item) return;
@@ -139,7 +139,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["mod+E", hotkeyOpenUpdateItemModal, { preventDefault: true }],
             ["mod+M", hotkeyOpenMoveItemModal, { preventDefault: true }],
             ["mod+Shift+Backspace", hotkeyDeleteItem, { preventDefault: true }],
-            ["mod+Shift+Digit4", hotkeytoggleItemShouldCopyOnClick, { preventDefault: true }],
+            ["mod+Shift+Digit4", hotkeyToggleItemShouldCopyOnClick, { preventDefault: true }],
             ["mod+Shift+Digit5", hotkeyRefetchTitleAndFavicon, { preventDefault: true }],
         ])}
     />
