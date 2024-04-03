@@ -132,7 +132,7 @@ export default function ItemComponent(
                     >
                         {item.title}
                     </Text>}
-                    {item.content&& <Text className="item__secondary-text"
+                    {item.content && <Text className="item__secondary-text"
                         title={item.content}
                     >
                         {item.content}
