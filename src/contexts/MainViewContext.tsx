@@ -14,7 +14,7 @@ interface MainViewContextType {
     selectPrevItem: (_e?: KeyboardEvent, distance?: number) => void,
     selectNextItemFarther: (e: KeyboardEvent) => void,
     selectPrevItemFarther: (e: KeyboardEvent) => void,
-    execPrimaryAction: () => void,
+    clickOnSelectedItem: () => void,
     scrollToTop: () => void,
     scrollToBottom: () => void,
 };
@@ -59,7 +59,7 @@ export default function MainViewContextProvider(
         selectPrevItem(e, 5);
     }
 
-    const execPrimaryAction = () => {
+    const clickOnSelectedItem = () => {
         const itemListWrapper = document.querySelector("#displayed-list");
         const currSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>("[data-is-selected]");
         currSelectedItem?.click();
@@ -87,7 +87,7 @@ export default function MainViewContextProvider(
         selectPrevItem,
         selectNextItemFarther,
         selectPrevItemFarther,
-        execPrimaryAction,
+        clickOnSelectedItem,
         scrollToTop,
         scrollToBottom,
     }}>
