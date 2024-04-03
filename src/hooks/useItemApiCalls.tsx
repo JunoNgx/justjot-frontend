@@ -197,6 +197,7 @@ export default function useItemApiCalls() {
                 title: item.content.slice(0, MAX_TITLE_LENGTH),
                 content: "",
                 type: ItemType.TODO,
+                shouldCopyOnClick: false,
             },
             {requestKey: null},
         )
