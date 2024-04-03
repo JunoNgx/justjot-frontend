@@ -3,7 +3,6 @@ import { Box, Stack } from '@mantine/core';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Notifications } from '@mantine/notifications';
-import ItemComponent from '@/components/itemComponent/ItemComponent';
 import MainInput from "@/components/MainInput";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
@@ -13,12 +12,13 @@ import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 import CollectionMenu from "@/components/CollectionMenu";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
+import FilterableItemList from "@/components/FilterableItemList";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
     const { collections, fetchCollections } = useContext(CollectionsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
-    const { items, fetchItems } = useContext(ItemsContext);
+    const { fetchItems } = useContext(ItemsContext);
     const { focusOnMainInput } = useContext(MainViewContext);
     const {
         trySwitchToCollectionBySlug,
@@ -116,13 +116,7 @@ export default function MainView() {
                 id="displayed-list"
                 gap="xs"
             >
-                {items?.map((item, index) =>
-                    <ItemComponent
-                        key={item.id}
-                        item={item}
-                        index={index}
-                    />
-                )}
+                <FilterableItemList/>
             </Stack>
         </Stack>
     </Box>
