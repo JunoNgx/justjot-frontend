@@ -52,6 +52,14 @@ export default function useItemActions() {
         };
     };
 
+    const displayNotifItemNotReady = () => {
+        notifications.show({
+            message: "Item is not yet ready, please wait.",
+            color: "none",
+            autoClose: AUTO_CLOSE_DEFAULT,
+        });
+    };
+
     const createItemWithOptimisticUpdate = (
         { title, content }: CreateItemOptions
     ) => {
@@ -84,6 +92,11 @@ export default function useItemActions() {
     const deleteItemWithOptimisticUpdate = (
         { item }: { item: Item }
     ) => {
+        if (item.isPending) {
+            displayNotifItemNotReady();
+            return;
+        }
+
         const index = findIndexById(item.id, items)
         if (index === -1) return;
         itemsHandlers.remove(index);
@@ -112,6 +125,11 @@ export default function useItemActions() {
     const toggleItemShouldCopyOnClickWithOptimisticUpdate = (
         { item }: { item: Item }
     ) => {
+        if (item.isPending) {
+            displayNotifItemNotReady();
+            return;
+        }
+
         const newShouldCopyOnClickVal = !item.shouldCopyOnClick;
 
         const index = findIndexById(item.id, items)
@@ -144,6 +162,11 @@ export default function useItemActions() {
     const toggleItemIsTodoDoneWithOptimisticUpdate = (
         { item }: { item: Item }
     ) => {
+        if (item.isPending) {
+            displayNotifItemNotReady();
+            return;
+        }
+
         const newIsTodoDoneVal = !item.isTodoDone;
 
         const index = findIndexById(item.id, items)
@@ -188,11 +211,7 @@ export default function useItemActions() {
 
     const openUpdateItemModal = (item: Item) => {
         if (item.isPending) {
-            notifications.show({
-                message: "Item is not yet ready, please wait.",
-                color: "none",
-                autoClose: AUTO_CLOSE_DEFAULT,
-            });
+            displayNotifItemNotReady();
             return;
         }
 
@@ -210,6 +229,11 @@ export default function useItemActions() {
     const openMoveItemModal = async (
         {item, collectionList}: {item: Item, collectionList: ItemCollection[] }
     ) => {
+        if (item.isPending) {
+            displayNotifItemNotReady();
+            return;
+        }
+
         if (!item || collectionList.length === 0) {
             notifications.show({
                 message: "Requested moving item, but received missing data",
@@ -232,6 +256,11 @@ export default function useItemActions() {
     }
 
     const refetchLink = async (item: Item) => {
+        if (item.isPending) {
+            displayNotifItemNotReady();
+            return;
+        }
+
         refetchLinkTitleAndFavicon({
             item,
             successfulCallback: () => {
@@ -242,6 +271,11 @@ export default function useItemActions() {
     };
 
     const convertToTodo = async ({item}: {item: Item}) => {
+        if (item.isPending) {
+            displayNotifItemNotReady();
+            return;
+        }
+
         convertItemToTodo({
             item,
             successfulCallback: (record: Item) => {
