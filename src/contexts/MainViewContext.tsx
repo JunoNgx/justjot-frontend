@@ -1,4 +1,3 @@
-import { isElementInViewport } from "@/utils/miscUtils";
 import { clamp } from "@mantine/hooks";
 import { SetStateAction, createContext, useContext, useState } from "react";
 import { ItemsContext } from "./ItemsContext";

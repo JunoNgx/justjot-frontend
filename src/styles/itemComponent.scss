@@ -10,15 +10,9 @@
     text-decoration: none;
     color: var(--mantine-color-text);
 
-    &[data-is-selected=true] {
+    &--is-selected {
         border-color: var(--mantine-color-text);
     }
-
-    // @media (hover: hover) {
-    //     &:hover {
-    //         border-color: var(--mantine-color-text);
-    //     }
-    // }
 
     &__left-side {
         min-width: 0;

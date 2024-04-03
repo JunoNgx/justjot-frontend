@@ -21,7 +21,7 @@ type ItemComponentParams = {
 export default function ItemComponent(
     { item, index }: ItemComponentParams
 ) {
-    const { selectItem, deselectItem } = useContext(MainViewContext);
+    const { selectedIndex, setSelectedIndex } = useContext(MainViewContext);
     const { showContextMenu } = useContextMenu();
     const {
         deleteItemWithOptimisticUpdate,
@@ -41,7 +41,7 @@ export default function ItemComponent(
         deleteFn: deleteItemWithOptimisticUpdate,
         refetchFn: refetchLink,
         toggleCopyFn: toggleItemShouldCopyOnClickWithOptimisticUpdate,
-        deselectFn: deselectItem,
+        deselectFn: () => {setSelectedIndex(-1)},
         convertToTodoFn: convertToTodo,
     });
     const iconProps = useIconPropsFromTheme();
@@ -98,18 +98,20 @@ export default function ItemComponent(
         target: "_blank",
     }
     : {};
+    const isSelected = selectedIndex === index;
 
     return <Box
         {...anchorProps}
 
-        className={computeClassname(item)}
+        className={computeClassname(item, isSelected)}
         p="xs"
         data-is-item={true}
         data-index={index}
+        data-is-selected={isSelected}
         {...longPressEvent}
 
-        onMouseEnter={() => { selectItem(index)}}
-        onMouseLeave={() => { deselectItem()}}
+        onMouseEnter={() => { setSelectedIndex(index)}}
+        onMouseLeave={() => { setSelectedIndex(-1)}}
     >
             <Group className="item__flex-wrapper"
                 justify="space-between"
@@ -151,7 +153,10 @@ export default function ItemComponent(
         </Box>
 };
 
-const computeClassname = (item: Item) => {
+const computeClassname = (item: Item, isSelected: boolean) => {
+    const isSelectedModifier = isSelected
+        ? "item--is-selected "
+        : " ";
     const noPrimaryTextModifier = item.title
         ? " "
         : "item--has-no-primary-text ";
@@ -162,9 +167,10 @@ const computeClassname = (item: Item) => {
     const isTodoItem = item.type === ItemType.TODO;
     const isTodoItemDoneModifier = isTodoItem && item.isTodoDone
         ? "item--is-todo-done "
-        : " "
+        : " ";
 
     return "item "
+        + isSelectedModifier
         + noPrimaryTextModifier
         + noSecondaryTextModifier
         + isTodoItemDoneModifier;

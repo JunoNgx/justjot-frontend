@@ -6,7 +6,6 @@ import { IconCircleTriangle } from "@tabler/icons-react";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { MainViewContext } from "@/contexts/MainViewContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
-import { isValidIndex } from "@/utils/miscUtils";
 import useItemActions from "@/hooks/useItemActions";
 import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
@@ -16,8 +15,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { items, updateQueue } = useContext(ItemsContext);
     const {
         selectedIndex,
-        selectItem,
-        deselectItem,
+        setSelectedIndex,
         selectPrevItem,
         selectNextItem,
         selectNextItemFarther,
@@ -51,75 +49,52 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             content: inputVal,
         });
 
-        if (!selectedIndex) return;
-        selectedIndex.current += 1;
+        if (selectedIndex === -1) return;
+        setSelectedIndex(curr => curr + 1);
     };
 
-    const getItemByIndex = (index: number) => {
-        if (!items) return null;
-        const targetItem = items[index];
-        return targetItem;
-    };
+    const targetItem = items[selectedIndex];
 
     const hotkeyCopyContent = () => {
-        if (!isValidIndex(selectedIndex?.current)) return;
-        const item = getItemByIndex(selectedIndex!.current);
-        if (!item) return;
-        copyItemContent(item);
+        if (!targetItem) return;
+        copyItemContent(targetItem);
     }
 
     const hotkeyOpenUpdateItemModal = () => {
-        if (!isValidIndex(selectedIndex?.current)) return;
-        const item = getItemByIndex(selectedIndex!.current);
-        if (!item) return;
-        openUpdateItemModal(item);
+        if (!targetItem) return;
+        openUpdateItemModal(targetItem);
     }
 
     const hotkeyOpenMoveItemModal = () => {
-        if (!isValidIndex(selectedIndex?.current)) return;
-        const item = getItemByIndex(selectedIndex!.current);
-        if (!item) return;
-        openMoveItemModal({item, collectionList: collections});
+        if (!targetItem) return;
+        openMoveItemModal({item: targetItem, collectionList: collections});
     }
 
     const hotkeyDeleteItem = () => {
-        if (!isValidIndex(selectedIndex?.current)) return;
-        const item = getItemByIndex(selectedIndex!.current);
-        if (!item) return;
+        if (!targetItem) return;
 
-        if (selectedIndex!.current === 0)
-            deselectItem();
-        else
-            selectItem(selectedIndex!.current - 1);
+        if (selectedIndex === 0) setSelectedIndex(-1);
+        else setSelectedIndex(curr => curr - 1);
 
-        deleteItemWithOptimisticUpdate({item});
+        deleteItemWithOptimisticUpdate({item: targetItem});
     }
 
     const hotkeyRefetchTitleAndFavicon = () => {
-        if (!isValidIndex(selectedIndex?.current)) return;
-        const item = getItemByIndex(selectedIndex!.current);
-        if (!item) return;
-        if (!canRefetchItem(item)) return;
-
-        refetchLink(item);
+        if (!targetItem) return;
+        if (!canRefetchItem(targetItem)) return;
+        refetchLink(targetItem);
     }
 
     const hotkeyToggleItemShouldCopyOnClick = () => {
-        if (!isValidIndex(selectedIndex?.current)) return;
-        const item = getItemByIndex(selectedIndex!.current);
-        if (!item) return;
-        if (!canToggleItemShouldCopyOnClick(item)) return;
-
-        toggleItemShouldCopyOnClickWithOptimisticUpdate({item});
+        if (!targetItem) return;
+        if (!canToggleItemShouldCopyOnClick(targetItem)) return;
+        toggleItemShouldCopyOnClickWithOptimisticUpdate({item: targetItem});
     }
 
     const hotkeyToggleConvertToTodoItem = () => {
-        if (!isValidIndex(selectedIndex?.current)) return;
-        const item = getItemByIndex(selectedIndex!.current);
-        if (!item) return;
-     
-        if (!canConvertItemToTodo(item)) return;
-        convertToTodo({item});
+        if (!targetItem) return;
+        if (!canConvertItemToTodo(targetItem)) return;
+        convertToTodo({item: targetItem});
     }
 
     return <Input id="main-input" className="main-view__input"
