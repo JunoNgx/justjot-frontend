@@ -45,7 +45,6 @@ export default function useDeleteCollectionConfirmation() {
     };
 
     const handleSuccessfulDeletion = () => {
-        console.log("handleSuccessfulDeletion", currSelectedCollectionIndex)
         handlers.remove(currSelectedCollectionIndex);
         setShouldNavigateAway(true);
         notifications.show({
