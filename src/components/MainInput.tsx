@@ -91,7 +91,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         toggleItemShouldCopyOnClickWithOptimisticUpdate({item: targetItem});
     }
 
-    const hotkeyToggleConvertToTodoItem = () => {
+    const hotkeyConvertToTodoItem = () => {
         if (!targetItem) return;
         if (!canConvertItemToTodo(targetItem)) return;
         convertToTodo({item: targetItem});
@@ -126,9 +126,9 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["mod+E", hotkeyOpenUpdateItemModal, { preventDefault: true }],
             ["mod+M", hotkeyOpenMoveItemModal, { preventDefault: true }],
             ["mod+Shift+Backspace", hotkeyDeleteItem, { preventDefault: true }],
-            ["mod+Shift+Digit4", hotkeyToggleItemShouldCopyOnClick, { preventDefault: true }],
-            ["mod+Shift+Digit5", hotkeyRefetchTitleAndFavicon, { preventDefault: true }],
-            ["mod+Shift+Digit6", hotkeyToggleConvertToTodoItem, { preventDefault: true }],
+            ["mod+alt+Digit4", hotkeyToggleItemShouldCopyOnClick, { preventDefault: true }],
+            ["mod+alt+Digit5", hotkeyRefetchTitleAndFavicon, { preventDefault: true }],
+            ["mod+alt+Digit6", hotkeyConvertToTodoItem, { preventDefault: true }],
         ])}
     />
 });
