@@ -81,7 +81,7 @@ export default function ItemComponent(
         );
     };
 
-    const longPressEvent = useHandleContextMenuWithLongPress({
+    const clickEventsProps = useHandleContextMenuWithLongPress({
         onClick: handlePrimaryAction,
         onLongPress: handleSecondaryAction,
     }, {
@@ -108,7 +108,7 @@ export default function ItemComponent(
         data-is-item={true}
         data-index={index}
         data-is-selected={isSelected}
-        {...longPressEvent}
+        {...clickEventsProps}
 
         onMouseEnter={() => { setSelectedIndex(index)}}
         onMouseLeave={() => { setSelectedIndex(-1)}}
