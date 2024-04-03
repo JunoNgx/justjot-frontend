@@ -48,6 +48,7 @@ export default function useItemActions() {
             faviconUrl: "",
             created: currDateTime,
             updated: currDateTime,
+            isPending: true,
         };
     };
 
@@ -186,6 +187,15 @@ export default function useItemActions() {
     }
 
     const openUpdateItemModal = (item: Item) => {
+        if (item.isPending) {
+            notifications.show({
+                message: "Item is not yet ready, please wait.",
+                color: "none",
+                autoClose: AUTO_CLOSE_DEFAULT,
+            });
+            return;
+        }
+
         modals.open({
             title: "Edit item",
             centered: true,
