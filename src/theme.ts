@@ -8,7 +8,7 @@ import {
 } from '@mantine/core';
 
 import '@mantine/core/styles.css';
-import classes from "./theme.module.scss";
+import classes from "@/styles/theme.module.scss";
 
 const overrideTheme = createTheme({
     colors: {
