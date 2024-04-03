@@ -13,7 +13,13 @@ export type Item = RecordModel | {
     isTodoDone: boolean,
     // TODO: should validate these as ISO strings
     created: string,
-    updated: string
+    updated: string,
+
+    /**
+     * Frontend client-only value to mark temporary Record until backend's
+     * response is received.
+     */
+    isPending?: boolean,
 };
 
 export type ItemCollection = RecordModel | {
