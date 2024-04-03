@@ -88,6 +88,7 @@ export default function ItemComponent(
         delay: 800,
     });
 
+    const isSelected = selectedIndex === index;
     const isLink = item.type === ItemType.LINK;
     const shouldRenderAsAnchor = isLink && !item.shouldCopyOnClick;
     const anchorProps = shouldRenderAsAnchor
@@ -98,18 +99,14 @@ export default function ItemComponent(
         target: "_blank",
     }
     : {};
-    const isSelected = selectedIndex === index;
 
-    return <Box
-        {...anchorProps}
-
-        className={computeClassname(item, isSelected)}
+    return <Box className={computeClassname(item, isSelected)}
         p="xs"
         data-is-item={true}
         data-index={index}
         data-is-selected={isSelected}
+        {...anchorProps}
         {...clickEventsProps}
-
         onMouseEnter={() => { setSelectedIndex(index)}}
         onMouseLeave={() => { setSelectedIndex(-1)}}
     >
