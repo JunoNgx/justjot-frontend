@@ -34,8 +34,12 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
                 + (isInMainView && "collection-menu-btn--is-in-main-view")}
             >
                 <Group gap="xs">
-                    <Text>{currCollection?.name}</Text>
-                    <IconSelector {...iconProps} />
+                    <Text className="collection-menu-btn__label">
+                        {currCollection?.name}
+                    </Text>
+                    <IconSelector className="collection-menu-btn__icon"
+                        {...iconProps}
+                    />
                 </Group>
             </UnstyledButton>
         </Menu.Target>
