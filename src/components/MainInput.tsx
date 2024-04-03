@@ -111,7 +111,10 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         }
         type="text"
         value={inputVal}
-        onChange={(event) => setInputVal(event.currentTarget.value)}
+        onChange={(event) => {
+            setInputVal(event.currentTarget.value);
+            setSelectedIndex(-1);
+        }}
         onKeyDown={getHotkeyHandler([
             ["ArrowUp", selectPrevItem],
             ["ArrowDown", selectNextItem],
