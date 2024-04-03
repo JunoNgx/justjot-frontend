@@ -68,15 +68,8 @@ export default function ItemCreateUpdateModal(
         }
     }
 
-    const [ titleVal, setTitleVal ] = useState(
-        isEditMode
-            ? item.title
-            : "");
-    const [ contentVal, setContentVal ] = useState(
-        isEditMode
-            ? item.content
-            : ""
-        );
+    const [ titleVal, setTitleVal ] = useState(item?.title || "");
+    const [ contentVal, setContentVal ] = useState(item?.content || "");
 
     const [ hasSaved, setHasSaved ] = useState(false);
     const [ hasChanged, setHasChanged ] = useState(false);
