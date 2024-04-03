@@ -1,15 +1,16 @@
 import { isElementInViewport } from "@/utils/miscUtils";
 import { clamp } from "@mantine/hooks";
-import { SetStateAction, createContext, useRef, useState } from "react";
+import { SetStateAction, createContext, useContext, useState } from "react";
+import { ItemsContext } from "./ItemsContext";
 
 interface MainViewContextType {
     inputVal: string,
     setInputVal: React.Dispatch<SetStateAction<string>>,
-    selectedIndex: React.MutableRefObject<number> | null,
+    selectedIndex: number,
+    setSelectedIndex: React.Dispatch<SetStateAction<number>>,
     focusOnMainInput: (_mainInputRef: React.RefObject<HTMLInputElement>) => void,
     blurMainInput: () => void,
     selectItem: (_index: number) => void,
-    deselectItem: () => void,
     selectNextItem: (_e?: KeyboardEvent, distance?: number) => void,
     selectPrevItem: (_e?: KeyboardEvent, distance?: number) => void,
     selectNextItemFarther: (e: KeyboardEvent) => void,
@@ -24,14 +25,9 @@ export const MainViewContext = createContext<MainViewContextType>({} as MainView
 export default function MainViewContextProvider(
     {children}: {children: React.ReactNode}
 ) {
+    const { items } = useContext(ItemsContext);
     const [inputVal, setInputVal] = useState("");
-    const selectedIndex = useRef(-1);
-
-    const findItemCount = () => {
-        const itemListWrapper = document.querySelector(`#displayed-list`);
-        const itemList = itemListWrapper?.querySelectorAll<HTMLBaseElement>("[data-is-item]") ?? [];
-        return itemList.length;
-    }
+    const [selectedIndex, setSelectedIndex] = useState(-1);
 
     const focusOnMainInput = (mainInputRef: React.RefObject<HTMLInputElement>) => {
         mainInputRef.current?.focus();
@@ -40,40 +36,20 @@ export default function MainViewContextProvider(
     const blurMainInput = () => {
         const mainInputEl = document.querySelector<HTMLInputElement>("#main-input");
         mainInputEl?.blur();
-        deselectItem();
+        setSelectedIndex(-1);
     };
 
     const selectItem = (index: number) => {
-        const itemListWrapper = document.querySelector(`#displayed-list`);
-        const itemList = itemListWrapper?.querySelectorAll<HTMLBaseElement>("[data-is-item]") ?? [];
-        const newSelectedIndex = clamp(index, 0, itemList.length - 1);
-
-        const oldSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>("[data-is-selected]");
-        oldSelectedItem?.removeAttribute("data-is-selected");
-
-        const newSelectedItem = itemList[newSelectedIndex];
-        if (!isElementInViewport(newSelectedItem)) {
-            newSelectedItem.scrollIntoView({block: "end"});
-        }
-        newSelectedItem.setAttribute("data-is-selected", "true");
-
-        selectedIndex.current = newSelectedIndex;
-    }
-
-    const deselectItem = () => {
-        const itemListWrapper = document.querySelector("#displayed-list");
-        const currSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>("[data-is-selected]");
-        currSelectedItem?.removeAttribute("data-is-selected");
-
-        selectedIndex.current = -1;
+        const clampedIndex = clamp(index, 0, items.length - 1);
+        setSelectedIndex(clampedIndex);
     }
 
     const selectNextItem = (_e?: KeyboardEvent, distance: number = 1) => {
-        selectItem(selectedIndex.current + distance);
+        selectItem(selectedIndex + distance);
     }
 
     const selectPrevItem = (_e?: KeyboardEvent, distance: number = 1) => {
-        selectItem(selectedIndex.current - distance);
+        selectItem(selectedIndex - distance);
     }
 
     const selectNextItemFarther = (e: KeyboardEvent) => {
@@ -97,17 +73,17 @@ export default function MainViewContextProvider(
 
     const scrollToBottom = () => {
         window.scrollTo(0, document.body.scrollHeight);
-        selectItem(findItemCount() - 1);
+        selectItem(items.length - 1);
     }
 
     return <MainViewContext.Provider value={{
         inputVal,
         setInputVal,
         selectedIndex,
+        setSelectedIndex,
         focusOnMainInput,
         blurMainInput,
         selectItem,
-        deselectItem,
         selectNextItem,
         selectPrevItem,
         selectNextItemFarther,
