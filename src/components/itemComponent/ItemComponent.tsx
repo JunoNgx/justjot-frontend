@@ -102,9 +102,7 @@ export default function ItemComponent(
 
     return <Box className={computeClassname(item, isSelected)}
         p="xs"
-        data-is-item={true}
         data-index={index}
-        data-is-selected={isSelected}
         {...anchorProps}
         {...clickEventsProps}
         onMouseEnter={() => { setSelectedIndex(index)}}
