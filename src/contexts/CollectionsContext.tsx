@@ -28,23 +28,23 @@ export default function CollectionsContextProvider({ children }: { children: Rea
         if (!isLoggedIn) return;
 
         await pbClient
-            .cancelRequest("collection-get-all")
-            .collection(DbTable.COLLECTIONS)
-            .getFullList({
-                sort: "sortOrder",
-                requestKey: "collection-get-all",
-            })
-            .then((records: ItemCollection[]) => {
-                successfulCallback?.();
-                setCollections(records);
-            })
-            .catch(err => {
-                errorCallback?.();
-                console.error(err)
-                if (!err.isAbort) {
-                    console.warn("Non cancellation error")
-                }
-            });
+        .cancelRequest("collection-get-all")
+        .collection(DbTable.COLLECTIONS)
+        .getFullList({
+            sort: "sortOrder",
+            requestKey: "collection-get-all",
+        })
+        .then((records: ItemCollection[]) => {
+            successfulCallback?.();
+            setCollections(records);
+        })
+        .catch(err => {
+            errorCallback?.();
+            console.error(err)
+            if (!err.isAbort) {
+                console.warn("Non cancellation error")
+            }
+        });
     }, [isLoggedIn]);
 
     return <CollectionsContext.Provider value=

@@ -39,18 +39,18 @@ export default function useCollectionApiCalls() {
 
         setLoadingState?.(true);
         await pbClient.collection(DbTable.COLLECTIONS)
-            .create({
-                name,
-                slug,
-                owner: user!.id,
-                sortOrder: newSortOrderVal
-            })
-            .then((record: ItemCollection) => {
-                successfulCallback?.(record);
-            })
-            .catch(err => {
-                errorCallback?.(err);
-            });
+        .create({
+            name,
+            slug,
+            owner: user!.id,
+            sortOrder: newSortOrderVal
+        })
+        .then((record: ItemCollection) => {
+            successfulCallback?.(record);
+        })
+        .catch(err => {
+            errorCallback?.(err);
+        });
         setLoadingState?.(false);
     };
 
@@ -61,15 +61,14 @@ export default function useCollectionApiCalls() {
     ) => {
         setLoadingState?.(true);
         await pbClient.collection(DbTable.COLLECTIONS)
-            .update(collectionId,
-                { name, slug, })
-            .then((record: ItemCollection) => {
-                successfulCallback?.(record);
-            })
-            .catch(err => {
-                errorCallback?.(err);
-            });
-
+        .update(collectionId,
+            { name, slug, })
+        .then((record: ItemCollection) => {
+            successfulCallback?.(record);
+        })
+        .catch(err => {
+            errorCallback?.(err);
+        });
         setLoadingState?.(false);
     };
 
@@ -80,14 +79,13 @@ export default function useCollectionApiCalls() {
     ) => {
         setLoadingState?.(true);
         await pbClient.collection(DbTable.COLLECTIONS)
-            .delete(collection.id)
-            .then((_isSuccessful: boolean) => {
-                successfulCallback?.();
-            })
-            .catch(err => {
-                errorCallback?.(err);
-            });
-
+        .delete(collection.id)
+        .then((_isSuccessful: boolean) => {
+            successfulCallback?.();
+        })
+        .catch(err => {
+            errorCallback?.(err);
+        });
         setLoadingState?.(false);
     };
 
@@ -98,18 +96,17 @@ export default function useCollectionApiCalls() {
     ) => {
         setLoadingState?.(true);
         await pbClient.collection(DbTable.COLLECTIONS)
-            .update(collectionId,
-                { sortOrder: newSortOrderValue },
-                // { requestKey: "collection-sort" }
-                { requestKey: null } // Allow repeated request, no auto-cancelation
-            )
-            .then((record: ItemCollection) => {
-                successfulCallback?.(record);
-            })
-            .catch(err => {
-                errorCallback?.(err);
-            });
-
+        .update(collectionId,
+            { sortOrder: newSortOrderValue },
+            // { requestKey: "collection-sort" }
+            { requestKey: null } // Allow repeated request, no auto-cancelation
+        )
+        .then((record: ItemCollection) => {
+            successfulCallback?.(record);
+        })
+        .catch(err => {
+            errorCallback?.(err);
+        });
         setLoadingState?.(false);
     }
 

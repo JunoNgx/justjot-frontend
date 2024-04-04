@@ -55,18 +55,17 @@ export default function Register() {
 
         setIsLoading(true);
         await pbClient.collection(DbTable.USERS)
-            .create(submissionData)
-            .then(async (_record) => {
-                setErrorList([]);
-                setIsSuccessful(true);
+        .create(submissionData)
+        .then(async (_record) => {
+            setErrorList([]);
+            setIsSuccessful(true);
 
-                // TODO: backendLogic
-                // await pbClient.collection(DbTable.USERS)
-                //     .requestVerification(submissionData.email)
-                //     .catch(displayError)
-            })
-            .catch(displayError);
-        
+            // TODO: backendLogic
+            // await pbClient.collection(DbTable.USERS)
+            //     .requestVerification(submissionData.email)
+            //     .catch(displayError)
+        })
+        .catch(displayError);
         setIsLoading(false);
         setHasRequested(true);
     }

@@ -21,13 +21,13 @@ export default function Reset() {
         setIsLoading(true);
 
         await pbClient.collection(DbTable.USERS)
-            .requestPasswordReset(formData.email)
-            .then(() => {
-                setHasRequested(true);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        .requestPasswordReset(formData.email)
+        .then(() => {
+            setHasRequested(true);
+        })
+        .catch(error => {
+            console.log(error);
+        });
         
         setIsLoading(false);
     }

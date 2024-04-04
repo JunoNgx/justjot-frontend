@@ -43,25 +43,23 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
     ) => {
         if (!currCollection) return;
         setLoadingState?.(true);
-
         await pbClient
-            .cancelRequest("fetch-items")
-            .collection(DbTable.ITEMS)
-            .getFullList({
-                // Single relation can be used without specifying the id
-                filter: `collection="${currCollection?.id}"`,
-                sort: "-created",
-                requestKey: "fetch-items",
-            }, )
-            .then((records: Item[]) => {
-                setItems(records);
-            })
-            .catch(err => {
-                if (!err.isAbort) {
-                    console.error(err);
-                }
-            })
-
+        .cancelRequest("fetch-items")
+        .collection(DbTable.ITEMS)
+        .getFullList({
+            // Single relation can be used without specifying the id
+            filter: `collection="${currCollection?.id}"`,
+            sort: "-created",
+            requestKey: "fetch-items",
+        }, )
+        .then((records: Item[]) => {
+            setItems(records);
+        })
+        .catch(err => {
+            if (!err.isAbort) {
+                console.error(err);
+            }
+        })
         setLoadingState?.(false);
     }, []);
 

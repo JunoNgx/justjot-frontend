@@ -34,19 +34,18 @@ export default function Login() {
     const attemptLogin = async (loginForm: LoginFormData) => {
         setIsLoading(true);
         await pbClient.collection (DbTable.USERS)
-            .authWithPassword( // works for both email AND username
-                loginForm.email,
-                loginForm.password
-            )
-            .then(() => {
-                setIsSuccessful(true);
-                navigateToMainView();
-            })
-            .catch((error) => {
-                setIsSuccessful(false);
-                setErrorMsg(error.response.message)
-            });
-        
+        .authWithPassword( // works for both email AND username
+            loginForm.email,
+            loginForm.password
+        )
+        .then(() => {
+            setIsSuccessful(true);
+            navigateToMainView();
+        })
+        .catch((error) => {
+            setIsSuccessful(false);
+            setErrorMsg(error.response.message)
+        });
         setIsLoading(false);
         setHasAttempted(true);
     }
