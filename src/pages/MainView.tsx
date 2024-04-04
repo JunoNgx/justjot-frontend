@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Box, Stack } from '@mantine/core';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -34,6 +34,7 @@ export default function MainView() {
     const { generateNumericHotkeyHandlers } = useNumericHotkeyUtils();
     const navigate = useNavigate();
     const mainInputRef = useRef<HTMLInputElement>(null);
+    const [ isLoading, setIsLoading ] = useState(false);
     const numericKeysHotkeyOptions = generateNumericHotkeyHandlers({
         callback: (inputKey: number) => {
             /**
@@ -127,7 +128,10 @@ export default function MainView() {
                 gap="xs"
             >
 
-                {filteredItemList}
+                {isLoading
+                    ? "loading"
+                    : filteredItemList
+                }
 
             </Stack>
         </Stack>
