@@ -1,6 +1,7 @@
 import { ItemsContext } from "@/contexts/ItemsContext";
+import { isElementInViewport } from "@/utils/miscUtils";
 import { clamp } from "@mantine/hooks";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export default function useItemNavActions() {
     const {
@@ -8,6 +9,14 @@ export default function useItemNavActions() {
         setSelectedIndex,
         filteredItems,
     } = useContext(ItemsContext);
+
+    useEffect(() => {
+        const selectedItemEl = getSelectedItemElement();
+        if (!selectedItemEl) return;
+        if (!isElementInViewport(selectedItemEl)) {
+            selectedItemEl?.scrollIntoView({block: "end"});
+        }
+    }, [selectedIndex]);
 
     const getSelectedItemElement = () => {
         return document.querySelector<HTMLElement>(
