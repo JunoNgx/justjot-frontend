@@ -33,6 +33,7 @@ type ItemsContextType = {
     scrollToTop: () => void,
     scrollToBottom: () => void,
     filteredItems: Item[],
+    selectedItem: Item | undefined,
     updateQueue: UpdateQueueItem[],
     setUpdateQueue: React.Dispatch<SetStateAction<UpdateQueueItem[]>>,
 };
@@ -104,6 +105,8 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
         });
     }, [items, updateQueue])
 
+    const selectedItem = filteredItems[selectedIndex];
+
     const focusOnMainInput = (mainInputRef: React.RefObject<HTMLInputElement>) => {
         mainInputRef.current?.focus();
     }
@@ -172,6 +175,7 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
             scrollToTop,
             scrollToBottom,
             filteredItems,
+            selectedItem,
             updateQueue,
             setUpdateQueue,
         }}
