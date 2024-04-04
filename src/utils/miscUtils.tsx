@@ -24,7 +24,7 @@ export const isValidIndex = (n?: number) => {
         && n !== null;
 }
 
-export const isElementInViewport = (el: HTMLBaseElement): boolean => {
+export const isElementInViewport = (el: HTMLElement): boolean => {
     const rect = el.getBoundingClientRect();
 
     return rect.top >= 0
