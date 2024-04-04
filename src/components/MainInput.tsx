@@ -8,14 +8,19 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import useItemActions from "@/hooks/useItemActions";
 import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
+import useItemNavActions from "@/hooks/useItemNavActions";
 
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { collections } = useContext(CollectionsContext);
     const {
-        updateQueue,
-        selectedIndex,
-        selectedItem,
+        inputVal,
+        setInputVal,
         setSelectedIndex,
+        selectedIndex,
+        updateQueue,
+        selectedItem,
+    } = useContext(ItemsContext);
+    const {
         selectPrevItem,
         selectNextItem,
         selectNextItemFarther,
@@ -24,9 +29,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         blurMainInput,
         scrollToTop,
         scrollToBottom,
-        inputVal,
-        setInputVal,
-    } = useContext(ItemsContext);
+    } = useItemNavActions();
     const {
         copyItemContent,
         openUpdateItemModal,

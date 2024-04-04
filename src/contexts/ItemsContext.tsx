@@ -1,4 +1,3 @@
-import { clamp } from "@mantine/hooks";
 import { ReactNode, SetStateAction, createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { DbTable, Item, ItemCollection } from '@/types';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
@@ -17,25 +16,14 @@ type ItemsContextType = {
     setInputVal: React.Dispatch<SetStateAction<string>>,
     selectedIndex: number,
     setSelectedIndex: React.Dispatch<SetStateAction<number>>,
-
+    updateQueue: UpdateQueueItem[],
+    setUpdateQueue: React.Dispatch<SetStateAction<UpdateQueueItem[]>>,
     fetchItems: (
         currCollection: ItemCollection | undefined,
         setLoadingState?: React.Dispatch<React.SetStateAction<boolean>>,
     )  => void,
-    focusOnMainInput: (_mainInputRef: React.RefObject<HTMLInputElement>) => void,
-    blurMainInput: () => void,
-    selectItem: (_index: number) => void,
-    selectNextItem: (_e?: KeyboardEvent, distance?: number) => void,
-    selectPrevItem: (_e?: KeyboardEvent, distance?: number) => void,
-    selectNextItemFarther: (e: KeyboardEvent) => void,
-    selectPrevItemFarther: (e: KeyboardEvent) => void,
-    clickOnSelectedItem: () => void,
-    scrollToTop: () => void,
-    scrollToBottom: () => void,
     filteredItems: Item[],
     selectedItem: Item | undefined,
-    updateQueue: UpdateQueueItem[],
-    setUpdateQueue: React.Dispatch<SetStateAction<UpdateQueueItem[]>>,
 };
 
 export const ItemsContext = createContext<ItemsContextType>(
@@ -107,53 +95,6 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
 
     const selectedItem = filteredItems[selectedIndex];
 
-    const focusOnMainInput = (mainInputRef: React.RefObject<HTMLInputElement>) => {
-        mainInputRef.current?.focus();
-    }
-
-    const blurMainInput = () => {
-        const mainInputEl = document.querySelector<HTMLInputElement>("#main-input");
-        mainInputEl?.blur();
-        setSelectedIndex(-1);
-    };
-
-    const selectItem = (index: number) => {
-        const clampedIndex = clamp(index, 0, filteredItems.length - 1);
-        setSelectedIndex(clampedIndex);
-    }
-
-    const selectNextItem = (_e?: KeyboardEvent, distance: number = 1) => {
-        selectItem(selectedIndex + distance);
-    }
-
-    const selectPrevItem = (_e?: KeyboardEvent, distance: number = 1) => {
-        selectItem(selectedIndex - distance);
-    }
-
-    const selectNextItemFarther = (e: KeyboardEvent) => {
-        selectNextItem(e, 5);
-    }
-
-    const selectPrevItemFarther = (e: KeyboardEvent) => {
-        selectPrevItem(e, 5);
-    }
-
-    const clickOnSelectedItem = () => {
-        const itemListWrapper = document.querySelector("#displayed-list");
-        const currSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>(".item--is-selected");
-        currSelectedItem?.click();
-    }
-
-    const scrollToTop = () => {
-        window.scrollTo(0, 0);
-        selectItem(0);
-    }
-
-    const scrollToBottom = () => {
-        window.scrollTo(0, document.body.scrollHeight);
-        selectItem(filteredItems.length - 1);
-    }
-
     return <ItemsContext.Provider value=
         {{
             items,
@@ -162,22 +103,12 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
             setInputVal,
             selectedIndex,
             setSelectedIndex,
-
-            fetchItems,
-            focusOnMainInput,
-            blurMainInput,
-            selectItem,
-            selectNextItem,
-            selectPrevItem,
-            selectNextItemFarther,
-            selectPrevItemFarther,
-            clickOnSelectedItem,
-            scrollToTop,
-            scrollToBottom,
-            filteredItems,
-            selectedItem,
             updateQueue,
             setUpdateQueue,
+
+            fetchItems,
+            filteredItems,
+            selectedItem,
         }}
     >
         {children}
