@@ -133,11 +133,9 @@ export default function useItemApiCalls() {
         { item: Item } & ApiRequestCallbackOptions
     ) => {
         setLoadingState?.(true);
-        await fetch(`${import.meta.env.VITE_BACKEND_URL}refetch/${user!.id}/${item!.id}`, {
+        pbClient.send(`refetch/${user!.id}/${item!.id}`, {
             method: "PATCH",
-            headers: {
-                authorization: pbClient.authStore.token
-            },
+            authorization: pbClient.authStore.token
         })
         .then((record) => {
             successfulCallback?.(record);

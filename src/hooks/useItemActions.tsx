@@ -19,7 +19,7 @@ export default function useItemActions() {
 
     const { user } = useContext(BackendClientContext);
     const { currCollection } = useContext(CurrentCollectionContext);
-    const { items, setItems, fetchItems, setUpdateQueue } = useContext(ItemsContext);
+    const { items, setItems, setUpdateQueue } = useContext(ItemsContext);
     const {
         createItem,
         deleteItem,
@@ -263,9 +263,10 @@ export default function useItemActions() {
 
         refetchLinkTitleAndFavicon({
             item,
-            successfulCallback: () => {
-                // TODO: read from response
-                fetchItems(currCollection);
+            successfulCallback: (record: Item) => {
+                const index = findIndexById(item.id, items)
+                if (index === -1) return;
+                itemsHandlers.replace(index, record);
             },
         })
     };
@@ -279,6 +280,7 @@ export default function useItemActions() {
         convertItemToTodo({
             item,
             successfulCallback: (record: Item) => {
+                console.log("convert", record)
                 const index = findIndexById(item.id, items)
                 if (index === -1) return;
                 itemsHandlers.replace(index, record);
