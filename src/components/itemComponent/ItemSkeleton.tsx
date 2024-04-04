@@ -3,6 +3,7 @@ import { Group, Skeleton } from "@mantine/core";
 export default function ItemSkeleton() {
     return <Group className="item-skeleton"
         justify="space-between"
+        mb="1rem"
     >
         <Group className="item-skeleton__left-side">
             <Skeleton className="item-skeleton__icon-wrapper"
