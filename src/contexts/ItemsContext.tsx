@@ -18,7 +18,10 @@ type ItemsContextType = {
     selectedIndex: number,
     setSelectedIndex: React.Dispatch<SetStateAction<number>>,
 
-    fetchItems: (currCollection: ItemCollection | undefined) => void,
+    fetchItems: (
+        currCollection: ItemCollection | undefined,
+        setLoadingState?: React.Dispatch<React.SetStateAction<boolean>>,
+    )  => void,
     focusOnMainInput: (_mainInputRef: React.RefObject<HTMLInputElement>) => void,
     blurMainInput: () => void,
     selectItem: (_index: number) => void,
