@@ -102,7 +102,7 @@ export default function MainView() {
             index={index}
         />
     );
-    const SkeletonList = Array(7).fill(null).map((_, index) => 
+    const skeletonList = Array(7).fill(null).map((_, index) => 
         <ItemSkeleton key={index}/>
     );
 
@@ -129,7 +129,7 @@ export default function MainView() {
                 gap="xs"
             >
                 {isLoading
-                    ? SkeletonList
+                    ? skeletonList
                     : filteredItemList
                 }
             </Stack>
