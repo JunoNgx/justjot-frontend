@@ -2,6 +2,7 @@
 @use "./variables.scss" as v;
 @use "./mixins.scss" as m;
 @use "./fonts.scss";
+@use "./mainInput.scss";
 @use "./collectionMenu.scss";
 @use "./itemComponent.scss";
 @use "./itemSkeleton.scss";
@@ -103,17 +104,6 @@ header {
 .main-view {
     max-width: 720px;
     margin: 120px auto 12px;
-
-    #main-input {
-        border-width: 2px;
-
-        &:focus-within {
-            outline-offset: 4px;
-            outline-style: solid;
-            outline-width: 2px;
-            outline-color: var(--mantine-color-text);
-        }
-    }
 
     @include m.mobile {
         &__items-container {

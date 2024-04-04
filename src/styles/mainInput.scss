@@ -1,0 +1,17 @@
+.main-input {
+    border-width: 2px;
+
+    &:focus-within {
+        outline-offset: 4px;
+        outline-style: solid;
+        outline-width: 2px;
+        outline-color: var(--mantine-color-text);
+    }
+
+    &__menu-btn {
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+    }
+}
+
