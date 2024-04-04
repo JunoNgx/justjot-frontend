@@ -41,8 +41,8 @@ export default function useItemNavActions() {
     }
 
     const clickOnSelectedItem = () => {
-        const itemListWrapper = document.querySelector("#displayed-list");
-        const currSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>(".item--is-selected");
+        const currSelectedItem = document.querySelector<HTMLBaseElement>(
+            "#displayed-list .item--is-selected");
         currSelectedItem?.click();
     }
 
