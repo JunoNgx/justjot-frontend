@@ -13,16 +13,14 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
 import ItemComponent from "@/components/itemComponent/ItemComponent";
 import ItemSkeleton from "@/components/itemComponent/ItemSkeleton";
+import useItemNavActions from "@/hooks/useItemNavActions";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
     const { collections, fetchCollections } = useContext(CollectionsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
-    const {
-        fetchItems,
-        focusOnMainInput,
-        filteredItems,
-    } = useContext(ItemsContext);
+    const { fetchItems, filteredItems } = useContext(ItemsContext);
+    const { focusOnMainInput } = useItemNavActions();
     const {
         trySwitchToCollectionBySlug,
         trySwitchToCollectionByNumericKey,
