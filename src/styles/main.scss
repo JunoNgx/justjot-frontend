@@ -2,6 +2,7 @@
 @use "./variables.scss" as v;
 @use "./mixins.scss" as m;
 @use "./fonts.scss";
+@use "./collectionMenu.scss";
 @use "./itemComponent.scss";
 @use "./itemSkeleton.scss";
 @use '@mantine/core/styles/global.css';
@@ -125,56 +126,6 @@ header {
     @include m.mobile {
         bottom: 5rem;
     }
-}
-
-.collection-menu-btn {
-    // &--is-in-header {
-    //     @include m.mobile {
-    //         display: none;
-    //     }
-    // }
-
-    // &--is-sticky {
-    //     display: none;
-
-    //     @include m.mobile {
-    //         // display: block;
-    //         position: fixed;
-    //         bottom: 0.8rem;
-    
-    //         border: solid 1px var(--mantine-color-default-border);
-    //         background-color: var(--mantine-color-body);
-    //         padding: 0.4rem 0.8rem;
-    //     }
-    // }
-    &__label {
-        user-select: none;
-    }
-
-    @include m.mobile {
-        display: none;
-    }
-
-    &--is-in-main-view {
-        display: none;
-
-        @include m.mobile {
-            display: block;
-            position: fixed;
-            bottom: 1.5rem;
-            left: 1.5rem;
-    
-            border: solid 1px var(--mantine-color-text);
-            background-color: var(--mantine-color-body);
-            padding: 0.4rem 0.8rem;
-        }
-    }
-
-
-    // &__number-placeholder {
-    //     width: 19.35px; // TODO: find a more reliable way to size this
-    //     height: 28.6px;
-    // }
 }
 
 .dropdown-menu {

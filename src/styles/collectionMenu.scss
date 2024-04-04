@@ -1,0 +1,26 @@
+@use "./mixins.scss" as m;
+
+.collection-menu-btn {
+    &__label {
+        user-select: none;
+    }
+
+    @include m.mobile {
+        display: none;
+    }
+
+    &--is-in-main-view {
+        display: none;
+
+        @include m.mobile {
+            display: block;
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+    
+            border: solid 1px var(--mantine-color-text);
+            background-color: var(--mantine-color-body);
+            padding: 0.4rem 0.8rem;
+        }
+    }
+}
