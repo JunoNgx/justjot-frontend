@@ -12,6 +12,7 @@ import CollectionMenu from "@/components/CollectionMenu";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
 import ItemComponent from "@/components/itemComponent/ItemComponent";
+import ItemSkeleton from "@/components/itemComponent/ItemSkeleton";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -89,7 +90,7 @@ export default function MainView() {
 
     useEffect(() => {
         if (!currCollection) return;
-        fetchItems(currCollection);
+        fetchItems(currCollection, setIsLoading);
     }, [currCollection]);
 
     useEffect(() => {
@@ -103,7 +104,9 @@ export default function MainView() {
             index={index}
         />
     );
-
+    const SkeletonList = Array(7).fill(null).map((_, index) => 
+        <ItemSkeleton key={index}/>
+    );
 
     return <Box className="main-view-wrapper">
         {/* For non-item components */}
@@ -127,12 +130,10 @@ export default function MainView() {
                 id="displayed-list"
                 gap="xs"
             >
-
                 {isLoading
-                    ? "loading"
+                    ? SkeletonList
                     : filteredItemList
                 }
-
             </Stack>
         </Stack>
     </Box>
