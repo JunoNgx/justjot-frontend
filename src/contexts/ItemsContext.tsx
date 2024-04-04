@@ -45,8 +45,12 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
     const [ selectedIndex, setSelectedIndex ] = useState(-1);
     const [ updateQueue, setUpdateQueue ] = useState<UpdateQueueItem[]>([]);
 
-    const fetchItems = useCallback(async (currCollection: ItemCollection | undefined) => {
+    const fetchItems = useCallback(async(
+        currCollection: ItemCollection | undefined,
+        setLoadingState?: React.Dispatch<React.SetStateAction<boolean>>,
+    ) => {
         if (!currCollection) return;
+        setLoadingState?.(true);
 
         await pbClient
             .cancelRequest("fetch-items")
@@ -65,6 +69,8 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
                     console.error(err);
                 }
             })
+
+        setLoadingState?.(false);
     }, []);
 
     const filteredItems = items.filter(item => {
