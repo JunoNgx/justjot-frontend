@@ -106,7 +106,7 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
     };
 
     const selectItem = (index: number) => {
-        const clampedIndex = clamp(index, 0, items.length - 1);
+        const clampedIndex = clamp(index, 0, filteredItems.length - 1);
         setSelectedIndex(clampedIndex);
     }
 
@@ -139,7 +139,7 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
 
     const scrollToBottom = () => {
         window.scrollTo(0, document.body.scrollHeight);
-        selectItem(items.length - 1);
+        selectItem(filteredItems.length - 1);
     }
 
     return <ItemsContext.Provider value=

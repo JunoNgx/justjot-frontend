@@ -12,7 +12,7 @@ import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } 
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { collections } = useContext(CollectionsContext);
     const {
-        items,
+        filteredItems,
         updateQueue,
         selectedIndex,
         setSelectedIndex,
@@ -53,7 +53,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         setSelectedIndex(curr => curr + 1);
     };
 
-    const targetItem = items[selectedIndex];
+    const targetItem = filteredItems[selectedIndex];
 
     const hotkeyCopyContent = () => {
         if (!targetItem) return;
