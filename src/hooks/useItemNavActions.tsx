@@ -9,6 +9,11 @@ export default function useItemNavActions() {
         filteredItems,
     } = useContext(ItemsContext);
 
+    const getSelectedItemElement = () => {
+        return document.querySelector<HTMLElement>(
+            "#displayed-list .item--is-selected");
+    };
+
     const focusOnMainInput = (mainInputRef: React.RefObject<HTMLInputElement>) => {
         mainInputRef.current?.focus();
     }
@@ -41,9 +46,7 @@ export default function useItemNavActions() {
     }
 
     const clickOnSelectedItem = () => {
-        const currSelectedItem = document.querySelector<HTMLBaseElement>(
-            "#displayed-list .item--is-selected");
-        currSelectedItem?.click();
+        getSelectedItemElement()?.click();
     }
 
     const scrollToTop = () => {
