@@ -32,7 +32,6 @@ export default function MainView() {
     } = useCollectionNavActions();
     const { collectionSlug } = useParams();
     const { generateNumericHotkeyHandlers } = useNumericHotkeyUtils();
-
     const navigate = useNavigate();
     const mainInputRef = useRef<HTMLInputElement>(null);
     const numericKeysHotkeyOptions = generateNumericHotkeyHandlers({
@@ -47,6 +46,7 @@ export default function MainView() {
             trySwitchToCollectionByNumericKey(inputKey);
         },
     });
+
     useHotkeys([
         ["mod+F", () => focusOnMainInput(mainInputRef), { preventDefault: true }],
         ["ArrowLeft", trySwitchToPrevCollection],
@@ -67,6 +67,13 @@ export default function MainView() {
             window.removeEventListener("focus", tryRoutineUpdate);
         };
     }, []);
+    const lastRoutineUpdateTimestamp = useRef<number>(Date.now());
+    const tryRoutineUpdate = () => {
+        if (Date.now() - lastRoutineUpdateTimestamp.current >= 120000) {
+            fetchItems(currCollection);
+            lastRoutineUpdateTimestamp.current = Date.now();
+        }
+    }
 
     useEffect(() => {
         if (collections.length === 0) return;
@@ -87,14 +94,6 @@ export default function MainView() {
     useEffect(() => {
         tryRetrackCurrentSelectedIndexWithId(currCollection);
     }, [currCollection, collections]);
-
-    const lastRoutineUpdateTimestamp = useRef<number>(Date.now());
-    const tryRoutineUpdate = () => {
-        if (Date.now() - lastRoutineUpdateTimestamp.current >= 120000) {
-            fetchItems(currCollection);
-            lastRoutineUpdateTimestamp.current = Date.now();
-        }
-    }
 
     const filteredItemList = filteredItems?.map((item, index) =>
         <ItemComponent
