@@ -1,5 +1,5 @@
 import { forwardRef, useContext } from "react";
-import { Input, InputProps, Loader } from "@mantine/core";
+import { Input, InputProps } from "@mantine/core";
 import { getHotkeyHandler } from "@mantine/hooks";
 import { IconCircleTriangle } from "@tabler/icons-react";
 
@@ -9,6 +9,7 @@ import useItemActions from "@/hooks/useItemActions";
 import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
 import useItemNavActions from "@/hooks/useItemNavActions";
+import MainInputExtendedMenu from "./MainInputExtendedMenu";
 
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { collections } = useContext(CollectionsContext);
@@ -17,7 +18,6 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         setInputVal,
         setSelectedIndex,
         selectedIndex,
-        updateQueue,
         selectedItem,
     } = useContext(ItemsContext);
     const {
@@ -98,7 +98,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         convertToTodo({item: selectedItem});
     }
 
-    return <Input id="main-input" className="main-view__input"
+    return <Input id="main-input" className="main-input"
         ref={ref}
         {...props}
         size="lg"
@@ -107,9 +107,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             size={32}
         />}
         rightSectionPointerEvents="all"
-        rightSection={
-            updateQueue.length > 0 && <Loader size="xs"/>
-        }
+        rightSection={<MainInputExtendedMenu/>}
         type="text"
         value={inputVal}
         onChange={(event) => {
