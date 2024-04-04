@@ -8,7 +8,6 @@ import BackendClientContextProvider from "@/contexts/BackendClientContext";
 import CollectionsContextProvider from "@/contexts/CollectionsContext";
 import CurrentCollectionContextProvider from "@/contexts/CurrentCollectionContext";
 import ItemsContextProvider from "@/contexts/ItemsContext";
-import MainViewContextProvider from "@/contexts/MainViewContext";
 
 import Header from "@/components/header/Header";
 import LandingPage from "@/pages/LandingPage";
@@ -41,35 +40,33 @@ function App() {
                 <CollectionsContextProvider>
                     <CurrentCollectionContextProvider>
                         <ItemsContextProvider>
-                            <MainViewContextProvider>
 
-                                <ModalsProvider
-                                    modals={{ infoModal: InfoModal}}
-                                >
-                                    <ContextMenuProvider>
+                            <ModalsProvider
+                                modals={{ infoModal: InfoModal}}
+                            >
+                                <ContextMenuProvider>
 
-                                        <AppShell.Header className="appshell-header">
-                                            <Header/>
-                                        </AppShell.Header>
+                                    <AppShell.Header className="appshell-header">
+                                        <Header/>
+                                    </AppShell.Header>
 
-                                        <AppShell.Main className="appshell-main">
-                                            <Routes>
-                                                <Route path="/" element={<LandingPage />} />
-                                                <Route path="/help" element={<Help />} />
-                                                <Route path="/:username">
-                                                    <Route index element={<MainView />} />
-                                                    <Route path=":collectionSlug" element={<MainView />} />
-                                                </Route>
-                                                <Route path="/login" element={<Login />} />
-                                                <Route path="/register" element={<Register />} />
-                                                <Route path="/reset" element={<Reset />} />
-                                            </Routes>
-                                        </AppShell.Main>
+                                    <AppShell.Main className="appshell-main">
+                                        <Routes>
+                                            <Route path="/" element={<LandingPage />} />
+                                            <Route path="/help" element={<Help />} />
+                                            <Route path="/:username">
+                                                <Route index element={<MainView />} />
+                                                <Route path=":collectionSlug" element={<MainView />} />
+                                            </Route>
+                                            <Route path="/login" element={<Login />} />
+                                            <Route path="/register" element={<Register />} />
+                                            <Route path="/reset" element={<Reset />} />
+                                        </Routes>
+                                    </AppShell.Main>
 
-                                    </ContextMenuProvider>
-                                </ModalsProvider>
+                                </ContextMenuProvider>
+                            </ModalsProvider>
 
-                            </MainViewContextProvider>
                         </ItemsContextProvider>
                     </CurrentCollectionContextProvider>
                 </CollectionsContextProvider>

@@ -1,3 +1,4 @@
+import { clamp } from "@mantine/hooks";
 import { ReactNode, SetStateAction, createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { DbTable, Item, ItemCollection } from '@/types';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
@@ -12,7 +13,23 @@ type UpdateQueueItem = {
 type ItemsContextType = {
     items: Item[],
     setItems: React.Dispatch<SetStateAction<Item[]>>,
+    inputVal: string,
+    setInputVal: React.Dispatch<SetStateAction<string>>,
+    selectedIndex: number,
+    setSelectedIndex: React.Dispatch<SetStateAction<number>>,
+
     fetchItems: (currCollection: ItemCollection | undefined) => void,
+    focusOnMainInput: (_mainInputRef: React.RefObject<HTMLInputElement>) => void,
+    blurMainInput: () => void,
+    selectItem: (_index: number) => void,
+    selectNextItem: (_e?: KeyboardEvent, distance?: number) => void,
+    selectPrevItem: (_e?: KeyboardEvent, distance?: number) => void,
+    selectNextItemFarther: (e: KeyboardEvent) => void,
+    selectPrevItemFarther: (e: KeyboardEvent) => void,
+    clickOnSelectedItem: () => void,
+    scrollToTop: () => void,
+    scrollToBottom: () => void,
+    filteredItems: Item[],
     updateQueue: UpdateQueueItem[],
     setUpdateQueue: React.Dispatch<SetStateAction<UpdateQueueItem[]>>,
 };
@@ -24,6 +41,8 @@ export const ItemsContext = createContext<ItemsContextType>(
 export default function ItemsContextProvider({ children }: { children: ReactNode }) {
     const { pbClient } = useContext(BackendClientContext);
     const [ items, setItems ] = useState<Item[]>([]);
+    const [ inputVal, setInputVal ] = useState("");
+    const [ selectedIndex, setSelectedIndex ] = useState(-1);
     const [ updateQueue, setUpdateQueue ] = useState<UpdateQueueItem[]>([]);
 
     const fetchItems = useCallback(async (currCollection: ItemCollection | undefined) => {
@@ -66,11 +85,85 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
         });
     }, [items, updateQueue])
 
+    const focusOnMainInput = (mainInputRef: React.RefObject<HTMLInputElement>) => {
+        mainInputRef.current?.focus();
+    }
+
+    const blurMainInput = () => {
+        const mainInputEl = document.querySelector<HTMLInputElement>("#main-input");
+        mainInputEl?.blur();
+        setSelectedIndex(-1);
+    };
+
+    const selectItem = (index: number) => {
+        const clampedIndex = clamp(index, 0, items.length - 1);
+        setSelectedIndex(clampedIndex);
+    }
+
+    const selectNextItem = (_e?: KeyboardEvent, distance: number = 1) => {
+        selectItem(selectedIndex + distance);
+    }
+
+    const selectPrevItem = (_e?: KeyboardEvent, distance: number = 1) => {
+        selectItem(selectedIndex - distance);
+    }
+
+    const selectNextItemFarther = (e: KeyboardEvent) => {
+        selectNextItem(e, 5);
+    }
+
+    const selectPrevItemFarther = (e: KeyboardEvent) => {
+        selectPrevItem(e, 5);
+    }
+
+    const clickOnSelectedItem = () => {
+        const itemListWrapper = document.querySelector("#displayed-list");
+        const currSelectedItem = itemListWrapper?.querySelector<HTMLBaseElement>(".item--is-selected");
+        currSelectedItem?.click();
+    }
+
+    const scrollToTop = () => {
+        window.scrollTo(0, 0);
+        selectItem(0);
+    }
+
+    const scrollToBottom = () => {
+        window.scrollTo(0, document.body.scrollHeight);
+        selectItem(items.length - 1);
+    }
+
+    const filteredItems = items.filter(item => {
+
+        const searchTerm = inputVal.toLocaleLowerCase();
+        const hasTitleMatch = item.title?.toLowerCase()
+            .indexOf(searchTerm) > -1;
+        const hasContentMatch = item.content?.toLowerCase()
+            .indexOf(searchTerm) > -1;
+        
+        return hasTitleMatch || hasContentMatch;
+    });
+
     return <ItemsContext.Provider value=
         {{
             items,
             setItems,
+            inputVal,
+            setInputVal,
+            selectedIndex,
+            setSelectedIndex,
+
             fetchItems,
+            focusOnMainInput,
+            blurMainInput,
+            selectItem,
+            selectNextItem,
+            selectPrevItem,
+            selectNextItemFarther,
+            selectPrevItemFarther,
+            clickOnSelectedItem,
+            scrollToTop,
+            scrollToBottom,
+            filteredItems,
             updateQueue,
             setUpdateQueue,
         }}

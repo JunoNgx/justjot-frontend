@@ -6,12 +6,12 @@ import { Box, Center, Group, Text } from "@mantine/core";
 import { useContextMenu } from '@/libs/mantine-contextmenu';
 import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCreatedDate";
 import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
-import { MainViewContext } from "@/contexts/MainViewContext";
 import useHandleContextMenuWithLongPress from "@/libs/useHandleContextMenuWithLongPress";
 import useItemActions from "@/hooks/useItemActions";
 import useItemContextMenuOptions from "@/hooks/useItemContextMenuOptions";
 import { IconClipboardCopy } from "@tabler/icons-react";
 import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
+import { ItemsContext } from "@/contexts/ItemsContext";
 
 type ItemComponentParams = {
     item: Item,
@@ -21,7 +21,7 @@ type ItemComponentParams = {
 export default function ItemComponent(
     { item, index }: ItemComponentParams
 ) {
-    const { selectedIndex, setSelectedIndex } = useContext(MainViewContext);
+    const { selectedIndex, setSelectedIndex } = useContext(ItemsContext);
     const { showContextMenu } = useContextMenu();
     const {
         deleteItemWithOptimisticUpdate,

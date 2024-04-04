@@ -7,19 +7,21 @@ import MainInput from "@/components/MainInput";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { useHotkeys } from "@mantine/hooks";
-import { MainViewContext } from "@/contexts/MainViewContext";
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 import CollectionMenu from "@/components/CollectionMenu";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
-import FilterableItemList from "@/components/FilterableItemList";
+import ItemComponent from "@/components/itemComponent/ItemComponent";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
     const { collections, fetchCollections } = useContext(CollectionsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
-    const { fetchItems } = useContext(ItemsContext);
-    const { focusOnMainInput } = useContext(MainViewContext);
+    const {
+        fetchItems,
+        focusOnMainInput,
+        filteredItems,
+    } = useContext(ItemsContext);
     const {
         trySwitchToCollectionBySlug,
         trySwitchToCollectionByNumericKey,
@@ -116,7 +118,13 @@ export default function MainView() {
                 id="displayed-list"
                 gap="xs"
             >
-                <FilterableItemList/>
+                {filteredItems?.map((item, index) =>
+                    <ItemComponent
+                        key={item.id}
+                        item={item}
+                        index={index}
+                    />
+                )}
             </Stack>
         </Stack>
     </Box>

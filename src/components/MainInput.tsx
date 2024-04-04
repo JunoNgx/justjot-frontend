@@ -4,7 +4,6 @@ import { getHotkeyHandler } from "@mantine/hooks";
 import { IconCircleTriangle } from "@tabler/icons-react";
 
 import { ItemsContext } from "@/contexts/ItemsContext";
-import { MainViewContext } from "@/contexts/MainViewContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import useItemActions from "@/hooks/useItemActions";
 import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
@@ -12,8 +11,9 @@ import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } 
 
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { collections } = useContext(CollectionsContext);
-    const { items, updateQueue } = useContext(ItemsContext);
     const {
+        items,
+        updateQueue,
         selectedIndex,
         setSelectedIndex,
         selectPrevItem,
@@ -26,7 +26,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         scrollToBottom,
         inputVal,
         setInputVal,
-    } = useContext(MainViewContext);
+    } = useContext(ItemsContext);
     const {
         copyItemContent,
         openUpdateItemModal,
