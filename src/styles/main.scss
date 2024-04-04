@@ -3,6 +3,7 @@
 @use "./mixins.scss" as m;
 @use "./fonts.scss";
 @use "./itemComponent.scss";
+@use "./itemSkeleton.scss";
 @use '@mantine/core/styles/global.css';
 
 html {
