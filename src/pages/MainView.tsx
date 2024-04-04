@@ -96,6 +96,15 @@ export default function MainView() {
         }
     }
 
+    const filteredItemList = filteredItems?.map((item, index) =>
+        <ItemComponent
+            key={item.id}
+            item={item}
+            index={index}
+        />
+    );
+
+
     return <Box className="main-view-wrapper">
         {/* For non-item components */}
         <CollectionMenu isInMainView={true} />
@@ -118,13 +127,9 @@ export default function MainView() {
                 id="displayed-list"
                 gap="xs"
             >
-                {filteredItems?.map((item, index) =>
-                    <ItemComponent
-                        key={item.id}
-                        item={item}
-                        index={index}
-                    />
-                )}
+
+                {filteredItemList}
+
             </Stack>
         </Stack>
     </Box>
