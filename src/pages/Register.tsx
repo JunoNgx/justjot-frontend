@@ -59,11 +59,6 @@ export default function Register() {
         .then(async (_record) => {
             setErrorList([]);
             setIsSuccessful(true);
-
-            // TODO: backendLogic
-            // await pbClient.collection(DbTable.USERS)
-            //     .requestVerification(submissionData.email)
-            //     .catch(displayError)
         })
         .catch(displayError);
         setIsLoading(false);
