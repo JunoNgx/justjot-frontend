@@ -67,6 +67,16 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
             })
     }, []);
 
+    const filteredItems = items.filter(item => {
+
+        const searchTerm = inputVal.toLocaleLowerCase();
+        const hasTitleMatch = item.title?.toLowerCase()
+            .indexOf(searchTerm) > -1;
+        const hasContentMatch = item.content?.toLowerCase()
+            .indexOf(searchTerm) > -1;
+        
+        return hasTitleMatch || hasContentMatch;
+    });
 
     const itemsHandlers = useManageListState(setItems);
     const updateQueueHandlers = useManageListState(setUpdateQueue);
@@ -131,17 +141,6 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
         window.scrollTo(0, document.body.scrollHeight);
         selectItem(items.length - 1);
     }
-
-    const filteredItems = items.filter(item => {
-
-        const searchTerm = inputVal.toLocaleLowerCase();
-        const hasTitleMatch = item.title?.toLowerCase()
-            .indexOf(searchTerm) > -1;
-        const hasContentMatch = item.content?.toLowerCase()
-            .indexOf(searchTerm) > -1;
-        
-        return hasTitleMatch || hasContentMatch;
-    });
 
     return <ItemsContext.Provider value=
         {{
