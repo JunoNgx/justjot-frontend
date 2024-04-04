@@ -49,7 +49,6 @@ export default function Register() {
 
     const attemptRegister = async (formData: RegisterFormData) => {
         const submissionData: RegisterSubmission = { ...formData };
-        // Workaround the username requirement
         submissionData.emailVisibility = false;
         submissionData.userType = UserType.USER;
 
