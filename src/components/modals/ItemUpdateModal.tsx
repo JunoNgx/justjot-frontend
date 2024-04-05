@@ -14,8 +14,8 @@ import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 
 const DEBOUNCED_TIME = 5000;
 
-export default function ItemCreateUpdateModal(
-    {item, isEditMode}: {item: Item, isEditMode: boolean}
+export default function ItemUpdateModal(
+    {item}: {item: Item}
 ) {
     const { currCollection } = useContext(CurrentCollectionContext);
     const { fetchItems } = useContext(ItemsContext);
@@ -137,7 +137,7 @@ export default function ItemCreateUpdateModal(
         setTitleVal(event.target.value);
         titleValRef.current = titleVal;
 
-        if (isEditMode) debouncedAutosaveItemTitle();
+        debouncedAutosaveItemTitle();
     };
 
     const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -146,7 +146,7 @@ export default function ItemCreateUpdateModal(
         setContentVal(event.target.value);
         contentValRef.current = contentVal;
 
-        if (isEditMode) debouncedAutosaveItemContent();
+        debouncedAutosaveItemContent();
     };
 
     const handleActiveSave = () => {
@@ -179,7 +179,7 @@ export default function ItemCreateUpdateModal(
             ])}
         />
         <Group justify="flex-end">
-            <Text>{titleVal.length}/MAX_CONTENT_LENGTH</Text>
+            <Text>{titleVal.length}/{MAX_CONTENT_LENGTH}</Text>
         </Group>
 
         {isTodoItem && <>
@@ -199,12 +199,12 @@ export default function ItemCreateUpdateModal(
             />
             <Group justify="space-between">
                 <Text>Save <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>
-                <Text>{contentVal.length}/MAX_CONTENT_LENGTH</Text>
+                <Text>{contentVal.length}/{MAX_CONTENT_LENGTH}</Text>
             </Group>
         </>}
 
         <Group justify="flex-end">
-            {(isEditMode && hasSaved && relativeUpdatedTimeStr)
+            {(hasSaved && relativeUpdatedTimeStr)
                 && <Text>Saved at {relativeUpdatedTimeStr}</Text>
             }
         </Group>
