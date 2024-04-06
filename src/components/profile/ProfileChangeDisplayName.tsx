@@ -3,7 +3,7 @@ import { Button, Group, Paper, Text, TextInput, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useContext, useState } from "react";
 
-export default function ProfileUpdateDisplayName() {
+export default function ProfileChangeDisplayName() {
 
     const { user } = useContext(BackendClientContext);
     const form = useForm({
