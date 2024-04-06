@@ -4,7 +4,7 @@ import { MAX_TITLE_LENGTH, MAX_CONTENT_LENGTH } from "@/utils/constants";
 import { Button, Flex, Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { getHotkeyHandler } from "@mantine/hooks";
-import { ContextModalProps } from '@mantine/modals';
+import { ContextModalProps, modals } from '@mantine/modals';
 import { useContext, useState } from "react";
 
 const ItemCreateModal = ({
@@ -24,7 +24,21 @@ const ItemCreateModal = ({
     const [ isFocusedOnContentInput, setIsFocusedOnContentInput ] = useState(false);
 
     const handleClose = () => {
-        // TODO: show confirm modal if form.isDirty()
+        // BUG: will revert form back to initial values
+        if (form.isDirty()) {
+            modals.openConfirmModal({
+                title: "Confirm cancelation",
+                centered: true,
+                children: (
+                    <Text>You have not saved your progress. Exiting will abandon your changes.</Text>
+                ),
+                labels: { confirm: "Abandon changes", cancel: "Canel" },
+                onConfirm: () => {context.closeModal(id)},
+            })
+
+            return;
+        }
+
         context.closeModal(id);
     };
 
