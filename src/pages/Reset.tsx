@@ -82,7 +82,7 @@ export default function Reset() {
         </Text>
     </>
 
-    return <Paper className="account-route-modal account-route-modal--reset">
+    return <Paper className="account-modal account-modal--reset">
         <Title order={2}>
             Request password reset
         </Title>

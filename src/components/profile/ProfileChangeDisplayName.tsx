@@ -44,7 +44,7 @@ export default function ProfileChangeDisplayName() {
         setIsLoading(false);
     };
 
-    return <Paper className="account-route-modal"
+    return <Paper className="account-modal"
         withBorder p="md"
     >
         <form onSubmit={form.onSubmit(handleSubmission)}>

@@ -55,7 +55,7 @@ export default function Login() {
         setIsLoading(false);
     }
 
-    return <Paper className="account-route-modal account-route-modal--login">
+    return <Paper className="account-modal account-modal--login">
         <Title order={2}>
             Login
         </Title>

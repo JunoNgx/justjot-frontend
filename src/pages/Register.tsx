@@ -148,7 +148,7 @@ export default function Register() {
         </form>
     </>
 
-    return <Paper className="account-route-modal account-route-modal--login">
+    return <Paper className="account-modal account-modal--login">
         <Title order={2}>
             Register
         </Title>
