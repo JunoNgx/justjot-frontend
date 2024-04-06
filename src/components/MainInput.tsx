@@ -10,7 +10,7 @@ import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import MainInputExtendedMenu from "./MainInputExtendedMenu";
-import { CREATE_TEXT_WITH_TITLE_PREFIX } from "@/utils/constants";
+import { CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TEXT_WITH_TITLE_PREFIX_ALT } from "@/utils/constants";
 
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { collections } = useContext(CollectionsContext);
@@ -49,7 +49,9 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const handleEnter = () => {
         if (!inputVal) return;
 
-        if (inputVal.startsWith(CREATE_TEXT_WITH_TITLE_PREFIX)) {
+        if (inputVal.startsWith(CREATE_TEXT_WITH_TITLE_PREFIX)
+            || inputVal.startsWith(CREATE_TEXT_WITH_TITLE_PREFIX_ALT)
+        ) {
             openCreateItemModal(inputVal.substring(
                 CREATE_TEXT_WITH_TITLE_PREFIX.length).trim());
             return;

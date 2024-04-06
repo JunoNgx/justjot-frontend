@@ -6,4 +6,5 @@ export const AUTO_CLOSE_DEFAULT = 3000;
 export const COLLECTION_SORT_ORDER_MAG = 1000;
 export const MAX_TITLE_LENGTH = 200;
 export const MAX_CONTENT_LENGTH = 10000;
-export const CREATE_TEXT_WITH_TITLE_PREFIX = ":l:";
+export const CREATE_TEXT_WITH_TITLE_PREFIX = ":t:";
+export const CREATE_TEXT_WITH_TITLE_PREFIX_ALT = ":l:";
