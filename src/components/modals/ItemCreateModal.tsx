@@ -1,8 +1,11 @@
+import { ItemsContext } from "@/contexts/ItemsContext";
 import useItemActions from "@/hooks/useItemActions";
 import { MAX_TITLE_LENGTH, MAX_CONTENT_LENGTH } from "@/utils/constants";
 import { Button, Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { getHotkeyHandler } from "@mantine/hooks";
 import { ContextModalProps } from '@mantine/modals';
+import { useContext } from "react";
 
 const ItemCreateModal = ({
     context,
@@ -17,6 +20,7 @@ const ItemCreateModal = ({
         }
     });
     const { createItemWithOptimisticUpdate } = useItemActions();
+    const { setInputVal } = useContext(ItemsContext);
 
     const handleClose = () => {
         // TODO: show confirm modal if form.isDirty()
@@ -28,6 +32,8 @@ const ItemCreateModal = ({
             title: form.values.title,
             content: form.values.content
         });
+        context.closeModal(id);
+        setInputVal("");
     };
 
     return <Stack className="item-create-modal">
@@ -38,9 +44,6 @@ const ItemCreateModal = ({
             type="text"
             maxLength={MAX_TITLE_LENGTH}
             {...form.getInputProps("title")}
-            // onKeyDown={getHotkeyHandler([
-            //     ["mod+S", handleActiveSave, {preventDefault: true}]
-            // ])}
         />
         <Group justify="flex-end">
             <Text>{form.values.title.length}/{MAX_TITLE_LENGTH}</Text>
@@ -55,9 +58,9 @@ const ItemCreateModal = ({
             maxLength={MAX_CONTENT_LENGTH}
             minRows={5}
             {...form.getInputProps("content")}
-            // onKeyDown={getHotkeyHandler([
-            //     ["mod+S", handleActiveSave, {preventDefault: true}]
-            // ])}
+            onKeyDown={getHotkeyHandler([
+                ["mod+S", handleCreate, {preventDefault: true}]
+            ])}
         />
         <Group justify="space-between">
             <Text>Save <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>
