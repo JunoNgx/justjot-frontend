@@ -23,7 +23,7 @@ export default function HeaderUser() {
         offset={15}
     >
         <Menu.Target>
-            <UnstyledButton>
+            <UnstyledButton mr="xs">
                 <Group gap={6}>
                     <Text>{username}</Text>
                     <IconChevronDown {...iconProps} />
