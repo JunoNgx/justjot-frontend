@@ -1,9 +1,7 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { DbTable } from "@/types";
-import { AUTO_CLOSE_DEFAULT } from "@/utils/constants";
-import { Button, Group, Paper, Text, TextInput, Title } from "@mantine/core";
+import { Button, Group, Paper, Stack, Text, TextInput, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { notifications } from "@mantine/notifications";
 import { useContext, useState } from "react";
 
 export default function ProfileChangeEmail() {
@@ -17,13 +15,14 @@ export default function ProfileChangeEmail() {
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [errorMsg, setErrorMsg] = useState("");
+    const [errorList, setErrorList] = useState<string[]>([]);
     const handleSubmission = async (
         { newEmail }:
         { newEmail: string }
     ) => {
         setIsLoading(true);
         setHasAttempted(true);
+        setErrorList([]);
         await pbClient.collection(DbTable.USERS)
             .requestEmailChange(newEmail)
             .then((_isSuccessful: boolean) => {
@@ -31,13 +30,14 @@ export default function ProfileChangeEmail() {
             })
             .catch(err => {
                 setIsSuccessful(false);
-                setErrorMsg(err.response?.message)
-                notifications.show({
-                    message: "Error requesting email change",
-                    color: "none",
-                    autoClose: AUTO_CLOSE_DEFAULT,
-                    withCloseButton: true,
-                });
+
+                if (err.response.data) {
+                    Object.entries(err.response.data).forEach((keyValArr, _index) => {
+                        const value = keyValArr[1] as {code: string, message: string};
+                        const errorMsg = value.message;
+                        setErrorList(errList => [...errList, errorMsg])
+                    });
+                };
             });
         setIsLoading(false);
     };
@@ -69,9 +69,11 @@ export default function ProfileChangeEmail() {
         </form>
 
         {(hasAttempted && !isSuccessful) &&
-            <Text c="red">
-                {errorMsg}
-            </Text>
+            <Stack mt="xs">
+                {errorList?.map(error =>
+                    <Text c="red">{error}</Text>
+                )}
+            </Stack>
         }
     </Paper>
 }
