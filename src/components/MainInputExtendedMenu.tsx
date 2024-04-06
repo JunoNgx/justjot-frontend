@@ -30,13 +30,13 @@ export default function MainInputExtendedMenu(
                 processMainInput(clipboardContent);
             })
             .catch(err => {
-                console.error(err)
+                console.error(err);
                 notifications.show({
                     message: "Error retrieving clipboard content",
                     color: "red",
                     autoClose: AUTO_CLOSE_ERROR_TOAST,
                     withCloseButton: true,
-                })
+                });
             });
     }
 
