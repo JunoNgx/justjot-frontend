@@ -46,7 +46,7 @@ export default function Reset() {
         <Text mt="lg">Proceed to <Anchor component={NavLink} to="login">Login</Anchor>.</Text>
     </Box>
 
-    const initialResetRequestForm = <>
+    const resetRequestForm = <>
             <Text mt="lg">You are here for either inconvenient forgetfulness, or deliberate security enhancement.</Text>
 
             <form onSubmit={form.onSubmit(handleSubmission)}>
@@ -89,7 +89,7 @@ export default function Reset() {
 
         {(hasAttempted && isSuccessful)
             ? successNotice
-            : initialResetRequestForm
+            : resetRequestForm
         }
     </Paper>
 }
