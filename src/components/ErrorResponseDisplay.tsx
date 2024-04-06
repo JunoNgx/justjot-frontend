@@ -34,8 +34,8 @@ export default function ErrorResponseDisplay(
     const hasProblemList = !!problemList.length;
     const problemListDisplay = (
         <Stack mt="xs">
-            {problemList.map(problem =>
-                <Text c="red">{problem}</Text>
+            {problemList.map((problem, index) =>
+                <Text key={index} c="red">{problem}</Text>
             )}
         </Stack>
     );
