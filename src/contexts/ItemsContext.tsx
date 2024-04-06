@@ -70,7 +70,7 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
             .indexOf(searchTerm) > -1;
         const hasContentMatch = item.content?.toLowerCase()
             .indexOf(searchTerm) > -1;
-        
+
         return hasTitleMatch || hasContentMatch;
     });
 
