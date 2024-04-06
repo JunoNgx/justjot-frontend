@@ -1,8 +1,10 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { DbTable } from "@/types";
-import { Button, Group, Paper, Stack, Text, TextInput, Title } from "@mantine/core";
+import { Button, Group, Paper, Text, TextInput, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useContext, useState } from "react";
+import ErrorResponseDisplay from "@/components/ErrorResponseDisplay";
+import { ClientResponseError } from "pocketbase";
 
 export default function ProfileChangeEmail() {
 
@@ -15,7 +17,7 @@ export default function ProfileChangeEmail() {
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [errorList, setErrorList] = useState<string[]>([]);
+    const [errorRes, setErrorRes] = useState<ClientResponseError | null>(null);
     const handleSubmission = async (
         { newEmail }:
         { newEmail: string }
@@ -23,23 +25,16 @@ export default function ProfileChangeEmail() {
         setIsLoading(true);
         setHasAttempted(true);
         setIsSuccessful(false);
-        setErrorList([]);
+        setErrorRes(null);
 
         await pbClient.collection(DbTable.USERS)
             .requestEmailChange(newEmail)
             .then((_isSuccessful: boolean) => {
                 setIsSuccessful(true);
             })
-            .catch(err => {
+            .catch((err: ClientResponseError) => {
                 setIsSuccessful(false);
-
-                if (err.response.data) {
-                    Object.entries(err.response.data).forEach((keyValArr, _index) => {
-                        const value = keyValArr[1] as {code: string, message: string};
-                        const errorMsg = value.message;
-                        setErrorList(errList => [...errList, errorMsg])
-                    });
-                };
+                setErrorRes(err);
             });
         setIsLoading(false);
     };
@@ -70,18 +65,15 @@ export default function ProfileChangeEmail() {
             </Group>
         </form>
 
-        {(hasAttempted && !isSuccessful) &&
-            <Stack mt="xs">
-                {errorList?.map(error =>
-                    <Text c="red">{error}</Text>
-                )}
-            </Stack>
-        }
-
         {(hasAttempted && isSuccessful) &&
             <Text c="green" mt="xs">
                 Request successful. Please check the inbox of your new email address for a confirmation link.
             </Text>
         }
+
+        {(hasAttempted && !isSuccessful) &&
+            <ErrorResponseDisplay errRes={errorRes} />
+        }
+
     </Paper>
 }
