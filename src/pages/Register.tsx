@@ -1,10 +1,11 @@
 import { useForm } from '@mantine/form';
-import { Stack, Paper, TextInput, Button, Title, Group, Text, PasswordInput, Box, Anchor } from "@mantine/core";
+import { Paper, TextInput, Button, Title, Group, Text, PasswordInput, Box, Anchor } from "@mantine/core";
 import { NavLink } from 'react-router-dom';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useContext, useState } from 'react';
 import { UserType, DbTable } from '@/types'
 import { ClientResponseError } from 'pocketbase';
+import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
 
 type RegisterFormData = {
     email: string,
@@ -25,12 +26,13 @@ type RegisterSubmission = {
 };
 
 export default function Register() {
-    const [hasRequested, setHasRequested] = useState(false);
+    const { pbClient } = useContext(BackendClientContext);
+
+    const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [errRes, setErrRes] = useState<ClientResponseError | null>(null);
 
-    const { pbClient } = useContext(BackendClientContext);
-    const [errorList, setErrorList] = useState<string[]>([]);
     const form = useForm({
         initialValues: {
             email: "",
@@ -53,35 +55,28 @@ export default function Register() {
         submissionData.userType = UserType.USER;
 
         setIsLoading(true);
-        await pbClient.collection(DbTable.USERS)
-        .create(submissionData)
-        .then(async (_record) => {
-            setErrorList([]);
-            setIsSuccessful(true);
-        })
-        .catch(displayError);
-        setIsLoading(false);
-        setHasRequested(true);
-    }
-
-    const displayError = (error: ClientResponseError) => {
+        setHasAttempted(true);
         setIsSuccessful(false);
-        setErrorList(["Your submission encountered a problem."]);
-        if (error.response.data) {
-            Object.entries(error.response.data).forEach((keyValArr, _index) => {
-                const value = keyValArr[1] as {code: string, message: string};
-                const errorMsg = value.message;
-                setErrorList(errList => [...errList, errorMsg])
+        setErrRes(null);
+
+        await pbClient.collection(DbTable.USERS)
+            .create(submissionData)
+            .then(() => {
+                setIsSuccessful(true);
+            })
+            .catch((err: ClientResponseError) => {
+                setIsSuccessful(false);
+                setErrRes(err);
             });
-        };
-    };
+
+        setIsLoading(false);
+    }
 
     const successNotice = <Box mt="lg" p="none">
         <Text>Registration request has been made.</Text>
         <Text>Please check your inbox for the verification email.</Text>
         <Text mt="lg">Proceed to <Anchor component={NavLink} to="login">Login</Anchor></Text>
     </Box>
-
 
     const registrationForm = <>
         <Text>
@@ -147,15 +142,8 @@ export default function Register() {
                 </Button>
             </Group>
 
-            {(hasRequested && !isSuccessful)
-                ? <Stack className="register__error-list" mt="md">
-                    {errorList?.map(error =>
-                        <Text c="red">
-                            {error}
-                        </Text>
-                    )}
-                </Stack>
-                : ""
+            {(hasAttempted && !isSuccessful) &&
+                <ErrorResponseDisplay errRes={errRes} />
             }
         </form>
     </>
@@ -165,10 +153,9 @@ export default function Register() {
             Register
         </Title>
 
-        {(hasRequested && isSuccessful)
+        {(hasAttempted && isSuccessful)
             ? successNotice
             : registrationForm
         }
-
     </Paper>
 }
