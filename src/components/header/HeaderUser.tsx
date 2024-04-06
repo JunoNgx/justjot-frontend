@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Group, Menu, MenuDivider, Text, UnstyledButton } from "@mantine/core";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { useNavigate } from "react-router-dom";
-import { IconChevronDown, IconHelp, IconLogout, IconSettings } from "@tabler/icons-react";
+import { IconChevronDown, IconHelp, IconLogout, IconUserCog } from "@tabler/icons-react";
 import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 
 export default function HeaderUser() {
@@ -42,10 +42,10 @@ export default function HeaderUser() {
             <MenuDivider/>
 
             <Menu.Item
-                leftSection={<IconSettings {...iconProps} />}
+                leftSection={<IconUserCog {...iconProps} />}
                 onClick={() => navigate("/profile")}
             >
-                User settings
+                Account
             </Menu.Item>
             <Menu.Item
                 leftSection={<IconLogout {...iconProps} />}
