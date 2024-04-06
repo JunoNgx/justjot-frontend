@@ -89,7 +89,8 @@ const ItemCreateModal = ({
             onFocus={() => setIsFocusedOnTitleInput(true)}
             onBlur={() => setIsFocusedOnTitleInput(false)}
             onKeyDown={getHotkeyHandler([
-                ["mod+S", handleCreate, { preventDefault: true }]
+                ["mod+S", handleCreate, { preventDefault: true }],
+                ["Escape", handleExit, { preventDefault: true} ],
             ])}
         />
         <Group justify="flex-end">
@@ -109,7 +110,8 @@ const ItemCreateModal = ({
             onFocus={() => setIsFocusedOnContentInput(true)}
             onBlur={() => setIsFocusedOnContentInput(false)}
             onKeyDown={getHotkeyHandler([
-                ["mod+S", handleCreate, { preventDefault: true }]
+                ["mod+S", handleCreate, { preventDefault: true }],
+                ["Escape", handleExit, { preventDefault: true} ],
             ])}
         />
         <Flex
