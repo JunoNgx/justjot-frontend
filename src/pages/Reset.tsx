@@ -78,7 +78,7 @@ export default function Reset() {
         }
 
         <Text mt="lg">
-            To <Anchor component={NavLink} to="login">Login</Anchor>.
+            Just in case you want to <Anchor component={NavLink} to="login">Login</Anchor>.
         </Text>
     </>
 
