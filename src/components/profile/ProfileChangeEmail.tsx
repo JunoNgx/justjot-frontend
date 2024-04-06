@@ -45,6 +45,8 @@ export default function ProfileChangeEmail() {
         <form onSubmit={form.onSubmit(handleSubmission)}>
             <Title order={3}>Change email</Title>
 
+            <Text>Email change is only confirmed upon email verification with password.</Text>
+
             <TextInput mt="md"
                 label="New email"
                 description="Must be unique."
