@@ -11,7 +11,6 @@ export type Item = RecordModel | {
     shouldCopyOnClick: boolean,
     faviconUrl: string,
     isTodoDone: boolean,
-    // TODO: should validate these as ISO strings
     created: string,
     updated: string,
 
