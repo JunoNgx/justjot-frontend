@@ -115,7 +115,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             size={32}
         />}
         rightSectionPointerEvents="all"
-        rightSection={<MainInputExtendedMenu/>}
+        rightSection={<MainInputExtendedMenu enterInput={enterInput} />}
         type="text"
         value={inputVal}
         onChange={(event) => {
