@@ -5,7 +5,7 @@ import { Button, Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/c
 import { useForm } from "@mantine/form";
 import { getHotkeyHandler } from "@mantine/hooks";
 import { ContextModalProps } from '@mantine/modals';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 const ItemCreateModal = ({
     context,
@@ -21,6 +21,7 @@ const ItemCreateModal = ({
     });
     const { createItemWithOptimisticUpdate } = useItemActions();
     const { setInputVal } = useContext(ItemsContext);
+    const [ isFocusedOnContentInput, setIsFocusedOnContentInput ] = useState(false);
 
     const handleClose = () => {
         // TODO: show confirm modal if form.isDirty()
@@ -57,14 +58,21 @@ const ItemCreateModal = ({
             autosize
             maxLength={MAX_CONTENT_LENGTH}
             minRows={5}
+
             {...form.getInputProps("content")}
+            // Overriding form.getInput `...form.getInputProps("content")`
+            onFocus={() => setIsFocusedOnContentInput(true)}
+            onBlur={() => setIsFocusedOnContentInput(false)}
+
             onKeyDown={getHotkeyHandler([
                 ["mod+S", handleCreate, {preventDefault: true}]
             ])}
         />
-        <Group justify="space-between">
-            <Text>Save <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>
-            <Text>{form.values.content.length}/{MAX_CONTENT_LENGTH}</Text>
+        <Group justify="flex-end">
+            <Stack align="flex-end" gap="xs">
+                <Text>{form.values.content.length}/{MAX_CONTENT_LENGTH}</Text>
+                {isFocusedOnContentInput && <Text> Create <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>}
+            </Stack>
         </Group>
 
         <Group justify="space-around" mt="lg">
