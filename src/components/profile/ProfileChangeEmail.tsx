@@ -18,6 +18,7 @@ export default function ProfileChangeEmail() {
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [errRes, setErrRes] = useState<ClientResponseError | null>(null);
+
     const handleSubmission = async (
         { newEmail }:
         { newEmail: string }
