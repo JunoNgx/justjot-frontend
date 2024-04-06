@@ -4,11 +4,19 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { DbTable, User } from '@/types';
+import { ClientResponseError } from 'pocketbase';
+import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
 
 type LoginFormData = {email: string, password: string};
 
 export default function Login() {
     const { pbClient, setUser, isLoggedIn } = useContext(BackendClientContext);
+    const form = useForm({
+        initialValues: {
+            email: "",
+            password: ""
+        }
+    });
 
     useEffect(() => {
         if (isLoggedIn) navigateToMainView();
@@ -23,32 +31,28 @@ export default function Login() {
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [errorMsg, setErrorMsg] = useState("");
-    const form = useForm({
-        initialValues: {
-            email: "",
-            password: ""
-        }
-    });
+    const [errRes, setErrRes] = useState<ClientResponseError | null>(null);
 
     const attemptLogin = async (loginForm: LoginFormData) => {
         setIsLoading(true);
-        await pbClient.collection (DbTable.USERS)
-        .authWithPassword( // works for both email AND username
-            loginForm.email,
-            loginForm.password
-        )
-        .then((res: {token: string, record: User}) => {
-            setUser(res?.record)
-            setIsSuccessful(true);
-            navigateToMainView();
-        })
-        .catch((error) => {
-            setIsSuccessful(false);
-            setErrorMsg(error.response?.message)
-        });
-        setIsLoading(false);
         setHasAttempted(true);
+        setIsSuccessful(false);
+        setErrRes(null);
+        await pbClient.collection (DbTable.USERS)
+            .authWithPassword( // works for both email AND username
+                loginForm.email,
+                loginForm.password
+            )
+            .then((res: {token: string, record: User}) => {
+                setUser(res?.record)
+                setIsSuccessful(true);
+                navigateToMainView();
+            })
+            .catch((err: ClientResponseError) => {
+                setIsSuccessful(false);
+                setErrRes(err);
+            });
+        setIsLoading(false);
     }
 
     return <Paper className="account-route-modal account-route-modal--login">
@@ -94,11 +98,8 @@ export default function Login() {
 
         </form>
 
-        {hasAttempted && !isSuccessful
-            ? <Text mt="lg" c="red">
-                {errorMsg}
-            </Text>
-            : ""
+        {(hasAttempted && !isSuccessful) &&
+            <ErrorResponseDisplay errRes={errRes} />
         }
 
         <Text mt="lg">
