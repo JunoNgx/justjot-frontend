@@ -15,6 +15,7 @@ export default function ProfileChangeEmail() {
         { newEmail, password }:
         { password: string, newEmail: string }
     ) => {
+        setIsLoading(true);
         console.log(newEmail, password)
     };
 
