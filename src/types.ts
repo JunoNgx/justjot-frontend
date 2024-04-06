@@ -7,7 +7,6 @@ export type Item = RecordModel | {
     title: string,
     content: string,
     type: ItemType,
-    // defaultAction: DefaultAction,
     shouldCopyOnClick: boolean,
     faviconUrl: string,
     isTodoDone: boolean,
@@ -43,12 +42,6 @@ export type User = (RecordModel | {
     username: string,
     displayName: string,
 }) | null;
-
-// export enum DefaultAction {
-//     COPY = "copy",
-//     EDIT = "edit",
-//     OPEN = "open"
-// };
 
 export enum ThemeMode {
     LIGHT = "light",
