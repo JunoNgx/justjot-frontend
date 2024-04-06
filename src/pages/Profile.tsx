@@ -1,3 +1,4 @@
+import ProfileAccountDeletion from "@/components/profile/ProfileAccountDeletion";
 import ProfileChangeDisplayName from "@/components/profile/ProfileChangeDisplayName";
 import ProfileChangeEmail from "@/components/profile/ProfileChangeEmail";
 import ProfileChangePassword from "@/components/profile/ProfileChangePassword";
@@ -29,6 +30,7 @@ export default function Profile() {
                 <ProfileChangeDisplayName/>
                 <ProfileChangeEmail/>
                 <ProfileChangePassword/>
+                <ProfileAccountDeletion/>
             </>
         }
     </Box>
