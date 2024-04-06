@@ -29,7 +29,7 @@ import '@/styles/layers.css';
 import "@/styles/main.scss";
 import InfoModal from "@/components/modals/InfoModal";
 import ItemCreateModal from "./components/modals/ItemCreateModal";
-import UserProfile from "./pages/UserProfile";
+import Profile from "@/pages/Profile";
 
 function App() {
 
@@ -70,7 +70,7 @@ function App() {
                                                 <Route index element={<MainView />} />
                                                 <Route path=":collectionSlug" element={<MainView />} />
                                             </Route>
-                                            <Route path="/profile" element={<UserProfile />} />
+                                            <Route path="/profile" element={<Profile />} />
                                             <Route path="/login" element={<Login />} />
                                             <Route path="/register" element={<Register />} />
                                             <Route path="/reset" element={<Reset />} />

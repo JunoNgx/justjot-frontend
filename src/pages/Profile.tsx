@@ -7,7 +7,7 @@ import { Box } from "@mantine/core";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function UserProfile() {
+export default function Profile() {
 
     const { isLoggedIn } = useContext(BackendClientContext);
     const { setCurrCollection } = useContext(CurrentCollectionContext);
