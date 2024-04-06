@@ -7,7 +7,7 @@ import { IconCheckbox, IconChevronDown, IconClipboardPlus, IconLayoutNavbar, Ico
 import { useContext } from "react";
 
 export default function MainInputExtendedMenu(
-    {enterInput}: {enterInput: () => void}
+    {processMainInput}: {processMainInput: (input: string) => void}
 ) {
 
     const iconProps = useIconPropsFromTheme();
@@ -27,9 +27,7 @@ export default function MainInputExtendedMenu(
         navigator.clipboard
             .readText()
             .then((clipboardContent: string) => {
-                setInputVal(clipboardContent);
-                // BUG: main input is set after processing
-                enterInput();
+                processMainInput(clipboardContent);
             })
             .catch(err => {
                 console.error(err)
