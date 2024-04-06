@@ -42,8 +42,8 @@ export default function Reset() {
         <form onSubmit={form.onSubmit(attemptRequestResetPassword)}>
             <TextInput mt="md"
                 autoFocus
-                label="Email"
-                description="Enter email address to request password reset"
+                label="Email address"
+                description="Of the account that needs a password change"
                 required
                 placeholder="isaac@darkcrusader.org"
                 type="email"
@@ -68,7 +68,7 @@ export default function Reset() {
             Request password reset
         </Title>
         
-        <Text mt="lg">Well, that is inconvenient.</Text>
+        <Text mt="lg">You are here for either inconvenient forgetfulness, or deliberate security enhancement.</Text>
 
         {hasRequested
             ? successNotice
@@ -76,7 +76,7 @@ export default function Reset() {
         }
 
         <Text mt="lg">
-            Memory retrieved? <Anchor component={NavLink} to="login">Login</Anchor>
+            Go back to <Anchor component={NavLink} to="login">Login</Anchor>
         </Text>
     </Paper>
 }
