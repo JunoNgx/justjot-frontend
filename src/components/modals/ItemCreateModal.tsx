@@ -42,7 +42,7 @@ const ItemCreateModal = ({
         setInputVal("");
     };
 
-    const normalButtonButton = <>
+    const initialButtonGroup = <>
         <Button
             variant="default"
             color="grey"
@@ -122,7 +122,7 @@ const ItemCreateModal = ({
         <Group justify="flex-end">
             {isConfirmingExit
                 ? confirmExitButtonGroup
-                : normalButtonButton
+                : initialButtonGroup
             }
         </Group>
 
