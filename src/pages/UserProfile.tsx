@@ -1,5 +1,6 @@
+import ProfileChangeEmail from "@/components/profile/ProfileChangeEmail";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
-import { Text } from "@mantine/core";
+import { Box } from "@mantine/core";
 import { useContext, useEffect } from "react";
 
 export default function UserProfile() {
@@ -10,5 +11,7 @@ export default function UserProfile() {
         setCurrCollection(undefined);
     });
 
-    return <Text>User profile</Text>
+    return <Box>
+        <ProfileChangeEmail/>
+    </Box>
 };
