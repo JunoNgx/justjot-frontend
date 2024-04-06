@@ -46,19 +46,23 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const {
         createItemWithOptimisticUpdate
     } = useItemActions();
-    const enterInput = () => {
-        if (!inputVal) return;
 
-        if (inputVal.startsWith(CREATE_TEXT_WITH_TITLE_PREFIX)
-            || inputVal.startsWith(CREATE_TEXT_WITH_TITLE_PREFIX_ALT)
+    const processMainInput = (inputData: string) => {
+        if (!inputData) return;
+
+        if (inputData.startsWith(CREATE_TEXT_WITH_TITLE_PREFIX)
+            || inputData.startsWith(CREATE_TEXT_WITH_TITLE_PREFIX_ALT)
         ) {
-            openCreateItemModal(inputVal.substring(
+            openCreateItemModal(inputData.substring(
                 CREATE_TEXT_WITH_TITLE_PREFIX.length).trim());
             return;
         }
 
-        createItemWithOptimisticUpdate({ content: inputVal });
+        createItemContentFromInput(inputData);
+    };
 
+    const createItemContentFromInput = (inputData: string) => {
+        createItemWithOptimisticUpdate({ content: inputData });
         setInputVal("");
         if (selectedIndex === -1) return;
         setSelectedIndex(curr => curr + 1);
@@ -115,7 +119,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             size={32}
         />}
         rightSectionPointerEvents="all"
-        rightSection={<MainInputExtendedMenu enterInput={enterInput} />}
+        rightSection={<MainInputExtendedMenu processMainInput={processMainInput} />}
         type="text"
         value={inputVal}
         onChange={(event) => {
@@ -129,7 +133,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["Shift+ArrowDown", selectNextItemFarther, { preventDefault: true }],
             ["mod+Shift+ArrowUp", scrollToTop, { preventDefault: true }],
             ["mod+Shift+ArrowDown", scrollToBottom, { preventDefault: true }],
-            ["Enter", enterInput],
+            ["Enter", () => processMainInput(inputVal)],
             ["mod+Enter", clickOnSelectedItem, { preventDefault: true }],
             ["Escape", blurMainInput],
             ["mod+C", hotkeyCopyContent, { preventDefault: true }],
