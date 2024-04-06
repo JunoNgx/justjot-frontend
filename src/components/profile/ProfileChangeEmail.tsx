@@ -17,7 +17,7 @@ export default function ProfileChangeEmail() {
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [errorRes, setErrorRes] = useState<ClientResponseError | null>(null);
+    const [errRes, setErrRes] = useState<ClientResponseError | null>(null);
     const handleSubmission = async (
         { newEmail }:
         { newEmail: string }
@@ -25,7 +25,7 @@ export default function ProfileChangeEmail() {
         setIsLoading(true);
         setHasAttempted(true);
         setIsSuccessful(false);
-        setErrorRes(null);
+        setErrRes(null);
 
         await pbClient.collection(DbTable.USERS)
             .requestEmailChange(newEmail)
@@ -34,7 +34,7 @@ export default function ProfileChangeEmail() {
             })
             .catch((err: ClientResponseError) => {
                 setIsSuccessful(false);
-                setErrorRes(err);
+                setErrRes(err);
             });
         setIsLoading(false);
     };
@@ -72,7 +72,7 @@ export default function ProfileChangeEmail() {
         }
 
         {(hasAttempted && !isSuccessful) &&
-            <ErrorResponseDisplay errRes={errorRes} />
+            <ErrorResponseDisplay errRes={errRes} />
         }
 
     </Paper>
