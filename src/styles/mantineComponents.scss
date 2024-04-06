@@ -1,0 +1,21 @@
+.mantine-Modal-content {
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--mantine-color-text);
+}
+
+.mantine-Modal-overlay {
+    // TODO: This is incorrect, but it works. Should find out why
+    background-color: var(--mantine-color-body) 0.5;
+    backdrop-filter: blur(7px);
+}
+
+.mantine-Notifications-notification {
+    color: var(--mantine-color-text);
+    background-color: var(--mantine-color-body);
+    border: solid 1px var(--mantine-color-text);
+}
+
+.mantine-Kbd-root {
+    border-radius: 0;
+}
