@@ -46,7 +46,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const {
         createItemWithOptimisticUpdate
     } = useItemActions();
-    const handleEnter = () => {
+    const enterInput = () => {
         if (!inputVal) return;
 
         if (inputVal.startsWith(CREATE_TEXT_WITH_TITLE_PREFIX)
@@ -129,7 +129,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["Shift+ArrowDown", selectNextItemFarther, { preventDefault: true }],
             ["mod+Shift+ArrowUp", scrollToTop, { preventDefault: true }],
             ["mod+Shift+ArrowDown", scrollToBottom, { preventDefault: true }],
-            ["Enter", handleEnter],
+            ["Enter", enterInput],
             ["mod+Enter", clickOnSelectedItem, { preventDefault: true }],
             ["Escape", blurMainInput],
             ["mod+C", hotkeyCopyContent, { preventDefault: true }],
