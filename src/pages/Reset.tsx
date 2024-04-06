@@ -83,7 +83,9 @@ export default function Reset() {
     </>
 
     return <Paper className="account-modal account-modal--reset">
-        <Title order={2}>
+        <Title className="account-modal__title"
+            order={2}
+        >
             Request password reset
         </Title>
 

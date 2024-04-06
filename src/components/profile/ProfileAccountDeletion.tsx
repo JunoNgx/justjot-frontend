@@ -4,7 +4,11 @@ export default function ProfileAccountDeletion() {
     return <Paper className="account-modal"
         withBorder p="md"
     >
-        <Title order={3}>Account deletion</Title>
+        <Title className="account-modal__title"
+            order={2}
+        >
+            Account deletion
+        </Title>
         
         <Text>For account deletion (which will also result in the permanent and irreversible destruction of your data), please send an email request:</Text>
         <ul>

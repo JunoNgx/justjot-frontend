@@ -44,7 +44,11 @@ export default function ProfileChangeEmail() {
         withBorder p="md"
     >
         <form onSubmit={form.onSubmit(handleSubmission)}>
-            <Title order={3}>Change email</Title>
+            <Title className="account-modal__title"
+                order={2}
+            >
+                Change email
+            </Title>
 
             <Text>Email change is only confirmed upon email verification with password.</Text>
 

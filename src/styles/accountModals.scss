@@ -6,6 +6,10 @@
     max-width: 320px;
     border-color: var(--mantine-color-text);
 
+    &__title {
+        margin-bottom: var(--mantine-spacing-md);
+    }
+
     &--register {
         margin-bottom: 60px;
     }

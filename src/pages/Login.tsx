@@ -56,7 +56,9 @@ export default function Login() {
     }
 
     return <Paper className="account-modal account-modal--login">
-        <Title order={2}>
+        <Title className="account-modal__title"
+            order={2}
+        >
             Login
         </Title>
 

@@ -48,7 +48,11 @@ export default function ProfileChangeDisplayName() {
         withBorder p="md"
     >
         <form onSubmit={form.onSubmit(handleSubmission)}>
-            <Title order={3}>Change display name</Title>
+            <Title className="account-modal__title"
+                order={2}
+            >
+                Change display name
+            </Title>
 
             {user!.displayName
                 ? <Text>Your current display name is: <em>{user!.displayName}</em></Text>
