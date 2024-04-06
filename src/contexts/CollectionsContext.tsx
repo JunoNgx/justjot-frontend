@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useCallback, useContext, useState } from 'react';
 import { ApiRequestCallbackOptions, DbTable, ItemCollection } from '@/types';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
+import { ClientResponseError } from 'pocketbase';
 
 type CollectionsContextType = {
     collections: ItemCollection[],
@@ -42,11 +43,21 @@ export default function CollectionsContextProvider({ children }: { children: Rea
             successfulCallback?.();
             setCollections(records);
         })
-        .catch(err => {
+        .catch((err: ClientResponseError) => {
             errorCallback?.();
+            console.log(JSON.stringify(err))
             if (!err.isAbort) {
-                console.warn("Non cancellation error", err);
+                console.warn("Non cancellation error");
             }
+
+            // if (!err.url && !err.status) {
+            //     notifications.show({
+            //         message: "Error fetching collections. Your authorization token might have expired. Re-login is recommended.",
+            //         color: "red",
+            //         autoClose: AUTO_CLOSE_ERROR_TOAST,
+            //         withCloseButton: true,
+            //     });
+            // }
         });
     }, [isLoggedIn]);
 
