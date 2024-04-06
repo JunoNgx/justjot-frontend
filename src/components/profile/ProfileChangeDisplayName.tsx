@@ -1,7 +1,9 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { DbTable, User } from "@/types";
+import { AUTO_CLOSE_DEFAULT } from "@/utils/constants";
 import { Button, Group, Paper, Text, TextInput, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 import { useContext, useState } from "react";
 
 export default function ProfileChangeDisplayName() {
@@ -30,10 +32,16 @@ export default function ProfileChangeDisplayName() {
                 setUser(record);
                 setIsSuccessful(true);
                 form.setFieldValue("displayName", "");
+                notifications.show({
+                    message: "Display name updated successfully",
+                    color: "none",
+                    autoClose: AUTO_CLOSE_DEFAULT,
+                    withCloseButton: true,
+                });
             })
             .catch(err => {
                 setIsSuccessful(false);
-                setErrorMsg(err)
+                setErrorMsg(err.response?.message)
             });
         setIsLoading(false);
     };
@@ -69,7 +77,7 @@ export default function ProfileChangeDisplayName() {
         </form>
 
         {(hasAttempted && !isSuccessful) &&
-            <Text mt="lg" c="red">
+            <Text c="red">
                 {errorMsg}
             </Text>
         }
