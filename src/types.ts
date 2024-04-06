@@ -38,6 +38,13 @@ export enum ItemType {
     TODO = "todo"
 };
 
+export type User = (RecordModel | {
+    id: string,
+    email: string,
+    username: string,
+    displayName: string,
+}) | null;
+
 // export enum DefaultAction {
 //     COPY = "copy",
 //     EDIT = "edit",
