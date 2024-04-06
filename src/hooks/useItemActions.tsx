@@ -221,7 +221,6 @@ export default function useItemActions() {
             size: "50rem",
             children: (<ItemCreateUpdateModal
                 item={item}
-                isEditMode={true}
             />),
         });
     };
