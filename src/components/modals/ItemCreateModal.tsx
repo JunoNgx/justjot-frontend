@@ -85,7 +85,7 @@ const ItemCreateModal = ({
             maxLength={MAX_TITLE_LENGTH}
             {...form.getInputProps("title")}
 
-            // Overriding form.getInput `...form.getInputProps("content")`
+            // Overriding form.getInput `...form.getInputProps("title")`
             onFocus={() => setIsFocusedOnTitleInput(true)}
             onBlur={() => setIsFocusedOnTitleInput(false)}
             onKeyDown={getHotkeyHandler([
