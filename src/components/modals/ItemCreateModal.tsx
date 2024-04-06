@@ -1,3 +1,4 @@
+import useItemActions from "@/hooks/useItemActions";
 import { MAX_TITLE_LENGTH, MAX_CONTENT_LENGTH } from "@/utils/constants";
 import { Button, Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
@@ -14,7 +15,20 @@ const ItemCreateModal = ({
             title: innerProps.passedTitle,
             content: "",
         }
-    })
+    });
+    const { createItemWithOptimisticUpdate } = useItemActions();
+
+    const handleClose = () => {
+        // TODO: show confirm modal if form.isDirty()
+        context.closeModal(id);
+    };
+
+    const handleCreate = () => {
+        createItemWithOptimisticUpdate({
+            title: form.values.title,
+            content: form.values.content
+        });
+    };
 
     return <Stack className="item-create-modal">
         <TextInput className="item-create-modal__input item-create-modal__input--title"
@@ -50,12 +64,18 @@ const ItemCreateModal = ({
             <Text>{form.values.content.length}/{MAX_CONTENT_LENGTH}</Text>
         </Group>
 
-        <Group>
-            <Button onClick={() => context.closeModal(id)}>
+        <Group justify="space-around" mt="lg">
+            <Button
+                variant="filled"
+                color="grey"
+                onClick={handleClose}
+            >
                 Cancel
             </Button>
 
-            <Button>
+            <Button
+                onClick={handleCreate}
+            >
                 Create
             </Button>
         </Group>
