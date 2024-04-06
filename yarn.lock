@@ -1599,10 +1599,10 @@ luxon@^3.4.4:
   resolved "https://registry.yarnpkg.com/luxon/-/luxon-3.4.4.tgz#cf20dc27dc532ba41a169c43fdcc0063601577af"
   integrity sha512-zobTr7akeGHnv7eBOXcRgMeCP6+uyYsczwmeRCauvpvaAltgNyTbLH/+VaEAPUeWBT+1GuNmz4wC/6jtQzbbVA==
 
-mantine-contextmenu@^7.6.2:
-  version "7.6.2"
-  resolved "https://registry.yarnpkg.com/mantine-contextmenu/-/mantine-contextmenu-7.6.2.tgz#e341b3df487e990f5fe9b73c0c0a9c82f6480658"
-  integrity sha512-92maXK1+uk03BCrxZL+TKL/ARNL0EaIaIPBGOUSl+4M9AovckDgVNlBVGhlLUdw/9+Kcd6B2Z0v8OdmhDHfF8g==
+mantine-contextmenu@^7.7.0:
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/mantine-contextmenu/-/mantine-contextmenu-7.7.0.tgz#5fbca7516be789b607dae2d65f18951de545cbf8"
+  integrity sha512-W2D57m52owPwLV5YdNf/lmlhv1R0o906QxyTp95hQH0rSC38lq7ouiI4K6pTzESH1Df+BgAN+qxcI0KipAWwmQ==
 
 memoize-one@^6.0.0:
   version "6.0.0"
