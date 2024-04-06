@@ -53,7 +53,7 @@ export default function Reset() {
             <TextInput mt="md"
                 autoFocus
                 label="Email address"
-                description="Of the account that needs a password change"
+                description="Of the account that needs a password change."
                 required
                 placeholder="isaac@darkcrusader.org"
                 type="email"
