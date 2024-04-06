@@ -1,10 +1,10 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { DbTable, User } from "@/types";
-import { AUTO_CLOSE_DEFAULT } from "@/utils/constants";
 import { Button, Group, Paper, Text, TextInput, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { notifications } from "@mantine/notifications";
+import { ClientResponseError } from "pocketbase";
 import { useContext, useState } from "react";
+import ErrorResponseDisplay from "../ErrorResponseDisplay";
 
 export default function ProfileChangeDisplayName() {
 
@@ -17,13 +17,17 @@ export default function ProfileChangeDisplayName() {
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [errorMsg, setErrorMsg] = useState("");
+    const [errRes, setErrRes] = useState<ClientResponseError | null>(null);
+
     const handleSubmission = async (
         { displayName }:
         { displayName: string }
     ) => {
         setIsLoading(true);
         setHasAttempted(true);
+        setIsSuccessful(false);
+        setErrRes(null);
+
         await pbClient.collection(DbTable.USERS)
             .update(user!.id, {
                 displayName
@@ -32,16 +36,10 @@ export default function ProfileChangeDisplayName() {
                 setUser(record);
                 setIsSuccessful(true);
                 form.setFieldValue("displayName", "");
-                notifications.show({
-                    message: "Display name updated successfully",
-                    color: "none",
-                    autoClose: AUTO_CLOSE_DEFAULT,
-                    withCloseButton: true,
-                });
             })
-            .catch(err => {
+            .catch((err: ClientResponseError) => {
                 setIsSuccessful(false);
-                setErrorMsg(err.response?.message)
+                setErrRes(err)
             });
         setIsLoading(false);
     };
@@ -76,10 +74,14 @@ export default function ProfileChangeDisplayName() {
             </Group>
         </form>
 
-        {(hasAttempted && !isSuccessful) &&
-            <Text c="red">
-                {errorMsg}
+        {(hasAttempted && isSuccessful) &&
+            <Text c="green" mt="xs">
+                Display name updated successfully.
             </Text>
+        }
+
+        {(hasAttempted && !isSuccessful) &&
+            <ErrorResponseDisplay errRes={errRes} />
         }
     </Paper>
 };
