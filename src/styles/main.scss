@@ -4,6 +4,7 @@
 @use "./_fonts.scss";
 
 @use "./mantineComponents.scss";
+@use "./accountModals.scss";
 @use "./mainInput.scss";
 @use "./collectionMenu.scss";
 @use "./itemComponent.scss";
@@ -72,29 +73,6 @@ header {
         p {
             hyphens: auto;
         }
-    }
-}
-
-.account-route-modal {
-    margin: 0 auto;
-    margin-bottom: var(--mantine-spacing-xl);
-    max-width: 320px;
-    border-color: var(--mantine-color-text);
-
-    &--register {
-        margin-bottom: 60px;
-    }
-
-    &--login {
-        margin-top: 150px;
-    }
-
-    &--reset {
-        margin-top: 200px;
-    }
-
-    @include m.mobile {
-        margin-top: 0;
     }
 }
 
