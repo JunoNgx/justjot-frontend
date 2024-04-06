@@ -1,6 +1,5 @@
 import { Item } from "@/types";
 import ItemSkeleton from "./itemComponent/ItemSkeleton";
-import { Text } from "@mantine/core";
 import ItemComponent from "./itemComponent/ItemComponent";
 
 export default function MainContentList(
@@ -20,15 +19,7 @@ export default function MainContentList(
         />
     );
 
-    const emptyNotice = <Text ta="center" mt="xl">
-        There is nothing to display.
-    </Text>
-
-    const loadedContent = displayedItemList.length
-        ? displayedItemList
-        : emptyNotice;
-
     return isLoading
         ? skeletonList
-        : loadedContent;
+        : displayedItemList;
 };
