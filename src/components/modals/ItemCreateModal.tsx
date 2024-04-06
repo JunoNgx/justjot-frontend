@@ -22,6 +22,7 @@ const ItemCreateModal = ({
     const { createItemWithOptimisticUpdate } = useItemActions();
     const { setInputVal } = useContext(ItemsContext);
     const [isFocusedOnContentInput, setIsFocusedOnContentInput] = useState(false);
+    const [isFocusedOnTitleInput, setIsFocusedOnTitleInput] = useState(false);
     const [isConfirmingExit, setIsConfirmExit] = useState(false);
 
     const handleExit = () => {
@@ -83,6 +84,13 @@ const ItemCreateModal = ({
             type="text"
             maxLength={MAX_TITLE_LENGTH}
             {...form.getInputProps("title")}
+
+            // Overriding form.getInput `...form.getInputProps("content")`
+            onFocus={() => setIsFocusedOnTitleInput(true)}
+            onBlur={() => setIsFocusedOnTitleInput(false)}
+            onKeyDown={getHotkeyHandler([
+                ["mod+S", handleCreate, { preventDefault: true }]
+            ])}
         />
         <Group justify="flex-end">
             <Text>{form.values.title.length}/{MAX_TITLE_LENGTH}</Text>
@@ -96,12 +104,10 @@ const ItemCreateModal = ({
             autosize
             maxLength={MAX_CONTENT_LENGTH}
             minRows={5}
-
             {...form.getInputProps("content")}
-            // Overriding form.getInput `...form.getInputProps("content")`
+
             onFocus={() => setIsFocusedOnContentInput(true)}
             onBlur={() => setIsFocusedOnContentInput(false)}
-
             onKeyDown={getHotkeyHandler([
                 ["mod+S", handleCreate, { preventDefault: true }]
             ])}
@@ -111,7 +117,9 @@ const ItemCreateModal = ({
             justify="space-between"
         >
             <Text>{form.values.content.length}/{MAX_CONTENT_LENGTH}</Text>
-            {isFocusedOnContentInput && <Text> Create <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>}
+            {(isFocusedOnTitleInput || isFocusedOnContentInput) &&
+                <Text> Create <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>
+            }
         </Flex>
 
         {isConfirmingExit &&
