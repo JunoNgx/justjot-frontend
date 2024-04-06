@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useCallback, useContext, useState } from 'react';
-import { ApiRequestCallbackOptions, DbTable, ItemCollection, User } from '@/types';
+import { ApiRequestCallbackOptions, DbTable, ItemCollection } from '@/types';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 
 type CollectionsContextType = {
