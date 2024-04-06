@@ -22,7 +22,9 @@ export default function ProfileChangeEmail() {
     ) => {
         setIsLoading(true);
         setHasAttempted(true);
+        setIsSuccessful(false);
         setErrorList([]);
+
         await pbClient.collection(DbTable.USERS)
             .requestEmailChange(newEmail)
             .then((_isSuccessful: boolean) => {
@@ -74,6 +76,12 @@ export default function ProfileChangeEmail() {
                     <Text c="red">{error}</Text>
                 )}
             </Stack>
+        }
+
+        {(hasAttempted && isSuccessful) &&
+            <Text c="green" mt="xs">
+                Request successful. Please check the inbox of your new email address for a confirmation link.
+            </Text>
         }
     </Paper>
 }
