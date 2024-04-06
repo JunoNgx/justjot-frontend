@@ -1,17 +1,35 @@
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
+import useItemNavActions from "@/hooks/useItemNavActions";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TODO_PREFIX } from "@/utils/constants";
 import { Box, Menu } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { IconCheckbox, IconChevronDown, IconClipboardPlus, IconLayoutNavbar, IconX } from "@tabler/icons-react";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
+
+type MainInputExtendedMenuOptions = {
+    processMainInput: (input: string) => void,
+    mainInputRef: React.ForwardedRef<HTMLInputElement>,
+}
 
 export default function MainInputExtendedMenu(
-    {processMainInput}: {processMainInput: (input: string) => void}
+    {processMainInput, mainInputRef}: MainInputExtendedMenuOptions
 ) {
 
     const iconProps = useIconPropsFromTheme();
     const { setInputVal } = useContext(ItemsContext);
+    const { focusOnMainInput } = useItemNavActions();
+    const mainInputInnerRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (!mainInputRef) return;
+        if (typeof mainInputRef === "function") {
+            mainInputRef(mainInputInnerRef.current);
+            return;
+        }
+
+        mainInputRef.current = mainInputInnerRef.current;
+    });
 
     const enterFromClipboard = () => {
         if (!navigator.clipboard.readText) {
@@ -57,13 +75,21 @@ export default function MainInputExtendedMenu(
         <Menu.Dropdown className="dropdown-menu">
             <Menu.Item
                 leftSection={<IconLayoutNavbar {...iconProps} />}
-                onClick={() => setInputVal(curr => `${CREATE_TEXT_WITH_TITLE_PREFIX} ${curr}`)}
+                onClick={() => {
+                    console.log(mainInputRef)
+                    setInputVal(curr => `${CREATE_TEXT_WITH_TITLE_PREFIX} ${curr}`);
+                    focusOnMainInput(mainInputInnerRef);
+                }}
             >
                 with title
             </Menu.Item>
             <Menu.Item
                 leftSection={<IconCheckbox {...iconProps} />}
-                onClick={() => setInputVal(curr => `${CREATE_TODO_PREFIX} ${curr}`)}
+                onClick={() => {
+                    setInputVal(curr => `${CREATE_TODO_PREFIX} ${curr}`);
+                    focusOnMainInput(mainInputInnerRef);
+
+                }}
             >
                 as todo
             </Menu.Item>
@@ -76,7 +102,10 @@ export default function MainInputExtendedMenu(
 
             <Menu.Item
                 leftSection={<IconX {...iconProps} />}
-                onClick={() => {setInputVal("")}}
+                onClick={() => {
+                    setInputVal("");
+                    focusOnMainInput(mainInputInnerRef);
+                }}
             >
                 clear input
             </Menu.Item>
