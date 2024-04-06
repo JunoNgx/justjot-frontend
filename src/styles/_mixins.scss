@@ -1,26 +1,6 @@
 @use "./variables.scss" as v;
 
-// @mixin border {
-//     border: solid 2px var(--col-pri);
-// }
-
-// @mixin modal($width, $mobile-width) {
-//     @include border;
-//     margin: 1rem;
-//     min-width: $width;
-
-//     @include mobile {
-//         min-width: $mobile-width;
-//     }
-// }
-
-// @mixin modal-container {
-//     height: 100%;
-//     display: grid;
-//     place-items: center;
-// }
-
-@mixin glass-blur {
+@mixin glass-blur { 
     backdrop-filter: blur(10px);
     // Attributes to overwrite specificity
     [data-mantine-color-scheme="light"] &,
