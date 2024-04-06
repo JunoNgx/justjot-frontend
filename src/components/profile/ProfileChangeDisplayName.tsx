@@ -16,13 +16,13 @@ export default function ProfileChangeDisplayName() {
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
-    const handleSubmission = (
+    const handleSubmission = async (
         { displayName }:
         { displayName: string }
     ) => {
         setIsLoading(true);
         setHasAttempted(true);
-        pbClient.collection(DbTable.USERS)
+        await pbClient.collection(DbTable.USERS)
             .update(user!.id, {
                 displayName
             })
