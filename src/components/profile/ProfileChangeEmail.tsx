@@ -1,22 +1,45 @@
-import { Button, Group, Paper, PasswordInput, TextInput, Title } from "@mantine/core";
+import { BackendClientContext } from "@/contexts/BackendClientContext";
+import { DbTable } from "@/types";
+import { AUTO_CLOSE_DEFAULT } from "@/utils/constants";
+import { Button, Group, Paper, Text, TextInput, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useState } from "react";
+import { notifications } from "@mantine/notifications";
+import { useContext, useState } from "react";
 
 export default function ProfileChangeEmail() {
 
+    const { pbClient } = useContext(BackendClientContext);
     const form = useForm({
         initialValues: {
             newEmail: "",
-            password: "",
         }
     });
+    const [hasAttempted, setHasAttempted] = useState(false);
+    const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const handleSubmission = (
-        { newEmail, password }:
-        { password: string, newEmail: string }
+    const [errorMsg, setErrorMsg] = useState("");
+    const handleSubmission = async (
+        { newEmail }:
+        { newEmail: string }
     ) => {
         setIsLoading(true);
-        console.log(newEmail, password)
+        setHasAttempted(true);
+        await pbClient.collection(DbTable.USERS)
+            .requestEmailChange(newEmail)
+            .then((_isSuccessful: boolean) => {
+                setIsSuccessful(true);
+            })
+            .catch(err => {
+                setIsSuccessful(false);
+                setErrorMsg(err.response?.message)
+                notifications.show({
+                    message: "Error requesting email change",
+                    color: "none",
+                    autoClose: AUTO_CLOSE_DEFAULT,
+                    withCloseButton: true,
+                });
+            });
+        setIsLoading(false);
     };
 
     return <Paper className="account-route-modal"
@@ -33,17 +56,6 @@ export default function ProfileChangeEmail() {
                 {...form.getInputProps('newEmail')}
             />
 
-            <PasswordInput mt="md"
-                label="Password confirmation"
-                description="Enter your existing password as verification"
-                required
-                placeholder="IronMaus123"
-                type="password"
-                minLength={8}
-                maxLength={72}
-                {...form.getInputProps('password')}
-            />
-
             <Group
                 mt="md"
                 justify="flex-end"
@@ -55,5 +67,11 @@ export default function ProfileChangeEmail() {
                 </Button>
             </Group>
         </form>
+
+        {(hasAttempted && !isSuccessful) &&
+            <Text c="red">
+                {errorMsg}
+            </Text>
+        }
     </Paper>
 }
