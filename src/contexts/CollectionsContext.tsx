@@ -40,9 +40,8 @@ export default function CollectionsContextProvider({ children }: { children: Rea
         })
         .catch(err => {
             errorCallback?.();
-            console.error(err)
             if (!err.isAbort) {
-                console.warn("Non cancellation error")
+                console.warn("Non cancellation error", err);
             }
         });
     }, [isLoggedIn]);
