@@ -78,7 +78,7 @@ const ItemCreateModal = ({
     return <Stack className="item-create-modal">
         <TextInput className="item-create-modal__input item-create-modal__input--title"
             label="Title"
-            description="Optional, must be or fewer than 200 characters."
+            description={`Optional, must be or fewer than ${MAX_TITLE_LENGTH} characters.`}
             placeholder=""
             type="text"
             maxLength={MAX_TITLE_LENGTH}
@@ -91,7 +91,7 @@ const ItemCreateModal = ({
         <Textarea className="item-create-modal__input item-create-modal__input--content"
             data-autofocus
             label="Content"
-            description="Optional, must be or fewer than 10000 characters."
+            description={`Optional, must be or fewer than ${MAX_CONTENT_LENGTH} characters.`}
             placeholder="Enter your note content here"
             autosize
             maxLength={MAX_CONTENT_LENGTH}

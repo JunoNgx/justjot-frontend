@@ -168,7 +168,7 @@ export default function ItemUpdateModal(
                 ? "Title"
                 : "Todo task name"
             }
-            description="Optional, must be or fewer than 200 characters."
+            description={`Optional, must be or fewer than ${MAX_TITLE_LENGTH} characters.`}
             placeholder=""
             type="text"
             maxLength={MAX_TITLE_LENGTH}
@@ -186,7 +186,7 @@ export default function ItemUpdateModal(
             <Textarea className="item-update-modal__input item-update-modal__input--content"
                 data-autofocus
                 label="Content"
-                description="Optional, must be or fewer than 10000 characters."
+                description={`Optional, must be or fewer than ${MAX_CONTENT_LENGTH} characters.`}
                 placeholder="Enter your note content here"
                 autosize
                 maxLength={MAX_CONTENT_LENGTH}
