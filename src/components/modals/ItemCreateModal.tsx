@@ -63,7 +63,7 @@ const ItemCreateModal = ({
             variant="default"
             onClick={() => setIsConfirmExit(false)}
         >
-            Unconfirm
+            Back
         </Button>
 
         <Button
@@ -71,7 +71,7 @@ const ItemCreateModal = ({
             color="red"
             onClick={() => context.closeModal(id)}
         >
-            Abandon progress
+            Confirm exit
         </Button>
     </>;
 
