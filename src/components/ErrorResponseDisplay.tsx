@@ -26,8 +26,9 @@ export default function ErrorResponseDisplay(
     };
     
     const hasMainError = !!errRes;
+    const statusCode = errRes?.code || errRes?.status;
     const mainErrorDisplay = (
-        <Text c="orange" mt="xs">{errRes?.code}: {errRes?.message}</Text>
+        <Text c="orange" mt="xs">Code {statusCode}: {errRes?.message}</Text>
     );
 
     const problemList = tryTranscribeDataToProblemList(errRes?.data);
