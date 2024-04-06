@@ -78,6 +78,7 @@ header {
 .account-route-modal {
     margin: 0 auto;
     max-width: 320px;
+    border-color: var(--mantine-color-text);
 
     &--register {
         margin-bottom: 60px;
