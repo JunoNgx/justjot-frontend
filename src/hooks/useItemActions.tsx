@@ -11,7 +11,7 @@ import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import { ClientResponseError } from "pocketbase";
 import { useClipboard } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
-import ItemCreateUpdateModal from "@/components/modals/ItemCreateUpdateModal";
+import ItemUpdateModal from "@/components/modals/ItemUpdateModal";
 import ItemMoveModal from "@/components/modals/ItemMoveModal";
 import { findIndexById } from "@/utils/itemUtils";
 
@@ -219,7 +219,7 @@ export default function useItemActions() {
             title: "Edit item",
             centered: true,
             size: "50rem",
-            children: (<ItemCreateUpdateModal
+            children: (<ItemUpdateModal
                 item={item}
             />),
         });
