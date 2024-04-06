@@ -33,32 +33,32 @@ export default function CollectionsContextProvider({ children }: { children: Rea
         if (!isLoggedIn) return;
 
         await pbClient
-        .cancelRequest("collection-get-all")
-        .collection(DbTable.COLLECTIONS)
-        .getFullList({
-            sort: "sortOrder",
-            requestKey: "collection-get-all",
-        })
-        .then((records: ItemCollection[]) => {
-            successfulCallback?.();
-            setCollections(records);
-        })
-        .catch((err: ClientResponseError) => {
-            errorCallback?.();
-            console.log(JSON.stringify(err))
-            if (!err.isAbort) {
-                console.warn("Non cancellation error");
-            }
+            .cancelRequest("collection-get-all")
+            .collection(DbTable.COLLECTIONS)
+            .getFullList({
+                sort: "sortOrder",
+                requestKey: "collection-get-all",
+            })
+            .then((records: ItemCollection[]) => {
+                successfulCallback?.();
+                setCollections(records);
+            })
+            .catch((err: ClientResponseError) => {
+                errorCallback?.();
+                console.log(JSON.stringify(err))
+                if (!err.isAbort) {
+                    console.warn("Non cancellation error");
+                }
 
-            // if (!err.url && !err.status) {
-            //     notifications.show({
-            //         message: "Error fetching collections. Your authorization token might have expired. Re-login is recommended.",
-            //         color: "red",
-            //         autoClose: AUTO_CLOSE_ERROR_TOAST,
-            //         withCloseButton: true,
-            //     });
-            // }
-        });
+                // if (!err.url && !err.status) {
+                //     notifications.show({
+                //         message: "Error fetching collections. Your authorization token might have expired. Re-login is recommended.",
+                //         color: "red",
+                //         autoClose: AUTO_CLOSE_ERROR_TOAST,
+                //         withCloseButton: true,
+                //     });
+                // }
+            });
     }, [isLoggedIn]);
 
     return <CollectionsContext.Provider value=
