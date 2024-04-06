@@ -13,7 +13,7 @@ export default function HeaderUser() {
 
     const attemptLogout = () => {
         logout();
-        navigate("/", { replace: true});
+        navigate("/login", { replace: true});
     };
 
     const iconProps = useIconPropsFromTheme();
