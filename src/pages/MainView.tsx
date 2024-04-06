@@ -11,9 +11,8 @@ import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 import CollectionMenu from "@/components/CollectionMenu";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
-import ItemComponent from "@/components/itemComponent/ItemComponent";
-import ItemSkeleton from "@/components/itemComponent/ItemSkeleton";
 import useItemNavActions from "@/hooks/useItemNavActions";
+import MainContentList from "@/components/MainContentList";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -95,17 +94,6 @@ export default function MainView() {
         tryRetrackCurrentSelectedIndexWithId(currCollection);
     }, [currCollection, collections]);
 
-    const filteredItemList = filteredItems?.map((item, index) =>
-        <ItemComponent
-            key={item.id}
-            item={item}
-            index={index}
-        />
-    );
-    const skeletonList = Array(7).fill(null).map((_, index) => 
-        <ItemSkeleton key={index}/>
-    );
-
     return <Box className="main-view-wrapper">
         {/* For non-item components */}
         <CollectionMenu isInMainView={true} />
@@ -128,10 +116,10 @@ export default function MainView() {
                 id="displayed-list"
                 gap="xs"
             >
-                {isLoading
-                    ? skeletonList
-                    : filteredItemList
-                }
+                <MainContentList
+                    isLoading={isLoading}
+                    filteredItems={filteredItems}
+                />
             </Stack>
         </Stack>
     </Box>
