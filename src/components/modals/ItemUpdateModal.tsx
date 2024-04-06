@@ -7,7 +7,7 @@ import { ItemsContext } from "@/contexts/ItemsContext";
 import useItemApiCalls from "@/hooks/useItemApiCalls";
 import useManageListState from "@/libs/useManageListState";
 import { notifications } from "@mantine/notifications";
-import { AUTO_CLOSE_ERROR_TOAST, MAX_CONTENT_LENGTH } from "@/utils/constants";
+import { AUTO_CLOSE_ERROR_TOAST, MAX_CONTENT_LENGTH, MAX_TITLE_LENGTH } from "@/utils/constants";
 import { ClientResponseError } from "pocketbase";
 import { findIndexById } from "@/utils/itemUtils";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
@@ -171,7 +171,7 @@ export default function ItemUpdateModal(
             description="Optional, must be or fewer than 200 characters."
             placeholder=""
             type="text"
-            maxLength={MAX_CONTENT_LENGTH}
+            maxLength={MAX_TITLE_LENGTH}
             value={titleVal}
             onChange={handleTitleChange}
             onKeyDown={getHotkeyHandler([
@@ -179,7 +179,7 @@ export default function ItemUpdateModal(
             ])}
         />
         <Group justify="flex-end">
-            <Text>{titleVal.length}/{MAX_CONTENT_LENGTH}</Text>
+            <Text>{titleVal.length}/{MAX_TITLE_LENGTH}</Text>
         </Group>
 
         {isTodoItem && <>
