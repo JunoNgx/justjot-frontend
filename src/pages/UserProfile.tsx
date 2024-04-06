@@ -1,3 +1,4 @@
+import ProfileUpdateDisplayName from "@/components/profile/ProfileChangeDisplayName";
 import ProfileChangeEmail from "@/components/profile/ProfileChangeEmail";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { Box } from "@mantine/core";
@@ -12,6 +13,7 @@ export default function UserProfile() {
     });
 
     return <Box>
+        <ProfileUpdateDisplayName/>
         <ProfileChangeEmail/>
     </Box>
 };
