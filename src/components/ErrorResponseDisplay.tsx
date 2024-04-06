@@ -31,10 +31,22 @@ export default function ErrorResponseDisplay(
         <Text c="orange" mt="xs">Code {statusCode}: {errRes?.message}</Text>
     );
 
-    const problemList = tryTranscribeDataToProblemList(errRes?.data);
+    /**
+     * Crawling the potential data properties to find the error info.
+     * This is terrible, but Pocketbase unfortunately does not respond errors
+     * in a consistent way.
+     */
+    let problemList = tryTranscribeDataToProblemList(errRes?.data);
+    if (!problemList[0]) {
+        problemList = tryTranscribeDataToProblemList(errRes?.response.data);
+    }
+    if (!problemList[0]) {
+        problemList = tryTranscribeDataToProblemList(errRes?.data.data);
+    }
+
     const hasProblemList = !!problemList.length;
     const problemListDisplay = (
-        <Stack mt="xs">
+        <Stack mt="lg">
             {problemList.map((problem, index) =>
                 <Text key={index} c="red">{problem}</Text>
             )}
