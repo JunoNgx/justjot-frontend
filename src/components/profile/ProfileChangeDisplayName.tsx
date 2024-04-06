@@ -29,6 +29,7 @@ export default function ProfileChangeDisplayName() {
             .then((record: User) => {
                 setUser(record);
                 setIsSuccessful(true);
+                form.setFieldValue("displayName", "");
             })
             .catch(err => {
                 setIsSuccessful(false);
