@@ -1,7 +1,7 @@
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useItemActions from "@/hooks/useItemActions";
 import { MAX_TITLE_LENGTH, MAX_CONTENT_LENGTH } from "@/utils/constants";
-import { Button, Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
+import { Button, Flex, Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { getHotkeyHandler } from "@mantine/hooks";
 import { ContextModalProps } from '@mantine/modals';
@@ -68,12 +68,13 @@ const ItemCreateModal = ({
                 ["mod+S", handleCreate, {preventDefault: true}]
             ])}
         />
-        <Group justify="flex-end">
-            <Stack align="flex-end" gap="xs">
-                <Text>{form.values.content.length}/{MAX_CONTENT_LENGTH}</Text>
-                {isFocusedOnContentInput && <Text> Create <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>}
-            </Stack>
-        </Group>
+        <Flex
+            direction="row-reverse"
+            justify="space-between"
+        >
+            <Text>{form.values.content.length}/{MAX_CONTENT_LENGTH}</Text>
+            {isFocusedOnContentInput && <Text> Create <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>}
+        </Flex>
 
         <Group justify="space-around" mt="lg">
             <Button
