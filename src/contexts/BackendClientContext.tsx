@@ -7,7 +7,6 @@ type BackendClientContextType = {
     user: AuthModel & User,
     setUser: React.Dispatch<SetStateAction<User>>,
     isLoggedIn: boolean,
-    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
     logout: () => void,
 };
 
@@ -17,20 +16,18 @@ export const BackendClientContext = createContext<BackendClientContextType>(
 export default function BackendClientContextProvider({ children }: { children: ReactNode }) {
     const pbClient = new PocketBase(import.meta.env.VITE_BACKEND_URL);
 
-    const [isLoggedIn, setIsLoggedIn] = useState(pbClient.authStore.isValid);
     const [user, setUser] = useState<User>(pbClient.authStore.model as User);
 
     const logout = useCallback(() => {
         pbClient.authStore.clear();
-        setIsLoggedIn(false);
+        setUser(null);
     }, []);
 
     return <BackendClientContext.Provider value={{
         pbClient,
         user,
         setUser,
-        isLoggedIn,
-        setIsLoggedIn,
+        isLoggedIn: !!user,
         logout,
     }}>
         {children}
