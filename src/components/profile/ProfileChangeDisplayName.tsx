@@ -1,22 +1,40 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
+import { DbTable, User } from "@/types";
 import { Button, Group, Paper, Text, TextInput, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useContext, useState } from "react";
 
 export default function ProfileChangeDisplayName() {
 
-    const { user } = useContext(BackendClientContext);
+    const { user, setUser, pbClient } = useContext(BackendClientContext);
     const form = useForm({
         initialValues: {
             displayName: "",
         }
     });
+    const [hasAttempted, setHasAttempted] = useState(false);
+    const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
     const handleSubmission = (
         { displayName }:
         { displayName: string }
     ) => {
-        console.log(displayName)
+        setIsLoading(true);
+        setHasAttempted(true);
+        pbClient.collection(DbTable.USERS)
+            .update(user!.id, {
+                displayName
+            })
+            .then((record: User) => {
+                setUser(record);
+                setIsSuccessful(true);
+            })
+            .catch(err => {
+                setIsSuccessful(false);
+                setErrorMsg(err)
+            });
+        setIsLoading(false);
     };
 
     return <Paper className="account-route-modal"
@@ -31,7 +49,7 @@ export default function ProfileChangeDisplayName() {
             }
 
             <TextInput mt="md"
-                label="Display name"
+                label="New display name"
                 description="How you would like to display yourself, as an alternative to your username. Can be blank."
                 type="text"
                 {...form.getInputProps('displayName')}
@@ -48,5 +66,11 @@ export default function ProfileChangeDisplayName() {
                 </Button>
             </Group>
         </form>
+
+        {(hasAttempted && !isSuccessful) &&
+            <Text mt="lg" c="red">
+                {errorMsg}
+            </Text>
+        }
     </Paper>
 };
