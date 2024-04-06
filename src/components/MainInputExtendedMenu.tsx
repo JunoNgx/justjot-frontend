@@ -16,7 +16,7 @@ export default function MainInputExtendedMenu(
     const enterFromClipboard = () => {
         if (!navigator.clipboard.readText) {
             notifications.show({
-                message: "Browser does not support clipboard access",
+                message: "Clipboard access is not provided by the browser",
                 color: "none",
                 autoClose: AUTO_CLOSE_DEFAULT,
                 withCloseButton: true,
