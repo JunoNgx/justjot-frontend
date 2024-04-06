@@ -7,6 +7,6 @@ export default function ProfileChangePassword() {
     >
         <Title order={3}>Change password</Title>
         
-        For password change requests, please use the <Anchor component={Link} to="/reset">password rest form</Anchor>.
+        For password changes, please use the <Anchor component={Link} to="/reset">password reset form</Anchor>.
     </Paper>
 };
