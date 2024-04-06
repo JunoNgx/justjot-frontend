@@ -225,6 +225,21 @@ export default function useItemActions() {
         });
     };
 
+    const openCreateItemModal = (title: string) => {
+        modals.openContextModal({
+            modal: "itemCreateModal",
+            title: "Create item",
+            centered: true,
+            size: "50rem",
+            closeOnEscape: false,
+            closeOnClickOutside: false,
+            withCloseButton: false,
+            innerProps: {
+                passedTitle: title
+            }
+        });
+    };
+
     const openMoveItemModal = async (
         {item, collectionList}: {item: Item, collectionList: ItemCollection[] }
     ) => {
@@ -306,6 +321,7 @@ export default function useItemActions() {
         createItemWithOptimisticUpdate,
         deleteItemWithOptimisticUpdate,
         copyItemContent,
+        openCreateItemModal,
         openUpdateItemModal,
         openMoveItemModal,
         refetchLink,
