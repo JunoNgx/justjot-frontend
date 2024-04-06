@@ -54,12 +54,10 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
     const moveItemToCollection = (
         { itemId, collectionId }: { itemId: string, collectionId: string }
     ) => {
-        setIsLoading(true);
         moveItem({
             itemId,
             collectionId,
-            // TODO: Figure out why this line breaks things
-            // setLoadingState: setIsLoading,
+            setLoadingState: setIsLoading,
             successfulCallback: handleSuccessfulMove,
             errorCallback: handleErroredMove
         });
@@ -77,7 +75,6 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
             withCloseButton: true,
         });
 
-        setIsLoading(false);
         modals.closeAll();
     };
 
