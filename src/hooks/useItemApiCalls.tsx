@@ -114,7 +114,6 @@ export default function useItemApiCalls() {
     const deleteItem = async ({
         item, successfulCallback, errorCallback, setLoadingState
     }: {item: Item,} & ApiRequestCallbackOptions) => {
-
         setLoadingState?.(true);
         await pbClient.collection(DbTable.ITEMS)
             .delete(item.id)
