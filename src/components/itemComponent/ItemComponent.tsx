@@ -1,5 +1,3 @@
-// import styled from 'styled-components';
-
 import { useContext } from "react";
 import { Item, ItemType } from "@/types";
 import { Box, Center, Group, Text } from "@mantine/core";
