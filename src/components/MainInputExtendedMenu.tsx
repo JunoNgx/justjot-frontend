@@ -3,7 +3,7 @@ import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TODO_PREFIX } from "@/utils/constants";
 import { Box, Menu } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { IconCheckbox, IconChevronDown, IconClipboardPlus, IconLayoutNavbar } from "@tabler/icons-react";
+import { IconCheckbox, IconChevronDown, IconClipboardPlus, IconLayoutNavbar, IconX } from "@tabler/icons-react";
 import { useContext } from "react";
 
 export default function MainInputExtendedMenu(
@@ -74,6 +74,13 @@ export default function MainInputExtendedMenu(
                 onClick={enterFromClipboard}
             >
                 from clipboard
+            </Menu.Item>
+
+            <Menu.Item
+                leftSection={<IconX {...iconProps} />}
+                onClick={() => {setInputVal("")}}
+            >
+                clear input
             </Menu.Item>
         </Menu.Dropdown>
     </Menu>
