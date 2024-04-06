@@ -32,7 +32,9 @@ export default function HeaderUser() {
         </Menu.Target>
 
         <Menu.Dropdown className="dropdown-menu">
-            <Menu.Item leftSection={<IconSettings {...iconProps} />}
+            <Menu.Item
+                leftSection={<IconSettings {...iconProps} />}
+                onClick={() => navigate("/profile")}
             >
                 User settings
             </Menu.Item>
