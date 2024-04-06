@@ -2,7 +2,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Box, Stack } from '@mantine/core';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Notifications } from '@mantine/notifications';
 import MainInput from "@/components/MainInput";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
@@ -103,12 +102,6 @@ export default function MainView() {
             p="sm"
             onFocus={() => tryRoutineUpdate()}
         >
-            <Notifications className="notifications-container"
-                limit={5}
-                position="bottom-center"
-                autoClose={1000}
-            />
-
             <MainInput
                 ref={mainInputRef}
             />

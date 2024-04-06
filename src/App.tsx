@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { AppShell } from '@mantine/core';
 import { ContextMenuProvider } from 'mantine-contextmenu';
 import { ModalsProvider } from '@mantine/modals';
+import { Notifications } from "@mantine/notifications";
 
 import ThemeModeContextProvider from "@/contexts/ThemeModeContext";
 import BackendClientContextProvider from "@/contexts/BackendClientContext";
@@ -50,6 +51,12 @@ function App() {
                                 }}
                             >
                                 <ContextMenuProvider>
+
+                                    <Notifications className="notifications-container"
+                                        limit={5}
+                                        position="bottom-center"
+                                        autoClose={1000}
+                                    />
 
                                     <AppShell.Header className="appshell-header">
                                         <Header/>
