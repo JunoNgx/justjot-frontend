@@ -1,4 +1,4 @@
-import { Anchor, Paper, Title } from "@mantine/core";
+import { Anchor, Paper, Text, Title } from "@mantine/core";
 import { Link } from "react-router-dom";
 
 export default function ProfileChangePassword() {
@@ -7,6 +7,6 @@ export default function ProfileChangePassword() {
     >
         <Title order={3}>Change password</Title>
         
-        For password changes, please use the <Anchor component={Link} to="/reset">password reset form</Anchor>.
+        <Text>For password changes, please use the <Anchor component={Link} to="/reset">password reset form</Anchor>.</Text>
     </Paper>
 };
