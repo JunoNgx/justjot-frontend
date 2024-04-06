@@ -3,7 +3,7 @@
 import { useContext } from "react";
 import { Item, ItemType } from "@/types";
 import { Box, Center, Group, Text } from "@mantine/core";
-import { useContextMenu } from '@/libs/mantine-contextmenu';
+import { useContextMenu } from 'mantine-contextmenu';
 import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCreatedDate";
 import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
 import useHandleContextMenuWithLongPress from "@/libs/useHandleContextMenuWithLongPress";

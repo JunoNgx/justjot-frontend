@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { AppShell } from '@mantine/core';
-import { ContextMenuProvider } from '@/libs/mantine-contextmenu';
+import { ContextMenuProvider } from 'mantine-contextmenu';
 import { ModalsProvider } from '@mantine/modals';
 
 import ThemeModeContextProvider from "@/contexts/ThemeModeContext";
@@ -19,10 +19,10 @@ import Reset from "@/pages/Reset";
 
 import "@mantine/core/styles.css";
 import '@mantine/notifications/styles.css';
-import "@/libs/mantine-contextmenu/styles.css";
+import "mantine-contextmenu/styles.css";
 
 import '@mantine/core/styles.layer.css';
-import '@/libs/mantine-contextmenu/styles.layer.css';
+import 'mantine-contextmenu/styles.layer.css';
 import '@/styles/layers.css';
 
 import "@/styles/main.scss";
