@@ -11,7 +11,7 @@ const ItemCreateModal = ({
     context,
     id,
     innerProps
-}: ContextModalProps <{ passedTitle: string }>) => {
+}: ContextModalProps<{ passedTitle: string }>) => {
 
     const form = useForm({
         initialValues: {
@@ -21,7 +21,7 @@ const ItemCreateModal = ({
     });
     const { createItemWithOptimisticUpdate } = useItemActions();
     const { setInputVal } = useContext(ItemsContext);
-    const [ isFocusedOnContentInput, setIsFocusedOnContentInput ] = useState(false);
+    const [isFocusedOnContentInput, setIsFocusedOnContentInput] = useState(false);
 
     const handleClose = () => {
         // BUG: will revert form back to initial values
@@ -33,7 +33,7 @@ const ItemCreateModal = ({
                     <Text>You have not saved your progress. Exiting will abandon your changes.</Text>
                 ),
                 labels: { confirm: "Abandon changes", cancel: "Canel" },
-                onConfirm: () => {context.closeModal(id)},
+                onConfirm: () => { context.closeModal(id) },
             })
 
             return;
@@ -50,6 +50,14 @@ const ItemCreateModal = ({
         context.closeModal(id);
         setInputVal("");
     };
+
+    const exitButton = <Button
+        variant="default"
+        color="grey"
+        onClick={handleClose}
+    >
+        Exit
+    </Button>
 
     return <Stack className="item-create-modal">
         <TextInput className="item-create-modal__input item-create-modal__input--title"
@@ -79,7 +87,7 @@ const ItemCreateModal = ({
             onBlur={() => setIsFocusedOnContentInput(false)}
 
             onKeyDown={getHotkeyHandler([
-                ["mod+S", handleCreate, {preventDefault: true}]
+                ["mod+S", handleCreate, { preventDefault: true }]
             ])}
         />
         <Flex
@@ -90,15 +98,9 @@ const ItemCreateModal = ({
             {isFocusedOnContentInput && <Text> Create <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>}
         </Flex>
 
+        {form.isDirty()}
         <Group justify="space-around" mt="lg">
-            <Button
-                variant="filled"
-                color="grey"
-                onClick={handleClose}
-            >
-                Cancel
-            </Button>
-
+            {exitButton}
             <Button
                 onClick={handleCreate}
             >
