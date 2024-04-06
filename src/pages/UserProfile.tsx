@@ -1,6 +1,6 @@
 import ProfileChangeDisplayName from "@/components/profile/ProfileChangeDisplayName";
 import ProfileChangeEmail from "@/components/profile/ProfileChangeEmail";
-// import ProfileChangePassword from "@/components/profile/ProfileChangePassword";
+import ProfileChangePassword from "@/components/profile/ProfileChangePassword";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { Box } from "@mantine/core";
@@ -27,8 +27,8 @@ export default function UserProfile() {
         {isLoggedIn &&
             <>
                 <ProfileChangeDisplayName/>
-                {/* <ProfileChangePassword/> */}
                 <ProfileChangeEmail/>
+                <ProfileChangePassword/>
             </>
         }
     </Box>
