@@ -15,7 +15,7 @@ export default function useItemApiCalls() {
         }: CreateItemOptions
     ) => {
         setLoadingState?.(true);
-        pbClient.collection(DbTable.ITEMS)
+        await pbClient.collection(DbTable.ITEMS)
             .create({
                 owner: user!.id,
                 collection: currCollection!.id,
@@ -37,7 +37,7 @@ export default function useItemApiCalls() {
         }: MoveItemOptions
     ) => {
         setLoadingState?.(true);
-        pbClient
+        await pbClient
             .collection(DbTable.ITEMS)
             .update(itemId,
                 { collection: collectionId },
@@ -58,7 +58,7 @@ export default function useItemApiCalls() {
         }: UpdateItemTitleOptions
     ) => {
         setLoadingState?.(true);
-        pbClient.collection(DbTable.ITEMS)
+        await pbClient.collection(DbTable.ITEMS)
             .update(itemId, { title })
             .then((record: Item) => {
                 successfulCallback?.(record);
@@ -75,7 +75,7 @@ export default function useItemApiCalls() {
         }: UpdateItemContentOptions
     ) => {
         setLoadingState?.(true);
-        pbClient.collection(DbTable.ITEMS)
+        await pbClient.collection(DbTable.ITEMS)
             .update(itemId, { content })
             .then((_record: Item) => {
                 successfulCallback?.();
@@ -96,7 +96,7 @@ export default function useItemApiCalls() {
         }: UpdateItemTitleAndContentOptions
     ) => {
         setLoadingState?.(true);
-        pbClient
+        await pbClient
             .collection(DbTable.ITEMS)
             .update(itemId,
                 { title, content },
@@ -131,7 +131,7 @@ export default function useItemApiCalls() {
         { item: Item } & ApiRequestCallbackOptions
     ) => {
         setLoadingState?.(true);
-        pbClient.send(`refetch/${user!.id}/${item!.id}`, {
+        await pbClient.send(`refetch/${user!.id}/${item!.id}`, {
             method: "PATCH",
             authorization: pbClient.authStore.token
         })
@@ -149,7 +149,7 @@ export default function useItemApiCalls() {
         { item: Item, shouldCopyOnClick: boolean } & ApiRequestCallbackOptions
     ) => {
         setLoadingState?.(true);
-        pbClient.collection(DbTable.ITEMS)
+        await pbClient.collection(DbTable.ITEMS)
             .update(item.id,
                 {shouldCopyOnClick},
                 {requestKey: null},
@@ -168,7 +168,7 @@ export default function useItemApiCalls() {
         { item: Item, isTodoDone: boolean } & ApiRequestCallbackOptions
     ) => {
         setLoadingState?.(true);
-        pbClient.collection(DbTable.ITEMS)
+        await pbClient.collection(DbTable.ITEMS)
             .update(item.id,
                 {isTodoDone: isTodoDone},
                 {requestKey: null},
@@ -187,7 +187,7 @@ export default function useItemApiCalls() {
         { item: Item } & ApiRequestCallbackOptions
     ) => {
         setLoadingState?.(true);
-        pbClient.collection(DbTable.ITEMS)
+        await pbClient.collection(DbTable.ITEMS)
             .update(item.id,
                 {
                     title: item.content.slice(0, MAX_TITLE_LENGTH),
