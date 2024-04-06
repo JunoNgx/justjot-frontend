@@ -27,6 +27,7 @@ import '@/styles/layers.css';
 
 import "@/styles/main.scss";
 import InfoModal from "@/components/modals/InfoModal";
+import ItemCreateModal from "./components/modals/ItemCreateModal";
 
 function App() {
 
@@ -42,7 +43,10 @@ function App() {
                         <ItemsContextProvider>
 
                             <ModalsProvider
-                                modals={{ infoModal: InfoModal}}
+                                modals={{
+                                    infoModal: InfoModal,
+                                    itemCreateModal: ItemCreateModal
+                                }}
                             >
                                 <ContextMenuProvider>
 
