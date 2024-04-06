@@ -3,12 +3,12 @@ import { Paper, TextInput, Button, Title, Group, Text, PasswordInput, Anchor } f
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
-import { DbTable } from '@/types';
+import { DbTable, User } from '@/types';
 
 type LoginFormData = {email: string, password: string};
 
 export default function Login() {
-    const { pbClient, isLoggedIn } = useContext(BackendClientContext);
+    const { pbClient, setUser, isLoggedIn } = useContext(BackendClientContext);
 
     useEffect(() => {
         if (isLoggedIn) navigateToMainView();
@@ -38,13 +38,14 @@ export default function Login() {
             loginForm.email,
             loginForm.password
         )
-        .then(() => {
+        .then((res: {token: string, record: User}) => {
+            setUser(res?.record)
             setIsSuccessful(true);
             navigateToMainView();
         })
         .catch((error) => {
             setIsSuccessful(false);
-            setErrorMsg(error.response.message)
+            setErrorMsg(error.response?.message)
         });
         setIsLoading(false);
         setHasAttempted(true);
