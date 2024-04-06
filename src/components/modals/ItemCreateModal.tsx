@@ -4,7 +4,7 @@ import { MAX_TITLE_LENGTH, MAX_CONTENT_LENGTH } from "@/utils/constants";
 import { Button, Flex, Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { getHotkeyHandler } from "@mantine/hooks";
-import { ContextModalProps, modals } from '@mantine/modals';
+import { ContextModalProps } from '@mantine/modals';
 import { useContext, useState } from "react";
 
 const ItemCreateModal = ({
@@ -22,20 +22,11 @@ const ItemCreateModal = ({
     const { createItemWithOptimisticUpdate } = useItemActions();
     const { setInputVal } = useContext(ItemsContext);
     const [isFocusedOnContentInput, setIsFocusedOnContentInput] = useState(false);
+    const [isConfirmingExit, setIsConfirmExit] = useState(false);
 
-    const handleClose = () => {
-        // BUG: will revert form back to initial values
+    const handleExit = () => {
         if (form.isDirty()) {
-            modals.openConfirmModal({
-                title: "Confirm cancelation",
-                centered: true,
-                children: (
-                    <Text>You have not saved your progress. Exiting will abandon your changes.</Text>
-                ),
-                labels: { confirm: "Abandon changes", cancel: "Canel" },
-                onConfirm: () => { context.closeModal(id) },
-            })
-
+            setIsConfirmExit(true);
             return;
         }
 
@@ -51,13 +42,38 @@ const ItemCreateModal = ({
         setInputVal("");
     };
 
-    const exitButton = <Button
-        variant="default"
-        color="grey"
-        onClick={handleClose}
-    >
-        Exit
-    </Button>
+    const normalButtonButton = <>
+        <Button
+            variant="default"
+            color="grey"
+            onClick={handleExit}
+        >
+            Exit
+        </Button>
+
+        <Button
+            onClick={handleCreate}
+        >
+            Create
+        </Button>
+    </>;
+
+    const confirmExitButtonGroup = <>
+        <Button
+            variant="default"
+            onClick={() => setIsConfirmExit(false)}
+        >
+            Unconfirm
+        </Button>
+
+        <Button
+            variant="filled"
+            color="red"
+            onClick={() => context.closeModal(id)}
+        >
+            Abandon progress
+        </Button>
+    </>;
 
     return <Stack className="item-create-modal">
         <TextInput className="item-create-modal__input item-create-modal__input--title"
@@ -98,15 +114,18 @@ const ItemCreateModal = ({
             {isFocusedOnContentInput && <Text> Create <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>}
         </Flex>
 
-        {form.isDirty()}
-        <Group justify="space-around" mt="lg">
-            {exitButton}
-            <Button
-                onClick={handleCreate}
-            >
-                Create
-            </Button>
+        {isConfirmingExit &&
+            <Text ta="right">
+                You have not saved. Exiting will abandon your changes.
+            </Text>
+        }
+        <Group justify="flex-end">
+            {isConfirmingExit
+                ? confirmExitButtonGroup
+                : normalButtonButton
+            }
         </Group>
+
     </Stack>
 };
 
