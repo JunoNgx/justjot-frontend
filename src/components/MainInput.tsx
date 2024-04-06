@@ -10,6 +10,7 @@ import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import MainInputExtendedMenu from "./MainInputExtendedMenu";
+import { CREATE_TEXT_WITH_TITLE_PREFIX } from "@/utils/constants";
 
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { collections } = useContext(CollectionsContext);
@@ -32,6 +33,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     } = useItemNavActions();
     const {
         copyItemContent,
+        openCreateItemModal,
         openUpdateItemModal,
         deleteItemWithOptimisticUpdate,
         openMoveItemModal,
@@ -44,14 +46,18 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const {
         createItemWithOptimisticUpdate
     } = useItemActions();
-
     const handleEnter = () => {
         if (!inputVal) return;
-        setInputVal("");
-        createItemWithOptimisticUpdate({
-            content: inputVal,
-        });
 
+        if (inputVal.startsWith(CREATE_TEXT_WITH_TITLE_PREFIX)) {
+            openCreateItemModal(inputVal.substring(
+                CREATE_TEXT_WITH_TITLE_PREFIX.length).trim());
+            return;
+        }
+
+        createItemWithOptimisticUpdate({ content: inputVal });
+
+        setInputVal("");
         if (selectedIndex === -1) return;
         setSelectedIndex(curr => curr + 1);
     };
