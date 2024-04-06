@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { Group, Menu, Text, UnstyledButton } from "@mantine/core";
+import { Group, Menu, MenuDivider, Text, UnstyledButton } from "@mantine/core";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { useNavigate } from "react-router-dom";
-import { IconChevronDown, IconLogout, IconSettings } from "@tabler/icons-react";
+import { IconChevronDown, IconHelp, IconLogout, IconSettings } from "@tabler/icons-react";
 import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 
 export default function HeaderUser() {
@@ -32,6 +32,15 @@ export default function HeaderUser() {
         </Menu.Target>
 
         <Menu.Dropdown className="dropdown-menu">
+            <Menu.Item
+                leftSection={<IconHelp {...iconProps} />}
+                onClick={() => navigate("/help")}
+            >
+                Help
+            </Menu.Item>
+
+            <MenuDivider/>
+
             <Menu.Item
                 leftSection={<IconSettings {...iconProps} />}
                 onClick={() => navigate("/profile")}
