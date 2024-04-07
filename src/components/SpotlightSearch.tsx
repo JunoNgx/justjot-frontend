@@ -4,7 +4,7 @@ import useCollectionNavActions from '@/hooks/useCollectionNavActions';
 import useIconProps from '@/hooks/useIconProps';
 import { ThemeMode } from '@/types';
 import { Spotlight, SpotlightActionData, SpotlightActionGroupData } from '@mantine/spotlight';
-import { IconEdit, IconFolder, IconFolderPlus, IconHelp, IconLogout, IconMoon, IconSettingsCog, IconSortAscendingShapes, IconSun, IconTrash, IconUserCog } from '@tabler/icons-react';
+import { IconEdit, IconFolder, IconFolderPlus, IconHelp, IconLogout, IconMoon, IconPassword, IconSettingsCog, IconSortAscendingShapes, IconSun, IconTrash, IconUserCog } from '@tabler/icons-react';
 import { useContext } from 'react';
 import useDeleteCollectionConfirmation from '@/hooks/useDeleteCollectionConfirmation';
 import useCollectionActions from '@/hooks/useCollectionActions';
@@ -42,6 +42,13 @@ export default function SpotlightSearch() {
                 description: "/account",
                 leftSection: <IconUserCog {...spotlightIconProps} />,
                 onClick: () => {navigate("/profile");},
+            },
+            {
+                id: "change-password",
+                label: "Change password",
+                description: "/reset",
+                leftSection: <IconPassword {...spotlightIconProps} />,
+                onClick: () => {navigate("/reset");},
             },
             {
                 id: "logout",
