@@ -21,10 +21,16 @@ export default function useIconPropsFromTheme() {
         stroke: 1.5,
     }
 
+    const mainInputIconProps = {
+        size: 32,
+        stroke: 1,
+    }
+
     return {
         itemIcontProps,
         themeModeIconProps,
         menuIconProps,
+        mainInputIconProps,
         logoIconProps,
     };
 };
