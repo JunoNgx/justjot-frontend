@@ -9,7 +9,7 @@ import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 
 export default function HeaderThemeModeGroup() {
     const { themeMode, setThemeMode } = useContext(ThemeModeContext);
-    const iconProps = useIconPropsFromTheme();
+    const { themeModeIconProps } = useIconPropsFromTheme();
 
     const isThemeModeLight = () => themeMode === ThemeMode.LIGHT;
     const isThemeModeDark = () => themeMode === ThemeMode.DARK;
@@ -26,10 +26,7 @@ export default function HeaderThemeModeGroup() {
             radius="xl"
             onClick={() => {setThemeMode(ThemeMode.AUTO)}}
         >
-            <IconSettingsCog
-                {...iconProps}
-                size={justJotTheme.other.iconSizeThemeMode}
-            />
+            <IconSettingsCog {...themeModeIconProps} />
         </ActionIcon>
         <ActionIcon
             className={"header__theme-mode-btn "
@@ -39,10 +36,7 @@ export default function HeaderThemeModeGroup() {
             radius="xl"
             onClick={() => {setThemeMode(ThemeMode.LIGHT)}}
         >
-            <IconSun
-                {...iconProps}
-                size={justJotTheme.other.iconSizeThemeMode}
-            />
+            <IconSun {...themeModeIconProps} />
         </ActionIcon>
         <ActionIcon
             className={"header__theme-mode-btn "
@@ -52,9 +46,7 @@ export default function HeaderThemeModeGroup() {
             radius="xl"
             onClick={() => {setThemeMode(ThemeMode.DARK)}}
         >
-            <IconMoon
-                {...iconProps}
-                size={justJotTheme.other.iconSizeThemeMode}
+            <IconMoon {...themeModeIconProps} size={justJotTheme.other.iconSizeThemeMode}
             />
         </ActionIcon>
     </Group>
