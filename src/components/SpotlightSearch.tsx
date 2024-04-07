@@ -4,10 +4,11 @@ import useCollectionNavActions from '@/hooks/useCollectionNavActions';
 import useIconProps from '@/hooks/useIconProps';
 import { ThemeMode } from '@/types';
 import { Spotlight, SpotlightActionData, SpotlightActionGroupData } from '@mantine/spotlight';
-import { IconEdit, IconFolder, IconFolderPlus, IconMoon, IconSettingsCog, IconSortAscendingShapes, IconSun, IconTrash } from '@tabler/icons-react';
+import { IconEdit, IconFolder, IconFolderPlus, IconHelp, IconMoon, IconSettingsCog, IconSortAscendingShapes, IconSun, IconTrash, IconUserCog } from '@tabler/icons-react';
 import { useContext } from 'react';
 import useDeleteCollectionConfirmation from '@/hooks/useDeleteCollectionConfirmation';
 import useCollectionActions from '@/hooks/useCollectionActions';
+import { useNavigate } from 'react-router-dom';
 
 export default function SpotlightSearch() {
 
@@ -19,12 +20,27 @@ export default function SpotlightSearch() {
     const {
         openCreateCollectionModal,
         openUpdateCollectionModal,
-        openSortCollectionModal,
+        openSortCollectionModal, 
     } = useCollectionActions();
+    const navigate = useNavigate()
 
     const miscActionGroup: SpotlightActionGroupData = {
         group: "Miscellaneous",
         actions: [
+            {
+                id: "help",
+                label: "Help and User Manual",
+                description: ".help",
+                leftSection: <IconHelp {...spotlightIconProps} />,
+                onClick: () => {navigate("/help");},
+            },
+            {
+                id: "profile",
+                label: "Account management",
+                description: ".account",
+                leftSection: <IconUserCog {...spotlightIconProps} />,
+                onClick: () => {navigate("/profile");},
+            },
             {
                 id: "theme-mode-system",
                 label: "Theme mode: System",
