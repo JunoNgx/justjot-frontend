@@ -33,6 +33,27 @@ export default function SpotlightSearch() {
         group: "Miscellaneous",
         actions: [
             {
+                id: "theme-mode-system",
+                label: "Theme mode: System",
+                description: ".theme-system",
+                leftSection: <IconSettingsCog {...spotlightIconProps} />,
+                onClick: () => {setThemeMode(ThemeMode.AUTO)},
+            },
+            {
+                id: "theme-mode-light",
+                label: "Theme mode: Light",
+                description: ".theme-light",
+                leftSection: <IconSun {...spotlightIconProps} />,
+                onClick: () => {setThemeMode(ThemeMode.LIGHT)}
+            },
+            {
+                id: "theme-mode-dark",
+                label: "Theme mode: Dark",
+                description: ".theme-dark",
+                leftSection: <IconMoon {...spotlightIconProps} />,
+                onClick: () => {setThemeMode(ThemeMode.DARK)}
+            },
+            {
                 id: "help",
                 label: "Help / User Manual",
                 description: "/help",
@@ -59,27 +80,6 @@ export default function SpotlightSearch() {
                 description: ".logout",
                 leftSection: <IconLogout {...spotlightIconProps} />,
                 onClick: logoutAndNavigateToLogin,
-            },
-            {
-                id: "theme-mode-system",
-                label: "Theme mode: System",
-                description: ".theme-system",
-                leftSection: <IconSettingsCog {...spotlightIconProps} />,
-                onClick: () => {setThemeMode(ThemeMode.AUTO)},
-            },
-            {
-                id: "theme-mode-light",
-                label: "Theme mode: Light",
-                description: ".theme-light",
-                leftSection: <IconSun {...spotlightIconProps} />,
-                onClick: () => {setThemeMode(ThemeMode.LIGHT)}
-            },
-            {
-                id: "theme-mode-dark",
-                label: "Theme mode: Dark",
-                description: ".theme-dark",
-                leftSection: <IconMoon {...spotlightIconProps} />,
-                onClick: () => {setThemeMode(ThemeMode.DARK)}
             },
         ]
     };
