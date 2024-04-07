@@ -1,5 +1,5 @@
 import { ThemeModeContext } from '@/contexts/ThemeModeContext';
-import useIconPropsFromTheme from '@/hooks/useIconPropsFromTheme';
+import useIconProps from '@/hooks/useIconProps';
 import { ThemeMode } from '@/types';
 import { Spotlight, SpotlightActionData, SpotlightActionGroupData } from '@mantine/spotlight';
 import { IconMoon, IconSettingsCog, IconSun } from '@tabler/icons-react';
@@ -7,7 +7,7 @@ import { useContext } from 'react';
 
 export default function SpotlightSearch() {
     const { setThemeMode } = useContext(ThemeModeContext);
-    const iconProps = useIconPropsFromTheme();
+    const { spotlightIconProps } = useIconProps();
 
     const themeModeActionGroup: SpotlightActionGroupData = {
         group: "Theme modes",
@@ -15,19 +15,19 @@ export default function SpotlightSearch() {
             {
                 id: "theme-mode-system",
                 label: "Theme mode: system",
-                leftSection: <IconSettingsCog {...iconProps} />,
+                leftSection: <IconSettingsCog {...spotlightIconProps} />,
                 onClick: () => {setThemeMode(ThemeMode.AUTO)},
             },
             {
                 id: "theme-mode-light",
                 label: "Theme mode: light",
-                leftSection: <IconSun {...iconProps} />,
+                leftSection: <IconSun {...spotlightIconProps} />,
                 onClick: () => {setThemeMode(ThemeMode.LIGHT)}
             },
             {
                 id: "theme-mode-system",
                 label: "Theme mode: dark",
-                leftSection: <IconMoon {...iconProps} />,
+                leftSection: <IconMoon {...spotlightIconProps} />,
                 onClick: () => {setThemeMode(ThemeMode.DARK)}
             },
         ]
