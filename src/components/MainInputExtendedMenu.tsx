@@ -2,9 +2,10 @@ import { ItemsContext } from "@/contexts/ItemsContext";
 import useIconProps from "@/hooks/useIconProps";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TODO_PREFIX } from "@/utils/constants";
-import { Box, Menu } from "@mantine/core";
+import { Box, Menu, MenuDivider } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { IconCheckbox, IconChevronDown, IconClipboardPlus, IconLayoutNavbar, IconX } from "@tabler/icons-react";
+import { spotlight } from "@mantine/spotlight";
+import { IconCheckbox, IconChevronDown, IconClipboardPlus, IconFocus, IconLayoutNavbar, IconX } from "@tabler/icons-react";
 import { useContext } from "react";
 
 type MainInputExtendedMenuOptions = {
@@ -106,6 +107,15 @@ export default function MainInputExtendedMenu(
                 }}
             >
                 clear input
+            </Menu.Item>
+
+            <MenuDivider/>
+
+            <Menu.Item
+                leftSection={<IconFocus {...menuIconProps} />}
+                onClick={() => {spotlight.open()}}
+            >
+                spotlight
             </Menu.Item>
         </Menu.Dropdown>
     </Menu>
