@@ -1,4 +1,3 @@
-import SpotlightSearch from "@/components/SpotlightSearch";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { useContext, useEffect } from "react";
 
@@ -11,6 +10,5 @@ export default function Help() {
 
     return <>
         <h1>Help route</h1>
-        <SpotlightSearch/>
     </>
 }

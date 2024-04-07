@@ -16,6 +16,7 @@ import MainView from "@/pages/MainView";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Reset from "@/pages/Reset";
+import Profile from "@/pages/Profile";
 
 import "@mantine/core/styles.css";
 import '@mantine/notifications/styles.css';
@@ -29,7 +30,7 @@ import '@/styles/layers.css';
 import "@/styles/main.scss";
 import InfoModal from "@/components/modals/InfoModal";
 import ItemCreateModal from "./components/modals/ItemCreateModal";
-import Profile from "@/pages/Profile";
+import SpotlightSearch from "./components/SpotlightSearch";
 
 function App() {
 
@@ -74,6 +75,7 @@ function App() {
                                         <Route path="/register" element={<Register />} />
                                         <Route path="/reset" element={<Reset />} />
                                     </Routes>
+                                    <SpotlightSearch/>
                                 </AppShell.Main>
 
                             </ContextMenuProvider>
