@@ -54,14 +54,14 @@ export default function SpotlightSearch() {
         actions: buildCollectionNavActions(),
     };
         
-    const actions: (SpotlightActionGroupData | SpotlightActionData)[] = [
+    const allActionList: (SpotlightActionGroupData | SpotlightActionData)[] = [
         collectionsNavActionGroup,
         themeModeActionGroup,
     ];
 
     return <Spotlight
         shortcut={["mod + K", "mod + P"]}
-        actions={actions}
+        actions={allActionList}
         nothingFound="No result found."
         highlightQuery
     />
