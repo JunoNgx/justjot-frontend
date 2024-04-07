@@ -100,8 +100,8 @@ export default function SpotlightSearch() {
     };
         
     const allActionList: (SpotlightActionGroupData | SpotlightActionData)[] = [
-        collectionOperationActionGroup,
         collectionsNavActionGroup,
+        collectionOperationActionGroup,
         miscActionGroup,
     ];
 
