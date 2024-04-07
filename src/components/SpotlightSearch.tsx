@@ -41,8 +41,8 @@ export default function SpotlightSearch() {
     const buildCollectionNavActions = (): SpotlightActionData[] => {
         return collections.map(collection => ({
             id: `collections-${collection.id}`,
-            label: `/${collection.slug}`,
-            description: `${collection.name}`,
+            label: `${collection.name}`,
+            description: `/${collection.slug}`,
             leftSection: <IconFolder {...spotlightIconLargeProps} />,
             onClick: () => {trySwitchToCollectionById(collection.id)},
         }));
