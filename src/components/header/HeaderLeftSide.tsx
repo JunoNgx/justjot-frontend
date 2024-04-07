@@ -4,12 +4,12 @@ import CollectionMenu from "@/components/CollectionMenu";
 import { useContext } from "react";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { JustJotIcon } from "@/components/misc/JustJotIcon";
-import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
+import useIconProps from "@/hooks/useIconProps";
 
 export default function HeaderLeftSide() {
 
     const { user } = useContext(BackendClientContext);
-    const { logoIconProps } = useIconPropsFromTheme();
+    const { logoIconProps } = useIconProps();
     
     return <Group className="header__left-side"
         gap="xs"

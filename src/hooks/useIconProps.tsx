@@ -1,4 +1,4 @@
-export default function useIconPropsFromTheme() {
+export default function useIconProps() {
 
     const itemIcontProps = {
         size: 24,

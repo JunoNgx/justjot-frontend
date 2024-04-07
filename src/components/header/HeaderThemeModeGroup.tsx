@@ -5,11 +5,11 @@ import { ThemeModeContext } from "@/contexts/ThemeModeContext";
 import { ThemeMode } from "@/types";
 import { IconMoon, IconSettingsCog, IconSun } from "@tabler/icons-react";
 import { justJotTheme } from "@/theme";
-import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
+import useIconProps from "@/hooks/useIconProps";
 
 export default function HeaderThemeModeGroup() {
     const { themeMode, setThemeMode } = useContext(ThemeModeContext);
-    const { themeModeIconProps } = useIconPropsFromTheme();
+    const { themeModeIconProps } = useIconProps();
 
     const isThemeModeLight = () => themeMode === ThemeMode.LIGHT;
     const isThemeModeDark = () => themeMode === ThemeMode.DARK;

@@ -13,7 +13,7 @@ import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import CollectionHotkey from "@/components/misc/CollectionHotkey";
 import CollectionsSortModal from "@/components/modals/CollectionsSortModal";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
-import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
+import useIconProps from "@/hooks/useIconProps";
 
 export default function CollectionMenu({isInMainView}: {isInMainView?: boolean}) {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -23,7 +23,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
     const { trySwitchToCollectionById } = useCollectionNavActions();
     const confirmDeletion = useDeleteCollectionConfirmation();
     const isMobile = useMediaQuery(`(max-width: ${em(720)})`);
-    const { menuIconProps } = useIconPropsFromTheme();
+    const { menuIconProps } = useIconProps();
 
     const collectionMenu = <Menu
         position="bottom-start"

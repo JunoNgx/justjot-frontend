@@ -2,7 +2,7 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { Item, ItemCollection } from "@/types";
 import { IconArrowMoveRight, IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconSquare, IconTrash } from "@tabler/icons-react";
 import { useContext } from "react";
-import useIconPropsFromTheme from "./useIconPropsFromTheme";
+import useIconProps from "./useIconProps";
 import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
 
 type ItemContextMenuOptionsParams = {
@@ -31,7 +31,7 @@ export default function useItemContextMenuOptions(
     }: ItemContextMenuOptionsParams
 ) {
     const { collections } = useContext(CollectionsContext);
-    const { menuIconProps } = useIconPropsFromTheme();
+    const { menuIconProps } = useIconProps();
 
     const contextMenuDefaultActionIcon = item.shouldCopyOnClick
         ? <IconCheckbox {...menuIconProps} />

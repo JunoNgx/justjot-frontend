@@ -8,7 +8,7 @@ import useHandleContextMenuWithLongPress from "@/libs/useHandleContextMenuWithLo
 import useItemActions from "@/hooks/useItemActions";
 import useItemContextMenuOptions from "@/hooks/useItemContextMenuOptions";
 import { IconClipboardCopy } from "@tabler/icons-react";
-import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
+import useIconProps from "@/hooks/useIconProps";
 import { ItemsContext } from "@/contexts/ItemsContext";
 
 type ItemComponentParams = {
@@ -42,7 +42,7 @@ export default function ItemComponent(
         deselectFn: () => {setSelectedIndex(-1)},
         convertToTodoFn: convertToTodo,
     });
-    const { itemIcontProps } = useIconPropsFromTheme();
+    const { itemIcontProps } = useIconProps();
 
     const handlePrimaryAction = (
         _e: React.MouseEvent | React.TouchEvent

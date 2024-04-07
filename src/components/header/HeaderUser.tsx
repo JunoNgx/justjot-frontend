@@ -3,7 +3,7 @@ import { Group, Menu, MenuDivider, Text, UnstyledButton } from "@mantine/core";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { useNavigate } from "react-router-dom";
 import { IconChevronDown, IconHelp, IconLogout, IconUserCog } from "@tabler/icons-react";
-import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
+import useIconProps from "@/hooks/useIconProps";
 
 export default function HeaderUser() {
 
@@ -16,7 +16,7 @@ export default function HeaderUser() {
         navigate("/login", { replace: true});
     };
 
-    const { menuIconProps } = useIconPropsFromTheme();
+    const { menuIconProps } = useIconProps();
 
     return <Menu
         position="bottom-end"

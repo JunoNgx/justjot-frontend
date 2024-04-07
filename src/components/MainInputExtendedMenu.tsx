@@ -1,5 +1,5 @@
 import { ItemsContext } from "@/contexts/ItemsContext";
-import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
+import useIconProps from "@/hooks/useIconProps";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TODO_PREFIX } from "@/utils/constants";
 import { Box, Menu } from "@mantine/core";
@@ -16,7 +16,7 @@ export default function MainInputExtendedMenu(
     {processMainInput, mainInputRef}: MainInputExtendedMenuOptions
 ) {
 
-    const { menuIconProps } = useIconPropsFromTheme();
+    const { menuIconProps } = useIconProps();
     const { setInputVal } = useContext(ItemsContext);
     const { focusOnMainInput } = useItemNavActions();
     // const mainInputInnerRef = useRef<HTMLInputElement>(null);

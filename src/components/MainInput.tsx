@@ -6,7 +6,7 @@ import { IconCircleTriangle } from "@tabler/icons-react";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import useItemActions from "@/hooks/useItemActions";
-import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
+import useIconProps from "@/hooks/useIconProps";
 import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import MainInputExtendedMenu from "./MainInputExtendedMenu";
@@ -41,7 +41,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         toggleItemShouldCopyOnClickWithOptimisticUpdate,
         convertToTodo,
     } = useItemActions();
-    const { mainInputIconProps } = useIconPropsFromTheme();
+    const { mainInputIconProps } = useIconProps();
 
     const {
         createItemWithOptimisticUpdate

@@ -2,7 +2,7 @@ import { Image } from "@mantine/core";
 import { ItemType } from "@/types";
 import { IconCheckbox, IconFileText, IconHourglassLow, IconSquare, IconWorld } from "@tabler/icons-react";
 import { isValidHexColourCode } from "@/utils/itemUtils";
-import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
+import useIconProps from "@/hooks/useIconProps";
 
 type ItemComponentIconParams = {
     type: ItemType,
@@ -16,7 +16,7 @@ export default function ItemComponentIcon(
     {type, faviconUrl, isTodoDone, isPending, hexColourCode}:
     ItemComponentIconParams
 ) {
-    const { itemIcontProps } = useIconPropsFromTheme();
+    const { itemIcontProps } = useIconProps();
 
     if (isPending)
         return <IconHourglassLow {...itemIcontProps} />
