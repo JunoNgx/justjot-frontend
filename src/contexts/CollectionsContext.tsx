@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useCallback, useContext, useState } from 'react';
+import { ReactNode, createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { ApiRequestCallbackOptions, DbTable, ItemCollection } from '@/types';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { ClientResponseError } from 'pocketbase';
@@ -14,6 +14,11 @@ export const CollectionsContext = createContext<CollectionsContextType>({} as Co
 export default function CollectionsContextProvider({ children }: { children: ReactNode }) {
     const { isLoggedIn, pbClient } = useContext(BackendClientContext);
     const [collections, setCollections] = useState<ItemCollection[]>([]);
+
+    useEffect(() => {
+        if (!isLoggedIn) return;
+        fetchCollections();
+    }, []);
 
     // // @ts-expect-error
     // const removeLoginStatusListener = pbClient.authStore.onChange((token, model) => {

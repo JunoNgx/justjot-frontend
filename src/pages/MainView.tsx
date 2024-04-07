@@ -16,7 +16,7 @@ import SpotlightSearch from "@/components/SpotlightSearch";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
-    const { collections, fetchCollections } = useContext(CollectionsContext);
+    const { collections } = useContext(CollectionsContext);
     const { currCollection } = useContext(CurrentCollectionContext);
     const { fetchItems, filteredItems } = useContext(ItemsContext);
     const { focusOnMainInput } = useItemNavActions();
@@ -58,8 +58,6 @@ export default function MainView() {
             navigate(`/login`, { replace: true });
             return;
         }
-
-        fetchCollections();
 
         window.addEventListener("focus", tryRoutineUpdate);
         return () => {
