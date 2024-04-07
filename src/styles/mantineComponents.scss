@@ -20,6 +20,18 @@
     backdrop-filter: blur(7px);
 }
 
+.mantine-Spotlight-action {
+    &[data-selected] {
+        background-color: var(--mantine-color-text);
+
+        .mantine-Spotlight-actionSection,
+        .mantine-Spotlight-actionLabel,
+        .mantine-Spotlight-actionDescription {
+            color: var(--mantine-color-body);
+        }
+    }
+};
+
 .mantine-Notifications-notification {
     color: var(--mantine-color-text);
     background-color: var(--mantine-color-body);
