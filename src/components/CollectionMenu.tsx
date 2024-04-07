@@ -7,7 +7,6 @@ import { IconEdit, IconFolderPlus, IconSelector, IconSortAscendingShapes, IconTr
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 import useDeleteCollectionConfirmation from "@/hooks/useDeleteCollectionConfirmation";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
-import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import CollectionHotkey from "@/components/misc/CollectionHotkey";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import useIconProps from "@/hooks/useIconProps";
@@ -15,8 +14,7 @@ import useCollectionActions from "@/hooks/useCollectionActions";
 
 export default function CollectionMenu({isInMainView}: {isInMainView?: boolean}) {
     const { isLoggedIn } = useContext(BackendClientContext);
-    const { collections } = useContext(CollectionsContext);
-    const { currCollection } = useContext(CurrentCollectionContext);
+    const { collections, currCollection } = useContext(CollectionsContext);
 
     const { trySwitchToCollectionById } = useCollectionNavActions();
     const confirmDeletion = useDeleteCollectionConfirmation();

@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
-import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { ItemCollection } from "@/types";
 import { useNavigate } from "react-router-dom";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
@@ -10,12 +9,12 @@ import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
 
 export default function useCollectionNavActions() {
     const { user } = useContext(BackendClientContext);
-    const { collections } = useContext(CollectionsContext);
     const {
+        collections,
         setCurrCollection,
         currSelectedCollectionIndex,
         setCurrSelectedCollectionIndex,
-    } = useContext(CurrentCollectionContext);
+    } = useContext(CollectionsContext);
     const { computeIndexFromNumericKey } = useNumericHotkeyUtils();
 
     const navigate = useNavigate();

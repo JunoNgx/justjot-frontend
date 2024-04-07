@@ -1,5 +1,5 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
-import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
+import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { CreateItemOptions, MoveItemOptions, DbTable, Item, UpdateItemTitleOptions, UpdateItemContentOptions, UpdateItemTitleAndContentOptions, ApiRequestCallbackOptions, ItemType } from "@/types";
 import { MAX_TITLE_LENGTH } from "@/utils/constants";
 import { useContext } from "react";
@@ -7,7 +7,7 @@ import { useContext } from "react";
 export default function useItemApiCalls() {
 
     const { pbClient, user } = useContext(BackendClientContext);
-    const { currCollection } = useContext(CurrentCollectionContext);
+    const { currCollection } = useContext(CollectionsContext);
 
     const createItem = async (
         { title, content,

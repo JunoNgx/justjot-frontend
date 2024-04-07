@@ -1,9 +1,9 @@
 import SpotlightSearch from "@/components/SpotlightSearch";
-import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
+import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { useContext, useEffect } from "react";
 
 export default function Help() {
-    const { setCurrCollection } = useContext(CurrentCollectionContext);
+    const { setCurrCollection } = useContext(CollectionsContext);
 
     useEffect(() => {
         setCurrCollection(undefined);

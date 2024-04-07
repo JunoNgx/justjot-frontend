@@ -1,5 +1,4 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
-import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useManageListState from "@/libs/useManageListState";
 import { CreateItemOptions, Item, ItemCollection, ItemType } from "@/types";
@@ -14,11 +13,12 @@ import { modals } from "@mantine/modals";
 import ItemUpdateModal from "@/components/modals/ItemUpdateModal";
 import ItemMoveModal from "@/components/modals/ItemMoveModal";
 import { findIndexById } from "@/utils/itemUtils";
+import { CollectionsContext } from "@/contexts/CollectionsContext";
 
 export default function useItemActions() {
 
     const { user } = useContext(BackendClientContext);
-    const { currCollection } = useContext(CurrentCollectionContext);
+    const { currCollection } = useContext(CollectionsContext);
     const { items, setItems, setUpdateQueue } = useContext(ItemsContext);
     const {
         createItem,

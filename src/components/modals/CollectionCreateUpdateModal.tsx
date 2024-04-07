@@ -3,7 +3,6 @@ import { useForm } from "@mantine/form";
 import { useContext, useEffect, useState } from "react";
 import { modals } from "@mantine/modals";
 import { getCurrHighestCollectionSortOrder } from "@/utils/collectionUtils";
-import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { slugify } from "@/utils/miscUtils";
 import useCollectionApiCalls from "@/hooks/useCollectionApiCalls";
@@ -27,8 +26,12 @@ export default function CollectionCreateUpdateModal(
     { isEditMode }: CollectionCreateUpdateModalOptions
 ) {
 
-    const { collections, setCollections } = useContext(CollectionsContext);
-    const { currCollection, currSelectedCollectionIndex } = useContext(CurrentCollectionContext);
+    const {
+        collections,
+        setCollections,
+        currCollection,
+        currSelectedCollectionIndex
+    } = useContext(CollectionsContext);
     const form = useForm({
         initialValues: {
             name: isEditMode ? currCollection?.name : "",

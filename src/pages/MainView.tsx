@@ -4,7 +4,6 @@ import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import MainInput from "@/components/MainInput";
 import { ItemsContext } from "@/contexts/ItemsContext";
-import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { useHotkeys } from "@mantine/hooks";
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 import CollectionMenu from "@/components/CollectionMenu";
@@ -16,8 +15,7 @@ import SpotlightSearch from "@/components/SpotlightSearch";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
-    const { collections } = useContext(CollectionsContext);
-    const { currCollection } = useContext(CurrentCollectionContext);
+    const { collections, currCollection } = useContext(CollectionsContext);
     const { fetchItems, filteredItems } = useContext(ItemsContext);
     const { focusOnMainInput } = useItemNavActions();
     const {

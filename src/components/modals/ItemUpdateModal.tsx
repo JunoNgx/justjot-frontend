@@ -10,14 +10,14 @@ import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_ERROR_TOAST, MAX_CONTENT_LENGTH, MAX_TITLE_LENGTH } from "@/utils/constants";
 import { ClientResponseError } from "pocketbase";
 import { findIndexById } from "@/utils/itemUtils";
-import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
+import { CollectionsContext } from "@/contexts/CollectionsContext";
 
 const DEBOUNCED_TIME = 5000;
 
 export default function ItemUpdateModal(
     {item}: {item: Item}
 ) {
-    const { currCollection } = useContext(CurrentCollectionContext);
+    const { currCollection } = useContext(CollectionsContext);
     const { fetchItems } = useContext(ItemsContext);
     const { items, setItems } = useContext(ItemsContext);
     const itemsHandlers = useManageListState(setItems);

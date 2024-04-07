@@ -6,7 +6,6 @@ import { IconExclamationCircle } from "@tabler/icons-react";
 import { justJotTheme } from "@/theme";
 import { Text } from "@mantine/core";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
-import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import useCollectionApiCalls from "./useCollectionApiCalls";
 import { ClientResponseError } from "pocketbase";
 import useCollectionNavActions from "./useCollectionNavActions";
@@ -14,11 +13,13 @@ import useManageListState from "@/libs/useManageListState";
 
 export default function useDeleteCollectionConfirmation() {
     
-    const { collections, setCollections, fetchCollections } = useContext(CollectionsContext);
     const {
+        collections,
+        setCollections,
         currCollection,
         currSelectedCollectionIndex,
-    } = useContext(CurrentCollectionContext);
+        fetchCollections
+    } = useContext(CollectionsContext);
     const { trySwitchToCollectionByIndex } = useCollectionNavActions();
     const itemsHandlers = useManageListState(setCollections);
     

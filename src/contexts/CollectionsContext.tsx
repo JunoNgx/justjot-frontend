@@ -6,6 +6,10 @@ import { ClientResponseError } from 'pocketbase';
 type CollectionsContextType = {
     collections: ItemCollection[],
     setCollections: React.Dispatch<React.SetStateAction<ItemCollection[]>>,
+    currCollection: ItemCollection | undefined,
+    setCurrCollection: React.Dispatch<React.SetStateAction<ItemCollection | undefined>>,
+    currSelectedCollectionIndex: number,
+    setCurrSelectedCollectionIndex: React.Dispatch<React.SetStateAction<number>>,
     fetchCollections: ({successfulCallback, errorCallback}?: ApiRequestCallbackOptions) => void,
 };
 
@@ -14,6 +18,8 @@ export const CollectionsContext = createContext<CollectionsContextType>({} as Co
 export default function CollectionsContextProvider({ children }: { children: ReactNode }) {
     const { isLoggedIn, pbClient } = useContext(BackendClientContext);
     const [collections, setCollections] = useState<ItemCollection[]>([]);
+    const [currCollection, setCurrCollection] = useState<ItemCollection>();
+    const [currSelectedCollectionIndex, setCurrSelectedCollectionIndex] = useState<number>(0);
 
     useEffect(() => {
         if (!isLoggedIn) return;
@@ -69,6 +75,11 @@ export default function CollectionsContextProvider({ children }: { children: Rea
         {{
             collections,
             setCollections,
+            currCollection,
+            setCurrCollection,
+            currSelectedCollectionIndex,
+            setCurrSelectedCollectionIndex,
+
             fetchCollections
         }}
     >
