@@ -31,7 +31,10 @@ export default function Register() {
 
     const { navigateToMainView } = useNavigateRoutes();
     useEffect(() => {
-        if (isLoggedIn) navigateToMainView();
+        if (isLoggedIn) {
+            navigateToMainView();
+            return;
+        }
     }, []);
 
     const [hasAttempted, setHasAttempted] = useState(false);

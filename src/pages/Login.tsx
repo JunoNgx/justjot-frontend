@@ -19,7 +19,10 @@ export default function Login() {
     });
 
     useEffect(() => {
-        if (isLoggedIn) navigateToMainView();
+        if (isLoggedIn) {
+            navigateToMainView();
+            return;
+        }
     }, []);
 
     const navigate = useNavigate();
