@@ -4,6 +4,7 @@ import ProfileChangeEmail from "@/components/profile/ProfileChangeEmail";
 import ProfileChangePassword from "@/components/profile/ProfileChangePassword";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
+import { APP_NAME } from "@/utils/constants";
 import { Box } from "@mantine/core";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +23,7 @@ export default function Profile() {
         }
 
         setCurrCollection(undefined);
+        document.title = `Account — ${APP_NAME}`;
     }, []);
 
     return <Box>
