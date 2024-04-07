@@ -1,3 +1,4 @@
+import SpotlightSearch from "@/components/SpotlightSearch";
 import ProfileAccountDeletion from "@/components/profile/ProfileAccountDeletion";
 import ProfileChangeDisplayName from "@/components/profile/ProfileChangeDisplayName";
 import ProfileChangeEmail from "@/components/profile/ProfileChangeEmail";
@@ -31,6 +32,8 @@ export default function Profile() {
                 <ProfileChangeEmail/>
                 <ProfileChangePassword/>
                 <ProfileAccountDeletion/>
+
+                <SpotlightSearch/>
             </>
         }
     </Box>

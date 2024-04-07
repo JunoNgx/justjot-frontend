@@ -1,3 +1,4 @@
+import SpotlightSearch from "@/components/SpotlightSearch";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import { useContext, useEffect } from "react";
 
@@ -8,5 +9,8 @@ export default function Help() {
         setCurrCollection(undefined);
     });
 
-    return <h1>Help route</h1>
+    return <>
+        <h1>Help route</h1>
+        <SpotlightSearch/>
+    </>
 }
