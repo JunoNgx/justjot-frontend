@@ -17,7 +17,7 @@ export default function useDeleteCollectionConfirmation() {
         collections,
         setCollections,
         currCollection,
-        currSelectedCollectionIndex,
+        collSelectedIndex,
         fetchCollections
     } = useContext(CollectionsContext);
     const { trySwitchToCollectionByIndex } = useCollectionNavActions();
@@ -46,7 +46,7 @@ export default function useDeleteCollectionConfirmation() {
     };
 
     const handleSuccessfulDeletion = () => {
-        itemsHandlers.remove(currSelectedCollectionIndex);
+        itemsHandlers.remove(collSelectedIndex);
         setShouldNavigateAway(true);
         notifications.show({
             message: "Collection has been deleted successfully.",
@@ -59,10 +59,10 @@ export default function useDeleteCollectionConfirmation() {
         if (!shouldNavigateAway) return;
 
         let modifier = 0;
-        if (currSelectedCollectionIndex > collections.length - 1) {
+        if (collSelectedIndex > collections.length - 1) {
             modifier = -1;
         }
-        trySwitchToCollectionByIndex(currSelectedCollectionIndex + modifier);
+        trySwitchToCollectionByIndex(collSelectedIndex + modifier);
         setShouldNavigateAway(false);
     }, [collections, shouldNavigateAway]);
 
@@ -76,7 +76,7 @@ export default function useDeleteCollectionConfirmation() {
         });
     };
 
-    const confirmDeletion = () => {
+    const confirmCollectionDeletion = () => {
         if (canDelete) {
             modals.openConfirmModal({
                 title: "Confirm collection deletion",
@@ -109,5 +109,5 @@ export default function useDeleteCollectionConfirmation() {
         });
     };
 
-    return confirmDeletion;
+    return confirmCollectionDeletion;
 };
