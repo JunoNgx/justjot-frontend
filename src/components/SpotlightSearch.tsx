@@ -8,13 +8,11 @@ import { IconEdit, IconFolder, IconFolderPlus, IconHelp, IconLogout, IconMoon, I
 import { useContext } from 'react';
 import useDeleteCollectionConfirmation from '@/hooks/useDeleteCollectionConfirmation';
 import useCollectionActions from '@/hooks/useCollectionActions';
-import { useNavigate } from 'react-router-dom';
-import { BackendClientContext } from '@/contexts/BackendClientContext';
+import useNavigateRoutes from '@/hooks/useNavigateRoutes';
 
 export default function SpotlightSearch() {
 
     const { setThemeMode } = useContext(ThemeModeContext);
-    const { logout } = useContext(BackendClientContext);
     const { collections } = useContext(CollectionsContext);
     const { spotlightIconProps } = useIconProps();
     const { trySwitchToCollectionById } = useCollectionNavActions();
@@ -24,7 +22,12 @@ export default function SpotlightSearch() {
         openUpdateCollectionModal,
         openSortCollectionModal, 
     } = useCollectionActions();
-    const navigate = useNavigate()
+    const {
+        navigateToHelp,
+        navigateToProfile,
+        navigateToReset,
+        logoutAndNavigateToLogin,
+    } = useNavigateRoutes();
 
     const miscActionGroup: SpotlightActionGroupData = {
         group: "Miscellaneous",
@@ -34,31 +37,28 @@ export default function SpotlightSearch() {
                 label: "Help / User Manual",
                 description: "/help",
                 leftSection: <IconHelp {...spotlightIconProps} />,
-                onClick: () => {navigate("/help");},
+                onClick: navigateToHelp,
             },
             {
                 id: "profile",
                 label: "Account management",
                 description: "/account",
                 leftSection: <IconUserCog {...spotlightIconProps} />,
-                onClick: () => {navigate("/profile");},
+                onClick: navigateToProfile,
             },
             {
                 id: "change-password",
                 label: "Change password",
                 description: "/reset",
                 leftSection: <IconPassword {...spotlightIconProps} />,
-                onClick: () => {navigate("/reset");},
+                onClick: navigateToReset,
             },
             {
                 id: "logout",
                 label: "Logout",
                 description: ".logout",
                 leftSection: <IconLogout {...spotlightIconProps} />,
-                onClick: () => {
-                    logout();
-                    navigate("/login", { replace: true});
-                },
+                onClick: logoutAndNavigateToLogin,
             },
             {
                 id: "theme-mode-system",
