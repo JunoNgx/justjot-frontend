@@ -24,7 +24,6 @@ export default function MainView() {
         trySwitchToPrevCollection,
         trySwitchToNextCollection,
         trySwitchToCollectionByIndex,
-        tryRetrackCurrentSelectedIndexWithId,
     } = useCollectionNavActions();
     const { collectionSlug } = useParams();
     const { generateNumericHotkeyHandlers } = useNumericHotkeyUtils();
@@ -85,10 +84,6 @@ export default function MainView() {
         if (!currCollection) return;
         fetchItems(currCollection, setIsLoading);
     }, [currCollection]);
-
-    useEffect(() => {
-        tryRetrackCurrentSelectedIndexWithId(currCollection);
-    }, [currCollection, collections]);
 
     return <Box className="main-view-wrapper">
         {/* For non-item components */}
