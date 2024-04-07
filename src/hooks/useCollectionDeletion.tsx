@@ -18,14 +18,26 @@ export default function useCollectionDeletion() {
         setCollections,
         currCollection,
         collSelectedIndex,
-        fetchCollections
     } = useContext(CollectionsContext);
     const { trySwitchToCollectionByIndex } = useCollectionNavActions();
     const itemsHandlers = useManageListState(setCollections);
 
     const [isLoading, setIsLoading] = useState(false);
-    const [shouldNavigateAway, setShouldNavigateAway] = useState(false);
+    /**
+     * Full name: navigation away destination index.
+     * Temporarily holds the current index (because `collSelectedIndex`
+     * will be temporarily inaccurate and unusable until correctly navigating
+     * to a collection that is in the list).
+     */
+    const [navAwayIndex, setNavAwayIndex] = useState(-1);
     const { deleteCollection } = useCollectionApiCalls();
+
+    useEffect(() => {
+        setNavAwayIndex(-1);
+        return () => {
+            setNavAwayIndex(-1);
+        };
+    }, []);
 
     const proceedWithDeletion = () => {
         if (!currCollection) return;
@@ -36,12 +48,12 @@ export default function useCollectionDeletion() {
             successfulCallback: handleSuccessfulDeletion,
             errorCallback: handleErroredDeletion,
         });
-        fetchCollections();
     };
 
     const handleSuccessfulDeletion = () => {
+        const currCollSelectedIndex = collSelectedIndex;
         itemsHandlers.remove(collSelectedIndex);
-        setShouldNavigateAway(true);
+        setNavAwayIndex(currCollSelectedIndex);
         notifications.show({
             message: "Collection has been deleted successfully.",
             color: "none",
@@ -50,15 +62,14 @@ export default function useCollectionDeletion() {
     };
 
     useEffect(() => {
-        if (!shouldNavigateAway) return;
+        if (navAwayIndex === -1) return;
 
-        let modifier = 0;
-        if (collSelectedIndex > collections.length - 1) {
-            modifier = -1;
-        }
-        trySwitchToCollectionByIndex(collSelectedIndex + modifier);
-        setShouldNavigateAway(false);
-    }, [collections, shouldNavigateAway]);
+        if (navAwayIndex > collections.length - 1)
+            trySwitchToCollectionByIndex(navAwayIndex - 1);
+        else trySwitchToCollectionByIndex(navAwayIndex);
+
+        setNavAwayIndex(-1);
+    }, [collections, navAwayIndex]);
 
     const handleErroredDeletion = (err: ClientResponseError) => {
         console.error(err);
