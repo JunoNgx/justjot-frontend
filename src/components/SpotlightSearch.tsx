@@ -4,8 +4,10 @@ import useCollectionNavActions from '@/hooks/useCollectionNavActions';
 import useIconProps from '@/hooks/useIconProps';
 import { ThemeMode } from '@/types';
 import { Spotlight, SpotlightActionData, SpotlightActionGroupData } from '@mantine/spotlight';
-import { IconFolder, IconMoon, IconSettingsCog, IconSun } from '@tabler/icons-react';
+import { IconEdit, IconFolder, IconFolderPlus, IconMoon, IconSettingsCog, IconSortAscendingShapes, IconSun, IconTrash } from '@tabler/icons-react';
 import { useContext } from 'react';
+import useDeleteCollectionConfirmation from '@/hooks/useDeleteCollectionConfirmation';
+import useCollectionActions from '@/hooks/useCollectionActions';
 
 export default function SpotlightSearch() {
 
@@ -13,6 +15,12 @@ export default function SpotlightSearch() {
     const { collections } = useContext(CollectionsContext);
     const { spotlightIconProps, spotlightIconLargeProps } = useIconProps();
     const { trySwitchToCollectionById } = useCollectionNavActions();
+    const confirmDeletion = useDeleteCollectionConfirmation();
+    const {
+        openCreateCollectionModal,
+        openUpdateCollectionModal,
+        openSortCollectionModal,
+    } = useCollectionActions();
 
     const themeModeActionGroup: SpotlightActionGroupData = {
         group: "Theme modes",
@@ -38,6 +46,40 @@ export default function SpotlightSearch() {
         ]
     };
 
+    const collectionOperationActionGroup: SpotlightActionGroupData = {
+        group: "Collection actions",
+        actions: [
+            {
+                id: "coll-op-create",
+                label: "Create new collection",
+                description: ".create-coll",
+                leftSection: <IconFolderPlus {...spotlightIconLargeProps} />,
+                onClick: openCreateCollectionModal,
+            },
+            {
+                id: "coll-op-edit",
+                label: "Edit current collection",
+                description: ".edit-coll",
+                leftSection: <IconEdit {...spotlightIconLargeProps} />,
+                onClick: openUpdateCollectionModal,
+            },
+            {
+                id: "coll-op-sort",
+                label: "Sort collections",
+                description: ".sort-coll",
+                leftSection: <IconSortAscendingShapes {...spotlightIconLargeProps} />,
+                onClick: openSortCollectionModal,
+            },
+            {
+                id: "coll-op-delete",
+                label: "Delete current collection",
+                description: ".delete-coll",
+                leftSection: <IconTrash color="red" {...spotlightIconLargeProps} />,
+                onClick: confirmDeletion,
+            },
+        ]
+    };
+
     const buildCollectionNavActions = (): SpotlightActionData[] => {
         return collections.map(collection => ({
             id: `collection-${collection.id}`,
@@ -55,6 +97,7 @@ export default function SpotlightSearch() {
     };
         
     const allActionList: (SpotlightActionGroupData | SpotlightActionData)[] = [
+        collectionOperationActionGroup,
         collectionsNavActionGroup,
         themeModeActionGroup,
     ];
