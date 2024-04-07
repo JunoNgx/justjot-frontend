@@ -75,7 +75,7 @@ export default function SpotlightSearch() {
                 onClick: () => {setThemeMode(ThemeMode.LIGHT)}
             },
             {
-                id: "theme-mode-system",
+                id: "theme-mode-dark",
                 label: "Theme mode: Dark",
                 description: ".theme-dark",
                 leftSection: <IconMoon {...spotlightIconProps} />,
