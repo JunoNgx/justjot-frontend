@@ -31,37 +31,34 @@ export default function LandingPage() {
 
         <section className="landing-page__section">
             <Title order={1}>JustJot</Title>
-            <Text>A keyboard-first note-taking Progressive Web App, tailored for fast information-recording operation.</Text>
+            <Text>A keyboard-first note-taking Progressive Web App, tailored for swift information-recording operations.</Text>
         </section>
 
         <section className="landing-page__section">
             <Title order={2}>Keyboard-first</Title>
-            <Text>JustJot prioritises keyboard interactions. Most actions can be performed solely on a keyboard. While fully operable with pointer-based devices (for mobile access), users are recommended to spent time on learning to perform operations the optimal way. TODO: link to help page.</Text>
+            <Text>JustJot prioritises keyboard interactions; most actions can be performed solely on a keyboard. While fully operable with pointer-based devices (mouse or touchscreen), users are recommended to spent time on learning to perform operations the optimal way.</Text>
+
+            <Text mt="md">Due to the unconventional approach, consulting <Anchor component={NavLink} to="/help">the manual</Anchor> is high recommended to new users.</Text>
         </section>
 
         <section className="landing-page__section">
             <Title order={2}>Your omnipotent notebook</Title>
-            <Text>While mainly created to handle to handle plain-text notes, this app also:</Text>
+            <Text>Outside of handling plain-text notes, this app is also capable of:</Text>
             <ul>
-                <li>Stores bookmarks</li>
-                <li>Manages todo lists</li>
-                <li>Displays hex colour codes preview</li>
+                <li>Storing bookmarks</li>
+                <li>Managing todo items</li>
+                <li>Displaying hex colour code preview</li>
             </ul>
         </section>
         
         <section className="landing-page__section">
             <Title order={2}>Average FOSS software</Title>
-            <Text>JustJot was made with personal use and personal preferences first and foremost. It's barebone and as small as it can be. It has no roadmap, no monetisation, advertisement, and no tracking. I try to provide as much as I can, though it would certainly be limited and diffcult. It's also fully open-source.</Text>
+            <Text>JustJot was made with personal use and personal preferences first and foremost. It is as barebone and small as it can and should be. It has minimal development roadmap, no monetisation, no advertisement, no tracking, and is fully open-source. Technical support is limited and not guaranteed (I'll try as much as I could).</Text>
         </section>
 
         <section className="landing-page__section">
             <Title order={2}>Get started</Title>
-            <Text><Anchor component={NavLink} to="/login">Login</Anchor> to your existing account or <Anchor component={NavLink} to="/register">register</Anchor> a new one.</Text>
-        </section>
-
-        <section className="landing-page__section">
-            <Title order={2}>Manual</Title>
-            <Text>TODO: <Anchor component={NavLink} to="/help">link to manual</Anchor>.</Text>
+            <Text><Anchor component={NavLink} to="/register">Register</Anchor> a new account or <Anchor component={NavLink} to="/login">login</Anchor> to your existing one.</Text>
         </section>
     </Box>
 }
