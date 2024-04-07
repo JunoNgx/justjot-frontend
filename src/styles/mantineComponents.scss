@@ -6,13 +6,15 @@
     border-bottom: none;
 }
 
-.mantine-Modal-content {
+.mantine-Modal-content,
+.mantine-Spotlight-content {
     border-style: solid;
     border-width: 1px;
     border-color: var(--mantine-color-text);
 }
 
-.mantine-Modal-overlay {
+.mantine-Modal-overlay,
+.mantine-Spotlight-overlay {
     // TODO: This is incorrect, but it works. Should find out why
     background-color: var(--mantine-color-body) 0.5;
     backdrop-filter: blur(7px);

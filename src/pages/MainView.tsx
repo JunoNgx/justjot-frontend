@@ -12,6 +12,7 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import MainContentList from "@/components/MainContentList";
+import SpotlightSearch from "@/components/SpotlightSearch";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -95,6 +96,7 @@ export default function MainView() {
 
     return <Box className="main-view-wrapper">
         {/* For non-item components */}
+        <SpotlightSearch/>
         <CollectionMenu isInMainView={true} />
 
         <Stack className="main-view"
