@@ -41,7 +41,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         toggleItemShouldCopyOnClickWithOptimisticUpdate,
         convertToTodo,
     } = useItemActions();
-    const iconProps = useIconPropsFromTheme();
+    const { mainInputIconProps } = useIconPropsFromTheme();
 
     const {
         createItemWithOptimisticUpdate
@@ -115,8 +115,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         {...props}
         size="lg"
         leftSection={<IconCircleTriangle
-            {...iconProps} 
-            size={32}
+            {...mainInputIconProps}
         />}
         rightSectionPointerEvents="all"
         rightSection={<MainInputExtendedMenu
