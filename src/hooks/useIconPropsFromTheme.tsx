@@ -10,8 +10,15 @@ export default function useIconPropsFromTheme() {
         stroke: 1.5,
     }
 
+    const logoIconProps = {
+        size: 24,
+        // TODO: figure why the custom icon is acting up
+        stroke: "1.5",
+    }
+
     return {
         itemIcontProps,
         themeModeIconProps,
+        logoIconProps,
     };
 };
