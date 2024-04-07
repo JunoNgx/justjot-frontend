@@ -30,7 +30,7 @@ export default function CollectionCreateUpdateModal(
         collections,
         setCollections,
         currCollection,
-        currSelectedCollectionIndex
+        collSelectedIndex
     } = useContext(CollectionsContext);
     const form = useForm({
         initialValues: {
@@ -124,9 +124,12 @@ export default function CollectionCreateUpdateModal(
     };
 
     const handleSuccessfulUpdate = (newCollection: ItemCollection) => {
-        itemsHandlers.replace(currSelectedCollectionIndex, newCollection);
-        // Must update route slug, else it would default back to collections[0]
-        tryNavigateToCollection(newCollection, currSelectedCollectionIndex);
+        itemsHandlers.replace(collSelectedIndex, newCollection);
+        /**
+         * Update the url param slug as a side effect to avoid defaulting back
+         * to `collections[0]`
+         */
+        tryNavigateToCollection(newCollection);
         notifications.show({
             message: `Collection ${newCollection.name} has been updated successfully`,
             color: "none",
