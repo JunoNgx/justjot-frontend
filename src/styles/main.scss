@@ -74,6 +74,26 @@ header {
             hyphens: auto;
         }
     }
+
+    &__top-banner {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+
+        @include m.mobile {
+            flex-direction: column;
+        }
+    }
+    
+    &__demo-box {
+        max-width: 320px;
+        border-color: var(--mantine-color-text);
+
+        @include m.mobile {
+            margin-top: 2rem;
+            align-self: center;
+        }
+    }
 }
 
 .main-view {

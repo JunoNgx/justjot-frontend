@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react"
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Anchor, Box, Group, Text, Title } from "@mantine/core";
+import { Anchor, Box, Button, Center, Group, Paper, Text, Title } from "@mantine/core";
 import { JustJotIcon } from "@/components/misc/JustJotIcon";
 import { APP_NAME } from "@/utils/constants";
 
@@ -24,16 +24,28 @@ export default function LandingPage() {
 
     return <Box className="landing-page">
         <section className="landing-page__section">
-            <Group gap="xl">
-                <JustJotIcon size={72} stroke={"0.1"}/>
-                <Box>
-                    <Title order={2}>jot</Title>
-                    <Text fs="italic">/dʒɒt/</Text>
-                    <Text>(verb)</Text>
-                    <Text>write (something) quickly</Text>
-                </Box>
-            </Group>
+            <Box className="landing-page__top-banner">
+                <Group gap="lg">
+                    <JustJotIcon size={72} stroke={"0.1"}/>
+                    <Box>
+                        <Title order={2}>jot</Title>
+                        <Text fs="italic">/dʒɒt/</Text>
+                        <Text>(verb)</Text>
+                        <Text>write (something) quickly</Text>
+                    </Box>
+                </Group>
 
+                <Paper className="landing-page__demo-box"
+                    withBorder p="md"
+                >
+                    <Text ta="center">Account-free live demo available</Text>
+                    <Center mt="md">
+                        <Button>
+                            Try now
+                        </Button>
+                    </Center>
+                </Paper>
+            </Box>
         </section>
 
         <section className="landing-page__section">
