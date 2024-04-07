@@ -42,7 +42,7 @@ export default function ItemComponent(
         deselectFn: () => {setSelectedIndex(-1)},
         convertToTodoFn: convertToTodo,
     });
-    const iconProps = useIconPropsFromTheme();
+    const { itemIcontProps } = useIconPropsFromTheme();
 
     const handlePrimaryAction = (
         _e: React.MouseEvent | React.TouchEvent
@@ -137,7 +137,7 @@ export default function ItemComponent(
                 <Group className="item__right-side"
                     gap="xs"
                 >
-                    {item.shouldCopyOnClick && <IconClipboardCopy {...iconProps} />}
+                    {item.shouldCopyOnClick && <IconClipboardCopy {...itemIcontProps} />}
                     <ItemComponentCreatedDate className="item__datetime"
                         createdDatetime={item.created}
                     />

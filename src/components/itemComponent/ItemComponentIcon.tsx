@@ -16,10 +16,10 @@ export default function ItemComponentIcon(
     {type, faviconUrl, isTodoDone, isPending, hexColourCode}:
     ItemComponentIconParams
 ) {
-    const iconProps = useIconPropsFromTheme();
+    const { itemIcontProps } = useIconPropsFromTheme();
 
     if (isPending)
-        return <IconHourglassLow {...iconProps} />
+        return <IconHourglassLow {...itemIcontProps} />
 
     if (isValidHexColourCode(hexColourCode) && type !== ItemType.TODO)
         return <div className="item__icon-colour"
@@ -29,14 +29,14 @@ export default function ItemComponentIcon(
     switch (type) {
         case ItemType.TODO:
             return isTodoDone
-                ? <IconCheckbox {...iconProps} />
-                : <IconSquare {...iconProps} />
+                ? <IconCheckbox {...itemIcontProps} />
+                : <IconSquare {...itemIcontProps} />
         case ItemType.LINK:
             return faviconUrl
                 ? <Image h={24} src={faviconUrl}/>
-                : <IconWorld {...iconProps} />
+                : <IconWorld {...itemIcontProps} />
         case ItemType.TEXT:
         default:
-            return <IconFileText {...iconProps} />
+            return <IconFileText {...itemIcontProps} />
     }
 };
