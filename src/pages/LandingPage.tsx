@@ -46,7 +46,7 @@ export default function LandingPage() {
             >
                 <Text ta="center">Account-free live demo available</Text>
                 <Center mt="md">
-                    <Button>
+                    <Button component={NavLink} to="/demo-login">
                         Try now
                     </Button>
                 </Center>
@@ -78,6 +78,7 @@ export default function LandingPage() {
         <section className="landing-page__section">
             <Title order={2}>Get started</Title>
             <Text><Anchor component={NavLink} to="/register">Register</Anchor> a new account or <Anchor component={NavLink} to="/login">login</Anchor> to your existing one.</Text>
+            <Text mt="md">Not convinced yet? Try the <Anchor component={NavLink} to="/demo-login">live demo</Anchor> with a test account.</Text>
         </section>
     </Box>
 }
