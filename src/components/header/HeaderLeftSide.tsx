@@ -9,7 +9,7 @@ import useIconPropsFromTheme from "@/hooks/useIconPropsFromTheme";
 export default function HeaderLeftSide() {
 
     const { user } = useContext(BackendClientContext);
-    const iconProps = useIconPropsFromTheme();
+    const { logoIconProps } = useIconPropsFromTheme();
     
     return <Group className="header__left-side"
         gap="xs"
@@ -21,7 +21,7 @@ export default function HeaderLeftSide() {
             size="xl"
         >
             <JustJotIcon className="header__logo"
-                {...iconProps}
+                {...logoIconProps}
             />
         </ActionIcon>
         <CollectionMenu/>
