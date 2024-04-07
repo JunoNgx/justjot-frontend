@@ -40,7 +40,7 @@ export default function SpotlightSearch() {
 
     const buildCollectionNavActions = (): SpotlightActionData[] => {
         return collections.map(collection => ({
-            id: `collections-${collection.id}`,
+            id: `collection-${collection.id}`,
             label: `${collection.name}`,
             description: `/${collection.slug}`,
             leftSection: <IconFolder {...spotlightIconLargeProps} />,
