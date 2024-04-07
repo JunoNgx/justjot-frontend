@@ -15,14 +15,14 @@ type CollectionsContextType = {
 export const CollectionsContext = createContext<CollectionsContextType>({} as CollectionsContextType);
 
 export default function CollectionsContextProvider({ children }: { children: ReactNode }) {
-    const { isLoggedIn, pbClient } = useContext(BackendClientContext);
+    const { isLoggedIn, pbClient, user } = useContext(BackendClientContext);
     const [collections, setCollections] = useState<ItemCollection[]>([]);
     const [currCollection, setCurrCollection] = useState<ItemCollection>();
 
     useEffect(() => {
         if (!isLoggedIn) return;
         fetchCollections();
-    }, []);
+    }, [user]);
 
     // // @ts-expect-error
     // const removeLoginStatusListener = pbClient.authStore.onChange((token, model) => {
