@@ -7,7 +7,13 @@ export default function useIconPropsFromTheme() {
         stroke: justJotTheme.other.iconStrokeWidth,
     }
 
+    const themeModeIconProps = {
+        size: justJotTheme.other.iconSizeThemeMode,
+        stroke: justJotTheme.other.iconStrokeWidth,
+    }
+
     return {
         itemIcontProps,
+        themeModeIconProps,
     };
 };
