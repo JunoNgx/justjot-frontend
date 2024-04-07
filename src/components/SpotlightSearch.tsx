@@ -4,14 +4,16 @@ import useCollectionNavActions from '@/hooks/useCollectionNavActions';
 import useIconProps from '@/hooks/useIconProps';
 import { ThemeMode } from '@/types';
 import { Spotlight, SpotlightActionData, SpotlightActionGroupData } from '@mantine/spotlight';
-import { IconEdit, IconFolder, IconFolderPlus, IconHelp, IconLogout, IconMoon, IconPassword, IconSettingsCog, IconSortAscendingShapes, IconSun, IconTrash, IconUserCog } from '@tabler/icons-react';
+import { IconEdit, IconFolder, IconFolderPlus, IconHelp, IconHome2, IconLogin2, IconLogout, IconMoon, IconPassword, IconSettingsCog, IconSortAscendingShapes, IconSun, IconTrash, IconUserCog, IconUserPlus } from '@tabler/icons-react';
 import { useContext } from 'react';
 import useCollectionDeletion from '@/hooks/useCollectionDeletion';
 import useCollectionActions from '@/hooks/useCollectionActions';
 import useNavigateRoutes from '@/hooks/useNavigateRoutes';
+import { BackendClientContext } from '@/contexts/BackendClientContext';
 
 export default function SpotlightSearch() {
 
+    const { isLoggedIn } = useContext(BackendClientContext);
     const { setThemeMode } = useContext(ThemeModeContext);
     const { collections } = useContext(CollectionsContext);
     const { spotlightIconProps } = useIconProps();
@@ -27,6 +29,9 @@ export default function SpotlightSearch() {
         navigateToProfile,
         navigateToReset,
         logoutAndNavigateToLogin,
+        navigateToHome,
+        navigateToLogin,
+        navigateToRegister,
     } = useNavigateRoutes();
 
     const miscActionGroup: SpotlightActionGroupData = {
@@ -60,29 +65,59 @@ export default function SpotlightSearch() {
                 leftSection: <IconHelp {...spotlightIconProps} />,
                 onClick: navigateToHelp,
             },
-            {
-                id: "profile",
-                label: "Account management",
-                description: "/account",
-                leftSection: <IconUserCog {...spotlightIconProps} />,
-                onClick: navigateToProfile,
-            },
-            {
-                id: "change-password",
-                label: "Change password",
-                description: "/reset",
-                leftSection: <IconPassword {...spotlightIconProps} />,
-                onClick: navigateToReset,
-            },
-            {
-                id: "logout",
-                label: "Logout",
-                description: ".logout",
-                leftSection: <IconLogout {...spotlightIconProps} />,
-                onClick: logoutAndNavigateToLogin,
-            },
         ]
     };
+
+    const miscLoggedInActions = [
+        {
+            id: "route-profile",
+            label: "Account management",
+            description: "/account",
+            leftSection: <IconUserCog {...spotlightIconProps} />,
+            onClick: navigateToProfile,
+        },
+        {
+            id: "route-reset",
+            label: "Change password",
+            description: "/reset",
+            leftSection: <IconPassword {...spotlightIconProps} />,
+            onClick: navigateToReset,
+        },
+        {
+            id: "logout",
+            label: "Logout",
+            description: ".logout",
+            leftSection: <IconLogout {...spotlightIconProps} />,
+            onClick: logoutAndNavigateToLogin,
+        },
+    ];
+
+    const publicNavigationActionGroup: SpotlightActionGroupData = {
+        group: "Navigation",
+        actions: [
+            {
+                id: "home",
+                label: "Home page",
+                description: "/home",
+                leftSection: <IconHome2 {...spotlightIconProps} />,
+                onClick: navigateToHome,
+            },
+            {
+                id: "login",
+                label: "Login",
+                description: "/login",
+                leftSection: <IconLogin2 {...spotlightIconProps} />,
+                onClick: navigateToLogin,
+            },
+            {
+                id: "register",
+                label: "Register",
+                description: "/register",
+                leftSection: <IconUserPlus {...spotlightIconProps} />,
+                onClick: navigateToRegister,
+            },
+        ]
+    }; 
 
     const collectionOperationActionGroup: SpotlightActionGroupData = {
         group: "Collection actions",
@@ -126,7 +161,6 @@ export default function SpotlightSearch() {
             leftSection: <IconFolder {...spotlightIconProps} />,
             onClick: () => {trySwitchToCollectionById(collection.id)},
         }));
-
     }
 
     const collectionsNavActionGroup: SpotlightActionGroupData = {
@@ -134,11 +168,21 @@ export default function SpotlightSearch() {
         actions: buildCollectionNavActions(),
     };
         
-    const allActionList: (SpotlightActionGroupData | SpotlightActionData)[] = [
-        collectionsNavActionGroup,
-        collectionOperationActionGroup,
-        miscActionGroup,
-    ];
+    const allActionList: (SpotlightActionGroupData | SpotlightActionData)[] = [];
+
+    if (isLoggedIn) {
+        miscActionGroup.actions.push(...miscLoggedInActions);
+        allActionList.push(
+            collectionsNavActionGroup,
+            collectionOperationActionGroup,
+            miscActionGroup,
+        );
+    } else {
+        allActionList.push(
+            publicNavigationActionGroup,
+            miscActionGroup,
+        );
+    }
 
     return <Spotlight
         shortcut={["mod + K", "mod + P"]}
