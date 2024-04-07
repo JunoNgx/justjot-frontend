@@ -4,7 +4,7 @@ import useCollectionNavActions from '@/hooks/useCollectionNavActions';
 import useIconProps from '@/hooks/useIconProps';
 import { ThemeMode } from '@/types';
 import { Spotlight, SpotlightActionData, SpotlightActionGroupData } from '@mantine/spotlight';
-import { IconEdit, IconFolder, IconFolderPlus, IconHelp, IconHome2, IconLogin2, IconLogout, IconMoon, IconPassword, IconSettingsCog, IconSortAscendingShapes, IconSun, IconTrash, IconUserCog, IconUserPlus } from '@tabler/icons-react';
+import { IconEdit, IconHelp, IconHome2, IconLogin2, IconLogout, IconMoon, IconPassword, IconSettingsCog, IconSortAscendingShapes, IconStack2, IconStackPush, IconSun, IconTrash, IconUserCog, IconUserPlus } from '@tabler/icons-react';
 import { useContext } from 'react';
 import useCollectionDeletion from '@/hooks/useCollectionDeletion';
 import useCollectionActions from '@/hooks/useCollectionActions';
@@ -126,7 +126,7 @@ export default function SpotlightSearch() {
                 id: "coll-op-create",
                 label: "Create new collection",
                 description: ".create-coll",
-                leftSection: <IconFolderPlus {...spotlightIconProps} />,
+                leftSection: <IconStackPush {...spotlightIconProps} />,
                 onClick: openCreateCollectionModal,
             },
             {
@@ -158,7 +158,7 @@ export default function SpotlightSearch() {
             id: `collection-${collection.id}`,
             label: `${collection.name}`,
             description: `/${collection.slug}`,
-            leftSection: <IconFolder {...spotlightIconProps} />,
+            leftSection: <IconStack2 {...spotlightIconProps} />,
             onClick: () => {trySwitchToCollectionById(collection.id)},
         }));
     }

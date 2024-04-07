@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Group, Menu, MenuDivider, MenuItem, Text, UnstyledButton, em } from "@mantine/core";
 import { ItemCollection } from "@/types";
 import { useMediaQuery } from "@mantine/hooks";
-import { IconEdit, IconFolderPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
+import { IconEdit, IconSelector, IconSortAscendingShapes, IconStackPush, IconTrash } from "@tabler/icons-react";
 
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 import useCollectionDeletion from "@/hooks/useCollectionDeletion";
@@ -57,7 +57,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
             )}
             <MenuDivider/>
             <MenuItem
-                leftSection={<IconFolderPlus {...menuIconProps} />}
+                leftSection={<IconStackPush {...menuIconProps} />}
                 onClick={openCreateCollectionModal}
             >
                 Create collection
