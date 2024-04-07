@@ -24,11 +24,18 @@ export default function useCollectionNavActions() {
         tryNavigateToCollection(targetCollection);
     };
 
+    /**
+     * Only used by MainView with useEffect
+     */
     const trySwitchToCollectionBySlug = (collectionSlug?: string) => {
         if (!collectionSlug) return;
 
-        const targetCollection = collections.find(c => c.slug === collectionSlug);
-        if (!targetCollection) return;
+        const targetCollection =
+            collections.find(c => c.slug === collectionSlug);
+        if (!targetCollection) {
+            trySwitchToCollectionByIndex(0);
+            return;
+        }
 
         tryNavigateToCollection(targetCollection);
     };
@@ -60,9 +67,7 @@ export default function useCollectionNavActions() {
         tryNavigateToCollection(targetCollection);
     };
 
-    const tryNavigateToCollection = (
-        collection: ItemCollection
-    ) => {
+    const tryNavigateToCollection = (collection: ItemCollection) => {
         setCurrCollection(collection);
 
         navigate(`/${user?.username}/${collection.slug}`);
