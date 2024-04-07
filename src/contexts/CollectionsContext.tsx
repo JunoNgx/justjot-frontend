@@ -8,8 +8,7 @@ type CollectionsContextType = {
     setCollections: React.Dispatch<React.SetStateAction<ItemCollection[]>>,
     currCollection: ItemCollection | undefined,
     setCurrCollection: React.Dispatch<React.SetStateAction<ItemCollection | undefined>>,
-    currSelectedCollectionIndex: number,
-    setCurrSelectedCollectionIndex: React.Dispatch<React.SetStateAction<number>>,
+    collSelectedIndex: number,
     fetchCollections: ({successfulCallback, errorCallback}?: ApiRequestCallbackOptions) => void,
 };
 
@@ -19,7 +18,6 @@ export default function CollectionsContextProvider({ children }: { children: Rea
     const { isLoggedIn, pbClient } = useContext(BackendClientContext);
     const [collections, setCollections] = useState<ItemCollection[]>([]);
     const [currCollection, setCurrCollection] = useState<ItemCollection>();
-    const [currSelectedCollectionIndex, setCurrSelectedCollectionIndex] = useState<number>(0);
 
     useEffect(() => {
         if (!isLoggedIn) return;
@@ -71,15 +69,16 @@ export default function CollectionsContextProvider({ children }: { children: Rea
             });
     }, [isLoggedIn]);
 
+    const collSelectedIndex = collections.findIndex(c => c.id === currCollection?.id);
+
     return <CollectionsContext.Provider value=
         {{
             collections,
             setCollections,
             currCollection,
             setCurrCollection,
-            currSelectedCollectionIndex,
-            setCurrSelectedCollectionIndex,
 
+            collSelectedIndex,
             fetchCollections
         }}
     >
