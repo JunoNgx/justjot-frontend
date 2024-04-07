@@ -1,19 +1,17 @@
 import { useContext } from "react";
 import { Group, Menu, MenuDivider, MenuItem, Text, UnstyledButton, em } from "@mantine/core";
-import { modals } from "@mantine/modals";
 import { ItemCollection } from "@/types";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconEdit, IconFolderPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
 
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
-import CollectionCreateUpdateModal from "@/components/modals/CollectionCreateUpdateModal";
 import useDeleteCollectionConfirmation from "@/hooks/useDeleteCollectionConfirmation";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { CurrentCollectionContext } from "@/contexts/CurrentCollectionContext";
 import CollectionHotkey from "@/components/misc/CollectionHotkey";
-import CollectionsSortModal from "@/components/modals/CollectionsSortModal";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import useIconProps from "@/hooks/useIconProps";
+import useCollectionActions from "@/hooks/useCollectionActions";
 
 export default function CollectionMenu({isInMainView}: {isInMainView?: boolean}) {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -22,6 +20,11 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
 
     const { trySwitchToCollectionById } = useCollectionNavActions();
     const confirmDeletion = useDeleteCollectionConfirmation();
+    const {
+        openCreateCollectionModal,
+        openUpdateCollectionModal,
+        openSortCollectionModal,
+    } = useCollectionActions();
     const isMobile = useMediaQuery(`(max-width: ${em(720)})`);
     const { menuIconProps } = useIconProps();
 
@@ -57,31 +60,18 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
             <MenuDivider/>
             <MenuItem
                 leftSection={<IconFolderPlus {...menuIconProps} />}
-                onClick={() => modals.open({
-                    centered: true,
-                    title: "Create New Collection",
-                    children: (<CollectionCreateUpdateModal isEditMode={false}/>)
-                })}
+                onClick={openCreateCollectionModal}
             >
                 Create collection
             </MenuItem>
             <MenuItem leftSection={<IconEdit {...menuIconProps} />}
-                onClick={() => modals.open({
-                    centered: true,
-                    title: "Edit Collection",
-                    children: (<CollectionCreateUpdateModal isEditMode={true}/>)
-                })}
+                onClick={openUpdateCollectionModal}
             >
                 Edit collection
             </MenuItem>
             <MenuItem
                 leftSection={<IconSortAscendingShapes {...menuIconProps} />}
-                onClick={() => modals.open({
-                    size: "35rem",
-                    centered: true,
-                    title: "Sort Collections",
-                    children: <CollectionsSortModal/>
-                })}
+                onClick={openSortCollectionModal}
             >
                 Sort collections
             </MenuItem>
