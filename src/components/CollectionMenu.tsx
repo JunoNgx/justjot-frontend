@@ -3,7 +3,7 @@ import { Group, Menu, MenuDivider, MenuItem, Text, UnstyledButton, em } from "@m
 import { modals } from "@mantine/modals";
 import { ItemCollection } from "@/types";
 import { useMediaQuery } from "@mantine/hooks";
-import { IconEdit, IconPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
+import { IconEdit, IconFolderPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
 
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 import CollectionCreateUpdateModal from "@/components/modals/CollectionCreateUpdateModal";
@@ -56,7 +56,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
             )}
             <MenuDivider/>
             <MenuItem
-                leftSection={<IconPlus {...menuIconProps} />}
+                leftSection={<IconFolderPlus {...menuIconProps} />}
                 onClick={() => modals.open({
                     centered: true,
                     title: "Create New Collection",
