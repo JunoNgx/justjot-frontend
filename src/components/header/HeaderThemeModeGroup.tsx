@@ -4,7 +4,6 @@ import { ActionIcon, Group } from "@mantine/core";
 import { ThemeModeContext } from "@/contexts/ThemeModeContext";
 import { ThemeMode } from "@/types";
 import { IconMoon, IconSettingsCog, IconSun } from "@tabler/icons-react";
-import { justJotTheme } from "@/theme";
 import useIconProps from "@/hooks/useIconProps";
 
 export default function HeaderThemeModeGroup() {
@@ -46,8 +45,7 @@ export default function HeaderThemeModeGroup() {
             radius="xl"
             onClick={() => {setThemeMode(ThemeMode.DARK)}}
         >
-            <IconMoon {...themeModeIconProps} size={justJotTheme.other.iconSizeThemeMode}
-            />
+            <IconMoon {...themeModeIconProps} />
         </ActionIcon>
     </Group>
 }
