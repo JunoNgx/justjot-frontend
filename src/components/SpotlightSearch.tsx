@@ -22,8 +22,8 @@ export default function SpotlightSearch() {
         openSortCollectionModal,
     } = useCollectionActions();
 
-    const themeModeActionGroup: SpotlightActionGroupData = {
-        group: "Theme modes",
+    const miscActionGroup: SpotlightActionGroupData = {
+        group: "Miscellaneous",
         actions: [
             {
                 id: "theme-mode-system",
@@ -102,7 +102,7 @@ export default function SpotlightSearch() {
     const allActionList: (SpotlightActionGroupData | SpotlightActionData)[] = [
         collectionOperationActionGroup,
         collectionsNavActionGroup,
-        themeModeActionGroup,
+        miscActionGroup,
     ];
 
     return <Spotlight
