@@ -1,11 +1,12 @@
 import { useForm } from '@mantine/form';
 import { Paper, TextInput, Button, Title, Group, Text, Box, Anchor } from "@mantine/core";
 import { BackendClientContext } from '@/contexts/BackendClientContext';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { DbTable } from '@/types'
 import { NavLink } from 'react-router-dom';
 import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
 import { ClientResponseError } from 'pocketbase';
+import { APP_NAME } from '@/utils/constants';
 
 export default function Reset() {
 
@@ -15,6 +16,10 @@ export default function Reset() {
             email: "",
         }
     });
+
+    useEffect(() => {
+        document.title = `Reset password — ${APP_NAME}`;
+    }, []);
 
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);

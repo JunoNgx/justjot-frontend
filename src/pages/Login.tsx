@@ -6,6 +6,7 @@ import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { DbTable, User } from '@/types';
 import { ClientResponseError } from 'pocketbase';
 import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
+import { APP_NAME } from '@/utils/constants';
 
 type LoginFormData = {email: string, password: string};
 
@@ -23,6 +24,8 @@ export default function Login() {
             navigateToMainView();
             return;
         }
+
+        document.title = `Login — ${APP_NAME}`;
     }, []);
 
     const navigate = useNavigate();

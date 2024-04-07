@@ -7,6 +7,7 @@ import { UserType, DbTable } from '@/types'
 import { ClientResponseError } from 'pocketbase';
 import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
 import useNavigateRoutes from '@/hooks/useNavigateRoutes';
+import { APP_NAME } from '@/utils/constants';
 
 type RegisterFormData = {
     email: string,
@@ -35,6 +36,8 @@ export default function Register() {
             navigateToMainView();
             return;
         }
+
+        document.title = `Register — ${APP_NAME}`;
     }, []);
 
     const [hasAttempted, setHasAttempted] = useState(false);
