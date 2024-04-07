@@ -21,7 +21,12 @@ export default function useIconProps() {
     };
 
     const spotlightIconProps = {
-        size: 18,
+        size: 24,
+        stroke: 1.5,
+    };
+
+    const spotlightIconLargeProps = {
+        size: 32,
         stroke: 1.5,
     };
 
@@ -37,6 +42,7 @@ export default function useIconProps() {
         menuIconProps,
         mainInputIconProps,
         spotlightIconProps,
+        spotlightIconLargeProps,
         logoIconProps,
     };
 };
