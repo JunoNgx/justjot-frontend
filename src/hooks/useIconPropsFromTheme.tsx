@@ -16,9 +16,15 @@ export default function useIconPropsFromTheme() {
         stroke: "1.5",
     }
 
+    const menuIconProps = {
+        size: 18,
+        stroke: 1.5,
+    }
+
     return {
         itemIcontProps,
         themeModeIconProps,
+        menuIconProps,
         logoIconProps,
     };
 };
