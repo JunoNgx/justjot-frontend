@@ -39,7 +39,7 @@ export default function SpotlightSearch() {
             {
                 id: "profile",
                 label: "Account management",
-                description: ".account",
+                description: "/account",
                 leftSection: <IconUserCog {...spotlightIconProps} />,
                 onClick: () => {navigate("/profile");},
             },
