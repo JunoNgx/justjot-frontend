@@ -22,13 +22,7 @@ export default function useCollectionDeletion() {
     } = useContext(CollectionsContext);
     const { trySwitchToCollectionByIndex } = useCollectionNavActions();
     const itemsHandlers = useManageListState(setCollections);
-    
-    useEffect(() => {
-        if (collections.length === 0) return;
-        setCanDelete(collections.length > 1);
-    }, [collections]);
-    
-    const [canDelete, setCanDelete] = useState(false);
+
     const [isLoading, setIsLoading] = useState(false);
     const [shouldNavigateAway, setShouldNavigateAway] = useState(false);
     const { deleteCollection } = useCollectionApiCalls();
@@ -76,6 +70,7 @@ export default function useCollectionDeletion() {
         });
     };
 
+    const canDelete = collections.length > 1;
     const confirmCollectionDeletion = () => {
         if (canDelete) {
             modals.openConfirmModal({
