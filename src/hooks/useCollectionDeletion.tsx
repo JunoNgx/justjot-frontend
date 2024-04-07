@@ -11,7 +11,7 @@ import { ClientResponseError } from "pocketbase";
 import useCollectionNavActions from "./useCollectionNavActions";
 import useManageListState from "@/libs/useManageListState";
 
-export default function useDeleteCollectionConfirmation() {
+export default function useCollectionDeletion() {
     
     const {
         collections,

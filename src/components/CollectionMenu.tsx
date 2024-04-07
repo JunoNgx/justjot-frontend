@@ -5,7 +5,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { IconEdit, IconFolderPlus, IconSelector, IconSortAscendingShapes, IconTrash } from "@tabler/icons-react";
 
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
-import useDeleteCollectionConfirmation from "@/hooks/useDeleteCollectionConfirmation";
+import useCollectionDeletion from "@/hooks/useCollectionDeletion";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import CollectionHotkey from "@/components/misc/CollectionHotkey";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
@@ -17,7 +17,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
     const { collections, currCollection } = useContext(CollectionsContext);
 
     const { trySwitchToCollectionById } = useCollectionNavActions();
-    const confirmDeletion = useDeleteCollectionConfirmation();
+    const confirmCollectionDeletion = useCollectionDeletion();
     const {
         openCreateCollectionModal,
         openUpdateCollectionModal,
@@ -79,7 +79,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
             <MenuItem
                 color="red"
                 leftSection={<IconTrash {...menuIconProps} />}
-                onClick={confirmDeletion}
+                onClick={confirmCollectionDeletion}
             >
                 Delete collection
             </MenuItem>

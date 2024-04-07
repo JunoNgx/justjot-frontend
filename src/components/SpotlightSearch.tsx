@@ -6,7 +6,7 @@ import { ThemeMode } from '@/types';
 import { Spotlight, SpotlightActionData, SpotlightActionGroupData } from '@mantine/spotlight';
 import { IconEdit, IconFolder, IconFolderPlus, IconHelp, IconLogout, IconMoon, IconPassword, IconSettingsCog, IconSortAscendingShapes, IconSun, IconTrash, IconUserCog } from '@tabler/icons-react';
 import { useContext } from 'react';
-import useDeleteCollectionConfirmation from '@/hooks/useDeleteCollectionConfirmation';
+import useCollectionDeletion from '@/hooks/useCollectionDeletion';
 import useCollectionActions from '@/hooks/useCollectionActions';
 import useNavigateRoutes from '@/hooks/useNavigateRoutes';
 
@@ -16,7 +16,7 @@ export default function SpotlightSearch() {
     const { collections } = useContext(CollectionsContext);
     const { spotlightIconProps } = useIconProps();
     const { trySwitchToCollectionById } = useCollectionNavActions();
-    const confirmDeletion = useDeleteCollectionConfirmation();
+    const confirmCollectionDeletion = useCollectionDeletion();
     const {
         openCreateCollectionModal,
         openUpdateCollectionModal,
@@ -113,7 +113,7 @@ export default function SpotlightSearch() {
                 label: "Delete current collection",
                 description: ".delete-coll",
                 leftSection: <IconTrash color="red" {...spotlightIconProps} />,
-                onClick: confirmDeletion,
+                onClick: confirmCollectionDeletion,
             },
         ]
     };
