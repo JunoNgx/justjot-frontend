@@ -10,12 +10,17 @@ import { APP_NAME } from '@/utils/constants';
 
 type LoginFormData = {email: string, password: string};
 
-export default function Login() {
+const TEST_EMAIL = "JayDoeTest";
+const TEST_PASSWORD = "password123";
+
+export default function Login(
+    {isDemoMode}: {isDemoMode?: boolean}
+) {
     const { pbClient, setUser, isLoggedIn } = useContext(BackendClientContext);
     const form = useForm({
         initialValues: {
-            email: "",
-            password: ""
+            email: isDemoMode ? TEST_EMAIL : "",
+            password: isDemoMode ? TEST_PASSWORD : ""
         }
     });
 
@@ -61,6 +66,15 @@ export default function Login() {
         setIsLoading(false);
     }
 
+    const normalNotice = <Text>
+        Don't have an account? <Anchor component={NavLink} to="/register">Register</Anchor>
+    </Text>
+
+    const demoNotice = <>
+        <Text>Try using the test account</Text>
+        <Text><code>{TEST_EMAIL}</code> / <code>{TEST_PASSWORD}</code></Text>
+    </>
+
     return <Paper className="account-modal account-modal--login">
         <Title className="account-modal__title"
             order={2}
@@ -68,9 +82,10 @@ export default function Login() {
             Login
         </Title>
 
-        <Text>
-            Don't have an account? <Anchor component={NavLink} to="/register">Register</Anchor>
-        </Text>
+        {isDemoMode
+            ? demoNotice
+            : normalNotice
+        }
 
         <form onSubmit={form.onSubmit(attemptLogin)}>
             <TextInput
