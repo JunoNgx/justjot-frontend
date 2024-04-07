@@ -1,13 +1,18 @@
+import { CollectionsContext } from '@/contexts/CollectionsContext';
 import { ThemeModeContext } from '@/contexts/ThemeModeContext';
+import useCollectionNavActions from '@/hooks/useCollectionNavActions';
 import useIconProps from '@/hooks/useIconProps';
 import { ThemeMode } from '@/types';
 import { Spotlight, SpotlightActionData, SpotlightActionGroupData } from '@mantine/spotlight';
-import { IconMoon, IconSettingsCog, IconSun } from '@tabler/icons-react';
+import { IconFolder, IconMoon, IconSettingsCog, IconSun } from '@tabler/icons-react';
 import { useContext } from 'react';
 
 export default function SpotlightSearch() {
+
     const { setThemeMode } = useContext(ThemeModeContext);
-    const { spotlightIconProps } = useIconProps();
+    const { collections } = useContext(CollectionsContext);
+    const { spotlightIconProps, spotlightIconLargeProps } = useIconProps();
+    const { trySwitchToCollectionById } = useCollectionNavActions();
 
     const themeModeActionGroup: SpotlightActionGroupData = {
         group: "Theme modes",
@@ -32,9 +37,26 @@ export default function SpotlightSearch() {
             },
         ]
     };
+
+    const buildCollectionNavActions = (): SpotlightActionData[] => {
+        return collections.map(collection => ({
+            id: `collections-${collection.id}`,
+            label: `/${collection.slug}`,
+            description: `${collection.name}`,
+            leftSection: <IconFolder {...spotlightIconLargeProps} />,
+            onClick: () => {trySwitchToCollectionById(collection.id)},
+        }));
+
+    }
+
+    const collectionsNavActionGroup: SpotlightActionGroupData = {
+        group: "Collections",
+        actions: buildCollectionNavActions(),
+    };
         
     const actions: (SpotlightActionGroupData | SpotlightActionData)[] = [
-        themeModeActionGroup
+        collectionsNavActionGroup,
+        themeModeActionGroup,
     ];
 
     return <Spotlight
