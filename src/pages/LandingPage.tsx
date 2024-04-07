@@ -3,6 +3,7 @@ import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Anchor, Box, Group, Text, Title } from "@mantine/core";
 import { JustJotIcon } from "@/components/misc/JustJotIcon";
+import { APP_NAME } from "@/utils/constants";
 
 export default function LandingPage() {
     const { pbClient, isLoggedIn } = useContext(BackendClientContext);
@@ -15,6 +16,8 @@ export default function LandingPage() {
             );
             return;
         }
+
+        document.title = `${APP_NAME} — A keyboard-first note taking app`;
     }, []);
 
     const navigate = useNavigate();
