@@ -35,12 +35,6 @@ const overrideTheme = createTheme({
         colLogo: "#86EAD4", // Mint
         colBlack: "#000000",
         colWhite: "#FFFFFF",
-        iconStrokeWidth: 1,
-        iconSizeMenu: 16,
-        iconSizeItem: 24,
-        // iconSizeHeaderLogo: 24,
-        iconSizeHeaderUser: 24,
-        iconSizeThemeMode: 18,
     },
     components: {
         Anchor: Anchor.extend({
