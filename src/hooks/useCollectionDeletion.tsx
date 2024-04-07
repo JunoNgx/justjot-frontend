@@ -97,6 +97,7 @@ export default function useCollectionDeletion() {
                     cancel: "Cancel"
                 },
                 confirmProps: {
+                    variant: "filled",
                     color: "red",
                     loading: isLoading
                 },
