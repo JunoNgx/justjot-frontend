@@ -27,7 +27,7 @@ export default function BackendClientContextProvider({ children }: { children: R
         pbClient,
         user,
         setUser,
-        isLoggedIn: !!user,
+        isLoggedIn: pbClient.authStore.isValid,
         logout,
     }}>
         {children}
