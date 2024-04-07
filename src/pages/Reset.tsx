@@ -6,6 +6,7 @@ import { DbTable } from '@/types'
 import { NavLink } from 'react-router-dom';
 import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
 import { ClientResponseError } from 'pocketbase';
+import SpotlightSearch from '@/components/SpotlightSearch';
 
 export default function Reset() {
 
@@ -93,5 +94,7 @@ export default function Reset() {
             ? successNotice
             : resetRequestForm
         }
+
+        <SpotlightSearch/>
     </Paper>
 }
