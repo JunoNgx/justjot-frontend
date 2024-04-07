@@ -4,15 +4,17 @@ import useCollectionNavActions from '@/hooks/useCollectionNavActions';
 import useIconProps from '@/hooks/useIconProps';
 import { ThemeMode } from '@/types';
 import { Spotlight, SpotlightActionData, SpotlightActionGroupData } from '@mantine/spotlight';
-import { IconEdit, IconFolder, IconFolderPlus, IconHelp, IconMoon, IconSettingsCog, IconSortAscendingShapes, IconSun, IconTrash, IconUserCog } from '@tabler/icons-react';
+import { IconEdit, IconFolder, IconFolderPlus, IconHelp, IconLogout, IconMoon, IconSettingsCog, IconSortAscendingShapes, IconSun, IconTrash, IconUserCog } from '@tabler/icons-react';
 import { useContext } from 'react';
 import useDeleteCollectionConfirmation from '@/hooks/useDeleteCollectionConfirmation';
 import useCollectionActions from '@/hooks/useCollectionActions';
 import { useNavigate } from 'react-router-dom';
+import { BackendClientContext } from '@/contexts/BackendClientContext';
 
 export default function SpotlightSearch() {
 
     const { setThemeMode } = useContext(ThemeModeContext);
+    const { logout } = useContext(BackendClientContext);
     const { collections } = useContext(CollectionsContext);
     const { spotlightIconProps } = useIconProps();
     const { trySwitchToCollectionById } = useCollectionNavActions();
@@ -40,6 +42,16 @@ export default function SpotlightSearch() {
                 description: ".account",
                 leftSection: <IconUserCog {...spotlightIconProps} />,
                 onClick: () => {navigate("/profile");},
+            },
+            {
+                id: "logout",
+                label: "Logout",
+                description: ".logout",
+                leftSection: <IconLogout {...spotlightIconProps} />,
+                onClick: () => {
+                    logout();
+                    navigate("/login", { replace: true});
+                },
             },
             {
                 id: "theme-mode-system",
