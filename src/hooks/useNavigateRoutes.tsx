@@ -43,6 +43,10 @@ export default function useNavigateRoutes() {
         navigate("/register");
     }
 
+    const navigateToDemoLogin = () => {
+        navigate("/demo-login");
+    }
+
     return {
         navigateToHelp,
         navigateToProfile,
@@ -53,5 +57,6 @@ export default function useNavigateRoutes() {
         navigateToHome,
         navigateToLogin,
         navigateToRegister,
+        navigateToDemoLogin,
     }
 };
