@@ -72,6 +72,7 @@ function App() {
                                         </Route>
                                         <Route path="/profile" element={<Profile />} />
                                         <Route path="/login" element={<Login />} />
+                                        <Route path="/demo-login" element={<Login isDemoMode={true}/>} />
                                         <Route path="/register" element={<Register />} />
                                         <Route path="/reset" element={<Reset />} />
                                     </Routes>
