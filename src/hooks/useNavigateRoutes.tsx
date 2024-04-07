@@ -30,11 +30,28 @@ export default function useNavigateRoutes() {
         navigate("/login", { replace: true});
     };
 
+    // For non-logged in status only
+    const navigateToHome = () => {
+        navigate("/");
+    }
+
+    const navigateToLogin = () => {
+        navigate("/login");
+    }
+
+    const navigateToRegister = () => {
+        navigate("/register");
+    }
+
     return {
         navigateToHelp,
         navigateToProfile,
         navigateToReset,
         logoutAndNavigateToLogin,
         navigateToMainView,
+
+        navigateToHome,
+        navigateToLogin,
+        navigateToRegister,
     }
 };
