@@ -20,6 +20,7 @@ import Reset from "@/pages/Reset";
 
 import "@mantine/core/styles.css";
 import '@mantine/notifications/styles.css';
+import '@mantine/spotlight/styles.css';
 import "mantine-contextmenu/styles.css";
 
 import '@mantine/core/styles.layer.css';
