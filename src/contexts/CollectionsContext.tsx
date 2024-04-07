@@ -45,7 +45,6 @@ export default function CollectionsContextProvider({ children }: { children: Rea
             })
             .catch((err: ClientResponseError) => {
                 errorCallback?.();
-                console.log(JSON.stringify(err))
                 if (!err.isAbort) {
                     console.warn("Non cancellation error");
                 }
