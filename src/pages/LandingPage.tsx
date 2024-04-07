@@ -1,7 +1,8 @@
 import { useContext, useEffect } from "react"
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Anchor, Box, Text, Title } from "@mantine/core";
+import { Anchor, Box, Group, Text, Title } from "@mantine/core";
+import { JustJotIcon } from "@/components/misc/JustJotIcon";
 
 export default function LandingPage() {
     const { pbClient, isLoggedIn } = useContext(BackendClientContext);
@@ -16,10 +17,16 @@ export default function LandingPage() {
 
     return <Box className="landing-page">
         <section className="landing-page__section">
-            <Title order={2}>jot</Title>
-            <Text fs="italic">/dʒɒt/</Text>
-            <Text>(verb)</Text>
-            <Text>write (something) quickly</Text>
+            <Group gap="xl">
+                <JustJotIcon size={72} stroke={"0.1"}/>
+                <Box>
+                    <Title order={2}>jot</Title>
+                    <Text fs="italic">/dʒɒt/</Text>
+                    <Text>(verb)</Text>
+                    <Text>write (something) quickly</Text>
+                </Box>
+            </Group>
+
         </section>
 
         <section className="landing-page__section">
