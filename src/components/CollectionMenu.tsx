@@ -23,7 +23,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
     const { trySwitchToCollectionById } = useCollectionNavActions();
     const confirmDeletion = useDeleteCollectionConfirmation();
     const isMobile = useMediaQuery(`(max-width: ${em(720)})`);
-    const iconProps = useIconPropsFromTheme();
+    const { menuIconProps } = useIconPropsFromTheme();
 
     const collectionMenu = <Menu
         position="bottom-start"
@@ -38,7 +38,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
                         {currCollection?.name}
                     </Text>
                     <IconSelector className="collection-menu-btn__icon"
-                        {...iconProps}
+                        {...menuIconProps}
                     />
                 </Group>
             </UnstyledButton>
@@ -56,7 +56,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
             )}
             <MenuDivider/>
             <MenuItem
-                leftSection={<IconPlus {...iconProps} />}
+                leftSection={<IconPlus {...menuIconProps} />}
                 onClick={() => modals.open({
                     centered: true,
                     title: "Create New Collection",
@@ -65,7 +65,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
             >
                 Create collection
             </MenuItem>
-            <MenuItem leftSection={<IconEdit {...iconProps} />}
+            <MenuItem leftSection={<IconEdit {...menuIconProps} />}
                 onClick={() => modals.open({
                     centered: true,
                     title: "Edit Collection",
@@ -75,7 +75,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
                 Edit collection
             </MenuItem>
             <MenuItem
-                leftSection={<IconSortAscendingShapes {...iconProps} />}
+                leftSection={<IconSortAscendingShapes {...menuIconProps} />}
                 onClick={() => modals.open({
                     size: "35rem",
                     centered: true,
@@ -90,7 +90,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
 
             <MenuItem
                 color="red"
-                leftSection={<IconTrash {...iconProps} />}
+                leftSection={<IconTrash {...menuIconProps} />}
                 onClick={confirmDeletion}
             >
                 Delete collection

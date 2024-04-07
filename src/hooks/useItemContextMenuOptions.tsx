@@ -31,28 +31,28 @@ export default function useItemContextMenuOptions(
     }: ItemContextMenuOptionsParams
 ) {
     const { collections } = useContext(CollectionsContext);
-    const iconProps = useIconPropsFromTheme();
+    const { menuIconProps } = useIconPropsFromTheme();
 
     const contextMenuDefaultActionIcon = item.shouldCopyOnClick
-        ? <IconCheckbox {...iconProps} />
-        : <IconSquare {...iconProps} />
+        ? <IconCheckbox {...menuIconProps} />
+        : <IconSquare {...menuIconProps} />
 
     const contextMenuOptions = [
         {
             key: "copy",
-            icon: <IconCopy {...iconProps} />,
+            icon: <IconCopy {...menuIconProps} />,
             onClick: () => {copyFn(item)}
         }, {
             key: "edit",
-            icon: <IconEdit {...iconProps} />,
+            icon: <IconEdit {...menuIconProps} />,
             onClick: () => {editFn(item)},
         }, {
             key: "move",
-            icon: <IconFileSymlink {...iconProps} />,
+            icon: <IconFileSymlink {...menuIconProps} />,
             onClick: () => {moveFn({item, collectionList: collections})},
         }, {
             key: "delete",
-            icon: <IconTrash {...iconProps} />,
+            icon: <IconTrash {...menuIconProps} />,
             color: "red",
             onClick: () => {
                 deleteFn({item});
@@ -62,13 +62,13 @@ export default function useItemContextMenuOptions(
             key: "refetch",
             title: "Refetch",
             hidden: !canRefetchItem(item),
-            icon: <IconDownload {...iconProps} />,
+            icon: <IconDownload {...menuIconProps} />,
             onClick: () => {refetchFn(item);}
         }, {
             key: "convertToTodo",
             title: "Convert to Todo",
             hidden: !canConvertItemToTodo(item),
-            icon: <IconArrowMoveRight {...iconProps} />,
+            icon: <IconArrowMoveRight {...menuIconProps} />,
             color: "orange",
             onClick: () => {convertToTodoFn({item});}
         }, {

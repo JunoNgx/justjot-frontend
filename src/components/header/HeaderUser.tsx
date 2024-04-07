@@ -16,7 +16,7 @@ export default function HeaderUser() {
         navigate("/login", { replace: true});
     };
 
-    const iconProps = useIconPropsFromTheme();
+    const { menuIconProps } = useIconPropsFromTheme();
 
     return <Menu
         position="bottom-end"
@@ -26,14 +26,14 @@ export default function HeaderUser() {
             <UnstyledButton mr="xs">
                 <Group gap={6}>
                     <Text>{username}</Text>
-                    <IconChevronDown {...iconProps} />
+                    <IconChevronDown {...menuIconProps} />
                 </Group>
             </UnstyledButton>
         </Menu.Target>
 
         <Menu.Dropdown className="dropdown-menu">
             <Menu.Item
-                leftSection={<IconHelp {...iconProps} />}
+                leftSection={<IconHelp {...menuIconProps} />}
                 onClick={() => navigate("/help")}
             >
                 Help
@@ -42,13 +42,13 @@ export default function HeaderUser() {
             <MenuDivider/>
 
             <Menu.Item
-                leftSection={<IconUserCog {...iconProps} />}
+                leftSection={<IconUserCog {...menuIconProps} />}
                 onClick={() => navigate("/profile")}
             >
                 Account
             </Menu.Item>
             <Menu.Item
-                leftSection={<IconLogout {...iconProps} />}
+                leftSection={<IconLogout {...menuIconProps} />}
                 onClick={attemptLogout}
             >
                 Logout

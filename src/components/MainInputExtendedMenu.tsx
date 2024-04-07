@@ -16,7 +16,7 @@ export default function MainInputExtendedMenu(
     {processMainInput, mainInputRef}: MainInputExtendedMenuOptions
 ) {
 
-    const iconProps = useIconPropsFromTheme();
+    const { menuIconProps } = useIconPropsFromTheme();
     const { setInputVal } = useContext(ItemsContext);
     const { focusOnMainInput } = useItemNavActions();
     // const mainInputInnerRef = useRef<HTMLInputElement>(null);
@@ -67,14 +67,14 @@ export default function MainInputExtendedMenu(
                 w={64}
             >
                 <IconChevronDown
-                    {...iconProps}
+                    {...menuIconProps}
                 />
             </Box>
         </Menu.Target>
 
         <Menu.Dropdown className="dropdown-menu">
             <Menu.Item
-                leftSection={<IconLayoutNavbar {...iconProps} />}
+                leftSection={<IconLayoutNavbar {...menuIconProps} />}
                 onClick={() => {
                     setInputVal(curr => `${CREATE_TEXT_WITH_TITLE_PREFIX} ${curr}`);
                     focusOnMainInput(mainInputRef as React.RefObject<HTMLInputElement>);
@@ -83,7 +83,7 @@ export default function MainInputExtendedMenu(
                 with title
             </Menu.Item>
             <Menu.Item
-                leftSection={<IconCheckbox {...iconProps} />}
+                leftSection={<IconCheckbox {...menuIconProps} />}
                 onClick={() => {
                     setInputVal(curr => `${CREATE_TODO_PREFIX} ${curr}`);
                     focusOnMainInput(mainInputRef as React.RefObject<HTMLInputElement>);
@@ -92,14 +92,14 @@ export default function MainInputExtendedMenu(
                 as todo
             </Menu.Item>
             <Menu.Item
-                leftSection={<IconClipboardPlus {...iconProps} />}
+                leftSection={<IconClipboardPlus {...menuIconProps} />}
                 onClick={enterFromClipboard}
             >
                 from clipboard
             </Menu.Item>
 
             <Menu.Item
-                leftSection={<IconX {...iconProps} />}
+                leftSection={<IconX {...menuIconProps} />}
                 onClick={() => {
                     setInputVal("");
                     focusOnMainInput(mainInputRef as React.RefObject<HTMLInputElement>);
