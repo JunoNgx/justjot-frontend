@@ -24,33 +24,33 @@ export default function LandingPage() {
 
     return <Box className="landing-page">
         <section className="landing-page__section">
-            <Box className="landing-page__top-banner">
-                <Group gap="lg">
-                    <JustJotIcon size={72} stroke={"0.1"}/>
-                    <Box>
-                        <Title order={2}>jot</Title>
-                        <Text fs="italic">/dʒɒt/</Text>
-                        <Text>(verb)</Text>
-                        <Text>write (something) quickly</Text>
-                    </Box>
-                </Group>
-
-                <Paper className="landing-page__demo-box"
-                    withBorder p="md"
-                >
-                    <Text ta="center">Account-free live demo available</Text>
-                    <Center mt="md">
-                        <Button>
-                            Try now
-                        </Button>
-                    </Center>
-                </Paper>
-            </Box>
+            <Group gap="xl">
+                <JustJotIcon size={72} stroke={"0.1"}/>
+                <Box>
+                    <Title order={2}>jot</Title>
+                    <Text fs="italic">/dʒɒt/</Text>
+                    <Text>(verb)</Text>
+                    <Text>write (something) quickly</Text>
+                </Box>
+            </Group>
         </section>
 
         <section className="landing-page__section">
             <Title order={1}>JustJot</Title>
             <Text>A keyboard-first note-taking Progressive Web App, tailored for swift information-recording operations.</Text>
+        </section>
+
+        <section className="landing-page__section">
+            <Paper className="landing-page__demo-box"
+                withBorder p="md"
+            >
+                <Text ta="center">Account-free live demo available</Text>
+                <Center mt="md">
+                    <Button>
+                        Try now
+                    </Button>
+                </Center>
+            </Paper>
         </section>
 
         <section className="landing-page__section">
