@@ -13,7 +13,7 @@ export default function SpotlightSearch() {
 
     const { setThemeMode } = useContext(ThemeModeContext);
     const { collections } = useContext(CollectionsContext);
-    const { spotlightIconProps, spotlightIconLargeProps } = useIconProps();
+    const { spotlightIconProps } = useIconProps();
     const { trySwitchToCollectionById } = useCollectionNavActions();
     const confirmDeletion = useDeleteCollectionConfirmation();
     const {
@@ -29,21 +29,21 @@ export default function SpotlightSearch() {
                 id: "theme-mode-system",
                 label: "Theme mode: system",
                 description: ".theme-system",
-                leftSection: <IconSettingsCog {...spotlightIconLargeProps} />,
+                leftSection: <IconSettingsCog {...spotlightIconProps} />,
                 onClick: () => {setThemeMode(ThemeMode.AUTO)},
             },
             {
                 id: "theme-mode-light",
                 label: "Theme mode: light",
                 description: ".theme-light",
-                leftSection: <IconSun {...spotlightIconLargeProps} />,
+                leftSection: <IconSun {...spotlightIconProps} />,
                 onClick: () => {setThemeMode(ThemeMode.LIGHT)}
             },
             {
                 id: "theme-mode-system",
                 label: "Theme mode: dark",
                 description: ".theme-dark",
-                leftSection: <IconMoon {...spotlightIconLargeProps} />,
+                leftSection: <IconMoon {...spotlightIconProps} />,
                 onClick: () => {setThemeMode(ThemeMode.DARK)}
             },
         ]
@@ -56,28 +56,28 @@ export default function SpotlightSearch() {
                 id: "coll-op-create",
                 label: "Create new collection",
                 description: ".create-coll",
-                leftSection: <IconFolderPlus {...spotlightIconLargeProps} />,
+                leftSection: <IconFolderPlus {...spotlightIconProps} />,
                 onClick: openCreateCollectionModal,
             },
             {
                 id: "coll-op-edit",
                 label: "Edit current collection",
                 description: ".edit-coll",
-                leftSection: <IconEdit {...spotlightIconLargeProps} />,
+                leftSection: <IconEdit {...spotlightIconProps} />,
                 onClick: openUpdateCollectionModal,
             },
             {
                 id: "coll-op-sort",
                 label: "Sort collections",
                 description: ".sort-coll",
-                leftSection: <IconSortAscendingShapes {...spotlightIconLargeProps} />,
+                leftSection: <IconSortAscendingShapes {...spotlightIconProps} />,
                 onClick: openSortCollectionModal,
             },
             {
                 id: "coll-op-delete",
                 label: "Delete current collection",
                 description: ".delete-coll",
-                leftSection: <IconTrash color="red" {...spotlightIconLargeProps} />,
+                leftSection: <IconTrash color="red" {...spotlightIconProps} />,
                 onClick: confirmDeletion,
             },
         ]
@@ -88,7 +88,7 @@ export default function SpotlightSearch() {
             id: `collection-${collection.id}`,
             label: `${collection.name}`,
             description: `/${collection.slug}`,
-            leftSection: <IconFolder {...spotlightIconLargeProps} />,
+            leftSection: <IconFolder {...spotlightIconProps} />,
             onClick: () => {trySwitchToCollectionById(collection.id)},
         }));
 
