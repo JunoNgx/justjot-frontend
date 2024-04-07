@@ -108,7 +108,7 @@ export default function SpotlightSearch() {
     return <Spotlight
         shortcut={["mod + K", "mod + P"]}
         actions={allActionList}
-        nothingFound="No result found."
+        nothingFound="No action found."
         highlightQuery
     />
 };
