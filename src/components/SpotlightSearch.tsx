@@ -110,5 +110,6 @@ export default function SpotlightSearch() {
         actions={allActionList}
         nothingFound="No action found."
         highlightQuery
+        scrollable
     />
 };
