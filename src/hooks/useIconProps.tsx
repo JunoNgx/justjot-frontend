@@ -20,6 +20,11 @@ export default function useIconProps() {
         stroke: 1,
     };
 
+    const spotlightIconProps = {
+        size: 18,
+        stroke: 1.5,
+    };
+
     const logoIconProps = {
         size: 24,
         // TODO: figure why the custom icon is acting up
@@ -31,6 +36,7 @@ export default function useIconProps() {
         themeModeIconProps,
         menuIconProps,
         mainInputIconProps,
+        spotlightIconProps,
         logoIconProps,
     };
 };
