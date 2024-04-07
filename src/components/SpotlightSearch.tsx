@@ -27,21 +27,21 @@ export default function SpotlightSearch() {
         actions: [
             {
                 id: "theme-mode-system",
-                label: "Theme mode: system",
+                label: "Theme mode: System",
                 description: ".theme-system",
                 leftSection: <IconSettingsCog {...spotlightIconProps} />,
                 onClick: () => {setThemeMode(ThemeMode.AUTO)},
             },
             {
                 id: "theme-mode-light",
-                label: "Theme mode: light",
+                label: "Theme mode: Light",
                 description: ".theme-light",
                 leftSection: <IconSun {...spotlightIconProps} />,
                 onClick: () => {setThemeMode(ThemeMode.LIGHT)}
             },
             {
                 id: "theme-mode-system",
-                label: "Theme mode: dark",
+                label: "Theme mode: Dark",
                 description: ".theme-dark",
                 leftSection: <IconMoon {...spotlightIconProps} />,
                 onClick: () => {setThemeMode(ThemeMode.DARK)}
