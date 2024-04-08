@@ -38,14 +38,9 @@ function App() {
 
     const { colorScheme } = useMantineColorScheme();
     const computedColorScheme = useComputedColorScheme(colorScheme as ComputedThemeMode);
-
-    const getScrollbarThemeClass = () => {
-        const isLightTheme = computedColorScheme === "light";
-        const scrollbarThemeClass = isLightTheme
-            ? "os-theme-dark"
-            : "os-theme-light";
-        return scrollbarThemeClass;
-    };
+    const scrollbarThemeClass = computedColorScheme === ComputedThemeMode.LIGHT
+        ? "os-theme-dark"
+        : "os-theme-light";
 
     return (
         <AppShell
@@ -69,7 +64,7 @@ function App() {
                                         className="overlayScrollbar"
                                         options={{
                                             scrollbars: {
-                                                theme: getScrollbarThemeClass(),
+                                                theme: scrollbarThemeClass,
                                                 visibility: 'auto',
                                                 autoHide: 'scroll',
                                                 autoHideDelay: 1000,
