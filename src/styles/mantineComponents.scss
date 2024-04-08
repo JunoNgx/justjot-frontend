@@ -1,3 +1,5 @@
+@use "./_mixins.scss" as m;
+
 .appshell-main {
     padding-top: 60px; // see: Header
 }
@@ -31,6 +33,12 @@
         }
     }
 };
+
+.notifications-container {
+    @include m.mobile {
+        bottom: 5rem;
+    }
+}
 
 .mantine-Notifications-notification {
     color: var(--mantine-color-text);

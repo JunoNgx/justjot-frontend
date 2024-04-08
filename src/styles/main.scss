@@ -93,12 +93,6 @@ header {
     }
 }
 
-.notifications-container {
-    @include m.mobile {
-        bottom: 5rem;
-    }
-}
-
 .dropdown-menu {
     @include m.glass-blur;
 }
