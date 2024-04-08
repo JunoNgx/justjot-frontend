@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { AppShell } from '@mantine/core';
+import { AppShell, useComputedColorScheme, useMantineColorScheme } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from "@mantine/notifications";
 import "@mantine/core/styles.css";
@@ -32,22 +32,19 @@ import "@/styles/main.scss";
 import InfoModal from "@/components/modals/InfoModal";
 import ItemCreateModal from "./components/modals/ItemCreateModal";
 import SpotlightSearch from "./components/SpotlightSearch";
+import { ComputedThemeMode } from "./types";
 
 function App() {
 
+    const { colorScheme } = useMantineColorScheme();
+    const computedColorScheme = useComputedColorScheme(colorScheme as ComputedThemeMode);
+
     const getScrollbarThemeClass = () => {
-        /**
-         * Ideally, should check from `ThemeModeContext`.
-         * This implementation will save an awkward context setup, where
-         * `ThemeModeContextProvider` has to be an ancestor of this component
-         * somehow.
-         */
-        const documentColorScheme = document.documentElement
-            .getAttribute("data-mantine-color-scheme");
-        const isLightTheme = documentColorScheme === "light";
-        return isLightTheme
+        const isLightTheme = computedColorScheme === "light";
+        const scrollbarThemeClass = isLightTheme
             ? "os-theme-dark"
             : "os-theme-light";
+        return scrollbarThemeClass;
     };
 
     return (
