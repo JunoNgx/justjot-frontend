@@ -52,17 +52,17 @@ function App() {
                         >
                             <ContextMenuProvider>
 
-                                <Notifications className="notifications-container"
+                                <Notifications
                                     limit={5}
                                     position="bottom-center"
                                     autoClose={1000}
                                 />
 
-                                <AppShell.Header className="appshell-header">
+                                <AppShell.Header>
                                     <Header/>
                                 </AppShell.Header>
 
-                                <AppShell.Main className="appshell-main">
+                                <AppShell.Main>
                                     <Routes>
                                         <Route path="/" element={<LandingPage />} />
                                         <Route path="/help" element={<Help />} />
