@@ -35,6 +35,21 @@ import SpotlightSearch from "./components/SpotlightSearch";
 
 function App() {
 
+    const getScrollbarThemeClass = () => {
+        /**
+         * Ideally, should check from `ThemeModeContext`.
+         * This implementation will save an awkward context setup, where
+         * `ThemeModeContextProvider` has to be an ancestor of this component
+         * somehow.
+         */
+        const documentColorScheme = document.documentElement
+            .getAttribute("data-mantine-color-scheme");
+        const isLightTheme = documentColorScheme === "light";
+        return isLightTheme
+            ? "os-theme-dark"
+            : "os-theme-light";
+    };
+
     return (
         <AppShell
             header={{ height: 45}}
@@ -57,7 +72,7 @@ function App() {
                                         className="overlayScrollbar"
                                         options={{
                                             scrollbars: {
-                                                theme: "os-theme-dark",
+                                                theme: getScrollbarThemeClass(),
                                                 visibility: 'auto',
                                                 autoHide: 'scroll',
                                                 autoHideDelay: 1000,
