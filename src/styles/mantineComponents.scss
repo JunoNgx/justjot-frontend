@@ -1,10 +1,10 @@
 @use "./_mixins.scss" as m;
 
-.appshell-main {
+.mantine-AppShell-main {
     padding-top: 60px; // see: Header
 }
 
-.appshell-header {
+.mantine-AppShell-header {
     border-bottom: none;
 }
 
@@ -34,7 +34,7 @@
     }
 };
 
-.notifications-container {
+.mantine-Notifications-root {
     @include m.mobile {
         bottom: 5rem;
     }
