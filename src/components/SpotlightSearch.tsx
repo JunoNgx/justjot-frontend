@@ -192,8 +192,10 @@ export default function SpotlightSearch() {
         );
     }
 
+    // Hotkey shortcuts to spotlight are handled app-wide, and works within input
+
     return <Spotlight
-        shortcut={["mod + K", "mod + P"]}
+        shortcut={[]}
         actions={allActionList}
         nothingFound="No action found."
         highlightQuery

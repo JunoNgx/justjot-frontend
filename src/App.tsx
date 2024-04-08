@@ -33,6 +33,8 @@ import InfoModal from "@/components/modals/InfoModal";
 import ItemCreateModal from "./components/modals/ItemCreateModal";
 import SpotlightSearch from "./components/SpotlightSearch";
 import { ComputedThemeMode } from "./types";
+import { useHotkeys } from "@mantine/hooks";
+import { openSpotlight } from "@mantine/spotlight";
 
 function App() {
 
@@ -41,6 +43,11 @@ function App() {
     const scrollbarThemeClass = computedColorScheme === ComputedThemeMode.LIGHT
         ? "os-theme-dark"
         : "os-theme-light";
+
+    useHotkeys([
+        ["mod+K", openSpotlight, {preventDefault: true}],
+        ["mod+P", openSpotlight, {preventDefault: true}],
+    ], []);
 
     return (
         <AppShell
