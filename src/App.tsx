@@ -1,8 +1,16 @@
 import { Routes, Route } from "react-router-dom";
 import { AppShell } from '@mantine/core';
-import { ContextMenuProvider } from 'mantine-contextmenu';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from "@mantine/notifications";
+import "@mantine/core/styles.css";
+import '@mantine/notifications/styles.css';
+import '@mantine/spotlight/styles.css';
+import '@mantine/core/styles.layer.css';
+
+import { ContextMenuProvider } from 'mantine-contextmenu';
+import "mantine-contextmenu/styles.css";
+import 'mantine-contextmenu/styles.layer.css';
+import '@/styles/layers.css';
 
 import ThemeModeContextProvider from "@/contexts/ThemeModeContext";
 import BackendClientContextProvider from "@/contexts/BackendClientContext";
@@ -17,15 +25,6 @@ import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Reset from "@/pages/Reset";
 import Profile from "@/pages/Profile";
-
-import "@mantine/core/styles.css";
-import '@mantine/notifications/styles.css';
-import '@mantine/spotlight/styles.css';
-import "mantine-contextmenu/styles.css";
-
-import '@mantine/core/styles.layer.css';
-import 'mantine-contextmenu/styles.layer.css';
-import '@/styles/layers.css';
 
 import "@/styles/main.scss";
 import InfoModal from "@/components/modals/InfoModal";
