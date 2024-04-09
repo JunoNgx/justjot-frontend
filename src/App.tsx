@@ -42,10 +42,13 @@ function App() {
     const scrollbarThemeClass = computedColorScheme === ComputedThemeMode.LIGHT
         ? "os-theme-dark"
         : "os-theme-light";
-    useHotkeys([
-        ["mod+K", openSpotlight, {preventDefault: true}],
-        ["mod+P", openSpotlight, {preventDefault: true}],
-    ], []);
+    useHotkeys(
+        [
+            ["mod+K", openSpotlight, {preventDefault: true}],
+            ["mod+P", openSpotlight, {preventDefault: true}],
+        ],
+        [] // Does not ignore; will work in `<input/>` and `<textarea/>`.
+    );
 
     return (
         <AppShell
