@@ -22,7 +22,7 @@ export default function LandingPage() {
 
     const navigate = useNavigate();
 
-    return <Box className="landing-page">
+    return <Box className="landing-page" mb="xl">
         <section className="landing-page__section">
             <Group gap="xl">
                 <JustJotIcon size={72} stroke={"0.1"}/>
@@ -44,6 +44,7 @@ export default function LandingPage() {
             <Paper className="landing-page__demo-box"
                 withBorder p="md"
             >
+                <Text ta="center">Just want to take a look?</Text>
                 <Text ta="center">Account-free live demo available</Text>
                 <Center mt="md">
                     <Button component={NavLink} to="/demo-login">
@@ -78,7 +79,8 @@ export default function LandingPage() {
         <section className="landing-page__section">
             <Title order={2}>Get started</Title>
             <Text><Anchor component={NavLink} to="/register">Register</Anchor> a new account or <Anchor component={NavLink} to="/login">login</Anchor> to your existing one.</Text>
-            <Text mt="md">Not convinced yet? Try the <Anchor component={NavLink} to="/demo-login">live demo</Anchor> with a test account.</Text>
+            <Text mt="md">Also, you don't need to sign up just to see what this is all about. There is a <Anchor component={NavLink} to="/demo-login">live demo</Anchor> using a test account, obligation-free.</Text>
+            <Text mt="md">While we are at that, drop by to see <Anchor component={NavLink} to="/terms">things you should know about</Anchor> and <Anchor component={NavLink} to="/help">the manual</Anchor> before using JustJot.</Text>
         </section>
     </Box>
 }
