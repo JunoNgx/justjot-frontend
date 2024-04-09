@@ -35,6 +35,7 @@ import SpotlightSearch from "./components/SpotlightSearch";
 import { ComputedThemeMode } from "./types";
 import { useHotkeys } from "@mantine/hooks";
 import { openSpotlight } from "@mantine/spotlight";
+import Terms from "./pages/Terms";
 
 function App() {
 
@@ -104,6 +105,7 @@ function App() {
                                                 <Route path="/demo-login" element={<Login isDemoMode={true} />} />
                                                 <Route path="/register" element={<Register />} />
                                                 <Route path="/reset" element={<Reset />} />
+                                                <Route path="/terms" element={<Terms />} />
                                             </Routes>
                                             <SpotlightSearch />
 
