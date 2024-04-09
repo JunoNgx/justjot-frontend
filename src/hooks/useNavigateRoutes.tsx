@@ -17,6 +17,10 @@ export default function useNavigateRoutes() {
         navigate("/help");
     };
 
+    const navigateToTerms = () => {
+        navigate("/terms");
+    }
+
     const navigateToProfile = () => {
         navigate("/profile");
     };
@@ -49,6 +53,7 @@ export default function useNavigateRoutes() {
 
     return {
         navigateToHelp,
+        navigateToTerms,
         navigateToProfile,
         navigateToReset,
         logoutAndNavigateToLogin,
