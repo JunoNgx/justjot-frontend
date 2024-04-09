@@ -22,6 +22,15 @@
         margin-top: 200px;
     }
 
+    &--terms {
+        max-width: 640px;
+        hyphens: auto;
+    }
+
+    &__terms-li {
+        margin-top: 0.25rem;
+    }
+
     @include m.mobile {
         margin-top: 0;
     }
