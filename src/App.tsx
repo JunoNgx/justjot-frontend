@@ -44,15 +44,15 @@ function App() {
         : "os-theme-light";
     useHotkeys(
         [
-            ["mod+K", openSpotlight, {preventDefault: true}],
-            ["mod+P", openSpotlight, {preventDefault: true}],
+            ["mod+K", openSpotlight, { preventDefault: true }],
+            ["mod+P", openSpotlight, { preventDefault: true }],
         ],
         [] // Does not ignore; will work in `<input/>` and `<textarea/>`.
     );
 
     return (
         <AppShell
-            header={{ height: 45}}
+            header={{ height: 45 }}
             padding="none"
         >
             <ThemeModeContextProvider>
@@ -88,7 +88,7 @@ function App() {
                                         />
 
                                         <AppShell.Header>
-                                            <Header/>
+                                            <Header />
                                         </AppShell.Header>
 
                                         <AppShell.Main>
@@ -101,11 +101,11 @@ function App() {
                                                 </Route>
                                                 <Route path="/profile" element={<Profile />} />
                                                 <Route path="/login" element={<Login />} />
-                                                <Route path="/demo-login" element={<Login isDemoMode={true}/>} />
+                                                <Route path="/demo-login" element={<Login isDemoMode={true} />} />
                                                 <Route path="/register" element={<Register />} />
                                                 <Route path="/reset" element={<Reset />} />
                                             </Routes>
-                                            <SpotlightSearch/>
+                                            <SpotlightSearch />
 
                                         </AppShell.Main>
                                     </OverlayScrollbarsComponent>
