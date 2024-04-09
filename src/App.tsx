@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { AppShell, useComputedColorScheme, useMantineColorScheme } from '@mantine/core';
+import { AppShell, useComputedColorScheme } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from "@mantine/notifications";
 import "@mantine/core/styles.css";
@@ -38,12 +38,10 @@ import { openSpotlight } from "@mantine/spotlight";
 
 function App() {
 
-    const { colorScheme } = useMantineColorScheme();
-    const computedColorScheme = useComputedColorScheme(colorScheme as ComputedThemeMode);
+    const computedColorScheme = useComputedColorScheme(ComputedThemeMode.LIGHT);
     const scrollbarThemeClass = computedColorScheme === ComputedThemeMode.LIGHT
         ? "os-theme-dark"
         : "os-theme-light";
-
     useHotkeys([
         ["mod+K", openSpotlight, {preventDefault: true}],
         ["mod+P", openSpotlight, {preventDefault: true}],
