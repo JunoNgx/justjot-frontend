@@ -143,6 +143,10 @@ export default function Register() {
                 {...form.getInputProps('passwordConfirm')}
             />
 
+            <Text mt="md">
+                By registering, you acknowledge and agree to the <Anchor href="/terms" target='_blank'>terms and conditions</Anchor>.
+            </Text>
+
             <Group mt="md"
                 justify="flex-end"
             >
