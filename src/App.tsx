@@ -38,7 +38,7 @@ import { openSpotlight } from "@mantine/spotlight";
 
 function App() {
 
-    const computedColorScheme = useComputedColorScheme(ComputedThemeMode.LIGHT);
+    const computedColorScheme = useComputedColorScheme();
     const scrollbarThemeClass = computedColorScheme === ComputedThemeMode.LIGHT
         ? "os-theme-dark"
         : "os-theme-light";
