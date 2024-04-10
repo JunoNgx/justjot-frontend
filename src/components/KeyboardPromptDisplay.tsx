@@ -3,10 +3,11 @@ import KbdMod from "./misc/KbdMod";
 import { useContext } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { ItemType } from "@/types";
-import { canConvertItemToTodo } from "@/utils/itemUtils";
+import { canConvertItemToTodo, computeItemActionString } from "@/utils/itemUtils";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import { IconLayoutBottombarCollapse, IconLayoutBottombarExpand } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
+import useItemActions from "@/hooks/useItemActions";
 
 type Hotkey = string[];
 type KeyboardPrompt = Hotkey | Hotkey[];
@@ -28,6 +29,7 @@ export default function KeyboardPromptDisplay() {
         selectedIndex,
         selectedItem,
     } = useContext(ItemsContext);
+    const { computeItemPrimaryAction } = useItemActions();
     const { keyboardPromptIconProps } = useIconProps();
 
     const [isExpanded, setIsExpanded] = useLocalStorage({
@@ -43,6 +45,8 @@ export default function KeyboardPromptDisplay() {
     const hasSelectedWithKeyboard = isMainInputFocused && hasSelectedItem;
     const isLink = selectedItem?.type === ItemType.LINK;
     const canConvertToTodo = selectedItem && canConvertItemToTodo(selectedItem);
+    const primaryAction = selectedItem && computeItemPrimaryAction(selectedItem);
+    const primaryActionStr = primaryAction && computeItemActionString(primaryAction);
 
     const expandedContent = <>
         <KeyboardPromptItem
@@ -57,7 +61,7 @@ export default function KeyboardPromptDisplay() {
         />
         <KeyboardPromptItem
             prompt={["mod", "Enter"]}
-            desc="Perform primary action"
+            desc={`Perform primary action: ${primaryActionStr}`}
             shouldDisplay={hasSelectedWithKeyboard}
         />
         <KeyboardPromptItem
