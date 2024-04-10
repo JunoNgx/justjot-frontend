@@ -11,6 +11,7 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import MainContentList from "@/components/MainContentList";
+import KeyboardPromptDisplay from "@/components/KeyboardPromptDisplay";
 
 export default function MainView() {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -87,6 +88,7 @@ export default function MainView() {
     return <Box className="main-view-wrapper">
         {/* For non-item components */}
         <CollectionMenu isInMainView={true} />
+        <KeyboardPromptDisplay />
 
         <Stack className="main-view"
             gap="xl"
