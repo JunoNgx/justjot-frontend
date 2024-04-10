@@ -103,7 +103,7 @@ export default function KeyboardPromptDisplay() {
         <KeyboardPromptItem
             prompt={[["Mod", "Shift", "↑"], ["Mod", "Shift", "↓"]]}
             desc="Move to top/bottom"
-            // shouldDisplay={isMainInputFocused}
+            shouldDisplay={isMainInputFocused}
         />
         <KeyboardPromptItem
             prompt={["Esc"]}
