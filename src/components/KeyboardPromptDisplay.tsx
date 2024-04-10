@@ -2,8 +2,9 @@ import { Box, Group, Kbd, Paper, Text } from "@mantine/core";
 import KbdMod from "./misc/KbdMod";
 
 type Hotkey = string[];
+type KeyboardPrompt = Hotkey | Hotkey[];
 type KeyboardPromptItemOptions = {
-    prompt: Hotkey | Hotkey[],
+    prompt: KeyboardPrompt,
     desc: string,
 };
 
@@ -23,7 +24,19 @@ const KeyboardPromptItem = (
     {prompt, desc}: KeyboardPromptItemOptions
 ) => {
 
-    const promptDisplay = prompt.map((p, index) => {
+    return <Group
+        justify="space-between"
+    >
+        <SingleKeyboardPrompt prompt={prompt} />
+        <Text>{desc}</Text>
+    </Group>
+};
+
+const SingleKeyboardPrompt = (
+    {prompt}: {prompt: KeyboardPrompt}
+) => {
+
+    const promptContent = prompt.map((p, index) => {
         const isLastItem = index === prompt.length - 1;
 
         if (typeof p ==="string")
@@ -35,12 +48,9 @@ const KeyboardPromptItem = (
         </>
     });
 
-    return <Group
-        justify="space-between"
-    >
-        <Box>{promptDisplay}</Box>
-        <Text>{desc}</Text>
-    </Group>
+    return <Box>
+        {promptContent}
+    </Box>
 };
 
 const CombinationBtn = ({btnLabelList}: {btnLabelList: string[]}) => {
