@@ -145,5 +145,9 @@ input[type="password"] {
     position: fixed;
     right: 1rem;
     bottom: 1rem;
-    min-width: 320px;
+    min-width: 250px;
+
+    @media screen and (max-width: 1280px) {
+        display: none;
+    }
 }
