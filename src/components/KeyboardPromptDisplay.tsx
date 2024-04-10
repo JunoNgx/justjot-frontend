@@ -42,24 +42,25 @@ const SingleKeyboardPrompt = (
     {prompt}: {prompt: KeyboardPrompt}
 ) => {
 
-    const promptContent = prompt.map((p, index) => {
-        const isLastItem = index === prompt.length - 1;
-
-        if (typeof p ==="string")
-            return <SingleBtn key={index} btnLabel={p} />
-        else return <>
-            <CombinationBtn btnLabelList={p}/>
-            {/* Separator for each combination option */}
-            {!isLastItem && <span> / </span>}
-        </>
-    });
+    // Process and unify param into single type
+    const promptList: Hotkey[] = (prompt[0] instanceof Array)
+        ? prompt as Hotkey[]
+        : [prompt as Hotkey];
 
     return <Box>
-        {promptContent}
+        {promptList.map((prompt, index) => {
+            const isLastItem = index === promptList.length - 1;
+
+            return <>
+                <CombinationBtn btnLabelList={prompt} key={index} />
+                {/* Separator for each combination option */}
+                {!isLastItem && <span> / </span>}
+            </>
+        })}
     </Box>
 };
 
-const CombinationBtn = ({btnLabelList}: {btnLabelList: string[]}) => {
+const CombinationBtn = ({btnLabelList}: {btnLabelList: Hotkey}) => {
     return <>
         {btnLabelList.map((btnLabel, index) =>
             <>
