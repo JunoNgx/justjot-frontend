@@ -147,13 +147,8 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["mod+alt+Digit5", hotkeyRefetchTitleAndFavicon, { preventDefault: true }],
             ["mod+alt+Digit6", hotkeyConvertToTodoItem, { preventDefault: true }],
         ])}
-        onFocus={() => {
-            setIsMainInputFocused(true);
-        }}
-        onBlur={() => {
-            setSelectedIndex(-1);
-            setIsMainInputFocused(false);
-        }}
+        onFocus={() => setIsMainInputFocused(true)}
+        onBlur={() => setIsMainInputFocused(false)}
     />
 });
 

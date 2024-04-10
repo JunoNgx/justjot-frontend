@@ -30,6 +30,7 @@ export default function useItemNavActions() {
     const blurMainInput = () => {
         const mainInputEl = document.querySelector<HTMLInputElement>("#main-input");
         mainInputEl?.blur();
+        setSelectedIndex(-1);
     };
 
     const selectItem = (index: number) => {
