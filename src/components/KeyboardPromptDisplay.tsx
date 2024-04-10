@@ -20,6 +20,7 @@ export default function KeyboardPromptDisplay() {
 
     const { isMainInputFocused, selectedIndex } = useContext(ItemsContext);
     const hasSelectedItem = selectedIndex > -1;
+    const hasSelectedWithKeyboard = isMainInputFocused && hasSelectedItem;
 
     return <Paper className="keyboard-prompt-display dropdown-menu"
         // withBorder
@@ -39,27 +40,27 @@ export default function KeyboardPromptDisplay() {
             <KeyboardPromptItem
                 prompt={["mod", "Enter"]}
                 desc="Perform primary action"
-                shouldDisplay={isMainInputFocused && hasSelectedItem}
+                shouldDisplay={hasSelectedWithKeyboard}
             />
             <KeyboardPromptItem
                 prompt={["mod", "C"]}
                 desc="Copy item content"
-                shouldDisplay={isMainInputFocused && hasSelectedItem}
+                shouldDisplay={hasSelectedWithKeyboard}
             />
             <KeyboardPromptItem
                 prompt={["mod", "E"]}
                 desc="Edit item"
-                shouldDisplay={isMainInputFocused && hasSelectedItem}
+                shouldDisplay={hasSelectedWithKeyboard}
             />
             <KeyboardPromptItem
                 prompt={["mod", "M"]}
                 desc="Move item"
-                shouldDisplay={isMainInputFocused && hasSelectedItem}
+                shouldDisplay={hasSelectedWithKeyboard}
             />
             <KeyboardPromptItem
                 prompt={["mod", "Shift", "Backspace"]}
                 desc="Delete item"
-                shouldDisplay={isMainInputFocused && hasSelectedItem}
+                shouldDisplay={hasSelectedWithKeyboard}
             />
 
             <Divider />
