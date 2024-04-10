@@ -1,4 +1,4 @@
-import { Box, Group, Kbd, Paper, Space, Stack, Text } from "@mantine/core";
+import { Box, Divider, Group, Kbd, Paper, Stack, Text } from "@mantine/core";
 import KbdMod from "./misc/KbdMod";
 
 type Hotkey = string[];
@@ -24,6 +24,8 @@ export default function KeyboardPromptDisplay() {
                 prompt={["mod", "F"]}
                 desc="Main Input"
             />
+
+            <Divider />
 
             <CustomKeyboardPromptItem
                 leftSection={<Box><Kbd>1</Kbd>...<Kbd>0</Kbd></Box>}
