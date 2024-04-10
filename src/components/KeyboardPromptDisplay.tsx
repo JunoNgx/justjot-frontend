@@ -93,6 +93,16 @@ export default function KeyboardPromptDisplay() {
             shouldDisplay={hasSelectedWithKeyboard && canConvertToTodo}
         />
         <KeyboardPromptItem
+            prompt={[["Shift", "↑"], ["Shift", "↓"]]}
+            desc="Move by 5 items"
+            shouldDisplay={isMainInputFocused}
+        />
+        <KeyboardPromptItem
+            prompt={[["Mod", "Shift", "↑"], ["Mod", "Shift", "↓"]]}
+            desc="Move to top/bottom"
+            // shouldDisplay={isMainInputFocused}
+        />
+        <KeyboardPromptItem
             prompt={["Esc"]}
             desc="Unfocus Main Input"
             shouldDisplay={isMainInputFocused}
