@@ -44,7 +44,7 @@ export default function KeyboardPromptDisplay() {
     const expandedContent = <>
         <KeyboardPromptItem
             prompt={["mod", "F"]}
-            desc="Main Input"
+            desc="Focus on Main Input"
             shouldDisplay={!isMainInputFocused}
         />
         <KeyboardPromptItem
@@ -92,20 +92,31 @@ export default function KeyboardPromptDisplay() {
             desc="Convert item to Todo"
             shouldDisplay={hasSelectedWithKeyboard && canConvertToTodo}
         />
+        <KeyboardPromptItem
+            prompt={["Esc"]}
+            desc="Unfocus Main Input"
+            shouldDisplay={isMainInputFocused}
+        />
 
         <Divider />
 
         <CustomKeyboardPromptItem
             leftSection={<><Kbd>1</Kbd>...<Kbd>0</Kbd></>}
             desc="Switch to Collection"
+            shouldDisplay={!isMainInputFocused}
         />
         <KeyboardPromptItem
             prompt={[["←"], ["→"]]}
             desc="Prev/Next Collection"
+            shouldDisplay={!isMainInputFocused}
         />
         <KeyboardPromptItem
             prompt={[["mod", "K"], ["mod", "P"]]}
             desc="Spotlight"
+        />
+        <KeyboardPromptItem
+            prompt={[["Shift", "/"]]}
+            desc="Hide keyboard prompts"
         />
     </>
 
