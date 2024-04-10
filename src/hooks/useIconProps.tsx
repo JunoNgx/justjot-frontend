@@ -31,6 +31,11 @@ export default function useIconProps() {
         stroke: "1.5",
     };
 
+    const keyboardPromptIconProps = {
+        size: 16,
+        stroke: 1.5,
+    }
+
     return {
         itemIcontProps,
         themeModeIconProps,
@@ -38,5 +43,6 @@ export default function useIconProps() {
         mainInputIconProps,
         spotlightIconProps,
         logoIconProps,
+        keyboardPromptIconProps,
     };
 };
