@@ -90,7 +90,7 @@ export default function KeyboardPromptDisplay() {
             <Divider />
 
             <CustomKeyboardPromptItem
-                leftSection={<Box><Kbd>1</Kbd>...<Kbd>0</Kbd></Box>}
+                leftSection={<><Kbd>1</Kbd>...<Kbd>0</Kbd></>}
                 desc="Switch to Collection"
             />
             <KeyboardPromptItem
@@ -114,8 +114,8 @@ const CustomKeyboardPromptItem = (
     return <Group
         justify="space-between"
     >
-        {leftSection}
-        <Text>{desc}</Text>
+        <Box className="keyboard-prompt-display__prompt">{leftSection}</Box>
+        <Text className="keyboard-prompt-display__desc">{desc}</Text>
     </Group>
 }
 
@@ -129,7 +129,7 @@ const KeyboardPromptItem = (
         justify="space-between"
     >
         <SingleKeyboardPrompt prompt={prompt} />
-        <Text>{desc}</Text>
+        <Text className="keyboard-prompt-display__desc">{desc}</Text>
     </Group>
 };
 
@@ -142,7 +142,7 @@ const SingleKeyboardPrompt = (
         ? prompt as Hotkey[]
         : [prompt as Hotkey];
 
-    return <Box>
+    return <Box className="keyboard-prompt-display__prompt">
         {promptList.map((prompt, index) => {
             const isLastItem = index === promptList.length - 1;
 
