@@ -32,7 +32,7 @@ export default function useIconProps() {
     };
 
     const keyboardPromptIconProps = {
-        size: 16,
+        size: 24,
         stroke: 1.5,
     }
 

@@ -141,6 +141,7 @@ export default function KeyboardPromptDisplay() {
     </>
     
     const expandButton = <ActionIcon
+        className="keyboard-prompt-display__button"
         variant="subtle"
         onClick={() => setIsExpanded(true)}
         title="Show keyboard prompts"
@@ -149,9 +150,11 @@ export default function KeyboardPromptDisplay() {
     </ActionIcon>
 
     const collapseButton = <ActionIcon
+        className="keyboard-prompt-display__button"
         variant="subtle"
         onClick={() => setIsExpanded(false)}
         title="Hide keyboard prompts"
+        mb="md"
     >
         <IconLayoutBottombarCollapse {...keyboardPromptIconProps} />
     </ActionIcon>
