@@ -6,6 +6,7 @@ import { useForm } from "@mantine/form";
 import { getHotkeyHandler } from "@mantine/hooks";
 import { ContextModalProps } from '@mantine/modals';
 import { useContext, useState } from "react";
+import KbdMod from "../misc/KbdMod";
 
 const ItemCreateModal = ({
     context,
@@ -120,7 +121,7 @@ const ItemCreateModal = ({
         >
             <Text>{form.values.content.length}/{MAX_CONTENT_LENGTH}</Text>
             {(isFocusedOnTitleInput || isFocusedOnContentInput) &&
-                <Text> Create <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>
+                <Text><KbdMod/> <Kbd>S</Kbd>: Create and close</Text>
             }
         </Flex>
 

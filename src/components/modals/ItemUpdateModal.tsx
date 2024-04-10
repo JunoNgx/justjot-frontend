@@ -12,6 +12,7 @@ import { ClientResponseError } from "pocketbase";
 import { findIndexById } from "@/utils/itemUtils";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { modals } from "@mantine/modals";
+import KbdMod from "../misc/KbdMod";
 
 const DEBOUNCED_TIME = 5000;
 
@@ -229,7 +230,7 @@ export default function ItemUpdateModal(
             >
                 <Text>{contentVal.length}/{MAX_CONTENT_LENGTH}</Text>
                 {(isFocusedOnTitleInput || isFocusedOnContentInput) &&
-                    <Text> Save and close <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>
+                   <Text><KbdMod/> <Kbd>S</Kbd>: Save and close</Text>
                 }
             </Flex>
         </>}
