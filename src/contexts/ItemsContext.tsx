@@ -12,6 +12,8 @@ type UpdateQueueItem = {
 type ItemsContextType = {
     items: Item[],
     setItems: React.Dispatch<SetStateAction<Item[]>>,
+    isMainInputFocused: boolean,
+    setIsMainInputFocused: React.Dispatch<React.SetStateAction<boolean>>,
     inputVal: string,
     setInputVal: React.Dispatch<SetStateAction<string>>,
     selectedIndex: number,
@@ -33,6 +35,7 @@ export const ItemsContext = createContext<ItemsContextType>(
 export default function ItemsContextProvider({ children }: { children: ReactNode }) {
     const { pbClient } = useContext(BackendClientContext);
     const [ items, setItems ] = useState<Item[]>([]);
+    const [ isMainInputFocused, setIsMainInputFocused ] = useState(false);
     const [ inputVal, setInputVal ] = useState("");
     const [ selectedIndex, setSelectedIndex ] = useState(-1);
     const [ updateQueue, setUpdateQueue ] = useState<UpdateQueueItem[]>([]);
@@ -99,6 +102,8 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
         {{
             items,
             setItems,
+            isMainInputFocused,
+            setIsMainInputFocused,
             inputVal,
             setInputVal,
             selectedIndex,
