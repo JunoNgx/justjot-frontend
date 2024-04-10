@@ -36,6 +36,17 @@ export enum ItemType {
     TODO = "todo"
 };
 
+export enum ItemAction {
+    COPY = "copy",
+    OPEN_LINK = "openLink",
+    EDIT = "edit",
+    DELETE = "delete",
+    TOGGLE_COPY = "toggleShouldCopyOnClick",
+    TOGGLE_IS_DONE = "toggleIsTodo",
+    REFETCH = "refetch",
+    CONVERT_TO_TODO = "convertToTodo",
+};
+
 export type User = (RecordModel | {
     id: string,
     email: string,
