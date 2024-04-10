@@ -1,7 +1,7 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useManageListState from "@/libs/useManageListState";
-import { CreateItemOptions, Item, ItemCollection, ItemType } from "@/types";
+import { CreateItemOptions, Item, ItemAction, ItemCollection, ItemType } from "@/types";
 import { DateTime } from "luxon";
 import { useContext } from "react";
 import useItemApiCalls from "./useItemApiCalls";
@@ -317,6 +317,19 @@ export default function useItemActions() {
         });
     };
 
+    const computeItemPrimaryAction = (item: Item): ItemAction => {
+        switch (true) {
+        case (item.type === ItemType.TODO):
+            return ItemAction.TOGGLE_IS_DONE;
+        case (item.shouldCopyOnClick):
+            return ItemAction.COPY;
+        case (item.type === ItemType.LINK):
+            return ItemAction.OPEN_LINK;
+        default:
+            return ItemAction.EDIT;
+        };
+    };
+
     return {
         createItemWithOptimisticUpdate,
         deleteItemWithOptimisticUpdate,
@@ -328,5 +341,6 @@ export default function useItemActions() {
         toggleItemShouldCopyOnClickWithOptimisticUpdate,
         toggleItemIsTodoDoneWithOptimisticUpdate,
         convertToTodo,
+        computeItemPrimaryAction,
     }
 };
