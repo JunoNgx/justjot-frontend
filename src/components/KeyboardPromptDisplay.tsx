@@ -1,5 +1,7 @@
 import { Box, Divider, Group, Kbd, Paper, Stack, Text } from "@mantine/core";
 import KbdMod from "./misc/KbdMod";
+import { useContext } from "react";
+import { ItemsContext } from "@/contexts/ItemsContext";
 
 type Hotkey = string[];
 type KeyboardPrompt = Hotkey | Hotkey[];
@@ -15,7 +17,11 @@ type CustomKeyboardPromptItemOptions = {
 };
 
 export default function KeyboardPromptDisplay() {
-    return <Paper className="keyboard-prompt-display"
+
+    const { isMainInputFocused, selectedIndex } = useContext(ItemsContext);
+    const hasSelectedItem = selectedIndex > -1;
+
+    return <Paper className="keyboard-prompt-display dropdown-menu"
         // withBorder
         p="xs"
     >
@@ -23,6 +29,37 @@ export default function KeyboardPromptDisplay() {
             <KeyboardPromptItem
                 prompt={["mod", "F"]}
                 desc="Main Input"
+                shouldDisplay={!isMainInputFocused}
+            />
+            <KeyboardPromptItem
+                prompt={[["↑"], ["↓"]]}
+                desc="Select item"
+                shouldDisplay={isMainInputFocused}
+            />
+            <KeyboardPromptItem
+                prompt={["mod", "Enter"]}
+                desc="Perform primary action"
+                shouldDisplay={isMainInputFocused && hasSelectedItem}
+            />
+            <KeyboardPromptItem
+                prompt={["mod", "C"]}
+                desc="Copy item content"
+                shouldDisplay={isMainInputFocused && hasSelectedItem}
+            />
+            <KeyboardPromptItem
+                prompt={["mod", "E"]}
+                desc="Edit item"
+                shouldDisplay={isMainInputFocused && hasSelectedItem}
+            />
+            <KeyboardPromptItem
+                prompt={["mod", "M"]}
+                desc="Move item"
+                shouldDisplay={isMainInputFocused && hasSelectedItem}
+            />
+            <KeyboardPromptItem
+                prompt={["mod", "Shift", "Backspace"]}
+                desc="Delete item"
+                shouldDisplay={isMainInputFocused && hasSelectedItem}
             />
 
             <Divider />
@@ -30,6 +67,10 @@ export default function KeyboardPromptDisplay() {
             <CustomKeyboardPromptItem
                 leftSection={<Box><Kbd>1</Kbd>...<Kbd>0</Kbd></Box>}
                 desc="Switch to Collection"
+            />
+            <KeyboardPromptItem
+                prompt={[["←"], ["→"]]}
+                desc="Prev/Next Collection"
             />
             <KeyboardPromptItem
                 prompt={[["mod", "K"], ["mod", "P"]]}
