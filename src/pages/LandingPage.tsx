@@ -23,7 +23,7 @@ export default function LandingPage() {
     const navigate = useNavigate();
 
     return <Box className="landing-page" mb="xl">
-        <section className="landing-page__section">
+        <Box component="section" className="landing-page__section">
             <Group gap="xl">
                 <JustJotIcon size={72} stroke={"0.1"}/>
                 <Box>
@@ -33,14 +33,14 @@ export default function LandingPage() {
                     <Text>write (something) quickly</Text>
                 </Box>
             </Group>
-        </section>
+        </Box>
 
-        <section className="landing-page__section">
+        <Box component="section" className="landing-page__section">
             <Title order={1}>JustJot</Title>
             <Text>A keyboard-first note-taking Progressive Web App, tailored for swift information-recording operations.</Text>
-        </section>
+        </Box>
 
-        <section className="landing-page__section">
+        <Box component="section" className="landing-page__section">
             <Paper className="landing-page__demo-box"
                 withBorder p="md"
             >
@@ -52,16 +52,16 @@ export default function LandingPage() {
                     </Button>
                 </Center>
             </Paper>
-        </section>
+        </Box>
 
-        <section className="landing-page__section">
+        <Box component="section" className="landing-page__section">
             <Title order={2}>Keyboard-first</Title>
             <Text>JustJot prioritises keyboard interactions; most actions can be performed solely on a keyboard. While fully operable with pointer-based devices (mouse or touchscreen), users are recommended to spend time on learning to perform operations the optimal way.</Text>
 
             <Text mt="md">Due to the unconventional approach, consulting <Anchor component={NavLink} to="/help">the manual</Anchor> is high recommended to new users.</Text>
-        </section>
+        </Box>
 
-        <section className="landing-page__section">
+        <Box component="section" className="landing-page__section">
             <Title order={2}>Your omnipotent notebook</Title>
             <Text>Outside of handling plain-text notes, this app is also capable of:</Text>
             <ul>
@@ -69,23 +69,23 @@ export default function LandingPage() {
                 <li>Managing todo items</li>
                 <li>Displaying hex colour code preview</li>
             </ul>
-        </section>
+        </Box>
         
-        <section className="landing-page__section">
+        <Box component="section" className="landing-page__section">
             <Title order={2}>Average FOSS software</Title>
             <Text>JustJot was made with personal use and personal preferences first and foremost. It is as barebone and small as it can and should be. It has minimal development roadmap, no monetisation, no advertisement, no tracking, and is fully open-source. Technical support is limited and not guaranteed (I'll try as much as I can).</Text>
-        </section>
+        </Box>
 
-        <section className="landing-page__section">
+        <Box component="section" className="landing-page__section">
             <Title order={2}>Get started</Title>
             <Text><Anchor component={NavLink} to="/register">Register</Anchor> a new account or <Anchor component={NavLink} to="/login">login</Anchor> to your existing one.</Text>
             <Text mt="md">Also, you don't need to sign up just to see what this is all about. There is a <Anchor component={NavLink} to="/demo-login">live demo</Anchor> using a test account, obligation-free.</Text>
             <Text mt="md">While we are at that, drop by to see <Anchor component={NavLink} to="/terms">things you should know about</Anchor> and <Anchor component={NavLink} to="/help">the manual</Anchor> before using JustJot.</Text>
-        </section>
+        </Box>
 
-        <section className="landing-page__section">
+        <Box component="section" className="landing-page__section">
             <Title order={2}>Authors</Title>
             <Text>JustJot is developed by <Anchor href="https://www.junongx.com/" target='_blank' rel='noopener noreferrer'>Juno Nguyen</Anchor> with curiosity, compulsion, and tons of design input from <Anchor href="https://caseykwokdinata.webflow.io/" target='_blank' rel='noopener noreferrer'>Casey Kwokdinata</Anchor>.</Text>
-        </section>
+        </Box>
     </Box>
 }
