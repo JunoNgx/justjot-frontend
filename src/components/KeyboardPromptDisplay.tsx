@@ -2,6 +2,8 @@ import { Box, Divider, Group, Kbd, Paper, Stack, Text } from "@mantine/core";
 import KbdMod from "./misc/KbdMod";
 import { useContext } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
+import { ItemType } from "@/types";
+import { canConvertItemToTodo } from "@/utils/itemUtils";
 
 type Hotkey = string[];
 type KeyboardPrompt = Hotkey | Hotkey[];
@@ -18,9 +20,16 @@ type CustomKeyboardPromptItemOptions = {
 
 export default function KeyboardPromptDisplay() {
 
-    const { isMainInputFocused, selectedIndex } = useContext(ItemsContext);
+    const {
+        isMainInputFocused,
+        selectedIndex,
+        selectedItem,
+    } = useContext(ItemsContext);
+
     const hasSelectedItem = selectedIndex > -1;
     const hasSelectedWithKeyboard = isMainInputFocused && hasSelectedItem;
+    const isLink = selectedItem?.type === ItemType.LINK;
+    const canConvertToTodo = selectedItem && canConvertItemToTodo(selectedItem);
 
     return <Paper className="keyboard-prompt-display dropdown-menu"
         // withBorder
@@ -61,6 +70,21 @@ export default function KeyboardPromptDisplay() {
                 prompt={["mod", "Shift", "Backspace"]}
                 desc="Delete item"
                 shouldDisplay={hasSelectedWithKeyboard}
+            />
+            <KeyboardPromptItem
+                prompt={["mod", "Alt", "4"]}
+                desc="Toggle copy as primary action"
+                shouldDisplay={hasSelectedWithKeyboard}
+            />
+            <KeyboardPromptItem
+                prompt={["mod", "Alt", "5"]}
+                desc="Refetch link metadata"
+                shouldDisplay={hasSelectedWithKeyboard && isLink}
+            />
+            <KeyboardPromptItem
+                prompt={["mod", "Alt", "6"]}
+                desc="Convert item to Todo"
+                shouldDisplay={hasSelectedWithKeyboard && canConvertToTodo}
             />
 
             <Divider />
