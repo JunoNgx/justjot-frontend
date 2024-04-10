@@ -6,6 +6,12 @@ type KeyboardPrompt = Hotkey | Hotkey[];
 type KeyboardPromptItemOptions = {
     prompt: KeyboardPrompt,
     desc: string,
+    shouldDisplay?: boolean,
+};
+type CustomKeyboardPromptItemOptions = {
+    leftSection: React.ReactNode,
+    desc: string,
+    shouldDisplay?: boolean,
 };
 
 export default function KeyboardPromptDisplay() {
@@ -31,8 +37,11 @@ export default function KeyboardPromptDisplay() {
 };
 
 const CustomKeyboardPromptItem = (
-    {leftSection, desc}: {leftSection: React.ReactNode, desc: string}
+    {leftSection, desc, shouldDisplay = true}: CustomKeyboardPromptItemOptions
 ) => {
+    if (!shouldDisplay)
+        return "";
+
     return <Group
         justify="space-between"
     >
@@ -42,8 +51,10 @@ const CustomKeyboardPromptItem = (
 }
 
 const KeyboardPromptItem = (
-    {prompt, desc}: KeyboardPromptItemOptions
+    {prompt, desc, shouldDisplay = true}: KeyboardPromptItemOptions
 ) => {
+    if (!shouldDisplay)
+        return "";
 
     return <Group
         justify="space-between"
