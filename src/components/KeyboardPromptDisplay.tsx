@@ -12,14 +12,14 @@ export default function KeyboardPromptDisplay() {
         // withBorder
         p="md"
     >
-        <PromptItem
+        <KeyboardPromptItem
             prompt={[["mod", "K"], ["mod", "P"]]}
             desc="Spotlight"
         />
     </Paper>
 };
 
-const PromptItem = (
+const KeyboardPromptItem = (
     {prompt, desc}: KeyboardPromptItemOptions
 ) => {
 
