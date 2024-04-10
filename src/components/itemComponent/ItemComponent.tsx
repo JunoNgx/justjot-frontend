@@ -28,7 +28,8 @@ export default function ItemComponent(
         openMoveItemModal,
         refetchLink,
         toggleItemShouldCopyOnClickWithOptimisticUpdate,
-        toggleItemIsTodoDoneWithOptimisticUpdate,
+        computeItemPrimaryAction,
+        executeItemAction,
         convertToTodo,
     } = useItemActions();
     const itemContextMenuOptions = useItemContextMenuOptions({
@@ -47,23 +48,8 @@ export default function ItemComponent(
     const handlePrimaryAction = (
         _e: React.MouseEvent | React.TouchEvent
     ) => {
-        if (item.type === ItemType.TODO) {
-            toggleItemIsTodoDoneWithOptimisticUpdate({item});
-            return;
-        }
-
-        if (item.shouldCopyOnClick) {
-            copyItemContent(item);
-            return;
-        }
-
-        if (item.type === ItemType.LINK) {
-            // Let the <a> tag handle the click
-            // window.open(item.content, "_blank");
-            return;
-        }
-
-        openUpdateItemModal(item);
+        const action = computeItemPrimaryAction(item);
+        executeItemAction(item, action, true);
     };
 
     const handleSecondaryAction = (
