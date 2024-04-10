@@ -121,7 +121,7 @@ const ItemCreateModal = ({
         >
             <Text>{form.values.content.length}/{MAX_CONTENT_LENGTH}</Text>
             {(isFocusedOnTitleInput || isFocusedOnContentInput) &&
-                <Text><KbdMod/> <Kbd>S</Kbd>: Create and close</Text>
+                <Text><KbdMod/> <Kbd>S</Kbd> Create and close</Text>
             }
         </Flex>
 

@@ -230,7 +230,7 @@ export default function ItemUpdateModal(
             >
                 <Text>{contentVal.length}/{MAX_CONTENT_LENGTH}</Text>
                 {(isFocusedOnTitleInput || isFocusedOnContentInput) &&
-                   <Text><KbdMod/> <Kbd>S</Kbd>: Save and close</Text>
+                   <Text><KbdMod/> <Kbd>S</Kbd> Save and close</Text>
                 }
             </Flex>
         </>}
