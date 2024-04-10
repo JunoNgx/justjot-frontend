@@ -1,4 +1,4 @@
-import { Item, ItemType } from "@/types";
+import { Item, ItemAction, ItemType } from "@/types";
 // import { isDatetimeMoreThanOneYearOld } from "./misc";
 // import { DateTime } from "luxon";
 
@@ -31,6 +31,22 @@ export const canConvertItemToTodo = (item: Item) => {
     return !item.title
         && item.content
         && item.type === ItemType.TEXT;
+}
+
+export const computeItemActionString = (
+    itemAction: ItemAction
+): string => {
+    switch(itemAction) {
+    case ItemAction.COPY:
+        return "copy";
+    case ItemAction.TOGGLE_IS_DONE:
+        return "toggle completed";
+    case ItemAction.OPEN_LINK:
+        return "open link";
+    case ItemAction.EDIT:
+    default:
+        return "edit";
+    }
 }
 
 
