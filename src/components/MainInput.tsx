@@ -146,6 +146,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["mod+alt+Digit5", hotkeyRefetchTitleAndFavicon, { preventDefault: true }],
             ["mod+alt+Digit6", hotkeyConvertToTodoItem, { preventDefault: true }],
         ])}
+        onBlur={() => {setSelectedIndex(-1);}}
     />
 });
 
