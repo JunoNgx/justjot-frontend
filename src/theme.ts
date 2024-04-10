@@ -25,7 +25,11 @@ const overrideTheme = createTheme({
             "#575757"
         ]
     },
-    primaryColor: "black",
+    primaryColor: "gray",
+    primaryShade: {
+        light: 0,
+        dark: 9
+    },
     fontFamily: "Space Grotesk, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif, Segoe UI Emoji",
     fontFamilyMonospace: "Space Mono, Menlo, Consolas, monospace",
     defaultRadius: 0,
