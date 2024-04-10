@@ -1,4 +1,4 @@
-import { Box, Paper, Text, Title } from "@mantine/core";
+import { Anchor, Box, Paper, Text, Title } from "@mantine/core";
 
 export default function Terms() {
 
@@ -26,12 +26,38 @@ export default function Terms() {
         </Box>
 
         <Box component="section" mt="xl">
+            <Title order={2}>Acknowledgement</Title>
             <Text>
                 JustJot was made possible thanks to the pleathora of wonderful works from the open-source communities:
             </Text>
-            <ul className="account-modal__terms-ul">
-                
+            <ul className="account-modal__acknowledgement-ul">
+                <li>
+                    <Anchor href="https://react.dev/" target='_blank' rel='noopener noreferrer'>React</Anchor>
+                </li>
+                <li>
+                    <Anchor href="https://www.typescriptlang.org/" target='_blank' rel='noopener noreferrer'>TypeScript</Anchor>
+                </li>
+                <li>
+                    <Anchor href="https://pocketbase.io/" target='_blank' rel='noopener noreferrer'>Pocketbase</Anchor>
+                </li>
+                <li>
+                    <Anchor href="https://mantine.dev/" target='_blank' rel='noopener noreferrer'>Mantine UI Library</Anchor></li>
+                <li>
+                    <Anchor href="https://icflorescu.github.io/mantine-contextmenu/" target='_blank' rel='noopener noreferrer'>Mantine ContextMenu</Anchor>
+                </li>
+                <li>
+                    <Anchor href="https://sass-lang.com/" target='_blank' rel='noopener noreferrer'>SASS</Anchor>
+                </li>
+                <li>
+                    <Anchor href="https://github.com/KingSora/OverlayScrollbars" target='_blank' rel='noopener noreferrer'>OverlayScrollbars</Anchor>
+                </li>
             </ul>
+            <Text mt="md">
+                Very special thanks to <Anchor href="https://bmrks.com/" target='_blank' rel='noopener noreferrer'>Casey Kwokdinata</Anchor> for the design knowledge and support throughout the course of development.
+            </Text>
+            <Text mt="md">
+                While not a direct contributor, the brilliant <Anchor href="https://bmrks.com/" target='_blank' rel='noopener noreferrer'>bmrks</Anchor> heavily inspired the creation of JustJot.
+            </Text>
         </Box>
 
     </Paper>
