@@ -11,9 +11,13 @@ type KeyboardPromptItemOptions = {
 export default function KeyboardPromptDisplay() {
     return <Paper className="keyboard-prompt-display"
         // withBorder
-        p="md"
+        p="xs"
     >
         <Stack>
+            <CustomKeyboardPromptItem
+                leftSection={<Box><Kbd>1</Kbd>...<Kbd>0</Kbd></Box>}
+                desc="Switch to Collection"
+            />
             <KeyboardPromptItem
                 prompt={[["mod", "K"], ["mod", "P"]]}
                 desc="Spotlight"
@@ -25,6 +29,17 @@ export default function KeyboardPromptDisplay() {
         </Stack>
     </Paper>
 };
+
+const CustomKeyboardPromptItem = (
+    {leftSection, desc}: {leftSection: React.ReactNode, desc: string}
+) => {
+    return <Group
+        justify="space-between"
+    >
+        {leftSection}
+        <Text>{desc}</Text>
+    </Group>
+}
 
 const KeyboardPromptItem = (
     {prompt, desc}: KeyboardPromptItemOptions
