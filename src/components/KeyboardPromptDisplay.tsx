@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { ItemType } from "@/types";
 import { canConvertItemToTodo } from "@/utils/itemUtils";
+import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 
 type Hotkey = string[];
 type KeyboardPrompt = Hotkey | Hotkey[];
@@ -26,81 +27,102 @@ export default function KeyboardPromptDisplay() {
         selectedItem,
     } = useContext(ItemsContext);
 
+    const [isExpanded, setIsExpanded] = useLocalStorage({
+        key: "shouldDisplayKeyboardPrompt",
+        defaultValue: true,
+    });
+
+    useHotkeys([
+        ["Shift+Slash", () => setIsExpanded(curr => !curr), { preventDefault: true }],
+    ], []);
+
     const hasSelectedItem = selectedIndex > -1;
     const hasSelectedWithKeyboard = isMainInputFocused && hasSelectedItem;
     const isLink = selectedItem?.type === ItemType.LINK;
     const canConvertToTodo = selectedItem && canConvertItemToTodo(selectedItem);
+
+    const expandedContent = <>
+        <KeyboardPromptItem
+            prompt={["mod", "F"]}
+            desc="Main Input"
+            shouldDisplay={!isMainInputFocused}
+        />
+        <KeyboardPromptItem
+            prompt={[["↑"], ["↓"]]}
+            desc="Select item"
+            shouldDisplay={isMainInputFocused}
+        />
+        <KeyboardPromptItem
+            prompt={["mod", "Enter"]}
+            desc="Perform primary action"
+            shouldDisplay={hasSelectedWithKeyboard}
+        />
+        <KeyboardPromptItem
+            prompt={["mod", "C"]}
+            desc="Copy item content"
+            shouldDisplay={hasSelectedWithKeyboard}
+        />
+        <KeyboardPromptItem
+            prompt={["mod", "E"]}
+            desc="Edit item"
+            shouldDisplay={hasSelectedWithKeyboard}
+        />
+        <KeyboardPromptItem
+            prompt={["mod", "M"]}
+            desc="Move item"
+            shouldDisplay={hasSelectedWithKeyboard}
+        />
+        <KeyboardPromptItem
+            prompt={["mod", "Shift", "Backspace"]}
+            desc="Delete item"
+            shouldDisplay={hasSelectedWithKeyboard}
+        />
+        <KeyboardPromptItem
+            prompt={["mod", "Alt", "4"]}
+            desc="Toggle copy as primary action"
+            shouldDisplay={hasSelectedWithKeyboard}
+        />
+        <KeyboardPromptItem
+            prompt={["mod", "Alt", "5"]}
+            desc="Refetch link metadata"
+            shouldDisplay={hasSelectedWithKeyboard && isLink}
+        />
+        <KeyboardPromptItem
+            prompt={["mod", "Alt", "6"]}
+            desc="Convert item to Todo"
+            shouldDisplay={hasSelectedWithKeyboard && canConvertToTodo}
+        />
+
+        <Divider />
+
+        <CustomKeyboardPromptItem
+            leftSection={<><Kbd>1</Kbd>...<Kbd>0</Kbd></>}
+            desc="Switch to Collection"
+        />
+        <KeyboardPromptItem
+            prompt={[["←"], ["→"]]}
+            desc="Prev/Next Collection"
+        />
+        <KeyboardPromptItem
+            prompt={[["mod", "K"], ["mod", "P"]]}
+            desc="Spotlight"
+        />
+    </>
+
+    const collapsedContent = <KeyboardPromptItem
+        prompt={[["Shift", "/"]]}
+        desc="Show keyboard prompts"
+    />
 
     return <Paper className="keyboard-prompt-display dropdown-menu"
         // withBorder
         p="xs"
     >
         <Stack>
-            <KeyboardPromptItem
-                prompt={["mod", "F"]}
-                desc="Main Input"
-                shouldDisplay={!isMainInputFocused}
-            />
-            <KeyboardPromptItem
-                prompt={[["↑"], ["↓"]]}
-                desc="Select item"
-                shouldDisplay={isMainInputFocused}
-            />
-            <KeyboardPromptItem
-                prompt={["mod", "Enter"]}
-                desc="Perform primary action"
-                shouldDisplay={hasSelectedWithKeyboard}
-            />
-            <KeyboardPromptItem
-                prompt={["mod", "C"]}
-                desc="Copy item content"
-                shouldDisplay={hasSelectedWithKeyboard}
-            />
-            <KeyboardPromptItem
-                prompt={["mod", "E"]}
-                desc="Edit item"
-                shouldDisplay={hasSelectedWithKeyboard}
-            />
-            <KeyboardPromptItem
-                prompt={["mod", "M"]}
-                desc="Move item"
-                shouldDisplay={hasSelectedWithKeyboard}
-            />
-            <KeyboardPromptItem
-                prompt={["mod", "Shift", "Backspace"]}
-                desc="Delete item"
-                shouldDisplay={hasSelectedWithKeyboard}
-            />
-            <KeyboardPromptItem
-                prompt={["mod", "Alt", "4"]}
-                desc="Toggle copy as primary action"
-                shouldDisplay={hasSelectedWithKeyboard}
-            />
-            <KeyboardPromptItem
-                prompt={["mod", "Alt", "5"]}
-                desc="Refetch link metadata"
-                shouldDisplay={hasSelectedWithKeyboard && isLink}
-            />
-            <KeyboardPromptItem
-                prompt={["mod", "Alt", "6"]}
-                desc="Convert item to Todo"
-                shouldDisplay={hasSelectedWithKeyboard && canConvertToTodo}
-            />
-
-            <Divider />
-
-            <CustomKeyboardPromptItem
-                leftSection={<><Kbd>1</Kbd>...<Kbd>0</Kbd></>}
-                desc="Switch to Collection"
-            />
-            <KeyboardPromptItem
-                prompt={[["←"], ["→"]]}
-                desc="Prev/Next Collection"
-            />
-            <KeyboardPromptItem
-                prompt={[["mod", "K"], ["mod", "P"]]}
-                desc="Spotlight"
-            />
+            {isExpanded
+                ? expandedContent
+                : collapsedContent
+            }
         </Stack>
     </Paper>
 };
