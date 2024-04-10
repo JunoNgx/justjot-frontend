@@ -82,5 +82,10 @@ export default function LandingPage() {
             <Text mt="md">Also, you don't need to sign up just to see what this is all about. There is a <Anchor component={NavLink} to="/demo-login">live demo</Anchor> using a test account, obligation-free.</Text>
             <Text mt="md">While we are at that, drop by to see <Anchor component={NavLink} to="/terms">things you should know about</Anchor> and <Anchor component={NavLink} to="/help">the manual</Anchor> before using JustJot.</Text>
         </section>
+
+        <section className="landing-page__section">
+            <Title order={2}>Authors</Title>
+            <Text>JustJot is developed by <Anchor href="https://www.junongx.com/" target='_blank' rel='noopener noreferrer'>Juno Nguyen</Anchor> with curiosity, compulsion, and tons of design input from <Anchor href="https://caseykwokdinata.webflow.io/" target='_blank' rel='noopener noreferrer'>Casey Kwokdinata</Anchor>.</Text>
+        </section>
     </Box>
 }
