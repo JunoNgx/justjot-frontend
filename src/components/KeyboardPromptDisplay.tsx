@@ -1,10 +1,12 @@
-import { Box, Divider, Group, Kbd, Paper, Stack, Text } from "@mantine/core";
+import { ActionIcon, Box, Divider, Group, Kbd, Paper, Stack, Text } from "@mantine/core";
 import KbdMod from "./misc/KbdMod";
 import { useContext } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { ItemType } from "@/types";
 import { canConvertItemToTodo } from "@/utils/itemUtils";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
+import { IconLayoutBottombarCollapse, IconLayoutBottombarExpand } from "@tabler/icons-react";
+import useIconProps from "@/hooks/useIconProps";
 
 type Hotkey = string[];
 type KeyboardPrompt = Hotkey | Hotkey[];
@@ -26,6 +28,7 @@ export default function KeyboardPromptDisplay() {
         selectedIndex,
         selectedItem,
     } = useContext(ItemsContext);
+    const { keyboardPromptIconProps } = useIconProps();
 
     const [isExpanded, setIsExpanded] = useLocalStorage({
         key: "shouldDisplayKeyboardPrompt",
@@ -126,19 +129,38 @@ export default function KeyboardPromptDisplay() {
         />
         <KeyboardPromptItem
             prompt={[["Shift", "/"]]}
-            desc="Hide keyboard prompts"
+            desc="Toggle keyboard prompts display"
         />
     </>
 
-    const collapsedContent = <KeyboardPromptItem
-        prompt={[["Shift", "/"]]}
-        desc="Show keyboard prompts"
-    />
+    const collapsedContent = <>
+    </>
+    
+    const expandButton = <ActionIcon
+        variant="subtle"
+        onClick={() => setIsExpanded(true)}
+        title="Show keyboard prompts"
+    >
+        <IconLayoutBottombarExpand {...keyboardPromptIconProps} />
+    </ActionIcon>
+
+    const collapseButton = <ActionIcon
+        variant="subtle"
+        onClick={() => setIsExpanded(false)}
+        title="Hide keyboard prompts"
+    >
+        <IconLayoutBottombarCollapse {...keyboardPromptIconProps} />
+    </ActionIcon>
 
     return <Paper className="keyboard-prompt-display dropdown-menu"
         // withBorder
         p="xs"
     >
+        {
+            isExpanded
+                ? collapseButton
+                : expandButton
+        }
         <Stack>
             {isExpanded
                 ? expandedContent
