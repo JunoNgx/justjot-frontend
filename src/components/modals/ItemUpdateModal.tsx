@@ -1,4 +1,4 @@
-import { Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
+import { Flex, Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { Item, ItemType } from "@/types";
 import { DateTime } from "luxon";
 import { getHotkeyHandler, useDebounceCallback } from "@mantine/hooks";
@@ -67,6 +67,9 @@ export default function ItemUpdateModal(
             itemsHandlers.replace(index, newerItem);
         }
     }
+
+    const [isFocusedOnContentInput, setIsFocusedOnContentInput] = useState(false);
+    const [isFocusedOnTitleInput, setIsFocusedOnTitleInput] = useState(false);
 
     const [ titleVal, setTitleVal ] = useState(item?.title || "");
     const [ contentVal, setContentVal ] = useState(item?.content || "");
@@ -177,6 +180,8 @@ export default function ItemUpdateModal(
             onKeyDown={getHotkeyHandler([
                 ["mod+S", handleActiveSave, {preventDefault: true}]
             ])}
+            onFocus={() => setIsFocusedOnTitleInput(true)}
+            onBlur={() => setIsFocusedOnTitleInput(false)}
         />
         <Group justify="flex-end">
             <Text>{titleVal.length}/{MAX_TITLE_LENGTH}</Text>
@@ -196,11 +201,18 @@ export default function ItemUpdateModal(
                 onKeyDown={getHotkeyHandler([
                     ["mod+S", handleActiveSave, {preventDefault: true}]
                 ])}
+                onFocus={() => setIsFocusedOnContentInput(true)}
+                onBlur={() => setIsFocusedOnContentInput(false)}
             />
-            <Group justify="space-between">
-                <Text>Save <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>
+            <Flex
+                direction="row-reverse"
+                justify="space-between"
+            >
                 <Text>{contentVal.length}/{MAX_CONTENT_LENGTH}</Text>
-            </Group>
+                {(isFocusedOnTitleInput || isFocusedOnContentInput) &&
+                    <Text> Create <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>
+                }
+            </Flex>
         </>}
 
         <Group justify="flex-end">
