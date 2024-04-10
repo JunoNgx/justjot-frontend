@@ -18,6 +18,7 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 export default function useItemActions() {
 
     const { user } = useContext(BackendClientContext);
+    const { collections } = useContext(CollectionsContext);
     const { currCollection } = useContext(CollectionsContext);
     const { items, setItems, setUpdateQueue } = useContext(ItemsContext);
     const {
@@ -330,6 +331,57 @@ export default function useItemActions() {
         };
     };
 
+    const executeItemAction = (
+        item: Item, action: ItemAction, isClickEvent: boolean = false
+    ) => {
+        switch (action) {
+            case (ItemAction.COPY):
+                copyItemContent(item);
+                break;
+            
+            case (ItemAction.OPEN_LINK):
+                /**
+                 * Intentionally do nothing to let the browser handle the
+                 * click on `<a>` event.
+                 */
+                if (isClickEvent) break;
+                // window.open(item.content, "_blank");
+                break;
+
+            case (ItemAction.MOVE):
+                openMoveItemModal({item, collectionList: collections});
+                break;
+
+            case (ItemAction.TOGGLE_IS_DONE):
+                toggleItemIsTodoDoneWithOptimisticUpdate({item});
+                break;
+
+            case (ItemAction.DELETE):
+                deleteItemWithOptimisticUpdate({item});
+                break;
+
+            case (ItemAction.TOGGLE_COPY):
+                toggleItemShouldCopyOnClickWithOptimisticUpdate({item});
+                break;
+
+            case (ItemAction.TOGGLE_IS_DONE):
+                toggleItemIsTodoDoneWithOptimisticUpdate({item});
+                break;
+
+            case (ItemAction.REFETCH):
+                refetchLink(item);
+                break;
+
+            case (ItemAction.CONVERT_TO_TODO):
+                convertToTodo({item});
+                break;
+
+            case (ItemAction.EDIT):
+            default:
+                openUpdateItemModal(item);
+        };
+    };        
+
     return {
         createItemWithOptimisticUpdate,
         deleteItemWithOptimisticUpdate,
@@ -342,5 +394,6 @@ export default function useItemActions() {
         toggleItemIsTodoDoneWithOptimisticUpdate,
         convertToTodo,
         computeItemPrimaryAction,
+        executeItemAction,
     }
 };
