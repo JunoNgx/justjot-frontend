@@ -1,4 +1,4 @@
-import { Box, Group, Kbd, Paper, Stack, Text } from "@mantine/core";
+import { Box, Group, Kbd, Paper, Space, Stack, Text } from "@mantine/core";
 import KbdMod from "./misc/KbdMod";
 
 type Hotkey = string[];
@@ -20,6 +20,11 @@ export default function KeyboardPromptDisplay() {
         p="xs"
     >
         <Stack>
+            <KeyboardPromptItem
+                prompt={["mod", "F"]}
+                desc="Main Input"
+            />
+
             <CustomKeyboardPromptItem
                 leftSection={<Box><Kbd>1</Kbd>...<Kbd>0</Kbd></Box>}
                 desc="Switch to Collection"
@@ -27,10 +32,6 @@ export default function KeyboardPromptDisplay() {
             <KeyboardPromptItem
                 prompt={[["mod", "K"], ["mod", "P"]]}
                 desc="Spotlight"
-            />
-            <KeyboardPromptItem
-                prompt={["mod", "F"]}
-                desc="Main Input"
             />
         </Stack>
     </Paper>
