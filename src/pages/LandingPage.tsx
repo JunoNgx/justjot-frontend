@@ -56,7 +56,7 @@ export default function LandingPage() {
 
         <section className="landing-page__section">
             <Title order={2}>Keyboard-first</Title>
-            <Text>JustJot prioritises keyboard interactions; most actions can be performed solely on a keyboard. While fully operable with pointer-based devices (mouse or touchscreen), users are recommended to spent time on learning to perform operations the optimal way.</Text>
+            <Text>JustJot prioritises keyboard interactions; most actions can be performed solely on a keyboard. While fully operable with pointer-based devices (mouse or touchscreen), users are recommended to spend time on learning to perform operations the optimal way.</Text>
 
             <Text mt="md">Due to the unconventional approach, consulting <Anchor component={NavLink} to="/help">the manual</Anchor> is high recommended to new users.</Text>
         </section>
@@ -73,7 +73,7 @@ export default function LandingPage() {
         
         <section className="landing-page__section">
             <Title order={2}>Average FOSS software</Title>
-            <Text>JustJot was made with personal use and personal preferences first and foremost. It is as barebone and small as it can and should be. It has minimal development roadmap, no monetisation, no advertisement, no tracking, and is fully open-source. Technical support is limited and not guaranteed (I'll try as much as I could).</Text>
+            <Text>JustJot was made with personal use and personal preferences first and foremost. It is as barebone and small as it can and should be. It has minimal development roadmap, no monetisation, no advertisement, no tracking, and is fully open-source. Technical support is limited and not guaranteed (I'll try as much as I can).</Text>
         </section>
 
         <section className="landing-page__section">
