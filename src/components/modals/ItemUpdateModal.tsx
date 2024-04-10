@@ -11,6 +11,7 @@ import { AUTO_CLOSE_ERROR_TOAST, MAX_CONTENT_LENGTH, MAX_TITLE_LENGTH } from "@/
 import { ClientResponseError } from "pocketbase";
 import { findIndexById } from "@/utils/itemUtils";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
+import { modals } from "@mantine/modals";
 
 const DEBOUNCED_TIME = 5000;
 
@@ -153,14 +154,32 @@ export default function ItemUpdateModal(
     };
 
     const handleActiveSave = () => {
+        setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
+        setHasChanged(false);
+        setHasSaved(true);
+
         updateItemTitleAndContent({
             itemId: item?.id,
             title: titleValRef.current,
             content: contentValRef.current,
+            successfulCallback: (record: Item) => {
+                const index = findIndexById(record.id, items)
+                if (index === -1) return;
+                itemsHandlers.replace(index, record);
+
+                modals.closeAll();
+            },
+            errorCallback: (err: ClientQueryOptions) => {
+                console.error(err)
+                notifications.show({
+                    message: "Error saving item edit",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
+            },
+
         });
-        setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
-        setHasChanged(false);
-        setHasSaved(true);
     };
 
     const isTodoItem = item.type !== ItemType.TODO;
@@ -210,7 +229,7 @@ export default function ItemUpdateModal(
             >
                 <Text>{contentVal.length}/{MAX_CONTENT_LENGTH}</Text>
                 {(isFocusedOnTitleInput || isFocusedOnContentInput) &&
-                    <Text> Create <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>
+                    <Text> Save and close <Kbd>Ctrl</Kbd>/<Kbd>⌘</Kbd> <Kbd>S</Kbd></Text>
                 }
             </Flex>
         </>}
