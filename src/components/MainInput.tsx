@@ -15,6 +15,7 @@ import { CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TEXT_WITH_TITLE_PREFIX_ALT } from
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { collections } = useContext(CollectionsContext);
     const {
+        setIsMainInputFocused,
         inputVal,
         setInputVal,
         setSelectedIndex,
@@ -146,7 +147,13 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["mod+alt+Digit5", hotkeyRefetchTitleAndFavicon, { preventDefault: true }],
             ["mod+alt+Digit6", hotkeyConvertToTodoItem, { preventDefault: true }],
         ])}
-        onBlur={() => {setSelectedIndex(-1);}}
+        onFocus={() => {
+            setIsMainInputFocused(true);
+        }}
+        onBlur={() => {
+            setSelectedIndex(-1);
+            setIsMainInputFocused(false);
+        }}
     />
 });
 
