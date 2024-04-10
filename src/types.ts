@@ -40,6 +40,7 @@ export enum ItemAction {
     COPY = "copy",
     OPEN_LINK = "openLink",
     EDIT = "edit",
+    MOVE = "move",
     DELETE = "delete",
     TOGGLE_COPY = "toggleShouldCopyOnClick",
     TOGGLE_IS_DONE = "toggleIsTodo",
