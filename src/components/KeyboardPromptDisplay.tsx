@@ -60,7 +60,7 @@ export default function KeyboardPromptDisplay() {
             shouldDisplay={isMainInputFocused}
         />
         <KeyboardPromptItem
-            prompt={["mod", "Enter"]}
+            prompt={["mod", "↵"]}
             desc={`Perform primary action: ${primaryActionStr}`}
             shouldDisplay={hasSelectedWithKeyboard}
         />
