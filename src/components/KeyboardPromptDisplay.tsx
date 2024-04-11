@@ -49,7 +49,7 @@ export default function KeyboardPromptDisplay() {
         <Stack className="keyboard-prompt-display__list">
             <KeyboardPromptItem
                 prompt={["mod", "F"]}
-                desc="Focus on Main Input"
+                desc="Main Input"
                 shouldDisplay={!isMainInputFocused}
             />
             <KeyboardPromptItem
