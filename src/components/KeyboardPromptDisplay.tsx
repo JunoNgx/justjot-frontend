@@ -84,7 +84,7 @@ export default function KeyboardPromptDisplay() {
             desc="Delete item"
             shouldDisplay={hasSelectedWithKeyboard}
         />
-        <KeyboardPromptItem
+        {/* <KeyboardPromptItem
             prompt={["mod", "Alt", "4"]}
             desc="Toggle copy as primary action"
             shouldDisplay={hasSelectedWithKeyboard}
@@ -105,10 +105,10 @@ export default function KeyboardPromptDisplay() {
             shouldDisplay={isMainInputFocused}
         />
         <KeyboardPromptItem
-            prompt={[["Mod", "Shift", "↑"], ["Mod", "Shift", "↓"]]}
+            prompt={[["mod", "Shift", "↑"], ["Mod", "Shift", "↓"]]}
             desc="Move to top/bottom"
             shouldDisplay={isMainInputFocused}
-        />
+        /> */}
         <KeyboardPromptItem
             prompt={["Esc"]}
             desc="Unfocus Main Input"
@@ -117,7 +117,7 @@ export default function KeyboardPromptDisplay() {
 
         <Divider />
 
-        <CustomKeyboardPromptItem
+        {/* <CustomKeyboardPromptItem
             leftSection={<><Kbd>1</Kbd>...<Kbd>0</Kbd></>}
             desc="Switch to Collection"
             shouldDisplay={!isMainInputFocused}
@@ -126,7 +126,7 @@ export default function KeyboardPromptDisplay() {
             prompt={[["←"], ["→"]]}
             desc="Prev/Next Collection"
             shouldDisplay={!isMainInputFocused}
-        />
+        /> */}
         <KeyboardPromptItem
             prompt={[["mod", "K"], ["mod", "P"]]}
             desc="Spotlight"
