@@ -62,6 +62,13 @@ export default function Help() {
         <Box className="cardlike__man-section"
             component="section"
         >
+            <Title order={3}>Collection</Title>
+            <Text>Collate notes, bookmarks, and todos for different categories under your collections. Access them from the dropdown menu, numeric keys <Kbd>1</Kbd>...<Kbd>0</Kbd>, or <Kbd>←</Kbd> <Kbd>→</Kbd>. You always must have at least one collection in your account.</Text>
+        </Box>
+
+        <Box className="cardlike__man-section"
+            component="section"
+        >
             <Title order={3}>Main Input</Title>
             <Text>The main input serves both as a search bar and the interface for new item creation. To create new item, input your content and press <Kbd>↵</Kbd>.</Text>
             <Text>Prefix syntaxes are available to quickly create item with options. Helpers for syntaxes are accessible from the extended dropdown menu on right side the input.</Text>
@@ -82,13 +89,6 @@ export default function Help() {
                 <li>Entering `:td: Buy groceries` will create a todo item with content "Buy groceries".</li>
             </ul>
             <Text>As a note, leading and trailing whitespaces are always trimmed.</Text>
-        </Box>
-
-        <Box className="cardlike__man-section"
-            component="section"
-        >
-            <Title order={3}>Collection</Title>
-            <Text>Collate notes, bookmarks, and todos for different categories under your collections. Access them from the dropdown menu, numeric keys <Kbd>1</Kbd>...<Kbd>0</Kbd>, or <Kbd>←</Kbd> <Kbd>→</Kbd>. You always must have at least one collection in your account.</Text>
         </Box>
 
         <Box className="cardlike__man-section"
