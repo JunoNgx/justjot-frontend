@@ -115,5 +115,13 @@ export default function Help() {
             <Text>You can also toggle the primary action of notes between edit and copy, and likewise for links between open and copy, from the context menu.</Text>
         </Box>
 
+        <Box className="cardlike__man-section"
+            component="section"
+        >
+            <Title order={3}>Spotlight</Title>
+            <Text>Accessed by pressing <KbdMod/> <Kbd>K</Kbd> or <KbdMod/> <Kbd>P</Kbd> anywhere within the app, or from the Main Input extended menu.</Text>
+            <Text>It serves as the global navigation menu. Use it to search for actions and collections quickly.</Text>
+        </Box>
+
     </Paper>
 }
