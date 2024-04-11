@@ -25,6 +25,18 @@
     &--long-doc {
         max-width: 640px;
         hyphens: auto;
+
+        h2, h3, h4, h5, h6 {
+            margin-top: var(--mantine-spacing-md);
+        }
+
+        p {
+            margin-top: var(--mantine-spacing-md);
+        }
+    }
+
+    &__man-section {
+        margin-top: var(--mantine-spacing-md);
     }
 
     &__terms-li {
