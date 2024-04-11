@@ -143,7 +143,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["mod+C", hotkeyCopyContent, { preventDefault: true }],
             ["mod+E", hotkeyOpenUpdateItemModal, { preventDefault: true }],
             ["mod+M", hotkeyOpenMoveItemModal, { preventDefault: true }],
-            ["mod+Shift+Backspace", hotkeyDeleteItem, { preventDefault: true }],
+            ["alt+Backspace", hotkeyDeleteItem, { preventDefault: true }],
             ["mod+alt+Digit4", hotkeyToggleItemShouldCopyOnClick, { preventDefault: true }],
             ["mod+alt+Digit5", hotkeyRefetchTitleAndFavicon, { preventDefault: true }],
             ["mod+alt+Digit6", hotkeyConvertToTodoItem, { preventDefault: true }],
