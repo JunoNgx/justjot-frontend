@@ -61,7 +61,7 @@ export default function KeyboardPromptDisplay() {
         />
         <KeyboardPromptItem
             prompt={["mod", "↵"]}
-            desc={`Perform primary action: ${primaryActionStr}`}
+            desc={`Primary action: ${primaryActionStr}`}
             shouldDisplay={hasSelectedWithKeyboard}
         />
         <KeyboardPromptItem
