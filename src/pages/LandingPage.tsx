@@ -58,7 +58,7 @@ export default function LandingPage() {
             <Title order={2}>Keyboard-first</Title>
             <Text>JustJot prioritises keyboard interactions; most actions can be performed solely on a keyboard. While fully operable with pointer-based devices (mouse or touchscreen), users are recommended to spend time on learning to perform operations the optimal way.</Text>
 
-            <Text mt="md">Due to the unconventional approach, consulting <Anchor component={NavLink} to="/help">the manual</Anchor> is high recommended to new users.</Text>
+            <Text mt="md">Due to the unconventional approach, consulting <Anchor component={NavLink} to="/help">the manual</Anchor> is highly recommended for new users.</Text>
         </Box>
 
         <Box component="section" className="landing-page__section">
