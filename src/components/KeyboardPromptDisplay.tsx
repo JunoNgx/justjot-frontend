@@ -108,12 +108,12 @@ export default function KeyboardPromptDisplay() {
             prompt={[["mod", "Shift", "↑"], ["Mod", "Shift", "↓"]]}
             desc="Move to top/bottom"
             shouldDisplay={isMainInputFocused}
-        /> */}
+        />
         <KeyboardPromptItem
             prompt={["Esc"]}
             desc="Unfocus Main Input"
             shouldDisplay={isMainInputFocused}
-        />
+        /> */}
 
         <Divider />
 
