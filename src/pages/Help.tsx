@@ -13,7 +13,9 @@ export default function Help() {
         document.title = `User Manual — ${APP_NAME}`;
     });
 
-    return <Paper className="cardlike cardlike--long-doc">
+    return <Paper className="cardlike cardlike--long-doc"
+        p="md"
+    >
         <Title order={2}>User Manual</Title>
 
         <Box className="cardlike__man-section"
