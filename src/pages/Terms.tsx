@@ -56,7 +56,7 @@ export default function Terms() {
                 </li>
             </ul>
             <Text mt="md">
-                Very special thanks to <Anchor href="https://bmrks.com/" target='_blank' rel='noopener noreferrer'>Casey Kwokdinata</Anchor> for the design knowledge and support throughout the course of development.
+                Very special thanks to <Anchor href="https://caseykwokdinata.webflow.io/" target='_blank' rel='noopener noreferrer'>Casey Kwokdinata</Anchor> for the design knowledge and support throughout the course of development.
             </Text>
             <Text mt="md">
                 While not a direct contributor, the brilliant <Anchor href="https://bmrks.com/" target='_blank' rel='noopener noreferrer'>bmrks</Anchor> heavily inspired the creation of JustJot.
