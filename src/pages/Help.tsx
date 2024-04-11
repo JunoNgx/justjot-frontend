@@ -57,8 +57,38 @@ export default function Help() {
                 <li><Text><KbdMod/> <KbdAlt/> <Kbd>5</Kbd> to refetch a link's metadata.</Text></li>
                 <li><Text><KbdMod/> <KbdAlt/> <Kbd>6</Kbd> to convert a text note to a todo item.</Text></li>
             </ul>
-            
+        </Box>
 
+        <Box className="cardlike__man-section"
+            component="section"
+        >
+            <Title order={3}>Main Input</Title>
+            <Text>The Main Input is the primary interface to interact with your items. It is denoted with the icon of a circle and a triangle. This is a text field where it serves both as a search bar and the input for new item creation. Special syntaxes are also available (see below).</Text>
+        </Box>
+
+        <Box className="cardlike__man-section"
+            component="section"
+        >
+            <Title order={3}>Collection</Title>
+            <Text>Collate notes, bookmarks, and todos for different categories under your collections. Access them through the dropdown menu or toggle between them with the numeric keys. You always must have at least one collection in your account.</Text>
+        </Box>
+
+        <Box className="cardlike__man-section"
+            component="section"
+        >
+            <Title order={3}>Item Type</Title>
+
+            <Title order={4}>Text note</Title>
+            <Text>An item is a note by default. This contains simple plain text data.</Text>
+
+            <Title order={4}>Link/Bookmark</Title>
+            <Text>If your entered input is detected as a url, it will be stored as a link. Links also contain metadata (page title and favicon), and attempts are always made to retrieve them for links.</Text>
+
+            <Title order={4}>Todo</Title>
+            <Text>A todo item can be marked as completed. A text item without title can be converted into a todo item (though this can be a semi-destructive operation, due the title length limit, and is not reversible).</Text>
+
+            <Title order={4}>Hex colour code</Title>
+            <Text>As a special subtype of note, a hex colour code, when detected, will have itself displayed as the icon. The logic validates the last seven characters; hence as a lifehack, prepend a hex colour code to your text note to mark it with a coloured icon.</Text>
         </Box>
     </Paper>
 }
