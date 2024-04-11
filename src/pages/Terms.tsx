@@ -2,7 +2,7 @@ import { Anchor, Card, Text, Title } from "@mantine/core";
 
 export default function Terms() {
 
-    return <Card className="cardlike cardlike--terms"
+    return <Card className="cardlike cardlike--long-doc"
         p="md"
         component="article"
     >
