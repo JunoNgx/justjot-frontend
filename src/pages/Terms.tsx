@@ -41,6 +41,9 @@ export default function Terms() {
                     <Anchor href="https://pocketbase.io/" target='_blank' rel='noopener noreferrer'>Pocketbase</Anchor>
                 </li>
                 <li>
+                    <Anchor href="https://pockethost.io/" target='_blank' rel='noopener noreferrer'>PocketHost</Anchor>
+                </li>
+                <li>
                     <Anchor href="https://mantine.dev/" target='_blank' rel='noopener noreferrer'>Mantine UI Library</Anchor></li>
                 <li>
                     <Anchor href="https://icflorescu.github.io/mantine-contextmenu/" target='_blank' rel='noopener noreferrer'>Mantine ContextMenu</Anchor>
