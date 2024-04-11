@@ -11,6 +11,10 @@
     border-bottom: none;
 }
 
+.mantine-Card-root {
+    background-color: var(--mantine-color-body);
+}
+
 .mantine-Modal-content,
 .mantine-Spotlight-content {
     border-style: solid;
