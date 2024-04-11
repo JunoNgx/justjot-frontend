@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { computeItemActionString } from "@/utils/itemUtils";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
-import { IconLayoutBottombarCollapse, IconLayoutBottombarExpand } from "@tabler/icons-react";
+import {IconSquareChevronDown, IconSquareChevronUp } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
 import useItemActions from "@/hooks/useItemActions";
 
@@ -141,7 +141,7 @@ export default function KeyboardPromptDisplay() {
         onClick={() => setIsExpanded(true)}
         title="Show keyboard prompts"
     >
-        <IconLayoutBottombarExpand {...keyboardPromptIconProps} />
+        <IconSquareChevronUp {...keyboardPromptIconProps} />
     </ActionIcon>
 
     const collapseButton = <ActionIcon
@@ -151,7 +151,7 @@ export default function KeyboardPromptDisplay() {
         title="Hide keyboard prompts"
         mb="md"
     >
-        <IconLayoutBottombarCollapse {...keyboardPromptIconProps} />
+        <IconSquareChevronDown {...keyboardPromptIconProps} />
     </ActionIcon>
 
     return <Paper className="keyboard-prompt-display dropdown-menu"
