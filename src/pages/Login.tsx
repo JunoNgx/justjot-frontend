@@ -75,8 +75,8 @@ export default function Login(
         <Text><code>{TEST_EMAIL}</code> / <code>{TEST_PASSWORD}</code></Text>
     </>
 
-    return <Paper className="account-modal account-modal--login">
-        <Title className="account-modal__title"
+    return <Paper className="cardlike cardlike--login">
+        <Title className="cardlike__title"
             order={2}
         >
             Login

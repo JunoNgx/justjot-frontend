@@ -1,10 +1,10 @@
 import { Code, Paper, Text, Title } from "@mantine/core";
 
 export default function ProfileAccountDeletion() {
-    return <Paper className="account-modal"
+    return <Paper className="cardlike"
         withBorder p="md"
     >
-        <Title className="account-modal__title"
+        <Title className="cardlike__title"
             order={2}
         >
             Account deletion

@@ -44,11 +44,11 @@ export default function ProfileChangeDisplayName() {
         setIsLoading(false);
     };
 
-    return <Paper className="account-modal"
+    return <Paper className="cardlike"
         withBorder p="md"
     >
         <form onSubmit={form.onSubmit(handleSubmission)}>
-            <Title className="account-modal__title"
+            <Title className="cardlike__title"
                 order={2}
             >
                 Change display name

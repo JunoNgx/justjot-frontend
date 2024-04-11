@@ -87,8 +87,8 @@ export default function Reset() {
         </Text>
     </>
 
-    return <Paper className="account-modal account-modal--reset">
-        <Title className="account-modal__title"
+    return <Paper className="cardlike cardlike--reset">
+        <Title className="cardlike__title"
             order={2}
         >
             Request password reset
