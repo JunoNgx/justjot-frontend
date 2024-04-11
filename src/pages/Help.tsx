@@ -94,8 +94,19 @@ export default function Help() {
         <Box className="cardlike__man-section"
             component="section"
         >
+            <Title order={3}>Item actions</Title>
+            <Text>There are two ways to perform item actions:</Text>
+            <ul>
+                <li>Context menu — right-clicking on your mouse or long-pressing on your touchscreen.</li>
+                <li>Hotkeys — prompts are contextually displayed on the lower right corner of the screen (which requires a minimum viewport width of 1280px). A more complete list can also be found on top of this document.</li>
+            </ul>
+        </Box>
+
+        <Box className="cardlike__man-section"
+            component="section"
+        >
             <Title order={3}>Primary action</Title>
-            <Text>The item's primary action is executed by simply clicking on it. It varies depending on its type and settings:</Text>
+            <Text>An item's primary action is executed by clicking on it or pressing <Kbd>Shift</Kbd> <Kbd>↵</Kbd> while it is selected. This action varies depending on the item's type and settings:</Text>
             <ul>
                 <li>Note — edit.</li>
                 <li>Link — open in a new tab.</li>
