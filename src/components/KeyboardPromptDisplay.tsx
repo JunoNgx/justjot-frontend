@@ -166,12 +166,9 @@ export default function KeyboardPromptDisplay() {
         <Group justify="flex-end">
             {isExpanded ? collapseButton : expandButton}
         </Group>
-        <Stack>
-            {isExpanded
-                ? expandedContent
-                : collapsedContent
-            }
-        </Stack>
+        {isExpanded && <Stack className="keyboard-prompt-display__list">
+            {expandedContent}
+        </Stack>}
     </Paper>
 };
 
