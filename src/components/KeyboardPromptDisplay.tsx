@@ -150,7 +150,7 @@ export default function KeyboardPromptDisplay() {
         variant="subtle"
         onClick={() => setIsExpanded(false)}
         title="Hide keyboard prompts"
-        mb="md"
+        mt="xs"
     >
         <IconSquareChevronDown {...keyboardPromptIconProps} />
     </ActionIcon>
@@ -159,11 +159,11 @@ export default function KeyboardPromptDisplay() {
         // withBorder
         p="xs"
     >
+        {isExpanded && expandedContent}
+
         <Group justify="flex-end">
             {isExpanded ? collapseButton : expandButton}
         </Group>
-
-        {isExpanded && expandedContent}
     </Paper>
 };
 
