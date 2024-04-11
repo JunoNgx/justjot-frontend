@@ -63,7 +63,25 @@ export default function Help() {
             component="section"
         >
             <Title order={3}>Main Input</Title>
-            <Text>The Main Input is the primary interface to interact with your items. It is denoted with the icon of a circle and a triangle. This is a text field where it serves both as a search bar and the input for new item creation. Special syntaxes are also available (see below).</Text>
+            <Text>The main input serves both as a search bar and the interface for new item creation. To create new item, input your content and press <Kbd>↵</Kbd>.</Text>
+            <Text>Prefix syntaxes are available to quickly create item with options. Helpers for syntaxes are accessible from the extended dropdown menu on right side the input.</Text>
+        </Box>
+
+        <Box className="cardlike__man-section"
+            component="section"
+        >
+            <Title order={3}>Prefix syntaxes</Title>
+            <Text>These always start and end with the colon character (two vertical dots):</Text>
+            <ul>
+                <li><code>:t:</code> or <code>:l:</code> — create a text note with title.</li>
+                <li><code>:td:</code> — create a todo item.</li>
+            </ul>
+            As examples:
+            <ul>
+                <li>Entering `:t: Email draft 2` will open the item create dialog, whose title input is pre-filled as "Email draft 2", allowing you to conveniently continue working the content.</li>
+                <li>Entering `:td: Buy groceries` will create a todo item with content "Buy groceries".</li>
+            </ul>
+            <Text>As a note, leading and trailing whitespaces are always trimmed.</Text>
         </Box>
 
         <Box className="cardlike__man-section"
