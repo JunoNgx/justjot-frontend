@@ -1,12 +1,12 @@
-import { Anchor, Box, Paper, Text, Title } from "@mantine/core";
+import { Anchor, Card, Text, Title } from "@mantine/core";
 
 export default function Terms() {
 
-    return <Paper className="account-modal account-modal--terms"
+    return <Card className="account-modal account-modal--terms"
         p="md"
         component="article"
     >
-        <Box component="section">
+        <Card.Section component="section">
             <Title order={2}>Terms and Conditions</Title>
             <Text>
                 These are not exactly "terms and conditions" per se (I needed your attention nevertheless); more like things you should be aware of and acknowledge before signing up.
@@ -23,9 +23,9 @@ export default function Terms() {
                 <li className="account-modal__terms-li">I make nothing from running this (more like losing money, because of the domain cost). It was built because I enjoy making things. I am happy if JustJot is useful to you and would like to hear about it.</li>
                 <li className="account-modal__terms-li">I am too busy to study lawsuits and tell which rights to waive, but considering that this is a passion project that cost nothing from the users, let us hope it would not come to that. If there is any issue or concern, please contact me.</li>
             </ul>
-        </Box>
+        </Card.Section>
 
-        <Box component="section" mt="xl">
+        <Card.Section component="section" mt="xl">
             <Title order={2}>Acknowledgement</Title>
             <Text>
                 JustJot was made possible thanks to the plethora of wonderful works from the open-source communities:
@@ -61,7 +61,7 @@ export default function Terms() {
             <Text mt="md">
                 While not a direct contributor, the brilliant <Anchor href="https://bmrks.com/" target='_blank' rel='noopener noreferrer'>bmrks</Anchor> heavily inspired the creation of JustJot.
             </Text>
-        </Box>
+        </Card.Section>
 
-    </Paper>
+    </Card>
 };
