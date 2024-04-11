@@ -124,7 +124,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             mainInputRef={ref}
         />}
         type="text"
-        placeholder="Add new item or search"
+        // placeholder="Add new item or search"
         value={inputVal}
         onChange={(event) => {
             setInputVal(event.currentTarget.value);
