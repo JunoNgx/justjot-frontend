@@ -59,7 +59,7 @@ export default function KeyboardPromptDisplay() {
                 shouldDisplay={isMainInputFocused}
             />
             <KeyboardPromptItem
-                prompt={["mod", "↵"]}
+                prompt={["Shift", "↵"]}
                 desc={`Primary action: ${primaryActionStr}`}
                 shouldDisplay={hasSelectedWithKeyboard}
             />
@@ -69,12 +69,12 @@ export default function KeyboardPromptDisplay() {
                 shouldDisplay={hasSelectedWithKeyboard}
             />
             <KeyboardPromptItem
-                prompt={["mod", "E"]}
+                prompt={["alt", "E"]}
                 desc="Edit item"
                 shouldDisplay={hasSelectedWithKeyboard}
             />
             <KeyboardPromptItem
-                prompt={["mod", "M"]}
+                prompt={["alt", "M"]}
                 desc="Move item"
                 shouldDisplay={hasSelectedWithKeyboard}
             />
