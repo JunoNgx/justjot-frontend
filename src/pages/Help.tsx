@@ -70,7 +70,7 @@ export default function Help() {
             component="section"
         >
             <Title order={3}>Main Input</Title>
-            <Text>The main input serves both as a search bar and the interface for new item creation. To create new item, input your content and press <Kbd>↵</Kbd>.</Text>
+            <Text>Serves both as a search bar and the interface for new item creation. To create new item, input your content and press <Kbd>↵</Kbd>.</Text>
             <Text>Prefix syntaxes are available to quickly create item with options. Helpers for syntaxes are accessible from the dropdown menu on right side the input.</Text>
         </Box>
 
@@ -103,7 +103,7 @@ export default function Help() {
             <Text>If your entered input is detected as a url, it will be stored as a link. Links also contain metadata (page title and favicon), and attempts are always made to retrieve them.</Text>
 
             <Title order={4}>Todo</Title>
-            <Text>A todo item can be marked as completed. A text item without title can be converted into a todo item (this is a semi-destructive operation, due the title length limit, and is not reversible). To quickly create a todo action from the main input, use the <code>:td:</code> prefix.</Text>
+            <Text>A todo item can be marked as completed. A text item without title can be converted into a todo item (this is a semi-destructive operation, due the title length limit, and is not reversible). To quickly create a todo action from the Main Input, use the <code>:td:</code> prefix.</Text>
 
             <Title order={4}>Hex colour code</Title>
             <Text>As a special subtype of note, a hex colour code, when detected, will be accompanied by a corresponding icon. The logic validates the last seven characters in the item's content. As a lifehack, append a hex colour code to your text note to notate it in your own way.</Text>
