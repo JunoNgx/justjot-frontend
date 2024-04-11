@@ -2,8 +2,7 @@ import { ActionIcon, Box, Divider, Group, Kbd, Paper, Stack, Text } from "@manti
 import KbdMod from "./misc/KbdMod";
 import { useContext } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
-import { ItemType } from "@/types";
-import { canConvertItemToTodo, computeItemActionString } from "@/utils/itemUtils";
+import { computeItemActionString } from "@/utils/itemUtils";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import { IconLayoutBottombarCollapse, IconLayoutBottombarExpand } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
@@ -16,11 +15,11 @@ type KeyboardPromptItemOptions = {
     desc: string,
     shouldDisplay?: boolean,
 };
-type CustomKeyboardPromptItemOptions = {
-    leftSection: React.ReactNode,
-    desc: string,
-    shouldDisplay?: boolean,
-};
+// type CustomKeyboardPromptItemOptions = {
+//     leftSection: React.ReactNode,
+//     desc: string,
+//     shouldDisplay?: boolean,
+// };
 
 export default function KeyboardPromptDisplay() {
 
@@ -43,8 +42,6 @@ export default function KeyboardPromptDisplay() {
 
     const hasSelectedItem = selectedIndex > -1;
     const hasSelectedWithKeyboard = isMainInputFocused && hasSelectedItem;
-    const isLink = selectedItem?.type === ItemType.LINK;
-    const canConvertToTodo = selectedItem && canConvertItemToTodo(selectedItem);
     const primaryAction = selectedItem && computeItemPrimaryAction(selectedItem);
     const primaryActionStr = primaryAction && computeItemActionString(primaryAction);
 
@@ -138,9 +135,6 @@ export default function KeyboardPromptDisplay() {
             />
         </Stack>
 
-    const collapsedContent = <>
-    </>
-    
     const expandButton = <ActionIcon
         className="keyboard-prompt-display__button"
         variant="subtle"
@@ -172,19 +166,19 @@ export default function KeyboardPromptDisplay() {
     </Paper>
 };
 
-const CustomKeyboardPromptItem = (
-    {leftSection, desc, shouldDisplay = true}: CustomKeyboardPromptItemOptions
-) => {
-    if (!shouldDisplay)
-        return "";
+// const CustomKeyboardPromptItem = (
+//     {leftSection, desc, shouldDisplay = true}: CustomKeyboardPromptItemOptions
+// ) => {
+//     if (!shouldDisplay)
+//         return "";
 
-    return <Group
-        justify="space-between"
-    >
-        <Box className="keyboard-prompt-display__prompt">{leftSection}</Box>
-        <Text className="keyboard-prompt-display__desc">{desc}</Text>
-    </Group>
-}
+//     return <Group
+//         justify="space-between"
+//     >
+//         <Box className="keyboard-prompt-display__prompt">{leftSection}</Box>
+//         <Text className="keyboard-prompt-display__desc">{desc}</Text>
+//     </Group>
+// }
 
 const KeyboardPromptItem = (
     {prompt, desc, shouldDisplay = true}: KeyboardPromptItemOptions
