@@ -38,7 +38,7 @@ export default function Terms() {
                     <Anchor href="https://www.typescriptlang.org/" target='_blank' rel='noopener noreferrer'>TypeScript</Anchor>
                 </li>
                 <li>
-                    <Anchor href="https://pocketbase.io/" target='_blank' rel='noopener noreferrer'>Pocketbase</Anchor>
+                    <Anchor href="https://pocketbase.io/" target='_blank' rel='noopener noreferrer'>PocketBase</Anchor>
                 </li>
                 <li>
                     <Anchor href="https://pockethost.io/" target='_blank' rel='noopener noreferrer'>PocketHost</Anchor>
