@@ -90,5 +90,19 @@ export default function Help() {
             <Title order={4}>Hex colour code</Title>
             <Text>As a special subtype of note, a hex colour code, when detected, will have itself displayed as the icon. The logic validates the last seven characters; hence as a lifehack, prepend a hex colour code to your text note to mark it with a coloured icon.</Text>
         </Box>
+
+        <Box className="cardlike__man-section"
+            component="section"
+        >
+            <Title order={3}>Primary action</Title>
+            <Text>The item's primary action is executed by simply clicking on it. It varies depending on its type and settings:</Text>
+            <ul>
+                <li>Note — edit.</li>
+                <li>Link — open in a new tab.</li>
+                <li>Todo — toggle completed status.</li>
+            </ul>
+            <Text>You can also toggle the primary action of notes between edit and copy, and likewise for links between open and copy, from the context menu.</Text>
+        </Box>
+
     </Paper>
 }
