@@ -128,7 +128,7 @@ export default function KeyboardPromptDisplay() {
             shouldDisplay={!isMainInputFocused}
         /> */}
         <KeyboardPromptItem
-            prompt={["mod", "K or P"]}
+            prompt={[["mod", "K"], ["mod", "P"]]}
             desc="Spotlight"
         />
         <KeyboardPromptItem
