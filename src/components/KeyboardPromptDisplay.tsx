@@ -7,6 +7,7 @@ import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import {IconSquareChevronDown, IconSquareChevronUp } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
 import useItemActions from "@/hooks/useItemActions";
+import KbdAlt from "./misc/KbdAlt";
 
 type Hotkey = string[];
 type KeyboardPrompt = Hotkey | Hotkey[];
@@ -229,7 +230,12 @@ const CombinationBtn = ({btnLabelList}: {btnLabelList: Hotkey}) => {
 }
 
 const SingleBtn = ({btnLabel}: {btnLabel: string}) => {
-    return btnLabel==="mod"
-        ? <KbdMod/>
-        : <Kbd>{btnLabel}</Kbd>
+    switch (btnLabel) {
+    case ("mod"):
+        return <KbdMod/>;
+    case ("alt"):
+        return <KbdAlt/>;
+    default:
+        return <Kbd>{btnLabel}</Kbd>;
+    }
 };
