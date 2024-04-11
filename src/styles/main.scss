@@ -145,7 +145,7 @@ input[type="password"] {
     position: fixed;
     right: 1rem;
     bottom: 1rem;
-    max-width: 280px;
+    max-width: 320px;
 
     &__button,
     &__button:hover {
@@ -153,16 +153,16 @@ input[type="password"] {
     }
 
     &__prompt {
-        max-width: 120px;
+        max-width: 150px;
     }
 
     &__desc {
         text-align: right;
-        max-width: 120px;
+        max-width: 150px;
         font-size: 0.8rem;
     }
 
-    @media screen and (max-width: 1280px) {
+    @media screen and (max-width: 1279px) {
         display: none;
     }
 }
