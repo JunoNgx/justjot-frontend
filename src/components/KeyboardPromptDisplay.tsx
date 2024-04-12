@@ -79,7 +79,7 @@ export default function KeyboardPromptDisplay() {
                 shouldDisplay={hasSelectedWithKeyboard}
             />
             <KeyboardPromptItem
-                prompt={["alt", "BkSp"]}
+                prompt={["Shift", "BkSp"]}
                 desc="Delete item"
                 shouldDisplay={hasSelectedWithKeyboard}
             />
