@@ -2,7 +2,7 @@ import KbdAlt from "@/components/misc/KbdAlt";
 import KbdMod from "@/components/misc/KbdMod";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { APP_NAME } from "@/utils/constants";
-import { Box, Kbd, Paper, Text, Title } from "@mantine/core";
+import { Anchor, Box, Kbd, Paper, Text, Title } from "@mantine/core";
 import { useContext, useEffect } from "react";
 
 export default function Help() {
@@ -141,6 +141,46 @@ export default function Help() {
             <Title order={3}>Spotlight</Title>
             <Text>Accessed by pressing <KbdMod/> <Kbd>K</Kbd> or <KbdMod/> <Kbd>P</Kbd> anywhere within the app, or from the Main Input extended menu.</Text>
             <Text>It serves as the global navigation menu. Use it to search for actions and collections quickly.</Text>
+        </Box>
+
+        <Box className="cardlike__man-section"
+            component="section"
+        >
+            <Title order={3}>Acknowledgement</Title>
+            <Text>
+                JustJot was made possible thanks to the plethora of wonderful works from the open-source communities:
+            </Text>
+            <ul className="cardlike__acknowledgement-ul">
+                <li>
+                    <Anchor href="https://react.dev/" target='_blank' rel='noopener noreferrer'>React</Anchor>
+                </li>
+                <li>
+                    <Anchor href="https://www.typescriptlang.org/" target='_blank' rel='noopener noreferrer'>TypeScript</Anchor>
+                </li>
+                <li>
+                    <Anchor href="https://pocketbase.io/" target='_blank' rel='noopener noreferrer'>PocketBase</Anchor>
+                </li>
+                <li>
+                    <Anchor href="https://pockethost.io/" target='_blank' rel='noopener noreferrer'>PocketHost</Anchor>
+                </li>
+                <li>
+                    <Anchor href="https://mantine.dev/" target='_blank' rel='noopener noreferrer'>Mantine UI Library</Anchor></li>
+                <li>
+                    <Anchor href="https://icflorescu.github.io/mantine-contextmenu/" target='_blank' rel='noopener noreferrer'>Mantine ContextMenu</Anchor>
+                </li>
+                <li>
+                    <Anchor href="https://sass-lang.com/" target='_blank' rel='noopener noreferrer'>SASS</Anchor>
+                </li>
+                <li>
+                    <Anchor href="https://github.com/KingSora/OverlayScrollbars" target='_blank' rel='noopener noreferrer'>OverlayScrollbars</Anchor>
+                </li>
+            </ul>
+            <Text mt="md">
+                Very special thanks to <Anchor href="https://caseykwokdinata.webflow.io/" target='_blank' rel='noopener noreferrer'>Casey Kwokdinata</Anchor> for the design knowledge and support throughout the course of development.
+            </Text>
+            <Text mt="md">
+                While not a direct contributor, the brilliant <Anchor href="https://bmrks.com/" target='_blank' rel='noopener noreferrer'>bmrks</Anchor> heavily inspired the creation of JustJot.
+            </Text>
         </Box>
 
     </Paper>
