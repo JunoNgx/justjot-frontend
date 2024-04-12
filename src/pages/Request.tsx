@@ -2,13 +2,15 @@ import { useForm } from '@mantine/form';
 import { Paper, TextInput, Button, Title, Group, Text, Box, Anchor } from "@mantine/core";
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useContext, useEffect, useState } from 'react';
-import { DbTable } from '@/types'
+import { DbTable, RequestPageType } from '@/types'
 import { NavLink } from 'react-router-dom';
 import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
 import { ClientResponseError } from 'pocketbase';
 import { APP_NAME } from '@/utils/constants';
 
-export default function Reset() {
+export default function Request(
+    { pageType }: { pageType: RequestPageType }
+) {
 
     const { pbClient } = useContext(BackendClientContext);
     const form = useForm({
@@ -99,4 +101,64 @@ export default function Reset() {
             : resetRequestForm
         }
     </Paper>
+}
+
+const computePageName = (pageType: RequestPageType) => {
+    switch (pageType) {
+        case (RequestPageType.EMAIL_VERIFY):
+            return `Verify email — ${APP_NAME}`;
+        case (RequestPageType.PASSWORD_CHANGE):
+        default:
+            return `Reset password — ${APP_NAME}`;
+    }
+}
+
+const computePageTitle = (pageType: RequestPageType) => {
+    switch (pageType) {
+        case (RequestPageType.EMAIL_VERIFY):
+            return `Verify email — ${APP_NAME}`;
+        case (RequestPageType.PASSWORD_CHANGE):
+        default:
+            return `Reset password — ${APP_NAME}`;
+    }
+}
+
+const computeCardInitialNotice = (pageType: RequestPageType) => {
+    switch (pageType) {
+        case (RequestPageType.EMAIL_VERIFY):
+            return "In the unfortunate event that you did not receive the email verification link, please re-request again."
+        case (RequestPageType.PASSWORD_CHANGE):
+        default:
+            return "You are here for either inconvenient forgetfulness, or deliberate security enhancement."
+    }
+}
+
+const computeInputDesc = (pageType: RequestPageType) => {
+    switch (pageType) {
+        case (RequestPageType.EMAIL_VERIFY):
+            return "Of the account that needs verification."
+        case (RequestPageType.PASSWORD_CHANGE):
+        default:
+            return "Of the account that needs a password change."
+    }
+}
+
+const computeButtonLabel = (pageType: RequestPageType) => {
+    switch (pageType) {
+        case (RequestPageType.EMAIL_VERIFY):
+            return "Requset email verification"
+        case (RequestPageType.PASSWORD_CHANGE):
+        default:
+            return "Request password change"
+    }
+}
+
+const computeSuccessNoticeFirstLine = (pageType: RequestPageType) => {
+    switch (pageType) {
+        case (RequestPageType.EMAIL_VERIFY):
+            return "Email verification request has been made successfully."
+        case (RequestPageType.PASSWORD_CHANGE):
+        default:
+            return "Password change request has been made successfully."
+    }
 }
