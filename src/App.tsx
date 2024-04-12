@@ -25,14 +25,14 @@ import Help from "@/pages/Help";
 import MainView from "@/pages/MainView";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
-import Reset from "@/pages/Reset";
+import Request from "@/pages/Request";
 import Profile from "@/pages/Profile";
 
 import "@/styles/main.scss";
 import InfoModal from "@/components/modals/InfoModal";
 import ItemCreateModal from "./components/modals/ItemCreateModal";
 import SpotlightSearch from "./components/SpotlightSearch";
-import { ComputedThemeMode } from "./types";
+import { ComputedThemeMode, RequestPageType } from "./types";
 import { useHotkeys } from "@mantine/hooks";
 import { openSpotlight } from "@mantine/spotlight";
 import Terms from "./pages/Terms";
@@ -104,7 +104,12 @@ function App() {
                                                 <Route path="/login" element={<Login />} />
                                                 <Route path="/demo-login" element={<Login isDemoMode={true} />} />
                                                 <Route path="/register" element={<Register />} />
-                                                <Route path="/reset" element={<Reset />} />
+                                                <Route path="/reset" element={
+                                                    <Request pageType={RequestPageType.PASSWORD_CHANGE} />
+                                                } />
+                                                <Route path="/verify" element={
+                                                    <Request pageType={RequestPageType.EMAIL_VERIFY} />
+                                                } />
                                                 <Route path="/terms" element={<Terms />} />
                                             </Routes>
                                             <SpotlightSearch />
