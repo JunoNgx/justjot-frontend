@@ -29,7 +29,7 @@ export default function Help() {
             <Title order={4}>Everywhere</Title>
             <ul>
                 <li><Text><KbdMod/> <Kbd>K</Kbd> or <KbdMod/> <Kbd>P</Kbd> to open Spotlight.</Text></li>
-                <li> <Text><Kbd>Shift</Kbd> <Kbd>/</Kbd> to toggle display of contextual keyboard prompts.</Text></li>
+                <li> <Text><KbdMod/> <Kbd>/</Kbd> to toggle display of contextual keyboard prompts.</Text></li>
             </ul>
 
             <Title order={4}>Main Input is out of focus</Title>

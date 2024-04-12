@@ -38,7 +38,7 @@ export default function KeyboardPromptDisplay() {
     });
 
     useHotkeys([
-        ["Shift+Slash", () => setIsExpanded(curr => !curr), { preventDefault: true }],
+        ["mod+Slash", () => setIsExpanded(curr => !curr), { preventDefault: true }],
     ], []);
 
     const hasSelectedItem = selectedIndex > -1;
@@ -131,7 +131,7 @@ export default function KeyboardPromptDisplay() {
                 desc="Spotlight"
             />
             <KeyboardPromptItem
-                prompt={[["Shift", "/"]]}
+                prompt={[["mod", "/"]]}
                 desc="Toggle keyboard prompts display"
             />
         </Stack>
