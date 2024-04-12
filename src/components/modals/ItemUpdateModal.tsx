@@ -203,9 +203,15 @@ export default function ItemUpdateModal(
             onFocus={() => setIsFocusedOnTitleInput(true)}
             onBlur={() => setIsFocusedOnTitleInput(false)}
         />
-        <Group justify="flex-end">
+        <Flex
+            direction="row-reverse"
+            justify="space-between"
+        >
             <Text>{titleVal.length}/{MAX_TITLE_LENGTH}</Text>
-        </Group>
+            {(isTodoItem && isFocusedOnTitleInput) &&
+                <Text><KbdMod/> <Kbd>S</Kbd> Save and close</Text>
+            }
+        </Flex>
 
         {!isTodoItem && <>
             <Textarea className="item-update-modal__input item-update-modal__input--content"
