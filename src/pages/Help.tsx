@@ -65,7 +65,7 @@ export default function Help() {
             component="section"
         >
             <Title order={3}>Collection</Title>
-            <Text>Collate notes, bookmarks, and todos for different categories under your collections. Access them from the dropdown menu, numeric keys <Kbd>1</Kbd>...<Kbd>0</Kbd>, or <Kbd>←</Kbd> <Kbd>→</Kbd>. You always must have at least one collection in your account.</Text>
+            <Text>Collate notes, bookmarks, and todos for different categories under your collections. Access them from the dropdown menu, numeric keys <Kbd>1</Kbd>...<Kbd>0</Kbd>, or <Kbd>←</Kbd> <Kbd>→</Kbd>. You must have at least one collection in your account.</Text>
         </Box>
 
         <Box className="cardlike__man-section"
