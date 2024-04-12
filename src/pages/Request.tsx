@@ -34,15 +34,17 @@ export default function Request(
         setIsSuccessful(false);
         setErrRes(null);
 
-        await pbClient.collection(DbTable.USERS)
-            .requestPasswordReset(formData.email)
-            .then(() => {
-                setIsSuccessful(true);
-            })
-            .catch((err: ClientResponseError) => {
-                setIsSuccessful(false);
-                setErrRes(err);
-            });
+        try {
+            const userCollection = pbClient.collection(DbTable.USERS);
+            const isSuccessful = pageType === RequestPageType.EMAIL_VERIFY
+                ? await userCollection.requestVerification(formData.email)
+                : await userCollection.requestPasswordReset(formData.email);
+
+            setIsSuccessful(isSuccessful);
+        } catch (err) {
+            setIsSuccessful(false);
+            setErrRes(err as ClientResponseError);
+        }
 
         setIsLoading(false);
     }
