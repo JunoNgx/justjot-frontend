@@ -118,7 +118,7 @@ const computePageTitle = (pageType: RequestPageType) => {
 const computeCardInitialNotice = (pageType: RequestPageType) => {
     switch (pageType) {
         case (RequestPageType.EMAIL_VERIFY):
-            return "In the unfortunate event that you did not receive the email verification link, please re-request again."
+            return "In the unfortunate event that you did not receive the email verification link, please re-request."
         case (RequestPageType.PASSWORD_CHANGE):
         default:
             return "You are here for either inconvenient forgetfulness, or deliberate security enhancement."
