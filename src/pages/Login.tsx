@@ -128,5 +128,8 @@ export default function Login(
         <Text mt="lg">
             Forgot your password? <Anchor component={NavLink} to="/reset">Request reset</Anchor>
         </Text>
+        <Text mt="xs">
+            Not yet verified? <Anchor component={NavLink} to="/verify">Request verification</Anchor>
+        </Text>
     </Paper>
 }
