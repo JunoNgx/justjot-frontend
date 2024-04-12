@@ -187,6 +187,7 @@ export default function ItemUpdateModal(
 
     return <Stack className="item-update-modal">
         <TextInput className="item-update-modal__input item-update-modal__input--title"
+            data-autofocus={isTodoItem}
             label={isTodoItem
                 ? "Todo task name"
                 : "Title"
@@ -215,7 +216,7 @@ export default function ItemUpdateModal(
 
         {!isTodoItem && <>
             <Textarea className="item-update-modal__input item-update-modal__input--content"
-                data-autofocus
+                data-autofocus={!isTodoItem}
                 label="Content"
                 description={`Optional, must be or fewer than ${MAX_CONTENT_LENGTH} characters.`}
                 placeholder="Enter your note content here"
