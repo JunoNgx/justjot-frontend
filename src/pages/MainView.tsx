@@ -12,9 +12,10 @@ import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import MainContentList from "@/components/MainContentList";
 import KeyboardPromptDisplay from "@/components/KeyboardPromptDisplay";
+import DemoUserNotice from "@/components/misc/DemoUserNotice";
 
 export default function MainView() {
-    const { isLoggedIn } = useContext(BackendClientContext);
+    const { isLoggedIn, isDemoUser } = useContext(BackendClientContext);
     const { collections, currCollection } = useContext(CollectionsContext);
     const { fetchItems, filteredItems } = useContext(ItemsContext);
     const { focusOnMainInput } = useItemNavActions();
@@ -89,6 +90,7 @@ export default function MainView() {
         {/* For non-item components */}
         <CollectionMenu isInMainView={true} />
         <KeyboardPromptDisplay />
+        {isDemoUser && <DemoUserNotice />}
 
         <Stack className="main-view"
             gap="xl"
