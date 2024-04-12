@@ -20,7 +20,7 @@ export default function Request(
     });
 
     useEffect(() => {
-        document.title = `Reset password — ${APP_NAME}`;
+        document.title = computePageTitle(pageType);
     }, []);
 
     const [hasAttempted, setHasAttempted] = useState(false);
@@ -48,19 +48,19 @@ export default function Request(
     }
 
     const successNotice = <Box mt="lg" p="none">
-        <Text>Password change request has been made successfully.</Text>
+        <Text>{computeSuccessNoticeFirstLine(pageType)}</Text>
         <Text mt="md">Please check your email inbox for the verification link.</Text>
         <Text mt="lg">Proceed to <Anchor component={NavLink} to="login">Login</Anchor>.</Text>
     </Box>
 
     const resetRequestForm = <>
-            <Text mt="lg">You are here for either inconvenient forgetfulness, or deliberate security enhancement.</Text>
+            <Text mt="lg">{computeCardInitialNotice(pageType)}</Text>
 
             <form onSubmit={form.onSubmit(handleSubmission)}>
             <TextInput mt="md"
                 autoFocus
                 label="Email address"
-                description="Of the account that needs a password change."
+                description={computeInputDesc(pageType)}
                 required
                 placeholder="isaac@darkcrusader.org"
                 type="email"
@@ -93,7 +93,7 @@ export default function Request(
         <Title className="cardlike__title"
             order={2}
         >
-            Request password reset
+            {computeCardTitle(pageType)}
         </Title>
 
         {(hasAttempted && isSuccessful)
@@ -101,16 +101,6 @@ export default function Request(
             : resetRequestForm
         }
     </Paper>
-}
-
-const computePageName = (pageType: RequestPageType) => {
-    switch (pageType) {
-        case (RequestPageType.EMAIL_VERIFY):
-            return `Verify email — ${APP_NAME}`;
-        case (RequestPageType.PASSWORD_CHANGE):
-        default:
-            return `Reset password — ${APP_NAME}`;
-    }
 }
 
 const computePageTitle = (pageType: RequestPageType) => {
@@ -136,17 +126,17 @@ const computeCardInitialNotice = (pageType: RequestPageType) => {
 const computeInputDesc = (pageType: RequestPageType) => {
     switch (pageType) {
         case (RequestPageType.EMAIL_VERIFY):
-            return "Of the account that needs verification."
+            return "The one that needs verification."
         case (RequestPageType.PASSWORD_CHANGE):
         default:
             return "Of the account that needs a password change."
     }
 }
 
-const computeButtonLabel = (pageType: RequestPageType) => {
+const computeCardTitle = (pageType: RequestPageType) => {
     switch (pageType) {
         case (RequestPageType.EMAIL_VERIFY):
-            return "Requset email verification"
+            return "Request email verification"
         case (RequestPageType.PASSWORD_CHANGE):
         default:
             return "Request password change"
