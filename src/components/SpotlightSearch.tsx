@@ -40,6 +40,13 @@ export default function SpotlightSearch() {
         group: "Miscellaneous",
         actions: [
             {
+                id: "help",
+                label: "Help / User Manual",
+                description: "/help-man",
+                leftSection: <IconHelp {...spotlightIconProps} />,
+                onClick: navigateToHelp,
+            },
+            {
                 id: "theme-mode-system",
                 label: "Theme mode: System",
                 description: ".theme-system",
@@ -59,13 +66,6 @@ export default function SpotlightSearch() {
                 description: ".theme-dark",
                 leftSection: <IconMoon {...spotlightIconProps} />,
                 onClick: () => {setThemeMode(ThemeMode.DARK)}
-            },
-            {
-                id: "help",
-                label: "Help / User Manual",
-                description: "/help-man",
-                leftSection: <IconHelp {...spotlightIconProps} />,
-                onClick: navigateToHelp,
             },
             {
                 id: "terms",
