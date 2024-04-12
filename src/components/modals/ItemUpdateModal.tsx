@@ -183,13 +183,13 @@ export default function ItemUpdateModal(
         });
     };
 
-    const isTodoItem = item.type !== ItemType.TODO;
+    const isTodoItem = item.type === ItemType.TODO;
 
     return <Stack className="item-update-modal">
         <TextInput className="item-update-modal__input item-update-modal__input--title"
             label={isTodoItem
-                ? "Title"
-                : "Todo task name"
+                ? "Todo task name"
+                : "Title"
             }
             description={`Optional, must be or fewer than ${MAX_TITLE_LENGTH} characters.`}
             placeholder=""
@@ -207,7 +207,7 @@ export default function ItemUpdateModal(
             <Text>{titleVal.length}/{MAX_TITLE_LENGTH}</Text>
         </Group>
 
-        {isTodoItem && <>
+        {!isTodoItem && <>
             <Textarea className="item-update-modal__input item-update-modal__input--content"
                 data-autofocus
                 label="Content"
