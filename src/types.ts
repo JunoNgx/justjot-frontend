@@ -48,6 +48,11 @@ export enum ItemAction {
     CONVERT_TO_TODO = "convertToTodo",
 };
 
+export enum RequestPageType {
+    PASSWORD_CHANGE = "passwordChange",
+    EMAIL_VERIFY = "emailVerify"
+};
+
 export type User = (RecordModel | {
     id: string,
     email: string,
