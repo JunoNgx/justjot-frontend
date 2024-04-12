@@ -6,12 +6,9 @@ import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { DbTable, User } from '@/types';
 import { ClientResponseError } from 'pocketbase';
 import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
-import { APP_NAME } from '@/utils/constants';
+import { APP_NAME, TEST_ACC_PASSWORD, TEST_ACC_USERNAME } from '@/utils/constants';
 
 type LoginFormData = {email: string, password: string};
-
-const TEST_EMAIL = "JayDoeTest";
-const TEST_PASSWORD = "password123";
 
 export default function Login(
     {isDemoMode}: {isDemoMode?: boolean}
@@ -19,8 +16,8 @@ export default function Login(
     const { pbClient, setUser, isLoggedIn } = useContext(BackendClientContext);
     const form = useForm({
         initialValues: {
-            email: isDemoMode ? TEST_EMAIL : "",
-            password: isDemoMode ? TEST_PASSWORD : ""
+            email: isDemoMode ? TEST_ACC_USERNAME : "",
+            password: isDemoMode ? TEST_ACC_PASSWORD : ""
         }
     });
 
@@ -72,7 +69,7 @@ export default function Login(
 
     const demoNotice = <>
         <Text>Try using the test account</Text>
-        <Text><code>{TEST_EMAIL}</code> / <code>{TEST_PASSWORD}</code></Text>
+        <Text><code>{TEST_ACC_USERNAME}</code> / <code>{TEST_ACC_PASSWORD}</code></Text>
     </>
 
     return <Paper className="cardlike cardlike--login">
