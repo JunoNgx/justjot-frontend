@@ -4,7 +4,7 @@ import useCollectionNavActions from '@/hooks/useCollectionNavActions';
 import useIconProps from '@/hooks/useIconProps';
 import { ThemeMode } from '@/types';
 import { Spotlight, SpotlightActionData, SpotlightActionGroupData } from '@mantine/spotlight';
-import { IconEdit, IconExclamationCircle, IconHelp, IconHome2, IconLogin2, IconLogout, IconMoon, IconPassword, IconSettingsCog, IconSortAscendingShapes, IconStack2, IconStackPush, IconSun, IconTestPipe, IconTrash, IconUserCog, IconUserPlus } from '@tabler/icons-react';
+import { IconEdit, IconExclamationCircle, IconHelp, IconHome2, IconLogin2, IconLogout, IconMailCheck, IconMoon, IconPassword, IconSettingsCog, IconSortAscendingShapes, IconStack2, IconStackPush, IconSun, IconTestPipe, IconTrash, IconUserCog, IconUserPlus } from '@tabler/icons-react';
 import { useContext } from 'react';
 import useCollectionDeletion from '@/hooks/useCollectionDeletion';
 import useCollectionActions from '@/hooks/useCollectionActions';
@@ -33,6 +33,7 @@ export default function SpotlightSearch() {
         navigateToHome,
         navigateToLogin,
         navigateToRegister,
+        navigateToVerify,
         navigateToDemoLogin,
     } = useNavigateRoutes();
 
@@ -138,6 +139,13 @@ export default function SpotlightSearch() {
                 description: "/demo-login",
                 leftSection: <IconTestPipe {...spotlightIconProps} />,
                 onClick: navigateToDemoLogin,
+            },
+            {
+                id: "verify",
+                label: "Request email verification",
+                description: "/verify-email",
+                leftSection: <IconMailCheck {...spotlightIconProps} />,
+                onClick: navigateToVerify,
             },
         ]
     }; 
