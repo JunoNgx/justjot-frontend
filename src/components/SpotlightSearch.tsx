@@ -88,7 +88,7 @@ export default function SpotlightSearch() {
         {
             id: "route-reset",
             label: "Change password",
-            description: "/reset",
+            description: "/reset-password",
             leftSection: <IconPassword {...spotlightIconProps} />,
             onClick: navigateToReset,
         },
@@ -124,6 +124,13 @@ export default function SpotlightSearch() {
                 description: "/register",
                 leftSection: <IconUserPlus {...spotlightIconProps} />,
                 onClick: navigateToRegister,
+            },
+            {
+                id: "route-reset",
+                label: "Reset password",
+                description: "/reset-password",
+                leftSection: <IconPassword {...spotlightIconProps} />,
+                onClick: navigateToReset,
             },
             {
                 id: "demo-login",
