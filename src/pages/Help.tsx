@@ -80,9 +80,9 @@ export default function Help() {
             component="section"
         >
             <Title order={3}>Prefix syntaxes</Title>
-            <Text>These always start and end with the colon character (two vertical dots):</Text>
+            <Text>These always start and end with the colon character:</Text>
             <ul>
-                <li><code>:t:</code> or <code>:l:</code> — create a text note with title.</li>
+                <li><code>:t:</code> or <code>:l:</code> — create a text note with title ("t" for title; "l" for long).</li>
                 <li><code>:td:</code> — create a todo item.</li>
             </ul>
             As examples:
