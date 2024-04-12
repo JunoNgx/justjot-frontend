@@ -1,4 +1,5 @@
 import { User } from '@/types';
+import { TEST_ACC_USERNAME } from '@/utils/constants';
 import PocketBase, { AuthModel } from 'pocketbase';
 import { ReactNode, SetStateAction, createContext, useCallback, useState } from 'react';
 
@@ -8,6 +9,7 @@ type BackendClientContextType = {
     setUser: React.Dispatch<SetStateAction<User>>,
     isLoggedIn: boolean,
     logout: () => void,
+    isDemoUser: boolean,
 };
 
 export const BackendClientContext = createContext<BackendClientContextType>(
@@ -23,12 +25,15 @@ export default function BackendClientContextProvider({ children }: { children: R
         setUser(null);
     }, []);
 
+    const isDemoUser = user?.username === TEST_ACC_USERNAME;
+
     return <BackendClientContext.Provider value={{
         pbClient,
         user,
         setUser,
         isLoggedIn: pbClient.authStore.isValid,
         logout,
+        isDemoUser,
     }}>
         {children}
     </BackendClientContext.Provider>
