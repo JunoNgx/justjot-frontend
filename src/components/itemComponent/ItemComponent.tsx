@@ -89,6 +89,7 @@ export default function ItemComponent(
         p="xs"
         data-index={index}
         {...anchorProps}
+        role={isLink ? "link" : "button"}
         {...clickEventsProps}
         onMouseEnter={() => { setSelectedIndex(index)}}
         onMouseLeave={() => { setSelectedIndex(-1)}}
