@@ -12,6 +12,7 @@ export default function Terms() {
                 These are not exactly "terms and conditions" per se (I needed your attention nevertheless); more like things you should be aware of and acknowledge before signing up.
             </Text>
             <ul className="cardlike__terms-ul">
+                <li className="cardlike__terms-li">The functionality of this application involves displaying favicon assets from third-party sites, and as a result, third-party cookies. This can be changed in the account settings and is opt-out.</li>
                 <li className="cardlike__terms-li">As of time of writing, JustJot is not a commercial company, but the output of hobbyist project from a momentarily over-enthusiatic software developer.</li>
                 <li className="cardlike__terms-li">JustJot does not collect data more than absolutely necessary to function (such as your email and username, though you are free to anonymise them), serve advertisements, or is monetised in anyway. If you wonder why you do not see any GDPR notice, it is because absolutely nothing is done with your data and no permission is needed.</li>
                 <li className="cardlike__terms-li">For the purpose of maintaining the app, I will occasionally have to look at your data in the database (not unlike a hotel manager looking inside your room to inspect it using a master key), but it will not happen more than necessary.</li>
