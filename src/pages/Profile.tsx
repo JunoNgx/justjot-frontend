@@ -3,6 +3,7 @@ import ProfileChangeDisplayName from "@/components/profile/ProfileChangeDisplayN
 import ProfileChangeEmail from "@/components/profile/ProfileChangeEmail";
 import ProfileChangePassword from "@/components/profile/ProfileChangePassword";
 import ProfileFaviconCookies from "@/components/profile/ProfileFaviconCookies";
+import ProfileTestAccountNotice from "@/components/profile/ProfileTestAccountNotice";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { APP_NAME } from "@/utils/constants";
@@ -12,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
 
-    const { isLoggedIn } = useContext(BackendClientContext);
+    const { isLoggedIn, isDemoUser } = useContext(BackendClientContext);
     const { setCurrCollection } = useContext(CollectionsContext);
 
     const navigate = useNavigate();
@@ -32,9 +33,13 @@ export default function Profile() {
             <>
                 <ProfileFaviconCookies />
                 <ProfileChangeDisplayName/>
-                <ProfileChangeEmail/>
-                <ProfileChangePassword/>
-                <ProfileAccountDeletion/>
+                {isDemoUser
+                ? <ProfileTestAccountNotice />
+                : <>
+                    <ProfileChangeEmail/>
+                    <ProfileChangePassword/>
+                    <ProfileAccountDeletion/>
+                </>}
             </>
         }
     </Box>
