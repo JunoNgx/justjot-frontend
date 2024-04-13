@@ -28,7 +28,7 @@ export default function ItemComponentIcon(
         case ItemType.LINK:
             return item.faviconUrl
                 ? <Image h={24} src={item.faviconUrl}
-                    alt={`Favicon for ${item.content}`}
+                    alt={"Favicon of this link item"}
                 />
                 : <IconWorld {...itemIcontProps} />
         case ItemType.TEXT:
