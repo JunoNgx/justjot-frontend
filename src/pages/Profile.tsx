@@ -2,6 +2,7 @@ import ProfileAccountDeletion from "@/components/profile/ProfileAccountDeletion"
 import ProfileChangeDisplayName from "@/components/profile/ProfileChangeDisplayName";
 import ProfileChangeEmail from "@/components/profile/ProfileChangeEmail";
 import ProfileChangePassword from "@/components/profile/ProfileChangePassword";
+import ProfileFaviconCookies from "@/components/profile/ProfileFaviconCookies";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { APP_NAME } from "@/utils/constants";
@@ -29,6 +30,7 @@ export default function Profile() {
     return <Box pb="xl">
         {isLoggedIn &&
             <>
+                <ProfileFaviconCookies />
                 <ProfileChangeDisplayName/>
                 <ProfileChangeEmail/>
                 <ProfileChangePassword/>
