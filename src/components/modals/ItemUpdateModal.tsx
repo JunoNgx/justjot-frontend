@@ -187,7 +187,8 @@ export default function ItemUpdateModal(
 
     return <Stack className="item-update-modal">
         <TextInput className="item-update-modal__input item-update-modal__input--title"
-            data-autofocus={isTodoItem}
+            // Potential bug? `data-autofocus={false}` doesn't disable it, only `null` and `undefined` do
+            data-autofocus={!isTodoItem && null}
             label={isTodoItem
                 ? "Todo task name"
                 : "Title"
