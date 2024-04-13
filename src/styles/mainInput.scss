@@ -15,9 +15,5 @@
         display: grid;
         place-items: center;
     }
-
-    &__menu-dropdown {
-        @include m.glass-blur;
-    }
 }
 

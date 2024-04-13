@@ -35,10 +35,6 @@ header {
         white-space: nowrap;
     }
 
-    &__profile-dropdown {
-        @include m.glass-blur;
-    }
-
     &__theme-mode-btn {
         color: var(--mantine-color-text);
 
@@ -96,10 +92,6 @@ header {
             padding-bottom: 5rem;
         }
     }
-}
-
-.dropdown-menu {
-    @include m.glass-blur;
 }
 
 .info-modal-body {

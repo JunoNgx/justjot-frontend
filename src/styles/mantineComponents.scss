@@ -15,6 +15,10 @@
     background-color: var(--mantine-color-body);
 }
 
+.mantine-Menu-dropdown {
+    @include m.glass-blur;
+}
+
 .mantine-Modal-content,
 .mantine-Spotlight-content {
     border-style: solid;
