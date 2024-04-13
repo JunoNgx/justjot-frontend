@@ -23,6 +23,8 @@ export default function HeaderThemeModeGroup() {
             }
             variant={"subtle"}
             radius="xl"
+            title="Theme mode: System"
+            aria-label="Switch theme mode to follow system setting"
             onClick={() => {setThemeMode(ThemeMode.AUTO)}}
         >
             <IconSettingsCog {...themeModeIconProps} />
@@ -33,6 +35,8 @@ export default function HeaderThemeModeGroup() {
             }
             variant={"subtle"}
             radius="xl"
+            title="Theme mode: Light"
+            aria-label="Switch theme mode to light mode"
             onClick={() => {setThemeMode(ThemeMode.LIGHT)}}
         >
             <IconSun {...themeModeIconProps} />
@@ -43,6 +47,8 @@ export default function HeaderThemeModeGroup() {
             }
             variant={"subtle"}
             radius="xl"
+            title="Theme mode: Dark"
+            aria-label="Switch theme mode to dark mode"
             onClick={() => {setThemeMode(ThemeMode.DARK)}}
         >
             <IconMoon {...themeModeIconProps} />
