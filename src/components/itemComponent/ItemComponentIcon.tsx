@@ -3,12 +3,15 @@ import { Item, ItemType } from "@/types";
 import { IconCheckbox, IconFileText, IconHourglassLow, IconSquare, IconWorld } from "@tabler/icons-react";
 import { isValidHexColourCode } from "@/utils/itemUtils";
 import useIconProps from "@/hooks/useIconProps";
+import { useContext } from "react";
+import { ThemeModeContext } from "@/contexts/ThemeModeContext";
 
 export default function ItemComponentIcon(
     { item }: { item: Item }
 ) {
-    const { itemIcontProps } = useIconProps();
 
+    const { isFaviconEnabled } = useContext(ThemeModeContext);
+    const { itemIcontProps } = useIconProps();
     const lastSevenChars = item.content.substring(item.content.length - 7);
 
     if (item.isPending)
@@ -26,9 +29,10 @@ export default function ItemComponentIcon(
                 ? <IconCheckbox {...itemIcontProps} />
                 : <IconSquare {...itemIcontProps} />
         case ItemType.LINK:
-            return item.faviconUrl
+            return item.faviconUrl && isFaviconEnabled
                 ? <Image h={24} src={item.faviconUrl}
                     alt={"Favicon of this link item"}
+                    referrerPolicy="no-referrer"
                 />
                 : <IconWorld {...itemIcontProps} />
         case ItemType.TEXT:
