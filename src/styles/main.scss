@@ -35,6 +35,10 @@ header {
         white-space: nowrap;
     }
 
+    &__profile-dropdown {
+        @include m.glass-blur;
+    }
+
     &__theme-mode-btn {
         color: var(--mantine-color-text);
 

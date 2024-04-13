@@ -30,7 +30,7 @@ export default function HeaderUser() {
             </UnstyledButton>
         </Menu.Target>
 
-        <Menu.Dropdown className="dropdown-menu">
+        <Menu.Dropdown className="header__profile-dropdown">
             <Menu.Item
                 leftSection={<IconHelp {...menuIconProps} />}
                 onClick={navigateToHelp}
