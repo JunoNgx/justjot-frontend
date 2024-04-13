@@ -29,7 +29,6 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
     const collectionMenu = <Menu
         position="bottom-start"
         offset={isMobile ? 5 : 15}
-        width={300}
     >
         <Menu.Target>
             <UnstyledButton className={"collection-menu-btn "
@@ -46,7 +45,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
             </UnstyledButton>
         </Menu.Target>
 
-        <Menu.Dropdown className="dropdown-menu">
+        <Menu.Dropdown className="collection-menu-dropdown">
             {collections?.map((collection: ItemCollection, index: number) =>
                 <MenuItem
                     key={collection.id}
