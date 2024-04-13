@@ -59,7 +59,7 @@ export const justJotCssVarsResolver: CSSVariablesResolver = (theme) => ({
         "--mantine-color-body": theme.other.colWhite,
         "--app-shell-border-color": theme.other.colBlack,
         "--mantine-color-text": theme.other.colBlack,
-        "--mantine-color-dimmed": "#777",
+        "--mantine-color-dimmed": "#444",
         "--mantine-color-anchor": "#444",
         "--mantine-color-default-color": theme.other.colBlack,
         "--justjot-col-pri": theme.other.colBlack,
