@@ -3,6 +3,10 @@
 .collection-menu-btn {
     &__label {
         user-select: none;
+        max-width: 240px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     @include m.mobile {
