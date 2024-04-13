@@ -66,6 +66,8 @@ export default function MainInputExtendedMenu(
         <Menu.Target>
             <ActionIcon variant="transparent"
                 className="main-input__menu-btn"
+                title="Main input extended options"
+                aria-label="Extra functions and options for main input"
                 w={64}
             >
                 <IconChevronDown
