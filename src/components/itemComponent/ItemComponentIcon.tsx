@@ -1,39 +1,34 @@
 import { Image } from "@mantine/core";
-import { ItemType } from "@/types";
+import { Item, ItemType } from "@/types";
 import { IconCheckbox, IconFileText, IconHourglassLow, IconSquare, IconWorld } from "@tabler/icons-react";
 import { isValidHexColourCode } from "@/utils/itemUtils";
 import useIconProps from "@/hooks/useIconProps";
 
-type ItemComponentIconParams = {
-    type: ItemType,
-    faviconUrl: string,
-    isTodoDone: boolean,
-    isPending: boolean
-    hexColourCode: string
-}
-
 export default function ItemComponentIcon(
-    {type, faviconUrl, isTodoDone, isPending, hexColourCode}:
-    ItemComponentIconParams
+    { item }: { item: Item }
 ) {
     const { itemIcontProps } = useIconProps();
 
-    if (isPending)
+    const lastSevenChars = item.content.substring(item.content.length - 7);
+
+    if (item.isPending)
         return <IconHourglassLow {...itemIcontProps} />
 
-    if (isValidHexColourCode(hexColourCode) && type !== ItemType.TODO)
+    if (isValidHexColourCode(lastSevenChars) && item.type !== ItemType.TODO)
         return <div className="item__icon-colour"
-            style={{backgroundColor: hexColourCode}}
+            style={{backgroundColor: lastSevenChars}}
         />
 
-    switch (type) {
+    switch (item.type) {
         case ItemType.TODO:
-            return isTodoDone
+            return item.isTodoDone
                 ? <IconCheckbox {...itemIcontProps} />
                 : <IconSquare {...itemIcontProps} />
         case ItemType.LINK:
-            return faviconUrl
-                ? <Image h={24} src={faviconUrl}/>
+            return item.faviconUrl
+                ? <Image h={24} src={item.faviconUrl}
+                    alt={`Favicon for `}
+                />
                 : <IconWorld {...itemIcontProps} />
         case ItemType.TEXT:
         default:

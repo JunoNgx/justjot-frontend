@@ -101,13 +101,7 @@ export default function ItemComponent(
                     wrap="nowrap"
                 >
                     <Center className="item__icon-wrapper">
-                        <ItemComponentIcon
-                            type={item.type}
-                            faviconUrl={item.faviconUrl}
-                            isTodoDone={item.isTodoDone}
-                            isPending={item.isPending}
-                            hexColourCode={item.content.substring(item.content.length - 7)}
-                        />
+                        <ItemComponentIcon item={item} />
                     </Center>
                     {item.title && <Text className="item__primary-text"
                         title={item.title}
