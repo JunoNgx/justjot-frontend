@@ -41,7 +41,8 @@ export default function ProfileChangeEmail() {
     };
 
     return <Paper className="cardlike"
-        withBorder p="md"
+        withBorder
+        p="md"
     >
         <form onSubmit={form.onSubmit(handleSubmission)}>
             <Title className="cardlike__title"

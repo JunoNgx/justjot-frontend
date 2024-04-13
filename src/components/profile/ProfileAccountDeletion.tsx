@@ -2,7 +2,8 @@ import { Code, Paper, Text, Title } from "@mantine/core";
 
 export default function ProfileAccountDeletion() {
     return <Paper className="cardlike"
-        withBorder p="md"
+        withBorder
+        p="md"
     >
         <Title className="cardlike__title"
             order={2}

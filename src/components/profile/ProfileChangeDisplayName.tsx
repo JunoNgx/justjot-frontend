@@ -45,7 +45,8 @@ export default function ProfileChangeDisplayName() {
     };
 
     return <Paper className="cardlike"
-        withBorder p="md"
+        withBorder
+        p="md"
     >
         <form onSubmit={form.onSubmit(handleSubmission)}>
             <Title className="cardlike__title"

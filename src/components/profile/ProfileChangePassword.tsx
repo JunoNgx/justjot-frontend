@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 export default function ProfileChangePassword() {
     return <Paper className="cardlike"
-        withBorder p="md"
+        withBorder
+        p="md"
     >
         <Title className="cardlike__title"
             order={2}
