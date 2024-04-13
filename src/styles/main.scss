@@ -28,8 +28,8 @@ header {
         justify-content: center;
     }
 
-    &__user-corner {
-        max-width: 150px;
+    &__username {
+        max-width: 320px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -50,6 +50,12 @@ header {
 
     &__logo {
         color: var(--mantine-color-text);
+    }
+
+    @include m.mobile {
+        &__username {
+            max-width: 120px;
+        }
     }
 }
 

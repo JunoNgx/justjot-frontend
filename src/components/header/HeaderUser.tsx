@@ -24,7 +24,7 @@ export default function HeaderUser() {
         <Menu.Target>
             <UnstyledButton mr="xs">
                 <Group gap={6}>
-                    <Text>{username}</Text>
+                    <Text className="header__username">{username}</Text>
                     <IconChevronDown {...menuIconProps} />
                 </Group>
             </UnstyledButton>
