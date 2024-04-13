@@ -19,6 +19,7 @@ export default function HeaderLeftSide() {
             component={NavLink}
             to={user ? `/${user.username}` : "/"}
             size="xl"
+            aria-label="Link to home page"
         >
             <JustJotIcon className="header__logo"
                 {...logoIconProps}
