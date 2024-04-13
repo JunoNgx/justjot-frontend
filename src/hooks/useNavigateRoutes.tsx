@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function useNavigateRoutes() {
 
     const { user, logout } = useContext(BackendClientContext);
-    const { setCurrCollection } = useContext(CollectionsContext);
+    const { setCurrCollection, setCollections } = useContext(CollectionsContext);
 
     const navigate = useNavigate();
     const navigateToMainView = () => {
@@ -32,6 +32,7 @@ export default function useNavigateRoutes() {
     };
 
     const logoutAndNavigateToLogin = () => {
+        setCollections([]);
         setCurrCollection(undefined)
         logout();
         navigate("/login", { replace: true});
