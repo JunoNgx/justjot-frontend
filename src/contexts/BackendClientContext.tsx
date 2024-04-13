@@ -1,4 +1,4 @@
-import { User } from '@/types';
+import { DbTable, User } from '@/types';
 import { TEST_ACC_USERNAME } from '@/utils/constants';
 import PocketBase, { AuthModel } from 'pocketbase';
 import { ReactNode, SetStateAction, createContext, useCallback, useState } from 'react';
@@ -10,6 +10,7 @@ type BackendClientContextType = {
     isLoggedIn: boolean,
     logout: () => void,
     isDemoUser: boolean,
+    refreshAuth: () => void,
 };
 
 export const BackendClientContext = createContext<BackendClientContextType>(
@@ -26,6 +27,10 @@ export default function BackendClientContextProvider({ children }: { children: R
     }, []);
 
     const isDemoUser = user?.username === TEST_ACC_USERNAME;
+    const refreshAuth = async () => {
+        await pbClient.collection(DbTable.USERS).authRefresh();
+        setUser(pbClient.authStore.model as User);
+    };
 
     return <BackendClientContext.Provider value={{
         pbClient,
@@ -34,6 +39,7 @@ export default function BackendClientContextProvider({ children }: { children: R
         isLoggedIn: pbClient.authStore.isValid,
         logout,
         isDemoUser,
+        refreshAuth,
     }}>
         {children}
     </BackendClientContext.Provider>
