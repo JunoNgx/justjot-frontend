@@ -124,6 +124,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             mainInputRef={ref}
         />}
         type="text"
+        aria-label="Main input"
         // placeholder="Add new item or search"
         value={inputVal}
         onChange={(event) => {
