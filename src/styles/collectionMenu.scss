@@ -13,6 +13,8 @@
         display: none;
 
         @include m.mobile {
+            @include m.glass-blur;
+
             display: block;
             z-index: 2;
             position: fixed;
