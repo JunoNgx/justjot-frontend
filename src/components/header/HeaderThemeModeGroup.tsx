@@ -1,13 +1,13 @@
 import { useContext } from "react";
 
 import { ActionIcon, Group } from "@mantine/core";
-import { ThemeModeContext } from "@/contexts/ThemeModeContext";
+import { UserLocalSettingsContext } from "@/contexts/UserLocalSettingsContext";
 import { ThemeMode } from "@/types";
 import { IconMoon, IconSettingsCog, IconSun } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
 
 export default function HeaderThemeModeGroup() {
-    const { themeMode, setThemeMode } = useContext(ThemeModeContext);
+    const { themeMode, setThemeMode } = useContext(UserLocalSettingsContext);
     const { themeModeIconProps } = useIconProps();
 
     const isThemeModeLight = () => themeMode === ThemeMode.LIGHT;

@@ -1,5 +1,5 @@
 import { CollectionsContext } from '@/contexts/CollectionsContext';
-import { ThemeModeContext } from '@/contexts/ThemeModeContext';
+import { UserLocalSettingsContext } from '@/contexts/UserLocalSettingsContext';
 import useCollectionNavActions from '@/hooks/useCollectionNavActions';
 import useIconProps from '@/hooks/useIconProps';
 import { ThemeMode } from '@/types';
@@ -14,7 +14,7 @@ import { BackendClientContext } from '@/contexts/BackendClientContext';
 export default function SpotlightSearch() {
 
     const { isLoggedIn } = useContext(BackendClientContext);
-    const { setThemeMode } = useContext(ThemeModeContext);
+    const { setThemeMode } = useContext(UserLocalSettingsContext);
     const { collections } = useContext(CollectionsContext);
     const { spotlightIconProps } = useIconProps();
     const { trySwitchToCollectionById } = useCollectionNavActions();

@@ -14,7 +14,7 @@ import 'mantine-contextmenu/styles.layer.css';
 import '@/styles/layers.css';
 import 'overlayscrollbars/styles/overlayscrollbars.css';
 
-import ThemeModeContextProvider from "@/contexts/ThemeModeContext";
+import UserLocalSettingsContextProvider from "@/contexts/UserLocalSettingsContext";
 import BackendClientContextProvider from "@/contexts/BackendClientContext";
 import CollectionsContextProvider from "@/contexts/CollectionsContext";
 import ItemsContextProvider from "@/contexts/ItemsContext";
@@ -56,7 +56,7 @@ function App() {
             header={{ height: 45 }}
             padding="none"
         >
-            <ThemeModeContextProvider>
+            <UserLocalSettingsContextProvider>
 
                 <BackendClientContextProvider>
                     <CollectionsContextProvider>
@@ -123,7 +123,7 @@ function App() {
                     </CollectionsContextProvider>
                 </BackendClientContextProvider>
 
-            </ThemeModeContextProvider>
+            </UserLocalSettingsContextProvider>
 
         </AppShell>
     )

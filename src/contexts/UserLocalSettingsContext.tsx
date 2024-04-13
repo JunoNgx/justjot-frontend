@@ -4,16 +4,16 @@ import { ThemeMode } from "@/types";
 import { useMantineColorScheme } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 
-type ThemeModeContextType = {
+type UserLocalSettingsContextType = {
     themeMode: ThemeMode,
     setThemeMode: React.Dispatch<React.SetStateAction<ThemeMode>>,
     isFaviconEnabled: boolean,
     setIsFaviconEnabled: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-export const ThemeModeContext = createContext<ThemeModeContextType>({} as ThemeModeContextType);
+export const UserLocalSettingsContext = createContext<UserLocalSettingsContextType>({} as UserLocalSettingsContextType);
 
-export default function ThemeModeContextProvider({children}: {children: ReactNode}) {
+export default function UserLocalSettingsContextProvider({children}: {children: ReactNode}) {
     const [themeMode, setThemeMode] = useLocalStorage<ThemeMode>({
         key: "color-scheme",
         defaultValue: ThemeMode.AUTO,
@@ -32,12 +32,12 @@ export default function ThemeModeContextProvider({children}: {children: ReactNod
         setMantineColorScheme(themeMode);
     }, [themeMode]);
 
-    return <ThemeModeContext.Provider value={{
+    return <UserLocalSettingsContext.Provider value={{
         themeMode,
         setThemeMode,
         isFaviconEnabled,
         setIsFaviconEnabled,
     }}>
         {children}
-    </ThemeModeContext.Provider>
+    </UserLocalSettingsContext.Provider>
 }

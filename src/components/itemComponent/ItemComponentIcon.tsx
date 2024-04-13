@@ -4,13 +4,13 @@ import { IconCheckbox, IconFileText, IconHourglassLow, IconSquare, IconWorld } f
 import { isValidHexColourCode } from "@/utils/itemUtils";
 import useIconProps from "@/hooks/useIconProps";
 import { useContext } from "react";
-import { ThemeModeContext } from "@/contexts/ThemeModeContext";
+import { UserLocalSettingsContext } from "@/contexts/UserLocalSettingsContext";
 
 export default function ItemComponentIcon(
     { item }: { item: Item }
 ) {
 
-    const { isFaviconEnabled } = useContext(ThemeModeContext);
+    const { isFaviconEnabled } = useContext(UserLocalSettingsContext);
     const { itemIcontProps } = useIconProps();
     const lastSevenChars = item.content.substring(item.content.length - 7);
 

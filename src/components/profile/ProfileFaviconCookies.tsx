@@ -1,10 +1,10 @@
 import { Box, Checkbox, Paper, Text, Title } from "@mantine/core";
 import { useContext } from "react";
-import { ThemeModeContext } from "@/contexts/ThemeModeContext";
+import { UserLocalSettingsContext } from "@/contexts/UserLocalSettingsContext";
 
 export default function ProfileFaviconCookies() {
 
-    const { isFaviconEnabled, setIsFaviconEnabled } = useContext(ThemeModeContext);
+    const { isFaviconEnabled, setIsFaviconEnabled } = useContext(UserLocalSettingsContext);
 
     return <Paper className="cardlike"
         withBorder
