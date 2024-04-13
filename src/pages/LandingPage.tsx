@@ -17,7 +17,7 @@ export default function LandingPage() {
             return;
         }
 
-        document.title = `${APP_NAME} — A keyboard-first note taking app`;
+        document.title = `${APP_NAME} — A minimalist keyboard-first note-taking web application tailored for fast operations`;
     }, []);
 
     const navigate = useNavigate();
