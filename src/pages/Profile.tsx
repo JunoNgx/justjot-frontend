@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
 
-    const { isLoggedIn, isDemoUser, refreshAuth } = useContext(BackendClientContext);
+    const { isLoggedIn, isDemoUser } = useContext(BackendClientContext);
     const { setCurrCollection } = useContext(CollectionsContext);
 
     const navigate = useNavigate();
@@ -23,8 +23,6 @@ export default function Profile() {
             navigate(`/login`, { replace: true });
             return;
         }
-
-        refreshAuth();
 
         setCurrCollection(undefined);
         document.title = `Account — ${APP_NAME}`;

@@ -15,7 +15,7 @@ import KeyboardPromptDisplay from "@/components/KeyboardPromptDisplay";
 import DemoUserNotice from "@/components/misc/DemoUserNotice";
 
 export default function MainView() {
-    const { isLoggedIn, isDemoUser } = useContext(BackendClientContext);
+    const { isLoggedIn, isDemoUser, refreshAuth } = useContext(BackendClientContext);
     const { collections, currCollection } = useContext(CollectionsContext);
     const { fetchItems, filteredItems } = useContext(ItemsContext);
     const { focusOnMainInput } = useItemNavActions();
@@ -56,6 +56,8 @@ export default function MainView() {
             navigate(`/login`, { replace: true });
             return;
         }
+
+        refreshAuth();
 
         window.addEventListener("focus", tryRoutineUpdate);
         return () => {
