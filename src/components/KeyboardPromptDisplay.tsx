@@ -47,7 +47,9 @@ export default function KeyboardPromptDisplay() {
     const primaryActionStr = primaryAction && computeItemActionString(primaryAction);
 
     const expandedContent = 
-        <Stack className="keyboard-prompt-display__list">
+        <Stack className="keyboard-prompt-display__list"
+            aria-hidden={!isExpanded}
+        >
             <KeyboardPromptItem
                 prompt={["mod", "F"]}
                 desc="Main Input"
