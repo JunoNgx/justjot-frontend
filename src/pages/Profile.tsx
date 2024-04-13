@@ -26,7 +26,7 @@ export default function Profile() {
         document.title = `Account — ${APP_NAME}`;
     }, []);
 
-    return <Box>
+    return <Box pb="xl">
         {isLoggedIn &&
             <>
                 <ProfileChangeDisplayName/>
