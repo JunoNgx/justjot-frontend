@@ -81,6 +81,7 @@ export default function ItemComponent(
         href: item.content,
         rel: "noopener noreferrer",
         target: "_blank",
+        "aria-label": "Link to this item content",
     }
     : {};
 
