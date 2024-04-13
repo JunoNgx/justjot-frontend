@@ -2,7 +2,7 @@ import { ItemsContext } from "@/contexts/ItemsContext";
 import useIconProps from "@/hooks/useIconProps";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TODO_PREFIX } from "@/utils/constants";
-import { Box, Menu, MenuDivider } from "@mantine/core";
+import { ActionIcon, Menu, MenuDivider } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { spotlight } from "@mantine/spotlight";
 import { IconCheckbox, IconChevronDown, IconClipboardPlus, IconFocus, IconLayoutNavbar, IconX } from "@tabler/icons-react";
@@ -64,13 +64,14 @@ export default function MainInputExtendedMenu(
         offset={18}
     >
         <Menu.Target>
-            <Box className="main-input__menu-btn"
+            <ActionIcon variant="transparent"
+                className="main-input__menu-btn"
                 w={64}
             >
                 <IconChevronDown
                     {...menuIconProps}
                 />
-            </Box>
+            </ActionIcon>
         </Menu.Target>
 
         <Menu.Dropdown className="dropdown-menu">
