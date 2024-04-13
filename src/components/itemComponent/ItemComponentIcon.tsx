@@ -3,7 +3,7 @@ import { Item, ItemType } from "@/types";
 import { IconCheckbox, IconFileText, IconHourglassLow, IconSquare, IconWorld } from "@tabler/icons-react";
 import { isValidHexColourCode } from "@/utils/itemUtils";
 import useIconProps from "@/hooks/useIconProps";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserLocalSettingsContext } from "@/contexts/UserLocalSettingsContext";
 
 export default function ItemComponentIcon(
@@ -30,13 +30,25 @@ export default function ItemComponentIcon(
                 : <IconSquare {...itemIcontProps} />
         case ItemType.LINK:
             return item.faviconUrl && isFaviconEnabled
-                ? <Image h={24} src={item.faviconUrl}
-                    alt={"Favicon of this link item"}
-                    referrerPolicy="no-referrer"
-                />
+                ? <FaviconImg faviconUrl={item.faviconUrl}/>
                 : <IconWorld {...itemIcontProps} />
         case ItemType.TEXT:
         default:
             return <IconFileText {...itemIcontProps} />
     }
+};
+
+const FaviconImg = ({ faviconUrl }: { faviconUrl: string }) => {
+
+    const { itemIcontProps } = useIconProps();
+    const [ shouldShow, setShouldShow] = useState(true)
+    
+    return shouldShow
+        ? <Image h={24} src={faviconUrl}
+            alt={"Favicon of this link item"}
+            referrerPolicy="no-referrer"
+            // onLoad={() => setShouldShow(true)}
+            onError={() => setShouldShow(false)}
+        />
+        : <IconWorld {...itemIcontProps} />
 };
