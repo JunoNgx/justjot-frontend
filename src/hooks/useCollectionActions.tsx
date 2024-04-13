@@ -21,7 +21,7 @@ export default function useCollectionActions() {
 
     const openSortCollectionModal = () => {
          modals.open({
-            size: "35rem",
+            // size: "35rem",
             centered: true,
             title: "Sort Collections",
             children: <CollectionsSortModal/>

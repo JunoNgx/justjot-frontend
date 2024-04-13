@@ -1,11 +1,10 @@
-import { Center, Group, Paper, Text } from "@mantine/core";
+import { Center, Paper, Text } from "@mantine/core";
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { useListState } from "@mantine/hooks";
 import { useContext, useEffect, useRef } from "react";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, COLLECTION_SORT_ORDER_MAG } from "@/utils/constants";
 import { ItemCollection } from "@/types";
-import CollectionHotkey from "@/components/misc/CollectionHotkey";
 import { isValidIndex } from "@/utils/miscUtils";
 import useCollectionApiCalls from "@/hooks/useCollectionApiCalls";
 import { notifications } from "@mantine/notifications";
@@ -121,15 +120,12 @@ export default function CollectionsSortModal() {
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
                 >
-                    <Paper withBorder m="xs" p="xs">
-                        {/* <Center> */}
-                            <Group
-                                justify="space-between"
-                            >
-                                <Text>{collection.name} ({collection.sortOrder})</Text>
-                                <CollectionHotkey index={index}/>
-                            </Group>
-                        {/* </Center> */}
+                    <Paper withBorder
+                        m="xs"
+                        px="lg"
+                        py="xs"
+                    >
+                        <Text>{collection.name}</Text>
                     </Paper>
 
                 </div>
