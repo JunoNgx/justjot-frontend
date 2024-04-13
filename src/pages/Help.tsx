@@ -146,6 +146,15 @@ export default function Help() {
         <Box className="cardlike__man-section"
             component="section"
         >
+            <Title order={3}>Troubleshooting</Title>
+
+            <Title order={4}>Items are not loaded</Title>
+            <Text>The most frequent cause for this is expired authentication token. Try logging out and re-logging in.</Text>
+        </Box>
+
+        <Box className="cardlike__man-section"
+            component="section"
+        >
             <Title order={3}>Acknowledgement</Title>
             <Text>
                 JustJot was made possible thanks to the plethora of wonderful works from the open-source communities:
