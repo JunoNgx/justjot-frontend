@@ -29,6 +29,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
     const collectionMenu = <Menu
         position="bottom-start"
         offset={isMobile ? 5 : 15}
+        width={300}
     >
         <Menu.Target>
             <UnstyledButton className={"collection-menu-btn "
