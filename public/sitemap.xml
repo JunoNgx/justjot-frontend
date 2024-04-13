@@ -3,16 +3,16 @@
 <url>
 	<loc>https://justjot.app/</loc>
 	<lastmod>2024-04-13T09:15:08+01:00</lastmod>
-	<priority>0.8</priority>
+	<priority>1.0</priority>
 </url>
 <url>
 	<loc>https://justjot.app/help</loc>
 	<lastmod>2024-04-13T09:15:08+01:00</lastmod>
-	<priority>1.0</priority>
+	<priority>0.8</priority>
 </url>
 <url>
 	<loc>https://justjot.app/terms</loc>
 	<lastmod>2024-04-13T09:15:08+01:00</lastmod>
-	<priority>1.0</priority>
+	<priority>0.5</priority>
 </url>
 </urlset>
