@@ -76,7 +76,7 @@ export default function MainInputExtendedMenu(
             </ActionIcon>
         </Menu.Target>
 
-        <Menu.Dropdown className="dropdown-menu">
+        <Menu.Dropdown className="main-input__dropdown">
             <Menu.Item
                 leftSection={<IconLayoutNavbar {...menuIconProps} />}
                 onClick={() => {
