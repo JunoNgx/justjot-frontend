@@ -37,7 +37,7 @@ export default function LandingPage() {
 
         <Box component="section" className="landing-page__section">
             <Title order={1}>JustJot</Title>
-            <Text>A keyboard-first note-taking Progressive Web App, tailored for swift information-recording operations.</Text>
+            <Text>A minimalist keyboard-first note-taking Progressive Web App, tailored for fast operations.</Text>
         </Box>
 
         <Box component="section" className="landing-page__section">
