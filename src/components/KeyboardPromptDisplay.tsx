@@ -208,11 +208,11 @@ const SingleKeyboardPrompt = (
         {promptList.map((prompt, index) => {
             const isLastItem = index === promptList.length - 1;
 
-            return <>
-                <CombinationBtn btnLabelList={prompt} key={index} />
+            return <span key={index}>
+                <CombinationBtn btnLabelList={prompt} />
                 {/* Separator for each combination option */}
                 {!isLastItem && <span> / </span>}
-            </>
+            </span>
         })}
     </Box>
 };
@@ -220,11 +220,11 @@ const SingleKeyboardPrompt = (
 const CombinationBtn = ({btnLabelList}: {btnLabelList: Hotkey}) => {
     return <>
         {btnLabelList.map((btnLabel, index) =>
-            <>
-                <SingleBtn key={index} btnLabel={btnLabel}/>
+            <span key={index}>
+                <SingleBtn btnLabel={btnLabel}/>
                 {/* White space to separate each key */}
                 <span> </span>
-            </>
+            </span>
         )}
     </>
 }
