@@ -157,7 +157,7 @@ export default function KeyboardPromptDisplay() {
         <IconSquareChevronDown {...keyboardPromptIconProps} />
     </ActionIcon>
 
-    return <Paper className="keyboard-prompt-display dropdown-menu"
+    return <Paper className="keyboard-prompt-display"
         // withBorder
         p="xs"
     >
