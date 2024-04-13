@@ -16,6 +16,8 @@ type ItemComponentParams = {
     index: number,
 }
 
+const CHAR_DISPLAY_COUNT = 50;
+
 export default function ItemComponent(
     { item, index }: ItemComponentParams
 ) {
@@ -108,12 +110,12 @@ export default function ItemComponent(
                     {item.title && <Text className="item__primary-text"
                         title={item.title}
                     >
-                        {item.title}
+                        {item.title.substring(0, CHAR_DISPLAY_COUNT)}
                     </Text>}
                     {item.content && <Text className="item__secondary-text"
                         title={item.content}
                     >
-                        {item.content}
+                        {item.content.substring(0, CHAR_DISPLAY_COUNT)}
                     </Text>}
                 </Group>
                 <Group className="item__right-side"
