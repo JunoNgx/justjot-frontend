@@ -16,6 +16,7 @@ export default function ItemComponentIcon(
 
     if (isValidHexColourCode(lastSevenChars) && item.type !== ItemType.TODO)
         return <div className="item__icon-colour"
+            aria-label={`Icon with the hex colour code ${lastSevenChars}`}
             style={{backgroundColor: lastSevenChars}}
         />
 
@@ -27,7 +28,7 @@ export default function ItemComponentIcon(
         case ItemType.LINK:
             return item.faviconUrl
                 ? <Image h={24} src={item.faviconUrl}
-                    alt={`Favicon for `}
+                    alt={`Favicon for ${item.content}`}
                 />
                 : <IconWorld {...itemIcontProps} />
         case ItemType.TEXT:
