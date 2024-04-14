@@ -106,7 +106,7 @@ export default function useItemApiCalls() {
             .collection(DbTable.ITEMS)
             .update(itemId,
                 { title, content },
-                { requestKey: "item-update-both" }
+                { requestKey: "item-update-title-content" }
             )
             .then((record: Item) => {
                 successfulCallback?.(record);
