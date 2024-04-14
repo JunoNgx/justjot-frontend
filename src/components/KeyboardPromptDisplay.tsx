@@ -71,12 +71,12 @@ export default function KeyboardPromptDisplay() {
                 shouldDisplay={hasSelectedWithKeyboard}
             />
             <KeyboardPromptItem
-                prompt={["alt", "E"]}
+                prompt={["mod", "E"]}
                 desc="Edit item"
                 shouldDisplay={hasSelectedWithKeyboard}
             />
             <KeyboardPromptItem
-                prompt={["alt", "M"]}
+                prompt={["mod", "M"]}
                 desc="Move item"
                 shouldDisplay={hasSelectedWithKeyboard}
             />
