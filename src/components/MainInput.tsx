@@ -139,7 +139,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["mod+Shift+ArrowUp", scrollToTop, { preventDefault: true }],
             ["mod+Shift+ArrowDown", scrollToBottom, { preventDefault: true }],
             ["Enter", () => processMainInput(inputVal)],
-            ["Shift+Enter", clickOnSelectedItem, { preventDefault: true }],
+            ["mod+Enter", clickOnSelectedItem, { preventDefault: true }],
             ["Escape", blurMainInput],
             ["alt+C", hotkeyCopyContent, { preventDefault: true }],
             ["alt+E", hotkeyOpenUpdateItemModal, { preventDefault: true }],
