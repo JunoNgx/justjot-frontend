@@ -1,5 +1,6 @@
 import { DbTable, User } from '@/types';
-import { TEST_ACC_USERNAME } from '@/utils/constants';
+import { AUTO_CLOSE_ERROR_TOAST, TEST_ACC_USERNAME } from '@/utils/constants';
+import { notifications } from '@mantine/notifications';
 import PocketBase, { AuthModel } from 'pocketbase';
 import { ReactNode, SetStateAction, createContext, useCallback, useState } from 'react';
 
@@ -28,7 +29,17 @@ export default function BackendClientContextProvider({ children }: { children: R
 
     const isDemoUser = user?.username === TEST_ACC_USERNAME;
     const refreshAuth = async () => {
-        await pbClient.collection(DbTable.USERS).authRefresh();
+        await pbClient.collection(DbTable.USERS).authRefresh()
+            .catch((err) => {
+                if (err?.status === 401) {
+                    notifications.show({
+                        message: "Auth token expired; please re-login",
+                        color: "red",
+                        autoClose: AUTO_CLOSE_ERROR_TOAST,
+                        withCloseButton: true,
+                    });
+                }
+            });
         setUser(pbClient.authStore.model as User);
     };
 
