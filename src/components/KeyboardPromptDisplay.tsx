@@ -66,7 +66,7 @@ export default function KeyboardPromptDisplay() {
                 shouldDisplay={hasSelectedWithKeyboard}
             />
             <KeyboardPromptItem
-                prompt={["alt", "C"]}
+                prompt={["mod", "Shift", "C"]}
                 desc="Copy item content"
                 shouldDisplay={hasSelectedWithKeyboard}
             />

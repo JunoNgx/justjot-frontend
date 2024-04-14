@@ -141,7 +141,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["Enter", () => processMainInput(inputVal)],
             ["mod+Enter", clickOnSelectedItem, { preventDefault: true }],
             ["Escape", blurMainInput],
-            ["alt+C", hotkeyCopyContent, { preventDefault: true }],
+            ["mod+Shift+C", hotkeyCopyContent, { preventDefault: true }],
             ["mod+E", hotkeyOpenUpdateItemModal, { preventDefault: true }],
             ["mod+M", hotkeyOpenMoveItemModal, { preventDefault: true }],
             ["Shift+Backspace", hotkeyDeleteItem, { preventDefault: true }],
