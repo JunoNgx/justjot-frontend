@@ -155,6 +155,11 @@ export default function ItemUpdateModal(
     };
 
     const handleActiveSave = () => {
+        if (hasSaved) {
+            modals.closeAll();
+            return;
+        }
+
         setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
         setHasChanged(false);
         setHasSaved(true);
