@@ -59,7 +59,10 @@ export default function useItemApiCalls() {
     ) => {
         setLoadingState?.(true);
         await pbClient.collection(DbTable.ITEMS)
-            .update(itemId, { title })
+            .update(itemId,
+                { title },
+                { requestKey: "item-update-title" }
+            )
             .then((record: Item) => {
                 successfulCallback?.(record);
             })
@@ -76,7 +79,10 @@ export default function useItemApiCalls() {
     ) => {
         setLoadingState?.(true);
         await pbClient.collection(DbTable.ITEMS)
-            .update(itemId, { content })
+            .update(itemId,
+                { content },
+                { requestKey: "item-update-content" }
+            )
             .then((_record: Item) => {
                 successfulCallback?.();
             })
