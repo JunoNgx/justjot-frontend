@@ -59,7 +59,7 @@ export default function ItemComponent(
     ) => {
         const handleEventWithContextMenu = showContextMenu(
             itemContextMenuOptions,
-            { className: "dropdown-menu" }
+            { className: "item-context-menu" }
         )
         handleEventWithContextMenu(e as
             React.MouseEvent
