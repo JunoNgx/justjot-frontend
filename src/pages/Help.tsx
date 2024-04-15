@@ -180,9 +180,6 @@ export default function Help() {
                 <li>
                     <Anchor href="https://sass-lang.com/" target='_blank' rel='noopener noreferrer'>SASS</Anchor>
                 </li>
-                <li>
-                    <Anchor href="https://github.com/KingSora/OverlayScrollbars" target='_blank' rel='noopener noreferrer'>OverlayScrollbars</Anchor>
-                </li>
             </ul>
             <Text mt="md">
                 Very special thanks to <Anchor href="https://caseykwokdinata.webflow.io/" target='_blank' rel='noopener noreferrer'>Casey Kwokdinata</Anchor> for the design knowledge and support throughout the course of development.
