@@ -22,6 +22,10 @@ header {
     @include m.glass-blur;
 }
 
+ul li {
+    list-style-type: square;
+}
+
 .header {
     &__left-side {
         display: flex;
