@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { AppShell, useComputedColorScheme } from '@mantine/core';
+import { AppShell, ScrollArea } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from "@mantine/notifications";
 import "@mantine/core/styles.css";
@@ -8,11 +8,9 @@ import '@mantine/spotlight/styles.css';
 import '@mantine/core/styles.layer.css';
 
 import { ContextMenuProvider } from 'mantine-contextmenu';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import "mantine-contextmenu/styles.css";
 import 'mantine-contextmenu/styles.layer.css';
 import '@/styles/layers.css';
-import 'overlayscrollbars/styles/overlayscrollbars.css';
 
 import UserLocalSettingsContextProvider from "@/contexts/UserLocalSettingsContext";
 import BackendClientContextProvider from "@/contexts/BackendClientContext";
@@ -32,17 +30,13 @@ import "@/styles/main.scss";
 import InfoModal from "@/components/modals/InfoModal";
 import ItemCreateModal from "./components/modals/ItemCreateModal";
 import SpotlightSearch from "./components/SpotlightSearch";
-import { ComputedThemeMode, RequestPageType } from "./types";
+import { RequestPageType } from "./types";
 import { useHotkeys } from "@mantine/hooks";
 import { openSpotlight } from "@mantine/spotlight";
 import Terms from "./pages/Terms";
 
 function App() {
 
-    const computedColorScheme = useComputedColorScheme();
-    const scrollbarThemeClass = computedColorScheme === ComputedThemeMode.LIGHT
-        ? "os-theme-dark"
-        : "os-theme-light";
     useHotkeys(
         [
             ["mod+K", openSpotlight, { preventDefault: true }],
@@ -69,17 +63,11 @@ function App() {
                             >
                                 <ContextMenuProvider>
 
-                                    <OverlayScrollbarsComponent
-                                        className="overlayScrollbar"
-                                        options={{
-                                            scrollbars: {
-                                                theme: scrollbarThemeClass,
-                                                visibility: 'auto',
-                                                autoHide: 'scroll',
-                                                autoHideDelay: 1000,
-                                            },
-                                        }}
-                                        defer
+                                    <ScrollArea.Autosize
+                                        // type="always"
+                                        offsetScrollbars
+                                        h="100vh"
+                                        scrollbarSize={7}
                                     >
 
                                         <Notifications
@@ -115,7 +103,7 @@ function App() {
                                             <SpotlightSearch />
 
                                         </AppShell.Main>
-                                    </OverlayScrollbarsComponent>
+                                    </ScrollArea.Autosize>
 
                                 </ContextMenuProvider>
                             </ModalsProvider>
