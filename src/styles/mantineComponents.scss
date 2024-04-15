@@ -2,9 +2,6 @@
 
 .mantine-AppShell-main {
     padding-top: 60px; // see: Header
-    // Needed by `overlayscrollbars` to work
-    // TODO: figure out if removable
-    height: 100vh;
 }
 
 .mantine-AppShell-header {
@@ -13,6 +10,10 @@
 
 .mantine-Card-root {
     background-color: var(--mantine-color-body);
+}
+
+.mantine-ScrollArea-scrollbar {
+    z-index: 100; 
 }
 
 .mantine-Menu-dropdown {
