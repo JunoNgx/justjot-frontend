@@ -2,7 +2,7 @@ import KbdAlt from "@/components/misc/KbdAlt";
 import KbdMod from "@/components/misc/KbdMod";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { APP_NAME } from "@/utils/constants";
-import { Anchor, Box, Kbd, Paper, Text, Title } from "@mantine/core";
+import { Anchor, Box, Code, Kbd, Paper, Text, Title } from "@mantine/core";
 import { useContext, useEffect } from "react";
 
 export default function Help() {
@@ -82,13 +82,13 @@ export default function Help() {
             <Title order={3}>Prefix syntaxes</Title>
             <Text>These always start and end with the colon character:</Text>
             <ul>
-                <li><code>:t:</code> or <code>:l:</code> — create a text note with title ("t" for title; "l" for long).</li>
-                <li><code>:td:</code> — create a todo item.</li>
+                <li><Code>:t:</Code> or <Code>:l:</Code> — create a text note with title ("t" for title; "l" for long).</li>
+                <li><Code>:td:</Code> — create a todo item.</li>
             </ul>
             As examples:
             <ul>
-                <li>Entering `:t: Email draft 2` will open the item create dialog, whose title input is pre-filled as "Email draft 2", allowing you to conveniently continue working on the content.</li>
-                <li>Entering `:td: Buy groceries` will create a todo item with content "Buy groceries".</li>
+                <li>Entering <Code>:t: Email draft 2</Code> will open the item create dialog, whose title input is pre-filled as "Email draft 2", allowing you to conveniently continue working on the content.</li>
+                <li>Entering <Code>:td: Buy groceries</Code> will create a todo item with content "Buy groceries".</li>
             </ul>
             <Text>Leading and trailing whitespaces are always trimmed; the spaces between the prefix and your input do not matter.</Text>
         </Box>
@@ -105,7 +105,7 @@ export default function Help() {
             <Text>If your entered input is detected as a url, it will be stored as a link. Links also contain metadata (page title and favicon), and attempts are always made to retrieve them.</Text>
 
             <Title order={4}>Todo</Title>
-            <Text>A todo item can be marked as completed. A text item without title can be converted into a todo item (this is a semi-destructive operation, due the title length limit, and is not reversible). To quickly create a todo action from the Main Input, use the <code>:td:</code> prefix.</Text>
+            <Text>A todo item can be marked as completed. A text item without title can be converted into a todo item (this is a semi-destructive operation, due the title length limit, and is not reversible). To quickly create a todo action from the Main Input, use the <Code>:td:</Code> prefix.</Text>
 
             <Title order={4}>Hex colour code</Title>
             <Text>As a special subtype of note, a hex colour code, when detected, will be accompanied by a corresponding icon. The logic validates the last seven characters in the item's content. As a lifehack, append a hex colour code to your text note to notate it in your own way.</Text>
