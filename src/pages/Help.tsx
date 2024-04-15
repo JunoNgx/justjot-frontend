@@ -178,7 +178,7 @@ export default function Help() {
                     <Anchor href="https://icflorescu.github.io/mantine-contextmenu/" target='_blank' rel='noopener noreferrer'>Mantine ContextMenu</Anchor>
                 </li>
                 <li>
-                    <Anchor href="https://sass-lang.com/" target='_blank' rel='noopener noreferrer'>SASS</Anchor>
+                    <Anchor href="https://sass-lang.com/" target='_blank' rel='noopener noreferrer'>Sass</Anchor>
                 </li>
             </ul>
             <Text mt="md">
