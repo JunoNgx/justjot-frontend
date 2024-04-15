@@ -73,3 +73,10 @@
         border-color: var(--mantine-color-text);
     }
 }
+
+.mantine-Code-root {
+    [data-mantine-color-scheme="light"] &,
+    [data-mantine-color-scheme="dark"] & {
+        background-color: var(--mantine-color-code-bg);
+    }
+}
