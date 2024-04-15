@@ -1,5 +1,6 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
+import { ItemsContext } from "@/contexts/ItemsContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +8,7 @@ export default function useNavigateRoutes() {
 
     const { user, logout } = useContext(BackendClientContext);
     const { setCurrCollection, setCollections } = useContext(CollectionsContext);
+    const { setItems } = useContext(ItemsContext);
 
     const navigate = useNavigate();
     const navigateToMainView = () => {
@@ -34,6 +36,7 @@ export default function useNavigateRoutes() {
     const logoutAndNavigateToLogin = () => {
         setCollections([]);
         setCurrCollection(undefined)
+        setItems([]);
         logout();
         navigate("/login", { replace: true});
     };
