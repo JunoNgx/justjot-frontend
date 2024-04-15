@@ -16,6 +16,13 @@
     z-index: 100; 
 }
 
+.mantine-ScrollArea-viewport {
+    & > div {
+        // Overriding some mind-boggling stupidity in Mantine
+        display: block !important;
+    }
+}
+
 .mantine-Menu-dropdown {
     @include m.glass-blur;
 }
