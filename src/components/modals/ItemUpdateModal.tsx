@@ -1,7 +1,7 @@
 import { Flex, Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
 import { Item, ItemType } from "@/types";
 import { DateTime } from "luxon";
-import { getHotkeyHandler, useDebounceCallback } from "@mantine/hooks";
+import { getHotkeyHandler, useDebouncedCallback } from "@mantine/hooks";
 import { useContext, useEffect, useRef, useState } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useItemApiCalls from "@/hooks/useItemApiCalls";
@@ -101,7 +101,7 @@ export default function ItemUpdateModal(
     const { updateItemTitle, updateItemContent, updateItemTitleAndContent }
         = useItemApiCalls();
 
-    const debouncedAutosaveItemTitle = useDebounceCallback(() => {
+    const debouncedAutosaveItemTitle = useDebouncedCallback(() => {
         updateItemTitle({
             itemId: item?.id,
             title: titleVal,
@@ -111,7 +111,7 @@ export default function ItemUpdateModal(
         setHasSaved(true);
     }, DEBOUNCED_TIME);
 
-    const debouncedAutosaveItemContent = useDebounceCallback(() => {
+    const debouncedAutosaveItemContent = useDebouncedCallback(() => {
         updateItemContent({
             itemId: item?.id,
             content: contentVal,
