@@ -63,9 +63,9 @@ function App() {
                             >
                                 <ContextMenuProvider>
 
-                                    <ScrollArea.Autosize
+                                    <ScrollArea
                                         // type="always"
-                                        offsetScrollbars
+                                        // offsetScrollbars
                                         h="100vh"
                                         scrollbarSize={7}
                                     >
@@ -103,7 +103,7 @@ function App() {
                                             <SpotlightSearch />
 
                                         </AppShell.Main>
-                                    </ScrollArea.Autosize>
+                                    </ScrollArea>
 
                                 </ContextMenuProvider>
                             </ModalsProvider>
