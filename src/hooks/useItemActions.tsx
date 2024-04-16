@@ -1,7 +1,7 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useManageListState from "@/libs/useManageListState";
-import { CreateItemOptions, Item, ItemAction, ItemCollection, ItemType } from "@/types";
+import { CreateItemOptions, Item, ItemAction, ItemCollection, ItemType, UpdateItemTitleAndContentOptions } from "@/types";
 import { DateTime } from "luxon";
 import { useContext } from "react";
 import useItemApiCalls from "./useItemApiCalls";
@@ -24,6 +24,7 @@ export default function useItemActions() {
     const {
         createItem,
         deleteItem,
+        updateItemTitleAndContent,
         toggleItemShouldCopyOnClick,
         toggleItemIsTodoDone,
         refetchLinkTitleAndFavicon,
@@ -226,6 +227,29 @@ export default function useItemActions() {
         });
     };
 
+    const updateItemTitleAndContentWithOptimisticUpdate = (
+        { itemId, title, content,
+            successfulCallback, errorCallback, setLoadingState
+        }: UpdateItemTitleAndContentOptions
+    ) => {
+        const index = findIndexById(itemId, items);
+        if (index === -1) return;
+        const item = items[index];
+        itemsHandlers.replace(
+            index,
+            {...item, title, content}
+        );
+
+        updateItemTitleAndContent({
+            itemId,
+            title,
+            content,
+            successfulCallback,
+            errorCallback,
+            setLoadingState,
+        });
+    };
+
     const openCreateItemModal = (title: string) => {
         modals.openContextModal({
             modal: "itemCreateModal",
@@ -388,6 +412,7 @@ export default function useItemActions() {
         copyItemContent,
         openCreateItemModal,
         openUpdateItemModal,
+        updateItemTitleAndContentWithOptimisticUpdate,
         openMoveItemModal,
         refetchLink,
         toggleItemShouldCopyOnClickWithOptimisticUpdate,
