@@ -9,7 +9,7 @@ import useCollectionApiCalls from "@/hooks/useCollectionApiCalls";
 import { ItemCollection } from "@/types";
 import { ClientResponseError } from "pocketbase";
 import { notifications } from "@mantine/notifications";
-import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
+import { AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import useManageListState from "@/libs/useManageListState";
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 
@@ -97,12 +97,12 @@ export default function CollectionCreateUpdateModal(
     const handleSuccessfulCreation = (newCollection: ItemCollection) => {
         itemsHandlers.append(newCollection);
         setNewlyCreatedCollection(newCollection);
-        notifications.show({
-            message: "Collection created: " + newCollection.name,
-            color: "none",
-            autoClose: AUTO_CLOSE_DEFAULT,
-            withCloseButton: true,
-        });
+        // notifications.show({
+        //     message: "Collection created: " + newCollection.name,
+        //     color: "none",
+        //     autoClose: AUTO_CLOSE_DEFAULT,
+        //     withCloseButton: true,
+        // });
 
         modals.closeAll();
     };
@@ -130,12 +130,12 @@ export default function CollectionCreateUpdateModal(
          * to `collections[0]`
          */
         tryNavigateToCollection(newCollection);
-        notifications.show({
-            message: `Collection ${newCollection.name} has been updated successfully`,
-            color: "none",
-            autoClose: AUTO_CLOSE_DEFAULT,
-            withCloseButton: true,
-        });
+        // notifications.show({
+        //     message: `Collection ${newCollection.name} has been updated successfully`,
+        //     color: "none",
+        //     autoClose: AUTO_CLOSE_DEFAULT,
+        //     withCloseButton: true,
+        // });
 
         modals.closeAll();
     };
