@@ -1,7 +1,7 @@
 @use "./variables.scss" as v;
 
 @mixin glass-blur { 
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     // Attributes to overwrite specificity
     [data-mantine-color-scheme="light"] &,
     [data-mantine-color-scheme="dark"] & {
