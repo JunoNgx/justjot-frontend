@@ -27,7 +27,7 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
     const { menuIconProps } = useIconProps();
 
     const collectionMenu = <Menu
-        position="bottom-start"
+        position={isInMainView ? "top-end" : "bottom-start"}
         offset={isMobile ? 5 : 15}
     >
         <Menu.Target>
