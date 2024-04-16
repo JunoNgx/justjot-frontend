@@ -13,6 +13,7 @@ import { findIndexById } from "@/utils/itemUtils";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { modals } from "@mantine/modals";
 import KbdMod from "../misc/KbdMod";
+import useItemActions from "@/hooks/useItemActions";
 
 const DEBOUNCED_TIME = 5000;
 
@@ -31,10 +32,20 @@ export default function ItemUpdateModal(
     }, []);
 
     const handleOnCloseItemUpdateModal = async () => {
+        const index = findIndexById(item.id, items)
+        if (index === -1) return;
+        itemsHandlers.replace(
+            index,
+            {
+                ...item,
+                title: titleValRef.current,
+                content: contentValRef.current
+            }
+        );
 
         // Try post unsaved changes
         if (hasChangedRef.current && !hasSavedRef.current) {
-            await updateItemTitleAndContent({
+            updateItemTitleAndContentWithOptimisticUpdate({
                 itemId: item.id,
                 title: titleValRef.current,
                 content: contentValRef.current,
@@ -98,8 +109,9 @@ export default function ItemUpdateModal(
     }, [hasChanged]);
 
     const [ relativeUpdatedTimeStr, setRelativeUpdatedTimeStr] = useState("");
-    const { updateItemTitle, updateItemContent, updateItemTitleAndContent }
+    const { updateItemTitle, updateItemContent }
         = useItemApiCalls();
+    const { updateItemTitleAndContentWithOptimisticUpdate } = useItemActions();
 
     const debouncedAutosaveItemTitle = useDebouncedCallback(() => {
         updateItemTitle({
@@ -163,8 +175,9 @@ export default function ItemUpdateModal(
         setRelativeUpdatedTimeStr(DateTime.now().toLocaleString(DateTime.TIME_WITH_SECONDS));
         setHasChanged(false);
         setHasSaved(true);
+        modals.closeAll();
 
-        updateItemTitleAndContent({
+        updateItemTitleAndContentWithOptimisticUpdate({
             itemId: item?.id,
             title: titleValRef.current,
             content: contentValRef.current,
@@ -172,8 +185,6 @@ export default function ItemUpdateModal(
                 const index = findIndexById(record.id, items)
                 if (index === -1) return;
                 itemsHandlers.replace(index, record);
-
-                modals.closeAll();
             },
             errorCallback: (err: ClientQueryOptions) => {
                 console.error(err)
