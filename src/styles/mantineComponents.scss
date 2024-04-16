@@ -8,6 +8,13 @@
     border-bottom: none;
 }
 
+// Devices without hover, aka, touchscreens
+@media (hover: none) {
+    .mantine-Input-input {
+        font-size: var(--mantine-font-size-md);
+    }
+}
+
 .mantine-Card-root {
     background-color: var(--mantine-color-body);
 }
