@@ -1,5 +1,11 @@
 @use "./_mixins.scss" as m;
 
+.mantine-AppShell-root {
+    // Override unnecessary inline transition that causes visible movement upon
+    // scrolling is locked (e.g. modal or spotlight)
+    --app-shell-transition-duration: 0 !important;
+}
+
 .mantine-AppShell-main {
     padding-top: 60px; // see: Header
 }
