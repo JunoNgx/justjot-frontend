@@ -64,10 +64,13 @@ function App() {
                                 <ContextMenuProvider>
 
                                     <ScrollArea
-                                        // type="always"
+                                        // Mantine currently doesn't havea fade out transition; this looks very ugly
+                                        // Use this as a workaround
+                                        // TODO: submit PR to mantine
+                                        type="auto"
                                         // offsetScrollbars
                                         h="100vh"
-                                        scrollbarSize={7}
+                                        scrollbarSize={10}
                                     >
 
                                         <Notifications
