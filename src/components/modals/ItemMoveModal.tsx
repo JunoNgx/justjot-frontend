@@ -4,7 +4,7 @@ import { modals } from "@mantine/modals";
 import { Item, ItemCollection } from "@/types";
 
 import { notifications } from "@mantine/notifications";
-import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
+import { AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import CollectionHotkey from "@/components//misc/CollectionHotkey";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useItemApiCalls from "@/hooks/useItemApiCalls";
@@ -68,12 +68,12 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
         if (index === -1) return;
 
         itemsHandlers.remove(index);
-        notifications.show({
-            message: "Item moved successfully",
-            color: "none",
-            autoClose: AUTO_CLOSE_DEFAULT,
-            withCloseButton: true,
-        });
+        // notifications.show({
+        //     message: "Item moved successfully",
+        //     color: "none",
+        //     autoClose: AUTO_CLOSE_DEFAULT,
+        //     withCloseButton: true,
+        // });
 
         modals.closeAll();
     };
