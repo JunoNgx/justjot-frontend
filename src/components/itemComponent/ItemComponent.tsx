@@ -16,7 +16,7 @@ type ItemComponentParams = {
     index: number,
 }
 
-const CHAR_DISPLAY_COUNT = 50;
+const CHAR_DISPLAY_COUNT = 120;
 
 export default function ItemComponent(
     { item, index }: ItemComponentParams
