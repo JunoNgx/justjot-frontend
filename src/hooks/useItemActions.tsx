@@ -218,6 +218,7 @@ export default function useItemActions() {
         if (index === -1) return;
         itemsHandlers.replaceProps(index, { hasCopied: true });
 
+        clearTimeout(timeoutCopyRef.current);
         timeoutCopyRef.current = setTimeout(() => {
             itemsHandlers.replaceProps(index, { hasCopied: false });
         }, 2000);
