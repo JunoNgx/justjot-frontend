@@ -199,6 +199,7 @@ export default function useItemActions() {
         })
     };
 
+    const COPY_DISPLAY_DURATION = 1500;
     const timeoutCopyRef = useRef<number|undefined>(undefined);
     useEffect(() => {
         return () => {
@@ -221,7 +222,7 @@ export default function useItemActions() {
         clearTimeout(timeoutCopyRef.current);
         timeoutCopyRef.current = setTimeout(() => {
             itemsHandlers.replaceProps(index, { hasCopied: false });
-        }, 2000);
+        }, COPY_DISPLAY_DURATION);
 
         // notifications.show({
         //     message: "Copied item content",
