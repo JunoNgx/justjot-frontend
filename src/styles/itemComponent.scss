@@ -35,11 +35,11 @@
 
     &__left-side {
         overflow: hidden;
+        flex-grow: 2;
     }
 
     &__text-wrapper {
         position: relative;
-        max-width: 100%;
     }
 
     &__primary-text,
