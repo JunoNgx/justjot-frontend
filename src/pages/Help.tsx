@@ -22,6 +22,9 @@ export default function Help() {
             component="section"
             mb="xl"
         >
+            <Title order={3}>System requirement</Title>
+            <Text>This application should run on any computing device with a W3C-compliant web browser and a stable internet connection, including mobile devices. For the best experience, a keyboard-equipped desktop environment is recommended.</Text>
+
             <Title order={3}>Keyboard shortcuts</Title>
             <Title order={4}>Operating systems</Title>
             <Text>This application takes your operating system into account; <Kbd>Mod</Kbd> is appropriately assigned and displayed as either <Kbd>Ctrl</Kbd> or <Kbd>Cmd</Kbd>, depending on whether your are on Linux/Windows/Android or iOS/MacOS. Similarly for <Kbd>Alt</Kbd> and <Kbd>Opt</Kbd>. This is applicable to any contexual prompt display throughout the app, including this document.</Text>
