@@ -71,7 +71,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
     const hotkeyCopyContent = () => {
         if (!selectedItem) return;
-        copyItemContent(selectedItem);
+        copyItemContent({item: selectedItem});
     }
 
     const hotkeyOpenUpdateItemModal = () => {

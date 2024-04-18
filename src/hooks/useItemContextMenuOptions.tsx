@@ -7,7 +7,7 @@ import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } 
 
 type ItemContextMenuOptionsParams = {
     item: Item,
-    copyFn: (item: Item) => void,
+    copyFn: ({item}: {item: Item}) => void,
     editFn: (item: Item) => void,
     moveFn: ({item, collectionList}: {item: Item, collectionList: ItemCollection[]}) => void,
     deleteFn: ({item}: {item: Item}) => void,
@@ -41,7 +41,7 @@ export default function useItemContextMenuOptions(
         {
             key: "copy",
             icon: <IconCopy {...menuIconProps} />,
-            onClick: () => {copyFn(item)}
+            onClick: () => {copyFn({item})}
         }, {
             key: "edit",
             icon: <IconEdit {...menuIconProps} />,

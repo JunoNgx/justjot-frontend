@@ -199,7 +199,10 @@ export default function useItemActions() {
     };
 
     const clipboard = useClipboard({ timeout: 1000 });
-    const copyItemContent = async (item: Item) => {
+    const copyItemContent = async (
+        { item }:
+        { item: Item }
+    ) => {
         item.type === ItemType.TODO
             ? clipboard.copy(item.title)
             : clipboard.copy(item.content);
@@ -360,7 +363,7 @@ export default function useItemActions() {
     ) => {
         switch (action) {
             case (ItemAction.COPY):
-                copyItemContent(item);
+                copyItemContent({item});
                 break;
             
             case (ItemAction.OPEN_LINK):
