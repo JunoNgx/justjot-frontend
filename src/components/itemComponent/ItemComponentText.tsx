@@ -5,9 +5,9 @@ const CHAR_DISPLAY_COUNT = 150;
 
 export default function ItemComponentText({ item }: { item: Item }) {
 
-    const transitionProp = {
-        in: { opacity: 1, transform: 'scale(1)' },
-        out: { opacity: 0, transform: 'scale(0.9)' },
+    const transitionPropCopiedText = {
+        in: { opacity: 1, transform: 'translateY(0)' },
+        out: { opacity: 0, transform: 'translateY(-50%)' },
         common: { transformOrigin: 'center' },
         transitionProperty: 'opacity, transform',
     };
@@ -18,9 +18,9 @@ export default function ItemComponentText({ item }: { item: Item }) {
     >
         <Transition
             mounted={!item.hasCopied}
-            duration={300}
-            exitDuration={100}
-            transition={transitionProp}
+            duration={400}
+            exitDuration={50}
+            transition="slide-left"
         >
             {(transitionStyle) => (<>
                 {item.title && <Text className="item__primary-text"
@@ -41,8 +41,8 @@ export default function ItemComponentText({ item }: { item: Item }) {
         <Transition
             mounted={item.hasCopied}
             duration={300}
-            exitDuration={100}
-            transition={transitionProp}
+            exitDuration={150}
+            transition={transitionPropCopiedText}
         >
             {(transitionStyle) => (
                 <Text className="item__copied-text"
