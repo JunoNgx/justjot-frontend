@@ -216,10 +216,10 @@ export default function useItemActions() {
 
         const index = findIndexById(item.id, items)
         if (index === -1) return;
-        itemsHandlers.replaceProps(index, {hasCopied: true});
+        itemsHandlers.replaceProps(index, { hasCopied: true });
 
         timeoutCopyRef.current = setTimeout(() => {
-            itemsHandlers.replaceProps(index, {hasCopied: false});
+            itemsHandlers.replaceProps(index, { hasCopied: false });
         }, 2000);
 
         // notifications.show({
