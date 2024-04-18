@@ -43,6 +43,15 @@ export default function useManageListState<T>(
         });
     }
 
+    const replaceProps = (index: number, prop: object) => {
+        setState(curr => {
+            const tempArr = [...curr];
+            const item = tempArr[index];
+            tempArr[index] = {...item, ...prop};
+            return tempArr;
+        });
+    }
+
     return {
         prepend,
         append,
@@ -50,5 +59,6 @@ export default function useManageListState<T>(
         remove,
         insert,
         replace,
+        replaceProps,
     };
 };
