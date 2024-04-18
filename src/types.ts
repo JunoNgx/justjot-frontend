@@ -14,10 +14,11 @@ export type Item = RecordModel | {
     updated: string,
 
     /**
-     * Frontend client-only value to mark temporary Record until backend's
-     * response is received.
+     * Frontend display variables
      */
+    // Mark temporary Record until backend's response is received
     isPending?: boolean,
+    hasCopied: boolean,
 };
 
 export type ItemCollection = RecordModel | {
