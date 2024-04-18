@@ -2,11 +2,11 @@
 @use "./mixins.scss" as m;
 
 .item {
+    height: 47px;
+    padding: var(--mantine-spacing-xs);
     cursor: pointer;
     user-select: none;
     border: solid 1px transparent;
-    height: 47px;
-    padding: var(--mantine-spacing-xs);
 
     // override the anchor styles
     text-decoration: none;
@@ -14,16 +14,6 @@
 
     &--is-selected {
         border-color: var(--mantine-color-text);
-    }
-
-    &__left-side {
-        min-width: 0;
-        flex-grow: 3;
-        overflow: hidden;
-    }
-
-    &__right-side {
-        flex-shrink: 0;
     }
 
     &__icon-wrapper {
@@ -41,6 +31,12 @@
         height: 24px;
         width: 24px;
         border-radius: 50%;
+    }
+
+    &__left-side {
+        min-width: 0;
+        flex-grow: 3;
+        overflow: hidden;
     }
 
     &__text-wrapper {
@@ -67,6 +63,10 @@
     &__copied-text {
         position: absolute;
         text-wrap: nowrap;
+    }
+
+    &__right-side {
+        flex-shrink: 0;
     }
 
     &__datetime {
