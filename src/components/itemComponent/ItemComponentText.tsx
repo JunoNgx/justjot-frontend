@@ -1,7 +1,7 @@
 import { Item } from "@/types";
 import { Group, Text, Transition } from "@mantine/core";
 
-const CHAR_DISPLAY_COUNT = 120;
+const CHAR_DISPLAY_COUNT = 150;
 
 export default function ItemComponentText({ item }: { item: Item }) {
 
