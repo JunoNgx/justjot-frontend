@@ -195,6 +195,22 @@ export default function Help() {
             component="section"
             mb="xl"
         >
+            <Title order={3}>Features road map</Title>
+            <Text>The following features are under consideration for future developments, in descending order of priority:</Text>
+            <ul>
+                <li><Text>Development unit tests.</Text></li>
+                <li><Text>User data export to JSON format.</Text></li>
+                <li><Text>Self-serving user account deletion.</Text></li>
+                <li><Text>Offline operations.</Text></li>
+                <li><Text>Syntax highlighting and advance keybindings with Monaco Editor.</Text></li>
+            </ul>
+
+        </Box>
+
+        <Box className="cardlike__man-section"
+            component="section"
+            mb="xl"
+        >
             <Title order={3}>Acknowledgement</Title>
             <Text>
                 JustJot was made possible thanks to the plethora of wonderful works from the open-source communities:
