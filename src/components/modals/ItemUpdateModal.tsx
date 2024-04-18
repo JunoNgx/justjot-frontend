@@ -34,10 +34,9 @@ export default function ItemUpdateModal(
     const handleOnCloseItemUpdateModal = async () => {
         const index = findIndexById(item.id, items)
         if (index === -1) return;
-        itemsHandlers.replace(
+        itemsHandlers.replaceProps(
             index,
             {
-                ...item,
                 title: titleValRef.current,
                 content: contentValRef.current
             }
