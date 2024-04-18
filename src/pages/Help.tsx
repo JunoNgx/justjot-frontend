@@ -150,6 +150,11 @@ export default function Help() {
 
             <Title order={4}>Items are not loaded</Title>
             <Text>The most frequent cause for this is expired authentication token. Try logging out and re-logging in.</Text>
+
+            <Title order={4}>The option to create item from clipboard does not work.</Title>
+            <Text>The clipboard usually contains your highly personal data and can be occasionally sensitive (e.g. passwords). As such, browsers take measures to make sure that your data is not wrongfully accessed by bad actors.</Text>
+            <Text>Please check your browser's current settings to ensure that permission to access clipboard is provided.</Text>
+            <Text>As of time of writing, the <Code>navigator.clipboard.readText</Code> interface is not supported in Firefox, and I have decided to not further complicate the codebase with any workaround.</Text>
         </Box>
 
         <Box className="cardlike__man-section"
