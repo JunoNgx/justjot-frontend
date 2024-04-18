@@ -59,11 +59,11 @@ export default function Help() {
 
             <Title order={4}>Selected item actions</Title>
             <ul>
-                <li><Text><Kbd>Shift</Kbd> <Kbd>↵</Kbd> to perform the primary action.</Text></li>
-                <li><Text><KbdAlt/> <Kbd>C</Kbd> to copy item content.</Text></li>
-                <li><Text><KbdAlt/> <Kbd>E</Kbd> to edit.</Text></li>
-                <li><Text><KbdAlt/> <Kbd>M</Kbd> to move item to another collection.</Text></li>
-                <li><Text><Kbd>Shift</Kbd> <Kbd>BkSp</Kbd> to delete item.</Text></li>
+                <li><Text><KbdMod/> <Kbd>↵</Kbd> to perform the primary action.</Text></li>
+                <li><Text><KbdMod/> <Kbd>Shift</Kbd> <Kbd>C</Kbd> to copy item content.</Text></li>
+                <li><Text><KbdMod/> <Kbd>E</Kbd> to edit.</Text></li>
+                <li><Text><KbdMod/> <Kbd>M</Kbd> to move item to another collection.</Text></li>
+                <li><Text><KbdMod/> <Kbd>Shift</Kbd> <Kbd>BkSp</Kbd> to delete item.</Text></li>
                 <li><Text><KbdMod/> <KbdAlt/> <Kbd>4</Kbd> to toggle copying content as item's primary action.</Text></li>
                 <li><Text><KbdMod/> <KbdAlt/> <Kbd>5</Kbd> to refetch a link's metadata.</Text></li>
                 <li><Text><KbdMod/> <KbdAlt/> <Kbd>6</Kbd> to convert a title-less text note to a todo item.</Text></li>
