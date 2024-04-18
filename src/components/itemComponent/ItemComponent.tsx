@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Item, ItemType } from "@/types";
-import { Box, Center, Group, Text, Transition } from "@mantine/core";
+import { Box, Center, Group } from "@mantine/core";
 import { useContextMenu } from 'mantine-contextmenu';
 import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCreatedDate";
 import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
@@ -10,13 +10,12 @@ import useItemContextMenuOptions from "@/hooks/useItemContextMenuOptions";
 import { IconClipboardCopy } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
 import { ItemsContext } from "@/contexts/ItemsContext";
+import ItemComponentText from "./ItemComponentText";
 
 type ItemComponentParams = {
     item: Item,
     index: number,
 }
-
-const CHAR_DISPLAY_COUNT = 120;
 
 export default function ItemComponent(
     { item, index }: ItemComponentParams
@@ -120,49 +119,6 @@ export default function ItemComponent(
             </Group>
 
         </Box>
-};
-
-const ItemComponentText = ({ item }: { item: Item }) => {
-
-    return (<>
-        <Transition
-            keepMounted={true}
-            mounted={!item.hasCopied}
-            duration={200}
-            exitDuration={1}
-            transition="fade"
-        >
-            {(transitionStyle) => (<>
-                {item.title && <Text className="item__primary-text"
-                    title={item.title}
-                    style={transitionStyle}
-                >
-                    {item.title.substring(0, CHAR_DISPLAY_COUNT)}
-                </Text>}
-                {item.content && <Text className="item__secondary-text"
-                    title={item.content}
-                    style={transitionStyle}
-                >
-                    {item.content.substring(0, CHAR_DISPLAY_COUNT)}
-                </Text>}
-            </>)}
-        </Transition>
-
-        <Transition
-            mounted={item.hasCopied}
-            duration={300}
-            exitDuration={1}
-            transition="fade"
-        >
-            {(transitionStyle) => (
-                <Text className="item__copied-text"
-                    style={transitionStyle}
-                >
-                    Content copied
-                </Text>
-            )}
-        </Transition>
-    </>);
 };
 
 const computeClassname = (item: Item, isSelected: boolean) => {
