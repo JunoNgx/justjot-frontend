@@ -108,10 +108,15 @@ export default function ItemComponent(
                     </Center>
                     <ItemComponentText item={item} />
                 </Group>
+
                 <Group className="item__right-side"
                     gap="xs"
                 >
-                    {item.shouldCopyOnClick && <IconClipboardCopy {...itemIcontProps} />}
+                    {item.shouldCopyOnClick &&
+                        <IconClipboardCopy className="item__should-copy-icon"
+                            {...itemIcontProps}
+                        />
+                    }
                     <ItemComponentCreatedDate className="item__datetime"
                         createdDatetime={item.created}
                     />
