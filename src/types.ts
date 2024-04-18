@@ -13,11 +13,9 @@ export type Item = RecordModel | {
     created: string,
     updated: string,
 
-    /**
-     * Frontend display variables
-     */
-    // Mark temporary Record until backend's response is received
+    /** Mark as temporary Record until backend's response is received */ 
     isPending?: boolean,
+    /** Should display copied content text temporarily */
     hasCopied: boolean,
 };
 
