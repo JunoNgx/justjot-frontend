@@ -24,6 +24,12 @@ export default function Help() {
         >
             <Title order={3}>System requirement</Title>
             <Text>This application should run on any computing device with a W3C-compliant web browser and a stable internet connection, including mobile devices. For the best experience, a keyboard-equipped desktop environment is recommended.</Text>
+        </Box>
+
+        <Box className="cardlike__man-section"
+            component="section"
+            mb="xl"
+        >
 
             <Title order={3}>Keyboard shortcuts</Title>
             <Title order={4}>Operating systems</Title>
