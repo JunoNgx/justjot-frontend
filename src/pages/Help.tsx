@@ -169,6 +169,9 @@ export default function Help() {
             </ul>
             <Text>The current arrangement is what we believe the be the most inclusive and functional possible state. Custom and user-assigned hotkeys might be looked into in the future, though this will be a massive undertaking.</Text>
 
+            <Title order={4}>Why is the scrollbar acting so strange on mobile?</Title>
+            <Text>As per system requirement, it is recommended to use JustJot on a keyboard-equipped desktop. All design choices are optimised for this setup, which unfortunately means that compromises had to be made on other devices. That being said, the issues on mobile devices are known and a solution would be deployed as soon as possible when found.</Text>
+
         </Box>
 
         <Box className="cardlike__man-section"
