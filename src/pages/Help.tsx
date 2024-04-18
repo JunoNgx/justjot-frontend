@@ -204,7 +204,20 @@ export default function Help() {
                 <li><Text>Offline operations.</Text></li>
                 <li><Text>Syntax highlighting and advance keybindings with Monaco Editor.</Text></li>
             </ul>
+        </Box>
 
+        <Box className="cardlike__man-section"
+            component="section"
+            mb="xl"
+        >
+            <Title order={3}>Contributions</Title>
+            <Text>JustJot is fully open-source:</Text>
+            <ul>
+                <li><Anchor href="https://github.com/JunoNgx/justjot-frontend" target='_blank' rel='noopener noreferrer'>Frontend repository</Anchor></li>
+                <li><Anchor href="https://github.com/JunoNgx/justjot-backend" target='_blank' rel='noopener noreferrer'>Backend repository</Anchor></li>
+            </ul>
+            <Text>While we welcome contributions, JustJot is also extremely opinionated and personal, and as such, we are selective about what should be added and developed.</Text>
+            <Text>The best channel to start a conversation is via the GitHub issues, in either one of the two repositories (when in doubt, please post in the frontend repository).</Text>
         </Box>
 
         <Box className="cardlike__man-section"
