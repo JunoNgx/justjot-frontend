@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Item, ItemType } from "@/types";
-import { Box, Center, Group } from "@mantine/core";
+import { Center, Group } from "@mantine/core";
 import { useContextMenu } from 'mantine-contextmenu';
 import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCreatedDate";
 import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
@@ -86,8 +86,9 @@ export default function ItemComponent(
     }
     : {};
 
-    return <Box className={computeClassname(item, isSelected)}
-        p="xs"
+    return <Group className={computeClassname(item, isSelected)}
+        justify="space-between"
+        wrap="nowrap"
         data-index={index}
         {...anchorProps}
         role={isLink ? "link" : "button"}
@@ -95,35 +96,30 @@ export default function ItemComponent(
         onMouseEnter={() => { setSelectedIndex(index)}}
         onMouseLeave={() => { setSelectedIndex(-1)}}
     >
-            <Group className="item__flex-wrapper"
-                justify="space-between"
-                wrap="nowrap"
-            >
-                <Group className="item__left-side"
-                    justify="flex-start"
-                    wrap="nowrap"
-                >
-                    <Center className="item__icon-wrapper">
-                        <ItemComponentIcon item={item} />
-                    </Center>
-                    <ItemComponentText item={item} />
-                </Group>
+        <Group className="item__left-side"
+            justify="flex-start"
+            wrap="nowrap"
+        >
+            <Center className="item__icon-wrapper">
+                <ItemComponentIcon item={item} />
+            </Center>
+            <ItemComponentText item={item} />
+        </Group>
 
-                <Group className="item__right-side"
-                    gap="xs"
-                >
-                    {item.shouldCopyOnClick &&
-                        <IconClipboardCopy className="item__should-copy-icon"
-                            {...itemIcontProps}
-                        />
-                    }
-                    <ItemComponentCreatedDate className="item__datetime"
-                        createdDatetime={item.created}
-                    />
-                </Group>
-            </Group>
+        <Group className="item__right-side"
+            gap="xs"
+        >
+            {item.shouldCopyOnClick &&
+                <IconClipboardCopy className="item__should-copy-icon"
+                    {...itemIcontProps}
+                />
+            }
+            <ItemComponentCreatedDate className="item__datetime"
+                createdDatetime={item.created}
+            />
+        </Group>
 
-        </Box>
+    </Group>
 };
 
 const computeClassname = (item: Item, isSelected: boolean) => {
