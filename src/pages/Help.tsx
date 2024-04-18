@@ -161,8 +161,8 @@ export default function Help() {
             <Text>The following keyboard shortcuts are known conflicts that we have eliminated during the development:</Text>
             <ul>
                 <li><Text><Kbd>Cmd</Kbd> <Kbd>C</Kbd> [iOS] Copy highlighted text.</Text></li>
-                <li><Text><Kbd>Ctrl</Kbd> <Kbd>BkSp</Kbd> [Linux/Windows] Delete whole word.</Text></li>
                 <li><Text><Kbd>Cmd</Kbd> <Kbd>BkSp</Kbd> [iOS] Delete whole line.</Text></li>
+                <li><Text><Kbd>Ctrl</Kbd> <Kbd>BkSp</Kbd> [Linux/Windows] Delete whole word.</Text></li>
                 <li><Text><Kbd>Shift</Kbd> <Kbd>Any letter key</Kbd> [All] Capitalised letter.</Text></li>
                 <li><Text><Kbd>Opt</Kbd> <Kbd>Any letter key</Kbd> [iOS/MacOS] Insert special character.</Text></li>
                 <li><Text><Kbd>Opt</Kbd> <Kbd>BkSp</Kbd> [iOS] Delete whole word.</Text></li>
