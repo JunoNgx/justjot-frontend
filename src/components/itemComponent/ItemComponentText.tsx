@@ -1,15 +1,18 @@
 import { Item } from "@/types";
-import { Text, Transition } from "@mantine/core";
+import { Group, Text, Transition } from "@mantine/core";
 
 const CHAR_DISPLAY_COUNT = 120;
 
 export default function ItemComponentText({ item }: { item: Item }) {
 
-    return (<>
+    return (<Group className="item__text-wrapper"
+        wrap="nowrap"
+        gap="xs"
+    >
         <Transition
             mounted={!item.hasCopied}
-            duration={200}
-            exitDuration={1}
+            duration={300}
+            exitDuration={100}
             transition="fade"
         >
             {(transitionStyle) => (<>
@@ -31,7 +34,7 @@ export default function ItemComponentText({ item }: { item: Item }) {
         <Transition
             mounted={item.hasCopied}
             duration={300}
-            exitDuration={1}
+            exitDuration={100}
             transition="fade"
         >
             {(transitionStyle) => (
@@ -42,5 +45,5 @@ export default function ItemComponentText({ item }: { item: Item }) {
                 </Text>
             )}
         </Transition>
-    </>);
+    </Group>);
 };

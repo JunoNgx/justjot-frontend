@@ -9,6 +9,7 @@
     // override the anchor styles
     text-decoration: none;
     color: var(--mantine-color-text);
+    height: 47px;
 
     &--is-selected {
         border-color: var(--mantine-color-text);
@@ -40,6 +41,10 @@
         border-radius: 50%;
     }
 
+    &__text-wrapper {
+        position: relative;
+    }
+
     &__primary-text,
     &__secondary-text {
         white-space: nowrap;
@@ -54,6 +59,12 @@
         color: var(--mantine-color-dimmed);
         font-size: 0.8rem;
         flex-shrink: 4;
+    }
+
+    &__copied-text {
+        position: absolute;
+        // left: 2.5rem;
+        text-wrap: nowrap;
     }
 
     &__datetime {
