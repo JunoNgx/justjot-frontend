@@ -155,6 +155,20 @@ export default function Help() {
             <Text>The clipboard usually contains your highly personal data and can be occasionally sensitive (e.g. passwords). As such, browsers take measures to make sure that your data is not wrongfully accessed by bad actors.</Text>
             <Text>Please check your browser's current settings to ensure that permission to access clipboard is provided.</Text>
             <Text>As of time of writing, the <Code>navigator.clipboard.readText</Code> interface is not supported in Firefox, and I have decided to not further complicate the codebase with any workaround.</Text>
+
+            <Title order={4}>Why are your keyboard shortcut so strange and unintuitive?</Title>
+            <Text>Outside of tackling a relatively uncharted matter of keyboard-first design, JustJot is also burdened to accommodate the wide range of operating systems that can access the web, including, but not limited to: distributions of Linux, Windows, Android, MacOS, and iOS. While certain keys appear available on your current setup, they might not be on other users' systems. The keyboard shortcuts for item actions are also designed strictly to not interfere with the main input typing operations.</Text>
+            <Text>The following keyboard shortcuts are known conflicts that we have eliminated during the development:</Text>
+            <ul>
+                <li><Text><Kbd>Cmd</Kbd> <Kbd>C</Kbd> [iOS] Copy highlighted text.</Text></li>
+                <li><Text><Kbd>Ctrl</Kbd> <Kbd>BkSp</Kbd> [Linux/Windows] Delete whole word.</Text></li>
+                <li><Text><Kbd>Mod</Kbd> <Kbd>BkSp</Kbd> [iOS] Delete whole line.</Text></li>
+                <li><Text><Kbd>Shift</Kbd> <Kbd>Any letter key</Kbd> [All] Capitalised letter.</Text></li>
+                <li><Text><Kbd>Opt</Kbd> <Kbd>Any letter key</Kbd> [iOS/MacOS] Insert special character.</Text></li>
+                <li><Text><Kbd>Alt</Kbd> <Kbd>BkSp</Kbd> [iOS] Delete whole word.</Text></li>
+            </ul>
+            <Text>The current arrangement is what we believe the be the most inclusive and functional possible state. Custom and user-assigned hotkeys might be looked into in the future, though this will be a massive undertaking.</Text>
+
         </Box>
 
         <Box className="cardlike__man-section"
