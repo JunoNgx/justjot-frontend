@@ -162,10 +162,10 @@ export default function Help() {
             <ul>
                 <li><Text><Kbd>Cmd</Kbd> <Kbd>C</Kbd> [iOS] Copy highlighted text.</Text></li>
                 <li><Text><Kbd>Ctrl</Kbd> <Kbd>BkSp</Kbd> [Linux/Windows] Delete whole word.</Text></li>
-                <li><Text><Kbd>Mod</Kbd> <Kbd>BkSp</Kbd> [iOS] Delete whole line.</Text></li>
+                <li><Text><Kbd>Cmd</Kbd> <Kbd>BkSp</Kbd> [iOS] Delete whole line.</Text></li>
                 <li><Text><Kbd>Shift</Kbd> <Kbd>Any letter key</Kbd> [All] Capitalised letter.</Text></li>
                 <li><Text><Kbd>Opt</Kbd> <Kbd>Any letter key</Kbd> [iOS/MacOS] Insert special character.</Text></li>
-                <li><Text><Kbd>Alt</Kbd> <Kbd>BkSp</Kbd> [iOS] Delete whole word.</Text></li>
+                <li><Text><Kbd>Opt</Kbd> <Kbd>BkSp</Kbd> [iOS] Delete whole word.</Text></li>
             </ul>
             <Text>The current arrangement is what we believe the be the most inclusive and functional possible state. Custom and user-assigned hotkeys might be looked into in the future, though this will be a massive undertaking.</Text>
 
