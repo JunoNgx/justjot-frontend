@@ -72,6 +72,7 @@ export default function Help() {
 
         <Box className="cardlike__man-section"
             component="section"
+            mb="xl"
         >
             <Title order={3}>Collection</Title>
             <Text>Collate notes, bookmarks, and todos for different categories under your collections. Access them from the dropdown menu, numeric keys <Kbd>1</Kbd>...<Kbd>0</Kbd>, or <Kbd>←</Kbd> <Kbd>→</Kbd>. You must have at least one collection in your account.</Text>
@@ -79,6 +80,7 @@ export default function Help() {
 
         <Box className="cardlike__man-section"
             component="section"
+            mb="xl"
         >
             <Title order={3}>Main Input</Title>
             <Text>Serves both as a search bar and the interface for new item creation. To create new item, input your content and press <Kbd>↵</Kbd>.</Text>
@@ -87,6 +89,7 @@ export default function Help() {
 
         <Box className="cardlike__man-section"
             component="section"
+            mb="xl"
         >
             <Title order={3}>Prefix syntaxes</Title>
             <Text>These always start and end with the colon character:</Text>
@@ -104,6 +107,7 @@ export default function Help() {
 
         <Box className="cardlike__man-section"
             component="section"
+            mb="xl"
         >
             <Title order={3}>Item Type</Title>
 
@@ -122,6 +126,7 @@ export default function Help() {
 
         <Box className="cardlike__man-section"
             component="section"
+            mb="xl"
         >
             <Title order={3}>Item actions</Title>
             <Text>There are two ways to perform item actions:</Text>
@@ -133,6 +138,7 @@ export default function Help() {
 
         <Box className="cardlike__man-section"
             component="section"
+            mb="xl"
         >
             <Title order={3}>Primary action</Title>
             <Text>An item's primary action is executed by clicking on it or pressing <Kbd>Shift</Kbd> <Kbd>↵</Kbd> while it is selected. This action varies depending on the item's type and settings:</Text>
@@ -146,6 +152,7 @@ export default function Help() {
 
         <Box className="cardlike__man-section"
             component="section"
+            mb="xl"
         >
             <Title order={3}>Spotlight</Title>
             <Text>Accessed by pressing <KbdMod/> <Kbd>K</Kbd> or <KbdMod/> <Kbd>P</Kbd> anywhere within the app, or from the Main Input extended menu.</Text>
@@ -154,6 +161,7 @@ export default function Help() {
 
         <Box className="cardlike__man-section"
             component="section"
+            mb="xl"
         >
             <Title order={3}>Frequently asked questions</Title>
 
@@ -185,6 +193,7 @@ export default function Help() {
 
         <Box className="cardlike__man-section"
             component="section"
+            mb="xl"
         >
             <Title order={3}>Acknowledgement</Title>
             <Text>
