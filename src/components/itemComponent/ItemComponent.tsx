@@ -87,6 +87,23 @@ export default function ItemComponent(
     }
     : {};
 
+    const normalTextBlock = <>
+        {item.title && <Text className="item__primary-text"
+            title={item.title}
+        >
+            {item.title.substring(0, CHAR_DISPLAY_COUNT)}
+        </Text>}
+        {item.content && <Text className="item__secondary-text"
+            title={item.content}
+        >
+            {item.content.substring(0, CHAR_DISPLAY_COUNT)}
+        </Text>}
+    </>;
+
+    const hasCopiedTextBlock = (
+        <Text className="item__primary-text">Content copied</Text>
+    );
+
     return <Box className={computeClassname(item, isSelected)}
         p="xs"
         data-index={index}
@@ -107,16 +124,7 @@ export default function ItemComponent(
                     <Center className="item__icon-wrapper">
                         <ItemComponentIcon item={item} />
                     </Center>
-                    {item.title && <Text className="item__primary-text"
-                        title={item.title}
-                    >
-                        {item.title.substring(0, CHAR_DISPLAY_COUNT)}
-                    </Text>}
-                    {item.content && <Text className="item__secondary-text"
-                        title={item.content}
-                    >
-                        {item.content.substring(0, CHAR_DISPLAY_COUNT)}
-                    </Text>}
+                    {item.hasCopied ? hasCopiedTextBlock : normalTextBlock}
                 </Group>
                 <Group className="item__right-side"
                     gap="xs"
