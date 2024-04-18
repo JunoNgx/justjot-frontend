@@ -3,7 +3,7 @@ import { ItemsContext } from "@/contexts/ItemsContext";
 import useManageListState from "@/libs/useManageListState";
 import { CreateItemOptions, Item, ItemAction, ItemCollection, ItemType, UpdateItemTitleAndContentOptions } from "@/types";
 import { DateTime } from "luxon";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import useItemApiCalls from "./useItemApiCalls";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
@@ -51,6 +51,7 @@ export default function useItemActions() {
             created: currDateTime,
             updated: currDateTime,
             isPending: true,
+            hasCopied: false,
         };
     };
 
@@ -198,6 +199,12 @@ export default function useItemActions() {
         })
     };
 
+    const timeoutCopyRef = useRef<number|undefined>(undefined);
+    useEffect(() => {
+        return () => {
+            clearTimeout(timeoutCopyRef.current);
+        };
+    }, []);
     const clipboard = useClipboard({ timeout: 1000 });
     const copyItemContent = async (
         { item }:
@@ -207,11 +214,19 @@ export default function useItemActions() {
             ? clipboard.copy(item.title)
             : clipboard.copy(item.content);
 
-        notifications.show({
-            message: "Copied item content",
-            color: "none",
-            autoClose: AUTO_CLOSE_DEFAULT,
-        });
+        const index = findIndexById(item.id, items)
+        if (index === -1) return;
+        itemsHandlers.replaceProps(index, {hasCopied: true});
+
+        timeoutCopyRef.current = setTimeout(() => {
+            itemsHandlers.replaceProps(index, {hasCopied: false});
+        }, 2000);
+
+        // notifications.show({
+        //     message: "Copied item content",
+        //     color: "none",
+        //     autoClose: AUTO_CLOSE_DEFAULT,
+        // });
     }
 
     const openUpdateItemModal = (item: Item) => {
