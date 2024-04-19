@@ -2,7 +2,7 @@
 
 A minimalist keyboard-first note-taking Progressive Web App, tailored for fast operations.
 
-Backend repository here.
+Backend repository [here](https://github.com/JunoNgx/justjot-backend).
 
 ## Current deployment
 
