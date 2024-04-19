@@ -5,6 +5,13 @@ const CHAR_DISPLAY_COUNT = 150;
 
 export default function ItemComponentText({ item }: { item: Item }) {
 
+    const transitionPropNormalText = {
+        in: { opacity: 1, transform: 'translateX(0)' },
+        out: { opacity: 0, transform: 'translateX(+50%)' },
+        common: { transformOrigin: 'center' },
+        transitionProperty: 'opacity, transform',
+    };
+
     const transitionPropCopiedText = {
         in: { opacity: 1, transform: 'translateY(0)' },
         out: { opacity: 0, transform: 'translateY(-50%)' },
@@ -20,7 +27,7 @@ export default function ItemComponentText({ item }: { item: Item }) {
             mounted={!item.hasCopied}
             duration={400}
             exitDuration={50}
-            transition="slide-left"
+            transition={transitionPropNormalText}
         >
             {(transitionStyle) => (<>
                 {item.title && <Text className="item__primary-text"
