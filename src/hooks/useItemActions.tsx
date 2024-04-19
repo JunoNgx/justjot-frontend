@@ -20,7 +20,7 @@ export default function useItemActions() {
     const { user } = useContext(BackendClientContext);
     const { collections } = useContext(CollectionsContext);
     const { currCollection } = useContext(CollectionsContext);
-    const { items, setItems, setUpdateQueue } = useContext(ItemsContext);
+    const { items, setItems, setUpdateQueue, fetchItems } = useContext(ItemsContext);
     const {
         createItem,
         deleteItem,
@@ -145,12 +145,13 @@ export default function useItemActions() {
         toggleItemShouldCopyOnClick({
             item,
             shouldCopyOnClick: newShouldCopyOnClickVal,
-            successfulCallback: (record: Item) => {
-                const index = findIndexById(item.id, items)
-                if (index === -1) return;
-                itemsHandlers.replace(index, record);
-            },
+            // successfulCallback: (record: Item) => {
+            //     const index = findIndexById(item.id, items)
+            //     if (index === -1) return;
+            //     itemsHandlers.replace(index, record);
+            // },
             errorCallback: (err: ClientResponseError) => {
+                fetchItems(currCollection);
                 console.error(err);
                 notifications.show({
                     message: "Error toggling copy as primary action",
@@ -182,12 +183,13 @@ export default function useItemActions() {
         toggleItemIsTodoDone({
             item,
             isTodoDone: newIsTodoDoneVal,
-            successfulCallback: (record: Item) => {
-                const index = findIndexById(item.id, items)
-                if (index === -1) return;
-                itemsHandlers.replace(index, record);
-            },
+            // successfulCallback: (record: Item) => {
+            //     const index = findIndexById(item.id, items)
+            //     if (index === -1) return;
+            //     itemsHandlers.replace(index, record);
+            // },
             errorCallback: (err: ClientResponseError) => {
+                fetchItems(currCollection);
                 console.error(err);
                 notifications.show({
                     message: "Error toggling todo task status",
@@ -339,7 +341,6 @@ export default function useItemActions() {
         convertItemToTodo({
             item,
             successfulCallback: (record: Item) => {
-                console.log("convert", record)
                 const index = findIndexById(item.id, items)
                 if (index === -1) return;
                 itemsHandlers.replace(index, record);
