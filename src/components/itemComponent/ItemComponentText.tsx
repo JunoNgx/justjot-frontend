@@ -6,8 +6,8 @@ const CHAR_DISPLAY_COUNT = 150;
 export default function ItemComponentText({ item }: { item: Item }) {
 
     const transitionPropNormalText = {
-        in: { opacity: 1, transform: 'translateX(0)' },
-        out: { opacity: 0, transform: 'translateX(+50%)' },
+        in: { opacity: 1, transform: 'translateY(0)' },
+        out: { opacity: 0, transform: 'translateY(+50%)' },
         common: { transformOrigin: 'center' },
         transitionProperty: 'opacity, transform',
     };
