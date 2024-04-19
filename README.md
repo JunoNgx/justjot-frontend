@@ -14,7 +14,7 @@ The project is powered by [React](https://react.dev/), [TypeScript](https://www.
 
 Additionally, it also uses the [Mantine components library](https://mantine.dev/) and [Sass](https://sass-lang.com/).
 
-## Running
+## Running locally
 
 ```
 yarn
