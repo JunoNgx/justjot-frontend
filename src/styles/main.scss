@@ -92,7 +92,9 @@ ul li {
     max-width: 720px;
     margin: 120px auto 12px;
 
-    @include m.mobile {
+    @include m.mobile { 
+        margin-top: 80px;
+
         &__items-container {
             padding-bottom: 5rem;
         }
