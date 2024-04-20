@@ -10,7 +10,7 @@ import { useContext } from "react";
 
 type MainInputExtendedMenuOptions = {
     processMainInput: (input: string) => void,
-    mainInputRef: React.ForwardedRef<HTMLInputElement>,
+    mainInputRef: React.RefObject<HTMLInputElement>,
 }
 
 export default function MainInputExtendedMenu(
@@ -81,7 +81,7 @@ export default function MainInputExtendedMenu(
                 leftSection={<IconLayoutNavbar {...menuIconProps} />}
                 onClick={() => {
                     setInputVal(curr => `${CREATE_TEXT_WITH_TITLE_PREFIX} ${curr}`);
-                    focusOnMainInput(mainInputRef as React.RefObject<HTMLInputElement>);
+                    focusOnMainInput(mainInputRef);
                 }}
             >
                 with title
@@ -90,7 +90,7 @@ export default function MainInputExtendedMenu(
                 leftSection={<IconCheckbox {...menuIconProps} />}
                 onClick={() => {
                     setInputVal(curr => `${CREATE_TODO_PREFIX} ${curr}`);
-                    focusOnMainInput(mainInputRef as React.RefObject<HTMLInputElement>);
+                    focusOnMainInput(mainInputRef);
                 }}
             >
                 as todo
@@ -106,7 +106,7 @@ export default function MainInputExtendedMenu(
                 leftSection={<IconX {...menuIconProps} />}
                 onClick={() => {
                     setInputVal("");
-                    focusOnMainInput(mainInputRef as React.RefObject<HTMLInputElement>);
+                    focusOnMainInput(mainInputRef);
                 }}
             >
                 clear input

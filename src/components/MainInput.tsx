@@ -121,7 +121,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         rightSectionPointerEvents="all"
         rightSection={<MainInputExtendedMenu
             processMainInput={processMainInput}
-            mainInputRef={ref}
+            mainInputRef={ref as React.RefObject<HTMLInputElement>}
         />}
         type="text"
         aria-label="Main input"
