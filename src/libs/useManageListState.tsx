@@ -1,5 +1,5 @@
 /**
- * 
+ * Set of utilities to modify React array state
  * @param setState {useState set function}
  * @returns A set of utility methods to manage the tuple whose `set` function
  * was passed in.
