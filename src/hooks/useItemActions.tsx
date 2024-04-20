@@ -201,6 +201,7 @@ export default function useItemActions() {
         })
     };
 
+    // TODO: rewrite this and store the `hasCopied` state inside the component
     const COPY_DISPLAY_DURATION = 1500;
     const timeoutCopyRef = useRef<number|undefined>(undefined);
     useEffect(() => {
