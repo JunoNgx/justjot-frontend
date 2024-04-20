@@ -20,17 +20,6 @@ export default function MainInputExtendedMenu(
     const { menuIconProps } = useIconProps();
     const { setInputVal } = useContext(ItemsContext);
     const { focusOnMainInput } = useItemNavActions();
-    // const mainInputInnerRef = useRef<HTMLInputElement>(null);
-
-    // useEffect(() => {
-    //     if (!mainInputRef) return;
-    //     if (typeof mainInputRef === "function") {
-    //         mainInputRef(mainInputInnerRef.current);
-    //         return;
-    //     }
-
-    //     mainInputRef.current = mainInputInnerRef.current;
-    // });
 
     const enterFromClipboard = () => {
         if (!navigator.clipboard.readText) {
