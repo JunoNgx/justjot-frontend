@@ -22,6 +22,7 @@
         "clsx": "^2.1.0",
         "luxon": "^3.4.4",
         "mantine-contextmenu": "^7.8.0",
+        "mitt": "^3.0.1",
         "pocketbase": "^0.21.1",
         "postcss": "^8.4.35",
         "postcss-loader": "^8.1.1",
