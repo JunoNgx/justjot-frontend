@@ -68,12 +68,6 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
         if (index === -1) return;
 
         itemsHandlers.remove(index);
-        // notifications.show({
-        //     message: "Item moved successfully",
-        //     color: "none",
-        //     autoClose: AUTO_CLOSE_DEFAULT,
-        //     withCloseButton: true,
-        // });
 
         modals.closeAll();
     };
