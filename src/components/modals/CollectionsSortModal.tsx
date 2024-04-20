@@ -159,22 +159,12 @@ export default function CollectionsSortModal() {
     )
 
     return (
-        <div className="collections-sort-modal"
-        >
+        <div className="collections-sort-modal">
             <Center>
-                <div className="collections-sort-modal__left-side"
-                >
+                <div className="collections-sort-modal__left-side">
                     {draggableArea}
                 </div>
             </Center>
-            {/* <div className="collections-sort-modal__right-side"
-            >
-                {collections?.map((_, index) =>
-                    <div className="collections-sort-modal__number-item">
-                        <CollectionHotkey index={index}/>
-                    </div>
-                )}
-            </div> */}
         </div>
     )
 }
