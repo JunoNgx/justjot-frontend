@@ -62,9 +62,6 @@ export const justJotCssVarsResolver: CSSVariablesResolver = (theme) => ({
         "--mantine-color-dimmed": "#444",
         "--mantine-color-anchor": "#444",
         "--mantine-color-code-bg": "#EEE",
-        "--mantine-color-default-color": theme.other.colBlack,
-        "--justjot-col-pri": theme.other.colBlack,
-        "--justjot-col-bg": theme.other.colWhite,
     },
     dark: {
         "--mantine-color-body": theme.other.colBlack,
@@ -73,9 +70,6 @@ export const justJotCssVarsResolver: CSSVariablesResolver = (theme) => ({
         "--mantine-color-dimmed": "#999",
         "--mantine-color-anchor": "#AAA",
         "--mantine-color-code-bg": "#222",
-        "--mantine-color-default-color": theme.other.colWhite,
-        "--justjot-col-pri": theme.other.colWhite,
-        "--justjot-col-bg": theme.other.colBlack,
     }
 });
 
