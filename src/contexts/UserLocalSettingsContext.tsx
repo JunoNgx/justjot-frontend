@@ -25,7 +25,6 @@ export default function UserLocalSettingsContextProvider({children}: {children: 
 
     const {
         setColorScheme: setMantineColorScheme,
-        // clearColorScheme: _clearMantineColorScheme
     } = useMantineColorScheme();
 
     useEffect(() => {
