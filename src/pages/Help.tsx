@@ -134,6 +134,9 @@ export default function Help() {
                 <li>Context menu — right-clicking on your mouse or long-pressing on your touchscreen.</li>
                 <li>Keypresses — prompts are contextually displayed on the lower right corner of the screen (which requires a minimum viewport width of 1280px to be displayed). A more complete list can also be found on top of this document.</li>
             </ul>
+
+            <Title order={4}>Item edit</Title>
+            <Text>Your changes are autosaved (with a short interval) during item edit. The autosave feature is unique to this user interface. Pressing <Kbd>Esc</Kbd> or <KbdMod/> <Kbd>S</Kbd> will pro-actively save progress, without waiting for the autosave interval, and close the modal.</Text>
         </Box>
 
         <Box className="cardlike__man-section"
