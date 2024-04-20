@@ -17,13 +17,6 @@ export const isValidUrl = (url: string) => {
     }
 }
 
-export const isValidIndex = (n?: number) => {
-    return typeof n === "number"
-        && n >= 0
-        && n !== undefined
-        && n !== null;
-}
-
 export const isElementInViewport = (el: HTMLElement): boolean => {
     const rect = el.getBoundingClientRect();
 
