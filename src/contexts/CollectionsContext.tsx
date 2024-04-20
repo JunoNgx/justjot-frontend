@@ -57,15 +57,6 @@ export default function CollectionsContextProvider({ children }: { children: Rea
                 if (!err.isAbort) {
                     console.warn("Non cancellation error");
                 }
-
-                // if (!err.url && !err.status) {
-                //     notifications.show({
-                //         message: "Error fetching collections. Your authorization token might have expired. Re-login is recommended.",
-                //         color: "red",
-                //         autoClose: AUTO_CLOSE_ERROR_TOAST,
-                //         withCloseButton: true,
-                //     });
-                // }
             });
     }, [isLoggedIn]);
 
