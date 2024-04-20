@@ -5,7 +5,6 @@ import { useContext, useEffect, useRef } from "react";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, COLLECTION_SORT_ORDER_MAG } from "@/utils/constants";
 import { ItemCollection } from "@/types";
-import { isValidIndex } from "@/utils/miscUtils";
 import useCollectionApiCalls from "@/hooks/useCollectionApiCalls";
 import { notifications } from "@mantine/notifications";
 
@@ -31,7 +30,10 @@ export default function CollectionsSortModal() {
         });
 
         if (collections.length === 0) return;
-        if (!isValidIndex(destination?.index)) return;
+        if (destination?.index === undefined
+            || destination?.index === null
+            || destination?.index < 0
+        ) return;
 
         if (source.index === destination!.index) {
             return;
