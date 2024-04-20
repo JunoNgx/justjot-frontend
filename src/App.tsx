@@ -12,6 +12,7 @@ import "mantine-contextmenu/styles.css";
 import 'mantine-contextmenu/styles.layer.css';
 import '@/styles/layers.css';
 
+import EventBusContextProvider from "./contexts/EventBusContext";
 import UserLocalSettingsContextProvider from "@/contexts/UserLocalSettingsContext";
 import BackendClientContextProvider from "@/contexts/BackendClientContext";
 import CollectionsContextProvider from "@/contexts/CollectionsContext";
@@ -50,72 +51,71 @@ function App() {
             header={{ height: 45 }}
             padding="none"
         >
-            <UserLocalSettingsContextProvider>
+            <EventBusContextProvider>
+                <UserLocalSettingsContextProvider>
+                    <BackendClientContextProvider>
+                        <CollectionsContextProvider>
+                            <ItemsContextProvider>
+                                <ModalsProvider
+                                    modals={{
+                                        infoModal: InfoModal,
+                                        itemCreateModal: ItemCreateModal
+                                    }}
+                                >
+                                    <ContextMenuProvider>
 
-                <BackendClientContextProvider>
-                    <CollectionsContextProvider>
-                        <ItemsContextProvider>
-                            <ModalsProvider
-                                modals={{
-                                    infoModal: InfoModal,
-                                    itemCreateModal: ItemCreateModal
-                                }}
-                            >
-                                <ContextMenuProvider>
+                                        <ScrollArea
+                                            // Mantine currently doesn't havea fade out transition; this looks very ugly
+                                            // Use this as a workaround
+                                            // TODO: submit PR to mantine
+                                            type="auto"
+                                            // offsetScrollbars
+                                            h="100vh"
+                                            scrollbarSize={10}
+                                        >
 
-                                    <ScrollArea
-                                        // Mantine currently doesn't havea fade out transition; this looks very ugly
-                                        // Use this as a workaround
-                                        // TODO: submit PR to mantine
-                                        type="auto"
-                                        // offsetScrollbars
-                                        h="100vh"
-                                        scrollbarSize={10}
-                                    >
+                                            <Notifications
+                                                limit={5}
+                                                position="bottom-center"
+                                                autoClose={1000}
+                                            />
 
-                                        <Notifications
-                                            limit={5}
-                                            position="bottom-center"
-                                            autoClose={1000}
-                                        />
+                                            <AppShell.Header>
+                                                <Header />
+                                            </AppShell.Header>
 
-                                        <AppShell.Header>
-                                            <Header />
-                                        </AppShell.Header>
+                                            <AppShell.Main>
+                                                <Routes>
+                                                    <Route path="/" element={<LandingPage />} />
+                                                    <Route path="/help" element={<Help />} />
+                                                    <Route path="/:username">
+                                                        <Route index element={<MainView />} />
+                                                        <Route path=":collectionSlug" element={<MainView />} />
+                                                    </Route>
+                                                    <Route path="/profile" element={<Profile />} />
+                                                    <Route path="/login" element={<Login />} />
+                                                    <Route path="/demo-login" element={<Login isDemoMode={true} />} />
+                                                    <Route path="/register" element={<Register />} />
+                                                    <Route path="/reset" element={
+                                                        <Request pageType={RequestPageType.PASSWORD_CHANGE} />
+                                                    } />
+                                                    <Route path="/verify" element={
+                                                        <Request pageType={RequestPageType.EMAIL_VERIFY} />
+                                                    } />
+                                                    <Route path="/terms" element={<Terms />} />
+                                                </Routes>
+                                                <SpotlightSearch />
 
-                                        <AppShell.Main>
-                                            <Routes>
-                                                <Route path="/" element={<LandingPage />} />
-                                                <Route path="/help" element={<Help />} />
-                                                <Route path="/:username">
-                                                    <Route index element={<MainView />} />
-                                                    <Route path=":collectionSlug" element={<MainView />} />
-                                                </Route>
-                                                <Route path="/profile" element={<Profile />} />
-                                                <Route path="/login" element={<Login />} />
-                                                <Route path="/demo-login" element={<Login isDemoMode={true} />} />
-                                                <Route path="/register" element={<Register />} />
-                                                <Route path="/reset" element={
-                                                    <Request pageType={RequestPageType.PASSWORD_CHANGE} />
-                                                } />
-                                                <Route path="/verify" element={
-                                                    <Request pageType={RequestPageType.EMAIL_VERIFY} />
-                                                } />
-                                                <Route path="/terms" element={<Terms />} />
-                                            </Routes>
-                                            <SpotlightSearch />
+                                            </AppShell.Main>
+                                        </ScrollArea>
 
-                                        </AppShell.Main>
-                                    </ScrollArea>
-
-                                </ContextMenuProvider>
-                            </ModalsProvider>
-                        </ItemsContextProvider>
-                    </CollectionsContextProvider>
-                </BackendClientContextProvider>
-
-            </UserLocalSettingsContextProvider>
-
+                                    </ContextMenuProvider>
+                                </ModalsProvider>
+                            </ItemsContextProvider>
+                        </CollectionsContextProvider>
+                    </BackendClientContextProvider>
+                </UserLocalSettingsContextProvider>
+            </EventBusContextProvider>
         </AppShell>
     )
 }
