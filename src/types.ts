@@ -119,3 +119,8 @@ export type UpdateItemTitleAndContentOptions = {
     title: string,
     content: string,
 } & ApiRequestCallbackOptions;
+
+export type CopyItemContentEvent = { 
+    copyItemContent: string,
+    itemId: string,
+};
