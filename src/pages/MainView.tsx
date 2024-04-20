@@ -104,7 +104,7 @@ export default function MainView() {
             />
             <Stack className="main-view__items-container"
                 id="displayed-list"
-                gap="xs"
+                gap="0.25rem"
             >
                 <MainContentList
                     isLoading={isLoading}
