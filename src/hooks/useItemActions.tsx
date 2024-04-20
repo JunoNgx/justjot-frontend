@@ -3,7 +3,7 @@ import { ItemsContext } from "@/contexts/ItemsContext";
 import useManageListState from "@/libs/useManageListState";
 import { CreateItemOptions, Item, ItemAction, ItemCollection, ItemType, UpdateItemTitleAndContentOptions } from "@/types";
 import { DateTime } from "luxon";
-import { useContext, useEffect, useRef } from "react";
+import { useContext } from "react";
 import useItemApiCalls from "./useItemApiCalls";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
@@ -14,9 +14,11 @@ import ItemUpdateModal from "@/components/modals/ItemUpdateModal";
 import ItemMoveModal from "@/components/modals/ItemMoveModal";
 import { findIndexById } from "@/utils/itemUtils";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
+import { EventBusContext } from "@/contexts/EventBusContext";
 
 export default function useItemActions() {
 
+    const { emitter } = useContext(EventBusContext);
     const { user } = useContext(BackendClientContext);
     const { collections } = useContext(CollectionsContext);
     const { currCollection } = useContext(CollectionsContext);
@@ -201,15 +203,7 @@ export default function useItemActions() {
         })
     };
 
-    // TODO: rewrite this and store the `hasCopied` state inside the component
-    const COPY_DISPLAY_DURATION = 1500;
-    const timeoutCopyRef = useRef<number|undefined>(undefined);
-    useEffect(() => {
-        return () => {
-            clearTimeout(timeoutCopyRef.current);
-        };
-    }, []);
-    const clipboard = useClipboard({ timeout: 1000 });
+    const clipboard = useClipboard();
     const copyItemContent = async (
         { item }:
         { item: Item }
@@ -218,20 +212,7 @@ export default function useItemActions() {
             ? clipboard.copy(item.title)
             : clipboard.copy(item.content);
 
-        const index = findIndexById(item.id, items)
-        if (index === -1) return;
-        itemsHandlers.replaceProps(index, { hasCopied: true });
-
-        clearTimeout(timeoutCopyRef.current);
-        timeoutCopyRef.current = setTimeout(() => {
-            itemsHandlers.replaceProps(index, { hasCopied: false });
-        }, COPY_DISPLAY_DURATION);
-
-        // notifications.show({
-        //     message: "Copied item content",
-        //     color: "none",
-        //     autoClose: AUTO_CLOSE_DEFAULT,
-        // });
+        emitter.emit("copyItemContent", item.id);
     }
 
     const openUpdateItemModal = (item: Item) => {

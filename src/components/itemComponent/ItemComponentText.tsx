@@ -1,9 +1,36 @@
 import { Item } from "@/types";
 import { Group, Text, Transition } from "@mantine/core";
+import { useContext, useEffect, useRef, useState } from "react";
+import { EventBusContext } from "@/contexts/EventBusContext";
 
 const CHAR_DISPLAY_COUNT = 150;
+const COPIED_DISPLAY_DURATION = 1500;
 
 export default function ItemComponentText({ item }: { item: Item }) {
+
+    const { emitter } = useContext(EventBusContext);
+
+    const [ hasCopied, setHasCopied ] = useState(false);
+    const timeoutCopyRef = useRef<number|undefined>(undefined);
+
+    useEffect(() => {
+        emitter.on("copyItemContent", handleCopyItemContentEvent);
+
+        return () => {
+            clearTimeout(timeoutCopyRef.current);
+        };
+    }, []);
+
+    const handleCopyItemContentEvent = ( itemId: string ) => {
+        if (item.id !== itemId) return;
+
+        setHasCopied(true);
+
+        clearTimeout(timeoutCopyRef.current);
+        timeoutCopyRef.current = setTimeout(() => {
+            setHasCopied(false);
+        }, COPIED_DISPLAY_DURATION);
+    };
 
     const transitionPropNormalText = {
         in: { opacity: 1, transform: 'translateY(0)' },
@@ -24,7 +51,7 @@ export default function ItemComponentText({ item }: { item: Item }) {
         gap="xs"
     >
         <Transition
-            mounted={!item.hasCopied}
+            mounted={!hasCopied}
             duration={400}
             exitDuration={50}
             transition={transitionPropNormalText}
@@ -46,7 +73,7 @@ export default function ItemComponentText({ item }: { item: Item }) {
         </Transition>
 
         <Transition
-            mounted={item.hasCopied}
+            mounted={hasCopied}
             duration={300}
             exitDuration={150}
             transition={transitionPropCopiedText}
