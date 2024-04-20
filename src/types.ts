@@ -15,9 +15,6 @@ export type Item = RecordModel | {
 
     /** Mark as temporary Record until backend's response is received */ 
     isPending?: boolean,
-    // TODO: rewrite this; should not store a UI variable in the model
-    /** Should display copied content text temporarily */
-    hasCopied: boolean,
 };
 
 export type ItemCollection = RecordModel | {

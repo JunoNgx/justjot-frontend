@@ -53,7 +53,6 @@ export default function useItemActions() {
             created: currDateTime,
             updated: currDateTime,
             isPending: true,
-            hasCopied: false,
         };
     };
 
