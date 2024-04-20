@@ -66,10 +66,8 @@ function App() {
 
                                         <ScrollArea
                                             // Mantine currently doesn't havea fade out transition; this looks very ugly
-                                            // Use this as a workaround
-                                            // TODO: submit PR to mantine
+                                            // TODO: submit PR to mantine to fix this
                                             type="scroll"
-                                            // offsetScrollbars
                                             h="100vh"
                                             scrollbarSize={10}
                                         >
