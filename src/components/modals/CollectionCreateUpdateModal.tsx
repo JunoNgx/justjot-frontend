@@ -97,12 +97,6 @@ export default function CollectionCreateUpdateModal(
     const handleSuccessfulCreation = (newCollection: ItemCollection) => {
         itemsHandlers.append(newCollection);
         setNewlyCreatedCollection(newCollection);
-        // notifications.show({
-        //     message: "Collection created: " + newCollection.name,
-        //     color: "none",
-        //     autoClose: AUTO_CLOSE_DEFAULT,
-        //     withCloseButton: true,
-        // });
 
         modals.closeAll();
     };
@@ -130,12 +124,6 @@ export default function CollectionCreateUpdateModal(
          * to `collections[0]`
          */
         tryNavigateToCollection(newCollection);
-        // notifications.show({
-        //     message: `Collection ${newCollection.name} has been updated successfully`,
-        //     color: "none",
-        //     autoClose: AUTO_CLOSE_DEFAULT,
-        //     withCloseButton: true,
-        // });
 
         modals.closeAll();
     };
