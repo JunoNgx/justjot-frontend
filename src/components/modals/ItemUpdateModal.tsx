@@ -15,7 +15,7 @@ import { modals } from "@mantine/modals";
 import KbdMod from "../misc/KbdMod";
 import useItemActions from "@/hooks/useItemActions";
 
-const DEBOUNCED_TIME = 5000;
+const DEBOUNCED_TIME = 2500;
 
 export default function ItemUpdateModal(
     {item}: {item: Item}
