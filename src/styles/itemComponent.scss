@@ -2,8 +2,8 @@
 @use "./mixins.scss" as m;
 
 .item {
-    height: 47px;
-    padding: var(--mantine-spacing-xs);
+    height: 42px;
+    padding: 0.5rem;
     cursor: pointer;
     user-select: none;
     border: solid 1px transparent;
