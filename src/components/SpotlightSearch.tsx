@@ -215,9 +215,11 @@ export default function SpotlightSearch() {
         );
     }
 
-    // Hotkey shortcuts to spotlight are handled app-wide, and works within input
-
     return <Spotlight
+        /**
+         * Disable component-scope hotkey, to allow App to handle this and
+         * not ignore `<input>` and `<textarea>`.
+         */
         shortcut={[]}
         actions={allActionList}
         nothingFound="No action found."
