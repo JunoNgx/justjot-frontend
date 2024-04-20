@@ -1,6 +1,8 @@
 @use "./mixins.scss" as m;
 
 .item-skeleton {
+    margin: 0.4rem;
+
     &__left-side {
         min-width: 0;
         flex-grow: 3;
@@ -27,7 +29,7 @@
     }
 
     &__datetime {
-        flex-shrink: 0; 
+        flex-shrink: 0;
 
         @include m.mobile {
             display: none;
