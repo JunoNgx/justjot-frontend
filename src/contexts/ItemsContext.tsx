@@ -98,24 +98,22 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
 
     const selectedItem = filteredItems[selectedIndex];
 
-    return <ItemsContext.Provider value=
-        {{
-            items,
-            setItems,
-            isMainInputFocused,
-            setIsMainInputFocused,
-            inputVal,
-            setInputVal,
-            selectedIndex,
-            setSelectedIndex,
-            updateQueue,
-            setUpdateQueue,
+    return <ItemsContext.Provider value={{
+        items,
+        setItems,
+        isMainInputFocused,
+        setIsMainInputFocused,
+        inputVal,
+        setInputVal,
+        selectedIndex,
+        setSelectedIndex,
+        updateQueue,
+        setUpdateQueue,
 
-            fetchItems,
-            filteredItems,
-            selectedItem,
-        }}
-    >
+        fetchItems,
+        filteredItems,
+        selectedItem,
+    }}>
         {children}
     </ItemsContext.Provider>
 }
