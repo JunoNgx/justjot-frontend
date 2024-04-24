@@ -212,6 +212,42 @@ export default function useItemApiCalls() {
         setLoadingState?.(false);
     };
 
+    const trashItem = async (
+        { item, successfulCallback, errorCallback, setLoadingState }:
+        { item: Item } & ApiRequestCallbackOptions
+    ) => {
+        setLoadingState?.(true);
+        await pbClient.send(`items/trash/${user!.id}/${item!.id}`, {
+            method: "PATCH",
+            authorization: pbClient.authStore.token,
+        })
+            .then((record) => {
+                successfulCallback?.(record);
+            })
+            .catch(err => {
+                errorCallback?.(err);
+            });
+        setLoadingState?.(false);
+    };
+
+    const untrashItem = async (
+        { item, successfulCallback, errorCallback, setLoadingState }:
+        { item: Item } & ApiRequestCallbackOptions
+    ) => {
+        setLoadingState?.(true);
+        await pbClient.send(`items/untrash/${user!.id}/${item!.id}`, {
+            method: "PATCH",
+            authorization: pbClient.authStore.token,
+        })
+            .then((record) => {
+                successfulCallback?.(record);
+            })
+            .catch(err => {
+                errorCallback?.(err);
+            });
+        setLoadingState?.(false);
+    };
+
     return {
         createItem,
         moveItem,
@@ -223,5 +259,7 @@ export default function useItemApiCalls() {
         toggleItemShouldCopyOnClick,
         toggleItemIsTodoDone,
         convertItemToTodo,
+        trashItem,
+        untrashItem,
     }
 }
