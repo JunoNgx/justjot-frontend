@@ -7,7 +7,7 @@ import { ItemsContext } from "@/contexts/ItemsContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import useItemActions from "@/hooks/useItemActions";
 import useIconProps from "@/hooks/useIconProps";
-import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick, canTrashItem } from "@/utils/itemUtils";
+import { canConvertItemToTodo, canRefetchItem, canRestoreItem, canToggleItemShouldCopyOnClick, canTrashItem } from "@/utils/itemUtils";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import MainInputExtendedMenu from "./MainInputExtendedMenu";
 import { CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TEXT_WITH_TITLE_PREFIX_ALT } from "@/utils/constants";
@@ -42,6 +42,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         toggleItemShouldCopyOnClickWithOptimisticUpdate,
         convertToTodo,
         trashItemWithOptimisticUpdate,
+        untrashItemWithOptimisticUpdate,
     } = useItemActions();
     const { mainInputIconProps } = useIconProps();
 
@@ -99,6 +100,16 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         deleteItemWithOptimisticUpdate({item: selectedItem});
     }
 
+    const hotkeyRestoreItem = () => {
+        if (!selectedItem) return;
+        if (!canRestoreItem(selectedItem)) return;
+
+        if (selectedIndex === 0) setSelectedIndex(-1);
+        else setSelectedIndex(curr => curr - 1);
+
+        untrashItemWithOptimisticUpdate({item: selectedItem});
+    }
+
     const hotkeyRefetchTitleAndFavicon = () => {
         if (!selectedItem) return;
         if (!canRefetchItem(selectedItem)) return;
@@ -151,6 +162,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             ["mod+E", hotkeyOpenUpdateItemModal, { preventDefault: true }],
             ["mod+M", hotkeyOpenMoveItemModal, { preventDefault: true }],
             ["mod+Shift+Backspace", hotkeyDeleteItem, { preventDefault: true }],
+            ["mod+alt+R", hotkeyRestoreItem, { preventDefault: true }],
             ["mod+alt+Digit4", hotkeyToggleItemShouldCopyOnClick, { preventDefault: true }],
             ["mod+alt+Digit5", hotkeyRefetchTitleAndFavicon, { preventDefault: true }],
             ["mod+alt+Digit6", hotkeyConvertToTodoItem, { preventDefault: true }],
