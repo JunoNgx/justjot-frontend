@@ -7,7 +7,7 @@ import { ItemsContext } from "@/contexts/ItemsContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import useItemActions from "@/hooks/useItemActions";
 import useIconProps from "@/hooks/useIconProps";
-import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
+import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick, canTrashItem } from "@/utils/itemUtils";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import MainInputExtendedMenu from "./MainInputExtendedMenu";
 import { CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TEXT_WITH_TITLE_PREFIX_ALT } from "@/utils/constants";
@@ -41,6 +41,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         refetchLink,
         toggleItemShouldCopyOnClickWithOptimisticUpdate,
         convertToTodo,
+        trashItemWithOptimisticUpdate,
     } = useItemActions();
     const { mainInputIconProps } = useIconProps();
 
@@ -89,6 +90,11 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
         if (selectedIndex === 0) setSelectedIndex(-1);
         else setSelectedIndex(curr => curr - 1);
+
+        if (canTrashItem(selectedItem)) {
+            trashItemWithOptimisticUpdate({item: selectedItem});
+            return;
+        }
 
         deleteItemWithOptimisticUpdate({item: selectedItem});
     }
