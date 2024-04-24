@@ -32,12 +32,16 @@ export default function ItemComponent(
         computeItemPrimaryAction,
         executeItemAction,
         convertToTodo,
+        trashItemWithOptimisticUpdate,
+        untrashItemWithOptimisticUpdate,
     } = useItemActions();
     const itemContextMenuOptions = useItemContextMenuOptions({
         item,
         copyFn: copyItemContent,
         editFn: openUpdateItemModal,
         moveFn: openMoveItemModal,
+        untrashFn: untrashItemWithOptimisticUpdate,
+        trashFn: trashItemWithOptimisticUpdate,
         deleteFn: deleteItemWithOptimisticUpdate,
         refetchFn: refetchLink,
         toggleCopyFn: toggleItemShouldCopyOnClickWithOptimisticUpdate,

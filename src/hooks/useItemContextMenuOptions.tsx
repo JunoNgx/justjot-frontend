@@ -1,6 +1,6 @@
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { Item, ItemCollection } from "@/types";
-import { IconArrowMoveRight, IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconSquare, IconTrash } from "@tabler/icons-react";
+import { IconArrowMoveRight, IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconRestore, IconSquare, IconTrash } from "@tabler/icons-react";
 import { useContext } from "react";
 import useIconProps from "./useIconProps";
 import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
@@ -10,6 +10,8 @@ type ItemContextMenuOptionsParams = {
     copyFn: ({item}: {item: Item}) => void,
     editFn: (item: Item) => void,
     moveFn: ({item, collectionList}: {item: Item, collectionList: ItemCollection[]}) => void,
+    trashFn: ({item}: {item: Item}) => void,
+    untrashFn: ({item}: {item: Item}) => void,
     deleteFn: ({item}: {item: Item}) => void,
     refetchFn: (item: Item) => void,
     toggleCopyFn: ({item}: {item: Item}) => void,
@@ -27,6 +29,8 @@ export default function useItemContextMenuOptions(
         refetchFn,
         toggleCopyFn,
         deselectFn,
+        trashFn,
+        untrashFn,
         convertToTodoFn,
     }: ItemContextMenuOptionsParams
 ) {
@@ -56,6 +60,21 @@ export default function useItemContextMenuOptions(
             color: "red",
             onClick: () => {
                 deleteFn({item});
+                deselectFn();
+            }
+        }, {
+            key: "trash",
+            icon: <IconTrash {...menuIconProps} />,
+            color: "red",
+            onClick: () => {
+                trashFn({item});
+                deselectFn();
+            }
+        }, {
+            key: "restore",
+            icon: <IconRestore {...menuIconProps} />,
+            onClick: () => {
+                untrashFn({item});
                 deselectFn();
             }
         }, {
