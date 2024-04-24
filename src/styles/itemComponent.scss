@@ -40,7 +40,7 @@
 
     &__text-wrapper {
         position: relative;
-        max-width: 100%;
+        max-width: calc(100% - 32px);
     }
 
     &__primary-text,
