@@ -16,7 +16,7 @@ import MainViewNotice from "@/components/misc/MainViewNotice";
 
 export default function MainView() {
     const { isLoggedIn, isDemoUser, refreshAuth } = useContext(BackendClientContext);
-    const { collections, currCollection } = useContext(CollectionsContext);
+    const { collections, currCollection, isTrashCollection } = useContext(CollectionsContext);
     const { fetchItems, filteredItems } = useContext(ItemsContext);
     const { focusOnMainInput } = useItemNavActions();
     const {
@@ -94,6 +94,9 @@ export default function MainView() {
         <KeyboardPromptDisplay />
         {isDemoUser && <MainViewNotice
             content="You are using the test account. Data are periodically reset."
+        />}
+        {isTrashCollection && <MainViewNotice
+            content="Items in Trash Bins are permanently deleted after 7 days."
         />}
 
         <Stack className="main-view"
