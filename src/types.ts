@@ -24,12 +24,22 @@ export type ItemCollection = RecordModel | {
     owner: string,
     name: string,
     slug: string,
-    sortOrder: number,
+    sortOrder?: number,
     created: string,
     updated: string,
 
     /** Collection is a faux-collection, representing the trashed items */
     isTrashBin?: boolean,
+};
+
+export type TrashBin = RecordModel | {
+    id: string,
+    owner: string,
+    name: string,
+    slug: string,
+    created: string,
+    updated: string,
+    isTrashBin: true,
 };
 
 export enum ItemType {
@@ -82,7 +92,8 @@ export enum UserType {
 export enum DbTable {
     USERS = "users",
     ITEMS = "items",
-    COLLECTIONS = "itemCollections"
+    COLLECTIONS = "itemCollections",
+    TRASH_BINS = "trashBins",
 };
 
 export type ApiRequestCallbackOptions = {
