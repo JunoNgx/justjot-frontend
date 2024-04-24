@@ -12,6 +12,8 @@ export type Item = RecordModel | {
     isTodoDone: boolean,
     created: string,
     updated: string,
+    isTrashed: boolean,
+    trashedDateTime: string,
 
     /** Mark as temporary Record until backend's response is received */ 
     isPending?: boolean,
@@ -24,7 +26,10 @@ export type ItemCollection = RecordModel | {
     slug: string,
     sortOrder: number,
     created: string,
-    updated: string
+    updated: string,
+
+    /** Collection is a faux-collection, representing the trashed items */
+    isTrashBin?: boolean,
 };
 
 export enum ItemType {
