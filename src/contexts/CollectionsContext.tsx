@@ -1,14 +1,15 @@
 import { ReactNode, createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { ApiRequestCallbackOptions, DbTable, ItemCollection } from '@/types';
+import { ApiRequestCallbackOptions, DbTable, ItemCollection, TrashBin } from '@/types';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { ClientResponseError } from 'pocketbase';
-import useGenerateTrashBinCollection from '@/hooks/useGenerateTrashBinCollection';
 
 type CollectionsContextType = {
     collections: ItemCollection[],
     setCollections: React.Dispatch<React.SetStateAction<ItemCollection[]>>,
     currCollection: ItemCollection | undefined,
     setCurrCollection: React.Dispatch<React.SetStateAction<ItemCollection | undefined>>,
+    trashBin: TrashBin | undefined,
+    setTrashBin: React.Dispatch<React.SetStateAction<TrashBin | undefined>>,
     collSelectedIndex: number,
     fetchCollections: ({successfulCallback, errorCallback}?: ApiRequestCallbackOptions) => void,
 };
@@ -19,11 +20,17 @@ export default function CollectionsContextProvider({ children }: { children: Rea
     const { isLoggedIn, pbClient, user } = useContext(BackendClientContext);
     const [collections, setCollections] = useState<ItemCollection[]>([]);
     const [currCollection, setCurrCollection] = useState<ItemCollection>();
+    const [trashBin, setTrashBin] = useState<TrashBin>();
 
     useEffect(() => {
         if (!isLoggedIn) return;
-        fetchCollections();
+        fetchTrashBin();
     }, [user]);
+
+    useEffect(() => {
+        if (!isLoggedIn || !trashBin) return;
+        fetchCollections();
+    }, [trashBin]);
 
     // // @ts-expect-error
     // const removeLoginStatusListener = pbClient.authStore.onChange((token, model) => {
@@ -37,10 +44,31 @@ export default function CollectionsContextProvider({ children }: { children: Rea
     //     setUser(null);
     // });
 
-    const fetchCollections = useCallback(async (
+    const fetchTrashBin = useCallback(async (
         {successfulCallback, errorCallback}: ApiRequestCallbackOptions = {}
     ) => {
         if (!isLoggedIn) return;
+
+        await pbClient
+            .collection(DbTable.TRASH_BINS)
+            .getFirstListItem(`owner="${user!.id}"`)
+            .then((record) => {
+                successfulCallback?.();
+                setTrashBin({...record, isTrash: true});
+            })
+            .catch((err: ClientResponseError) => {
+                errorCallback?.();
+                if (!err.isAbort) {
+                    console.warn("Non cancellation error");
+                }
+            });
+
+    }, [isLoggedIn]);
+
+    const fetchCollections = useCallback(async (
+        {successfulCallback, errorCallback}: ApiRequestCallbackOptions = {}
+    ) => {
+        if (!isLoggedIn || !trashBin) return;
 
         await pbClient
             .cancelRequest("collection-get-all")
@@ -51,7 +79,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
             })
             .then((records: ItemCollection[]) => {
                 successfulCallback?.();
-                setCollections(collectionListWithAppendedTrashBin(records));
+                setCollections([...records, trashBin]);
             })
             .catch((err: ClientResponseError) => {
                 errorCallback?.();
@@ -59,13 +87,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
                     console.warn("Non cancellation error");
                 }
             });
-    }, [isLoggedIn]);
-
-    const collectionListWithAppendedTrashBin = (
-        curr: ItemCollection[]
-    ) => {
-        return [...curr, useGenerateTrashBinCollection(user)];
-    };
+    }, [trashBin]);
 
     const collSelectedIndex = collections.findIndex(c => c.id === currCollection?.id);
 
@@ -75,6 +97,8 @@ export default function CollectionsContextProvider({ children }: { children: Rea
             setCollections,
             currCollection,
             setCurrCollection,
+            trashBin,
+            setTrashBin,
 
             collSelectedIndex,
             fetchCollections
