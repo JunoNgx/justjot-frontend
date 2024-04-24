@@ -1,5 +1,5 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
-import { ApiRequestCallbackOptions, DbTable, ItemCollection } from "@/types";
+import { ApiRequestCallbackOptions, DbTable, ItemCollection, TrashBin } from "@/types";
 import { SORT_ORDER_INCREMENT_COLLECTION } from "@/utils/constants";
 import { useContext } from "react";
 
@@ -110,10 +110,29 @@ export default function useCollectionApiCalls() {
         setLoadingState?.(false);
     }
 
+    const updateTrashBin = async (
+        { collectionId, name, slug,
+            successfulCallback, errorCallback, setLoadingState,
+        }: UpdateCollectionOptions
+    ) => {
+        setLoadingState?.(true);
+        await pbClient.collection(DbTable.TRASH_BINS)
+            .update(collectionId,
+                { name, slug })
+            .then((record: TrashBin) => {
+                successfulCallback?.(record);
+            })
+            .catch(err => {
+                errorCallback?.(err);
+            });
+        setLoadingState?.(false);
+    };
+
     return {
         createCollection,
         deleteCollection,
         updateCollection,
         sortCollection,
+        updateTrashBin,
     };
 };

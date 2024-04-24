@@ -46,7 +46,7 @@ export default function CollectionCreateUpdateModal(
         tryNavigateToCollection,
     } = useCollectionNavActions();
 
-    const { createCollection, updateCollection } = useCollectionApiCalls();
+    const { createCollection, updateCollection, updateTrashBin } = useCollectionApiCalls();
 
     useEffect(() => {
         setNewlyCreatedCollection(null);
@@ -60,6 +60,17 @@ export default function CollectionCreateUpdateModal(
         const slug = slugify(originalSlug);
 
         if (isEditMode) {
+            if (currCollection?.isTrashBin) {
+                await updateTrashBin({
+                    name, slug,
+                    collectionId: currCollection!.id,
+                    setLoadingState: setIsLoading,
+                    successfulCallback: handleSuccessfulUpdate,
+                    errorCallback: handleErroredUpdate
+                });
+                return;
+            }
+
             await updateCollection({
                 name, slug,
                 collectionId: currCollection!.id,
