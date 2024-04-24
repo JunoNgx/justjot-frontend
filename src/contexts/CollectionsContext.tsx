@@ -52,7 +52,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
             .getFirstListItem(`owner="${user!.id}"`)
             .then((record) => {
                 successfulCallback?.();
-                setTrashBin({...record, isTrash: true});
+                setTrashBin({...record, isTrashBin: true});
             })
             .catch((err: ClientResponseError) => {
                 errorCallback?.();
