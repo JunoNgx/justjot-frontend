@@ -23,12 +23,10 @@ export default function CollectionsContextProvider({ children }: { children: Rea
     const [trashBin, setTrashBin] = useState<TrashBin>();
 
     useEffect(() => {
-        if (!isLoggedIn) return;
         fetchTrashBin();
     }, [user]);
 
     useEffect(() => {
-        if (!isLoggedIn || !trashBin) return;
         fetchCollections();
     }, [trashBin]);
 
