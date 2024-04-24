@@ -15,7 +15,7 @@ export type Item = RecordModel | {
     isTrashed: boolean,
     trashedDateTime: string,
 
-    /** Mark as temporary Record until backend's response is received */ 
+    /** Mark as temporary Record until backend's response is received */
     isPending?: boolean,
 };
 
@@ -58,6 +58,8 @@ export enum ItemAction {
     TOGGLE_IS_DONE = "toggleIsTodo",
     REFETCH = "refetch",
     CONVERT_TO_TODO = "convertToTodo",
+    TRASH = "trash",
+    UNTRASH = "untrash",
 };
 
 export enum RequestPageType {
@@ -133,7 +135,7 @@ export type UpdateItemTitleAndContentOptions = {
     content: string,
 } & ApiRequestCallbackOptions;
 
-export type CopyItemContentEvent = { 
+export type CopyItemContentEvent = {
     copyItemContent: string,
     itemId: string,
 };

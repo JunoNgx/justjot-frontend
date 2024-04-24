@@ -457,6 +457,14 @@ export default function useItemActions() {
             case (ItemAction.CONVERT_TO_TODO):
                 convertToTodo({item});
                 break;
+            
+            case (ItemAction.TRASH):
+                trashItem({item});
+                break;
+            
+            case (ItemAction.UNTRASH):
+                untrashItem({item});
+                break;
 
             case (ItemAction.EDIT):
             default:
