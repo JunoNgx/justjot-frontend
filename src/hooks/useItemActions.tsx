@@ -362,6 +362,14 @@ export default function useItemActions() {
 
         trashItem({
             item,
+            successfulCallback: (_record: Item) => {
+                notifications.show({
+                    message: "Item moved to trash bin",
+                    color: "none",
+                    autoClose: AUTO_CLOSE_DEFAULT,
+                    withCloseButton: true,
+                });
+            },
             errorCallback: (err: ClientResponseError) => {
                 console.error(err);
                 notifications.show({
@@ -388,6 +396,18 @@ export default function useItemActions() {
 
         untrashItem({
             item,
+            successfulCallback: (_record: Item) => {
+                const originalCollection =
+                    collections.find(c => c.id === item.collection);
+                if (!originalCollection) return;
+
+                notifications.show({
+                    message: `Item restored to collection "${originalCollection.name}"`,
+                    color: "none",
+                    autoClose: AUTO_CLOSE_DEFAULT,
+                    withCloseButton: true,
+                });
+            },
             errorCallback: (err: ClientResponseError) => {
                 console.error(err);
                 notifications.show({
