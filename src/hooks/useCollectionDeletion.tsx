@@ -83,6 +83,20 @@ export default function useCollectionDeletion() {
 
     const canDelete = collections.length > 1;
     const confirmCollectionDeletion = () => {
+
+        if (currCollection?.isTrashBin) {
+            modals.openContextModal({
+                modal: "infoModal",
+                title: "Cannot delete",
+                centered: true,
+                innerProps: {
+                    leftSection: <IconExclamationCircle color="orange" size={64} stroke={justJotTheme.other.iconStrokeWidth}/>,
+                    modalBody: `Your only Trash Bin collection "${currCollection.name}" cannot be deleted.`
+                }
+            });
+            return;
+        }
+
         if (canDelete) {
             modals.openConfirmModal({
                 title: "Confirm collection deletion",

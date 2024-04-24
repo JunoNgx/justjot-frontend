@@ -14,7 +14,7 @@ import useCollectionActions from "@/hooks/useCollectionActions";
 
 export default function CollectionMenu({isInMainView}: {isInMainView?: boolean}) {
     const { isLoggedIn } = useContext(BackendClientContext);
-    const { collections, currCollection } = useContext(CollectionsContext);
+    const { collections, currCollection, isTrashCollection } = useContext(CollectionsContext);
 
     const { trySwitchToCollectionById } = useCollectionNavActions();
     const confirmCollectionDeletion = useCollectionDeletion();
@@ -90,15 +90,16 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
                 Sort collections
             </MenuItem>
 
-            <MenuDivider/>
-
-            <MenuItem
-                color="red"
-                leftSection={<IconTrashX {...menuIconProps} />}
-                onClick={confirmCollectionDeletion}
-            >
-                Delete collection
-            </MenuItem>
+            {!isTrashCollection && <>
+                <MenuDivider/>
+                <MenuItem
+                    color="red"
+                    leftSection={<IconTrashX {...menuIconProps} />}
+                    onClick={confirmCollectionDeletion}
+                >
+                    Delete collection
+                </MenuItem>
+            </>}
         </Menu.Dropdown>
     </Menu>
 
