@@ -28,6 +28,10 @@ export const canTrashItem = (item: Item) => {
     return !item.isTrashed;
 }
 
+export const canRestoreItem = (item: Item) => {
+    return item.isTrashed;
+}
+
 export const computeItemActionString = (
     itemAction: ItemAction
 ): string => {
