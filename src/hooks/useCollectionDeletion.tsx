@@ -123,6 +123,7 @@ export default function useCollectionDeletion() {
         modals.openContextModal({
             modal: "infoModal",
             title: "Minimum data required",
+            centered: true,
             innerProps: {
                 leftSection: <IconExclamationCircle color="yellow" size={64} stroke={justJotTheme.other.iconStrokeWidth}/>,
                 modalBody: "You have only one collection at the movement. You cannot delete your last collection."
