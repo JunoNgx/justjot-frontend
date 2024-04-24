@@ -97,7 +97,7 @@ export default function MainView() {
                 content="You are using the test account. Data are periodically reset."
             />}
             {isTrashCollection && <MainViewNotice
-                content="Items in Trash Bins are permanently deleted after 7 days."
+                content="Items in the Trash Bin are permanently deleted after 7 days."
             />}
         </Box>
 
