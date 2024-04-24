@@ -88,13 +88,24 @@ ul li {
     }
 }
 
+.main-view-notice {
+    padding: 60px 0 60px;
+
+    @include m.mobile {
+        padding: 40px 0 40px;
+    }
+
+    &__item {
+        margin: auto;
+        max-width: 720px;
+    }
+}
+
 .main-view {
     max-width: 720px;
-    margin: 120px auto 12px;
+    margin: 0 auto 12px;
 
     @include m.mobile { 
-        margin-top: 80px;
-
         &__items-container {
             padding-bottom: 5rem;
         }
@@ -172,11 +183,6 @@ input[type="password"] {
     @media screen and (max-width: 1279px) {
         display: none;
     }
-}
-
-.main-view-notice {
-    margin: auto;
-    max-width: 720px;
 }
 
 .item-context-menu {

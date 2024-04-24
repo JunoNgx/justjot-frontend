@@ -92,12 +92,14 @@ export default function MainView() {
         {/* For non-item components */}
         <CollectionMenu isInMainView={true} />
         <KeyboardPromptDisplay />
-        {isDemoUser && <MainViewNotice
-            content="You are using the test account. Data are periodically reset."
-        />}
-        {isTrashCollection && <MainViewNotice
-            content="Items in Trash Bins are permanently deleted after 7 days."
-        />}
+        <Box className="main-view-notice">
+            {isDemoUser && <MainViewNotice
+                content="You are using the test account. Data are periodically reset."
+            />}
+            {isTrashCollection && <MainViewNotice
+                content="Items in Trash Bins are permanently deleted after 7 days."
+            />}
+        </Box>
 
         <Stack className="main-view"
             gap="xl"
