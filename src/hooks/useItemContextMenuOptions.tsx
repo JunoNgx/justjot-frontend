@@ -41,65 +41,94 @@ export default function useItemContextMenuOptions(
         ? <IconCheckbox {...menuIconProps} />
         : <IconSquare {...menuIconProps} />
 
-    const contextMenuOptions = [
-        {
-            key: "copy",
-            icon: <IconCopy {...menuIconProps} />,
-            onClick: () => {copyFn({item})}
-        }, {
-            key: "edit",
-            icon: <IconEdit {...menuIconProps} />,
-            onClick: () => {editFn(item)},
-        }, {
-            key: "move",
-            icon: <IconFileSymlink {...menuIconProps} />,
-            onClick: () => {moveFn({item, collectionList: collections})},
-        }, {
-            key: "delete",
-            icon: <IconTrash {...menuIconProps} />,
-            color: "red",
-            onClick: () => {
-                deleteFn({item});
-                deselectFn();
-            }
-        }, {
-            key: "trash",
-            icon: <IconTrash {...menuIconProps} />,
-            color: "red",
-            onClick: () => {
-                trashFn({item});
-                deselectFn();
-            }
-        }, {
-            key: "restore",
-            icon: <IconRestore {...menuIconProps} />,
-            onClick: () => {
-                untrashFn({item});
-                deselectFn();
-            }
-        }, {
-            key: "refetch",
-            title: "Refetch",
-            hidden: !canRefetchItem(item),
-            icon: <IconDownload {...menuIconProps} />,
-            onClick: () => {refetchFn(item);}
-        }, {
-            key: "convertToTodo",
-            title: "Convert to Todo",
-            hidden: !canConvertItemToTodo(item),
-            icon: <IconArrowMoveRight {...menuIconProps} />,
-            color: "orange",
-            onClick: () => {convertToTodoFn({item});}
-        }, {
-            key: "divider",
-        }, {
-            key: "togglePrimaryAction",
-            title: "To copy",
-            hidden: !canToggleItemShouldCopyOnClick(item),
-            icon: contextMenuDefaultActionIcon,
-            color: "blue",
-            onClick: () => {toggleCopyFn({item})}
+    const copyAction = {
+        key: "copy",
+        icon: <IconCopy {...menuIconProps} />,
+        onClick: () => {copyFn({item})}
+    };
+
+    const editAction = {
+        key: "edit",
+        icon: <IconEdit {...menuIconProps} />,
+        onClick: () => {editFn(item)},
+    };
+    
+    const moveAction = {
+        key: "move",
+        icon: <IconFileSymlink {...menuIconProps} />,
+        onClick: () => {moveFn({item, collectionList: collections})},
+    };
+
+    const deleteAction = {
+        key: "delete",
+        icon: <IconTrash {...menuIconProps} />,
+        color: "red",
+        onClick: () => {
+            deleteFn({item});
+            deselectFn();
         }
+    };
+
+    const trashAction = {
+        key: "trash",
+        icon: <IconTrash {...menuIconProps} />,
+        color: "red",
+        onClick: () => {
+            trashFn({item});
+            deselectFn();
+        }
+    };
+
+    const untrashAction = {
+        key: "restore",
+        icon: <IconRestore {...menuIconProps} />,
+        onClick: () => {
+            untrashFn({item});
+            deselectFn();
+        }
+    };
+
+    const refetchAction = {
+        key: "refetch",
+        title: "Refetch",
+        hidden: !canRefetchItem(item),
+        icon: <IconDownload {...menuIconProps} />,
+        onClick: () => {refetchFn(item);}
+    };
+
+    const convertToTodoAction = {
+        key: "convertToTodo",
+        title: "Convert to Todo",
+        hidden: !canConvertItemToTodo(item),
+        icon: <IconArrowMoveRight {...menuIconProps} />,
+        color: "orange",
+        onClick: () => {convertToTodoFn({item});}
+    };
+
+    const togglePriActAction = {
+        key: "togglePrimaryAction",
+        title: "To copy",
+        hidden: !canToggleItemShouldCopyOnClick(item),
+        icon: contextMenuDefaultActionIcon,
+        color: "blue",
+        onClick: () => {toggleCopyFn({item})}
+    };
+
+    const divider = {
+        key: "divider",
+    };
+
+    const contextMenuOptions = [
+        copyAction,
+        editAction,
+        moveAction,
+        deleteAction,
+        trashAction,
+        untrashAction,
+        refetchAction,
+        convertToTodoAction,
+        divider,
+        togglePriActAction,
     ];
 
     return contextMenuOptions;
