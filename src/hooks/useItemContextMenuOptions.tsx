@@ -118,23 +118,15 @@ export default function useItemContextMenuOptions(
         key: "divider",
     };
 
-    if (item.isTrashed) {
-        return [
-            copyAction,
-            untrashAction,
-            divider,
-            deleteAction,
-        ];
-    }
-
     return [
         copyAction,
         editAction,
         moveAction,
-        trashAction,
+        item.isTrashed ? untrashAction : trashAction,
         refetchAction,
         convertToTodoAction,
         divider,
         togglePriActAction,
+        item.isTrashed && deleteAction,
     ];
 };
