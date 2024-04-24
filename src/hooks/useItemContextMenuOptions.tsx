@@ -1,6 +1,6 @@
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { Item, ItemCollection } from "@/types";
-import { IconArrowMoveRight, IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconRestore, IconSquare, IconTrash } from "@tabler/icons-react";
+import { IconArrowMoveRight, IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconRestore, IconSquare, IconTrashX } from "@tabler/icons-react";
 import { useContext } from "react";
 import useIconProps from "./useIconProps";
 import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
@@ -61,7 +61,7 @@ export default function useItemContextMenuOptions(
 
     const deleteAction = {
         key: "delete",
-        icon: <IconTrash {...menuIconProps} />,
+        icon: <IconTrashX {...menuIconProps} />,
         color: "red",
         onClick: () => {
             deleteFn({item});
@@ -71,7 +71,7 @@ export default function useItemContextMenuOptions(
 
     const trashAction = {
         key: "trash",
-        icon: <IconTrash {...menuIconProps} />,
+        icon: <IconTrashX {...menuIconProps} />,
         color: "red",
         onClick: () => {
             trashFn({item});
