@@ -82,7 +82,7 @@ export default function KeyboardPromptDisplay() {
             />
             <KeyboardPromptItem
                 prompt={["mod", "Shift", "BkSp"]}
-                desc="Delete item"
+                desc={selectedItem?.isTrashed ? "Delete item" : "Trash item"}
                 shouldDisplay={hasSelectedWithKeyboard}
             />
             {/* <KeyboardPromptItem
