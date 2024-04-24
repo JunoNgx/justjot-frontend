@@ -31,6 +31,8 @@ export default function useItemActions() {
         toggleItemIsTodoDone,
         refetchLinkTitleAndFavicon,
         convertItemToTodo,
+        trashItem,
+        untrashItem,
     } = useItemApiCalls();
     const itemsHandlers = useManageListState(setItems);
     const updateQueueHandlers = useManageListState(setUpdateQueue);
@@ -52,6 +54,8 @@ export default function useItemActions() {
             faviconUrl: "",
             created: currDateTime,
             updated: currDateTime,
+            isTrashed: false,
+            trashedDateTime: "",
             isPending: true,
         };
     };
@@ -344,6 +348,58 @@ export default function useItemActions() {
         });
     };
 
+    const trashItemWithOptimisticUpdate = async (
+        { item }: { item: Item }
+    ) => {
+        if (item.isPending) {
+            displayNotifItemNotReady();
+            return;
+        }
+
+        const index = findIndexById(item.id, items)
+        if (index === -1) return;
+        itemsHandlers.remove(index);
+
+        trashItem({
+            item,
+            errorCallback: (err: ClientResponseError) => {
+                console.error(err);
+                notifications.show({
+                    message: "Error trashing item",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
+            },
+        });
+    };
+
+    const untrashItemWithOptimisticUpdate = async (
+        { item }: { item: Item }
+    ) => {
+        if (item.isPending) {
+            displayNotifItemNotReady();
+            return;
+        }
+
+        const index = findIndexById(item.id, items)
+        if (index === -1) return;
+        itemsHandlers.remove(index);
+
+        untrashItem({
+            item,
+            errorCallback: (err: ClientResponseError) => {
+                console.error(err);
+                notifications.show({
+                    message: "Error trashing item",
+                    color: "red",
+                    autoClose: AUTO_CLOSE_ERROR_TOAST,
+                    withCloseButton: true,
+                });
+            },
+        });
+    };
+
     const computeItemPrimaryAction = (item: Item): ItemAction => {
         switch (true) {
         case (item.type === ItemType.TODO):
@@ -422,5 +478,7 @@ export default function useItemActions() {
         convertToTodo,
         computeItemPrimaryAction,
         executeItemAction,
+        trashItemWithOptimisticUpdate,
+        untrashItemWithOptimisticUpdate,
     }
 };
