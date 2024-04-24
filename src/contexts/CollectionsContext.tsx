@@ -2,6 +2,7 @@ import { ReactNode, createContext, useCallback, useContext, useEffect, useState 
 import { ApiRequestCallbackOptions, DbTable, ItemCollection } from '@/types';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { ClientResponseError } from 'pocketbase';
+import useGenerateTrashBinCollection from '@/hooks/useGenerateTrashBinCollection';
 
 type CollectionsContextType = {
     collections: ItemCollection[],
@@ -50,7 +51,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
             })
             .then((records: ItemCollection[]) => {
                 successfulCallback?.();
-                setCollections(records);
+                setCollections(collectionListWithAppendedTrashBin(records));
             })
             .catch((err: ClientResponseError) => {
                 errorCallback?.();
@@ -59,6 +60,12 @@ export default function CollectionsContextProvider({ children }: { children: Rea
                 }
             });
     }, [isLoggedIn]);
+
+    const collectionListWithAppendedTrashBin = (
+        curr: ItemCollection[]
+    ) => {
+        return [...curr, useGenerateTrashBinCollection(user)];
+    };
 
     const collSelectedIndex = collections.findIndex(c => c.id === currCollection?.id);
 
