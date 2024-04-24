@@ -113,7 +113,7 @@ export default function useItemActions() {
             item,
             successfulCallback: () => {
                 notifications.show({
-                    message: "Item deleted successfully",
+                    message: "Item deleted permanently",
                     color: "none",
                     autoClose: AUTO_CLOSE_DEFAULT,
                 });
@@ -331,7 +331,7 @@ export default function useItemActions() {
                 itemsHandlers.replace(index, record);
 
                 notifications.show({
-                    message: "Item successfully converted to Todo task",
+                    message: "Item converted to Todo task",
                     color: "none",
                     autoClose: AUTO_CLOSE_DEFAULT,
                 });
