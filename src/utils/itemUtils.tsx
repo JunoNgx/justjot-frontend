@@ -24,6 +24,10 @@ export const canConvertItemToTodo = (item: Item) => {
         && item.type === ItemType.TEXT;
 }
 
+export const canTrashItem = (item: Item) => {
+    return !item.isTrashed;
+}
+
 export const computeItemActionString = (
     itemAction: ItemAction
 ): string => {
