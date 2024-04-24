@@ -49,15 +49,26 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
 
         const normalItemsFetchOptions = {
             // Single relation can be used without specifying the id
-            filter: `collection="${currCollection?.id}"`,
+            filter: `collection="${currCollection?.id}" && isTrashed=false`,
             sort: "-created",
             requestKey: "fetch-items",
         }
 
+        const trashedItemsFetchOptions = {
+            // Single relation can be used without specifying the id
+            filter: `isTrashed=true`,
+            sort: "-trashedDateTime",
+            requestKey: "fetch-trashed-items",
+        }
+
+        const fetchOptionsToUse = currCollection.isTrashBin
+            ? trashedItemsFetchOptions
+            : normalItemsFetchOptions;
+
         await pbClient
             .cancelRequest("fetch-items")
             .collection(DbTable.ITEMS)
-            .getFullList(normalItemsFetchOptions)
+            .getFullList(fetchOptionsToUse)
             .then((records: Item[]) => {
                 setItems(records);
             })
