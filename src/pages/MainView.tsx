@@ -12,7 +12,7 @@ import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import MainContentList from "@/components/MainContentList";
 import KeyboardPromptDisplay from "@/components/KeyboardPromptDisplay";
-import DemoUserNotice from "@/components/misc/DemoUserNotice";
+import MainViewNotice from "@/components/misc/MainViewNotice";
 
 export default function MainView() {
     const { isLoggedIn, isDemoUser, refreshAuth } = useContext(BackendClientContext);
@@ -92,7 +92,9 @@ export default function MainView() {
         {/* For non-item components */}
         <CollectionMenu isInMainView={true} />
         <KeyboardPromptDisplay />
-        {isDemoUser && <DemoUserNotice />}
+        {isDemoUser && <MainViewNotice
+            content="You are using the test account. Data are periodically reset."
+        />}
 
         <Stack className="main-view"
             gap="xl"
