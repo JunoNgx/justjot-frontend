@@ -10,6 +10,7 @@ type CollectionsContextType = {
     setCurrCollection: React.Dispatch<React.SetStateAction<ItemCollection | undefined>>,
     trashBin: TrashBin | undefined,
     setTrashBin: React.Dispatch<React.SetStateAction<TrashBin | undefined>>,
+    isTrashCollection: boolean,
     collSelectedIndex: number,
     fetchCollections: ({successfulCallback, errorCallback}?: ApiRequestCallbackOptions) => void,
 };
@@ -88,6 +89,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
     }, [trashBin]);
 
     const collSelectedIndex = collections.findIndex(c => c.id === currCollection?.id);
+    const isTrashCollection = currCollection?.isTrashBin;
 
     return <CollectionsContext.Provider value=
         {{
@@ -99,6 +101,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
             setTrashBin,
 
             collSelectedIndex,
+            isTrashCollection,
             fetchCollections
         }}
     >
