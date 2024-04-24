@@ -63,7 +63,8 @@ export default function Help() {
                 <li><Text><KbdMod/> <Kbd>Shift</Kbd> <Kbd>C</Kbd> to copy item content.</Text></li>
                 <li><Text><KbdMod/> <Kbd>E</Kbd> to edit.</Text></li>
                 <li><Text><KbdMod/> <Kbd>M</Kbd> to move item to another collection.</Text></li>
-                <li><Text><KbdMod/> <Kbd>Shift</Kbd> <Kbd>BkSp</Kbd> to delete item.</Text></li>
+                <li><Text><KbdMod/> <Kbd>Shift</Kbd> <Kbd>BkSp</Kbd> to move an item to the trash bin, or permanently delete a trashed item.</Text></li>
+                <li><Text><KbdMod/> <KbdAlt/> <Kbd>R</Kbd> to restore a trashed item.</Text></li>
                 <li><Text><KbdMod/> <KbdAlt/> <Kbd>4</Kbd> to toggle copying content as item's primary action.</Text></li>
                 <li><Text><KbdMod/> <KbdAlt/> <Kbd>5</Kbd> to refetch a link's metadata.</Text></li>
                 <li><Text><KbdMod/> <KbdAlt/> <Kbd>6</Kbd> to convert a title-less text note to a todo item.</Text></li>
