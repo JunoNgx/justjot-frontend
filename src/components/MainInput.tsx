@@ -13,7 +13,7 @@ import MainInputExtendedMenu from "./MainInputExtendedMenu";
 import { CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TEXT_WITH_TITLE_PREFIX_ALT } from "@/utils/constants";
 
 const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-    const { collections } = useContext(CollectionsContext);
+    const { collections, isTrashCollection } = useContext(CollectionsContext);
     const {
         setIsMainInputFocused,
         inputVal,
@@ -51,6 +51,7 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     } = useItemActions();
 
     const processMainInput = (inputData: string) => {
+        if (isTrashCollection) return;
         if (!inputData) return;
 
         if (inputData.startsWith(CREATE_TEXT_WITH_TITLE_PREFIX)
