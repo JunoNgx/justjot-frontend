@@ -26,6 +26,9 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
     const isMobile = useMediaQuery(`(max-width: ${em(720)})`);
     const { menuIconProps } = useIconProps();
 
+    // The last one is always a trash bin
+    const trashBin = collections[collections.length - 1];
+
     const collectionMenu = <Menu
         position={isInMainView ? "top-end" : "bottom-start"}
         offset={isMobile ? 5 : 15}
@@ -46,15 +49,28 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
         </Menu.Target>
 
         <Menu.Dropdown className="collection-menu-dropdown">
-            {collections?.map((collection: ItemCollection, index: number) =>
-                <MenuItem
-                    key={collection.id}
-                    rightSection={<CollectionHotkey index={index}/>}
-                    onClick={() => trySwitchToCollectionById(collection.id)}
-                >
-                    {collection.name}
-                </MenuItem>
+            {/* Everything except for the trash bin */}
+            {collections?.filter(collection => !collection.isTrashBin)
+                .map((collection: ItemCollection, index: number) =>
+                    <MenuItem
+                        key={collection.id}
+                        rightSection={<CollectionHotkey index={index}/>}
+                        onClick={() => trySwitchToCollectionById(collection.id)}
+                    >
+                        {collection.name}
+                    </MenuItem>
             )}
+
+            <MenuDivider/>
+            {/* The trash bin */}
+            <MenuItem
+                color="violet"
+                leftSection={<IconTrash {...menuIconProps} />}
+                onClick={() => trySwitchToCollectionById(trashBin.id)}
+            >
+                {trashBin?.name}
+            </MenuItem>
+            
             <MenuDivider/>
             <MenuItem
                 leftSection={<IconStackPush {...menuIconProps} />}
