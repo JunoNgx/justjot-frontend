@@ -103,37 +103,38 @@ export default function CollectionsSortModal() {
     }
 
     const draggableItemList = (
-        state.map((collection, index) => <Draggable
-            key={collection.id}
-            index={index}
-            draggableId={collection.id}
-        >
-            {(provided, _snapshot) => {
-                if (_snapshot.isDragging) {
-                    // Hackfix: https://github.com/atlassian/react-beautiful-dnd/issues/1881
-                    // @ts-expect-error
-                    provided.draggableProps.style.left = provided.draggableProps.style.offsetLeft;
-                    // @ts-expect-error
-                    provided.draggableProps.style.top = provided.draggableProps.style.offsetTop;
-                }
+        state.filter(collection => !collection.isTrashBin)
+            .map((collection, index) => <Draggable
+                key={collection.id}
+                index={index}
+                draggableId={collection.id}
+            >
+                {(provided, _snapshot) => {
+                    if (_snapshot.isDragging) {
+                        // Hackfix: https://github.com/atlassian/react-beautiful-dnd/issues/1881
+                        // @ts-expect-error
+                        provided.draggableProps.style.left = provided.draggableProps.style.offsetLeft;
+                        // @ts-expect-error
+                        provided.draggableProps.style.top = provided.draggableProps.style.offsetTop;
+                    }
 
-                return <div className="collections-sort-modal__collection-item"
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    ref={provided.innerRef}
-                >
-                    <Paper withBorder
-                        m="xs"
-                        px="lg"
-                        py="xs"
+                    return <div className="collections-sort-modal__collection-item"
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
                     >
-                        <Text>{collection.name}</Text>
-                    </Paper>
+                        <Paper withBorder
+                            m="xs"
+                            px="lg"
+                            py="xs"
+                        >
+                            <Text>{collection.name}</Text>
+                        </Paper>
 
-                </div>
-            }}
+                    </div>
+                }}
 
-        </Draggable>
+            </Draggable>
         )
     )
 
