@@ -189,7 +189,10 @@ export default function SpotlightSearch() {
             id: `collection-${collection.id}`,
             label: `${collection.name}`,
             description: `/${collection.slug}`,
-            leftSection: <IconStack2 {...spotlightIconProps} />,
+            leftSection: collection.isTrashBin
+                ? <IconTrash color="purple" {...spotlightIconProps} />
+                : <IconStack2 {...spotlightIconProps} />
+            ,
             onClick: () => {trySwitchToCollectionById(collection.id)},
         }));
     }
