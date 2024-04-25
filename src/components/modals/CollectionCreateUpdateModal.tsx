@@ -106,7 +106,8 @@ export default function CollectionCreateUpdateModal(
     }
 
     const handleSuccessfulCreation = (newCollection: ItemCollection) => {
-        collectionsHandlers.append(newCollection);
+        // Last position is Trash bin, so insert to second last
+        collectionsHandlers.insert(collections.length - 2, newCollection);
         setNewlyCreatedCollection(newCollection);
 
         modals.closeAll();
