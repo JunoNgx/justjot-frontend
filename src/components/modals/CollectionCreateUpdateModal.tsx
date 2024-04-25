@@ -40,7 +40,7 @@ export default function CollectionCreateUpdateModal(
     });
     const [isLoading, setIsLoading] = useState(false);
     const [newlyCreatedCollection, setNewlyCreatedCollection] = useState<ItemCollection | null>(null);
-    const itemsHandlers = useManageListState(setCollections);
+    const collectionsHandlers = useManageListState(setCollections);
     const {
         trySwitchToCollectionById,
         tryNavigateToCollection,
@@ -106,7 +106,7 @@ export default function CollectionCreateUpdateModal(
     }
 
     const handleSuccessfulCreation = (newCollection: ItemCollection) => {
-        itemsHandlers.append(newCollection);
+        collectionsHandlers.append(newCollection);
         setNewlyCreatedCollection(newCollection);
 
         modals.closeAll();
@@ -129,7 +129,7 @@ export default function CollectionCreateUpdateModal(
     };
 
     const handleSuccessfulUpdate = (newCollection: ItemCollection) => {
-        itemsHandlers.replace(collSelectedIndex, newCollection);
+        collectionsHandlers.replace(collSelectedIndex, newCollection);
         /**
          * Update the url param slug as a side effect to avoid defaulting back
          * to `collections[0]`
