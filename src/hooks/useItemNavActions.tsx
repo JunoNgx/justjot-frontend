@@ -80,4 +80,4 @@ export default function useItemNavActions() {
         scrollToTop,
         scrollToBottom,
     };
-};
+}

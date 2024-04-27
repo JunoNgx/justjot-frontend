@@ -129,4 +129,4 @@ export default function useItemContextMenuOptions(
         togglePriActAction,
         item.isTrashed && deleteAction,
     ];
-};
+}

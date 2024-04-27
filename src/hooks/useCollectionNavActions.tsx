@@ -54,7 +54,7 @@ export default function useCollectionNavActions() {
     }
 
     const trySwitchToNextCollection = () => {
-        if (collSelectedIndex === collections?.length! - 1) return;
+        if (collSelectedIndex === collections?.length - 1) return;
 
         trySwitchToCollectionByIndex(collSelectedIndex + 1);
     }
@@ -83,4 +83,4 @@ export default function useCollectionNavActions() {
         trySwitchToCollectionByIndex,
         tryNavigateToCollection,
     }
-};
+}

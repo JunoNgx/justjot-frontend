@@ -430,7 +430,7 @@ export default function useItemActions() {
             return ItemAction.OPEN_LINK;
         default:
             return ItemAction.EDIT;
-        };
+        }
     };
 
     const executeItemAction = (
@@ -452,10 +452,6 @@ export default function useItemActions() {
 
             case (ItemAction.MOVE):
                 openMoveItemModal({item, collectionList: collections});
-                break;
-
-            case (ItemAction.TOGGLE_IS_DONE):
-                toggleItemIsTodoDoneWithOptimisticUpdate({item});
                 break;
 
             case (ItemAction.DELETE):
@@ -489,8 +485,8 @@ export default function useItemActions() {
             case (ItemAction.EDIT):
             default:
                 openUpdateItemModal(item);
-        };
-    };        
+        }
+    };
 
     return {
         createItemWithOptimisticUpdate,
@@ -509,4 +505,4 @@ export default function useItemActions() {
         trashItemWithOptimisticUpdate,
         untrashItemWithOptimisticUpdate,
     }
-};
+}
