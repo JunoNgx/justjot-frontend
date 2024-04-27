@@ -9,6 +9,7 @@ export default function ErrorResponseDisplay(
     { errRes }: { errRes: ErrorResponse | null }
 ) {
     const tryTranscribeDataToProblemList = (
+        /* eslint-disable  @typescript-eslint/no-explicit-any */
         data: any
     ): string[] => {
 
@@ -20,7 +21,7 @@ export default function ErrorResponseDisplay(
                 const errorMsg = value.message;
                 problemList.push(errorMsg);
             });
-        };
+        }
 
         return problemList;
     };

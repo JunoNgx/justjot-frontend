@@ -172,7 +172,7 @@ export default function KeyboardPromptDisplay() {
             {isExpanded ? collapseButton : expandButton}
         </Group>
     </Paper>
-};
+}
 
 // const CustomKeyboardPromptItem = (
 //     {leftSection, desc, shouldDisplay = true}: CustomKeyboardPromptItemOptions

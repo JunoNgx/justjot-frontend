@@ -22,4 +22,4 @@ export default function MainContentList(
     return isLoading
         ? skeletonList
         : displayedItemList;
-};
+}

@@ -111,4 +111,4 @@ export default function MainInputExtendedMenu(
             </Menu.Item>
         </Menu.Dropdown>
     </Menu>
-};
+}

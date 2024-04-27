@@ -229,4 +229,4 @@ export default function SpotlightSearch() {
         highlightQuery
         scrollable
     />
-};
+}
