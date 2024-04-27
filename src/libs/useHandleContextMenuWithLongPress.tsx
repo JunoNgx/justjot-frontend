@@ -17,11 +17,11 @@ import { useCallback, useRef } from "react";
 interface PressHandlers {
     onClick: (e: React.MouseEvent | React.TouchEvent) => void,
     onLongPress: (e: React.MouseEvent | React.TouchEvent) => void,
-};
+}
 
 interface Options {
     delay?: number,
-};
+}
 
 export default function useHandleContextMenuWithLongPress(
     { onClick, onLongPress }: PressHandlers,
@@ -69,4 +69,4 @@ export default function useHandleContextMenuWithLongPress(
         onMouseMove: (e: React.MouseEvent) => clear(e),
         onMouseLeave: (e: React.MouseEvent) => clear(e),
     };
-};
+}

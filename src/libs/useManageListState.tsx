@@ -61,4 +61,4 @@ export default function useManageListState<T>(
         replace,
         replaceProps,
     };
-};
+}
