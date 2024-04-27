@@ -1,4 +1,4 @@
-import { canRefetchItem, canToggleItemShouldCopyOnClick, findIndexById, isValidHexColourCode } from "./itemUtils";
+import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick, findIndexById, isValidHexColourCode } from "./itemUtils";
 import * as items from "@/tests/fixtures/items.json";
 
 describe("itemUtils", () => {
@@ -45,6 +45,24 @@ describe("itemUtils", () => {
         });
         test("Text note", () => {
             expect(canRefetchItem(items[0])).toBe(false);
+        });
+    });
+
+    describe("canConvertItemToTodo", () => {
+        test("Text note without title", () => {
+            expect(canConvertItemToTodo(items[6])).toBe(true);
+        });
+        test("Text note with title and content", () => {
+            expect(canConvertItemToTodo(items[7])).toBe(false);
+        });
+        test("Text note with title but no content", () => {
+            expect(canConvertItemToTodo(items[5])).toBe(false);
+        });
+        test("Link", () => {
+            expect(canConvertItemToTodo(items[4])).toBe(false);
+        });
+        test("Todo", () => {
+            expect(canConvertItemToTodo(items[0])).toBe(false);
         });
     });
 });
