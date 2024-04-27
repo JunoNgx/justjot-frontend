@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { modals } from "@mantine/modals";
 import { getCurrHighestCollectionSortOrder } from "@/utils/collectionUtils";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
-import { slugify } from "@/utils/miscUtils";
+import kebabCase from "lodash-es/kebabCase";
 import useCollectionApiCalls from "@/hooks/useCollectionApiCalls";
 import { ItemCollection } from "@/types";
 import { ClientResponseError } from "pocketbase";
@@ -57,7 +57,7 @@ export default function CollectionCreateUpdateModal(
 
     const handleSubmit = async (formData: CollectionCreateUpdateFormData) => {
         const { name, slug: originalSlug } = formData;
-        const slug = slugify(originalSlug);
+        const slug = kebabCase(originalSlug);
 
         if (isEditMode) {
             if (currCollection?.isTrashBin) {
@@ -95,13 +95,13 @@ export default function CollectionCreateUpdateModal(
 
         form.setValues({
             name: newVal,
-            slug: slugify(newVal)
+            slug: kebabCase(newVal)
         });
     }
 
     const handleSlugChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         form.setValues({
-            slug: slugify(e.target.value)
+            slug: kebabCase(e.target.value)
         });
     }
 
