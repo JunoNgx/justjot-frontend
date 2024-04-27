@@ -81,14 +81,14 @@ export default function ItemComponent(
     const isLink = item.type === ItemType.LINK;
     const shouldRenderAsAnchor = isLink && !item.shouldCopyOnClick;
     const anchorProps = shouldRenderAsAnchor
-    ? {
-        component: "a" as any,
-        href: item.content,
-        rel: "noopener noreferrer",
-        target: "_blank",
-        "aria-label": "Link to this item content",
-    }
-    : {};
+        ? {
+            component: "a",
+            href: item.content,
+            rel: "noopener noreferrer",
+            target: "_blank",
+            "aria-label": "Link to this item content",
+        }
+        : {};
 
     return <Group className={computeClassname(item, isSelected)}
         justify="space-between"
@@ -124,7 +124,7 @@ export default function ItemComponent(
         </Group>
 
     </Group>
-};
+}
 
 const computeClassname = (item: Item, isSelected: boolean) => {
     const isSelectedModifier = isSelected

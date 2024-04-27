@@ -18,4 +18,4 @@ export default function ItemSkeleton() {
             />
         </Group>
     </Group>
-};
+}

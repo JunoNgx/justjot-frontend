@@ -87,4 +87,4 @@ export default function ItemComponentText({ item }: { item: Item }) {
             )}
         </Transition>
     </Group>);
-};
+}

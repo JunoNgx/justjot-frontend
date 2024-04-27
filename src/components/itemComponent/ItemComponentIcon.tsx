@@ -36,7 +36,7 @@ export default function ItemComponentIcon(
         default:
             return <IconFileText {...itemIcontProps} />
     }
-};
+}
 
 const FaviconImg = ({ faviconUrl }: { faviconUrl: string }) => {
 
