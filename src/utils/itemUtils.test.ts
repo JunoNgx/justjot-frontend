@@ -1,4 +1,4 @@
-import { findIndexById, isValidHexColourCode } from "./itemUtils";
+import { canToggleItemShouldCopyOnClick, findIndexById, isValidHexColourCode } from "./itemUtils";
 import * as items from "@/tests/fixtures/items.json";
 
 describe("itemUtils", () => {
@@ -21,6 +21,18 @@ describe("itemUtils", () => {
 
         test("No item found", () => {
             expect(findIndexById("zzzzzzz", items)).toBe(-1);
+        });
+    });
+
+    describe("canToggleItemShouldCopyOnClick", () => {
+        test("Text note", () => {
+            expect(canToggleItemShouldCopyOnClick(items[6])).toBe(true);
+        });
+        test("Link", () => {
+            expect(canToggleItemShouldCopyOnClick(items[4])).toBe(true);
+        });
+        test("Todo", () => {
+            expect(canToggleItemShouldCopyOnClick(items[0])).toBe(false);
         });
     });
 });
