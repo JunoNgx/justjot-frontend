@@ -11,4 +11,4 @@ export default function KbdAlt() {
     default:
         return <Kbd>Alt</Kbd>;
     }
-};
+}

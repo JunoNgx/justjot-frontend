@@ -11,4 +11,4 @@ export default function KbdMod() {
     default:
         return <Kbd>Ctrl</Kbd>;
     }
-};
+}
