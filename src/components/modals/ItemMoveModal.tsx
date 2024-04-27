@@ -118,4 +118,4 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
             </Group>}
         </Stack>
     </FocusTrap>  
-};
+}

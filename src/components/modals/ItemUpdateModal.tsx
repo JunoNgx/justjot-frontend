@@ -264,4 +264,4 @@ export default function ItemUpdateModal(
             }
         </Group>
     </Stack>
-};
+}
