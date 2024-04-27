@@ -26,4 +26,4 @@ export default function EventBusContextProvider(
     }}>
         {children}
     </EventBusContext.Provider>
-};
+}
