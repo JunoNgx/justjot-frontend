@@ -14,4 +14,4 @@ export default function ProfileChangePassword() {
         
         <Text>For password changes, please use the <Anchor component={Link} to="/reset">password reset form</Anchor>.</Text>
     </Paper>
-};
+}

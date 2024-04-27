@@ -13,4 +13,4 @@ export default function ProfileTestAccountNotice() {
         
         <Text>Several functionalities are limited and/or not displayed for the test account.</Text>
     </Paper>
-};
+}

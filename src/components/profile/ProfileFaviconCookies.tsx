@@ -31,4 +31,4 @@ export default function ProfileFaviconCookies() {
             label="I would like to enable the display of favicons and related third-party cookies for this device"
         />
     </Paper>
-};
+}

@@ -89,4 +89,4 @@ export default function ProfileChangeDisplayName() {
             <ErrorResponseDisplay errRes={errRes} />
         }
     </Paper>
-};
+}

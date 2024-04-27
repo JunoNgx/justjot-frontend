@@ -21,4 +21,4 @@ export default function ProfileAccountDeletion() {
         <Code>[JustJot] Account deletion request</Code>
 
     </Paper>
-};
+}
