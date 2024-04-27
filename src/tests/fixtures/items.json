@@ -44,7 +44,7 @@
       "isTodoDone": false,
       "isTrashed": false,
       "owner": "jh96fp60mggt4m7",
-      "shouldCopyOnClick": false,
+      "shouldCopyOnClick": true,
       "title": "A link that should copy on click",
       "trashedDateTime": "",
       "type": "link",
