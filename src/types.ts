@@ -46,7 +46,7 @@ export enum ItemType {
     TEXT = "text",
     LINK = "link",
     TODO = "todo"
-};
+}
 
 export enum ItemAction {
     COPY = "copy",
@@ -60,12 +60,12 @@ export enum ItemAction {
     CONVERT_TO_TODO = "convertToTodo",
     TRASH = "trash",
     UNTRASH = "untrash",
-};
+}
 
 export enum RequestPageType {
     PASSWORD_CHANGE = "passwordChange",
     EMAIL_VERIFY = "emailVerify"
-};
+}
 
 export type User = (RecordModel | {
     id: string,
@@ -78,28 +78,30 @@ export enum ThemeMode {
     LIGHT = "light",
     DARK = "dark",
     AUTO = "auto"
-};
+}
 
 export enum ComputedThemeMode {
     LIGHT = "light",
     DARK = "dark"
-};
+}
 
 export enum UserType {
     USER = "user",
     ADMIN = "admin",
     POWERUSER = "poweruser"
-};
+}
 
 export enum DbTable {
     USERS = "users",
     ITEMS = "items",
     COLLECTIONS = "itemCollections",
     TRASH_BINS = "trashBins",
-};
+}
 
 export type ApiRequestCallbackOptions = {
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
     successfulCallback?: (response?: any) => void,
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
     errorCallback?: (err?: any) => void,
     setLoadingState?: React.Dispatch<React.SetStateAction<boolean>>,
 };
