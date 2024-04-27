@@ -27,4 +27,4 @@ export default function Terms() {
         </Box>
 
     </Paper>
-};
+}

@@ -77,7 +77,7 @@ export default function MainView() {
         if (!collectionSlug) {
             trySwitchToCollectionByIndex(0)
             return;
-        };
+        }
         if (collectionSlug === currCollection?.slug) return;
 
         trySwitchToCollectionBySlug(collectionSlug);
