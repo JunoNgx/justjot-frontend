@@ -1,4 +1,4 @@
-import * as collections from "@/tests/fixtures/collections.json";
+import collections from "@/tests/fixtures/collections.json";
 import { getCurrHighestCollectionSortOrder } from "./collectionUtils";
 
 describe("collectionUtils", () => {

@@ -1,5 +1,5 @@
 import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick, findIndexById, isValidHexColourCode } from "./itemUtils";
-import * as items from "@/tests/fixtures/items.json";
+import items from "@/tests/fixtures/items.json";
 
 describe("itemUtils", () => {
     describe("isValidHexColourCode", () => {
