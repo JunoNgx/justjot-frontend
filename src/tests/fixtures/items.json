@@ -117,5 +117,22 @@
       "trashedDateTime": "",
       "type": "text",
       "updated": "2024-04-27 10:04:59.615Z"
+    },
+    {
+        "collection": "xtncm54bmxtvh1k",
+        "collectionId": "zge7ncngf5zodei",
+        "collectionName": "items",
+        "content": "Content sample",
+        "created": "2024-04-27 10:02:24.563Z",
+        "faviconUrl": "",
+        "id": "o9t5o6fpehcd0pw",
+        "isTodoDone": false,
+        "isTrashed": false,
+        "owner": "jh96fp60mggt4m7",
+        "shouldCopyOnClick": false,
+        "title": "A normal text note",
+        "trashedDateTime": "",
+        "type": "text",
+        "updated": "2024-04-27 10:45:24.565Z"
     }
 ]
