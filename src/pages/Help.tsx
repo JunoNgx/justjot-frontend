@@ -178,7 +178,7 @@ export default function Help() {
             <Text>As of time of writing, the <Code>navigator.clipboard.readText</Code> interface is not supported in Firefox, and I have decided to not further complicate the codebase with any workaround.</Text>
 
             <Title order={4}>Why are your keyboard shortcuts so strange and unintuitive?</Title>
-            <Text>Outside of tackling a relatively uncharted matter of keyboard-first design, JustJot is also burdened to accommodate the wide range of operating systems that can access the web, including, but not limited to: distributions of Linux, Windows, Android, MacOS, and iOS. While certain keys appear available on your current setup, they might not be on other users' systems. The keyboard shortcuts for item actions are also designed strictly to not interfere with the main input typing operations.</Text>
+            <Text>Outside of tackling a relatively uncharted matter of keyboard-first design, JustJot is also burdened to accommodate the wide range of operating systems that can access the web, including, but not limited to: Windows, Android, MacOS, iOS, and distributions of Linux. While certain keys appear available on your current setup, they might not be on other users' systems. The keyboard shortcuts for item actions are also designed strictly to not interfere with the main input typing operations.</Text>
             <Text>The following keyboard shortcuts are known conflicts that we have eliminated during the development:</Text>
             <ul>
                 <li><Text><Kbd>Cmd</Kbd> <Kbd>C</Kbd> [iOS] Copy highlighted text.</Text></li>
