@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 
 export default function ItemComponentCreatedDate(
     { createdDatetime, className }:
-    { createdDatetime: string, className: string}
+    { createdDatetime: string, className?: string}
 ) {
 
     const itemDatetime = DateTime.fromSQL(createdDatetime);
@@ -25,6 +25,7 @@ export default function ItemComponentCreatedDate(
 
     return <Text className={className}
         title={fullDateTime}
+        data-testid="item-component-created-date"
     >
         {computeDisplayedDateTime()}
     </Text>   
