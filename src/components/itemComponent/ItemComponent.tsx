@@ -96,6 +96,7 @@ export default function ItemComponent(
         data-index={index}
         {...anchorProps}
         role={isLink ? "link" : "button"}
+        aria-current={isSelected}
         {...clickEventsProps}
         onMouseEnter={() => { setSelectedIndex(index)}}
         onMouseLeave={() => { setSelectedIndex(-1)}}
