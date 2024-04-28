@@ -63,6 +63,7 @@ export default function useItemContextMenuOptions(
         key: "delete",
         icon: <IconTrashX {...menuIconProps} />,
         color: "red",
+        hidden: !item.isTrashed,
         onClick: () => {
             deleteFn({item});
             deselectFn();
@@ -73,6 +74,7 @@ export default function useItemContextMenuOptions(
         key: "trash",
         icon: <IconTrashX {...menuIconProps} />,
         color: "red",
+        hidden: item.isTrashed,
         onClick: () => {
             trashFn({item});
             deselectFn();
@@ -82,6 +84,7 @@ export default function useItemContextMenuOptions(
     const untrashAction = {
         key: "restore",
         icon: <IconRestore {...menuIconProps} />,
+        hidden: !item.isTrashed,
         onClick: () => {
             untrashFn({item});
             deselectFn();
@@ -122,11 +125,12 @@ export default function useItemContextMenuOptions(
         copyAction,
         editAction,
         moveAction,
-        item.isTrashed ? untrashAction : trashAction,
+        trashAction,
+        untrashAction,
         refetchAction,
         convertToTodoAction,
         divider,
         togglePriActAction,
-        item.isTrashed && deleteAction,
+        deleteAction,
     ];
 }
