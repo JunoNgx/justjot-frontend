@@ -9,7 +9,7 @@ import { MantineProvider } from '@mantine/core';
 
 describe("ItemComponentCreatedDate", () => {
 
-    const mockedNowDateTime = DateTime.utc(2024, 4, 27, 18, 0, 0);
+    const mockedNowDateTime = DateTime.local(2024, 4, 27, 18, 0, 0, {zone: "Asia/Singapore"});
     Settings.now = () => mockedNowDateTime.toMillis();
 
     const renderItemComponentCreatedTime = (createdTimeString: string) => render(
