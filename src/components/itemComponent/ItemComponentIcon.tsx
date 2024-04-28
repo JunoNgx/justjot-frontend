@@ -11,11 +11,11 @@ export default function ItemComponentIcon(
 ) {
 
     const { isFaviconEnabled } = useContext(UserLocalSettingsContext);
-    const { itemIcontProps } = useIconProps();
+    const { itemIconProps } = useIconProps();
     const lastSevenChars = item.content.substring(item.content.length - 7);
 
     if (item.isPending)
-        return <IconHourglassLow {...itemIcontProps} />
+        return <IconHourglassLow {...itemIconProps} />
 
     if (isValidHexColourCode(lastSevenChars) && item.type !== ItemType.TODO)
         return <div className="item__icon-colour"
@@ -26,21 +26,21 @@ export default function ItemComponentIcon(
     switch (item.type) {
         case ItemType.TODO:
             return item.isTodoDone
-                ? <IconCheckbox {...itemIcontProps} />
-                : <IconSquare {...itemIcontProps} />
+                ? <IconCheckbox {...itemIconProps} />
+                : <IconSquare {...itemIconProps} />
         case ItemType.LINK:
             return item.faviconUrl && isFaviconEnabled
                 ? <FaviconImg faviconUrl={item.faviconUrl}/>
-                : <IconWorld {...itemIcontProps} />
+                : <IconWorld {...itemIconProps} />
         case ItemType.TEXT:
         default:
-            return <IconFileText {...itemIcontProps} />
+            return <IconFileText {...itemIconProps} />
     }
 }
 
 const FaviconImg = ({ faviconUrl }: { faviconUrl: string }) => {
 
-    const { itemIcontProps } = useIconProps();
+    const { itemIconProps } = useIconProps();
     const [ shouldShow, setShouldShow] = useState(true)
     
     return shouldShow
@@ -50,5 +50,5 @@ const FaviconImg = ({ faviconUrl }: { faviconUrl: string }) => {
             // onLoad={() => setShouldShow(true)}
             onError={() => setShouldShow(false)}
         />
-        : <IconWorld {...itemIcontProps} />
+        : <IconWorld {...itemIconProps} />
 };

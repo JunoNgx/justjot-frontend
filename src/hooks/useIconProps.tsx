@@ -1,6 +1,6 @@
 export default function useIconProps() {
 
-    const itemIcontProps = {
+    const itemIconProps = {
         size: 24,
         stroke: 1,
     };
@@ -37,7 +37,7 @@ export default function useIconProps() {
     }
 
     return {
-        itemIcontProps,
+        itemIconProps,
         themeModeIconProps,
         menuIconProps,
         mainInputIconProps,
