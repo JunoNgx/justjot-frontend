@@ -3,7 +3,7 @@ import { Item, ItemCollection } from "@/types";
 import { IconArrowMoveRight, IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconRestore, IconSquare, IconTrashX } from "@tabler/icons-react";
 import { useContext } from "react";
 import useIconProps from "./useIconProps";
-import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick } from "@/utils/itemUtils";
+import { canConvertItemToTodo, canDeleteItem, canRefetchItem, canToggleItemShouldCopyOnClick, canTrashItem } from "@/utils/itemUtils";
 
 type ItemContextMenuOptionsParams = {
     item: Item,
@@ -63,7 +63,7 @@ export default function useItemContextMenuOptions(
         key: "delete",
         icon: <IconTrashX {...menuIconProps} />,
         color: "red",
-        hidden: !item.isTrashed,
+        hidden: !canDeleteItem(item),
         onClick: () => {
             deleteFn({item});
             deselectFn();
@@ -74,7 +74,7 @@ export default function useItemContextMenuOptions(
         key: "trash",
         icon: <IconTrashX {...menuIconProps} />,
         color: "red",
-        hidden: item.isTrashed,
+        hidden: !canTrashItem(item),
         onClick: () => {
             trashFn({item});
             deselectFn();
@@ -84,7 +84,7 @@ export default function useItemContextMenuOptions(
     const untrashAction = {
         key: "restore",
         icon: <IconRestore {...menuIconProps} />,
-        hidden: !item.isTrashed,
+        hidden: canTrashItem(item),
         onClick: () => {
             untrashFn({item});
             deselectFn();
