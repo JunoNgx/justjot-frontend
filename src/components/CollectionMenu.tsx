@@ -51,27 +51,14 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
         <Menu.Dropdown className="collection-menu-dropdown">
             {/* Everything except for the trash bin */}
             {collections?.filter(collection => !collection.isTrashBin)
-                .map((collection: ItemCollection, index: number) => {
-
-                    const isSelected = currCollection?.id === collection.id;
-                    const baseClassName = "collection-menu-dropdown__item "
-                    const modifierClassName = isSelected
-                            ? "collection-menu-dropdown__item--current"
-                            : "";
-                    const rightSection = isSelected
-                        ? <IconCheck {...menuIconProps} />
-                        : <CollectionHotkey index={index}/>
-
-                    return <MenuItem
-                        className={baseClassName + modifierClassName}
+                .map((collection: ItemCollection, index: number) =>
+                    <CollectionMenuCollectionItem
                         key={collection.id}
-                        rightSection={rightSection}
-                        aria-current={isSelected}
-                        onClick={() => trySwitchToCollectionById(collection.id)}
-                    >
-                        {collection.name}
-                    </MenuItem>
-                }
+                        index={index}
+                        collection={collection}
+                        isSelected={currCollection?.id === collection.id}
+                        onClickHandler={trySwitchToCollectionById}
+                    />
             )}
 
             <MenuDivider/>
@@ -117,4 +104,35 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
     </Menu>
 
     return (isLoggedIn && currCollection) && collectionMenu;
+}
+
+type CollectionMenuCollectionItemProps = {
+    collection: ItemCollection,
+    index: number,
+    isSelected: boolean,
+    onClickHandler: (collectionId: string) => void;
+};
+
+const CollectionMenuCollectionItem = (
+    { collection, index, isSelected, onClickHandler }: CollectionMenuCollectionItemProps
+) => {
+    const { menuIconProps } = useIconProps();
+
+    const baseClassName = "collection-menu-dropdown__item "
+    const modifierClassName = isSelected
+            ? "collection-menu-dropdown__item--current"
+            : "";
+    const rightSection = isSelected
+        ? <IconCheck {...menuIconProps} />
+        : <CollectionHotkey index={index}/>
+
+    return <MenuItem
+        className={baseClassName + modifierClassName}
+        key={collection.id}
+        rightSection={rightSection}
+        aria-current={isSelected}
+        onClick={() => onClickHandler(collection.id)}
+    >
+        {collection.name}
+    </MenuItem>
 }
