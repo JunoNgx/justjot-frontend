@@ -60,12 +60,14 @@ export default function ItemComponentText({ item }: { item: Item }) {
                 {item.title && <Text className="item__primary-text"
                     title={item.title}
                     style={transitionStyle}
+                    data-testid="item-component-primary-text"
                 >
                     {item.title.substring(0, CHAR_DISPLAY_COUNT)}
                 </Text>}
                 {item.content && <Text className="item__secondary-text"
                     title={item.content}
                     style={transitionStyle}
+                    data-testid="item-component-secondary-text"
                 >
                     {item.content.substring(0, CHAR_DISPLAY_COUNT)}
                 </Text>}
