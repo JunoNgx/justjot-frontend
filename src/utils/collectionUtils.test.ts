@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest';
 import collections from "@/tests/fixtures/collections.json";
 import { getCurrHighestCollectionSortOrder } from "./collectionUtils";
 
