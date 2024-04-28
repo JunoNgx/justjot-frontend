@@ -37,4 +37,10 @@
     max-height: 80vh;
     overflow-y: auto;
     scrollbar-width: thin;
+
+    &__item {
+        &--current {
+            font-weight: 700;
+        }
+    }
 }

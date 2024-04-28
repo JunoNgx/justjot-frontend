@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Group, Menu, MenuDivider, MenuItem, Text, UnstyledButton, em } from "@mantine/core";
 import { ItemCollection } from "@/types";
 import { useMediaQuery } from "@mantine/hooks";
-import { IconEdit, IconSelector, IconSortAscendingShapes, IconStackPush, IconTrash, IconTrashX } from "@tabler/icons-react";
+import { IconCheck, IconEdit, IconSelector, IconSortAscendingShapes, IconStackPush, IconTrash, IconTrashX } from "@tabler/icons-react";
 
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
 import useCollectionDeletion from "@/hooks/useCollectionDeletion";
@@ -51,14 +51,27 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
         <Menu.Dropdown className="collection-menu-dropdown">
             {/* Everything except for the trash bin */}
             {collections?.filter(collection => !collection.isTrashBin)
-                .map((collection: ItemCollection, index: number) =>
-                    <MenuItem
+                .map((collection: ItemCollection, index: number) => {
+
+                    const isSelected = currCollection?.id === collection.id;
+                    const baseClassName = "collection-menu-dropdown__item "
+                    const modifierClassName = isSelected
+                            ? "collection-menu-dropdown__item--current"
+                            : "";
+                    const rightSection = isSelected
+                        ? <IconCheck {...menuIconProps} />
+                        : <CollectionHotkey index={index}/>
+
+                    return <MenuItem
+                        className={baseClassName + modifierClassName}
                         key={collection.id}
-                        rightSection={<CollectionHotkey index={index}/>}
+                        rightSection={rightSection}
+                        aria-current={isSelected}
                         onClick={() => trySwitchToCollectionById(collection.id)}
                     >
                         {collection.name}
                     </MenuItem>
+                }
             )}
 
             <MenuDivider/>
