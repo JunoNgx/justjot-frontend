@@ -44,7 +44,6 @@ describe("ItemComponentCreatedDate", () => {
         renderItemComponentCreatedTime(items[5].created)
         const itemCreatedDatetime = await screen
             .findByTestId("item-component-created-date");
-        screen.debug()
         expect(itemCreatedDatetime.textContent).toBe("12:05");
     });
 });
