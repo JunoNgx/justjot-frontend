@@ -9,8 +9,9 @@ import { MantineProvider } from '@mantine/core';
 
 describe("ItemComponentCreatedDate", () => {
 
-    const mockedNowDateTime = DateTime.local(2024, 4, 27, 18, 0, 0, {zone: "Asia/Singapore"});
+    const mockedNowDateTime = DateTime.utc(2024, 4, 27, 18, 0, 0);
     Settings.now = () => mockedNowDateTime.toMillis();
+    Settings.defaultZone = "Europe/Berlin";
 
     const renderItemComponentCreatedTime = (createdTimeString: string) => render(
         <MantineProvider
@@ -43,6 +44,7 @@ describe("ItemComponentCreatedDate", () => {
         renderItemComponentCreatedTime(items[5].created)
         const itemCreatedDatetime = await screen
             .findByTestId("item-component-created-date");
-        expect(itemCreatedDatetime.textContent).toBe("18:05");
+        screen.debug()
+        expect(itemCreatedDatetime.textContent).toBe("12:05");
     });
 });
