@@ -7,7 +7,7 @@ import ItemComponentText from '@/components/itemComponent/ItemComponentText';
 import { Item } from '@/types';
 import EventBusContextProvider from '@/contexts/EventBusContext';
 
-describe.only("ItemComponentText", () => {
+describe("ItemComponentText", () => {
 
     const renderItemComponentText = (item: Item) => render(
         <MantineProvider

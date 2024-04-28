@@ -7,7 +7,7 @@ import { DateTime, Settings } from 'luxon';
 import ItemComponentCreatedDate from '@/components/itemComponent/ItemComponentCreatedDate';
 import { MantineProvider } from '@mantine/core';
 
-describe.only("ItemComponentCreatedDate", () => {
+describe("ItemComponentCreatedDate", () => {
 
     const mockedNowDateTime = DateTime.utc(2024, 4, 27, 18, 0, 0);
     Settings.now = () => mockedNowDateTime.toMillis();
