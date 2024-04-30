@@ -160,7 +160,11 @@ export default function Help() {
         >
             <Title order={3}>Spotlight</Title>
             <Text>Accessed by pressing <KbdMod/> <Kbd>K</Kbd> or <KbdMod/> <Kbd>P</Kbd> anywhere within the app, or from the Main Input extended menu.</Text>
-            <Text>It serves as the global navigation menu. Use it to search for actions and collections quickly.</Text>
+            <Text>It serves as the global navigation menu. Use it to search for actions and collections quickly. For easy references:</Text>
+            <ul>
+                <li><Text>Navigation actions start with the slash character <Code>/</Code>.</Text></li>
+                <li><Text>Performative actions start with the period <Code>.</Code>.</Text></li>
+            </ul>
         </Box>
 
         <Box className="cardlike__man-section"
