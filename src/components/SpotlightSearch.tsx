@@ -42,7 +42,7 @@ export default function SpotlightSearch() {
         actions: [
             {
                 id: "help",
-                label: "Help / User Manual",
+                label: "Help (User Manual)",
                 description: "/help-man",
                 leftSection: <IconHelp {...spotlightIconProps} />,
                 onClick: navigateToHelp,
