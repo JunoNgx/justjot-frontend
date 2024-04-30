@@ -33,7 +33,7 @@ export default function Help() {
 
             <Title order={3}>Keyboard shortcuts</Title>
             <Title order={4}>Operating systems</Title>
-            <Text>This application takes your operating system into account; <Kbd>Mod</Kbd> is appropriately assigned and displayed as either <Kbd>Ctrl</Kbd> or <Kbd>Cmd</Kbd>, depending on whether your are on Linux/Windows/Android or iOS/MacOS. Similarly for <Kbd>Alt</Kbd> and <Kbd>Opt</Kbd>. This is applicable to any contexual prompt display throughout the app, including this document.</Text>
+            <Text>This application takes your operating system into account; <Kbd>Mod</Kbd> is appropriately assigned and displayed as either <Kbd>Ctrl</Kbd> or <Kbd>Cmd</Kbd>, depending on whether your are on Windows or Linux, or a Mac-based OS. Similarly for <Kbd>Alt</Kbd> and <Kbd>Opt</Kbd>. This is applicable to any contexual prompt display throughout the app, including this document.</Text>
 
             <Title order={4}>Everywhere</Title>
             <ul>
