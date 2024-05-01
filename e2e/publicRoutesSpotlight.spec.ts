@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('Navigating public routes, using Spotlight', async ({ page }) => {
     const spotlightTextboxSelector = 'input.mantine-Spotlight-search';
 
-    await page.goto('http://localhost:4173/');
+    await page.goto('/');
 
     await page.locator('body').press('Control+k');
     await expect(page.locator(spotlightTextboxSelector)).toBeVisible();

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Navigating public routes, using pointer', async ({ page }) => {
-    await page.goto('http://localhost:4173/');
+    await page.goto('/');
 
     // Landing page
     await expect(page.getByRole('heading', { name: 'JustJot' })).toBeVisible();

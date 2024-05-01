@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Accessing test account', async ({ page }) => {
-    await page.goto('http://localhost:4173/');
+    await page.goto('/');
 
     await expect(page.getByText('Just want to take a look?Account-free live demo availableTry now')).toBeVisible();
     await expect(page.getByRole('link', { name: 'Try now' })).toBeVisible();
