@@ -11,7 +11,7 @@ export default function ItemComponentText({ item }: { item: Item }) {
     const { emitter } = useContext(EventBusContext);
 
     const [ hasCopied, setHasCopied ] = useState(false);
-    const timeoutCopyRef = useRef<number|undefined>(undefined);
+    const timeoutCopyRef = useRef<ReturnType<typeof setTimeout>|undefined>(undefined);
 
     useEffect(() => {
         emitter.on("copyItemContent", handleCopyItemContentEvent);

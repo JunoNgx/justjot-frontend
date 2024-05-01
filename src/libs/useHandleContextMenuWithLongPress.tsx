@@ -27,7 +27,7 @@ export default function useHandleContextMenuWithLongPress(
     { onClick, onLongPress }: PressHandlers,
     { delay = 300 } : Options = {},
 ) {
-    const timeout = useRef<number>();
+    const timeout = useRef<ReturnType<typeof setTimeout>>();
 
     const start = useCallback((
         e: React.MouseEvent | React.TouchEvent
