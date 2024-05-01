@@ -66,7 +66,7 @@ export default defineConfig({
     command: 'yarn serve',
     // url: 'http://127.0.0.1:3000',
     url: 'http://localhost:4173/',
-    // reuseExistingServer: !process.env.CI,
+    reuseExistingServer: !process.env.CI,
     timeout: 5 * 1000,
   },
   use: {
