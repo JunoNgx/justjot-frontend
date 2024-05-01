@@ -8,6 +8,8 @@ test.describe("Item actions", () => {
         await page.getByPlaceholder('lucatiel@mirrah.com').fill('e2eTestAcc');
         await page.getByPlaceholder('BearSeekSeekLest').fill('testaccount');
         await page.getByPlaceholder('BearSeekSeekLest').press('Enter');
+        await page.waitForTimeout(7000);
+        await expect(page.locator("header .collection-menu-btn")).toContainText('Logbook');
     });
 
     test("Regular note without title, with keyboard", async ({ page }) => {
@@ -20,6 +22,9 @@ test.describe("Item actions", () => {
         // Edit
         await page.getByLabel('Main input', { exact: true }).press('ArrowDown');
         await page.getByLabel('Main input', { exact: true }).press('Control+Enter');
+
+        await page.waitForTimeout(2000);
+
         await expect(page.getByLabel('Title')).toBeVisible();
         await expect(page.getByLabel("Todo task name")).not.toBeVisible();
         await expect(page.getByLabel("Content", { exact: true })).toBeVisible();
