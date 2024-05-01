@@ -21,11 +21,11 @@ test.describe("Item actions", () => {
         await page.getByLabel('Main input', { exact: true }).press('ArrowDown');
         await page.getByLabel('Main input', { exact: true }).press('Control+Enter');
         await expect(page.getByLabel('Title')).toBeVisible();
-        await expect(page.getByPlaceholder('Enter your note content here')).toBeVisible();
-        await expect(page.getByPlaceholder('Enter your note content here')).toHaveValue('New quick note');
+        await expect(page.getByLabel("Content")).toBeVisible();
+        await expect(page.getByLabel("Content")).toHaveValue('New quick note');
     
-        await page.getByPlaceholder('Enter your note content here').fill('New quick note edited');
-        await page.getByPlaceholder('Enter your note content here').press('Control+s');
+        await page.getByLabel("Content").fill('New quick note edited');
+        await page.getByLabel("Content").press('Control+s');
         await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('New quick note edited');
 
         // Move
@@ -59,9 +59,9 @@ test.describe("Item actions", () => {
         await page.getByRole('menuitem', { name: 'with title' }).click();
         await page.getByLabel('Main input', { exact: true }).press('Enter');
         await expect(page.getByLabel('Title')).toBeVisible();
-        await expect(page.getByPlaceholder('Enter your note content here')).toBeVisible();
-        await page.getByPlaceholder('Enter your note content here').click();
-        await page.getByPlaceholder('Enter your note content here').fill('Sample content');
+        await expect(page.getByLabel("Content")).toBeVisible();
+        await page.getByLabel("Content").click();
+        await page.getByLabel("Content").fill('Sample content');
         await page.getByRole('button', { name: 'Create' }).click();
 
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveText('Sample title');
@@ -72,9 +72,9 @@ test.describe("Item actions", () => {
         await page.getByRole('button', { name: 'Edit', exact: true }).click();
         await page.getByLabel('Title').click();
         await page.getByLabel('Title').fill('Sample title edited');
-        await page.getByPlaceholder('Enter your note content here').click();
-        await page.getByPlaceholder('Enter your note content here').fill('Sample content edited');
-        await page.getByPlaceholder('Enter your note content here').press('Control+s');
+        await page.getByLabel("Content").click();
+        await page.getByLabel("Content").fill('Sample content edited');
+        await page.getByLabel("Content").press('Control+s');
 
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveText('Sample title edited');
         await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('Sample content edited');
@@ -82,7 +82,7 @@ test.describe("Item actions", () => {
         // Mark to copy on click
         await page.locator('.item[data-index="0"]').click({ button: 'right' });
         await page.getByRole('button', { name: 'To copy' }).click();
-        await expect(page.getByPlaceholder('Enter your note content here')).not.toBeVisible();
+        await expect(page.getByLabel("Content")).not.toBeVisible();
 
         // Delete
         await page.locator('.item[data-index="0"]').click({ button: 'right' });
