@@ -23,7 +23,7 @@ test.describe("Item actions", () => {
         await expect(page.getByLabel('Title')).toBeVisible();
         await expect(page.getByPlaceholder('Enter your note content here')).toBeVisible();
         await expect(page.getByPlaceholder('Enter your note content here')).toHaveValue('New quick note');
-        await page.getByPlaceholder('Enter your note content here').press('Control+a');
+    
         await page.getByPlaceholder('Enter your note content here').fill('New quick note edited');
         await page.getByPlaceholder('Enter your note content here').press('Control+s');
         await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('New quick note edited');
@@ -39,7 +39,6 @@ test.describe("Item actions", () => {
         await page.getByLabel('Main input', { exact: true }).press('ArrowDown');
         await page.keyboard.press('Control+Shift+Backspace');
 
-        // await expect(page.locator('.item[data-index="0"]')).toBeEmpty();
         await expect(page.locator('#displayed-list')).toBeEmpty();
 
         // Delete permanently
