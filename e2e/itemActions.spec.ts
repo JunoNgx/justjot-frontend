@@ -21,6 +21,7 @@ test.describe("Item actions", () => {
         await page.getByLabel('Main input', { exact: true }).press('ArrowDown');
         await page.getByLabel('Main input', { exact: true }).press('Control+Enter');
         await expect(page.getByLabel('Title')).toBeVisible();
+        await expect(page.getByLabel("Todo task name")).not.toBeVisible();
         await expect(page.getByLabel("Content")).toBeVisible();
         await expect(page.getByLabel("Content")).toHaveValue('New quick note');
     
