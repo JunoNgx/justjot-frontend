@@ -1,13 +1,17 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vitest/config'
+import { configDefaults, defineConfig } from 'vitest/config'
 
 export default defineConfig({
     resolve: {
         alias: {
-           "@": "/src"
+            "@": "/src"
         },
-     },
+    },
     test: {
-        environment: 'happy-dom'
+        environment: 'happy-dom',
+        exclude: [
+            ...configDefaults.exclude,
+            '**/e2e/**'
+        ]
     },
 });
