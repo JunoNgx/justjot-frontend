@@ -33,7 +33,7 @@ export default function Help() {
 
             <Title order={3}>Keyboard shortcuts</Title>
             <Title order={4}>Operating systems</Title>
-            <Text>This application takes your operating system into account; <Kbd>Mod</Kbd> is appropriately assigned and displayed as either <Kbd>Ctrl</Kbd> or <Kbd>Cmd</Kbd>, depending on whether your are on Linux/Windows/Android or iOS/MacOS. Similarly for <Kbd>Alt</Kbd> and <Kbd>Opt</Kbd>. This is applicable to any contexual prompt display throughout the app, including this document.</Text>
+            <Text>This application takes your operating system into account; <Kbd>Mod</Kbd> is appropriately assigned and displayed as either <Kbd>Ctrl</Kbd> or <Kbd>Cmd</Kbd>, depending on whether your are on Windows or Linux, or a Mac-based OS. Similarly for <Kbd>Alt</Kbd> and <Kbd>Opt</Kbd>. This is applicable to any contexual prompt display throughout the app, including this document.</Text>
 
             <Title order={4}>Everywhere</Title>
             <ul>
@@ -160,7 +160,11 @@ export default function Help() {
         >
             <Title order={3}>Spotlight</Title>
             <Text>Accessed by pressing <KbdMod/> <Kbd>K</Kbd> or <KbdMod/> <Kbd>P</Kbd> anywhere within the app, or from the Main Input extended menu.</Text>
-            <Text>It serves as the global navigation menu. Use it to search for actions and collections quickly.</Text>
+            <Text>It serves as the global navigation menu. Use it to search for actions and collections quickly. For easy references:</Text>
+            <ul>
+                <li><Text>Navigation actions start with the slash character <Code>/</Code>.</Text></li>
+                <li><Text>Performative actions start with the period <Code>.</Code>.</Text></li>
+            </ul>
         </Box>
 
         <Box className="cardlike__man-section"

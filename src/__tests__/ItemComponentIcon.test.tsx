@@ -8,7 +8,7 @@ import ItemComponentIcon from '@/components/itemComponent/ItemComponentIcon';
 import { Item, ThemeMode } from '@/types';
 import { UserLocalSettingsContext } from '@/contexts/UserLocalSettingsContext';
 
-describe.only("ItemComponentIcon", () => {
+describe("ItemComponentIcon", () => {
 
     const renderItemComponentIcon = (item: Item) => render(
         <MantineProvider

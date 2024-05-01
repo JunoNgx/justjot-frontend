@@ -4,7 +4,7 @@ import useCollectionNavActions from '@/hooks/useCollectionNavActions';
 import useIconProps from '@/hooks/useIconProps';
 import { ThemeMode } from '@/types';
 import { Spotlight, SpotlightActionData, SpotlightActionGroupData } from '@mantine/spotlight';
-import { IconEdit, IconExclamationCircle, IconHelp, IconHome2, IconLogin2, IconLogout, IconMailCheck, IconMoon, IconPassword, IconSettingsCog, IconSortAscendingShapes, IconStack2, IconStackPush, IconSun, IconTestPipe, IconTrash, IconUserCog, IconUserPlus } from '@tabler/icons-react';
+import { IconEdit, IconExclamationCircle, IconHelp, IconHome2, IconLogin2, IconLogout, IconMailCheck, IconMoon, IconPassword, IconSettingsCog, IconSortAscendingShapes, IconStack2, IconStackPush, IconSun, IconTestPipe, IconTrash, IconTrashX, IconUserCog, IconUserPlus } from '@tabler/icons-react';
 import { useContext } from 'react';
 import useCollectionDeletion from '@/hooks/useCollectionDeletion';
 import useCollectionActions from '@/hooks/useCollectionActions';
@@ -42,7 +42,7 @@ export default function SpotlightSearch() {
         actions: [
             {
                 id: "help",
-                label: "Help / User Manual",
+                label: "Help (User Manual)",
                 description: "/help-man",
                 leftSection: <IconHelp {...spotlightIconProps} />,
                 onClick: navigateToHelp,
@@ -178,7 +178,7 @@ export default function SpotlightSearch() {
                 id: "coll-op-delete",
                 label: "Delete current collection",
                 description: ".delete-coll",
-                leftSection: <IconTrash color="red" {...spotlightIconProps} />,
+                leftSection: <IconTrashX color="red" {...spotlightIconProps} />,
                 onClick: confirmCollectionDeletion,
             },
         ]

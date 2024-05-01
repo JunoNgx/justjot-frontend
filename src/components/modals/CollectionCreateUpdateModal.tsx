@@ -6,7 +6,7 @@ import { getCurrHighestCollectionSortOrder } from "@/utils/collectionUtils";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import kebabCase from "lodash-es/kebabCase";
 import useCollectionApiCalls from "@/hooks/useCollectionApiCalls";
-import { ItemCollection } from "@/types";
+import { ItemCollection, TrashBin } from "@/types";
 import { ClientResponseError } from "pocketbase";
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
@@ -65,7 +65,7 @@ export default function CollectionCreateUpdateModal(
                     name, slug,
                     collectionId: currCollection!.id,
                     setLoadingState: setIsLoading,
-                    successfulCallback: handleSuccessfulUpdate,
+                    successfulCallback: handleSuccessulTrashbinUpdate,
                     errorCallback: handleErroredUpdate
                 });
                 return;
@@ -130,13 +130,20 @@ export default function CollectionCreateUpdateModal(
     };
 
     const handleSuccessfulUpdate = (newCollection: ItemCollection) => {
-        collectionsHandlers.replace(collSelectedIndex, newCollection);
+        collectionsHandlers.replaceProps(collSelectedIndex, {...newCollection});
         /**
          * Update the url param slug as a side effect to avoid defaulting back
          * to `collections[0]`
          */
         tryNavigateToCollection(newCollection);
 
+        modals.closeAll();
+    };
+
+    const handleSuccessulTrashbinUpdate = (respondedTrashBin: TrashBin) => {
+        const processedTrashBin = {...respondedTrashBin, isTrashBin: true}
+        collectionsHandlers.replaceProps(collSelectedIndex, processedTrashBin);
+        tryNavigateToCollection(processedTrashBin);
         modals.closeAll();
     };
 

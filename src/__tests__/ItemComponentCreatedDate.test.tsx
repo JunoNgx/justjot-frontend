@@ -7,10 +7,11 @@ import { DateTime, Settings } from 'luxon';
 import ItemComponentCreatedDate from '@/components/itemComponent/ItemComponentCreatedDate';
 import { MantineProvider } from '@mantine/core';
 
-describe.only("ItemComponentCreatedDate", () => {
+describe("ItemComponentCreatedDate", () => {
 
     const mockedNowDateTime = DateTime.utc(2024, 4, 27, 18, 0, 0);
     Settings.now = () => mockedNowDateTime.toMillis();
+    Settings.defaultZone = "Europe/Berlin";
 
     const renderItemComponentCreatedTime = (createdTimeString: string) => render(
         <MantineProvider
@@ -43,6 +44,6 @@ describe.only("ItemComponentCreatedDate", () => {
         renderItemComponentCreatedTime(items[5].created)
         const itemCreatedDatetime = await screen
             .findByTestId("item-component-created-date");
-        expect(itemCreatedDatetime.textContent).toBe("18:05");
+        expect(itemCreatedDatetime.textContent).toBe("12:05");
     });
 });
