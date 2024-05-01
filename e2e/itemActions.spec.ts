@@ -79,6 +79,11 @@ test.describe("Item actions", () => {
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveText('Sample title edited');
         await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('Sample content edited');
 
+        // Mark to copy on click
+        await page.locator('.item[data-index="0"]').click({ button: 'right' });
+        await page.getByRole('button', { name: 'To copy' }).click();
+        await expect(page.getByPlaceholder('Enter your note content here')).not.toBeVisible();
+
         // Delete
         await page.locator('.item[data-index="0"]').click({ button: 'right' });
         await page.getByRole('button', { name: 'Trash' }).click();
