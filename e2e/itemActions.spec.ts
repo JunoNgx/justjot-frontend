@@ -122,4 +122,16 @@ test.describe("Item actions", () => {
         await page.getByRole('button', { name: 'Trash' }).click();
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toHaveText('Sample title edited');
     });
+
+    test("Create link, with keyboard", async ({ page }) => {
+        await page.locator('body').press('Control+f');
+        await page.getByLabel('Main input', { exact: true }).fill('mozilla.org');
+        await page.getByLabel('Main input', { exact: true }).press('Enter');
+        await expect(page.locator('.item[data-index="0"]')).toContainText('Internet for people, not profit — Mozilla Global');
+
+        // Delete
+        await page.keyboard.press('Control+f');
+        await page.keyboard.press('ArrowDown');
+        await page.keyboard.press('Control+Shift+Backspace');
+    });
 });
