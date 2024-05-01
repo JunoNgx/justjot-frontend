@@ -99,6 +99,8 @@ test.describe("Item actions", () => {
         await page.getByRole('menuitem', { name: 'as todo' }).click();
         await page.getByLabel('Main input', { exact: true }).press('Enter');
 
+        await page.waitForTimeout(1000);
+
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveText('Buy groceries');
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toHaveCSS("text-decoration", "line-through solid rgb(68, 68, 68)");
 
@@ -120,6 +122,8 @@ test.describe("Item actions", () => {
         // Delete
         await page.locator('.item[data-index="0"]').click({ button: 'right' });
         await page.getByRole('button', { name: 'Trash' }).click();
+
+        await page.waitForTimeout(1000);
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toHaveText('Sample title edited');
     });
 
@@ -127,6 +131,8 @@ test.describe("Item actions", () => {
         // Create
         await page.getByLabel('Main input', { exact: true }).fill('Buy groceries');
         await page.getByLabel('Main input', { exact: true }).press('Enter');
+
+        await page.waitForTimeout(1000);
 
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toBeVisible();
         await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('Buy groceries');
@@ -147,6 +153,9 @@ test.describe("Item actions", () => {
         await page.locator('body').press('Control+f');
         await page.getByLabel('Main input', { exact: true }).fill('mozilla.org');
         await page.getByLabel('Main input', { exact: true }).press('Enter');
+
+        await page.waitForTimeout(2000);
+
         await expect(page.locator('.item[data-index="0"]')).toContainText('Internet for people, not profit — Mozilla Global');
 
         // Delete
