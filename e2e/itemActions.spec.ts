@@ -123,6 +123,26 @@ test.describe("Item actions", () => {
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toHaveText('Sample title edited');
     });
 
+    test("Convert to todo, with pointer", async ({ page }) => {
+        // Create
+        await page.getByLabel('Main input', { exact: true }).fill('Buy groceries');
+        await page.getByLabel('Main input', { exact: true }).press('Enter');
+
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toBeVisible();
+        await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('Buy groceries');
+
+        // Convert
+        await page.locator('.item[data-index="0"]').click({ button: 'right' });
+        await page.getByRole('button', { name: 'Convert to Todo', exact: true }).click();
+
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveText('Buy groceries');
+        await expect(page.locator('.item[data-index="0"] .item__secondary-text')).not.toBeVisible();
+
+        // Delete
+        await page.locator('.item[data-index="0"]').click({ button: 'right' });
+        await page.getByRole('button', { name: 'Trash' }).click();
+    });
+
     test("Create link, with keyboard", async ({ page }) => {
         await page.locator('body').press('Control+f');
         await page.getByLabel('Main input', { exact: true }).fill('mozilla.org');
