@@ -90,4 +90,35 @@ test.describe("Item actions", () => {
         await page.getByRole('button', { name: 'Trash' }).click();
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toHaveText('Sample title edited');
     });
+
+    test("Create todo, with pointer", async ({ page }) => {
+        // Create
+        await page.getByLabel('Main input', { exact: true }).fill('Buy groceries');
+        await page.getByLabel('Extra functions and options').click();
+        await page.getByRole('menuitem', { name: 'as todo' }).click();
+        await page.getByLabel('Main input', { exact: true }).press('Enter');
+
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveText('Buy groceries');
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toHaveCSS("text-decoration", "line-through solid rgb(68, 68, 68)");
+
+        // Mark as done
+        await page.locator('.item[data-index="0"]').click();
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveCSS("text-decoration", "line-through solid rgb(68, 68, 68)");
+
+        // Edit
+        await page.locator('.item[data-index="0"]').click({ button: 'right' });
+        await page.getByRole('button', { name: 'Edit', exact: true }).click();
+        await expect(page.getByLabel("Todo task name")).toBeVisible();
+        await expect(page.getByLabel('Title')).not.toBeVisible();
+        await expect(page.getByLabel("Content")).not.toBeVisible();
+
+        await page.getByLabel("Todo task name").fill('Buy groceries 2');
+        await page.keyboard.press('Control+s');
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveText('Buy groceries 2');
+
+        // Delete
+        await page.locator('.item[data-index="0"]').click({ button: 'right' });
+        await page.getByRole('button', { name: 'Trash' }).click();
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toHaveText('Sample title edited');
+    });
 });
