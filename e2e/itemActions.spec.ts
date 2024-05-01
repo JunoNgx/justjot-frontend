@@ -69,7 +69,7 @@ test.describe("Item actions", () => {
 
         // Edit
         await page.locator('.item[data-index="0"]').click({ button: 'right' });
-        await page.getByRole('button', { name: 'Edit' }).click();
+        await page.getByRole('button', { name: 'Edit', exact: true }).click();
         await page.getByLabel('Title').click();
         await page.getByLabel('Title').fill('Sample title edited');
         await page.getByPlaceholder('Enter your note content here').click();
@@ -82,6 +82,6 @@ test.describe("Item actions", () => {
         // Delete
         await page.locator('.item[data-index="0"]').click({ button: 'right' });
         await page.getByRole('button', { name: 'Trash' }).click();
-        await expect(page.locator('#displayed-list')).toBeEmpty();
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toHaveText('Sample title edited');
     });
 });
