@@ -29,7 +29,7 @@ export default function useManageListState<T>(
 
     const insert = (index: number, ...items: T[]) => {
         setState(curr => {
-            return [...curr].splice(0, index)
+            return [...curr].splice(0, index + 1)
                 .concat([...items])
                 .concat([...curr].splice(index + 1));
         });
