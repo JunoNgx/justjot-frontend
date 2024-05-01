@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick, findIndexById, isValidHexColourCode } from "../utils/itemUtils";
+import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick, findIndexById, isValidHexColourCode } from "@/utils/itemUtils";
 import items from "@/__tests__/fixtures/items.json";
 
 describe("itemUtils", () => {
