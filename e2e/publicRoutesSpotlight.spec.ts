@@ -31,6 +31,5 @@ test('Navigating public routes, using Spotlight', async ({ page }) => {
     await page.locator(spotlightTextboxSelector).fill('demo');
     await page.locator(spotlightTextboxSelector).press('Enter');
     await expect(page.getByRole('heading', { name: 'Login' })).toBeVisible();
-    await expect(page.getByPlaceholder('lucatiel@mirrah.com')).toHaveValue('JayDoeTest');
-    await expect(page.getByPlaceholder('BearSeekSeekLest')).toHaveValue('password123');
+    await expect(page.getByText('Try using the test account')).toBeVisible();
 });
