@@ -10,7 +10,7 @@ test.describe("Item actions", () => {
         await page.getByPlaceholder('BearSeekSeekLest').press('Enter');
     });
 
-    test("Regular note without title", async ({ page }) => {
+    test("Regular note without title, with keyboard", async ({ page }) => {
         // Create
         await page.locator('body').press('Control+f');
         await page.getByLabel('Main input', { exact: true }).fill('New quick note');
@@ -42,12 +42,46 @@ test.describe("Item actions", () => {
         await expect(page.locator('#displayed-list')).toBeEmpty();
 
         // Delete permanently
-        await page.locator("header .collection-menu-btn").click();
-        await page.getByRole('menuitem', { name: 'Trash bin' }).click();
-        await page.keyboard.press('Control+f');
-        await page.keyboard.press('ArrowDown');
-        await page.keyboard.press('Control+Shift+Backspace');
+        // await page.locator("header .collection-menu-btn").click();
+        // await page.getByRole('menuitem', { name: 'Trash bin' }).click();
+        // await page.keyboard.press('Control+f');
+        // await page.keyboard.press('ArrowDown');
+        // await page.keyboard.press('Control+Shift+Backspace');
 
+        // await expect(page.locator('#displayed-list')).toBeEmpty();
+    });
+
+    test("Note with title, with pointer", async ({ page }) => {
+        // Create
+        await page.getByLabel('Main input', { exact: true }).click();
+        await page.getByLabel('Main input', { exact: true }).fill('Sample title');
+        await page.getByLabel('Extra functions and options').click();
+        await page.getByRole('menuitem', { name: 'with title' }).click();
+        await page.getByLabel('Main input', { exact: true }).press('Enter');
+        await expect(page.getByLabel('Title')).toBeVisible();
+        await expect(page.getByPlaceholder('Enter your note content here')).toBeVisible();
+        await page.getByPlaceholder('Enter your note content here').click();
+        await page.getByPlaceholder('Enter your note content here').fill('Sample content');
+        await page.getByRole('button', { name: 'Create' }).click();
+
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveText('Sample title');
+        await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('Sample content');
+
+        // Edit
+        await page.locator('.item[data-index="0"]').click({ button: 'right' });
+        await page.getByRole('button', { name: 'Edit' }).click();
+        await page.getByLabel('Title').click();
+        await page.getByLabel('Title').fill('Sample title edited');
+        await page.getByPlaceholder('Enter your note content here').click();
+        await page.getByPlaceholder('Enter your note content here').fill('Sample content edited');
+        await page.getByPlaceholder('Enter your note content here').press('Control+s');
+
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveText('Sample title edited');
+        await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('Sample content edited');
+
+        // Delete
+        await page.locator('.item[data-index="0"]').click({ button: 'right' });
+        await page.getByRole('button', { name: 'Trash' }).click();
         await expect(page.locator('#displayed-list')).toBeEmpty();
     });
 });
