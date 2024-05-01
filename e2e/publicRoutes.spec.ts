@@ -34,6 +34,12 @@ test.describe("Navigating public routes", () => {
         await page1.getByRole('banner').getByRole('link', { name: 'Login' }).click();
         await page1.getByRole('link', { name: 'Request verification' }).click();
         await expect(page1.getByRole('heading', { name: 'Request email verification' })).toBeVisible();
+
+        // Demo login page
+        await page.getByLabel('Link to home page').click();
+        await page.getByRole('link', { name: 'Try now' }).click();
+        await expect(page.getByRole('heading', { name: 'Login' })).toBeVisible();
+        await expect(page.getByText('Try using the test account')).toBeVisible();
     });
 
     test('Using Spotlight', async ({ page }) => {
