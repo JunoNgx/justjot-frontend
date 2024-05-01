@@ -134,4 +134,17 @@ test.describe("Item actions", () => {
         await page.keyboard.press('ArrowDown');
         await page.keyboard.press('Control+Shift+Backspace');
     });
+
+    test("Create note with trailing hex colour code, with keyboard", async ({ page }) => {
+        await page.locator('body').press('Control+f');
+        await page.getByLabel('Main input', { exact: true }).fill('Some random content #00FF00');
+        await page.getByLabel('Main input', { exact: true }).press('Enter');
+        await expect(page.locator('.item[data-index="0"]')).toContainText('Some random content #00FF00');
+        await expect(page.locator('.item[data-index="0"] .item__icon-colour')).toHaveCSS("background-color", "rgb(0, 255, 0)");
+
+        // Delete
+        await page.keyboard.press('Control+f');
+        await page.keyboard.press('ArrowDown');
+        await page.keyboard.press('Control+Shift+Backspace');
+    });
 });
