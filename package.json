@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "yarn test && vite build",
+    "build": "yarn test && yarn e2e && vite build",
     "serve": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "tsc && yarn vitest run"
+    "test": "tsc && yarn vitest run",
+    "e2e": "yarn playwright test"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^16.5.0",
