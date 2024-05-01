@@ -84,6 +84,8 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
         });
     };
 
+    console.log(collectionList)
+
     return <FocusTrap> 
         <Stack className="item-move-modal"
             p="lg"
@@ -94,24 +96,25 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
             data-autofocus={true} 
             onKeyDown={getHotkeyHandler([...numericKeysHotkeyOptions])}
         >
-            {collectionList?.map((collection, index) => <Group
-                key={index}
-                justify="center"
-            >
-                <Button className="item-move-modal__move-btn"
-                    w="70%"
-                    onClick={() => moveItemToCollection({
-                        itemId: item.id, collectionId: collection.id})
-                    }
-                    disabled={isLoading || item?.collection === collection.id}
+            {collectionList?.filter(c => !c.isTrashBin)
+                .map((collection, index) => <Group
+                    key={index}
+                    justify="center"
                 >
-                    {collection.name}    
-                </Button>
+                    <Button className="item-move-modal__move-btn"
+                        w="70%"
+                        onClick={() => moveItemToCollection({
+                            itemId: item.id, collectionId: collection.id})
+                        }
+                        disabled={isLoading || item?.collection === collection.id}
+                    >
+                        {collection.name}    
+                    </Button>
 
-                <Box className="item-move-modal__collection-hotkey">
-                    <CollectionHotkey index={index}/>
-                </Box>
-            </Group>)}
+                    <Box className="item-move-modal__collection-hotkey">
+                        <CollectionHotkey index={index}/>
+                    </Box>
+                </Group>)}
 
             {isLoading && <Group mt="md" justify="center">
                 <Loader type="bars"/>
