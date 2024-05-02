@@ -13,6 +13,9 @@ import todoCreate from "./mocks/todoCreate.json" assert { type: "json" };
 import todoEdit from "./mocks/todoEdit.json" assert { type: "json" };
 import todoToggleDone from "./mocks/todoToggleDone.json" assert { type: "json" };
 
+import convertedTodoCreate from "./mocks/convertedTodoCreate.json" assert { type: "json" };
+import convertedTodoConvert from "./mocks/convertedTodoConvert.json" assert { type: "json" };
+import convertedTodoToggleDone from "./mocks/convertedTodoToggleDone.json" assert { type: "json" };
 
 test.describe("Item actions", () => {
 
@@ -202,24 +205,39 @@ test.describe("Item actions", () => {
 
     test("Convert to todo, with pointer", async ({ page }) => {
         // Create
-        await page.getByLabel('Main input', { exact: true }).fill('Buy groceries');
+        await page.route("*/**/api/collections/items/records", async route => {
+            await route.fulfill({ json: convertedTodoCreate });
+        });
+
+        await page.getByLabel('Main input', { exact: true }).fill('Upgrade longsword');
         await page.getByLabel('Main input', { exact: true }).press('Enter');
 
-        await page.waitForTimeout(1000);
-
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toBeVisible();
-        await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('Buy groceries');
+        await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('Upgrade longsword');
 
         // Convert
+        await page.route("*/**/api/collections/items/records/s8h780lulq640kd", async route => {
+            await route.fulfill({ json: convertedTodoConvert });
+        });
+
         await page.locator('.item[data-index="0"]').click({ button: 'right' });
         await page.getByRole('button', { name: 'Convert to Todo', exact: true }).click();
 
-        await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveText('Buy groceries');
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveText('Upgrade longsword');
         await expect(page.locator('.item[data-index="0"] .item__secondary-text')).not.toBeVisible();
+
+        // Mark as done
+        await page.route("*/**/api/collections/items/records/s8h780lulq640kd", async route => {
+            await route.fulfill({ json: convertedTodoToggleDone });
+        });
+
+        await page.locator('.item[data-index="0"]').click();
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveCSS("text-decoration", "line-through solid rgb(68, 68, 68)");
 
         // Delete
         await page.locator('.item[data-index="0"]').click({ button: 'right' });
         await page.getByRole('button', { name: 'Trash' }).click();
+        await expect(page.locator('#displayed-list')).toBeEmpty();
     });
 
     test("Create link, with keyboard", async ({ page }) => {
