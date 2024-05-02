@@ -67,7 +67,7 @@ test.describe("Item actions", () => {
         await expect(page.getByLabel("Todo task name")).not.toBeVisible();
         await expect(page.getByLabel("Content", { exact: true })).toBeVisible();
         await expect(page.getByLabel("Content", { exact: true })).toHaveValue('New quick note');
-    
+
         await page.getByLabel("Content", { exact: true }).fill('New quick note edited');
         await page.getByLabel("Content", { exact: true }).press('Control+s');
         await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('New quick note edited');
@@ -109,7 +109,7 @@ test.describe("Item actions", () => {
         await page.getByLabel('Main input', { exact: true }).fill('Sample title');
         await page.getByLabel('Extra functions and options').click();
         await page.getByRole('menuitem', { name: 'with title' }).click();
-        await expect(page.getByLabel('Main input', { exact: true })).toHaveValue(':t: Sample title');        
+        await expect(page.getByLabel('Main input', { exact: true })).toHaveValue(':t: Sample title');
         await page.getByLabel('Main input', { exact: true }).press('Enter');
         await expect(page.getByLabel('Title')).toBeVisible();
         await expect(page.getByLabel("Content", { exact: true })).toBeVisible();
@@ -243,7 +243,7 @@ test.describe("Item actions", () => {
         await page.locator('body').press('Control+f');
         await page.getByLabel('Main input', { exact: true }).fill('mozilla.org');
         await page.getByLabel('Main input', { exact: true }).press('Enter');
-    
+
         await expect(page.locator('.item[data-index="0"]')).toContainText('mozilla.org');
         page.waitForTimeout(750);
         await expect(page.locator('.item[data-index="0"]')).toContainText('Internet for people, not profit — Mozilla Global');
