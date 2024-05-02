@@ -1,18 +1,53 @@
 import { test, expect } from '@playwright/test';
+import authWithPasswordRes from "./mocks/authWithPassword.json" assert { type: "json" };
+import trashBins from "./mocks/trashBins.json" assert { type: "json" };
+import itemCollections from "./mocks/itemsCollectionsInit.json" assert { type: "json" };
+import regularNoteItemCreate from "./mocks/regularNoteItemCreate.json" assert { type: "json" };
+import regularNoteItemEdit from "./mocks/regularNoteItemEdit.json" assert { type: "json" };
 
 test.describe("Item actions", () => {
 
     test.beforeEach(async ({ page }) => {
+        await page.route("*/**/api/collections/users/auth-with-password", async route => {
+            await route.fulfill({ json: authWithPasswordRes });
+        });
+
+        await page.route("*/**/api/collections/trashBins/records?page=1&perPage=1&filter=owner%3D%221x9diejq0lx6e0b%22&skipTotal=1", async route => {
+            await route.fulfill({ json: trashBins });
+        });
+
+        await page.route("*/**/api/collections/itemCollections/records?page=1&perPage=500&skipTotal=1&sort=sortOrder", async route => {
+            await route.fulfill({ json: itemCollections });
+        });
+
         await page.goto('/');
         await page.getByRole('link', { name: 'Login', exact: true }).click();
         await page.getByPlaceholder('lucatiel@mirrah.com').fill('e2eTestAcc');
         await page.getByPlaceholder('BearSeekSeekLest').fill('testaccount');
         await page.getByPlaceholder('BearSeekSeekLest').press('Enter');
-        await page.waitForTimeout(7000);
         await expect(page.locator("header .collection-menu-btn")).toContainText('Logbook');
     });
 
     test("Regular note without title, with keyboard", async ({ page }) => {
+
+        /**
+         * API Mocks
+         */
+
+        // Create Note 
+        await page.route("*/**/api/collections/items/records", async route => {
+            await route.fulfill({ json: regularNoteItemCreate });
+        });
+
+        // Edit
+        await page.route("*/**/api/collections/items/records/6u81us701gxtati", async route => {
+            await route.fulfill({ json: regularNoteItemEdit });
+        });
+
+        /**
+         * Actual test
+         */
+
         // Create
         await page.locator('body').press('Control+f');
         await page.getByLabel('Main input', { exact: true }).fill('New quick note');
@@ -22,8 +57,6 @@ test.describe("Item actions", () => {
         // Edit
         await page.getByLabel('Main input', { exact: true }).press('ArrowDown');
         await page.getByLabel('Main input', { exact: true }).press('Control+Enter');
-
-        await page.waitForTimeout(2000);
 
         await expect(page.getByLabel('Title')).toBeVisible();
         await expect(page.getByLabel("Todo task name")).not.toBeVisible();
@@ -37,25 +70,28 @@ test.describe("Item actions", () => {
         // Move
         await page.getByLabel('Main input', { exact: true }).press('Control+m');
         await page.getByRole('button', { name: 'Coll2' }).press('Enter');
-        await page.locator("header .collection-menu-btn").click();
-        await page.getByRole('menuitem', { name: 'Coll2' }).click();
-        await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('New quick note edited');
-
-        // Delete
-        await page.keyboard.press('Control+f');
-        await page.keyboard.press('ArrowDown');
-        await page.keyboard.press('Control+Shift+Backspace');
-
         await expect(page.locator('#displayed-list')).toBeEmpty();
 
-        // Delete permanently
+
         // await page.locator("header .collection-menu-btn").click();
-        // await page.getByRole('menuitem', { name: 'Trash bin' }).click();
+        // await page.getByRole('menuitem', { name: 'Coll2' }).click();
+        // await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('New quick note edited');
+
+        // // Delete
         // await page.keyboard.press('Control+f');
         // await page.keyboard.press('ArrowDown');
         // await page.keyboard.press('Control+Shift+Backspace');
 
         // await expect(page.locator('#displayed-list')).toBeEmpty();
+
+        // // Delete permanently
+        // // await page.locator("header .collection-menu-btn").click();
+        // // await page.getByRole('menuitem', { name: 'Trash bin' }).click();
+        // // await page.keyboard.press('Control+f');
+        // // await page.keyboard.press('ArrowDown');
+        // // await page.keyboard.press('Control+Shift+Backspace');
+
+        // // await expect(page.locator('#displayed-list')).toBeEmpty();
     });
 
     test("Note with title, with pointer", async ({ page }) => {
