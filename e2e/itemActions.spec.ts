@@ -5,6 +5,11 @@ import itemCollections from "./mocks/itemsCollectionsInit.json" assert { type: "
 import regularNoteItemCreate from "./mocks/regularNoteItemCreate.json" assert { type: "json" };
 import regularNoteItemEdit from "./mocks/regularNoteItemEdit.json" assert { type: "json" };
 
+import noteWithTitleCreate from "./mocks/noteWithTitleCreate.json" assert { type: "json" };
+import noteWithTitleEdit from "./mocks/noteWithTitleEdit.json" assert { type: "json" };
+import noteWithTitleToggleCopy from "./mocks/noteWithTitleToggleCopy.json" assert { type: "json" };
+
+
 test.describe("Item actions", () => {
 
     test.beforeEach(async ({ page }) => {
@@ -96,21 +101,30 @@ test.describe("Item actions", () => {
 
     test("Note with title, with pointer", async ({ page }) => {
         // Create
+        await page.route("*/**/api/collections/items/records", async route => {
+            await route.fulfill({ json: noteWithTitleCreate });
+        });
+
         await page.getByLabel('Main input', { exact: true }).click();
         await page.getByLabel('Main input', { exact: true }).fill('Sample title');
         await page.getByLabel('Extra functions and options').click();
         await page.getByRole('menuitem', { name: 'with title' }).click();
+        await expect(page.getByLabel('Main input', { exact: true })).toHaveValue(':t: Sample title');        
         await page.getByLabel('Main input', { exact: true }).press('Enter');
         await expect(page.getByLabel('Title')).toBeVisible();
-        await expect(page.getByLabel("Content")).toBeVisible();
-        await page.getByLabel("Content").click();
-        await page.getByLabel("Content").fill('Sample content');
+        await expect(page.getByLabel("Content", { exact: true })).toBeVisible();
+        await page.getByLabel("Content", { exact: true }).click();
+        await page.getByLabel("Content", { exact: true }).fill('Sample content');
         await page.getByRole('button', { name: 'Create' }).click();
 
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveText('Sample title');
         await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('Sample content');
 
         // Edit
+        await page.route("*/**/api/collections/items/records/lm9vmoh3yez44s2", async route => {
+            await route.fulfill({ json: noteWithTitleEdit });
+        });
+
         await page.locator('.item[data-index="0"]').click({ button: 'right' });
         await page.getByRole('button', { name: 'Edit', exact: true }).click();
         await page.getByLabel('Title').click();
@@ -123,14 +137,19 @@ test.describe("Item actions", () => {
         await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('Sample content edited');
 
         // Mark to copy on click
+        await page.route("*/**/api/collections/items/records/lm9vmoh3yez44s2", async route => {
+            await route.fulfill({ json: noteWithTitleToggleCopy });
+        });
+
         await page.locator('.item[data-index="0"]').click({ button: 'right' });
         await page.getByRole('button', { name: 'To copy' }).click();
+        await page.waitForTimeout(500);
         await expect(page.getByLabel("Content", { exact: true })).not.toBeVisible();
 
         // Delete
         await page.locator('.item[data-index="0"]').click({ button: 'right' });
         await page.getByRole('button', { name: 'Trash' }).click();
-        // await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toHaveText('Sample title edited');
+        await expect(page.locator('#displayed-list')).toBeEmpty();
     });
 
     test("Create todo, with pointer", async ({ page }) => {
