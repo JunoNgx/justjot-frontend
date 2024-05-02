@@ -3,7 +3,7 @@ import { Item, ItemCollection } from "@/types";
 import { IconArrowMoveRight, IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconRestore, IconSquare, IconTrashX } from "@tabler/icons-react";
 import { useContext } from "react";
 import useIconProps from "./useIconProps";
-import { canConvertItemToTodo, canDeleteItem, canRefetchItem, canToggleItemShouldCopyOnClick, canTrashItem } from "@/utils/itemUtils";
+import { canConvertItemToTodo, canDeleteItem, canMoveItem, canRefetchItem, canToggleItemShouldCopyOnClick, canTrashItem } from "@/utils/itemUtils";
 
 type ItemContextMenuOptionsParams = {
     item: Item,
@@ -56,6 +56,7 @@ export default function useItemContextMenuOptions(
     const moveAction = {
         key: "move",
         icon: <IconFileSymlink {...menuIconProps} />,
+        hidden: !canMoveItem(item),
         onClick: () => {moveFn({item, collectionList: collections})},
     };
 
