@@ -3,8 +3,8 @@ import authWithPasswordRes from "./mocks/authWithPassword.json" assert { type: "
 import fetchTrashBin from "./mocks/fetchTrashBin.json" assert { type: "json" };
 import fetchCollectionsInit from "./mocks/fetchCollectionsInit.json" assert { type: "json" };
 import fetchItemsEmpty from "./mocks/fetchItemsEmpty.json" assert { type: "json" };
-import newItemCollection from "./mocks/newItemCollection.json" assert { type: "json" };
-import editItemCollection from "./mocks/editItemCollection.json" assert { type: "json" };
+import collectionNew from "./mocks/collectionNew.json" assert { type: "json" };
+import collectionEdit from "./mocks/collectionEdit.json" assert { type: "json" };
 
 test.describe("Collection actions", () => {
 
@@ -26,11 +26,11 @@ test.describe("Collection actions", () => {
         });
 
         await page.route("*/**/api/collections/itemCollections/records", async route => {
-            await route.fulfill({ json: newItemCollection });
+            await route.fulfill({ json: collectionNew });
         });
 
         await page.route("*/**/api/collections/itemCollections/records/o01002w6k5krq60", async route => {
-            await route.fulfill({ json: editItemCollection });
+            await route.fulfill({ json: collectionEdit });
         });
 
         await page.goto('/');
