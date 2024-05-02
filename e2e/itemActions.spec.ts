@@ -9,6 +9,10 @@ import noteWithTitleCreate from "./mocks/noteWithTitleCreate.json" assert { type
 import noteWithTitleEdit from "./mocks/noteWithTitleEdit.json" assert { type: "json" };
 import noteWithTitleToggleCopy from "./mocks/noteWithTitleToggleCopy.json" assert { type: "json" };
 
+import todoCreate from "./mocks/todoCreate.json" assert { type: "json" };
+import todoEdit from "./mocks/todoEdit.json" assert { type: "json" };
+import todoToggleDone from "./mocks/todoToggleDone.json" assert { type: "json" };
+
 
 test.describe("Item actions", () => {
 
@@ -154,21 +158,32 @@ test.describe("Item actions", () => {
 
     test("Create todo, with pointer", async ({ page }) => {
         // Create
+        await page.route("*/**/api/collections/items/records", async route => {
+            await route.fulfill({ json: todoCreate });
+        });
+
         await page.getByLabel('Main input', { exact: true }).fill('Buy groceries');
         await page.getByLabel('Extra functions and options').click();
         await page.getByRole('menuitem', { name: 'as todo' }).click();
+        await expect(page.getByLabel('Main input', { exact: true })).toHaveValue(':td: Buy groceries');
         await page.getByLabel('Main input', { exact: true }).press('Enter');
-
-        await page.waitForTimeout(1000);
 
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveText('Buy groceries');
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toHaveCSS("text-decoration", "line-through solid rgb(68, 68, 68)");
 
         // Mark as done
+        await page.route("*/**/api/collections/items/records/umu61zocq8yq2a6", async route => {
+            await route.fulfill({ json: todoToggleDone });
+        });
+
         await page.locator('.item[data-index="0"]').click();
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveCSS("text-decoration", "line-through solid rgb(68, 68, 68)");
 
         // Edit
+        await page.route("*/**/api/collections/items/records/umu61zocq8yq2a6", async route => {
+            await route.fulfill({ json: todoEdit });
+        });
+
         await page.locator('.item[data-index="0"]').click({ button: 'right' });
         await page.getByRole('button', { name: 'Edit', exact: true }).click();
         await expect(page.getByLabel("Todo task name")).toBeVisible();
@@ -182,9 +197,7 @@ test.describe("Item actions", () => {
         // Delete
         await page.locator('.item[data-index="0"]').click({ button: 'right' });
         await page.getByRole('button', { name: 'Trash' }).click();
-
-        await page.waitForTimeout(1000);
-        await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toHaveText('Sample title edited');
+        await expect(page.locator('#displayed-list')).toBeEmpty();
     });
 
     test("Convert to todo, with pointer", async ({ page }) => {
