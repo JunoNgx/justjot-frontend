@@ -2,7 +2,7 @@ import { ActionIcon, Box, Divider, Group, Kbd, Paper, Stack, Text } from "@manti
 import KbdMod from "./misc/KbdMod";
 import { useContext } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
-import { canMoveItem, computeItemActionString } from "@/utils/itemUtils";
+import { canMoveItem, canRestoreItem, computeItemActionString } from "@/utils/itemUtils";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import {IconSquareChevronDown, IconSquareChevronUp } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
@@ -86,7 +86,10 @@ export default function KeyboardPromptDisplay() {
             <KeyboardPromptItem
                 prompt={["mod", "alt", "R"]}
                 desc="Restore item"
-                shouldDisplay={hasSelectedWithKeyboard && selectedItem?.isTrashed}
+                shouldDisplay={hasSelectedWithKeyboard
+                    && selectedItem
+                    && canRestoreItem(selectedItem)
+                }
             />
             <KeyboardPromptItem
                 prompt={["mod", "Shift", "BkSp"]}
