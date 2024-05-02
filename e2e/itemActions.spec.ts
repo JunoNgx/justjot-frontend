@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import authWithPasswordRes from "./mocks/authWithPassword.json" assert { type: "json" };
-import trashBins from "./mocks/trashBins.json" assert { type: "json" };
+import fetchTrashBin from "./mocks/fetchTrashBin.json" assert { type: "json" };
 import fetchCollectionsInit from "./mocks/fetchCollectionsInit.json" assert { type: "json" };
 import regularNoteItemCreate from "./mocks/regularNoteItemCreate.json" assert { type: "json" };
 import regularNoteItemEdit from "./mocks/regularNoteItemEdit.json" assert { type: "json" };
@@ -29,7 +29,7 @@ test.describe("Item actions", () => {
         });
 
         await page.route("*/**/api/collections/trashBins/records?page=1&perPage=1&filter=owner%3D%221x9diejq0lx6e0b%22&skipTotal=1", async route => {
-            await route.fulfill({ json: trashBins });
+            await route.fulfill({ json: fetchTrashBin });
         });
 
         await page.route("*/**/api/collections/itemCollections/records?page=1&perPage=500&skipTotal=1&sort=sortOrder", async route => {
