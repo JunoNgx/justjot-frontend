@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
-        run: yarn install --frozen-lockfile && npx playwright install --with-deps
+        run: yarn install --immutable --immutable-cache --check-cache && npx playwright install --with-deps
       - name: Run tests
         run: npx playwright test
         env:
