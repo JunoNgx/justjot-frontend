@@ -1,8 +1,13 @@
 import { test, expect } from '@playwright/test';
+import authWithPasswordRes from "./mocks/authWithPassword.json" assert { type: "json" };
 
 test.describe("Collection actions", () => {
 
     test.beforeEach(async ({ page }) => {
+        await page.route("*/**/api/collections/users/auth-with-password", async route => {
+            await route.fulfill({ json: authWithPasswordRes });
+        });
+
         await page.goto('/');
         await page.getByRole('link', { name: 'Login', exact: true }).click();
         await page.getByPlaceholder('lucatiel@mirrah.com').fill('e2eTestAcc');
