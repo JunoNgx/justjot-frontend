@@ -1,0 +1,18 @@
+{
+    "page": 1,
+    "perPage": 1,
+    "totalItems": -1,
+    "totalPages": -1,
+    "items": [
+        {
+            "collectionId": "mx2gu6c6yab83nr",
+            "collectionName": "trashBins",
+            "created": "2024-05-01 14:06:52.236Z",
+            "id": "8klyug62tbuuezd",
+            "name": "Trash bin",
+            "owner": "1x9diejq0lx6e0b",
+            "slug": "trash-bin",
+            "updated": "2024-05-01 14:06:52.236Z"
+        }
+    ]
+}
