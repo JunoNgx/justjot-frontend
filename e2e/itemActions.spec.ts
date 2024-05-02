@@ -45,32 +45,21 @@ test.describe("Item actions", () => {
     });
 
     test("Regular note without title, with keyboard", async ({ page }) => {
-
-        /**
-         * API Mocks
-         */
-
-        // Create Note 
+        // Create
         await page.route("*/**/api/collections/items/records", async route => {
             await route.fulfill({ json: regularNoteItemCreate });
         });
 
-        // Edit
-        await page.route("*/**/api/collections/items/records/6u81us701gxtati", async route => {
-            await route.fulfill({ json: regularNoteItemEdit });
-        });
-
-        /**
-         * Actual test
-         */
-
-        // Create
         await page.locator('body').press('Control+f');
         await page.getByLabel('Main input', { exact: true }).fill('New quick note');
         await page.getByLabel('Main input', { exact: true }).press('Enter');
         await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('New quick note');
 
         // Edit
+        await page.route("*/**/api/collections/items/records/6u81us701gxtati", async route => {
+            await route.fulfill({ json: regularNoteItemEdit });
+        });
+
         await page.getByLabel('Main input', { exact: true }).press('ArrowDown');
         await page.getByLabel('Main input', { exact: true }).press('Control+Enter');
 
