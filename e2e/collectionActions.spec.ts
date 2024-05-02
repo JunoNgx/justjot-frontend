@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import authWithPasswordRes from "./mocks/authWithPassword.json" assert { type: "json" };
 import trashBins from "./mocks/trashBins.json" assert { type: "json" };
-import itemCollections from "./mocks/itemsCollectionsInit.json" assert { type: "json" };
+import fetchCollectionsInit from "./mocks/fetchCollectionsInit.json" assert { type: "json" };
 import itemsEmpty from "./mocks/itemsEmpty.json" assert { type: "json" };
 import newItemCollection from "./mocks/newItemCollection.json" assert { type: "json" };
 import editItemCollection from "./mocks/editItemCollection.json" assert { type: "json" };
@@ -18,7 +18,7 @@ test.describe("Collection actions", () => {
         });
 
         await page.route("*/**/api/collections/itemCollections/records?page=1&perPage=500&skipTotal=1&sort=sortOrder", async route => {
-            await route.fulfill({ json: itemCollections });
+            await route.fulfill({ json: fetchCollectionsInit });
         });
 
         await page.route("*/**/api/collections/items/records?page=1&perPage=500&skipTotal=1&filter=collection%3D%226qt1usrvke0tuac%22%20%26%26%20isTrashed%3Dfalse&sort=-created", async route => {
