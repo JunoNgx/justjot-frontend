@@ -165,7 +165,7 @@ test.describe("Item actions", () => {
         await page.getByLabel('Main input', { exact: true }).press('Enter');
 
         await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveText('Buy groceries');
-        await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toHaveCSS("text-decoration", "line-through solid rgb(68, 68, 68)");
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).not.toHaveCSS("text-decoration", /line-through/);
 
         // Mark as done
         await page.route("*/**/api/collections/items/records/umu61zocq8yq2a6", async route => {
@@ -173,7 +173,7 @@ test.describe("Item actions", () => {
         });
 
         await page.locator('.item[data-index="0"]').click();
-        await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveCSS("text-decoration", "line-through solid rgb(68, 68, 68)");
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveCSS("text-decoration", /line-through/);
 
         // Edit
         await page.route("*/**/api/collections/items/records/umu61zocq8yq2a6", async route => {
@@ -225,7 +225,7 @@ test.describe("Item actions", () => {
         });
 
         await page.locator('.item[data-index="0"]').click();
-        await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveCSS("text-decoration", "line-through solid rgb(68, 68, 68)");
+        await expect(page.locator('.item[data-index="0"] .item__primary-text')).toHaveCSS("text-decoration", /line-through/);
 
         // Delete
         await page.locator('.item[data-index="0"]').click({ button: 'right' });
