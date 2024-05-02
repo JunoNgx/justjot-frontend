@@ -17,6 +17,8 @@ import convertedTodoCreate from "./mocks/convertedTodoCreate.json" assert { type
 import convertedTodoConvert from "./mocks/convertedTodoConvert.json" assert { type: "json" };
 import convertedTodoToggleDone from "./mocks/convertedTodoToggleDone.json" assert { type: "json" };
 
+import linkCreate from "./mocks/linkCreate.json" assert { type: "json" };
+
 test.describe("Item actions", () => {
 
     test.beforeEach(async ({ page }) => {
@@ -241,18 +243,25 @@ test.describe("Item actions", () => {
     });
 
     test("Create link, with keyboard", async ({ page }) => {
+        // Create
+        await page.route("*/**/api/collections/items/records", async route => {
+            await new Promise(r => setTimeout(r, 500))
+            await route.fulfill({ json: linkCreate });
+        });
+
         await page.locator('body').press('Control+f');
         await page.getByLabel('Main input', { exact: true }).fill('mozilla.org');
         await page.getByLabel('Main input', { exact: true }).press('Enter');
-
-        await page.waitForTimeout(2000);
-
+    
+        await expect(page.locator('.item[data-index="0"]')).toContainText('mozilla.org');
+        page.waitForTimeout(750);
         await expect(page.locator('.item[data-index="0"]')).toContainText('Internet for people, not profit — Mozilla Global');
 
         // Delete
         await page.keyboard.press('Control+f');
         await page.keyboard.press('ArrowDown');
         await page.keyboard.press('Control+Shift+Backspace');
+        await expect(page.locator('#displayed-list')).toBeEmpty();
     });
 
     test("Create note with trailing hex colour code, with keyboard", async ({ page }) => {
