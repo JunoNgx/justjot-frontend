@@ -19,6 +19,8 @@ import convertedTodoToggleDone from "./mocks/convertedTodoToggleDone.json" asser
 
 import linkCreate from "./mocks/linkCreate.json" assert { type: "json" };
 
+import hexCodeNoteCreate from "./mocks/hexCodeNoteCreate.json" assert { type: "json" };
+
 test.describe("Item actions", () => {
 
     test.beforeEach(async ({ page }) => {
@@ -265,6 +267,10 @@ test.describe("Item actions", () => {
     });
 
     test("Create note with trailing hex colour code, with keyboard", async ({ page }) => {
+        await page.route("*/**/api/collections/items/records", async route => {
+            await route.fulfill({ json: hexCodeNoteCreate });
+        });
+
         await page.locator('body').press('Control+f');
         await page.getByLabel('Main input', { exact: true }).fill('Some random content #00FF00');
         await page.getByLabel('Main input', { exact: true }).press('Enter');
@@ -275,5 +281,6 @@ test.describe("Item actions", () => {
         await page.keyboard.press('Control+f');
         await page.keyboard.press('ArrowDown');
         await page.keyboard.press('Control+Shift+Backspace');
+        await expect(page.locator('#displayed-list')).toBeEmpty();
     });
 });
