@@ -103,8 +103,24 @@ test.describe("Spotlight collection action", () => {
             await expect(page.getByLabel('Sort Collections').getByRole('button', { name: 'Coll2' })).toBeVisible();
         });
 
-        test.fixme("Delete collection", async ({ page }) => {
+        test("Delete collection", async ({ page }) => {
+            await page.route("*/**/api/collections/itemCollections/records/6qt1usrvke0tuac/", async route => {
+                await route.fulfill({ status: 204 });
+            });
+            // await page.route("*/**/api/collections/itemCollections/records/6qt1usrvke0tuac", async route => {
+            //     await route.fulfill({ json: collectionEdit });
+            // });
 
+            await page.locator('body').press('Control+k');
+            await page.locator(spotlightTextboxSelector).fill('.delete');
+            await page.locator(spotlightTextboxSelector).press('Enter');
+            await page.locator('body').press('Tab');
+            await page.locator('body').press('Tab');
+            await page.locator('body').press('Enter');
+
+            // TODO: not passing
+            // Test: auto-navigate to current index, meaning the next collection
+            await expect(page).toHaveURL("e2eTestAcc/coll-2");
         });
     });
 });
