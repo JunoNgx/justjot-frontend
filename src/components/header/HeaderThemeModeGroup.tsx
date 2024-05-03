@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { ActionIcon, Group } from "@mantine/core";
 import { UserLocalSettingsContext } from "@/contexts/UserLocalSettingsContext";
 import { ThemeMode } from "@/types";
-import { IconMoon, IconSettingsCog, IconSun } from "@tabler/icons-react";
+import { IconMoon, IconMoonFilled, IconSettings, IconSettingsFilled, IconSun, IconSunFilled } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
 
 export default function HeaderThemeModeGroup() {
@@ -18,9 +18,7 @@ export default function HeaderThemeModeGroup() {
         gap="xs"
     >
         <ActionIcon
-            className={"header__theme-mode-btn "
-                + (isThemeModeAuto() ? "header__theme-mode-btn--is-selected" : null)
-            }
+            className="header__theme-mode-btn"
             variant={"subtle"}
             radius="xl"
             title="Theme mode: System"
@@ -28,12 +26,13 @@ export default function HeaderThemeModeGroup() {
             aria-current={isThemeModeAuto()}
             onClick={() => {setThemeMode(ThemeMode.AUTO)}}
         >
-            <IconSettingsCog {...themeModeIconProps} />
+            {isThemeModeAuto()
+                ? <IconSettingsFilled {...themeModeIconProps} />
+                : <IconSettings {...themeModeIconProps} />
+            }
         </ActionIcon>
         <ActionIcon
-            className={"header__theme-mode-btn "
-                + (isThemeModeLight() ? "header__theme-mode-btn--is-selected" : null)
-            }
+            className="header__theme-mode-btn"
             variant={"subtle"}
             radius="xl"
             title="Theme mode: Light"
@@ -41,12 +40,13 @@ export default function HeaderThemeModeGroup() {
             aria-current={isThemeModeLight()}
             onClick={() => {setThemeMode(ThemeMode.LIGHT)}}
         >
-            <IconSun {...themeModeIconProps} />
+            {isThemeModeLight()
+                ? <IconSunFilled {...themeModeIconProps} />
+                : <IconSun {...themeModeIconProps} />
+            }
         </ActionIcon>
         <ActionIcon
-            className={"header__theme-mode-btn "
-                + (isThemeModeDark() ? "header__theme-mode-btn--is-selected" : null)
-            }
+            className="header__theme-mode-btn"
             variant={"subtle"}
             radius="xl"
             title="Theme mode: Dark"
@@ -54,7 +54,10 @@ export default function HeaderThemeModeGroup() {
             aria-current={isThemeModeDark()}
             onClick={() => {setThemeMode(ThemeMode.DARK)}}
         >
-            <IconMoon {...themeModeIconProps} />
+            {isThemeModeDark()
+                ? <IconMoonFilled {...themeModeIconProps} />
+                : <IconMoon {...themeModeIconProps} />
+            }
         </ActionIcon>
     </Group>
 }
