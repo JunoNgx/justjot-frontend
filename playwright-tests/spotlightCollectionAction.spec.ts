@@ -39,8 +39,15 @@ test.describe("Spotlight collection action", () => {
     });
 
     test.describe("Test keyboard shortcuts", () => {
-        test.fixme("Switch collection", async ({ page }) => {
+        test.beforeEach(loginWithMocks);
 
+        test("Switch collection", async ({ page }) => {
+            await page.locator('body').press('Control+k');
+            await page.locator(spotlightTextboxSelector).fill('/coll-2');
+            await page.locator(spotlightTextboxSelector).press('Enter');
+
+            await expect(page).toHaveURL("e2eTestAcc/coll-2");
+            await expect(page.locator("header .collection-menu-btn")).toContainText('Coll2');
         });
 
         test.fixme("Create collection", async ({ page }) => {
