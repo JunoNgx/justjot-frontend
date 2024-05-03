@@ -50,8 +50,22 @@ test.describe("Spotlight collection action", () => {
             await expect(page.locator("header .collection-menu-btn")).toContainText('Coll2');
         });
 
-        test.fixme("Create collection", async ({ page }) => {
+        test("Create collection", async ({ page }) => {
+            await page.route("*/**/api/collections/itemCollections/records", async route => {
+                await route.fulfill({ json: collectionNew });
+            });
 
+            await page.locator('body').press('Control+k');
+            await page.locator(spotlightTextboxSelector).fill('.create');
+            await page.locator(spotlightTextboxSelector).press('Enter');
+
+            await page.getByPlaceholder('My collection').fill('Coll3');
+            await page.getByRole('button', { name: 'Create collection' }).click();
+            await expect(page.getByPlaceholder('my-collection')).toHaveValue('coll-3');
+            await page.getByPlaceholder('My collection').press('Enter');
+
+            await expect(page).toHaveURL("e2eTestAcc/coll-3");
+            await expect(page.locator("header .collection-menu-btn")).toContainText('Coll3');
         });
 
         test.fixme("Edit collection", async ({ page }) => {
