@@ -93,8 +93,14 @@ test.describe("Spotlight collection action", () => {
             await expect(page.locator("header .collection-menu-btn")).toContainText('Logbook-!#+$%^-edited');
         });
 
-        test.fixme("Sort collection", async ({ page }) => {
+        test("Sort collection", async ({ page }) => {
+            await page.locator('body').press('Control+k');
+            await page.locator(spotlightTextboxSelector).fill('.sort');
+            await page.locator(spotlightTextboxSelector).press('Enter');
 
+            await expect(page.locator('.mantine-Modal-header')).toContainText('Sort Collections');
+            await expect(page.getByLabel('Sort Collections').getByRole('button', { name: 'Logbook' })).toBeVisible();
+            await expect(page.getByLabel('Sort Collections').getByRole('button', { name: 'Coll2' })).toBeVisible();
         });
 
         test.fixme("Delete collection", async ({ page }) => {
