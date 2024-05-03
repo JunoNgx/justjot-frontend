@@ -9,7 +9,7 @@
     "serve": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "tsc && yarn vitest run"
+    "test": "tsc && yarn vitest run && yarn playwright test"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^16.5.0",
