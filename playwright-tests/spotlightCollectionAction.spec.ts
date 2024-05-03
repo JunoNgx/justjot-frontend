@@ -68,8 +68,29 @@ test.describe("Spotlight collection action", () => {
             await expect(page.locator("header .collection-menu-btn")).toContainText('Coll3');
         });
 
-        test.fixme("Edit collection", async ({ page }) => {
+        test("Edit collection", async ({ page }) => {
+            await page.route("*/**/api/collections/itemCollections/records/6qt1usrvke0tuac", async route => {
+                await route.fulfill({ json: collectionEdit });
+            });
 
+            await page.locator('body').press('Control+k');
+            await page.locator(spotlightTextboxSelector).fill('.edit');
+            await page.locator(spotlightTextboxSelector).press('Enter');
+    
+            // Test: current values are correctly passed to modal
+            await expect(page.getByPlaceholder('My collection')).toHaveValue('Logbook');
+            await expect(page.getByPlaceholder('my-collection')).toHaveValue('logbook');
+    
+            await page.getByPlaceholder('My collection').fill('Logbook-!#+$%^-edited');
+    
+            // Test: slugify logic
+            await expect(page.getByPlaceholder('my-collection')).toHaveValue('logbook-edited');
+    
+            await page.getByPlaceholder('My collection').press('Enter');
+    
+            // Test: url slug is updated
+            await expect(page).toHaveURL("e2eTestAcc/logbook-edited");
+            await expect(page.locator("header .collection-menu-btn")).toContainText('Logbook-!#+$%^-edited');
         });
 
         test.fixme("Sort collection", async ({ page }) => {
