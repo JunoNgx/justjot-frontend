@@ -52,6 +52,7 @@ test.describe("Collection Menu", () => {
             await page.locator("header .collection-menu-btn").click();
             await page.getByRole('menuitem', { name: 'Create collection' }).click();
             await page.getByPlaceholder('My collection').fill('Coll3');
+            await expect(page.getByPlaceholder('my-collection')).toHaveValue('coll-3');
             await page.getByRole('button', { name: 'Create collection' }).click();
 
             await expect(page).toHaveURL("e2eTestAcc/coll-3");
