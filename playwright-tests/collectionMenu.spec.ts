@@ -91,8 +91,20 @@ test.describe("Collection Menu", () => {
             await page.getByRole('button', { name: 'Coll2' }).click();
         });
 
-        test.fixme("Delete collection", async ({ page }) => {
+        test("Delete collection", async ({ page }) => {
+            await page.route("*/**/api/collections/itemCollections/records/6qt1usrvke0tuac", async route => {
+                await route.fulfill({status: 204});
+            });
 
+            await page.locator("header .collection-menu-btn").click();
+            await page.getByRole('menuitem', { name: 'Delete collection' }).click();
+            await page.getByRole('button', { name: 'Delete collection' }).click();
+
+            // Test: auto-navigate to current index, meaning the next collection
+            await expect(page).toHaveURL("e2eTestAcc/coll-2");
+
+            await page.locator("header .collection-menu-btn").click();
+            await page.getByRole('menuitem', { name: 'Delete collection' }).click();
         });
     });
 });
