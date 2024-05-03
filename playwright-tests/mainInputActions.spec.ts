@@ -11,6 +11,10 @@ test.describe("Main input", () => {
 
         });
 
+        test.fixme("Pressing enter clearing the main input", async ({ page }) => {
+
+        });
+
         test.fixme("Extended menu: with title", async ({ page }) => {
 
         });
