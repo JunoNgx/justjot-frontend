@@ -11,7 +11,7 @@ export default defineConfig({
         environment: 'happy-dom',
         exclude: [
             ...configDefaults.exclude,
-            '**/e2e/**'
+            '**/playwright-tests/**'
         ]
     },
 });
