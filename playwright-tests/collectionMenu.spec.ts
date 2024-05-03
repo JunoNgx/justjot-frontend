@@ -40,6 +40,7 @@ test.describe("Collection Menu", () => {
             await page.locator("header .collection-menu-btn").click();
             await page.getByRole('menuitem', { name: 'Coll2' }).click();
 
+            await expect(page).toHaveURL("e2eTestAcc/coll-2");
             await expect(page.locator("header .collection-menu-btn")).toContainText('Coll2');
         });
 
