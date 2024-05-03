@@ -104,9 +104,6 @@ test.describe("Collection Menu", () => {
 
             // Test: auto-navigate to current index, meaning the next collection
             await expect(page).toHaveURL("e2eTestAcc/coll-2");
-
-            await page.locator("header .collection-menu-btn").click();
-            await page.getByRole('menuitem', { name: 'Delete collection' }).click();
         });
     });
 });
