@@ -15,7 +15,7 @@ export default function SpotlightSearch() {
 
     const { isLoggedIn } = useContext(BackendClientContext);
     const { setThemeMode } = useContext(UserLocalSettingsContext);
-    const { collections } = useContext(CollectionsContext);
+    const { collections, isTrashCollection } = useContext(CollectionsContext);
     const { spotlightIconProps } = useIconProps();
     const { trySwitchToCollectionById } = useCollectionNavActions();
     const confirmCollectionDeletion = useCollectionDeletion();
@@ -174,15 +174,17 @@ export default function SpotlightSearch() {
                 leftSection: <IconSortAscendingShapes {...spotlightIconProps} />,
                 onClick: openSortCollectionModal,
             },
-            {
-                id: "coll-op-delete",
-                label: "Delete current collection",
-                description: ".delete-coll",
-                leftSection: <IconTrashX color="red" {...spotlightIconProps} />,
-                onClick: confirmCollectionDeletion,
-            },
         ]
     };
+    if (!isTrashCollection) {
+        collectionOperationActionGroup.actions.push({
+            id: "coll-op-delete",
+            label: "Delete current collection",
+            description: ".delete-coll",
+            leftSection: <IconTrashX color="red" {...spotlightIconProps} />,
+            onClick: confirmCollectionDeletion,
+        });
+    }
 
     const buildCollectionNavActions = (): SpotlightActionData[] => {
         return collections.map(collection => ({
