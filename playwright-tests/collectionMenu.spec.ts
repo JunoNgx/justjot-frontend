@@ -35,7 +35,12 @@ test.describe("Collection Menu", () => {
 
     test.describe("Functionalities", () => {
         test.beforeEach(loginWithMocks);
-        
+
+        test("Auto-navigates to first collection", async ({ page }) => {
+            await expect(page.locator("header .collection-menu-btn")).toContainText('Logbook');
+            await expect(page).toHaveURL("e2eTestAcc/logbook");
+        });
+
         test("Switch collection", async ({ page }) => {
             await page.locator("header .collection-menu-btn").click();
             await page.getByRole('menuitem', { name: 'Coll2' }).click();
