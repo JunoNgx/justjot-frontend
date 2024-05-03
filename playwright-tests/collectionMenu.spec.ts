@@ -82,8 +82,13 @@ test.describe("Collection Menu", () => {
             await expect(page.locator("header .collection-menu-btn")).toContainText('Logbook-!#+$%^-edited');
         });
 
-        test.fixme("Sort collection", async ({ page }) => {
+        test("Sort collection", async ({ page }) => {
+            await page.locator("header .collection-menu-btn").click();
+            await page.getByRole('menuitem', { name: 'Sort collections' }).click();
 
+            await expect(page.getByRole('banner')).toHaveText("Sort Collections");
+            await page.getByRole('button', { name: 'Logbook' }).click();
+            await page.getByRole('button', { name: 'Coll2' }).click();
         });
 
         test.fixme("Delete collection", async ({ page }) => {
