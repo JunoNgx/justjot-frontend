@@ -22,3 +22,5 @@ export const loginWithMocks = async ({ page }: { page: Page}) => {
     await page.getByPlaceholder('BearSeekSeekLest').fill('testaccount');
     await page.getByPlaceholder('BearSeekSeekLest').press('Enter');
 }
+
+export const spotlightTextboxSelector = 'input.mantine-Spotlight-search';
