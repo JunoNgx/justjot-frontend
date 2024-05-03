@@ -7,7 +7,7 @@ import { ItemsContext } from "@/contexts/ItemsContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import useItemActions from "@/hooks/useItemActions";
 import useIconProps from "@/hooks/useIconProps";
-import { canConvertItemToTodo, canRefetchItem, canRestoreItem, canToggleItemShouldCopyOnClick, canTrashItem } from "@/utils/itemUtils";
+import { canConvertItemToTodo, canMoveItem, canRefetchItem, canRestoreItem, canToggleItemShouldCopyOnClick, canTrashItem } from "@/utils/itemUtils";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import MainInputExtendedMenu from "./MainInputExtendedMenu";
 import { CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TEXT_WITH_TITLE_PREFIX_ALT } from "@/utils/constants";
@@ -84,7 +84,10 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
     const hotkeyOpenMoveItemModal = () => {
         if (!selectedItem) return;
-        openMoveItemModal({item: selectedItem, collectionList: collections});
+
+        if (canMoveItem(selectedItem)) {
+            openMoveItemModal({item: selectedItem, collectionList: collections});
+        }
     }
 
     const hotkeyDeleteItem = () => {

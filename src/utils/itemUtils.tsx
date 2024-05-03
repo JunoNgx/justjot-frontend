@@ -14,6 +14,10 @@ export const canToggleItemShouldCopyOnClick = (item: Item) => {
         || item.type === ItemType.LINK;
 }
 
+export const canMoveItem = (item: Item) => {
+    return !item.isTrashed;
+}
+
 export const canRefetchItem = (item: Item) => {
     return item.type === ItemType.LINK;
 };
