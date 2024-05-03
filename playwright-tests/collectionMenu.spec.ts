@@ -87,9 +87,9 @@ test.describe("Collection Menu", () => {
             await page.locator("header .collection-menu-btn").click();
             await page.getByRole('menuitem', { name: 'Sort collections' }).click();
 
-            await expect(page.getByRole('banner')).toHaveText("Sort Collections");
-            await page.getByRole('button', { name: 'Logbook' }).click();
-            await page.getByRole('button', { name: 'Coll2' }).click();
+            await expect(page.locator('.mantine-Modal-header')).toContainText('Sort Collections');
+            await expect(page.getByLabel('Sort Collections').getByRole('button', { name: 'Logbook' })).toBeVisible();
+            await expect(page.getByLabel('Sort Collections').getByRole('button', { name: 'Coll2' })).toBeVisible();
         });
 
         test("Delete collection", async ({ page }) => {
