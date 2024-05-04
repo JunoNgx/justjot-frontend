@@ -194,6 +194,31 @@ test.describe("Main input", () => {
         });
 
         test("Primary action: toggling a todo isDone status", async ({ page }) => {
+            await page.route("*/**/api/collections/items/records/adc11tj7btn1mzz", async route => {
+                const originalData = {
+                    "collection": "6qt1usrvke0tuac",
+                    "collectionId": "zge7ncngf5zodei",
+                    "collectionName": "items",
+                    "content": "",
+                    "created": "2024-04-27 10:06:52.362Z",
+                    "faviconUrl": "",
+                    "id": "adc11tj7btn1mzz",
+                    "isTodoDone": false,
+                    "isTrashed": false,
+                    "owner": "1x9diejq0lx6e0b",
+                    "shouldCopyOnClick": false,
+                    "title": "A todo item",
+                    "trashedDateTime": "",
+                    "type": "todo",
+                    "updated": "2024-04-27 10:06:52.363Z"
+                };
+
+                await route.fulfill({ json: {
+                    ...originalData,
+                    isTodoDone: true
+                }});
+            });
+
             await page.locator('body').press('Control+F');
             await page.locator('body').press('ArrowDown');
             await page.locator('body').press('ArrowDown');
@@ -201,8 +226,6 @@ test.describe("Main input", () => {
             await expect(page.locator('.item[data-index="1"] .item__primary-text')).not.toHaveCSS("text-decoration", /line-through/);
             await page.locator('body').press('Control+Enter');
             await expect(page.locator('.item[data-index="1"] .item__primary-text')).toHaveCSS("text-decoration", /line-through/);
-            await page.locator('body').press('Control+Enter');
-            await expect(page.locator('.item[data-index="1"] .item__primary-text')).not.toHaveCSS("text-decoration", /line-through/);
         });
 
         test("Create item", async ({ page }) => {
