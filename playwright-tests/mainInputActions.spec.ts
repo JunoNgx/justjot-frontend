@@ -325,9 +325,11 @@ test.describe("Main input", () => {
                 .toContainText('Trash bin');
             await expect(page).toHaveURL("e2eTestAcc/trash-bin");
 
+            await expect(page.locator("#displayed-list")).not.toBeEmpty();
+
             await page.locator('body').press('Control+F');
             await page.locator('body').press('ArrowDown');
-            await page.locator('body').press('Control+Shift+R');
+            await page.locator('body').press('Control+Alt+R');
 
             // Dev note: locator will fail to find element, everything will fail.
             // await expect(page.locator('.item[data-index="0"] .item__primary-text'))
