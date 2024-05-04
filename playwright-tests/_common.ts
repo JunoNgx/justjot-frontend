@@ -3,6 +3,7 @@ import authWithPasswordRes from "./mocks/authWithPassword.json" assert { type: "
 import fetchTrashBin from "./mocks/fetchTrashBin.json" assert { type: "json" };
 import fetchCollectionsInit from "./mocks/fetchCollectionsInit.json" assert { type: "json" };
 import fetchItemsFilled from "./mocks/fetchItemsFilled.json" assert { type: "json" };
+import fetchItemsTrashed from "./mocks/fetchItemsTrashed.json" assert { type: "json" };
 
 const interceptBasicApiRequests = async (page: Page) => {
     await page.route("*/**/api/collections/users/auth-with-password", async route => {
@@ -21,6 +22,12 @@ const interceptBasicApiRequests = async (page: Page) => {
 const interceptApiRequestForItems = async (page: Page) => {
     await page.route("*/**/api/collections/items/records?page=1&perPage=500&skipTotal=1&filter=collection%3D%226qt1usrvke0tuac%22%20%26%26%20isTrashed%3Dfalse&sort=-created", async route => {
         await route.fulfill({ json: fetchItemsFilled });
+    });
+}
+
+export const interceptApiRequestForTrashedItems = async (page: Page) => {
+    await page.route("*/**/api/collections/items/records?page=1&perPage=500&skipTotal=1&filter=collection%3D%226qt1usrvke0tuac%22%20%26%26%20isTrashed%3Dfalse&sort=-created", async route => {
+        await route.fulfill({ json: fetchItemsTrashed });
     });
 }
 
