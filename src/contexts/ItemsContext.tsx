@@ -1,4 +1,4 @@
-import { ReactNode, SetStateAction, createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from 'react';
 import { DbTable, Item, ItemCollection } from '@/types';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { findIndexById } from '@/utils/itemUtils';
@@ -40,7 +40,7 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
     const [ selectedIndex, setSelectedIndex ] = useState(-1);
     const [ updateQueue, setUpdateQueue ] = useState<UpdateQueueItem[]>([]);
 
-    const fetchItems = useCallback(async(
+    const fetchItems = async (
         currCollection: ItemCollection | undefined,
         setLoadingState?: React.Dispatch<React.SetStateAction<boolean>>,
     ) => {
@@ -79,7 +79,7 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
             })
 
         setLoadingState?.(false);
-    }, []);
+    };
 
     const filteredItems = items.filter(item => {
 
