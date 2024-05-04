@@ -167,8 +167,15 @@ test.describe("Main input", () => {
             await expect(page.locator('.item[data-index="7"] .item__secondary-text')).toHaveText('Sample content edited');
         });
 
-        test.fixme("Move item", async ({ page }) => {
+        test("Move item", async ({ page }) => {
+            await page.locator('body').press('Control+F');
+            await page.locator('body').press('ArrowDown');
+            await page.locator('body').press('Control+M');
 
+            await page.locator('.item-move-modal').press("2");
+
+            await expect(page.locator('.item[data-index="7"] .item__primary-text'))
+                .not.toHaveText(/A todo item that has been marked as completed/);
         });
 
         test.fixme("Trash item", async ({ page }) => {
