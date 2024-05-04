@@ -94,8 +94,16 @@ test.describe("Main input", () => {
             expect(await page.$eval(".item[data-index='0']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
         });
 
-        test.fixme("Primary action: edit a note", async ({ page }) => {
+        test("Primary action: edit a note", async ({ page }) => {
+            await page.locator('body').press('Control+F');
+            await page.locator('body').press('Control+Shift+ArrowDown');
+            await page.getByLabel('Main input', { exact: true }).press('Control+Enter');
 
+            await expect(page.getByLabel('Title')).toBeVisible();
+            await expect(page.getByLabel("Title", { exact: true })).toHaveValue('Another note with title');
+            await expect(page.getByLabel("Todo task name")).not.toBeVisible();
+            await expect(page.getByLabel("Content", { exact: true })).toBeVisible();
+            await expect(page.getByLabel("Content", { exact: true })).toHaveValue('Just an extra item');
         });
 
         test.fixme("Primary action: open a link", async ({ page }) => {
