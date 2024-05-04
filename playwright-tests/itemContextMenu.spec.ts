@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { loginWithMocksAndFilledItems } from './_common';
+import { interceptApiRequestForTrashedItems, loginWithMocksAndFilledItems } from './_common';
 
 test.describe("Item context menu", () => {
 
@@ -48,9 +48,27 @@ test.describe("Item context menu", () => {
             await expect(page.getByRole('button', { name: 'To copy' })).toBeVisible();
         });
 
-        test.fixme("Trashed note", async ({ page }) => {
+        test("Trashed note", async ({ page }) => {
+            await interceptApiRequestForTrashedItems(page);
 
-        });
+            await page.goto("/e2eTestAcc/trash-bin")
+            
+            await expect(page.locator("header .collection-menu-btn"))
+                .toContainText('Trash bin');
+            await expect(page).toHaveURL("e2eTestAcc/trash-bin");
+    
+            await page.locator('.item[data-id="7msw3d3jj1owyan"]').click({ button: 'right' });
+    
+            await expect(page.getByRole('button', { name: 'Copy', exact: true })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'Edit' })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'Move' })).not.toBeVisible();
+            await expect(page.getByRole('button', { name: 'Trash', exact: true })).not.toBeVisible();
+            await expect(page.getByRole('button', { name: 'Delete' })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'Restore' })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'Refetch' })).not.toBeVisible();
+            await expect(page.getByRole('button', { name: 'Convert to Todo' })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'To copy' })).toBeVisible();
+        })
     });
 
     test.describe("Functionalities", () => {
