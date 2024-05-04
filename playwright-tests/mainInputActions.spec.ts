@@ -19,12 +19,18 @@ test.describe("Main input", () => {
             await expect(page.getByLabel('Main input', { exact: true })).toHaveValue("");
         });
 
-        test.fixme("Extended menu: with title", async ({ page }) => {
-
+        test("Extended menu: with title", async ({ page }) => {
+            await page.getByLabel('Main input', { exact: true }).fill('Favourite assembled weapons');
+            await page.getByLabel('Extra functions and options').click();
+            await page.getByRole('menuitem', { name: 'with title' }).click();
+            await expect(page.getByLabel('Main input', { exact: true })).toHaveValue(':t: Favourite assembled weapons');
         });
 
-        test.fixme("Extended menu: as todo", async ({ page }) => {
-
+        test("Extended menu: as todo", async ({ page }) => {
+            await page.getByLabel('Main input', { exact: true }).fill('Buy armor');
+            await page.getByLabel('Extra functions and options').click();
+            await page.getByRole('menuitem', { name: 'as todo' }).click();
+            await expect(page.getByLabel('Main input', { exact: true })).toHaveValue(':td: Buy armor');
         });
 
         test.fixme("Extended menu: from clipboard", async ({ page }) => {
