@@ -104,22 +104,21 @@ test.describe("Spotlight collection action", () => {
         });
 
         test("Delete collection", async ({ page }) => {
-            await page.route("*/**/api/collections/itemCollections/records/6qt1usrvke0tuac/", async route => {
+            await page.route("*/**/api/collections/itemCollections/records/6qt1usrvke0tuac", async route => {
                 await route.fulfill({ status: 204 });
             });
-            // await page.route("*/**/api/collections/itemCollections/records/6qt1usrvke0tuac", async route => {
-            //     await route.fulfill({ json: collectionEdit });
-            // });
 
             await page.locator('body').press('Control+k');
             await page.locator(spotlightTextboxSelector).fill('.delete');
             await page.locator(spotlightTextboxSelector).press('Enter');
-            await page.locator('body').press('Tab');
-            await page.locator('body').press('Tab');
-            await page.locator('body').press('Enter');
+            // Double tabbing and entering seem to be unreliable
+            // await page.locator('body').press('Tab');
+            // await page.locator('body').press('Tab');
+            // await page.locator('body').press('Enter');
+            await page.getByRole('button', { name: 'Delete collection' }).click();
 
-            // TODO: not passing
-            // Test: auto-navigate to current index, meaning the next collection
+            // Test: auto-navigate tno current index, meaning the next collection
+            await expect(page.locator("header .collection-menu-btn")).toContainText('Coll2');
             await expect(page).toHaveURL("e2eTestAcc/coll-2");
         });
     });
