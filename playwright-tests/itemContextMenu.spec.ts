@@ -82,8 +82,48 @@ test.describe("Item context menu", () => {
             await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
         });
 
-        test.fixme("Edit", async ({ page }) => {
+        test("Edit", async ({ page }) => {
+            await page.route("*/**/api/collections/items/records/o9t5o6fpehcd0pw", async route => {
+                await route.fulfill({
+                    json:
+                    {
+                        "collection": "6qt1usrvke0tuac",
+                        "collectionId": "zge7ncngf5zodei",
+                        "collectionName": "items",
+                        "content": "Sample content edited",
+                        "created": "2023-02-24 10:02:24.563Z",
+                        "faviconUrl": "",
+                        "id": "o9t5o6fpehcd0pw",
+                        "isTodoDone": false,
+                        "isTrashed": false,
+                        "owner": "1x9diejq0lx6e0b",
+                        "shouldCopyOnClick": false,
+                        "title": "Sample title edited",
+                        "trashedDateTime": "",
+                        "type": "text",
+                        "updated": "2024-04-27 10:45:24.565Z"
+                    }
+                });
+            });
 
+            await page.locator('.item[data-id="o9t5o6fpehcd0pw"]').click({ button: 'right' });
+            await page.getByRole('button', { name: 'Edit' }).click();
+
+            await expect(page.getByLabel('Title')).toBeVisible();
+            await expect(page.getByLabel("Title", { exact: true })).toHaveValue('A normal text note');
+            await expect(page.getByLabel("Todo task name")).not.toBeVisible();
+            await expect(page.getByLabel("Content", { exact: true })).toBeVisible();
+            await expect(page.getByLabel("Content", { exact: true })).toHaveValue('Content sample');
+
+            await page.getByLabel("Title", { exact: true }).click();
+            await page.getByLabel("Title", { exact: true }).fill("Sample title edited");
+            await page.getByLabel("Content", { exact: true }).click();
+            await page.getByLabel("Content", { exact: true }).fill('Sample content edited');
+            await page.getByLabel("Content", { exact: true }).press("Escape");
+            await page.waitForTimeout(500);
+
+            await expect(page.locator('.item[data-id="o9t5o6fpehcd0pw"] .item__primary-text')).toHaveText('Sample title edited');
+            await expect(page.locator('.item[data-id="o9t5o6fpehcd0pw"] .item__secondary-text')).toHaveText('Sample content edited');
         });
 
         test.fixme("Move", async ({ page }) => {
