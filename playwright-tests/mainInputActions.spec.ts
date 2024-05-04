@@ -360,8 +360,35 @@ test.describe("Main input", () => {
             await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
         });
 
-        test.fixme("Refetch link metadata", async ({ page }) => {
+        test("Refetch link metadata", async ({ page }) => {
+            await page.route("*/**/refetch/1x9diejq0lx6e0b/lzbedvc667m3r3r?authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3MTU4NjA3ODcsImlkIjoiaTJncXdveWRzZ3UxbTI0IiwidHlwZSI6ImF1dGhSZWNvcmQifQ.yGMpxtYyya7JYncmlbQXGxFgI5RKzKIDtlTqe_L1RbM", async route => {
+                await route.fulfill({
+                    json: {
+                        "collection": "u9v6d9osqqzy6ml",
+                        "collectionId": "zge7ncngf5zodei",
+                        "collectionName": "items",
+                        "content": "https://xkcd.com",
+                        "created": "2024-05-04 07:03:53.811Z",
+                        "faviconUrl": "https://xkcd.com/s/919f27.ico",
+                        "id": "lzbedvc667m3r3r",
+                        "isTodoDone": false,
+                        "isTrashed": false,
+                        "owner": "i2gqwoydsgu1m24",
+                        "shouldCopyOnClick": false,
+                        "title": "xkcd: Software Testing Day",
+                        "trashedDateTime": "",
+                        "type": "link",
+                        "updated": "2024-05-04 07:03:53.811Z"
+                    },
+                });
+            });
 
+            await page.locator('body').press('Control+F');
+            await page.locator('body').press('Shift+ArrowDown');
+            await page.locator('body').press('ArrowDown');
+            await page.locator('body').press('Control+Alt+Digit5');
+            await expect(page.locator('.item[data-index="5"] .item__primary-text')).toHaveText(/xkcd/);
+            await expect(page.locator('.item[data-index="5"] .item__secondary-text')).toHaveText(/xkcd.com/);
         });
 
         test.fixme("Convert title-less note to todo", async ({ page }) => {
