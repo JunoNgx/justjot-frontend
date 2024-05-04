@@ -55,8 +55,11 @@ test.describe("Main input", () => {
             await expect(page.getByLabel('Main input', { exact: true })).toHaveValue('');
         });
 
-        test.fixme("Extended menu: open spotlight", async ({ page }) => {
-
+        test("Extended menu: open spotlight", async ({ page }) => {
+            await page.getByLabel('Main input', { exact: true }).fill('A good puppet');
+            await page.getByLabel('Extra functions and options').click();
+            await page.getByRole('menuitem', { name: 'spotlight' }).click();
+            await expect(page.getByRole('dialog').getByRole('textbox')).toBeVisible();
         });
     });
 
