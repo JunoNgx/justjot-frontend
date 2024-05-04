@@ -129,8 +129,15 @@ test.describe("Main input", () => {
             await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
         });
 
-        test.fixme("Primary action: copy a link content that was marked to copy", async ({ page }) => {
+        test("Primary action: copy a link content that was marked to copy", async ({ page }) => {
+            await page.locator('body').press('Control+F');
+            await page.locator('body').press('ArrowDown');
+            await page.locator('body').press('ArrowDown');
+            await page.locator('body').press('ArrowDown');
+            await page.locator('body').press('Control+Enter');
 
+            await expect(page.locator('.item[data-index="2"]')).toHaveText(/Content copied/);
+            await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
         });
 
         test.fixme("Primary action: toggling a todo isDone status", async ({ page }) => {
