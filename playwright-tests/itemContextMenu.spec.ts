@@ -1,14 +1,23 @@
 import { test, expect } from '@playwright/test';
+import { loginWithMocksAndFilledItems } from './_common';
 
 test.describe("Item context menu", () => {
 
-    test.beforeEach(async ({ page }) => {
-
-    });
-
     test.describe("Options visibility", () => {
-        test.fixme("Note without title", async ({ page }) => {
+        test.beforeEach(loginWithMocksAndFilledItems);
 
+        test("Note without title", async ({ page }) => {
+            await page.locator('.item[data-id="yrcn8ax4fph01tx"]').click({ button: 'right' });
+
+            await expect(page.getByRole('button', { name: 'Copy', exact: true })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'Edit' })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'Move' })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'Trash' })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'Delete' })).not.toBeVisible();
+            await expect(page.getByRole('button', { name: 'Restore' })).not.toBeVisible();
+            await expect(page.getByRole('button', { name: 'Refetch' })).not.toBeVisible();
+            await expect(page.getByRole('button', { name: 'Convert to Todo' })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'To copy' })).toBeVisible();
         });
 
         test.fixme("Note with title", async ({ page }) => {
