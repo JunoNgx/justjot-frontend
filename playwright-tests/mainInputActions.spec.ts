@@ -66,9 +66,31 @@ test.describe("Main input", () => {
             expect(await page.$eval("#main-input", (el) => el === document.activeElement)).toBeTruthy();
         });
 
-        test("Select items with arrow keys", async ({ page }) => {
+        test("Arrow key navigations", async ({ page }) => {
             await page.locator('body').press('Control+F');
+
             await page.locator('body').press('ArrowDown');
+            expect(await page.$eval(".item[data-index='0']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+            
+            await page.locator('body').press('ArrowDown');
+            expect(await page.$eval(".item[data-index='1']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+
+            await page.locator('body').press('Shift+ArrowDown');
+            expect(await page.$eval(".item[data-index='6']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+
+            await page.locator('body').press('Control+Shift+ArrowDown');
+            expect(await page.$eval(".item[data-index='8']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+
+            await page.locator('body').press('ArrowUp');
+            expect(await page.$eval(".item[data-index='7']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+
+            await page.locator('body').press('ArrowUp');
+            expect(await page.$eval(".item[data-index='6']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+
+            await page.locator('body').press('Shift+ArrowUp');
+            expect(await page.$eval(".item[data-index='1']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+
+            await page.locator('body').press('Shift+Control+ArrowUp');
             expect(await page.$eval(".item[data-index='0']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
         });
 
