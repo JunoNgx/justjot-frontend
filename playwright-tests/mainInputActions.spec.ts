@@ -414,8 +414,38 @@ test.describe("Main input", () => {
             await expect(page.locator('.item[data-index="5"] .item__secondary-text')).toHaveText(/xkcd.com/);
         });
 
-        test.fixme("Convert title-less note to todo", async ({ page }) => {
+        test("Convert title-less note to todo", async ({ page }) => {
+            await page.route("*/**/api/collections/items/records/yrcn8ax4fph01tx", async route => {
+                await route.fulfill({
+                    json:
+                    {
+                        "collection": "6qt1usrvke0tuac",
+                        "collectionId": "zge7ncngf5zodei",
+                        "collectionName": "items",
+                        "content": "",
+                        "created": "2024-04-24 10:04:46.604Z",
+                        "faviconUrl": "",
+                        "id": "yrcn8ax4fph01tx",
+                        "isTodoDone": false,
+                        "isTrashed": false,
+                        "owner": "1x9diejq0lx6e0b",
+                        "shouldCopyOnClick": false,
+                        "title": "A note without title",
+                        "trashedDateTime": "",
+                        "type": "todo",
+                        "updated": "2024-04-27 10:04:59.615Z"
+                    },
+                });
+            });
 
+            await page.locator('body').press('Control+F');
+            await page.locator('body').press('Control+Shift+ArrowDown');
+            await page.locator('body').press('ArrowUp');
+            await page.locator('body').press('ArrowUp');
+            await page.locator('body').press('Control+Alt+Digit6');
+
+            await expect(page.locator('.item[data-index="7"] .item__primary-text')).toHaveText('A note without title');
+            await expect(page.locator('.item[data-index="7"] .item__secondary-text')).not.toBeVisible();
         });
     });
 });
