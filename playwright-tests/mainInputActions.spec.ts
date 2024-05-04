@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { loginWithMocks, loginWithMocksAndFilledItems } from './_common';
+import { interceptApiRequestForTrashedItems, loginWithMocks, loginWithMocksAndFilledItems } from './_common';
 
 test.describe("Main input", () => {
 
@@ -69,7 +69,7 @@ test.describe("Main input", () => {
             await page.locator('body').press('ArrowLeft');
             await expect(page.locator("header .collection-menu-btn")).toContainText('Logbook');
             await expect(page).toHaveURL("e2eTestAcc/logbook");
-            
+
             await page.locator('body').press('ArrowRight');
 
             await expect(page.locator("header .collection-menu-btn")).toContainText('Coll2');
@@ -81,12 +81,12 @@ test.describe("Main input", () => {
             await expect(page).toHaveURL("e2eTestAcc/trash-bin");
 
             await page.locator('body').press('ArrowRight');
-            
+
             await expect(page.locator("header .collection-menu-btn")).toContainText('Trash bin');
             await expect(page).toHaveURL("e2eTestAcc/trash-bin");
 
             await page.locator('body').press('ArrowLeft');
-            
+
             await expect(page.locator("header .collection-menu-btn")).toContainText('Coll2');
             await expect(page).toHaveURL("e2eTestAcc/coll-2");
         });
@@ -116,7 +116,7 @@ test.describe("Main input", () => {
 
             await page.locator('body').press('ArrowDown');
             expect(await page.$eval(".item[data-index='0']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
-            
+
             await page.locator('body').press('ArrowDown');
             expect(await page.$eval(".item[data-index='1']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
 
@@ -232,8 +232,23 @@ test.describe("Main input", () => {
                 .not.toHaveText(/A todo item that has been marked as completed/);
         });
 
-        test.fixme("Restore trashed item", async ({ page }) => {
+        test("Restore trashed item", async ({ page }) => {
+            interceptApiRequestForTrashedItems(page);
 
+            await page.goto("/e2eTestAcc/trash-bin")
+
+            await expect(page.locator("header .collection-menu-btn"))
+                .toContainText('Trash bin');
+            await expect(page).toHaveURL("e2eTestAcc/trash-bin");
+
+            await page.locator('body').press('Control+F');
+            await page.locator('body').press('ArrowDown');
+            await page.locator('body').press('Control+Shift+R');
+
+            // Dev note: locator will fail to find element, everything will fail.
+            // await expect(page.locator('.item[data-index="0"] .item__primary-text'))
+            //     .not.toHaveText("trashed");
+            await expect(page.locator("#displayed-list")).toBeEmpty();
         });
 
         test.fixme("Toggle shouldCopyOnClick", async ({ page }) => {
