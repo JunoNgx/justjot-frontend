@@ -218,8 +218,34 @@ test.describe("Item context menu", () => {
             await expect(page.locator('.item[data-id="7msw3d3jj1owyan"]')).not.toBeVisible();
         });
 
-        test.fixme("Refetch", async ({ page }) => {
+        test("Refetch", async ({ page }) => {
+            await page.route("*/**/refetch/1x9diejq0lx6e0b/lzbedvc667m3r3r?authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3MTU4NjA3ODcsImlkIjoiaTJncXdveWRzZ3UxbTI0IiwidHlwZSI6ImF1dGhSZWNvcmQifQ.yGMpxtYyya7JYncmlbQXGxFgI5RKzKIDtlTqe_L1RbM", async route => {
+                await route.fulfill({
+                    json: {
+                        "collection": "u9v6d9osqqzy6ml",
+                        "collectionId": "zge7ncngf5zodei",
+                        "collectionName": "items",
+                        "content": "https://xkcd.com",
+                        "created": "2024-05-04 07:03:53.811Z",
+                        "faviconUrl": "https://xkcd.com/s/919f27.ico",
+                        "id": "lzbedvc667m3r3r",
+                        "isTodoDone": false,
+                        "isTrashed": false,
+                        "owner": "i2gqwoydsgu1m24",
+                        "shouldCopyOnClick": false,
+                        "title": "xkcd: Software Testing Day",
+                        "trashedDateTime": "",
+                        "type": "link",
+                        "updated": "2024-05-04 07:03:53.811Z"
+                    },
+                });
+            });
 
+            await page.locator('.item[data-id="lzbedvc667m3r3r"]').click({ button: 'right' });
+            await page.getByRole('button', { name: 'Refetch' }).click();
+
+            await expect(page.locator('.item[data-id="lzbedvc667m3r3r"] .item__primary-text')).toHaveText(/xkcd/);
+            await expect(page.locator('.item[data-id="lzbedvc667m3r3r"] .item__secondary-text')).toHaveText(/xkcd.com/);
         });
 
         test.fixme("Convert to Todo", async ({ page }) => {
