@@ -126,8 +126,36 @@ test.describe("Item context menu", () => {
             await expect(page.locator('.item[data-id="o9t5o6fpehcd0pw"] .item__secondary-text')).toHaveText('Sample content edited');
         });
 
-        test.fixme("Move", async ({ page }) => {
+        test("Move", async ({ page }) => {
+            await page.route("*/**/api/collections/items/records/hxz3757cizrkzsl", async route => {
+                await route.fulfill({
+                    json:
+                    {
+                        "collection": "rhy45jt7zbhk6de",
+                        "collectionId": "zge7ncngf5zodei",
+                        "collectionName": "items",
+                        "content": "",
+                        "created": "2024-04-27 10:07:01.712Z",
+                        "faviconUrl": "",
+                        "id": "hxz3757cizrkzsl",
+                        "isTodoDone": true,
+                        "isTrashed": false,
+                        "owner": "1x9diejq0lx6e0b",
+                        "shouldCopyOnClick": false,
+                        "title": "A todo item that has been marked as completed",
+                        "trashedDateTime": "",
+                        "type": "todo",
+                        "updated": "2024-04-27 10:07:03.136Z"
+                    }
+                });
+            });
 
+            await page.locator('.item[data-id="hxz3757cizrkzsl"]').click({ button: 'right' });
+            await page.getByRole('button', { name: 'Move' }).click();
+            await expect(page.locator(".mantine-Modal-header")).toHaveText("Move to another collection");
+            await page.getByRole('button', { name: 'Coll2' }).click();
+
+            await expect(page.locator('.item[data-id="hxz3757cizrkzsl"]')).not.toBeVisible();
         });
 
         test.fixme("Trash", async ({ page }) => {
