@@ -213,6 +213,29 @@ test.describe("Main input", () => {
         });
 
         test("Edit item", async ({ page }) => {
+            await page.route("*/**/api/collections/items/records/hxz3757cizrkzsl", async route => {
+                await route.fulfill({
+                    json:
+                    {
+                        "collection": "6qt1usrvke0tuac",
+                        "collectionId": "zge7ncngf5zodei",
+                        "collectionName": "items",
+                        "content": "Sample content edited",
+                        "created": "2023-02-24 10:02:24.563Z",
+                        "faviconUrl": "",
+                        "id": "o9t5o6fpehcd0pw",
+                        "isTodoDone": false,
+                        "isTrashed": false,
+                        "owner": "1x9diejq0lx6e0b",
+                        "shouldCopyOnClick": false,
+                        "title": "Sample title edited",
+                        "trashedDateTime": "",
+                        "type": "text",
+                        "updated": "2024-04-27 10:45:24.565Z"
+                    }
+                });
+            });
+
             await page.locator('body').press('Control+F');
             await page.locator('body').press('Control+Shift+ArrowDown');
             await page.locator('body').press('ArrowUp');
@@ -223,13 +246,14 @@ test.describe("Main input", () => {
             await page.getByLabel("Content", { exact: true }).fill('Sample content edited');
             await page.locator('body').press('Control+S');
 
-            await expect(page.locator('.item[data-index="7"] .item__primary-text')).toHaveText('Sample title edited');
-            await expect(page.locator('.item[data-index="7"] .item__secondary-text')).toHaveText('Sample content edited');
+            await expect(page.locator('.item[data-index="8"] .item__primary-text')).toHaveText('Sample title edited');
+            await expect(page.locator('.item[data-index="8"] .item__secondary-text')).toHaveText('Sample content edited');
         });
 
         test("Move item", async ({ page }) => {
             await page.route("*/**/api/collections/items/records/hxz3757cizrkzsl", async route => {
-                await route.fulfill({ json:
+                await route.fulfill({
+                    json:
                     {
                         "collection": "rhy45jt7zbhk6de",
                         "collectionId": "zge7ncngf5zodei",
@@ -261,11 +285,34 @@ test.describe("Main input", () => {
         });
 
         test("Trash item", async ({ page }) => {
+            await page.route("*/**/items/trash/1x9diejq0lx6e0b/hxz3757cizrkzsl?authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3MTU4NjA3ODcsImlkIjoiaTJncXdveWRzZ3UxbTI0IiwidHlwZSI6ImF1dGhSZWNvcmQifQ.yGMpxtYyya7JYncmlbQXGxFgI5RKzKIDtlTqe_L1RbM", async route => {
+                await route.fulfill({
+                    status: 204,
+                    json: {
+                        "collection": "6qt1usrvke0tuac",
+                        "collectionId": "zge7ncngf5zodei",
+                        "collectionName": "items",
+                        "content": "",
+                        "created": "2024-04-27 10:07:01.712Z",
+                        "faviconUrl": "",
+                        "id": "hxz3757cizrkzsl",
+                        "isTodoDone": true,
+                        "isTrashed": true,
+                        "owner": "1x9diejq0lx6e0b",
+                        "shouldCopyOnClick": false,
+                        "title": "A todo item that has been marked as completed",
+                        "trashedDateTime": "",
+                        "type": "todo",
+                        "updated": "2024-04-27 10:07:03.136Z"
+                    }
+                });
+            });
+
             await page.locator('body').press('Control+F');
             await page.locator('body').press('ArrowDown');
-            await page.locator('body').press('Control+Shift+Delete');
+            await page.locator('body').press('Control+Shift+Backspace');
 
-            await expect(page.locator('.item[data-index="7"] .item__primary-text'))
+            await expect(page.locator('.item[data-index="0"] .item__primary-text'))
                 .not.toHaveText(/A todo item that has been marked as completed/);
         });
 
