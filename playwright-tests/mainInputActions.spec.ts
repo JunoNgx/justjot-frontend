@@ -60,7 +60,37 @@ test.describe("Main input", () => {
 
     test.describe("Test keyboard shortcuts", () => {
         test.beforeEach(loginWithMocksAndFilledItems);
-        
+
+        test("Navigate to adjacent collections with arrow keys", async ({ page }) => {
+            await expect(page.locator("header .collection-menu-btn")).toContainText('Logbook');
+            await expect(page).toHaveURL("e2eTestAcc/logbook");
+
+            // Do nothing if already on the first collection
+            await page.locator('body').press('ArrowLeft');
+            await expect(page.locator("header .collection-menu-btn")).toContainText('Logbook');
+            await expect(page).toHaveURL("e2eTestAcc/logbook");
+            
+            await page.locator('body').press('ArrowRight');
+
+            await expect(page.locator("header .collection-menu-btn")).toContainText('Coll2');
+            await expect(page).toHaveURL("e2eTestAcc/coll-2");
+
+            // Do nothing if already on the last collection
+            await page.locator('body').press('ArrowRight');
+            await expect(page.locator("header .collection-menu-btn")).toContainText('Trash bin');
+            await expect(page).toHaveURL("e2eTestAcc/trash-bin");
+
+            await page.locator('body').press('ArrowRight');
+            
+            await expect(page.locator("header .collection-menu-btn")).toContainText('Trash bin');
+            await expect(page).toHaveURL("e2eTestAcc/trash-bin");
+
+            await page.locator('body').press('ArrowLeft');
+            
+            await expect(page.locator("header .collection-menu-btn")).toContainText('Coll2');
+            await expect(page).toHaveURL("e2eTestAcc/coll-2");
+        });
+
         test("Focus on main input", async ({ page }) => {
             await page.locator('body').press('Control+F');
             expect(await page.$eval("#main-input", (el) => el === document.activeElement)).toBeTruthy();
