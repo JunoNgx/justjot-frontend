@@ -140,8 +140,16 @@ test.describe("Main input", () => {
             await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
         });
 
-        test.fixme("Primary action: toggling a todo isDone status", async ({ page }) => {
+        test("Primary action: toggling a todo isDone status", async ({ page }) => {
+            await page.locator('body').press('Control+F');
+            await page.locator('body').press('ArrowDown');
+            await page.locator('body').press('ArrowDown');
 
+            await expect(page.locator('.item[data-index="1"] .item__primary-text')).not.toHaveCSS("text-decoration", /line-through/);
+            await page.locator('body').press('Control+Enter');
+            await expect(page.locator('.item[data-index="1"] .item__primary-text')).toHaveCSS("text-decoration", /line-through/);
+            await page.locator('body').press('Control+Enter');
+            await expect(page.locator('.item[data-index="1"] .item__primary-text')).not.toHaveCSS("text-decoration", /line-through/);
         });
 
         test.fixme("Edit item", async ({ page }) => {
