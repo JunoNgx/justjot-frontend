@@ -93,7 +93,7 @@
             "collection": "u9v6d9osqqzy6ml",
             "collectionId": "zge7ncngf5zodei",
             "collectionName": "items",
-            "content": "xkcd.org",
+            "content": "xkcd.com",
             "created": "2024-05-04 07:03:53.811Z",
             "faviconUrl": "",
             "id": "lzbedvc667m3r3r",
@@ -103,7 +103,7 @@
             "shouldCopyOnClick": false,
             "title": "Link to be refetched",
             "trashedDateTime": "",
-            "type": "text",
+            "type": "link",
             "updated": "2024-05-04 07:03:53.811Z"
         },
         {
