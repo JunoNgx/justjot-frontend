@@ -1,0 +1,25 @@
+{
+    "page": 1,
+    "perPage": 500,
+    "totalItems": -1,
+    "totalPages": -1,
+    "items": [
+        {
+            "collection": "6qt1usrvke0tuac",
+            "collectionId": "zge7ncngf5zodei",
+            "collectionName": "items",
+            "content": "A trashed item",
+            "created": "2024-05-04 03:38:06.711Z",
+            "faviconUrl": "",
+            "id": "7msw3d3jj1owyan",
+            "isTodoDone": false,
+            "isTrashed": false,
+            "owner": "1x9diejq0lx6e0b",
+            "shouldCopyOnClick": false,
+            "title": "",
+            "trashedDateTime": "",
+            "type": "text",
+            "updated": "2024-05-04 03:38:06.712Z"
+        }
+    ]
+}
