@@ -378,6 +378,8 @@ test.describe("Main input", () => {
                 });
             });
 
+            await expect(page.locator('.item[data-index="9"] .item__should-copy-icon')).not.toBeVisible();
+
             await page.locator('body').press('Control+F');
             await page.locator('body').press('Control+Shift+ArrowDown');
             await page.locator('body').press('Control+Alt+Digit4');
