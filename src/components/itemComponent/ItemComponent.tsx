@@ -94,6 +94,7 @@ export default function ItemComponent(
         justify="space-between"
         wrap="nowrap"
         data-index={index}
+        data-id={item.id}
         {...anchorProps}
         role={isLink ? "link" : "button"}
         aria-current={isSelected}
