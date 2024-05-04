@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { loginWithMocks, spotlightTextboxSelector } from './_common';
+import { interceptApiRequestForTrashedItems, loginWithMocks, spotlightTextboxSelector } from './_common';
 import collectionNew from "./mocks/collectionNew.json" assert { type: "json" };
 import collectionEdit from "./mocks/collectionEdit.json" assert { type: "json" };
 
@@ -24,6 +24,7 @@ test.describe("Spotlight collection action", () => {
             await page.locator('body').press('Control+k');
             await page.locator(spotlightTextboxSelector).fill('/trash-bin');
             await page.locator(spotlightTextboxSelector).press('Enter');
+            await page.locator(spotlightTextboxSelector).fill('');
 
             await page.locator('body').press('Control+k');
 
