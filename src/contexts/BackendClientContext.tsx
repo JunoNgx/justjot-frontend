@@ -2,7 +2,7 @@ import { DbTable, User } from '@/types';
 import { AUTO_CLOSE_ERROR_TOAST, TEST_ACC_USERNAME } from '@/utils/constants';
 import { notifications } from '@mantine/notifications';
 import PocketBase, { AuthModel } from 'pocketbase';
-import { ReactNode, SetStateAction, createContext, useCallback, useState } from 'react';
+import { ReactNode, SetStateAction, createContext, useState } from 'react';
 
 type BackendClientContextType = {
     pbClient: PocketBase,
@@ -22,10 +22,10 @@ export default function BackendClientContextProvider({ children }: { children: R
 
     const [user, setUser] = useState<User>(pbClient.authStore.model as User);
 
-    const logout = useCallback(() => {
+    const logout = () => {
         pbClient.authStore.clear();
         setUser(null);
-    }, []);
+    }
 
     const isDemoUser = user?.username === TEST_ACC_USERNAME;
     const refreshAuth = async () => {
