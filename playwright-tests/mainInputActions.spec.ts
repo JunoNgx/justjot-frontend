@@ -228,6 +228,28 @@ test.describe("Main input", () => {
         });
 
         test("Move item", async ({ page }) => {
+            await page.route("*/**/api/collections/items/records/hxz3757cizrkzsl", async route => {
+                await route.fulfill({ json:
+                    {
+                        "collection": "rhy45jt7zbhk6de",
+                        "collectionId": "zge7ncngf5zodei",
+                        "collectionName": "items",
+                        "content": "",
+                        "created": "2024-04-27 10:07:01.712Z",
+                        "faviconUrl": "",
+                        "id": "hxz3757cizrkzsl",
+                        "isTodoDone": true,
+                        "isTrashed": false,
+                        "owner": "1x9diejq0lx6e0b",
+                        "shouldCopyOnClick": false,
+                        "title": "A todo item that has been marked as completed",
+                        "trashedDateTime": "",
+                        "type": "todo",
+                        "updated": "2024-04-27 10:07:03.136Z"
+                    }
+                });
+            });
+
             await page.locator('body').press('Control+F');
             await page.locator('body').press('ArrowDown');
             await page.locator('body').press('Control+M');
