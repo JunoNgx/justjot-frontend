@@ -21,12 +21,19 @@ yarn
 yarn dev
 ```
 
+## Tests
+
+Run `yarn test` and `yarn intg-test` for unit tests (powered by [Vitest](https://vitest.dev/)) and integration tests (powered by [Playwright](https://playwright.dev/)), respectively.
+
+Unit test passes are required for `yarn build` and deployment.
+
+Playwright tests are performed separately with each push to the `main` branch as a GitHub Actions workflow.
+
 ### Environment variable
 
 This application requires the variable `VITE_BACKEND_URL`, which is an url pointing to an appropriate PocketBase instance.
 
 ## Feature roadmap
-* Unit tests and end-to-end tests.
 * Export user data to JSON format.
 * Offline operations.
 * Syntax highlighting and advanced keybindings with Monaco Editor.
