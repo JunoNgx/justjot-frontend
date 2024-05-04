@@ -6,15 +6,17 @@ test.describe("Main input", () => {
     test.beforeEach(loginWithMocks);
 
     test.describe("General functions", () => {
-        test("Typing changes the main input value", async ({ page }) => {
+        test("Basic functionalities", async ({ page }) => {
             await page.locator('body').press('Control+k');
-            await page.getByLabel('Main input', { exact: true }).fill('Seek greater souls');
-            await expect(page.getByLabel('Main input', { exact: true })).toHaveValue("Seek greater souls");
-        });
 
-        test("Pressing enter clearing the main input", async ({ page }) => {
-            await page.locator('body').press('Control+k');
-            await page.getByLabel('Main input', { exact: true }).fill('I was born in a prison');
+            // Ctrl + F should focus
+            expect(page.$eval("#main-input", (el) => el === document.activeElement)).toBeTruthy();
+            await page.getByLabel('Main input', { exact: true }).fill('Seek greater souls');
+
+            // Typing changes the input value
+            await expect(page.getByLabel('Main input', { exact: true })).toHaveValue("Seek greater souls");
+
+            // Input is cleared upon item creation
             await page.getByLabel('Main input', { exact: true }).press('Enter');
             await expect(page.getByLabel('Main input', { exact: true })).toHaveValue("");
         });
