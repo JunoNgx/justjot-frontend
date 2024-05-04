@@ -86,7 +86,9 @@ export default function MainView() {
         fetchItems(currCollection, setIsLoading);
     }, [currCollection]);
 
-    return <Box className="main-view-wrapper">
+    return <Box className="main-view-wrapper"
+        id="main-view-wrapper"
+    >
         {/* For non-item components */}
         <CollectionMenu isInMainView={true} />
         <KeyboardPromptDisplay />
