@@ -72,8 +72,14 @@ test.describe("Item context menu", () => {
     });
 
     test.describe("Functionalities", () => {
-        test.fixme("Copy", async ({ page }) => {
+        test.beforeEach(loginWithMocksAndFilledItems);
 
+        test("Copy", async ({ page }) => {
+            await page.locator('.item[data-id="hxz3757cizrkzsl"]').click({ button: 'right' });
+            await page.getByRole('button', { name: 'Copy', exact: true }).click();
+
+            await expect(page.locator('.item[data-id="hxz3757cizrkzsl"]')).toHaveText(/Content copied/);
+            await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
         });
 
         test.fixme("Edit", async ({ page }) => {
