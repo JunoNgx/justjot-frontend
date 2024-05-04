@@ -279,8 +279,36 @@ test.describe("Item context menu", () => {
             await expect(page.locator('.item[data-id="yrcn8ax4fph01tx"] .item__secondary-text')).not.toBeVisible();
         });
 
-        test.fixme("Toggle should copy on click", async ({ page }) => {
+        test("Toggle should copy on click", async ({ page }) => {
+            await page.route("*/**/api/collections/items/records/7msw3d3jj1owyan", async route => {
+                await route.fulfill({
+                    json:
+                    {
+                        "collection": "6qt1usrvke0tuac",
+                        "collectionId": "zge7ncngf5zodei",
+                        "collectionName": "items",
+                        "content": "Just an extra item",
+                        "created": "2024-05-04 03:38:06.711Z",
+                        "faviconUrl": "",
+                        "id": "7msw3d3jj1owyan",
+                        "isTodoDone": false,
+                        "isTrashed": false,
+                        "owner": "1x9diejq0lx6e0b",
+                        "shouldCopyOnClick": true,
+                        "title": "Another note with title",
+                        "trashedDateTime": "",
+                        "type": "text",
+                        "updated": "2024-05-04 03:38:06.712Z"
+                    }
+                });
+            });
 
+            await expect(page.locator('.item[data-id="7msw3d3jj1owyan"] .item__should-copy-icon')).not.toBeVisible();
+
+            await page.locator('.item[data-id="7msw3d3jj1owyan"]').click({ button: 'right' });
+            await page.getByRole('button', { name: 'To copy' }).click();
+
+            await expect(page.locator('.item[data-id="7msw3d3jj1owyan"] .item__should-copy-icon')).toBeVisible();
         });
 
     });
