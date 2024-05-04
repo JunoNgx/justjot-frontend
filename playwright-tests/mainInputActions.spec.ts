@@ -91,6 +91,18 @@ test.describe("Main input", () => {
             await expect(page).toHaveURL("e2eTestAcc/coll-2");
         });
 
+        test("Navigate to collection with numeric keys", async ({ page }) => {
+            // TODO: this is not great, find out why I needed to press around
+            // before pressing 3
+            await page.locator('body').press('Control+F');
+            await page.locator('body').press('Escape');
+            await page.locator('body').press('Digit3');
+
+            await expect(page.locator("header .collection-menu-btn"))
+                .toContainText('Trash bin');
+            await expect(page).toHaveURL("e2eTestAcc/trash-bin");
+        });
+
         test("Focus on main input", async ({ page }) => {
             await page.locator('body').press('Control+F');
             expect(await page.$eval("#main-input", (el) => el === document.activeElement)).toBeTruthy();
