@@ -106,8 +106,15 @@ test.describe("Main input", () => {
             await expect(page.getByLabel("Content", { exact: true })).toHaveValue('Just an extra item');
         });
 
-        test.fixme("Primary action: open a link", async ({ page }) => {
+        test("Primary action: open a link", async ({ page }) => {
+            await page.locator('body').press('Control+F');
+            await page.locator('body').press('Shift+ArrowDown');
+            await page.locator('body').press('Control+Enter');
 
+            const newTabPromise = page.waitForEvent("popup");
+            const newTab = await newTabPromise;
+            await newTab.waitForLoadState();
+            await expect(newTab).toHaveURL(/mozilla.org/);
         });
 
         test.fixme("Primary action: copy a note content that was marked to copy", async ({ page }) => {
