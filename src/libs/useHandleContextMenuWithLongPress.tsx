@@ -12,7 +12,7 @@
  * https://github.com/facebook/react/issues/17596#issuecomment-565524946
  */
 
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
 
 interface PressHandlers {
     onClick: (e: React.MouseEvent | React.TouchEvent) => void,
@@ -29,7 +29,7 @@ export default function useHandleContextMenuWithLongPress(
 ) {
     const timeout = useRef<ReturnType<typeof setTimeout>>();
 
-    const start = useCallback((
+    const start = (
         e: React.MouseEvent | React.TouchEvent
     ) => {
         // Prevent right mouse click/native contextmenu interference
@@ -40,13 +40,13 @@ export default function useHandleContextMenuWithLongPress(
         timeout.current = setTimeout(() => {
             handleContextMenu(e)
         }, delay);
-    }, [onLongPress, delay]);
+    };
 
-    const clear = useCallback((
+    const clear = (
         _e: React.MouseEvent | React.TouchEvent,
     ) => {
         timeout.current && clearTimeout(timeout.current);
-    }, [onClick]);
+    };
 
     const handleContextMenu = (
         e: React.MouseEvent | React.TouchEvent
