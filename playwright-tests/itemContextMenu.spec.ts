@@ -188,8 +188,19 @@ test.describe("Item context menu", () => {
             await expect(page.locator('.item[data-id="hxz3757cizrkzsl"]')).not.toBeVisible();
         });
 
-        test.fixme("Delete", async ({ page }) => {
+        test("Delete", async ({ page }) => {
+            await interceptApiRequestForTrashedItems(page);
 
+            await page.goto("/e2eTestAcc/trash-bin")
+            
+            await expect(page.locator("header .collection-menu-btn"))
+                .toContainText('Trash bin');
+            await expect(page).toHaveURL("e2eTestAcc/trash-bin");
+    
+            await page.locator('.item[data-id="7msw3d3jj1owyan"]').click({ button: 'right' });
+            await page.getByRole('button', { name: 'Delete' }).click();
+
+            await expect(page.locator('.item[data-id="7msw3d3jj1owyan"]')).not.toBeVisible();
         });
 
         test.fixme("Restore", async ({ page }) => {
