@@ -20,8 +20,18 @@ test.describe("Item context menu", () => {
             await expect(page.getByRole('button', { name: 'To copy' })).toBeVisible();
         });
 
-        test.fixme("Note with title", async ({ page }) => {
+        test("Note with title", async ({ page }) => {
+            await page.locator('.item[data-id="o9t5o6fpehcd0pw"]').click({ button: 'right' });
 
+            await expect(page.getByRole('button', { name: 'Copy', exact: true })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'Edit' })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'Move' })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'Trash' })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'Delete' })).not.toBeVisible();
+            await expect(page.getByRole('button', { name: 'Restore' })).not.toBeVisible();
+            await expect(page.getByRole('button', { name: 'Refetch' })).not.toBeVisible();
+            await expect(page.getByRole('button', { name: 'Convert to Todo' })).not.toBeVisible();
+            await expect(page.getByRole('button', { name: 'To copy' })).toBeVisible();
         });
 
         test.fixme("Link", async ({ page }) => {
