@@ -197,6 +197,13 @@ test.describe("Main input", () => {
             await expect(page.locator('.item[data-index="1"] .item__primary-text')).not.toHaveCSS("text-decoration", /line-through/);
         });
 
+        test("Create item", async ({ page }) => {
+            await page.locator('body').press('Control+f');
+            await page.getByLabel('Main input', { exact: true }).fill('New quick note');
+            await page.getByLabel('Main input', { exact: true }).press('Enter');
+            await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('New quick note');
+        });
+
         test("Edit item", async ({ page }) => {
             await page.locator('body').press('Control+F');
             await page.locator('body').press('Control+Shift+ArrowDown');
@@ -248,6 +255,23 @@ test.describe("Main input", () => {
             // Dev note: locator will fail to find element, everything will fail.
             // await expect(page.locator('.item[data-index="0"] .item__primary-text'))
             //     .not.toHaveText("trashed");
+            await expect(page.locator("#displayed-list")).toBeEmpty();
+        });
+
+        test("Item creation should be blocked from trash bin", async ({ page }) => {
+            interceptApiRequestForTrashedItems(page);
+
+            await page.goto("/e2eTestAcc/trash-bin")
+
+            await expect(page.locator("header .collection-menu-btn"))
+                .toContainText('Trash bin');
+            await expect(page).toHaveURL("e2eTestAcc/trash-bin");
+
+            await page.locator('body').press('Control+f');
+            await page.getByLabel('Main input', { exact: true }).fill('New quick note in trash bin');
+            await page.getByLabel('Main input', { exact: true }).press('Enter');
+
+            await expect(page.getByLabel("Main input", { exact: true })).toHaveValue('New quick note in trash bin');
             await expect(page.locator("#displayed-list")).toBeEmpty();
         });
 
