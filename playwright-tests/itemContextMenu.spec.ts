@@ -248,8 +248,35 @@ test.describe("Item context menu", () => {
             await expect(page.locator('.item[data-id="lzbedvc667m3r3r"] .item__secondary-text')).toHaveText(/xkcd.com/);
         });
 
-        test.fixme("Convert to Todo", async ({ page }) => {
+        test("Convert to Todo", async ({ page }) => {
+            await page.route("*/**/api/collections/items/records/yrcn8ax4fph01tx", async route => {
+                await route.fulfill({
+                    json:
+                    {
+                        "collection": "6qt1usrvke0tuac",
+                        "collectionId": "zge7ncngf5zodei",
+                        "collectionName": "items",
+                        "content": "",
+                        "created": "2024-04-24 10:04:46.604Z",
+                        "faviconUrl": "",
+                        "id": "yrcn8ax4fph01tx",
+                        "isTodoDone": false,
+                        "isTrashed": false,
+                        "owner": "1x9diejq0lx6e0b",
+                        "shouldCopyOnClick": false,
+                        "title": "A note without title",
+                        "trashedDateTime": "",
+                        "type": "todo",
+                        "updated": "2024-04-27 10:04:59.615Z"
+                    },
+                });
+            });
 
+            await page.locator('.item[data-id="yrcn8ax4fph01tx"]').click({ button: 'right' });
+            await page.getByRole('button', { name: 'Convert to Todo' }).click();
+
+            await expect(page.locator('.item[data-id="yrcn8ax4fph01tx"] .item__primary-text')).toHaveText("A note without title");
+            await expect(page.locator('.item[data-id="yrcn8ax4fph01tx"] .item__secondary-text')).not.toBeVisible();
         });
 
         test.fixme("Toggle should copy on click", async ({ page }) => {
