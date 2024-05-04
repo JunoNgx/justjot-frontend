@@ -178,8 +178,13 @@ test.describe("Main input", () => {
                 .not.toHaveText(/A todo item that has been marked as completed/);
         });
 
-        test.fixme("Trash item", async ({ page }) => {
+        test("Trash item", async ({ page }) => {
+            await page.locator('body').press('Control+F');
+            await page.locator('body').press('ArrowDown');
+            await page.locator('body').press('Control+Shift+Delete');
 
+            await expect(page.locator('.item[data-index="7"] .item__primary-text'))
+                .not.toHaveText(/A todo item that has been marked as completed/);
         });
 
         test.fixme("Restore trashed item", async ({ page }) => {
