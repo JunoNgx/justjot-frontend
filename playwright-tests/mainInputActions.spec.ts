@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { loginWithMocks } from './_common';
+import { loginWithMocks, loginWithMocksAndFilledItems } from './_common';
 
 test.describe("Main input", () => {
 
-    test.beforeEach(loginWithMocks);
-
     test.describe("General functions", () => {
+        test.beforeEach(loginWithMocks);
+
         test("Basic functionalities", async ({ page }) => {
             // Typing changes the input value
             await page.getByLabel('Main input', { exact: true }).fill('Seek greater souls');
@@ -59,13 +59,17 @@ test.describe("Main input", () => {
     });
 
     test.describe("Test keyboard shortcuts", () => {
+        test.beforeEach(loginWithMocksAndFilledItems);
+        
         test("Focus on main input", async ({ page }) => {
             await page.locator('body').press('Control+F');
             expect(await page.$eval("#main-input", (el) => el === document.activeElement)).toBeTruthy();
         });
 
-        test.fixme("Select items with arrow keys", async ({ page }) => {
-
+        test("Select items with arrow keys", async ({ page }) => {
+            await page.locator('body').press('Control+F');
+            await page.locator('body').press('ArrowDown');
+            expect(await page.$eval(".item[data-index='0']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
         });
 
         test.fixme("Primary action: edit a note", async ({ page }) => {
