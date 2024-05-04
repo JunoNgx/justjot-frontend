@@ -152,8 +152,19 @@ test.describe("Main input", () => {
             await expect(page.locator('.item[data-index="1"] .item__primary-text')).not.toHaveCSS("text-decoration", /line-through/);
         });
 
-        test.fixme("Edit item", async ({ page }) => {
+        test("Edit item", async ({ page }) => {
+            await page.locator('body').press('Control+F');
+            await page.locator('body').press('Control+Shift+ArrowDown');
+            await page.locator('body').press('ArrowUp');
+            await page.locator('body').press('Control+E');
 
+            await page.getByLabel('Title').fill('Sample title edited');
+            await page.getByLabel("Content", { exact: true }).click();
+            await page.getByLabel("Content", { exact: true }).fill('Sample content edited');
+            await page.locator('body').press('Control+S');
+
+            await expect(page.locator('.item[data-index="7"] .item__primary-text')).toHaveText('Sample title edited');
+            await expect(page.locator('.item[data-index="7"] .item__secondary-text')).toHaveText('Sample content edited');
         });
 
         test.fixme("Move item", async ({ page }) => {
