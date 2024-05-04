@@ -353,11 +353,34 @@ test.describe("Main input", () => {
         });
 
         test("Toggle shouldCopyOnClick", async ({ page }) => {
+            await page.route("*/**/api/collections/items/records/7msw3d3jj1owyan", async route => {
+                await route.fulfill({
+                    json:
+                    {
+                        "collection": "6qt1usrvke0tuac",
+                        "collectionId": "zge7ncngf5zodei",
+                        "collectionName": "items",
+                        "content": "Just an extra item",
+                        "created": "2024-05-04 03:38:06.711Z",
+                        "faviconUrl": "",
+                        "id": "7msw3d3jj1owyan",
+                        "isTodoDone": false,
+                        "isTrashed": false,
+                        "owner": "1x9diejq0lx6e0b",
+                        "shouldCopyOnClick": true,
+                        "title": "Another note with title",
+                        "trashedDateTime": "",
+                        "type": "text",
+                        "updated": "2024-05-04 03:38:06.712Z"
+                    }
+                });
+            });
+
             await page.locator('body').press('Control+F');
-            await page.locator('body').press('ArrowDown');
-            await page.locator('body').press('Control+Shift+C');
-            await expect(page.locator('.item[data-index="0"]')).toHaveText(/Content copied/);
-            await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
+            await page.locator('body').press('Control+Shift+ArrowDown');
+            await page.locator('body').press('Control+Alt+Digit4');
+
+            await expect(page.locator('.item[data-index="9"] .item__should-copy-icon')).toBeVisible();
         });
 
         test("Refetch link metadata", async ({ page }) => {
