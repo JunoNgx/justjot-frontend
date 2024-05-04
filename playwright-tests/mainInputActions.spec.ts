@@ -7,13 +7,8 @@ test.describe("Main input", () => {
 
     test.describe("General functions", () => {
         test("Basic functionalities", async ({ page }) => {
-            await page.locator('body').press('Control+k');
-
-            // Ctrl + F should focus
-            expect(page.$eval("#main-input", (el) => el === document.activeElement)).toBeTruthy();
-            await page.getByLabel('Main input', { exact: true }).fill('Seek greater souls');
-
             // Typing changes the input value
+            await page.getByLabel('Main input', { exact: true }).fill('Seek greater souls');
             await expect(page.getByLabel('Main input', { exact: true })).toHaveValue("Seek greater souls");
 
             // Input is cleared upon item creation
@@ -64,8 +59,9 @@ test.describe("Main input", () => {
     });
 
     test.describe("Test keyboard shortcuts", () => {
-        test.fixme("Focus on main input", async ({ page }) => {
-
+        test("Focus on main input", async ({ page }) => {
+            await page.locator('body').press('Control+F');
+            expect(await page.$eval("#main-input", (el) => el === document.activeElement)).toBeTruthy();
         });
 
         test.fixme("Select items with arrow keys", async ({ page }) => {
