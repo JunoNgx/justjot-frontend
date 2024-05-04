@@ -35,12 +35,24 @@ test.describe("Main input", () => {
             await expect(page.getByLabel('Main input', { exact: true })).toHaveValue(':td: Buy armor');
         });
 
-        test.fixme("Extended menu: from clipboard", async ({ page }) => {
+        // Requires clipboard access, to not run at the moment
+        // test("Extended menu: from clipboard", async ({ page }) => {
+        //     // Get something onto clipboard
+        //     await page.getByLabel('Main input', { exact: true }).fill('I was born in a prison');
+        //     await page.getByLabel('Main input', { exact: true }).press('Control+A');
+        //     await page.getByLabel('Main input', { exact: true }).press('Control+X');
 
-        });
+        //     await page.getByLabel('Extra functions and options').click();
+        //     await page.getByRole('menuitem', { name: 'from clipboard' }).click();
+        //     await expect(page.getByLabel('Main input', { exact: true })).toHaveValue('');
+        //     await expect(page.locator('#displayed-list')).toContainText('I was born in a prison');
+        // });
 
-        test.fixme("Extended menu: clear input", async ({ page }) => {
-
+        test("Extended menu: clear input", async ({ page }) => {
+            await page.getByLabel('Main input', { exact: true }).fill('A good puppet');
+            await page.getByLabel('Extra functions and options').click();
+            await page.getByRole('menuitem', { name: 'clear input' }).click();
+            await expect(page.getByLabel('Main input', { exact: true })).toHaveValue('');
         });
 
         test.fixme("Extended menu: open spotlight", async ({ page }) => {
