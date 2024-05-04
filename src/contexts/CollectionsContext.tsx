@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { ApiRequestCallbackOptions, DbTable, ItemCollection, TrashBin } from '@/types';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { ClientResponseError } from 'pocketbase';
@@ -43,7 +43,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
     //     setUser(null);
     // });
 
-    const fetchTrashBin = useCallback(async (
+    const fetchTrashBin = async (
         {successfulCallback, errorCallback}: ApiRequestCallbackOptions = {}
     ) => {
         if (!isLoggedIn) return;
@@ -62,9 +62,9 @@ export default function CollectionsContextProvider({ children }: { children: Rea
                 }
             });
 
-    }, [isLoggedIn]);
+    };
 
-    const fetchCollections = useCallback(async (
+    const fetchCollections = async (
         {successfulCallback, errorCallback}: ApiRequestCallbackOptions = {}
     ) => {
         if (!isLoggedIn || !trashBin) return;
@@ -86,7 +86,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
                     console.warn("Non cancellation error");
                 }
             });
-    }, [trashBin]);
+    };
 
     const collSelectedIndex = collections.findIndex(c => c.id === currCollection?.id);
     const isTrashCollection = currCollection?.isTrashBin;
