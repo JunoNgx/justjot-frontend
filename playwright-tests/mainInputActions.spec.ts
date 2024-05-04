@@ -64,6 +64,9 @@ test.describe("Main input", () => {
         test("Focus on main input", async ({ page }) => {
             await page.locator('body').press('Control+F');
             expect(await page.$eval("#main-input", (el) => el === document.activeElement)).toBeTruthy();
+
+            await page.locator('body').press('Escape');
+            expect(await page.$eval("#main-input", (el) => el === document.activeElement)).toBeFalsy();
         });
 
         test("Arrow key navigations", async ({ page }) => {
