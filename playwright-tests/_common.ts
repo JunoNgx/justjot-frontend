@@ -33,14 +33,14 @@ const navigateToLogin = async (page: Page) => {
 }
 
 export const loginWithMocks = async ({ page }: { page: Page }) => {
-    interceptBasicApiRequests(page);
-    navigateToLogin(page);
+    await interceptBasicApiRequests(page);
+    await navigateToLogin(page);
 }
 
 export const loginWithMocksAndFilledItems = async ({ page }: { page: Page }) => {
-    interceptBasicApiRequests(page);
-    interceptApiRequestForItems(page);
-    navigateToLogin(page);
+    await interceptBasicApiRequests(page);
+    await interceptApiRequestForItems(page);
+    await navigateToLogin(page);
 }
 
 export const spotlightTextboxSelector = 'input.mantine-Spotlight-search';
