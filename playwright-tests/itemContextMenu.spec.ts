@@ -158,8 +158,34 @@ test.describe("Item context menu", () => {
             await expect(page.locator('.item[data-id="hxz3757cizrkzsl"]')).not.toBeVisible();
         });
 
-        test.fixme("Trash", async ({ page }) => {
+        test("Trash", async ({ page }) => {
+            await page.route("*/**/items/trash/1x9diejq0lx6e0b/hxz3757cizrkzsl?authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3MTU4NjA3ODcsImlkIjoiaTJncXdveWRzZ3UxbTI0IiwidHlwZSI6ImF1dGhSZWNvcmQifQ.yGMpxtYyya7JYncmlbQXGxFgI5RKzKIDtlTqe_L1RbM", async route => {
+                await route.fulfill({
+                    status: 204,
+                    json: {
+                        "collection": "6qt1usrvke0tuac",
+                        "collectionId": "zge7ncngf5zodei",
+                        "collectionName": "items",
+                        "content": "",
+                        "created": "2024-04-27 10:07:01.712Z",
+                        "faviconUrl": "",
+                        "id": "hxz3757cizrkzsl",
+                        "isTodoDone": true,
+                        "isTrashed": true,
+                        "owner": "1x9diejq0lx6e0b",
+                        "shouldCopyOnClick": false,
+                        "title": "A todo item that has been marked as completed",
+                        "trashedDateTime": "",
+                        "type": "todo",
+                        "updated": "2024-04-27 10:07:03.136Z"
+                    }
+                });
+            });
 
+            await page.locator('.item[data-id="hxz3757cizrkzsl"]').click({ button: 'right' });
+            await page.getByRole('button', { name: 'Trash' }).click();
+
+            await expect(page.locator('.item[data-id="hxz3757cizrkzsl"]')).not.toBeVisible();
         });
 
         test.fixme("Delete", async ({ page }) => {
