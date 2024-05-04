@@ -251,8 +251,12 @@ test.describe("Main input", () => {
             await expect(page.locator("#displayed-list")).toBeEmpty();
         });
 
-        test.fixme("Toggle shouldCopyOnClick", async ({ page }) => {
-
+        test("Toggle shouldCopyOnClick", async ({ page }) => {
+            await page.locator('body').press('Control+F');
+            await page.locator('body').press('ArrowDown');
+            await page.locator('body').press('Control+Shift+C');
+            await expect(page.locator('.item[data-index="0"]')).toHaveText(/Content copied/);
+            await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
         });
 
         test.fixme("Refetch link metadata", async ({ page }) => {
