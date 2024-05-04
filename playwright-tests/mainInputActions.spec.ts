@@ -1,18 +1,22 @@
 import { test, expect } from '@playwright/test';
+import { loginWithMocks } from './_common';
 
 test.describe("Main input", () => {
 
-    test.beforeEach(async ({ page }) => {
-
-    });
+    test.beforeEach(loginWithMocks);
 
     test.describe("General functions", () => {
-        test.fixme("Typing changes the main input value", async ({ page }) => {
-
+        test("Typing changes the main input value", async ({ page }) => {
+            await page.locator('body').press('Control+k');
+            await page.getByLabel('Main input', { exact: true }).fill('Seek greater souls');
+            await expect(page.getByLabel('Main input', { exact: true })).toHaveValue("Seek greater souls");
         });
 
-        test.fixme("Pressing enter clearing the main input", async ({ page }) => {
-
+        test("Pressing enter clearing the main input", async ({ page }) => {
+            await page.locator('body').press('Control+k');
+            await page.getByLabel('Main input', { exact: true }).fill('I was born in a prison');
+            await page.getByLabel('Main input', { exact: true }).press('Enter');
+            await expect(page.getByLabel('Main input', { exact: true })).toHaveValue("");
         });
 
         test.fixme("Extended menu: with title", async ({ page }) => {
