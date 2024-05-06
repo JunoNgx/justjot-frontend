@@ -25,6 +25,10 @@
         @include m.DropdownItem;
     }
 
+    &__ProfileDropdownSeparator {
+        @include m.DropdownSeparator;
+    }
+
     &__UsernameText {
         max-width: 200px;
         overflow: hidden;

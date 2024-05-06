@@ -42,7 +42,7 @@ export default function HeaderUser() {
                     </ItemWithIcon>
                 </DropdownMenu.Item>
 
-                <DropdownMenu.Separator/>
+                <DropdownMenu.Separator className="header__ProfileDropdownSeparator" />
 
                 <DropdownMenu.Item className="header__ProfileDropdownItem"
                     onClick={navigateToProfile}
