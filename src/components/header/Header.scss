@@ -71,6 +71,10 @@
         @include m.DropdownSeparator;
     }
 
+    &__UserProfileBtn {
+        margin-right: 0.75rem;
+    }
+
     &__UsernameText {
         max-width: 200px;
         overflow: hidden;
