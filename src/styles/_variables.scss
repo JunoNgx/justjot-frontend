@@ -3,25 +3,25 @@
     --fontSizeSm: 14px;
     --container-width: 955px;
 
-    --col-pri: #000;
-    --col-bg: #fff;
-    --col-grey: #444;
-    --col-grey-2: #999;
-    --col-code-bg: #EEE;
+    --colPri: #000;
+    --colBg: #fff;
+    --colGrey: #444;
+    --colGrey2: #999;
+    --colCodeBg: #EEE;
 }
 
 :root[data-mantine-color-scheme="light"] {
-    --col-pri: #000;
-    --col-bg: #fff;
-    --col-grey: #444;
-    --col-grey-2: #999;
-    --col-code-bg: #EEE;
+    --colPri: #000;
+    --colBg: #fff;
+    --colGrey: #444;
+    --colGrey2: #999;
+    --colCodeBg: #EEE;
 }
 
 :root[data-mantine-color-scheme="dark"] {
-    --col-pri: #fff;
-    --col-bg: #000;
-    --col-grey: #999;
-    --col-grey-2: #444;
-    --col-code-bg: #222;
+    --colPri: #fff;
+    --colBg: #000;
+    --colGrey: #999;
+    --colGrey2: #444;
+    --colCodeBg: #222;
 }
