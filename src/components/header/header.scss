@@ -7,6 +7,10 @@
         justify-content: center;
     }
 
+    &__profileDropdown {
+        @include m.menu;
+    }
+
     &__username {
         max-width: 200px;
         overflow: hidden;

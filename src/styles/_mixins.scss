@@ -16,3 +16,10 @@
         @content;
     }
 }
+
+@mixin menu {
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--mantine-color-text);
+    padding: 0.5rem;
+}

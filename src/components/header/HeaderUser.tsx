@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { Group, Menu, MenuDivider, Text, UnstyledButton } from "@mantine/core";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { IconChevronDown, IconHelp, IconLogout, IconUserCog } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
 import useNavigateRoutes from "@/hooks/useNavigateRoutes";
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 export default function HeaderUser() {
 
@@ -17,41 +17,43 @@ export default function HeaderUser() {
     
     const username = user?.displayName || user?.username;
 
-    return <Menu
-        position="bottom-end"
-        offset={15}
+    return <DropdownMenu.Root
+        // position="bottom-end"
+        // offset={15}
     >
-        <Menu.Target>
-            <UnstyledButton mr="xs">
-                <Group gap={6}>
-                    <Text className="header__username">{username}</Text>
+        <DropdownMenu.Trigger>
+            <button className="header__userProfileBtn">
+                {/* <Group gap={6}> */}
+                    <p className="header__username">{username}</p>
                     <IconChevronDown {...menuIconProps} />
-                </Group>
-            </UnstyledButton>
-        </Menu.Target>
+                {/* </Group> */}
+            </button>
+        </DropdownMenu.Trigger>
 
-        <Menu.Dropdown className="header__profile-dropdown">
-            <Menu.Item
-                leftSection={<IconHelp {...menuIconProps} />}
-                onClick={navigateToHelp}
-            >
-                Help
-            </Menu.Item>
+        <DropdownMenu.Portal>
+            <DropdownMenu.Content className="header__profileDropdown">
+                <DropdownMenu.Item
+                    // leftSection={<IconHelp {...menuIconProps} />}
+                    onClick={navigateToHelp}
+                >
+                    Help
+                </DropdownMenu.Item>
 
-            <MenuDivider/>
+                <DropdownMenu.Separator/>
 
-            <Menu.Item
-                leftSection={<IconUserCog {...menuIconProps} />}
-                onClick={navigateToProfile}
-            >
-                Account
-            </Menu.Item>
-            <Menu.Item
-                leftSection={<IconLogout {...menuIconProps} />}
-                onClick={logoutAndNavigateToLogin}
-            >
-                Logout
-            </Menu.Item>
-        </Menu.Dropdown>
-    </Menu>
+                <DropdownMenu.Item
+                    // leftSection={<IconUserCog {...menuIconProps} />}
+                    onClick={navigateToProfile}
+                >
+                    Account
+                </DropdownMenu.Item>
+                <DropdownMenu.Item
+                    // leftSection={<IconLogout {...menuIconProps} />}
+                    onClick={logoutAndNavigateToLogin}
+                >
+                    Logout
+                </DropdownMenu.Item>
+            </DropdownMenu.Content>
+        </DropdownMenu.Portal>
+    </DropdownMenu.Root>
 }
