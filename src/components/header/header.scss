@@ -12,9 +12,13 @@
         margin-inline: auto;
     }
 
-    &__left-side {
+    &__LeftSide {
         display: flex;
         justify-content: center;
+    }
+
+    &__LogoIcon {
+        color: var(--mantine-color-text);
     }
 
     &__ProfileDropdown {
@@ -43,10 +47,6 @@
             background-color: transparent;
             color: var(--mantine-color-text);
         }
-    }
-
-    &__logo {
-        color: var(--mantine-color-text);
     }
 
     @include m.mobile {

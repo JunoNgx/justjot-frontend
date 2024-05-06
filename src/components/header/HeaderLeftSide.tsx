@@ -11,7 +11,7 @@ export default function HeaderLeftSide() {
     const { user } = useContext(BackendClientContext);
     const { logoIconProps } = useIconProps();
     
-    return <Group className="header__left-side"
+    return <Group className="header__LeftSide"
         gap="xs"
     >
         <ActionIcon
@@ -21,7 +21,7 @@ export default function HeaderLeftSide() {
             size="xl"
             aria-label="Link to home page"
         >
-            <JustJotIcon className="header__logo"
+            <JustJotIcon className="header__LogoIcon"
                 {...logoIconProps}
             />
         </ActionIcon>
