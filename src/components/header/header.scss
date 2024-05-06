@@ -2,6 +2,16 @@
 @use "../../styles/_variables.scss" as v;
 
 .header {
+    padding-left: 0;
+    padding-right: 5px;
+
+    &__flex-wrapper {
+        display: flex;
+        justify-content: space-between;
+        max-width: var(--container-width);
+        margin-inline: auto;
+    }
+
     &__left-side {
         display: flex;
         justify-content: center;
