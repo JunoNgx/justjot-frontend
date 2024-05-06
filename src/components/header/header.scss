@@ -8,7 +8,7 @@
     }
 
     &__ProfileDropdown {
-        @include m.menu;
+        @include m.Menu;
     }
 
     &__UsernameText {
