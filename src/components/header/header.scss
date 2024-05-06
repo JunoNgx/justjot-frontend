@@ -29,6 +29,12 @@
         color: var(--mantine-color-text);
     }
 
+    &__LoginRegisterBox {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
     &__ProfileDropdown {
         @include m.Menu;
     }
