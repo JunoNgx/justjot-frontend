@@ -14,7 +14,7 @@ import useCollectionActions from "@/hooks/useCollectionActions";
 
 import "./CollectionMenu.scss";
 
-export default function CollectionMenu({isInMainView}: {isInMainView?: boolean}) {
+export default function CollectionMenu({isMobile}: {isMobile?: boolean}) {
     const { isLoggedIn } = useContext(BackendClientContext);
     const { collections, currCollection, isTrashCollection } = useContext(CollectionsContext);
 
@@ -25,16 +25,16 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
         openUpdateCollectionModal,
         openSortCollectionModal,
     } = useCollectionActions();
-    const isMobile = useMediaQuery(`(max-width: ${em(720)})`);
+    const isWidthMobile = useMediaQuery(`(max-width: ${em(720)})`);
     const { menuIconProps } = useIconProps();
 
     const collectionMenu = <Menu
-        position={isInMainView ? "top-end" : "bottom-start"}
+        position={isWidthMobile ? "top-end" : "bottom-start"}
         offset={isMobile ? 5 : 15}
     >
         <Menu.Target>
             <UnstyledButton className={"CollectionMenuBtn "
-                + (isInMainView && "CollectionMenuBtn--isInMainView")}
+                + (isMobile && "CollectionMenuBtn--isMobile")}
             >
                 <Group gap="xs">
                     <Text className="CollectionMenuBtn__Label">

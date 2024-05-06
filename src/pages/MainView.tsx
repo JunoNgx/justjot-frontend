@@ -90,7 +90,7 @@ export default function MainView() {
         id="main-view-wrapper"
     >
         {/* For non-item components */}
-        <CollectionMenu isInMainView={true} />
+        <CollectionMenu isMobile={true} />
         <KeyboardPromptDisplay />
         <Box className="main-view-notice">
             {isDemoUser && <MainViewNotice

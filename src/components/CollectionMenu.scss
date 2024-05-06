@@ -15,7 +15,7 @@
         display: none;
     }
 
-    &--isInMainView {
+    &--isMobile {
         display: none;
 
         @include m.mobile {
