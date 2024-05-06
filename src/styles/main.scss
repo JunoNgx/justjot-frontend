@@ -36,6 +36,12 @@ button {
     outline: none;
 }
 
+a,
+a:hover,
+a:visited {
+    color: var(--colGreyLt);
+}
+
 .landing-page {
     margin: 0 auto;
     max-width: 640px;
