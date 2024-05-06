@@ -1,5 +1,6 @@
 @use "./variables.scss" as v;
 
+
 @mixin glass-blur { 
     backdrop-filter: blur(15px);
     // Attributes to overwrite specificity
@@ -22,4 +23,15 @@
     border-width: 1px;
     border-color: var(--mantine-color-text);
     padding: 0.25rem;
+}
+
+@mixin DropdownItem {
+    cursor: pointer;
+    padding: 0.25rem 0.75rem;
+
+    &:hover,
+    &:focus {
+        outline: none;
+        background-color: var(--col-grey-2);
+    }
 }
