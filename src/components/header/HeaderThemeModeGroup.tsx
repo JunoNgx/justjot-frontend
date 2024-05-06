@@ -1,10 +1,10 @@
 import { useContext } from "react";
 
-import { ActionIcon } from "@mantine/core";
 import { UserLocalSettingsContext } from "@/contexts/UserLocalSettingsContext";
 import { ThemeMode } from "@/types";
 import { IconMoon, IconMoonFilled, IconSettings, IconSettingsFilled, IconSun, IconSunFilled } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
+import IconButton from "@/libs/components/IconButton";
 
 export default function HeaderThemeModeGroup() {
     const { themeMode, setThemeMode } = useContext(UserLocalSettingsContext);
@@ -15,10 +15,7 @@ export default function HeaderThemeModeGroup() {
     const isThemeModeAuto = () => themeMode === ThemeMode.AUTO;
 
     return <div className="header__ThemeModeContainer">
-        <ActionIcon
-            className="header__theme-mode-btn"
-            variant={"subtle"}
-            radius="xl"
+        <IconButton className="header__ThemeModeBtn"
             title="Theme mode: System"
             aria-label="Switch theme mode to follow system setting"
             aria-current={isThemeModeAuto()}
@@ -28,11 +25,8 @@ export default function HeaderThemeModeGroup() {
                 ? <IconSettingsFilled {...themeModeIconProps} />
                 : <IconSettings {...themeModeIconProps} />
             }
-        </ActionIcon>
-        <ActionIcon
-            className="header__theme-mode-btn"
-            variant={"subtle"}
-            radius="xl"
+        </IconButton>
+        <IconButton className="header__ThemeModeBtn"
             title="Theme mode: Light"
             aria-label="Switch theme mode to light mode"
             aria-current={isThemeModeLight()}
@@ -42,11 +36,8 @@ export default function HeaderThemeModeGroup() {
                 ? <IconSunFilled {...themeModeIconProps} />
                 : <IconSun {...themeModeIconProps} />
             }
-        </ActionIcon>
-        <ActionIcon
-            className="header__theme-mode-btn"
-            variant={"subtle"}
-            radius="xl"
+        </IconButton>
+        <IconButton className="header__ThemeModeBtn"
             title="Theme mode: Dark"
             aria-label="Switch theme mode to dark mode"
             aria-current={isThemeModeDark()}
@@ -56,6 +47,6 @@ export default function HeaderThemeModeGroup() {
                 ? <IconMoonFilled {...themeModeIconProps} />
                 : <IconMoon {...themeModeIconProps} />
             }
-        </ActionIcon>
+        </IconButton>
     </div>
 }
