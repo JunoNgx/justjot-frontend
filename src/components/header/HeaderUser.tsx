@@ -32,8 +32,7 @@ export default function HeaderUser() {
                 sideOffset={10}
                 align="end"
             >
-                <DropdownMenu.Item
-                    // 
+                <DropdownMenu.Item className="header__ProfileDropdownItem"
                     onClick={navigateToHelp}
                 >
                     <ItemWithIcon
@@ -45,7 +44,7 @@ export default function HeaderUser() {
 
                 <DropdownMenu.Separator/>
 
-                <DropdownMenu.Item
+                <DropdownMenu.Item className="header__ProfileDropdownItem"
                     onClick={navigateToProfile}
                 >
                     <ItemWithIcon
@@ -54,7 +53,7 @@ export default function HeaderUser() {
                         Account
                     </ItemWithIcon>
                 </DropdownMenu.Item>
-                <DropdownMenu.Item
+                <DropdownMenu.Item className="header__ProfileDropdownItem"
                     onClick={logoutAndNavigateToLogin}
                 >
                     <ItemWithIcon

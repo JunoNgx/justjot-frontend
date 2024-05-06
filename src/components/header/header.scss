@@ -11,6 +11,10 @@
         @include m.Menu;
     }
 
+    &__ProfileDropdownItem {
+        @include m.DropdownItem;
+    }
+
     &__UsernameText {
         max-width: 200px;
         overflow: hidden;
