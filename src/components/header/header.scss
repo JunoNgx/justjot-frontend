@@ -15,6 +15,14 @@
     &__LeftSide {
         display: flex;
         justify-content: center;
+        gap: 10px;
+    }
+
+    &__LogoNav {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
     }
 
     &__LogoIcon {

@@ -1,4 +1,3 @@
-import { ActionIcon, Group } from "@mantine/core";
 import { NavLink } from "react-router-dom";
 import CollectionMenu from "@/components/CollectionMenu";
 import { useContext } from "react";
@@ -11,20 +10,15 @@ export default function HeaderLeftSide() {
     const { user } = useContext(BackendClientContext);
     const { logoIconProps } = useIconProps();
     
-    return <Group className="header__LeftSide"
-        gap="xs"
-    >
-        <ActionIcon
-            variant="transparent"
-            component={NavLink}
+    return <div className="header__LeftSide">
+        <NavLink className="header__LogoNav"
             to={user ? `/${user.username}` : "/"}
-            size="xl"
             aria-label="Link to home page"
         >
             <JustJotIcon className="header__LogoIcon"
                 {...logoIconProps}
             />
-        </ActionIcon>
+        </NavLink>
         <CollectionMenu/>
-    </Group>
+    </div>
 }
