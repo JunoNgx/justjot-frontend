@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { ActionIcon, Group } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import { UserLocalSettingsContext } from "@/contexts/UserLocalSettingsContext";
 import { ThemeMode } from "@/types";
 import { IconMoon, IconMoonFilled, IconSettings, IconSettingsFilled, IconSun, IconSunFilled } from "@tabler/icons-react";
@@ -14,9 +14,7 @@ export default function HeaderThemeModeGroup() {
     const isThemeModeDark = () => themeMode === ThemeMode.DARK;
     const isThemeModeAuto = () => themeMode === ThemeMode.AUTO;
 
-    return <Group className="header__theme-mode-container"
-        gap="xs"
-    >
+    return <div className="header__ThemeModeContainer">
         <ActionIcon
             className="header__theme-mode-btn"
             variant={"subtle"}
@@ -59,5 +57,5 @@ export default function HeaderThemeModeGroup() {
                 : <IconMoon {...themeModeIconProps} />
             }
         </ActionIcon>
-    </Group>
+    </div>
 }
