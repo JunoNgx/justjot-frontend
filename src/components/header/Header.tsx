@@ -1,6 +1,6 @@
 import HeaderLeftSide from "./HeaderLeftSide";
 import HeaderRightSide from "./HeaderRightSide";
-import "./header.scss";
+import "./Header.scss";
 
 function Header() {
     return <div className="header">
