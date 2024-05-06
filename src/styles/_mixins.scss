@@ -10,7 +10,7 @@
 }
 
 @mixin mobile {
-    @media screen and (width <= 720) {
+    @media screen and (width <= 720px) {
         @content;
     }
 }
