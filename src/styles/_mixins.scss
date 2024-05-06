@@ -1,6 +1,3 @@
-@use "./variables.scss" as v;
-
-
 @mixin glass-blur { 
     backdrop-filter: blur(15px);
     // Attributes to overwrite specificity
@@ -13,7 +10,7 @@
 }
 
 @mixin mobile {
-    @media screen and (width <= v.$breakpoint) {
+    @media screen and (width <= 720) {
         @content;
     }
 }
