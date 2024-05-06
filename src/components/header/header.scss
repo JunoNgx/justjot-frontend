@@ -57,6 +57,10 @@
 
     &__ProfileDropdown {
         @include m.Menu;
+
+        &[data-side="bottom"] {
+            @include m.AnimatedDropdown;
+        }
     }
 
     &__ProfileDropdownItem {
