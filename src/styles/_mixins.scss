@@ -30,12 +30,12 @@
     &:hover,
     &:focus {
         outline: none;
-        background-color: var(--colGrey2);
+        background-color: var(--colGreyBg);
     }
 }
 
 @mixin DropdownSeparator {
     height: 1px;
-    background-color: var(--colGrey2);
+    background-color: var(--colGreyBg);
     margin: 5px;
 }
