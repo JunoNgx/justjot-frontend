@@ -12,6 +12,8 @@ import { BackendClientContext } from "@/contexts/BackendClientContext";
 import useIconProps from "@/hooks/useIconProps";
 import useCollectionActions from "@/hooks/useCollectionActions";
 
+import "./CollectionMenu.scss";
+
 export default function CollectionMenu({isInMainView}: {isInMainView?: boolean}) {
     const { isLoggedIn } = useContext(BackendClientContext);
     const { collections, currCollection, isTrashCollection } = useContext(CollectionsContext);

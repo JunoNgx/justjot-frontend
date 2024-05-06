@@ -1,6 +1,8 @@
-@use "./mixins.scss" as m;
+@use "../styles/mixins" as m;
+@use "../styles/_variables.scss" as v;
 
 .collection-menu-btn {
+
     &__label {
         user-select: none;
         max-width: 200px;
