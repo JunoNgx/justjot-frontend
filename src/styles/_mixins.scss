@@ -24,7 +24,7 @@
 
 @mixin DropdownItem {
     cursor: pointer;
-    font-size: var(--font-size-sm);
+    font-size: var(--fontSizeSm);
     padding: 0.25rem 0.75rem;
 
     &:hover,
