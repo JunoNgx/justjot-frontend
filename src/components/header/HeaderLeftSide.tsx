@@ -10,12 +10,12 @@ export default function HeaderLeftSide() {
     const { user } = useContext(BackendClientContext);
     const { logoIconProps } = useIconProps();
     
-    return <div className="header__LeftSide">
-        <NavLink className="header__LogoNav"
+    return <div className="Header__LeftSide">
+        <NavLink className="Header__LogoNav"
             to={user ? `/${user.username}` : "/"}
             aria-label="Link to home page"
         >
-            <JustJotIcon className="header__LogoIcon"
+            <JustJotIcon className="Header__LogoIcon"
                 {...logoIconProps}
             />
         </NavLink>

@@ -4,7 +4,7 @@ import "./header.scss";
 
 function Header() {
     return <div className="header">
-        <div className="header__FlexWrapper">
+        <div className="Header__FlexWrapper">
             <HeaderLeftSide/>
             <HeaderRightSide/>
         </div>

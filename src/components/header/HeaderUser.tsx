@@ -20,20 +20,20 @@ export default function HeaderUser() {
 
     return <DropdownMenu.Root>
         <DropdownMenu.Trigger>
-            <ItemWithIcon className="header__UserProfileBtn"
+            <ItemWithIcon className="Header__UserProfileBtn"
                 rightSection={<IconChevronDown {...menuIconProps} />}
             >
-                <span className="header__UsernameText">{username}</span>
+                <span className="Header__UsernameText">{username}</span>
             </ItemWithIcon>
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Portal>
-            <DropdownMenu.Content className="header__ProfileDropdown"
+            <DropdownMenu.Content className="Header__ProfileDropdown"
                 sideOffset={15}
                 alignOffset={5}
                 align="end"
             >
-                <DropdownMenu.Item className="header__ProfileDropdownItem"
+                <DropdownMenu.Item className="Header__ProfileDropdownItem"
                     onClick={navigateToHelp}
                 >
                     <ItemWithIcon
@@ -43,9 +43,9 @@ export default function HeaderUser() {
                     </ItemWithIcon>
                 </DropdownMenu.Item>
 
-                <DropdownMenu.Separator className="header__ProfileDropdownSeparator" />
+                <DropdownMenu.Separator className="Header__ProfileDropdownSeparator" />
 
-                <DropdownMenu.Item className="header__ProfileDropdownItem"
+                <DropdownMenu.Item className="Header__ProfileDropdownItem"
                     onClick={navigateToProfile}
                 >
                     <ItemWithIcon
@@ -54,7 +54,7 @@ export default function HeaderUser() {
                         Account
                     </ItemWithIcon>
                 </DropdownMenu.Item>
-                <DropdownMenu.Item className="header__ProfileDropdownItem"
+                <DropdownMenu.Item className="Header__ProfileDropdownItem"
                     onClick={logoutAndNavigateToLogin}
                 >
                     <ItemWithIcon

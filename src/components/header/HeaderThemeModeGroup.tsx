@@ -14,8 +14,8 @@ export default function HeaderThemeModeGroup() {
     const isThemeModeDark = () => themeMode === ThemeMode.DARK;
     const isThemeModeAuto = () => themeMode === ThemeMode.AUTO;
 
-    return <div className="header__ThemeModeContainer">
-        <IconButton className="header__ThemeModeBtn"
+    return <div className="Header__ThemeModeContainer">
+        <IconButton className="Header__ThemeModeBtn"
             title="Theme mode: System"
             aria-label="Switch theme mode to follow system setting"
             aria-current={isThemeModeAuto()}
@@ -26,7 +26,7 @@ export default function HeaderThemeModeGroup() {
                 : <IconSettings {...themeModeIconProps} />
             }
         </IconButton>
-        <IconButton className="header__ThemeModeBtn"
+        <IconButton className="Header__ThemeModeBtn"
             title="Theme mode: Light"
             aria-label="Switch theme mode to light mode"
             aria-current={isThemeModeLight()}
@@ -37,7 +37,7 @@ export default function HeaderThemeModeGroup() {
                 : <IconSun {...themeModeIconProps} />
             }
         </IconButton>
-        <IconButton className="header__ThemeModeBtn"
+        <IconButton className="Header__ThemeModeBtn"
             title="Theme mode: Dark"
             aria-label="Switch theme mode to dark mode"
             aria-current={isThemeModeDark()}
