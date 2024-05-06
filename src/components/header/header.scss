@@ -7,11 +7,11 @@
         justify-content: center;
     }
 
-    &__profileDropdown {
+    &__ProfileDropdown {
         @include m.menu;
     }
 
-    &__username {
+    &__UsernameText {
         max-width: 200px;
         overflow: hidden;
         text-overflow: ellipsis;

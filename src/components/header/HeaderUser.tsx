@@ -20,15 +20,15 @@ export default function HeaderUser() {
 
     return <DropdownMenu.Root>
         <DropdownMenu.Trigger>
-            <ItemWithIcon className="header__userProfileBtn"
+            <ItemWithIcon className="header__UserProfileBtn"
                 rightSection={<IconChevronDown {...menuIconProps} />}
             >
-                <span className="header__username">{username}</span>
+                <span className="header__UsernameText">{username}</span>
             </ItemWithIcon>
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Portal>
-            <DropdownMenu.Content className="header__profileDropdown"
+            <DropdownMenu.Content className="header__ProfileDropdown"
                 sideOffset={10}
                 align="end"
             >
