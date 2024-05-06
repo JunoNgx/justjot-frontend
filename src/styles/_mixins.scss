@@ -61,6 +61,7 @@
     cursor: pointer;
     font-size: var(--fontSizeSm);
     padding: 0.25rem 0.75rem;
+    width: 100%;
 
     &:hover,
     &:focus {
@@ -72,5 +73,5 @@
 @mixin DropdownSeparator {
     height: 1px;
     background-color: var(--colGreyBg);
-    margin: 5px;
+    margin: 2px;
 }
