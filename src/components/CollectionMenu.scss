@@ -1,9 +1,9 @@
 @use "../styles/mixins" as m;
 @use "../styles/_variables.scss" as v;
 
-.collection-menu-btn {
+.CollectionMenuBtn {
 
-    &__label {
+    &__Label {
         user-select: none;
         max-width: 200px;
         overflow: hidden;
@@ -15,7 +15,7 @@
         display: none;
     }
 
-    &--is-in-main-view {
+    &--isInMainView {
         display: none;
 
         @include m.mobile {
@@ -34,13 +34,13 @@
     }
 }
 
-.collection-menu-dropdown {
+.CollectionMenuDropdown {
     max-width: 300px;
     max-height: 80vh;
     overflow-y: auto;
     scrollbar-width: thin;
 
-    &__item {
+    &__Item {
         &--current {
             font-weight: 700;
         }

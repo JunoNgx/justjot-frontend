@@ -33,21 +33,21 @@ export default function CollectionMenu({isInMainView}: {isInMainView?: boolean})
         offset={isMobile ? 5 : 15}
     >
         <Menu.Target>
-            <UnstyledButton className={"collection-menu-btn "
-                + (isInMainView && "collection-menu-btn--is-in-main-view")}
+            <UnstyledButton className={"CollectionMenuBtn "
+                + (isInMainView && "CollectionMenuBtn--isInMainView")}
             >
                 <Group gap="xs">
-                    <Text className="collection-menu-btn__label">
+                    <Text className="CollectionMenuBtn__Label">
                         {currCollection?.name}
                     </Text>
-                    <IconSelector className="collection-menu-btn__icon"
+                    <IconSelector className="CollectionMenuBtn__Icon"
                         {...menuIconProps}
                     />
                 </Group>
             </UnstyledButton>
         </Menu.Target>
 
-        <Menu.Dropdown className="collection-menu-dropdown">
+        <Menu.Dropdown className="CollectionMenuDropdown">
             {collections?.map((collection: ItemCollection, index: number) =>
                 <CollectionMenuCollectionItem
                     key={collection.id}
@@ -106,9 +106,9 @@ const CollectionMenuCollectionItem = (
     const { menuIconProps } = useIconProps();
     const isTrashBin = collection.isTrashBin
 
-    const baseClassName = "collection-menu-dropdown__item "
+    const baseClassName = "CollectionMenuDropdown__Item "
     const selectedModifierClassName = isSelected
-            ? "collection-menu-dropdown__item--current"
+            ? "CollectionMenuDropdown__CurrentItem"
             : "";
     const leftSection = isTrashBin
         ? <IconTrash {...menuIconProps} />
