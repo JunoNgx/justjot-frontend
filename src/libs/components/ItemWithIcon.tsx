@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import "./ItemWithIcon.scss";
 
-type ItemWithIcon = {
+type ItemWithIconOptions = {
     className?: string,
     children?: ReactNode,
     onClick?: () => void,
@@ -11,7 +11,8 @@ type ItemWithIcon = {
 };
 
 export default function ItemWithIcon(
-    { className = "", children, onClick, leftSection, rightSection, gap = "0.5rem"}: ItemWithIcon
+    { className = "", children, onClick, leftSection, rightSection, gap = "0.5rem"}:
+    ItemWithIconOptions
 ) {
     return <span className={`${className} item-with-icon`}
         onClick={onClick}
