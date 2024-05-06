@@ -1,0 +1,35 @@
+@use "../../styles/mixins" as m;
+@use "../../styles/_variables.scss" as v;
+
+.header {
+    &__left-side {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__username {
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__theme-mode-btn {
+        color: var(--mantine-color-text);
+
+        &:hover {
+            background-color: transparent;
+            color: var(--mantine-color-text);
+        }
+    }
+
+    &__logo {
+        color: var(--mantine-color-text);
+    }
+
+    @include m.mobile {
+        &__username {
+            max-width: 120px;
+        }
+    }
+}
