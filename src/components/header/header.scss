@@ -29,6 +29,14 @@
         color: var(--mantine-color-text);
     }
 
+    &__RightSide {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1rem;
+    }
+
     &__LoginRegisterBox {
         display: flex;
         flex-direction: row;
