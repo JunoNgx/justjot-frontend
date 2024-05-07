@@ -12,6 +12,8 @@ import useIconProps from "@/hooks/useIconProps";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import ItemComponentText from "./ItemComponentText";
 
+import "./ItemComponent.scss"
+
 type ItemComponentParams = {
     item: Item,
     index: number,
