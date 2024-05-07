@@ -43,7 +43,7 @@ export default function CollectionMenu({isMobile}: {isMobile?: boolean}) {
             <DropdownMenu.Content className="CollectionMenuDropdown"
                 side={isWidthMobile ? "top" : "bottom"}
                 align={isWidthMobile ? "end" : "start"}
-                sideOffset={isMobile ? 5 : 15}
+                sideOffset={isMobile ? 10 : 15}
             >
                 {collections?.map((collection: ItemCollection, index: number) =>
                     <CollectionMenuCollectionItem
