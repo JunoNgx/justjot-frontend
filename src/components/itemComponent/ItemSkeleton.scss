@@ -1,13 +1,25 @@
 @use "../../styles/mixins" as m;
 
+@mixin SkeletonBlock {
+    height: 2rem;
+    background-color: var(--colSkeleton);
+}
+
 .ItemSkeleton {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 2rem;
     margin: 0.4rem;
 
     &__LeftSide {
+        display: flex;
+        justify-content: flex-start;
         min-width: 0;
         flex-grow: 3;
         width: 60%;
         justify-content: flex-start;
+        gap: 1rem;
 
         @include m.mobile {
             width: 100%;
@@ -18,17 +30,19 @@
         flex-shrink: 0;
     }
 
-    &__IconColour {
-        height: 24px;
-        width: 24px;
-        border-radius: 50%;
+    &__IconWrapper {
+        @include SkeletonBlock;
+        width: 2rem;
     }
 
     &__PrimaryText {
+        @include SkeletonBlock;
         width: calc(100% - 1rem - 32px);
     }
 
     &__Datetime {
+        @include SkeletonBlock;
+        width: 5rem;
         flex-shrink: 0;
 
         @include m.mobile {
