@@ -9,6 +9,7 @@
     --colGreyBg: #EEE;
     --colGreyLt: #AAA;
     --colCodeBg: #EEE;
+    --colSkeleton: #DDD;
 }
 
 :root[data-mantine-color-scheme="light"] {
@@ -18,6 +19,7 @@
     --colGreyBg: #EEE;
     --colGreyLt: #444;
     --colCodeBg: #EEE;
+    --colSkeleton: #DDD;
 }
 
 :root[data-mantine-color-scheme="dark"] {
@@ -27,4 +29,5 @@
     --colGreyBg: #444;
     --colGreyLt: #999;
     --colCodeBg: #222;
+    --colSkeleton: #222;
 }
