@@ -3,7 +3,7 @@ import { UserLocalSettingsContext } from "@/contexts/UserLocalSettingsContext";
 import { ThemeMode } from "@/types";
 import { IconMoon, IconMoonFilled, IconSettings, IconSettingsFilled, IconSun, IconSunFilled } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
-import Button from "@/libs/components/Button";
+import IconButton from "@/libs/components/IconButton";
 
 export default function HeaderThemeModeGroup() {
     const { themeMode, setThemeMode } = useContext(UserLocalSettingsContext);
@@ -14,7 +14,7 @@ export default function HeaderThemeModeGroup() {
     const isThemeModeAuto = () => themeMode === ThemeMode.AUTO;
 
     return <div className="Header__ThemeModeContainer">
-        <Button className="Header__ThemeModeBtn"
+        <IconButton className="Header__ThemeModeBtn"
             title="Theme mode: System"
             aria-label="Switch theme mode to follow system setting"
             aria-current={isThemeModeAuto()}
@@ -24,8 +24,8 @@ export default function HeaderThemeModeGroup() {
                 ? <IconSettingsFilled {...themeModeIconProps} />
                 : <IconSettings {...themeModeIconProps} />
             }
-        </Button>
-        <Button className="Header__ThemeModeBtn"
+        </IconButton>
+        <IconButton className="Header__ThemeModeBtn"
             title="Theme mode: Light"
             aria-label="Switch theme mode to light mode"
             aria-current={isThemeModeLight()}
@@ -35,8 +35,8 @@ export default function HeaderThemeModeGroup() {
                 ? <IconSunFilled {...themeModeIconProps} />
                 : <IconSun {...themeModeIconProps} />
             }
-        </Button>
-        <Button className="Header__ThemeModeBtn"
+        </IconButton>
+        <IconButton className="Header__ThemeModeBtn"
             title="Theme mode: Dark"
             aria-label="Switch theme mode to dark mode"
             aria-current={isThemeModeDark()}
@@ -46,6 +46,6 @@ export default function HeaderThemeModeGroup() {
                 ? <IconMoonFilled {...themeModeIconProps} />
                 : <IconMoon {...themeModeIconProps} />
             }
-        </Button>
+        </IconButton>
     </div>
 }

@@ -1,0 +1,10 @@
+.icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &__icon {
+        display: grid;
+        place-items: center;
+    }
+}
