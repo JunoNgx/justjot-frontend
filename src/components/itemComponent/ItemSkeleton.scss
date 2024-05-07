@@ -1,9 +1,9 @@
 @use "../../styles/mixins" as m;
 
-.item-skeleton {
+.ItemSkeleton {
     margin: 0.4rem;
 
-    &__left-side {
+    &__LeftSide {
         min-width: 0;
         flex-grow: 3;
         width: 60%;
@@ -14,21 +14,21 @@
         }
     }
 
-    &__right-side {
+    &__RightSide {
         flex-shrink: 0;
     }
 
-    &__icon-colour {
+    &__IconColour {
         height: 24px;
         width: 24px;
         border-radius: 50%;
     }
 
-    &__primary-text {
+    &__PrimaryText {
         width: calc(100% - 1rem - 32px);
     }
 
-    &__datetime {
+    &__Datetime {
         flex-shrink: 0;
 
         @include m.mobile {

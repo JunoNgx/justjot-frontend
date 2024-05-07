@@ -2,19 +2,19 @@ import { Group, Skeleton } from "@mantine/core";
 import "./ItemSkeleton.scss";
 
 export default function ItemSkeleton() {
-    return <Group className="item-skeleton"
+    return <Group className="ItemSkeleton"
         justify="space-between"
     >
-        <Group className="item-skeleton__left-side">
-            <Skeleton className="item-skeleton__icon-wrapper"
+        <Group className="ItemSkeleton__LeftSide">
+            <Skeleton className="ItemSkeleton__IconWrapper"
                 width={32} height={32} 
             />
-            <Skeleton className="item-skeleton__primary-text"
+            <Skeleton className="ItemSkeleton__PrimaryText"
                 height={32}
             />
         </Group>
-        <Group className="item-skeleton__right-side">
-            <Skeleton className="item-skeleton__datetime"
+        <Group className="ItemSkeleton__RightSide">
+            <Skeleton className="ItemSkeleton__Datetime"
                 height={32} width="5rem"
             />
         </Group>
