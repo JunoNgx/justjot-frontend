@@ -4,7 +4,7 @@ import { IconChevronDown, IconHelp, IconLogout, IconUserCog } from "@tabler/icon
 import useIconProps from "@/hooks/useIconProps";
 import useNavigateRoutes from "@/hooks/useNavigateRoutes";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import Button from "@/libs/components/Button";
+import ItemWithIcon from "@/libs/components/ItemWithIcon";
 
 export default function HeaderUser() {
 
@@ -20,11 +20,10 @@ export default function HeaderUser() {
 
     return <DropdownMenu.Root>
         <DropdownMenu.Trigger>
-            <Button className="Header__UserProfileBtn"
-                rightSection={<IconChevronDown {...menuIconProps} />}
-            >
+            <span className="Header__UserProfileBtn">
                 <span className="Header__UsernameText">{username}</span>
-            </Button>
+                <IconChevronDown {...menuIconProps} />
+            </span>
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Portal>
@@ -34,33 +33,36 @@ export default function HeaderUser() {
                 align="end"
             >
 
-                <DropdownMenu.Item asChild>
-                    <Button className="Header__ProfileDropdownItem"
-                        onClick={navigateToHelp}
+                <DropdownMenu.Item className="Header__ProfileDropdownItem"
+                    onClick={navigateToHelp}
+                >
+                    <ItemWithIcon 
                         leftSection={<IconHelp {...menuIconProps} />}
                     >
                         Help
-                    </Button>
+                    </ItemWithIcon>
                 </DropdownMenu.Item>
 
                 <DropdownMenu.Separator className="Header__ProfileDropdownSeparator" />
 
-                <DropdownMenu.Item asChild>
-                    <Button className="Header__ProfileDropdownItem"
-                        onClick={navigateToProfile}
+                <DropdownMenu.Item className="Header__ProfileDropdownItem"
+                    onClick={navigateToProfile}
+                >
+                    <ItemWithIcon 
                         leftSection={<IconUserCog {...menuIconProps} />}
                     >
                         Account
-                    </Button>
+                    </ItemWithIcon>
                 </DropdownMenu.Item>
 
-                <DropdownMenu.Item>
-                    <Button className="Header__ProfileDropdownItem"
-                        onClick={logoutAndNavigateToLogin}
+                <DropdownMenu.Item className="Header__ProfileDropdownItem"
+                    onClick={logoutAndNavigateToLogin}
+                >
+                    <ItemWithIcon 
                         leftSection={<IconLogout {...menuIconProps} />}
                     >
                         Logout
-                    </Button>
+                    </ItemWithIcon>
                 </DropdownMenu.Item>
 
             </DropdownMenu.Content>
