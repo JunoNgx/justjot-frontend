@@ -13,6 +13,7 @@ import useIconProps from "@/hooks/useIconProps";
 import useCollectionActions from "@/hooks/useCollectionActions";
 
 import "./CollectionMenu.scss";
+import ItemWithIcon from "@/libs/components/ItemWithIcon";
 
 export default function CollectionMenu({isMobile}: {isMobile?: boolean}) {
     const { isLoggedIn } = useContext(BackendClientContext);
@@ -59,20 +60,29 @@ export default function CollectionMenu({isMobile}: {isMobile?: boolean}) {
                 <DropdownMenu.Item className="CollectionMenuDropdown__Item"
                     onClick={openCreateCollectionModal}
                 >
-                    <IconStackPush {...menuIconProps} />
-                    Create collection
+                    <ItemWithIcon className="CollectionMenuDropdown__Label"
+                        leftSection={<IconStackPush {...menuIconProps} />}
+                    >
+                        Create collection
+                    </ItemWithIcon>
                 </DropdownMenu.Item>
                 <DropdownMenu.Item className="CollectionMenuDropdown__Item"
                     onClick={openUpdateCollectionModal}
                 >
-                    <IconEdit {...menuIconProps} />
-                    Edit collection
+                    <ItemWithIcon className="CollectionMenuDropdown__Label"
+                        leftSection={<IconEdit {...menuIconProps} />}
+                    >
+                        Edit collection
+                    </ItemWithIcon>
                 </DropdownMenu.Item>
                 <DropdownMenu.Item className="CollectionMenuDropdown__Item"
                     onClick={openSortCollectionModal}
                 >
-                    <IconSortAscendingShapes {...menuIconProps} />
-                    Sort collections
+                    <ItemWithIcon className="CollectionMenuDropdown__Label"
+                        leftSection={<IconSortAscendingShapes {...menuIconProps} />}
+                    >
+                        Sort collections
+                    </ItemWithIcon>
                 </DropdownMenu.Item>
 
                 {!isTrashCollection && <>
@@ -80,8 +90,11 @@ export default function CollectionMenu({isMobile}: {isMobile?: boolean}) {
                     <DropdownMenu.Item className="CollectionMenuDropdown__Item CollectionMenuDropdown__Item--isRed"
                         onClick={confirmCollectionDeletion}
                     >
-                        <IconTrashX {...menuIconProps} />
-                        Delete collection
+                        <ItemWithIcon className="CollectionMenuDropdown__Label"
+                            leftSection={<IconTrashX {...menuIconProps} />}
+                        >
+                            Delete collection
+                        </ItemWithIcon>
                     </DropdownMenu.Item>
                 </>}
 
@@ -127,9 +140,12 @@ const CollectionMenuCollectionItem = (
         onClick={() => onClickHandler(collection.id)}
         aria-current={isSelected}
     >
-        {leftSection}
-        {collection.name}
-        {rightSection}
+        <ItemWithIcon className="CollectionMenuDropdown__Label"
+            leftSection={leftSection}
+            rightSection={rightSection}
+        >
+            {collection.name}
+        </ItemWithIcon>
     </DropdownMenu.Item>
 
     if (!isTrashBin) return itemElement;
