@@ -1,4 +1,5 @@
 import { Group, Skeleton } from "@mantine/core";
+import "./ItemSkeleton.scss";
 
 export default function ItemSkeleton() {
     return <Group className="item-skeleton"
