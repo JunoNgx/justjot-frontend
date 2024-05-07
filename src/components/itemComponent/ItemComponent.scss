@@ -1,5 +1,5 @@
-// @use "./variables.scss";
-@use "./mixins.scss" as m;
+// @use "../../variables.scss";
+@use "../../styles/_mixins.scss" as m;
 
 .item {
     height: 42px;
