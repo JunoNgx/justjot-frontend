@@ -11,11 +11,11 @@ type IconButtonOptions = {
 export default function IconButton(
     { className = "", title = "", children, onClick }: IconButtonOptions
 ) {
-    return <button className={`${className} icon-button`}
+    return <button className={`${className} IconButton`}
         onClick={onClick}
         title={title}
     >
-        <span className="icon-button__icon">
+        <span className="IconButton__Icon">
             {children}
         </span>
     </button>
