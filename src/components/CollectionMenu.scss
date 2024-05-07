@@ -2,10 +2,7 @@
 @use "../styles/_variables.scss" as v;
 
 .CollectionMenuBtn {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
+    @include m.DropdownTrigger;
 
     &__Label {
         user-select: none;

@@ -57,18 +57,18 @@
     }
 }
 
+@mixin DropdownTrigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 @mixin DropdownItem {
     cursor: pointer;
     font-size: var(--fontSizeSm);
     padding: 0.4rem 0.75rem;
     width: 100%;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.25rem;
-
-    
 
     &:hover,
     &:focus {
