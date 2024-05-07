@@ -2,6 +2,10 @@
 @use "../styles/_variables.scss" as v;
 
 .CollectionMenuBtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
 
     &__Label {
         user-select: none;
@@ -21,7 +25,7 @@
         @include m.mobile {
             @include m.glass-blur;
 
-            display: block;
+            display: flex;
             z-index: 2;
             position: fixed;
             bottom: 1.5rem;
@@ -35,13 +39,32 @@
 }
 
 .CollectionMenuDropdown {
+    @include m.glass-blur;
+    @include m.Menu;
+    @include m.AnimatedDropdown;
+
+    width: max-content;
     max-width: 300px;
     max-height: 80vh;
     overflow-y: auto;
     scrollbar-width: thin;
 
+    &__Separator {
+        @include m.DropdownSeparator;
+    }
+
     &__Item {
-        &--current {
+        @include m.DropdownItem;
+
+        &--isRed {
+            color: #f00;
+        }
+
+        &--isViolet {
+            color: #8800DD;
+        }
+
+        &--isSelcted {
             font-weight: 700;
         }
     }

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Group, Menu, MenuDivider, MenuItem, Text, UnstyledButton, em } from "@mantine/core";
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ItemCollection } from "@/types";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconCheck, IconEdit, IconSelector, IconSortAscendingShapes, IconStackPush, IconTrash, IconTrashX } from "@tabler/icons-react";
@@ -25,70 +25,69 @@ export default function CollectionMenu({isMobile}: {isMobile?: boolean}) {
         openUpdateCollectionModal,
         openSortCollectionModal,
     } = useCollectionActions();
-    const isWidthMobile = useMediaQuery(`(max-width: ${em(720)})`);
+    const isWidthMobile = useMediaQuery("(max-width: 720px)");
     const { menuIconProps } = useIconProps();
 
-    const collectionMenu = <Menu
-        position={isWidthMobile ? "top-end" : "bottom-start"}
-        offset={isMobile ? 5 : 15}
-    >
-        <Menu.Target>
-            <UnstyledButton className={"CollectionMenuBtn "
-                + (isMobile && "CollectionMenuBtn--isMobile")}
+    const collectionMenu = <DropdownMenu.Root>
+        <DropdownMenu.Trigger
+            className={"CollectionMenuBtn " + (isMobile ? "CollectionMenuBtn--isMobile" : "")}
+        >
+            <span className="CollectionMenuBtn__Label">
+                {currCollection?.name}
+            </span>
+            <IconSelector className="CollectionMenuBtn__Icon" {...menuIconProps} />
+        </DropdownMenu.Trigger>
+
+        <DropdownMenu.Portal>
+            <DropdownMenu.Content className="CollectionMenuDropdown"
+                side={isWidthMobile ? "top" : "bottom"}
+                align={isWidthMobile ? "end" : "start"}
+                sideOffset={isMobile ? 5 : 15}
             >
-                <Group gap="xs">
-                    <Text className="CollectionMenuBtn__Label">
-                        {currCollection?.name}
-                    </Text>
-                    <IconSelector className="CollectionMenuBtn__Icon"
-                        {...menuIconProps}
+                {collections?.map((collection: ItemCollection, index: number) =>
+                    <CollectionMenuCollectionItem
+                        key={collection.id}
+                        index={index}
+                        collection={collection}
+                        isSelected={currCollection?.id === collection.id}
+                        onClickHandler={trySwitchToCollectionById}
                     />
-                </Group>
-            </UnstyledButton>
-        </Menu.Target>
+                )}
 
-        <Menu.Dropdown className="CollectionMenuDropdown">
-            {collections?.map((collection: ItemCollection, index: number) =>
-                <CollectionMenuCollectionItem
-                    key={collection.id}
-                    index={index}
-                    collection={collection}
-                    isSelected={currCollection?.id === collection.id}
-                    onClickHandler={trySwitchToCollectionById}
-                />
-            )}
+                <DropdownMenu.Separator className="CollectionMenuDropdown__Separator" />
 
-            <MenuDivider/>
-            <MenuItem
-                leftSection={<IconStackPush {...menuIconProps} />}
-                onClick={openCreateCollectionModal}
-            >
-                Create collection
-            </MenuItem>
-            <MenuItem leftSection={<IconEdit {...menuIconProps} />}
-                onClick={openUpdateCollectionModal}
-            >
-                Edit collection
-            </MenuItem>
-            <MenuItem
-                leftSection={<IconSortAscendingShapes {...menuIconProps} />}
-                onClick={openSortCollectionModal}
-            >
-                Sort collections
-            </MenuItem>
-
-            {!isTrashCollection && <>
-                <MenuDivider/>
-                <MenuItem
-                    color="red"
-                    leftSection={<IconTrashX {...menuIconProps} />}
-                    onClick={confirmCollectionDeletion}
+                <DropdownMenu.Item className="CollectionMenuDropdown__Item"
+                    onClick={openCreateCollectionModal}
                 >
-                    Delete collection
-                </MenuItem>
-            </>}
-        </Menu.Dropdown>
-    </Menu>
+                    <IconStackPush {...menuIconProps} />
+                    Create collection
+                </DropdownMenu.Item>
+                <DropdownMenu.Item className="CollectionMenuDropdown__Item"
+                    onClick={openUpdateCollectionModal}
+                >
+                    <IconEdit {...menuIconProps} />
+                    Edit collection
+                </DropdownMenu.Item>
+                <DropdownMenu.Item className="CollectionMenuDropdown__Item"
+                    onClick={openSortCollectionModal}
+                >
+                    <IconSortAscendingShapes {...menuIconProps} />
+                    Sort collections
+                </DropdownMenu.Item>
+
+                {!isTrashCollection && <>
+                    <DropdownMenu.Separator className="CollectionMenuDropdown__Separator" />
+                    <DropdownMenu.Item className="CollectionMenuDropdown__Item CollectionMenuDropdown__Item--isRed"
+                        onClick={confirmCollectionDeletion}
+                    >
+                        <IconTrashX {...menuIconProps} />
+                        Delete collection
+                    </DropdownMenu.Item>
+                </>}
+
+            </DropdownMenu.Content>
+        </DropdownMenu.Portal>
+    </DropdownMenu.Root>
 
     return (isLoggedIn && currCollection) && collectionMenu;
 }
@@ -108,33 +107,35 @@ const CollectionMenuCollectionItem = (
 
     const baseClassName = "CollectionMenuDropdown__Item "
     const selectedModifierClassName = isSelected
-            ? "CollectionMenuDropdown__CurrentItem"
-            : "";
+        ? "CollectionMenuDropdown__Item--isSelected "
+        : "";
+    const isTrashBinModifierClassName = isTrashBin
+        ? "CollectionMenuDropdown__Item--isViolet "
+        : "";
+    const finalClassName = baseClassName
+        + selectedModifierClassName
+        + isTrashBinModifierClassName;
+
     const leftSection = isTrashBin
         ? <IconTrash {...menuIconProps} />
         : "";
     const rightSection = isSelected
         ? <IconCheck {...menuIconProps} />
         : <CollectionHotkey index={index}/>;
-    const color = isTrashBin
-        ? "violet"
-        : "";
 
-    const itemElement = <MenuItem
-        className={baseClassName + selectedModifierClassName}
-        color={color}
-        leftSection={leftSection}
-        rightSection={rightSection}
-        aria-current={isSelected}
+    const itemElement = <DropdownMenu.Item className={finalClassName}
         onClick={() => onClickHandler(collection.id)}
+        aria-current={isSelected}
     >
+        {leftSection}
         {collection.name}
-    </MenuItem>
+        {rightSection}
+    </DropdownMenu.Item>
 
     if (!isTrashBin) return itemElement;
 
     return <>
-        <MenuDivider />
+        <DropdownMenu.Separator className="CollectionMenuDropdown__Separator" />
         {itemElement}
     </>
 }
