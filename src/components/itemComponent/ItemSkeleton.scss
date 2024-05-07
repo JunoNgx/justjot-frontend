@@ -49,4 +49,20 @@
             display: none;
         }
     }
+
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-name: breathing;
+    will-change: opacity;
+
+    @keyframes breathing {
+        from {
+            opacity: 0.5;
+        }
+        to {
+            opacity: 1;
+        }
+    }
 }
