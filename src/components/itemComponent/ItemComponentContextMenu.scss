@@ -8,6 +8,22 @@
     &__Item {
         @include m.DropdownItem;
         padding: 0.2rem 0.5rem;
+
+        &--IsBlue {
+            color: var(--colBlue);
+        }
+
+        &--IsRed {
+            color: var(--colRed);
+        }
+
+        &--IsViolet {
+            color: var(--colViolet);
+        }
+
+        &--IsOrange {
+            color: var(--colOrange);
+        }
     }
 
     &__Separator {

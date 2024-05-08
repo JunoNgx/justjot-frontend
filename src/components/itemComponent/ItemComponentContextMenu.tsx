@@ -1,11 +1,11 @@
 import { Item } from '@/types';
 import * as ContextMenu from '@radix-ui/react-context-menu';
-
-import "./ItemComponentContextMenu.scss";
 import ItemWithIcon from '@/libs/components/ItemWithIcon';
 import useIconProps from '@/hooks/useIconProps';
 import { IconArrowMoveRight, IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconRestore, IconSquare, IconTrashX } from "@tabler/icons-react";
 import { canConvertItemToTodo, canDeleteItem, canMoveItem, canRefetchItem, canToggleItemShouldCopyOnClick, canTrashItem } from '@/utils/itemUtils';
+
+import "./ItemComponentContextMenu.scss";
 
 export default function ItemComponentContextMenu(
     { item }: { item: Item }
@@ -36,7 +36,7 @@ export default function ItemComponentContextMenu(
         </ItemWithIcon>
     </ContextMenu.Item>
 
-    const trashAction = <ContextMenu.Item className="ItemContextMenu__Item">
+    const trashAction = <ContextMenu.Item className="ItemContextMenu__Item ItemContextMenu__Item--IsRed">
         <ItemWithIcon className="ItemContextMenu__Label"
             leftSection={<IconTrashX {...menuIconProps} />}
         >
@@ -60,7 +60,7 @@ export default function ItemComponentContextMenu(
         </ItemWithIcon>
     </ContextMenu.Item>
 
-    const convertToTodoAction = <ContextMenu.Item className="ItemContextMenu__Item">
+    const convertToTodoAction = <ContextMenu.Item className="ItemContextMenu__Item ItemContextMenu__Item--IsOrange">
         <ItemWithIcon className="ItemContextMenu__Label"
             leftSection={<IconArrowMoveRight {...menuIconProps} />}
         >
@@ -71,7 +71,7 @@ export default function ItemComponentContextMenu(
     const togglePriActionIcon = item.shouldCopyOnClick
         ? <IconCheckbox {...menuIconProps} />
         : <IconSquare {...menuIconProps} />
-    const togglePriActAction = <ContextMenu.Item className="ItemContextMenu__Item">
+    const togglePriActAction = <ContextMenu.Item className="ItemContextMenu__Item ItemContextMenu__Item--IsBlue">
         <ItemWithIcon className="ItemContextMenu__Label"
             leftSection={togglePriActionIcon}
         >
