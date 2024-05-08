@@ -16,6 +16,10 @@ html {
     scrollbar-width: thin;
 }
 
+html * {
+    font-family: "Space Grotesk, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif, Segoe UI Emoji";
+}
+
 header {
     @include m.glass-blur;
 }
