@@ -6,13 +6,33 @@ import { IconArrowMoveRight, IconCheckbox, IconCopy, IconDownload, IconEdit, Ico
 import { canConvertItemToTodo, canDeleteItem, canMoveItem, canRefetchItem, canToggleItemShouldCopyOnClick, canTrashItem } from '@/utils/itemUtils';
 
 import "./ItemComponentContextMenu.scss";
+import useItemActions from '@/hooks/useItemActions';
+import { useContext } from 'react';
+import { CollectionsContext } from '@/contexts/CollectionsContext';
+import { ItemsContext } from '@/contexts/ItemsContext';
 
 export default function ItemComponentContextMenu(
     { item }: { item: Item }
-) { 
-    const { menuIconProps } = useIconProps();
+) {
+    const { collections } = useContext(CollectionsContext);
+    const { setSelectedIndex } = useContext(ItemsContext);
 
-    const copyAction = <ContextMenu.Item className="ItemContextMenu__Item">
+    const { menuIconProps } = useIconProps();
+    const {
+        deleteItemWithOptimisticUpdate,
+        copyItemContent,
+        openUpdateItemModal,
+        openMoveItemModal,
+        refetchLink,
+        toggleItemShouldCopyOnClickWithOptimisticUpdate,
+        convertToTodo,
+        trashItemWithOptimisticUpdate,
+        untrashItemWithOptimisticUpdate,
+    } = useItemActions();
+
+    const copyAction = <ContextMenu.Item className="ItemContextMenu__Item"
+        onClick={() => copyItemContent({item})}
+    >
         <ItemWithIcon className="ItemContextMenu__Label"
             leftSection={<IconCopy {...menuIconProps} />}
         >
@@ -20,7 +40,9 @@ export default function ItemComponentContextMenu(
         </ItemWithIcon>
     </ContextMenu.Item>
 
-    const editAction = <ContextMenu.Item className="ItemContextMenu__Item">
+    const editAction = <ContextMenu.Item className="ItemContextMenu__Item"
+        onClick={() => openUpdateItemModal(item)}
+    >
         <ItemWithIcon className="ItemContextMenu__Label"
             leftSection={<IconEdit {...menuIconProps} />}
         >
@@ -28,7 +50,9 @@ export default function ItemComponentContextMenu(
         </ItemWithIcon>
     </ContextMenu.Item>
 
-    const moveAction = <ContextMenu.Item className="ItemContextMenu__Item">
+    const moveAction = <ContextMenu.Item className="ItemContextMenu__Item"
+        onClick={() => openMoveItemModal({item, collectionList: collections})}
+    >
         <ItemWithIcon className="ItemContextMenu__Label"
             leftSection={<IconFileSymlink {...menuIconProps} />}
         >
@@ -36,7 +60,13 @@ export default function ItemComponentContextMenu(
         </ItemWithIcon>
     </ContextMenu.Item>
 
-    const trashAction = <ContextMenu.Item className="ItemContextMenu__Item ItemContextMenu__Item--IsRed">
+    const trashAction = <ContextMenu.Item
+        className="ItemContextMenu__Item ItemContextMenu__Item--IsRed"
+        onClick={() => {
+            trashItemWithOptimisticUpdate({item});
+            setSelectedIndex(-1);
+        }}
+    >
         <ItemWithIcon className="ItemContextMenu__Label"
             leftSection={<IconTrashX {...menuIconProps} />}
         >
@@ -44,7 +74,12 @@ export default function ItemComponentContextMenu(
         </ItemWithIcon>
     </ContextMenu.Item>
 
-    const untrashAction = <ContextMenu.Item className="ItemContextMenu__Item">
+    const untrashAction = <ContextMenu.Item className="ItemContextMenu__Item"
+        onClick={() => {
+            untrashItemWithOptimisticUpdate({item});
+            setSelectedIndex(-1);
+        }}
+    >
         <ItemWithIcon className="ItemContextMenu__Label"
             leftSection={<IconRestore {...menuIconProps} />}
         >
@@ -52,7 +87,12 @@ export default function ItemComponentContextMenu(
         </ItemWithIcon>
     </ContextMenu.Item>
 
-    const refetchAction = <ContextMenu.Item className="ItemContextMenu__Item">
+    const refetchAction = <ContextMenu.Item className="ItemContextMenu__Item"
+        onClick={() => {
+            refetchLink(item);
+            setSelectedIndex(-1);
+        }}
+    >
         <ItemWithIcon className="ItemContextMenu__Label"
             leftSection={<IconDownload {...menuIconProps} />}
         >
@@ -60,7 +100,10 @@ export default function ItemComponentContextMenu(
         </ItemWithIcon>
     </ContextMenu.Item>
 
-    const convertToTodoAction = <ContextMenu.Item className="ItemContextMenu__Item ItemContextMenu__Item--IsOrange">
+    const convertToTodoAction = <ContextMenu.Item
+        className="ItemContextMenu__Item ItemContextMenu__Item--IsOrange"
+        onClick={() => convertToTodo({item})}
+    >
         <ItemWithIcon className="ItemContextMenu__Label"
             leftSection={<IconArrowMoveRight {...menuIconProps} />}
         >
@@ -71,7 +114,10 @@ export default function ItemComponentContextMenu(
     const togglePriActionIcon = item.shouldCopyOnClick
         ? <IconCheckbox {...menuIconProps} />
         : <IconSquare {...menuIconProps} />
-    const togglePriActAction = <ContextMenu.Item className="ItemContextMenu__Item ItemContextMenu__Item--IsBlue">
+    const togglePriActAction = <ContextMenu.Item
+        className="ItemContextMenu__Item ItemContextMenu__Item--IsBlue"
+        onClick={() => toggleItemShouldCopyOnClickWithOptimisticUpdate({item})}
+    >
         <ItemWithIcon className="ItemContextMenu__Label"
             leftSection={togglePriActionIcon}
         >
@@ -79,9 +125,12 @@ export default function ItemComponentContextMenu(
         </ItemWithIcon>
     </ContextMenu.Item>
 
-    const deleteAction = <ContextMenu.Item className="ItemContextMenu__Item">
-        <ItemWithIcon className="ItemContextMenu__Label ItemContextMenu__Label--IsRed"
-            leftSection={<IconFileSymlink {...menuIconProps} />}
+    const deleteAction = <ContextMenu.Item
+        className="ItemContextMenu__Item ItemContextMenu__Item--IsRed"
+        onClick={() => deleteItemWithOptimisticUpdate({item})}
+    >
+        <ItemWithIcon className="ItemContextMenu__Label"
+            leftSection={<IconTrashX {...menuIconProps} />}
         >
             Delete
         </ItemWithIcon>
