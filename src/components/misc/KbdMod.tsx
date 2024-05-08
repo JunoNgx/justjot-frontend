@@ -1,4 +1,3 @@
-import { Kbd } from "@mantine/core";
 import { useOs } from "@mantine/hooks";
 
 export default function KbdMod() {
@@ -7,8 +6,8 @@ export default function KbdMod() {
     switch(true) {
     case (os === "macos"):
     case (os === "ios"):
-        return <Kbd>Cmd</Kbd>;
+        return <kbd>Cmd</kbd>;
     default:
-        return <Kbd>Ctrl</Kbd>;
+        return <kbd>Ctrl</kbd>;
     }
 }

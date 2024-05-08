@@ -1,4 +1,3 @@
-import { Kbd } from "@mantine/core";
 import { useOs } from "@mantine/hooks";
 
 export default function KbdAlt() {
@@ -7,8 +6,8 @@ export default function KbdAlt() {
     switch(true) {
     case (os === "macos"):
     case (os === "ios"):
-        return <Kbd>Opt</Kbd>;
+        return <kbd>Opt</kbd>;
     default:
-        return <Kbd>Alt</Kbd>;
+        return <kbd>Alt</kbd>;
     }
 }
