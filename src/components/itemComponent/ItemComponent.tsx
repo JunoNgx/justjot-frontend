@@ -1,12 +1,9 @@
 import { useContext } from "react";
 import { Item, ItemType } from "@/types";
-// import { useContextMenu } from 'mantine-contextmenu';
 import * as ContextMenu from '@radix-ui/react-context-menu';
 import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCreatedDate";
 import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
-// import useHandleContextMenuWithLongPress from "@/libs/useHandleContextMenuWithLongPress";
 import useItemActions from "@/hooks/useItemActions";
-// import useItemContextMenuOptions from "@/hooks/useItemContextMenuOptions";
 import { IconClipboardCopy } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
 import { ItemsContext } from "@/contexts/ItemsContext";
@@ -24,33 +21,10 @@ export default function ItemComponent(
     { item, index }: ItemComponentParams
 ) {
     const { selectedIndex, setSelectedIndex } = useContext(ItemsContext);
-    // const { showContextMenu } = useContextMenu();
     const {
-        // deleteItemWithOptimisticUpdate,
-        // copyItemContent,
-        // openUpdateItemModal,
-        // openMoveItemModal,
-        // refetchLink,
-        // toggleItemShouldCopyOnClickWithOptimisticUpdate,
         computeItemPrimaryAction,
         executeItemAction,
-    //     convertToTodo,
-    //     trashItemWithOptimisticUpdate,
-    //     untrashItemWithOptimisticUpdate,
     } = useItemActions();
-    // const itemContextMenuOptions = useItemContextMenuOptions({
-    //     item,
-    //     copyFn: copyItemContent,
-    //     editFn: openUpdateItemModal,
-    //     moveFn: openMoveItemModal,
-    //     untrashFn: untrashItemWithOptimisticUpdate,
-    //     trashFn: trashItemWithOptimisticUpdate,
-    //     deleteFn: deleteItemWithOptimisticUpdate,
-    //     refetchFn: refetchLink,
-    //     toggleCopyFn: toggleItemShouldCopyOnClickWithOptimisticUpdate,
-    //     deselectFn: () => {setSelectedIndex(-1)},
-    //     convertToTodoFn: convertToTodo,
-    // });
     const { itemIconProps } = useIconProps();
 
     const handlePrimaryAction = (
@@ -59,26 +33,6 @@ export default function ItemComponent(
         const action = computeItemPrimaryAction(item);
         executeItemAction(item, action, true);
     };
-
-    // const handleSecondaryAction = (
-    //     _e: React.MouseEvent | React.TouchEvent
-    // ) => {
-    //     // const handleEventWithContextMenu = showContextMenu(
-    //     //     itemContextMenuOptions,
-    //     //     { className: "item-context-menu" }
-    //     // )
-    //     // handleEventWithContextMenu(e as
-    //     //     React.MouseEvent
-    //     //     & React.TouchEvent
-    //     // );
-    // };
-
-    // const clickEventsProps = useHandleContextMenuWithLongPress({
-    //     onClick: handlePrimaryAction,
-    //     onLongPress: handleSecondaryAction,
-    // }, {
-    //     delay: 800,
-    // });
 
     const isSelected = selectedIndex === index;
     const isLink = item.type === ItemType.LINK;
