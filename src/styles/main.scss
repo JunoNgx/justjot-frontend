@@ -7,7 +7,7 @@
 @use "./mantineComponents.scss";
 @use "./cardlike.scss";
 @use "./mainInput.scss";
-@use '@mantine/core/styles/global.css';
+// @use '@mantine/core/styles/global.css';
 
 html {
     -webkit-tap-highlight-color: transparent;
@@ -17,7 +17,7 @@ html {
 }
 
 html * {
-    font-family: "Space Grotesk, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif, Segoe UI Emoji";
+    font-family: Space Grotesk, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif, Segoe UI Emoji;
 }
 
 header {
