@@ -1,11 +1,11 @@
-import { Box, Text } from "@mantine/core";
+import "./MainViewNotice.scss";
 
 export default function MainViewNotice(
     { content }: { content: string }
 ) {
-    return <Box className="main-view-notice__item">
-        <Text fs="italic" ta="center">
+    return <div className="MainViewNotice__Item">
+        <p className="MainViewNotice__Content">
             {content}
-        </Text>
-    </Box>
+        </p>
+    </div>
 }

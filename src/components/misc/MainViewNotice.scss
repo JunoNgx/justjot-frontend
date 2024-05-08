@@ -1,0 +1,14 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.MainViewNotice {
+    &__Item {
+        margin: auto;
+        max-width: 720px;
+    }
+
+    &__Content {
+        font-style: italic;
+        text-align: center;
+    }
+}
