@@ -20,7 +20,7 @@
         display: none;
 
         @include m.mobile {
-            @include m.glass-blur;
+            @include m.GlassBlur;
 
             display: flex;
             z-index: 2;
@@ -36,7 +36,7 @@
 }
 
 .CollectionMenuDropdown {
-    @include m.glass-blur;
+    @include m.GlassBlur;
     @include m.Menu;
     @include m.AnimatedDropdown;
 

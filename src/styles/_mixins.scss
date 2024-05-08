@@ -1,4 +1,4 @@
-@mixin glass-blur { 
+@mixin GlassBlur { 
     backdrop-filter: blur(15px);
     // Attributes to overwrite specificity
     [data-mantine-color-scheme="light"] &,

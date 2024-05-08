@@ -21,7 +21,7 @@ html * {
 }
 
 header {
-    @include m.glass-blur;
+    @include m.GlassBlur;
 }
 
 ul li {
@@ -165,5 +165,5 @@ input[type="password"] {
 }
 
 .item-context-menu {
-    @include m.glass-blur;
+    @include m.GlassBlur;
 }
