@@ -29,10 +29,6 @@
         flex-shrink: 0;
         width: 1.5rem;
         height: 1.5rem;
-
-        > img {
-            flex: auto;
-        }
     }
 
     &__IconColour {
@@ -43,6 +39,7 @@
 
     &__FaviconImg {
         height: 24px;
+        flex: auto;
     }
 
     &__LeftSide {
