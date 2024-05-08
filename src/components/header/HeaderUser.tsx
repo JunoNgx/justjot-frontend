@@ -4,7 +4,7 @@ import { IconChevronDown, IconHelp, IconLogout, IconUserCog } from "@tabler/icon
 import useIconProps from "@/hooks/useIconProps";
 import useNavigateRoutes from "@/hooks/useNavigateRoutes";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import ItemWithIcon from "@/libs/components/ItemWithIcon";
+import LabelWithIcon from "@/libs/components/LabelWithIcon";
 
 export default function HeaderUser() {
 
@@ -36,11 +36,11 @@ export default function HeaderUser() {
                 <DropdownMenu.Item className="Header__ProfileDropdownItem"
                     onClick={navigateToHelp}
                 >
-                    <ItemWithIcon 
+                    <LabelWithIcon 
                         leftSection={<IconHelp {...menuIconProps} />}
                     >
                         Help
-                    </ItemWithIcon>
+                    </LabelWithIcon>
                 </DropdownMenu.Item>
 
                 <DropdownMenu.Separator className="Header__ProfileDropdownSeparator" />
@@ -48,21 +48,21 @@ export default function HeaderUser() {
                 <DropdownMenu.Item className="Header__ProfileDropdownItem"
                     onClick={navigateToProfile}
                 >
-                    <ItemWithIcon 
+                    <LabelWithIcon 
                         leftSection={<IconUserCog {...menuIconProps} />}
                     >
                         Account
-                    </ItemWithIcon>
+                    </LabelWithIcon>
                 </DropdownMenu.Item>
 
                 <DropdownMenu.Item className="Header__ProfileDropdownItem"
                     onClick={logoutAndNavigateToLogin}
                 >
-                    <ItemWithIcon 
+                    <LabelWithIcon 
                         leftSection={<IconLogout {...menuIconProps} />}
                     >
                         Logout
-                    </ItemWithIcon>
+                    </LabelWithIcon>
                 </DropdownMenu.Item>
 
             </DropdownMenu.Content>

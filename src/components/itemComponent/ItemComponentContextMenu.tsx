@@ -1,6 +1,6 @@
 import { Item } from '@/types';
 import * as ContextMenu from '@radix-ui/react-context-menu';
-import ItemWithIcon from '@/libs/components/ItemWithIcon';
+import LabelWithIcon from '@/libs/components/LabelWithIcon';
 import useIconProps from '@/hooks/useIconProps';
 import { IconArrowMoveRight, IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconRestore, IconSquare, IconTrashX } from "@tabler/icons-react";
 import { canConvertItemToTodo, canDeleteItem, canMoveItem, canRefetchItem, canToggleItemShouldCopyOnClick, canTrashItem } from '@/utils/itemUtils';
@@ -33,31 +33,31 @@ export default function ItemComponentContextMenu(
     const copyAction = <ContextMenu.Item className="ItemContextMenu__Item"
         onClick={() => copyItemContent({item})}
     >
-        <ItemWithIcon className="ItemContextMenu__Label"
+        <LabelWithIcon className="ItemContextMenu__Label"
             leftSection={<IconCopy {...menuIconProps} />}
         >
             Copy
-        </ItemWithIcon>
+        </LabelWithIcon>
     </ContextMenu.Item>
 
     const editAction = <ContextMenu.Item className="ItemContextMenu__Item"
         onClick={() => openUpdateItemModal(item)}
     >
-        <ItemWithIcon className="ItemContextMenu__Label"
+        <LabelWithIcon className="ItemContextMenu__Label"
             leftSection={<IconEdit {...menuIconProps} />}
         >
             Edit
-        </ItemWithIcon>
+        </LabelWithIcon>
     </ContextMenu.Item>
 
     const moveAction = <ContextMenu.Item className="ItemContextMenu__Item"
         onClick={() => openMoveItemModal({item, collectionList: collections})}
     >
-        <ItemWithIcon className="ItemContextMenu__Label"
+        <LabelWithIcon className="ItemContextMenu__Label"
             leftSection={<IconFileSymlink {...menuIconProps} />}
         >
             Move
-        </ItemWithIcon>
+        </LabelWithIcon>
     </ContextMenu.Item>
 
     const trashAction = <ContextMenu.Item
@@ -67,11 +67,11 @@ export default function ItemComponentContextMenu(
             setSelectedIndex(-1);
         }}
     >
-        <ItemWithIcon className="ItemContextMenu__Label"
+        <LabelWithIcon className="ItemContextMenu__Label"
             leftSection={<IconTrashX {...menuIconProps} />}
         >
             Trash
-        </ItemWithIcon>
+        </LabelWithIcon>
     </ContextMenu.Item>
 
     const untrashAction = <ContextMenu.Item className="ItemContextMenu__Item"
@@ -80,11 +80,11 @@ export default function ItemComponentContextMenu(
             setSelectedIndex(-1);
         }}
     >
-        <ItemWithIcon className="ItemContextMenu__Label"
+        <LabelWithIcon className="ItemContextMenu__Label"
             leftSection={<IconRestore {...menuIconProps} />}
         >
             Restore
-        </ItemWithIcon>
+        </LabelWithIcon>
     </ContextMenu.Item>
 
     const refetchAction = <ContextMenu.Item className="ItemContextMenu__Item"
@@ -93,22 +93,22 @@ export default function ItemComponentContextMenu(
             setSelectedIndex(-1);
         }}
     >
-        <ItemWithIcon className="ItemContextMenu__Label"
+        <LabelWithIcon className="ItemContextMenu__Label"
             leftSection={<IconDownload {...menuIconProps} />}
         >
             Refetch
-        </ItemWithIcon>
+        </LabelWithIcon>
     </ContextMenu.Item>
 
     const convertToTodoAction = <ContextMenu.Item
         className="ItemContextMenu__Item ItemContextMenu__Item--IsOrange"
         onClick={() => convertToTodo({item})}
     >
-        <ItemWithIcon className="ItemContextMenu__Label"
+        <LabelWithIcon className="ItemContextMenu__Label"
             leftSection={<IconArrowMoveRight {...menuIconProps} />}
         >
             Convert to Todo
-        </ItemWithIcon>
+        </LabelWithIcon>
     </ContextMenu.Item>
 
     const togglePriActionIcon = item.shouldCopyOnClick
@@ -118,22 +118,22 @@ export default function ItemComponentContextMenu(
         className="ItemContextMenu__Item ItemContextMenu__Item--IsBlue"
         onClick={() => toggleItemShouldCopyOnClickWithOptimisticUpdate({item})}
     >
-        <ItemWithIcon className="ItemContextMenu__Label"
+        <LabelWithIcon className="ItemContextMenu__Label"
             leftSection={togglePriActionIcon}
         >
             To copy
-        </ItemWithIcon>
+        </LabelWithIcon>
     </ContextMenu.Item>
 
     const deleteAction = <ContextMenu.Item
         className="ItemContextMenu__Item ItemContextMenu__Item--IsRed"
         onClick={() => deleteItemWithOptimisticUpdate({item})}
     >
-        <ItemWithIcon className="ItemContextMenu__Label"
+        <LabelWithIcon className="ItemContextMenu__Label"
             leftSection={<IconTrashX {...menuIconProps} />}
         >
             Delete
-        </ItemWithIcon>
+        </LabelWithIcon>
     </ContextMenu.Item>
 
     const shouldShowSeparator = canToggleItemShouldCopyOnClick(item)

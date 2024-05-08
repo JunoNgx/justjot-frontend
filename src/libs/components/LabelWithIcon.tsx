@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import "./ItemWithIcon.scss";
+import "./LabelWithIcon.scss";
 
-type ItemWithIconOptions = {
+type LabelWithIconOptions = {
     className?: string,
     children?: ReactNode,
     onClick?: () => void,
@@ -10,20 +10,20 @@ type ItemWithIconOptions = {
     gap?: string,
 };
 
-export default function ItemWithIcon(
+export default function LabelWithIcon(
     { className = "", children, onClick, leftSection, rightSection, gap = "0.5rem"}:
-    ItemWithIconOptions
+    LabelWithIconOptions
 ) {
-    return <span className={`${className} ItemWithIcon`}
+    return <span className={`${className} LabelWithIcon`}
         onClick={onClick}
         style={{
             gap,
         }}
     >
-        <span className="ItemWithIcon__LeftSide">
+        <span className="LabelWithIcon__LeftSide">
             {leftSection}
-            <span className="ItemWithIcon__Label">{children}</span>
+            <span className="LabelWithIcon__Label">{children}</span>
         </span>
-        <span className="ItemWithIcon__RightSide">{rightSection}</span>
+        <span className="LabelWithIcon__RightSide">{rightSection}</span>
     </span>
 }
