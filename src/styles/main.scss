@@ -43,6 +43,16 @@ a:visited {
     color: var(--colGreyLt);
 }
 
+kbd {
+    border-style: solid;
+    border-width: 1px;
+    border-bottom-width: 3px;
+    border-color: var(--colPri);
+    padding: 0 0.2rem;
+    font-family: var(--monospaceFontFamily);
+    font-size: var(--fontSizeXs);
+}
+
 .landing-page {
     margin: 0 auto;
     max-width: 640px;
