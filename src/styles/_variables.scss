@@ -12,6 +12,7 @@
     --colGreyLt: #AAA;
     --colCodeBg: #EEE;
     --colSkeleton: #DDD;
+    --colMenuBg: rgba(255, 255, 255, 0.1);
 }
 
 :root[data-mantine-color-scheme="light"] {
@@ -22,6 +23,7 @@
     --colGreyLt: #444;
     --colCodeBg: #EEE;
     --colSkeleton: #DDD;
+    --colMenuBg: rgba(255, 255, 255, 0.1);
 }
 
 :root[data-mantine-color-scheme="dark"] {
@@ -32,4 +34,5 @@
     --colGreyLt: #999;
     --colCodeBg: #222;
     --colSkeleton: #222;
+    --colMenuBg: rgba(0, 0, 0, 0);
 }
