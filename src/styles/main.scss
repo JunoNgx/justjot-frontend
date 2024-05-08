@@ -67,16 +67,11 @@ a:visited {
     }
 }
 
-.main-view-notice {
+.MainViewNoticeContainer {
     padding: 60px 0 60px;
 
     @include m.mobile {
         padding: 40px 0 40px;
-    }
-
-    &__item {
-        margin: auto;
-        max-width: 720px;
     }
 }
 

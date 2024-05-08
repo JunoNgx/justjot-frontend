@@ -92,7 +92,7 @@ export default function MainView() {
         {/* For non-item components */}
         <CollectionMenu isMobile={true} />
         <KeyboardPromptDisplay />
-        <Box className="main-view-notice">
+        <Box className="MainViewNoticeContainer">
             {isDemoUser && <MainViewNotice
                 content="You are using the test account. Data are periodically reset."
             />}
