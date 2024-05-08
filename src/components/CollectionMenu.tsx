@@ -87,7 +87,7 @@ export default function CollectionMenu({isMobile}: {isMobile?: boolean}) {
 
                 {!isTrashCollection && <>
                     <DropdownMenu.Separator className="CollectionMenuDropdown__Separator" />
-                    <DropdownMenu.Item className="CollectionMenuDropdown__Item CollectionMenuDropdown__Item--isRed"
+                    <DropdownMenu.Item className="CollectionMenuDropdown__Item CollectionMenuDropdown__Item--IsRed"
                         onClick={confirmCollectionDeletion}
                     >
                         <ItemWithIcon className="CollectionMenuDropdown__Label"
@@ -120,10 +120,10 @@ const CollectionMenuCollectionItem = (
 
     const baseClassName = "CollectionMenuDropdown__Item "
     const selectedModifierClassName = isSelected
-        ? "CollectionMenuDropdown__Item--isSelected "
+        ? "CollectionMenuDropdown__Item--IsSelected "
         : "";
     const isTrashBinModifierClassName = isTrashBin
-        ? "CollectionMenuDropdown__Item--isViolet "
+        ? "CollectionMenuDropdown__Item--IsViolet "
         : "";
     const finalClassName = baseClassName
         + selectedModifierClassName

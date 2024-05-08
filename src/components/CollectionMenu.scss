@@ -53,15 +53,15 @@
     &__Item {
         @include m.DropdownItem;
 
-        &--isRed {
+        &--IsRed {
             color: var(--colRed);
         }
 
-        &--isViolet {
+        &--IsViolet {
             color: var(--colViolet);
         }
 
-        &--isSelcted {
+        &--IsSelcted {
             font-weight: 700;
         }
     }
