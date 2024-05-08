@@ -1,4 +1,3 @@
-import { Image } from "@mantine/core";
 import { Item, ItemType } from "@/types";
 import { IconCheckbox, IconFileText, IconHourglassLow, IconSquare, IconWorld } from "@tabler/icons-react";
 import { isValidHexColourCode } from "@/utils/itemUtils";
@@ -44,7 +43,8 @@ const FaviconImg = ({ faviconUrl }: { faviconUrl: string }) => {
     const [ shouldShow, setShouldShow] = useState(true)
     
     return shouldShow
-        ? <Image h={24} src={faviconUrl}
+        ? <img className="Item__FaviconImg"
+            src={faviconUrl}
             alt={"Favicon of this link item"}
             referrerPolicy="no-referrer"
             // onLoad={() => setShouldShow(true)}

@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { Item, ItemType } from "@/types";
-import { Center, Group } from "@mantine/core";
 import { useContextMenu } from 'mantine-contextmenu';
 import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCreatedDate";
 import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
@@ -92,9 +91,7 @@ export default function ItemComponent(
         }
         : {};
 
-    return <Group className={computeClassname(item, isSelected)}
-        justify="space-between"
-        wrap="nowrap"
+    return <div className={computeClassname(item, isSelected)}
         data-index={index}
         data-id={item.id}
         {...anchorProps}
@@ -104,19 +101,14 @@ export default function ItemComponent(
         onMouseEnter={() => { setSelectedIndex(index)}}
         onMouseLeave={() => { setSelectedIndex(-1)}}
     >
-        <Group className="Item__LeftSide"
-            justify="flex-start"
-            wrap="nowrap"
-        >
-            <Center className="Item__IconWrapper">
+        <div className="Item__LeftSide">
+            <div className="Item__IconWrapper">
                 <ItemComponentIcon item={item} />
-            </Center>
+            </div>
             <ItemComponentText item={item} />
-        </Group>
+        </div>
 
-        <Group className="Item__RightSide"
-            gap="xs"
-        >
+        <div className="Item__RightSide">
             {item.shouldCopyOnClick &&
                 <IconClipboardCopy className="Item__ShouldCopyIcon"
                     {...itemIconProps}
@@ -125,9 +117,9 @@ export default function ItemComponent(
             <ItemComponentCreatedDate className="Item__Datetime"
                 createdDatetime={item.created}
             />
-        </Group>
+        </div>
 
-    </Group>
+    </div>
 }
 
 const computeClassname = (item: Item, isSelected: boolean) => {

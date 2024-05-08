@@ -1,4 +1,3 @@
-import { Text } from "@mantine/core";
 import { DateTime } from "luxon";
 
 export default function ItemComponentCreatedDate(
@@ -23,10 +22,10 @@ export default function ItemComponentCreatedDate(
         }
     }
 
-    return <Text className={className}
+    return <p className={className}
         title={fullDateTime}
         data-testid="item-component-created-date"
     >
         {computeDisplayedDateTime()}
-    </Text>   
+    </p>   
 }

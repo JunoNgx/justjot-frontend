@@ -2,6 +2,12 @@
 @use "../../styles/_mixins.scss" as m;
 
 .Item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+
     height: 42px;
     padding: 0.5rem;
     cursor: pointer;
@@ -17,6 +23,8 @@
     }
 
     &__IconWrapper {
+        display: grid;
+        place-items: center;
         user-select: none;
         flex-shrink: 0;
         width: 1.5rem;
@@ -33,7 +41,16 @@
         border-radius: 50%;
     }
 
+    &__FaviconImg {
+        height: 24px;
+    }
+
     &__LeftSide {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+
         overflow: hidden;
         flex-grow: 2;
     }
@@ -65,6 +82,8 @@
     }
 
     &__RightSide {
+        display: flex;
+        gap: 0.5rem;
         flex-shrink: 0;
     }
 
