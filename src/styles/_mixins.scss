@@ -1,11 +1,10 @@
 @mixin GlassBlur { 
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(12px);
     // Attributes to overwrite specificity
     [data-mantine-color-scheme="light"] &,
     [data-mantine-color-scheme="dark"] & {
         border-color: var(--mantine-color-text);
-        // TODO: sigh, somehow this works
-        background-color: var(--nonsensical-variable);
+        background-color: var(--colMenuBg);
     }
 }
 
@@ -16,10 +15,12 @@
 }
 
 @mixin Menu {
+    position: relative;
     border-style: solid;
     border-width: 1px;
     border-color: var(--mantine-color-text);
     padding: 0.25rem;
+    z-index: 10;
 }
 
 @mixin AnimatedDropdown() {
