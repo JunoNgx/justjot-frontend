@@ -1,5 +1,5 @@
 import { Item } from "@/types";
-import { Group, Text, Transition } from "@mantine/core";
+import { Transition } from "@mantine/core";
 import { useContext, useEffect, useRef, useState } from "react";
 import { EventBusContext } from "@/contexts/EventBusContext";
 
@@ -46,10 +46,7 @@ export default function ItemComponentText({ item }: { item: Item }) {
         transitionProperty: 'opacity, transform',
     };
 
-    return (<Group className="Item__TextWrapper"
-        wrap="nowrap"
-        gap="xs"
-    >
+    return (<div className="Item__TextWrapper">
         <Transition
             mounted={!hasCopied}
             duration={400}
@@ -57,20 +54,20 @@ export default function ItemComponentText({ item }: { item: Item }) {
             transition={transitionPropNormalText}
         >
             {(transitionStyle) => (<>
-                {item.title && <Text className="Item__PrimaryText"
+                {item.title && <p className="Item__PrimaryText"
                     title={item.title}
                     style={transitionStyle}
                     data-testid="item-component-primary-text"
                 >
                     {item.title.substring(0, CHAR_DISPLAY_COUNT)}
-                </Text>}
-                {item.content && <Text className="Item__SecondaryText"
+                </p>}
+                {item.content && <p className="Item__SecondaryText"
                     title={item.content}
                     style={transitionStyle}
                     data-testid="item-component-secondary-text"
                 >
                     {item.content.substring(0, CHAR_DISPLAY_COUNT)}
-                </Text>}
+                </p>}
             </>)}
         </Transition>
 
@@ -81,12 +78,12 @@ export default function ItemComponentText({ item }: { item: Item }) {
             transition={transitionPropCopiedText}
         >
             {(transitionStyle) => (
-                <Text className="Item__CopiedText"
+                <p className="Item__CopiedText"
                     style={transitionStyle}
                 >
                     Content copied
-                </Text>
+                </p>
             )}
         </Transition>
-    </Group>);
+    </div>);
 }

@@ -45,6 +45,7 @@
     &__LeftSide {
         display: flex;
         justify-content: flex-start;
+        align-items: center;
         flex-wrap: nowrap;
         gap: 0.5rem;
 
@@ -53,6 +54,11 @@
     }
 
     &__TextWrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 0.5rem;
+
         position: relative;
         max-width: calc(100% - 32px);
     }
@@ -80,6 +86,7 @@
 
     &__RightSide {
         display: flex;
+        align-items: center;
         gap: 0.5rem;
         flex-shrink: 0;
     }
