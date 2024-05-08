@@ -54,11 +54,11 @@
         @include m.DropdownItem;
 
         &--isRed {
-            color: #f00;
+            color: var(--colRed);
         }
 
         &--isViolet {
-            color: #8800DD;
+            color: var(--colViolet);
         }
 
         &--isSelcted {
