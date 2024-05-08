@@ -1,0 +1,16 @@
+@use "../../styles/_mixins.scss" as m;
+
+.ItemContextMenu {
+    @include m.GlassBlur;
+    @include m.Menu;
+    @include m.AnimatedDropdown;
+
+    &__Item {
+        @include m.DropdownItem;
+        padding: 0.2rem 0.5rem;
+    }
+
+    &__Separator {
+        @include m.DropdownSeparator;
+    }
+}
