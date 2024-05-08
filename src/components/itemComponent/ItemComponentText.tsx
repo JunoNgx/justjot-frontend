@@ -1,5 +1,5 @@
 import { Item } from "@/types";
-import { Transition } from "@mantine/core";
+// import { Transition } from "@mantine/core";
 import { useContext, useEffect, useRef, useState } from "react";
 import { EventBusContext } from "@/contexts/EventBusContext";
 
@@ -32,22 +32,51 @@ export default function ItemComponentText({ item }: { item: Item }) {
         }, COPIED_DISPLAY_DURATION);
     };
 
-    const transitionPropNormalText = {
-        in: { opacity: 1, transform: 'translateY(0)' },
-        out: { opacity: 0, transform: 'translateY(+50%)' },
-        common: { transformOrigin: 'center' },
-        transitionProperty: 'opacity, transform',
-    };
+    // const transitionPropNormalText = {
+    //     in: { opacity: 1, transform: 'translateY(0)' },
+    //     out: { opacity: 0, transform: 'translateY(+50%)' },
+    //     common: { transformOrigin: 'center' },
+    //     transitionProperty: 'opacity, transform',
+    // };
 
-    const transitionPropCopiedText = {
-        in: { opacity: 1, transform: 'translateY(0)' },
-        out: { opacity: 0, transform: 'translateY(-50%)' },
-        common: { transformOrigin: 'center' },
-        transitionProperty: 'opacity, transform',
-    };
+    // const transitionPropCopiedText = {
+    //     in: { opacity: 1, transform: 'translateY(0)' },
+    //     out: { opacity: 0, transform: 'translateY(-50%)' },
+    //     common: { transformOrigin: 'center' },
+    //     transitionProperty: 'opacity, transform',
+    // };
+
+    const primaryText = item.title &&
+        <p className="Item__PrimaryText"
+            title={item.title}
+            data-testid="item-component-primary-text"
+        >
+            {item.title.substring(0, CHAR_DISPLAY_COUNT)}
+        </p>
+
+    const secondaryText = item.content &&
+        <p className="Item__SecondaryText"
+            title={item.content}
+            data-testid="item-component-secondary-text"
+        >
+            {item.content.substring(0, CHAR_DISPLAY_COUNT)}
+        </p>
+
+    const copiedText = (
+        <p className="Item__CopiedText">
+            Content copied
+        </p>
+    )
 
     return (<div className="Item__TextWrapper">
-        <Transition
+        {!hasCopied && <>
+            {primaryText}
+            {secondaryText}
+        </>}
+        {hasCopied && copiedText}
+
+
+        {/* <Transition
             mounted={!hasCopied}
             duration={400}
             exitDuration={50}
@@ -84,6 +113,6 @@ export default function ItemComponentText({ item }: { item: Item }) {
                     Content copied
                 </p>
             )}
-        </Transition>
+        </Transition> */}
     </div>);
 }
