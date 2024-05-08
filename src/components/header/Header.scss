@@ -56,6 +56,7 @@
     }
 
     &__ProfileDropdown {
+        @include m.GlassBlur;
         @include m.Menu;
         @include m.AnimatedDropdown();
         // &[data-side="bottom"] {
