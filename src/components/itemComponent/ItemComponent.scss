@@ -1,7 +1,7 @@
 // @use "../../variables.scss";
 @use "../../styles/_mixins.scss" as m;
 
-.item {
+.Item {
     height: 42px;
     padding: 0.5rem;
     cursor: pointer;
@@ -10,13 +10,13 @@
 
     // override the anchor styles
     text-decoration: none;
-    color: var(--mantine-color-text);
+    color: var(--colPri);
 
-    &--is-selected {
-        border-color: var(--mantine-color-text);
+    &--IsSelected {
+        border-color: var(--colPri);
     }
 
-    &__icon-wrapper {
+    &__IconWrapper {
         user-select: none;
         flex-shrink: 0;
         width: 1.5rem;
@@ -27,24 +27,24 @@
         }
     }
 
-    &__icon-colour {
+    &__IconColour {
         height: 24px;
         width: 24px;
         border-radius: 50%;
     }
 
-    &__left-side {
+    &__LeftSide {
         overflow: hidden;
         flex-grow: 2;
     }
 
-    &__text-wrapper {
+    &__TextWrapper {
         position: relative;
         max-width: calc(100% - 32px);
     }
 
-    &__primary-text,
-    &__secondary-text {
+    &__PrimaryText,
+    &__SecondaryText {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -52,23 +52,23 @@
         max-width: calc(70%);
     }
 
-    &__secondary-text {
+    &__SecondaryText {
         font-family: var(--mantine-font-family-monospace);
-        color: var(--mantine-color-dimmed);
+        color: var(--colGrey);
         font-size: 0.8rem;
         flex-shrink: 4;
     }
 
-    &__copied-text {
+    &__CopiedText {
         position: absolute;
         text-wrap: nowrap;
     }
 
-    &__right-side {
+    &__RightSide {
         flex-shrink: 0;
     }
 
-    &__datetime {
+    &__Datetime {
         user-select: none;
 
         @include m.mobile {
@@ -76,30 +76,30 @@
         }
     }
 
-    &--has-no-primary-text {
-        .item__primary-text {
+    &--HasNoPrimaryText {
+        .Item__PrimaryText {
             display: none;
         }
 
-        .item__secondary-text {
+        .Item__SecondaryText {
             max-width: calc(100%);
         }
     }
 
-    &--has-no-secondary-text {
-        .item__primary-text {
+    &--HasNoSecondaryText {
+        .Item__PrimaryText {
             max-width: calc(100%);
         }
         
-        .item__secondary-text {
+        .Item__SecondaryText {
             display: none;
         }
     }
 
-    &--is-todo-done {
-        .item__primary-text {
+    &--IsTodoDone {
+        .Item__PrimaryText {
             text-decoration: line-through;
-            color: var(--mantine-color-dimmed);
+            color: var(--colGrey);
         }
     }
 }

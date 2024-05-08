@@ -18,7 +18,7 @@ export default function ItemComponentIcon(
         return <IconHourglassLow {...itemIconProps} />
 
     if (isValidHexColourCode(lastSevenChars) && item.type !== ItemType.TODO)
-        return <div className="item__icon-colour"
+        return <div className="Item__IconColour"
             aria-label={`Icon with the hex colour code ${lastSevenChars}`}
             style={{backgroundColor: lastSevenChars}}
         />

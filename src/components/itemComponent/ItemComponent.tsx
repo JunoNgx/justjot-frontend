@@ -104,25 +104,25 @@ export default function ItemComponent(
         onMouseEnter={() => { setSelectedIndex(index)}}
         onMouseLeave={() => { setSelectedIndex(-1)}}
     >
-        <Group className="item__left-side"
+        <Group className="Item__LeftSide"
             justify="flex-start"
             wrap="nowrap"
         >
-            <Center className="item__icon-wrapper">
+            <Center className="Item__IconWrapper">
                 <ItemComponentIcon item={item} />
             </Center>
             <ItemComponentText item={item} />
         </Group>
 
-        <Group className="item__right-side"
+        <Group className="Item__RightSide"
             gap="xs"
         >
             {item.shouldCopyOnClick &&
-                <IconClipboardCopy className="item__should-copy-icon"
+                <IconClipboardCopy className="Item__ShouldCopyIcon"
                     {...itemIconProps}
                 />
             }
-            <ItemComponentCreatedDate className="item__datetime"
+            <ItemComponentCreatedDate className="Item__Datetime"
                 createdDatetime={item.created}
             />
         </Group>
@@ -132,21 +132,21 @@ export default function ItemComponent(
 
 const computeClassname = (item: Item, isSelected: boolean) => {
     const isSelectedModifier = isSelected
-        ? "item--is-selected "
+        ? "Item--IsSelected "
         : " ";
     const noPrimaryTextModifier = item.title
         ? " "
-        : "item--has-no-primary-text ";
+        : "Item--HasNoPrimaryText ";
     const noSecondaryTextModifier = item.content
         ? " "
-        : "item--has-no-secondary-text ";
+        : "Item--HasNoSecondaryText ";
 
     const isTodoItem = item.type === ItemType.TODO;
     const isTodoItemDoneModifier = isTodoItem && item.isTodoDone
-        ? "item--is-todo-done "
+        ? "Item--IsTodoDone "
         : " ";
 
-    return "item "
+    return "Item "
         + isSelectedModifier
         + noPrimaryTextModifier
         + noSecondaryTextModifier

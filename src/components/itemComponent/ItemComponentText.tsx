@@ -46,7 +46,7 @@ export default function ItemComponentText({ item }: { item: Item }) {
         transitionProperty: 'opacity, transform',
     };
 
-    return (<Group className="item__text-wrapper"
+    return (<Group className="Item__TextWrapper"
         wrap="nowrap"
         gap="xs"
     >
@@ -57,14 +57,14 @@ export default function ItemComponentText({ item }: { item: Item }) {
             transition={transitionPropNormalText}
         >
             {(transitionStyle) => (<>
-                {item.title && <Text className="item__primary-text"
+                {item.title && <Text className="Item__PrimaryText"
                     title={item.title}
                     style={transitionStyle}
                     data-testid="item-component-primary-text"
                 >
                     {item.title.substring(0, CHAR_DISPLAY_COUNT)}
                 </Text>}
-                {item.content && <Text className="item__secondary-text"
+                {item.content && <Text className="Item__SecondaryText"
                     title={item.content}
                     style={transitionStyle}
                     data-testid="item-component-secondary-text"
@@ -81,7 +81,7 @@ export default function ItemComponentText({ item }: { item: Item }) {
             transition={transitionPropCopiedText}
         >
             {(transitionStyle) => (
-                <Text className="item__copied-text"
+                <Text className="Item__CopiedText"
                     style={transitionStyle}
                 >
                     Content copied
