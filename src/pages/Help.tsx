@@ -2,7 +2,7 @@ import KbdAlt from "@/components/misc/KbdAlt";
 import KbdMod from "@/components/misc/KbdMod";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { APP_NAME } from "@/utils/constants";
-import { Anchor, Box, Code, Kbd, Paper, Text, Title } from "@mantine/core";
+import { Anchor, Box, Code, Paper, Text, Title } from "@mantine/core";
 import { useContext, useEffect } from "react";
 
 export default function Help() {
@@ -33,41 +33,41 @@ export default function Help() {
 
             <Title order={3}>Keyboard shortcuts</Title>
             <Title order={4}>Operating systems</Title>
-            <Text>This application takes your operating system into account; <Kbd>Mod</Kbd> is appropriately assigned and displayed as either <Kbd>Ctrl</Kbd> or <Kbd>Cmd</Kbd>, depending on whether your are on Windows or Linux, or a Mac-based OS. Similarly for <Kbd>Alt</Kbd> and <Kbd>Opt</Kbd>. This is applicable to any contexual prompt display throughout the app, including this document.</Text>
+            <Text>This application takes your operating system into account; <kbd>Mod</kbd> is appropriately assigned and displayed as either <kbd>Ctrl</kbd> or <kbd>Cmd</kbd>, depending on whether your are on Windows or Linux, or a Mac-based OS. Similarly for <kbd>Alt</kbd> and <kbd>Opt</kbd>. This is applicable to any contexual prompt display throughout the app, including this document.</Text>
 
             <Title order={4}>Everywhere</Title>
             <ul>
-                <li><Text><KbdMod/> <Kbd>K</Kbd> or <KbdMod/> <Kbd>P</Kbd> to open Spotlight.</Text></li>
-                <li> <Text><KbdMod/> <Kbd>/</Kbd> to toggle display of contextual keyboard prompts.</Text></li>
+                <li><Text><KbdMod/> <kbd>K</kbd> or <KbdMod/> <kbd>P</kbd> to open Spotlight.</Text></li>
+                <li> <Text><KbdMod/> <kbd>/</kbd> to toggle display of contextual keyboard prompts.</Text></li>
             </ul>
 
             <Title order={4}>Main Input is out of focus</Title>
             <ul>
-                <li><Text><Kbd>1</Kbd>...<Kbd>0</Kbd> to switch to the corresponding ordered collection.</Text></li>
-                <li><Text><Kbd>←</Kbd> <Kbd>→</Kbd> to switch to the adjacent collections.</Text></li>
-                <li><Text><KbdMod/> <Kbd>F</Kbd> to focus on the Main Input.</Text></li>
+                <li><Text><kbd>1</kbd>...<kbd>0</kbd> to switch to the corresponding ordered collection.</Text></li>
+                <li><Text><kbd>←</kbd> <kbd>→</kbd> to switch to the adjacent collections.</Text></li>
+                <li><Text><KbdMod/> <kbd>F</kbd> to focus on the Main Input.</Text></li>
             </ul>
 
             <Title order={4}>Main Input is focused</Title>
             <ul>
-                <li><Text><Kbd>↑</Kbd> <Kbd>↓</Kbd> to select items.</Text></li>
-                <li><Text><Kbd>Shift</Kbd> <Kbd>↑</Kbd> / <Kbd>Shift</Kbd> <Kbd>↓</Kbd> to select items in an increment of five.</Text></li>
-                <li><Text><KbdMod/> <Kbd>Shift</Kbd> <Kbd>↑</Kbd> to scroll to the top of the list.</Text></li>
-                <li><Text><KbdMod/> <Kbd>Shift</Kbd> <Kbd>↓</Kbd> to scroll to the bottom of the list.</Text></li>
-                <li><Text><Kbd>Esc</Kbd> to exit Main Input focus.</Text></li>
+                <li><Text><kbd>↑</kbd> <kbd>↓</kbd> to select items.</Text></li>
+                <li><Text><kbd>Shift</kbd> <kbd>↑</kbd> / <kbd>Shift</kbd> <kbd>↓</kbd> to select items in an increment of five.</Text></li>
+                <li><Text><KbdMod/> <kbd>Shift</kbd> <kbd>↑</kbd> to scroll to the top of the list.</Text></li>
+                <li><Text><KbdMod/> <kbd>Shift</kbd> <kbd>↓</kbd> to scroll to the bottom of the list.</Text></li>
+                <li><Text><kbd>Esc</kbd> to exit Main Input focus.</Text></li>
             </ul>
 
             <Title order={4}>Selected item actions</Title>
             <ul>
-                <li><Text><KbdMod/> <Kbd>↵</Kbd> to perform the primary action.</Text></li>
-                <li><Text><KbdMod/> <Kbd>Shift</Kbd> <Kbd>C</Kbd> to copy item content.</Text></li>
-                <li><Text><KbdMod/> <Kbd>E</Kbd> to edit.</Text></li>
-                <li><Text><KbdMod/> <Kbd>M</Kbd> to move item to another collection.</Text></li>
-                <li><Text><KbdMod/> <Kbd>Shift</Kbd> <Kbd>BkSp</Kbd> to move an item to the trash bin, or permanently delete a trashed item.</Text></li>
-                <li><Text><KbdMod/> <KbdAlt/> <Kbd>R</Kbd> to restore a trashed item.</Text></li>
-                <li><Text><KbdMod/> <KbdAlt/> <Kbd>4</Kbd> to toggle copying content as item's primary action.</Text></li>
-                <li><Text><KbdMod/> <KbdAlt/> <Kbd>5</Kbd> to refetch a link's metadata.</Text></li>
-                <li><Text><KbdMod/> <KbdAlt/> <Kbd>6</Kbd> to convert a title-less text note to a todo item.</Text></li>
+                <li><Text><KbdMod/> <kbd>↵</kbd> to perform the primary action.</Text></li>
+                <li><Text><KbdMod/> <kbd>Shift</kbd> <kbd>C</kbd> to copy item content.</Text></li>
+                <li><Text><KbdMod/> <kbd>E</kbd> to edit.</Text></li>
+                <li><Text><KbdMod/> <kbd>M</kbd> to move item to another collection.</Text></li>
+                <li><Text><KbdMod/> <kbd>Shift</kbd> <kbd>BkSp</kbd> to move an item to the trash bin, or permanently delete a trashed item.</Text></li>
+                <li><Text><KbdMod/> <KbdAlt/> <kbd>R</kbd> to restore a trashed item.</Text></li>
+                <li><Text><KbdMod/> <KbdAlt/> <kbd>4</kbd> to toggle copying content as item's primary action.</Text></li>
+                <li><Text><KbdMod/> <KbdAlt/> <kbd>5</kbd> to refetch a link's metadata.</Text></li>
+                <li><Text><KbdMod/> <KbdAlt/> <kbd>6</kbd> to convert a title-less text note to a todo item.</Text></li>
             </ul>
         </Box>
 
@@ -76,7 +76,7 @@ export default function Help() {
             mb="xl"
         >
             <Title order={3}>Collection</Title>
-            <Text>Collate notes, bookmarks, and todos for different categories under your collections. Access them from the dropdown menu, numeric keys <Kbd>1</Kbd>...<Kbd>0</Kbd>, or <Kbd>←</Kbd> <Kbd>→</Kbd>. You must have at least one collection in your account.</Text>
+            <Text>Collate notes, bookmarks, and todos for different categories under your collections. Access them from the dropdown menu, numeric keys <kbd>1</kbd>...<kbd>0</kbd>, or <kbd>←</kbd> <kbd>→</kbd>. You must have at least one collection in your account.</Text>
         </Box>
 
         <Box className="cardlike__man-section"
@@ -84,7 +84,7 @@ export default function Help() {
             mb="xl"
         >
             <Title order={3}>Main Input</Title>
-            <Text>Serves both as a search bar and the interface for new item creation. To create new item, input your content and press <Kbd>↵</Kbd>.</Text>
+            <Text>Serves both as a search bar and the interface for new item creation. To create new item, input your content and press <kbd>↵</kbd>.</Text>
             <Text>Prefix syntaxes are available to quickly create item with options. Helpers for syntaxes are accessible from the dropdown menu on right side the input.</Text>
         </Box>
 
@@ -137,7 +137,7 @@ export default function Help() {
             </ul>
 
             <Title order={4}>Item edit</Title>
-            <Text>Your changes are autosaved (with a short interval) during item edit. The autosave feature is unique to this user interface. Pressing <Kbd>Esc</Kbd> or <KbdMod/> <Kbd>S</Kbd> will pro-actively save progress, without waiting for the autosave interval, and close the modal.</Text>
+            <Text>Your changes are autosaved (with a short interval) during item edit. The autosave feature is unique to this user interface. Pressing <kbd>Esc</kbd> or <KbdMod/> <kbd>S</kbd> will pro-actively save progress, without waiting for the autosave interval, and close the modal.</Text>
         </Box>
 
         <Box className="cardlike__man-section"
@@ -145,7 +145,7 @@ export default function Help() {
             mb="xl"
         >
             <Title order={3}>Primary action</Title>
-            <Text>An item's primary action is executed by clicking on it or pressing <Kbd>Shift</Kbd> <Kbd>↵</Kbd> while it is selected. This action varies depending on the item's type and settings:</Text>
+            <Text>An item's primary action is executed by clicking on it or pressing <kbd>Shift</kbd> <kbd>↵</kbd> while it is selected. This action varies depending on the item's type and settings:</Text>
             <ul>
                 <li>Note — edit.</li>
                 <li>Link — open in a new tab.</li>
@@ -159,7 +159,7 @@ export default function Help() {
             mb="xl"
         >
             <Title order={3}>Spotlight</Title>
-            <Text>Accessed by pressing <KbdMod/> <Kbd>K</Kbd> or <KbdMod/> <Kbd>P</Kbd> anywhere within the app, or from the Main Input extended menu.</Text>
+            <Text>Accessed by pressing <KbdMod/> <kbd>K</kbd> or <KbdMod/> <kbd>P</kbd> anywhere within the app, or from the Main Input extended menu.</Text>
             <Text>It serves as the global navigation menu. Use it to search for actions and collections quickly. For easy references:</Text>
             <ul>
                 <li><Text>Navigation actions start with the slash character <Code>/</Code>.</Text></li>
@@ -185,12 +185,12 @@ export default function Help() {
             <Text>Outside of tackling a relatively uncharted matter of keyboard-first design, JustJot is also burdened to accommodate the wide range of operating systems that can access the web, including, but not limited to: Windows, Android, MacOS, iOS, and distributions of Linux. While certain keys appear available on your current setup, they might not be on other users' systems. The keyboard shortcuts for item actions are also designed strictly to not interfere with the main input typing operations.</Text>
             <Text>The following keyboard shortcuts are known conflicts that we have eliminated during the development:</Text>
             <ul>
-                <li><Text><Kbd>Cmd</Kbd> <Kbd>C</Kbd> [iOS] Copy highlighted text.</Text></li>
-                <li><Text><Kbd>Cmd</Kbd> <Kbd>BkSp</Kbd> [iOS] Delete whole line.</Text></li>
-                <li><Text><Kbd>Ctrl</Kbd> <Kbd>BkSp</Kbd> [Linux/Windows] Delete whole word.</Text></li>
-                <li><Text><Kbd>Shift</Kbd> <Kbd>Any letter key</Kbd> [All] Capitalised letter.</Text></li>
-                <li><Text><Kbd>Opt</Kbd> <Kbd>Any letter key</Kbd> [iOS/MacOS] Insert special character.</Text></li>
-                <li><Text><Kbd>Opt</Kbd> <Kbd>BkSp</Kbd> [iOS] Delete whole word.</Text></li>
+                <li><Text><kbd>Cmd</kbd> <kbd>C</kbd> [iOS] Copy highlighted text.</Text></li>
+                <li><Text><kbd>Cmd</kbd> <kbd>BkSp</kbd> [iOS] Delete whole line.</Text></li>
+                <li><Text><kbd>Ctrl</kbd> <kbd>BkSp</kbd> [Linux/Windows] Delete whole word.</Text></li>
+                <li><Text><kbd>Shift</kbd> <kbd>Any letter key</kbd> [All] Capitalised letter.</Text></li>
+                <li><Text><kbd>Opt</kbd> <kbd>Any letter key</kbd> [iOS/MacOS] Insert special character.</Text></li>
+                <li><Text><kbd>Opt</kbd> <kbd>BkSp</kbd> [iOS] Delete whole word.</Text></li>
             </ul>
             <Text>The current arrangement is what we believe the be the most inclusive and functional possible state. Custom and user-assigned hotkeys might be looked into in the future, though this will be a massive undertaking.</Text>
 
