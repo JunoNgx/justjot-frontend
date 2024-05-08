@@ -61,6 +61,46 @@
 
         position: relative;
         max-width: calc(100% - 32px);
+
+        // Copied state animation for item texts
+        .Item__PrimaryText,
+        .Item__SecondaryText,
+        .Item__CopiedText {
+            will-change: opacity, transform;
+            animation-timing-function: ease-in-out;
+            animation-duration: 300ms;
+        }
+
+        .Item__PrimaryText,
+        .Item__SecondaryText {
+            animation-name: MainTextSlideIn;
+        }
+
+        .Item__CopiedText {
+            animation-name: CopiedTextSlideIn
+        }
+
+        @keyframes CopiedTextSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes MainTextSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(+50%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     }
 
     &__PrimaryText,
