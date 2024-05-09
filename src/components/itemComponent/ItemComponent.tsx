@@ -20,42 +20,11 @@ type ItemComponentParams = {
 export default function ItemComponent(
     { item, index }: ItemComponentParams
 ) {
-    const { selectedIndex, setSelectedIndex } = useContext(ItemsContext);
-    const {
-        computeItemPrimaryAction,
-        executeItemAction,
-    } = useItemActions();
     const { itemIconProps } = useIconProps();
 
-    const handlePrimaryAction = (
-        _e: React.MouseEvent | React.TouchEvent
-    ) => {
-        const action = computeItemPrimaryAction(item);
-        executeItemAction(item, action, true);
-    };
-
-    const isSelected = selectedIndex === index;
-    const isLink = item.type === ItemType.LINK;
-    const shouldRenderAsAnchor = isLink && !item.shouldCopyOnClick;
-    const anchorProps = shouldRenderAsAnchor
-        ? {
-            component: "a",
-            href: item.content,
-            rel: "noopener noreferrer",
-            target: "_blank",
-            "aria-label": "Link to this item content",
-        }
-        : {};
-
-    const itemComponentMain = <div className={computeClassname(item, isSelected)}
-        data-index={index}
-        data-id={item.id}
-        {...anchorProps}
-        role={isLink ? "link" : "button"}
-        aria-current={isSelected}
-        onClick={handlePrimaryAction}
-        onMouseEnter={() => { setSelectedIndex(index)}}
-        onMouseLeave={() => { setSelectedIndex(-1)}}
+    const itemComponentInner = <ItemComponentInner
+        item={item}
+        index={index}
     >
         <div className="Item__LeftSide">
             <div className="Item__IconWrapper">
@@ -74,17 +43,64 @@ export default function ItemComponent(
                 createdDatetime={item.created}
             />
         </div>
-
-    </div>
+    </ItemComponentInner>
 
     return <ContextMenu.Root>
         <ContextMenu.Trigger>
-            {itemComponentMain}
+            {itemComponentInner}
         </ContextMenu.Trigger>
 
         <ItemComponentContextMenu item={item} />
     </ContextMenu.Root>
 }
+
+const ItemComponentInner = (
+    { item, index, children }:
+    { item: Item, index: number, children: React.ReactNode }
+) => {
+    const { selectedIndex, setSelectedIndex } = useContext(ItemsContext);
+    const { computeItemPrimaryAction, executeItemAction } = useItemActions();
+
+    const handlePrimaryAction = (
+        _e: React.MouseEvent | React.TouchEvent
+    ) => {
+        const action = computeItemPrimaryAction(item);
+        executeItemAction(item, action, true);
+    };
+
+    const isSelected = selectedIndex === index;
+    const isLink = item.type === ItemType.LINK;
+    const shouldRenderAsAnchor = isLink && !item.shouldCopyOnClick;
+
+    const standardProps = {
+        className: computeClassname(item, isSelected),
+        "data-index": index,
+        "data-id": item.id,
+        "role": isLink ? "link" : "button",
+        "aria-current": isSelected,
+        onClick: handlePrimaryAction,
+        onMouseEnter: () => { setSelectedIndex(index) },
+        onMouseLeave: () => { setSelectedIndex(-1) }
+    };
+
+    const anchorProps = {
+        href: item.content,
+        rel: "noopener noreferrer",
+        target: "_blank",
+        "aria-label": "Link to this item content",
+    };
+
+    const finalProps = shouldRenderAsAnchor
+        ? {...standardProps, ...anchorProps}
+        : standardProps;
+
+    /**
+     * Render type LINK as `<a>` to improve semantic
+     */
+    return shouldRenderAsAnchor
+        ? <a {...finalProps}>{children}</a>
+        : <div {...finalProps}>{children}</div>
+};
 
 const computeClassname = (item: Item, isSelected: boolean) => {
     const isSelectedModifier = isSelected
