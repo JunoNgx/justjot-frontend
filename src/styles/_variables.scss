@@ -5,10 +5,10 @@
     --fontSizeSm: 14px;
     --fontSizeXs: 12px;
     --container-width: 955px;
-    --colBlue: #0082CB;
-    --colRed: #C51E3A;
-    --colViolet: #8806CE;
-    --colOrange: #FF7900;
+    --colBlue: #0098A9;
+    --colRed: #FF426C;
+    --colViolet: #9B70FF;
+    --colOrange: #D57300;
 
     --colPri: #000;
     --colBg: #fff;
@@ -21,6 +21,8 @@
 }
 
 :root[data-mantine-color-scheme="light"] {
+    --colViolet: #794AFF;
+    
     --colPri: #000;
     --colBg: #fff;
     --colGrey: #444;
@@ -32,6 +34,8 @@
 }
 
 :root[data-mantine-color-scheme="dark"] {
+    --colViolet: #9B70FF;
+
     --colPri: #fff;
     --colBg: #000;
     --colGrey: #999;
