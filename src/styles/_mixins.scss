@@ -23,9 +23,14 @@
     z-index: 10;
 }
 
-@mixin AnimatedDropdown() {
-    animation-duration: 250ms;
+@mixin AnimatedCommon() {
+    animation-duration: 200ms;
+    animation-timing-function: ease-in-out;
     will-change: transform, opacity;
+}
+
+@mixin AnimatedDropdown() {
+    @include AnimatedCommon;
 
     &[data-side="top"] {
         animation-name: slideUpAndFade;
@@ -59,9 +64,7 @@
 }
 
 @mixin AnimatedContextMenu() {
-    animation-duration: 200ms;
-    animation-timing-function: ease-in-out;
-    will-change: transform, opacity;
+    @include AnimatedCommon;
 
     &[data-side="right"] {
         animation-name: slideRightAndFade;
