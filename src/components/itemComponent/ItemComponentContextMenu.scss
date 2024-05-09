@@ -3,7 +3,7 @@
 .ItemContextMenu {
     @include m.GlassBlur;
     @include m.Menu;
-    @include m.AnimatedDropdown;
+    @include m.AnimatedContextMenu;
 
     &__Item {
         @include m.DropdownItem;
