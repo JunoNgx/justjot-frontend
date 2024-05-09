@@ -67,32 +67,26 @@
     @include AnimatedCommon;
 
     &[data-side="right"] {
-        animation-name: slideRightAndFade;
+        transform-origin: top left;
     }
 
     &[data-side="left"] {
-        animation-name: slideLeftAndFade;
+        transform-origin: top right;
     }
 
-    @keyframes slideRightAndFade {
+    &[data-side="right"],
+    &[data-side="left"] {
+        animation-name: scaleAndFade;
+    }
+
+    @keyframes scaleAndFade {
         from {
             opacity: 0;
-            transform: translateX(-4px);
+            transform: scale(0);
         }
         to {
             opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    @keyframes slideLeftAndFade {
-        from {
-            opacity: 0;
-            transform: translateX(4px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
+            transform: scale(1);
         }
     }
 }
