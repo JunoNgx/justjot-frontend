@@ -1,0 +1,23 @@
+.Modal {
+    &__Stackbox {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    &__SubInputFlexbox {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    &__ButtonsFlexbox {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+}

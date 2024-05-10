@@ -1,4 +1,4 @@
-import { Button, Group, Stack, TextInput } from "@mantine/core";
+import { TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useContext, useEffect, useState } from "react";
 import { modals } from "@mantine/modals";
@@ -12,6 +12,9 @@ import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import useManageListState from "@/libs/useManageListState";
 import useCollectionNavActions from "@/hooks/useCollectionNavActions";
+import ButtonWithLoader from "@/libs/components/ButtonWithLoader";
+
+import "./Modals.scss";
 
 type CollectionCreateUpdateModalOptions = {
     isEditMode?: boolean,
@@ -56,6 +59,7 @@ export default function CollectionCreateUpdateModal(
     }, []);
 
     const handleSubmit = async (formData: CollectionCreateUpdateFormData) => {
+        console.log("handle submit")
         const { name, slug: originalSlug } = formData;
         const slug = kebabCase(originalSlug);
 
@@ -158,7 +162,7 @@ export default function CollectionCreateUpdateModal(
     };
 
     return <form onSubmit={form.onSubmit(handleSubmit)}>
-        <Stack>
+        <div className="Modal__Stackbox">
             <TextInput
                 data-autofocus
                 label="Collection name"
@@ -179,18 +183,19 @@ export default function CollectionCreateUpdateModal(
                 {...form.getInputProps("slug")}
                 onChange={handleSlugChange}
             />
-            <Group mt="xl" justify="flex-end">
-                <Button
+            <div className="Modal__ButtonsFlexbox">
+                <ButtonWithLoader
                     type="submit"
-                    loading={isLoading}
+                    variant="primary"
+                    isLoading={isLoading}
                 >
                     {isEditMode
                         ? "Update collection"
                         : "Create collection"
                     }
-                </Button>
-            </Group>
-        </Stack>
+                </ButtonWithLoader>
+            </div>
+        </div>
     </form>
 
 }
