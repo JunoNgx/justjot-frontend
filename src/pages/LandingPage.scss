@@ -1,0 +1,23 @@
+.LandingPage {
+    max-width: 640px;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    padding: 16px;
+
+    &__Section {
+        ul {
+            margin: 0;
+        }
+
+        p {
+           hyphens: auto;
+        }
+    }
+
+    &__DemoBox {
+        border: 1px solid var(--colPri);
+        padding: 1rem;
+        margin: auto;
+        max-width: 320px;
+    }
+}
