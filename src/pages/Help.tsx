@@ -2,7 +2,7 @@ import KbdAlt from "@/components/misc/KbdAlt";
 import KbdMod from "@/components/misc/KbdMod";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { APP_NAME } from "@/utils/constants";
-import { Anchor, Box, Code, Paper, Text, Title } from "@mantine/core";
+import { Anchor, Code, Paper, Text, Title } from "@mantine/core";
 import { useContext, useEffect } from "react";
 import "./Pages.scss";
 
@@ -19,18 +19,12 @@ export default function Help() {
     >
         <Title order={2}>User Manual</Title>
 
-        <Box className="Cardlike__HelpSection"
-            component="section"
-            mb="xl"
-        >
+        <section className="Cardlike__HelpSection">
             <Title order={3}>System requirement</Title>
             <Text>This application should run on any computing device with a W3C-compliant web browser and a stable internet connection, including mobile devices. For the best experience, a keyboard-equipped desktop environment is recommended.</Text>
-        </Box>
+        </section>
 
-        <Box className="Cardlike__HelpSection"
-            component="section"
-            mb="xl"
-        >
+        <section className="Cardlike__HelpSection">
 
             <Title order={3}>Keyboard shortcuts</Title>
             <Title order={4}>Operating systems</Title>
@@ -70,29 +64,20 @@ export default function Help() {
                 <li><Text><KbdMod/> <KbdAlt/> <kbd>5</kbd> to refetch a link's metadata.</Text></li>
                 <li><Text><KbdMod/> <KbdAlt/> <kbd>6</kbd> to convert a title-less text note to a todo item.</Text></li>
             </ul>
-        </Box>
+        </section>
 
-        <Box className="Cardlike__HelpSection"
-            component="section"
-            mb="xl"
-        >
+        <section className="Cardlike__HelpSection">
             <Title order={3}>Collection</Title>
             <Text>Collate notes, bookmarks, and todos for different categories under your collections. Access them from the dropdown menu, numeric keys <kbd>1</kbd>...<kbd>0</kbd>, or <kbd>←</kbd> <kbd>→</kbd>. You must have at least one collection in your account.</Text>
-        </Box>
+        </section>
 
-        <Box className="Cardlike__HelpSection"
-            component="section"
-            mb="xl"
-        >
+        <section className="Cardlike__HelpSection">
             <Title order={3}>Main Input</Title>
             <Text>Serves both as a search bar and the interface for new item creation. To create new item, input your content and press <kbd>↵</kbd>.</Text>
             <Text>Prefix syntaxes are available to quickly create item with options. Helpers for syntaxes are accessible from the dropdown menu on right side the input.</Text>
-        </Box>
+        </section>
 
-        <Box className="Cardlike__HelpSection"
-            component="section"
-            mb="xl"
-        >
+        <section className="Cardlike__HelpSection">
             <Title order={3}>Prefix syntaxes</Title>
             <Text>These always start and end with the colon character:</Text>
             <ul>
@@ -105,12 +90,9 @@ export default function Help() {
                 <li>Entering <Code>:td: Buy groceries</Code> will create a todo item with content "Buy groceries".</li>
             </ul>
             <Text>Leading and trailing whitespaces are always trimmed; the spaces between the prefix and your input do not matter.</Text>
-        </Box>
+        </section>
 
-        <Box className="Cardlike__HelpSection"
-            component="section"
-            mb="xl"
-        >
+        <section className="Cardlike__HelpSection">
             <Title order={3}>Item Type</Title>
 
             <Title order={4}>Text note</Title>
@@ -124,12 +106,9 @@ export default function Help() {
 
             <Title order={4}>Hex colour code</Title>
             <Text>As a special subtype of note, a hex colour code, when detected, will be accompanied by a corresponding icon. The logic validates the last seven characters in the item's content. As a lifehack, append a hex colour code to your text note to notate it in your own way.</Text>
-        </Box>
+        </section>
 
-        <Box className="Cardlike__HelpSection"
-            component="section"
-            mb="xl"
-        >
+        <section className="Cardlike__HelpSection">
             <Title order={3}>Item actions</Title>
             <Text>There are two ways to perform item actions:</Text>
             <ul>
@@ -139,12 +118,9 @@ export default function Help() {
 
             <Title order={4}>Item edit</Title>
             <Text>Your changes are autosaved (with a short interval) during item edit. The autosave feature is unique to this user interface. Pressing <kbd>Esc</kbd> or <KbdMod/> <kbd>S</kbd> will pro-actively save progress, without waiting for the autosave interval, and close the modal.</Text>
-        </Box>
+        </section>
 
-        <Box className="Cardlike__HelpSection"
-            component="section"
-            mb="xl"
-        >
+        <section className="Cardlike__HelpSection">
             <Title order={3}>Primary action</Title>
             <Text>An item's primary action is executed by clicking on it or pressing <kbd>Shift</kbd> <kbd>↵</kbd> while it is selected. This action varies depending on the item's type and settings:</Text>
             <ul>
@@ -153,12 +129,9 @@ export default function Help() {
                 <li>Todo — toggle completed status.</li>
             </ul>
             <Text>You can also toggle the primary action of notes between edit and copy, and likewise for links between open and copy, from the context menu.</Text>
-        </Box>
+        </section>
 
-        <Box className="Cardlike__HelpSection"
-            component="section"
-            mb="xl"
-        >
+        <section className="Cardlike__HelpSection">
             <Title order={3}>Spotlight</Title>
             <Text>Accessed by pressing <KbdMod/> <kbd>K</kbd> or <KbdMod/> <kbd>P</kbd> anywhere within the app, or from the Main Input extended menu.</Text>
             <Text>It serves as the global navigation menu. Use it to search for actions and collections quickly. For easy references:</Text>
@@ -166,12 +139,9 @@ export default function Help() {
                 <li><Text>Navigation actions start with the slash character <Code>/</Code>.</Text></li>
                 <li><Text>Performative actions start with the period <Code>.</Code>.</Text></li>
             </ul>
-        </Box>
+        </section>
 
-        <Box className="Cardlike__HelpSection"
-            component="section"
-            mb="xl"
-        >
+        <section className="Cardlike__HelpSection">
             <Title order={3}>Frequently asked questions</Title>
 
             <Title order={4}>Why are my items not loaded?</Title>
@@ -198,12 +168,9 @@ export default function Help() {
             <Title order={4}>Why is the scrollbar so buggy on mobile?</Title>
             <Text>As per system requirement, it is recommended to use JustJot on a keyboard-equipped desktop. All design choices are optimised for this setup, which unfortunately means that compromises had to be made on other devices. That being said, the issues on mobile devices are known and a solution would be deployed as soon as possible when found.</Text>
 
-        </Box>
+        </section>
 
-        <Box className="Cardlike__HelpSection"
-            component="section"
-            mb="xl"
-        >
+        <section className="Cardlike__HelpSection">
             <Title order={3}>Features road map</Title>
             <Text>The following features are under consideration for future developments, in descending order of priority:</Text>
             <ul>
@@ -213,12 +180,9 @@ export default function Help() {
                 <li><Text>Offline operations.</Text></li>
                 <li><Text>Syntax highlighting and advance keybindings with Monaco Editor.</Text></li>
             </ul>
-        </Box>
+        </section>
 
-        <Box className="Cardlike__HelpSection"
-            component="section"
-            mb="xl"
-        >
+        <section className="Cardlike__HelpSection">
             <Title order={3}>Contributions</Title>
             <Text>JustJot is fully open-source:</Text>
             <ul>
@@ -227,12 +191,9 @@ export default function Help() {
             </ul>
             <Text>While we welcome contributions, JustJot is also extremely opinionated and personal, and as such, we are selective about what should be added and developed.</Text>
             <Text>The best channel to start a conversation is via the GitHub issues, in either one of the two repositories (when in doubt, please post in the frontend repository).</Text>
-        </Box>
+        </section>
 
-        <Box className="Cardlike__HelpSection"
-            component="section"
-            mb="xl"
-        >
+        <section className="Cardlike__HelpSection">
             <Title order={3}>Acknowledgement</Title>
             <Text>
                 JustJot was made possible thanks to the plethora of wonderful works from the open-source communities:
@@ -265,7 +226,7 @@ export default function Help() {
             <Text mt="md">
                 The brilliant <Anchor href="https://bmrks.com/" target='_blank' rel='noopener noreferrer'>bmrks</Anchor> heavily inspired the creation of JustJot.
             </Text>
-        </Box>
+        </section>
 
     </Paper>
 }
