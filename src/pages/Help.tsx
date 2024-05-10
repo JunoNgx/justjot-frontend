@@ -2,7 +2,6 @@ import KbdAlt from "@/components/misc/KbdAlt";
 import KbdMod from "@/components/misc/KbdMod";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { APP_NAME } from "@/utils/constants";
-import { Paper } from "@mantine/core";
 import { useContext, useEffect } from "react";
 import "./Pages.scss";
 
@@ -14,9 +13,7 @@ export default function Help() {
         document.title = `User Manual — ${APP_NAME}`;
     });
 
-    return <Paper className="Cardlike Cardlike--LongDoc"
-        p="md"
-    >
+    return <div className="Cardlike Cardlike--LongDoc">
         <h2>User Manual</h2>
 
         <section className="Cardlike__HelpSection">
@@ -228,5 +225,5 @@ export default function Help() {
             </p>
         </section>
 
-    </Paper>
+    </div>
 }
