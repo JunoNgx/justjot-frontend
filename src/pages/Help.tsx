@@ -2,7 +2,7 @@ import KbdAlt from "@/components/misc/KbdAlt";
 import KbdMod from "@/components/misc/KbdMod";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { APP_NAME } from "@/utils/constants";
-import { Anchor, Code, Paper, Text, Title } from "@mantine/core";
+import { Anchor, Code, Paper, Text } from "@mantine/core";
 import { useContext, useEffect } from "react";
 import "./Pages.scss";
 
@@ -17,33 +17,33 @@ export default function Help() {
     return <Paper className="Cardlike Cardlike--LongDoc"
         p="md"
     >
-        <Title order={2}>User Manual</Title>
+        <h2>User Manual</h2>
 
         <section className="Cardlike__HelpSection">
-            <Title order={3}>System requirement</Title>
+            <h3>System requirement</h3>
             <Text>This application should run on any computing device with a W3C-compliant web browser and a stable internet connection, including mobile devices. For the best experience, a keyboard-equipped desktop environment is recommended.</Text>
         </section>
 
         <section className="Cardlike__HelpSection">
 
-            <Title order={3}>Keyboard shortcuts</Title>
-            <Title order={4}>Operating systems</Title>
+            <h3>Keyboard shortcuts</h3>
+            <h4>Operating systems</h4>
             <Text>This application takes your operating system into account; <kbd>Mod</kbd> is appropriately assigned and displayed as either <kbd>Ctrl</kbd> or <kbd>Cmd</kbd>, depending on whether your are on Windows or Linux, or a Mac-based OS. Similarly for <kbd>Alt</kbd> and <kbd>Opt</kbd>. This is applicable to any contexual prompt display throughout the app, including this document.</Text>
 
-            <Title order={4}>Everywhere</Title>
+            <h4>Everywhere</h4>
             <ul>
                 <li><Text><KbdMod/> <kbd>K</kbd> or <KbdMod/> <kbd>P</kbd> to open Spotlight.</Text></li>
                 <li> <Text><KbdMod/> <kbd>/</kbd> to toggle display of contextual keyboard prompts.</Text></li>
             </ul>
 
-            <Title order={4}>Main Input is out of focus</Title>
+            <h4>Main Input is out of focus</h4>
             <ul>
                 <li><Text><kbd>1</kbd>...<kbd>0</kbd> to switch to the corresponding ordered collection.</Text></li>
                 <li><Text><kbd>←</kbd> <kbd>→</kbd> to switch to the adjacent collections.</Text></li>
                 <li><Text><KbdMod/> <kbd>F</kbd> to focus on the Main Input.</Text></li>
             </ul>
 
-            <Title order={4}>Main Input is focused</Title>
+            <h4>Main Input is focused</h4>
             <ul>
                 <li><Text><kbd>↑</kbd> <kbd>↓</kbd> to select items.</Text></li>
                 <li><Text><kbd>Shift</kbd> <kbd>↑</kbd> / <kbd>Shift</kbd> <kbd>↓</kbd> to select items in an increment of five.</Text></li>
@@ -52,7 +52,7 @@ export default function Help() {
                 <li><Text><kbd>Esc</kbd> to exit Main Input focus.</Text></li>
             </ul>
 
-            <Title order={4}>Selected item actions</Title>
+            <h4>Selected item actions</h4>
             <ul>
                 <li><Text><KbdMod/> <kbd>↵</kbd> to perform the primary action.</Text></li>
                 <li><Text><KbdMod/> <kbd>Shift</kbd> <kbd>C</kbd> to copy item content.</Text></li>
@@ -67,18 +67,18 @@ export default function Help() {
         </section>
 
         <section className="Cardlike__HelpSection">
-            <Title order={3}>Collection</Title>
+            <h3>Collection</h3>
             <Text>Collate notes, bookmarks, and todos for different categories under your collections. Access them from the dropdown menu, numeric keys <kbd>1</kbd>...<kbd>0</kbd>, or <kbd>←</kbd> <kbd>→</kbd>. You must have at least one collection in your account.</Text>
         </section>
 
         <section className="Cardlike__HelpSection">
-            <Title order={3}>Main Input</Title>
+            <h3>Main Input</h3>
             <Text>Serves both as a search bar and the interface for new item creation. To create new item, input your content and press <kbd>↵</kbd>.</Text>
             <Text>Prefix syntaxes are available to quickly create item with options. Helpers for syntaxes are accessible from the dropdown menu on right side the input.</Text>
         </section>
 
         <section className="Cardlike__HelpSection">
-            <Title order={3}>Prefix syntaxes</Title>
+            <h3>Prefix syntaxes</h3>
             <Text>These always start and end with the colon character:</Text>
             <ul>
                 <li><Code>:t:</Code> or <Code>:l:</Code> — create a text note with title ("t" for title; "l" for long).</li>
@@ -93,35 +93,35 @@ export default function Help() {
         </section>
 
         <section className="Cardlike__HelpSection">
-            <Title order={3}>Item Type</Title>
+            <h3>Item Type</h3>
 
-            <Title order={4}>Text note</Title>
+            <h4>Text note</h4>
             <Text>Contains simple plain text data. An item is a note by default.</Text>
 
-            <Title order={4}>Link/Bookmark</Title>
+            <h4>Link/Bookmark</h4>
             <Text>If your entered input is detected as a url, it will be stored as a link. Links also contain metadata (page title and favicon), and attempts are always made to retrieve them.</Text>
 
-            <Title order={4}>Todo</Title>
+            <h4>Todo</h4>
             <Text>A todo item can be marked as completed. A text item without title can be converted into a todo item (this is a semi-destructive operation, due the title length limit, and is not reversible). To quickly create a todo action from the Main Input, use the <Code>:td:</Code> prefix.</Text>
 
-            <Title order={4}>Hex colour code</Title>
+            <h4>Hex colour code</h4>
             <Text>As a special subtype of note, a hex colour code, when detected, will be accompanied by a corresponding icon. The logic validates the last seven characters in the item's content. As a lifehack, append a hex colour code to your text note to notate it in your own way.</Text>
         </section>
 
         <section className="Cardlike__HelpSection">
-            <Title order={3}>Item actions</Title>
+            <h3>Item actions</h3>
             <Text>There are two ways to perform item actions:</Text>
             <ul>
                 <li>Context menu — right-clicking on your mouse or long-pressing on your touchscreen.</li>
                 <li>Keypresses — prompts are contextually displayed on the lower right corner of the screen (which requires a minimum viewport width of 1280px to be displayed). A more complete list can also be found on top of this document.</li>
             </ul>
 
-            <Title order={4}>Item edit</Title>
+            <h4>Item edit</h4>
             <Text>Your changes are autosaved (with a short interval) during item edit. The autosave feature is unique to this user interface. Pressing <kbd>Esc</kbd> or <KbdMod/> <kbd>S</kbd> will pro-actively save progress, without waiting for the autosave interval, and close the modal.</Text>
         </section>
 
         <section className="Cardlike__HelpSection">
-            <Title order={3}>Primary action</Title>
+            <h3>Primary action</h3>
             <Text>An item's primary action is executed by clicking on it or pressing <kbd>Shift</kbd> <kbd>↵</kbd> while it is selected. This action varies depending on the item's type and settings:</Text>
             <ul>
                 <li>Note — edit.</li>
@@ -132,7 +132,7 @@ export default function Help() {
         </section>
 
         <section className="Cardlike__HelpSection">
-            <Title order={3}>Spotlight</Title>
+            <h3>Spotlight</h3>
             <Text>Accessed by pressing <KbdMod/> <kbd>K</kbd> or <KbdMod/> <kbd>P</kbd> anywhere within the app, or from the Main Input extended menu.</Text>
             <Text>It serves as the global navigation menu. Use it to search for actions and collections quickly. For easy references:</Text>
             <ul>
@@ -142,17 +142,17 @@ export default function Help() {
         </section>
 
         <section className="Cardlike__HelpSection">
-            <Title order={3}>Frequently asked questions</Title>
+            <h3>Frequently asked questions</h3>
 
-            <Title order={4}>Why are my items not loaded?</Title>
+            <h4>Why are my items not loaded?</h4>
             <Text>The most frequent cause for this is expired authentication token. Try logging out and re-logging in.</Text>
 
-            <Title order={4}>Why can't I create item from clipboard?</Title>
+            <h4>Why can't I create item from clipboard?</h4>
             <Text>The clipboard usually contains your highly personal data and can be occasionally sensitive (e.g. passwords). As such, browsers take measures to make sure that your data is not wrongfully accessed by bad actors.</Text>
             <Text>Please check your browser's current settings to ensure that permission to access clipboard is provided.</Text>
             <Text>As of time of writing, the <Code>navigator.clipboard.readText</Code> interface is not supported in Firefox, and I have decided to not further complicate the codebase with any workaround.</Text>
 
-            <Title order={4}>Why are your keyboard shortcuts so strange and unintuitive?</Title>
+            <h4>Why are your keyboard shortcuts so strange and unintuitive?</h4>
             <Text>Outside of tackling a relatively uncharted matter of keyboard-first design, JustJot is also burdened to accommodate the wide range of operating systems that can access the web, including, but not limited to: Windows, Android, MacOS, iOS, and distributions of Linux. While certain keys appear available on your current setup, they might not be on other users' systems. The keyboard shortcuts for item actions are also designed strictly to not interfere with the main input typing operations.</Text>
             <Text>The following keyboard shortcuts are known conflicts that we have eliminated during the development:</Text>
             <ul>
@@ -165,13 +165,13 @@ export default function Help() {
             </ul>
             <Text>The current arrangement is what we believe the be the most inclusive and functional possible state. Custom and user-assigned hotkeys might be looked into in the future, though this will be a massive undertaking.</Text>
 
-            <Title order={4}>Why is the scrollbar so buggy on mobile?</Title>
+            <h4>Why is the scrollbar so buggy on mobile?</h4>
             <Text>As per system requirement, it is recommended to use JustJot on a keyboard-equipped desktop. All design choices are optimised for this setup, which unfortunately means that compromises had to be made on other devices. That being said, the issues on mobile devices are known and a solution would be deployed as soon as possible when found.</Text>
 
         </section>
 
         <section className="Cardlike__HelpSection">
-            <Title order={3}>Features road map</Title>
+            <h3>Features road map</h3>
             <Text>The following features are under consideration for future developments, in descending order of priority:</Text>
             <ul>
                 <li><Text>Development unit tests.</Text></li>
@@ -183,7 +183,7 @@ export default function Help() {
         </section>
 
         <section className="Cardlike__HelpSection">
-            <Title order={3}>Contributions</Title>
+            <h3>Contributions</h3>
             <Text>JustJot is fully open-source:</Text>
             <ul>
                 <li><Anchor href="https://github.com/JunoNgx/justjot-frontend" target='_blank' rel='noopener noreferrer'>Frontend repository</Anchor></li>
@@ -194,7 +194,7 @@ export default function Help() {
         </section>
 
         <section className="Cardlike__HelpSection">
-            <Title order={3}>Acknowledgement</Title>
+            <h3>Acknowledgement</h3>
             <Text>
                 JustJot was made possible thanks to the plethora of wonderful works from the open-source communities:
             </Text>
