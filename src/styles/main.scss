@@ -62,30 +62,6 @@ code {
     background-color: var(--colCodeBg);
 }
 
-.landing-page {
-    margin: 0 auto;
-    max-width: 640px;
-    padding: 16px;
-
-    &__section {
-        margin-top: 32px;
-
-        ul {
-             margin: 0;
-        }
-
-        p {
-            hyphens: auto;
-        }
-    }
-    
-    &__demo-box {
-        margin: auto;
-        max-width: 320px;
-        border-color: var(--mantine-color-text);
-    }
-}
-
 .MainViewNoticeContainer {
     padding: 60px 0 60px;
 
