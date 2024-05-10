@@ -1,12 +1,10 @@
-import { Box, Kbd } from "@mantine/core"
-
 export default function CollectionHotkey({index}: {index: number}) {
    switch (true) {
     case index === 9:
-        return <Kbd>0</Kbd>
+        return <kbd>0</kbd>
     case index < 9:
-        return <Kbd>{index + 1}</Kbd>
+        return <kbd>{index + 1}</kbd>
     default:
-        return <Box className="collection-number-placeholder"/>
+        return <div className="CollectionNumberPlaceholder"/>
     }
 }
