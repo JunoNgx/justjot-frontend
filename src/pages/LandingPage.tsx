@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react"
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Button, Center, Group, Paper, Text, Title } from "@mantine/core";
 import { JustJotIcon } from "@/components/misc/JustJotIcon";
 import { APP_NAME } from "@/utils/constants";
 
@@ -26,7 +25,7 @@ export default function LandingPage() {
 
     return <div className="LandingPage">
         <section className="LandingPage__Section">
-            <Group gap="xl">
+            <div className="LandingPage__Banner">
                 <JustJotIcon size={72} stroke={"0.1"}/>
                 <div>
                     <h2 className="LandingPage__DefText">jot</h2>
@@ -34,7 +33,7 @@ export default function LandingPage() {
                     <p className="LandingPage__DefText">(verb)</p>
                     <p className="LandingPage__DefText">write (something) quickly</p>
                 </div>
-            </Group>
+            </div>
         </section>
 
         <section className="LandingPage__Section">
@@ -46,13 +45,13 @@ export default function LandingPage() {
             <div className="LandingPage__DemoBox">
                 <p className="LandingPage__DemoText">Just want to take a look?</p>
                 <p  className="LandingPage__DemoText">Account-free live demo available</p>
-                <Center mt="md">
+                <div className="LandingPage__DemoBtnContainer">
                     <NavLink className="LandingPage__DemoCtaBtn"
                         to="/demo-login"
                     >
                         Try now
                     </NavLink>
-                </Center>
+                </div>
             </div>
         </section>
 

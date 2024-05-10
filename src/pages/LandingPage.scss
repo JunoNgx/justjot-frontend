@@ -4,6 +4,13 @@
     margin-bottom: 2rem;
     padding: 16px;
 
+    &__Banner {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+    }
+
     &__Section {
         ul {
             margin: 0;
@@ -28,6 +35,13 @@
     &__DemoText {
         margin: 0;
         text-align: center;
+    }
+
+    &__DemoBtnContainer {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
     }
 
     &__DemoCtaBtn {
