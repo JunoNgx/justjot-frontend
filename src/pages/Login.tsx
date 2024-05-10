@@ -1,5 +1,5 @@
 import { useForm } from '@mantine/form';
-import { Paper, TextInput, Button, Title, Group, Text, PasswordInput, Anchor } from "@mantine/core";
+import { TextInput, PasswordInput } from "@mantine/core";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
@@ -7,6 +7,9 @@ import { DbTable, User } from '@/types';
 import { ClientResponseError } from 'pocketbase';
 import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
 import { APP_NAME, TEST_ACC_PASSWORD, TEST_ACC_USERNAME } from '@/utils/constants';
+import ButtonWithLoader from '@/libs/components/ButtonWithLoader';
+
+import "./Pages.scss";
 
 type LoginFormData = {email: string, password: string};
 
@@ -63,21 +66,17 @@ export default function Login(
         setIsLoading(false);
     }
 
-    const normalNotice = <Text>
-        Don't have an account? <Anchor component={NavLink} to="/register">Register</Anchor>
-    </Text>
+    const normalNotice = <p>
+        Don't have an account? <NavLink to="/register">Register</NavLink>
+    </p>
 
     const demoNotice = <>
-        <Text>Try using the test account</Text>
-        <Text><code>{TEST_ACC_USERNAME}</code> / <code>{TEST_ACC_PASSWORD}</code></Text>
+        <p>Try using the test account</p>
+        <p><code>{TEST_ACC_USERNAME}</code> / <code>{TEST_ACC_PASSWORD}</code></p>
     </>
 
-    return <Paper className="cardlike cardlike--login">
-        <Title className="cardlike__title"
-            order={2}
-        >
-            Login
-        </Title>
+    return <div className="Cardlike Cardlike--IsLogin">
+        <h2 className="Cardlike__Title">Login</h2>
 
         {isDemoMode
             ? demoNotice
@@ -104,17 +103,14 @@ export default function Login(
                 {...form.getInputProps('password')}
             />
 
-            <Group
-                mt="md"
-                justify="flex-end"
-            >
-                <Button
+            <div className="Cardlike__BtnContainer">
+                <ButtonWithLoader
                     type="submit"
-                    loading={isLoading}
+                    isLoading={isLoading}
                 >
                     Login
-                </Button>
-            </Group>
+                </ButtonWithLoader>
+            </div>
 
         </form>
 
@@ -122,11 +118,9 @@ export default function Login(
             <ErrorResponseDisplay errRes={errRes} />
         }
 
-        <Text mt="lg">
-            Forgot your password? <Anchor component={NavLink} to="/reset">Request reset</Anchor>
-        </Text>
-        <Text mt="xs">
-            Not yet verified? <Anchor component={NavLink} to="/verify">Request verification</Anchor>
-        </Text>
-    </Paper>
+        <div className='Cardlike__BottomTextContainer'>
+            <p>Forgot your password? <NavLink to="/reset">Request reset</NavLink></p>
+            <p>Not yet verified? <NavLink to="/verify">Request verification</NavLink></p>
+        </div>
+    </div>
 }

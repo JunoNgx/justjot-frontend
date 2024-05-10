@@ -40,8 +40,29 @@
         }
     }
 
+    &__Title {
+        margin-bottom: 1rem;
+    }
+
+    &__BtnContainer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    &__BottomTextContainer {
+        margin-top: 1rem;
+    }
+
     &__HelpSection {
         margin-top: 1rem;
         margin-bottom: 2rem;
     }
+
+
+    &--IsLogin {
+        margin-top: 150px;
+    }
+
 }
