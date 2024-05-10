@@ -128,6 +128,7 @@
     }
 
     &__Datetime {
+        color: var(--colPri);
         user-select: none;
 
         @include m.mobile {
