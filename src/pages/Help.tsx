@@ -2,7 +2,7 @@ import KbdAlt from "@/components/misc/KbdAlt";
 import KbdMod from "@/components/misc/KbdMod";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { APP_NAME } from "@/utils/constants";
-import { Anchor, Code, Paper } from "@mantine/core";
+import { Code, Paper } from "@mantine/core";
 import { useContext, useEffect } from "react";
 import "./Pages.scss";
 
@@ -186,8 +186,8 @@ export default function Help() {
             <h3>Contributions</h3>
             <p>JustJot is fully open-source:</p>
             <ul>
-                <li><Anchor href="https://github.com/JunoNgx/justjot-frontend" target='_blank' rel='noopener noreferrer'>Frontend repository</Anchor></li>
-                <li><Anchor href="https://github.com/JunoNgx/justjot-backend" target='_blank' rel='noopener noreferrer'>Backend repository</Anchor></li>
+                <li><a href="https://github.com/JunoNgx/justjot-frontend" target='_blank' rel='noopener noreferrer'>Frontend repository</a></li>
+                <li><a href="https://github.com/JunoNgx/justjot-backend" target='_blank' rel='noopener noreferrer'>Backend repository</a></li>
             </ul>
             <p>While we welcome contributions, JustJot is also extremely opinionated and personal, and as such, we are selective about what should be added and developed.</p>
             <p>The best channel to start a conversation is via the GitHub issues, in either one of the two repositories (when in doubt, please post in the frontend repository).</p>
@@ -200,31 +200,31 @@ export default function Help() {
             </p>
             <ul className="Cardlike__acknowledgement-ul">
                 <li>
-                    <Anchor href="https://react.dev/" target='_blank' rel='noopener noreferrer'>React</Anchor>
+                    <a href="https://react.dev/" target='_blank' rel='noopener noreferrer'>React</a>
                 </li>
                 <li>
-                    <Anchor href="https://www.typescriptlang.org/" target='_blank' rel='noopener noreferrer'>TypeScript</Anchor>
+                    <a href="https://www.typescriptlang.org/" target='_blank' rel='noopener noreferrer'>TypeScript</a>
                 </li>
                 <li>
-                    <Anchor href="https://pocketbase.io/" target='_blank' rel='noopener noreferrer'>PocketBase</Anchor>
+                    <a href="https://pocketbase.io/" target='_blank' rel='noopener noreferrer'>PocketBase</a>
                 </li>
                 <li>
-                    <Anchor href="https://pockethost.io/" target='_blank' rel='noopener noreferrer'>PocketHost</Anchor>
+                    <a href="https://pockethost.io/" target='_blank' rel='noopener noreferrer'>PocketHost</a>
                 </li>
                 <li>
-                    <Anchor href="https://mantine.dev/" target='_blank' rel='noopener noreferrer'>Mantine UI Library</Anchor></li>
+                    <a href="https://mantine.dev/" target='_blank' rel='noopener noreferrer'>Mantine UI Library</a></li>
                 <li>
-                    <Anchor href="https://icflorescu.github.io/mantine-contextmenu/" target='_blank' rel='noopener noreferrer'>Mantine ContextMenu</Anchor>
+                    <a href="https://icflorescu.github.io/mantine-contextmenu/" target='_blank' rel='noopener noreferrer'>Mantine ContextMenu</a>
                 </li>
                 <li>
-                    <Anchor href="https://sass-lang.com/" target='_blank' rel='noopener noreferrer'>Sass</Anchor>
+                    <a href="https://sass-lang.com/" target='_blank' rel='noopener noreferrer'>Sass</a>
                 </li>
             </ul>
             <p>
-                Very special thanks to <Anchor href="https://caseykwokdinata.webflow.io/" target='_blank' rel='noopener noreferrer'>Casey Kwokdinata</Anchor> for the design knowledge and support throughout the course of development.
+                Very special thanks to <a href="https://caseykwokdinata.webflow.io/" target='_blank' rel='noopener noreferrer'>Casey Kwokdinata</a> for the design knowledge and support throughout the course of development.
             </p>
             <p>
-                The brilliant <Anchor href="https://bmrks.com/" target='_blank' rel='noopener noreferrer'>bmrks</Anchor> heavily inspired the creation of JustJot.
+                The brilliant <a href="https://bmrks.com/" target='_blank' rel='noopener noreferrer'>bmrks</a> heavily inspired the creation of JustJot.
             </p>
         </section>
 
