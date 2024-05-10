@@ -54,6 +54,14 @@ kbd {
     font-size: var(--fontSizeXs);
 }
 
+code {
+    font-family: var(--monospaceFontFamily);
+    font-size: var(--fontSizeSm);
+    border-radius: 2px;
+    padding: 1px 3px;
+    background-color: var(--colCodeBg);
+}
+
 .landing-page {
     margin: 0 auto;
     max-width: 640px;

@@ -2,7 +2,7 @@ import KbdAlt from "@/components/misc/KbdAlt";
 import KbdMod from "@/components/misc/KbdMod";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { APP_NAME } from "@/utils/constants";
-import { Code, Paper } from "@mantine/core";
+import { Paper } from "@mantine/core";
 import { useContext, useEffect } from "react";
 import "./Pages.scss";
 
@@ -81,13 +81,13 @@ export default function Help() {
             <h3>Prefix syntaxes</h3>
             <p>These always start and end with the colon character:</p>
             <ul>
-                <li><Code>:t:</Code> or <Code>:l:</Code> — create a text note with title ("t" for title; "l" for long).</li>
-                <li><Code>:td:</Code> — create a todo item.</li>
+                <li><code>:t:</code> or <code>:l:</code> — create a text note with title ("t" for title; "l" for long).</li>
+                <li><code>:td:</code> — create a todo item.</li>
             </ul>
             As examples:
             <ul>
-                <li>Entering <Code>:t: Email draft 2</Code> will open the item create dialog, whose title input is pre-filled as "Email draft 2", allowing you to conveniently continue working on the content.</li>
-                <li>Entering <Code>:td: Buy groceries</Code> will create a todo item with content "Buy groceries".</li>
+                <li>Entering <code>:t: Email draft 2</code> will open the item create dialog, whose title input is pre-filled as "Email draft 2", allowing you to conveniently continue working on the content.</li>
+                <li>Entering <code>:td: Buy groceries</code> will create a todo item with content "Buy groceries".</li>
             </ul>
             <p>Leading and trailing whitespaces are always trimmed; the spaces between the prefix and your input do not matter.</p>
         </section>
@@ -102,7 +102,7 @@ export default function Help() {
             <p>If your entered input is detected as a url, it will be stored as a link. Links also contain metadata (page title and favicon), and attempts are always made to retrieve them.</p>
 
             <h4>Todo</h4>
-            <p>A todo item can be marked as completed. A text item without title can be converted into a todo item (this is a semi-destructive operation, due the title length limit, and is not reversible). To quickly create a todo action from the Main Input, use the <Code>:td:</Code> prefix.</p>
+            <p>A todo item can be marked as completed. A text item without title can be converted into a todo item (this is a semi-destructive operation, due the title length limit, and is not reversible). To quickly create a todo action from the Main Input, use the <code>:td:</code> prefix.</p>
 
             <h4>Hex colour code</h4>
             <p>As a special subtype of note, a hex colour code, when detected, will be accompanied by a corresponding icon. The logic validates the last seven characters in the item's content. As a lifehack, append a hex colour code to your text note to notate it in your own way.</p>
@@ -136,8 +136,8 @@ export default function Help() {
             <p>Accessed by pressing <KbdMod/> <kbd>K</kbd> or <KbdMod/> <kbd>P</kbd> anywhere within the app, or from the Main Input extended menu.</p>
             <p>It serves as the global navigation menu. Use it to search for actions and collections quickly. For easy references:</p>
             <ul>
-                <li><p>Navigation actions start with the slash character <Code>/</Code>.</p></li>
-                <li><p>Performative actions start with the period <Code>.</Code>.</p></li>
+                <li><p>Navigation actions start with the slash character <code>/</code>.</p></li>
+                <li><p>Performative actions start with the period <code>.</code>.</p></li>
             </ul>
         </section>
 
@@ -150,7 +150,7 @@ export default function Help() {
             <h4>Why can't I create item from clipboard?</h4>
             <p>The clipboard usually contains your highly personal data and can be occasionally sensitive (e.g. passwords). As such, browsers take measures to make sure that your data is not wrongfully accessed by bad actors.</p>
             <p>Please check your browser's current settings to ensure that permission to access clipboard is provided.</p>
-            <p>As of time of writing, the <Code>navigator.clipboard.readText</Code> interface is not supported in Firefox, and I have decided to not further complicate the codebase with any workaround.</p>
+            <p>As of time of writing, the <code>navigator.clipboard.readText</code> interface is not supported in Firefox, and I have decided to not further complicate the codebase with any workaround.</p>
 
             <h4>Why are your keyboard shortcuts so strange and unintuitive?</h4>
             <p>Outside of tackling a relatively uncharted matter of keyboard-first design, JustJot is also burdened to accommodate the wide range of operating systems that can access the web, including, but not limited to: Windows, Android, MacOS, iOS, and distributions of Linux. While certain keys appear available on your current setup, they might not be on other users' systems. The keyboard shortcuts for item actions are also designed strictly to not interfere with the main input typing operations.</p>
