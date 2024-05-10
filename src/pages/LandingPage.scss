@@ -14,10 +14,43 @@
         }
     }
 
+    &__UlPredecessor {
+        margin-bottom: 0.25rem;
+    }
+
     &__DemoBox {
         border: 1px solid var(--colPri);
         padding: 1rem;
         margin: auto;
         max-width: 320px;
+    }
+
+    &__DemoText {
+        margin: 0;
+        text-align: center;
+    }
+
+    &__DemoCtaBtn {
+        background-color: var(--colPri);
+        color: var(--colBg) !important;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        font-size: var(--fontSizeSm);
+    }
+
+    &__DefText {
+        margin: 0;
+
+        &--IsItalic {
+            font-style: italic;
+        }
+    }
+
+    h1, h2 {
+        margin-bottom: 0;
+    }
+
+    h1 + p, h2 + p {
+        margin-top: 0;
     }
 }
