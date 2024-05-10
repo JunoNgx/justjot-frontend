@@ -1,6 +1,5 @@
 import { Item } from '@/types';
 import * as ContextMenu from '@radix-ui/react-context-menu';
-import * as Dialog from "@radix-ui/react-dialog";
 import LabelWithIcon from '@/libs/components/LabelWithIcon';
 import useIconProps from '@/hooks/useIconProps';
 import { IconArrowMoveRight, IconCheckbox, IconCopy, IconDownload, IconEdit, IconFileSymlink, IconRestore, IconSquare, IconTrashX } from "@tabler/icons-react";
@@ -8,7 +7,7 @@ import { canConvertItemToTodo, canDeleteItem, canMoveItem, canRefetchItem, canTo
 
 import "./ItemComponentContextMenu.scss";
 import useItemActions from '@/hooks/useItemActions';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { CollectionsContext } from '@/contexts/CollectionsContext';
 import { ItemsContext } from '@/contexts/ItemsContext';
 
@@ -31,8 +30,6 @@ export default function ItemComponentContextMenu(
         untrashItemWithOptimisticUpdate,
     } = useItemActions();
 
-    const [ isMoveItemDialogOpened, setIsMoveItemDialogOpened ] = useState(false);
-
     const copyAction = <ContextMenu.Item className="ItemContextMenu__Item"
         onClick={() => copyItemContent({item})}
     >
@@ -43,73 +40,15 @@ export default function ItemComponentContextMenu(
         </LabelWithIcon>
     </ContextMenu.Item>
 
-
-    // const editAction = <ContextMenu.Item className="ItemContextMenu__Item"
-    //     onClick={() => openUpdateItemModal(item)}
-    // >
-    //     <LabelWithIcon className="ItemContextMenu__Label"
-    //         leftSection={<IconEdit {...menuIconProps} />}
-    //     >
-    //         Edit
-    //     </LabelWithIcon>
-    // </ContextMenu.Item>
-
-    const editAction = <Dialog.Root
-        open={isMoveItemDialogOpened}
-        onOpenChange={() => {
-            setIsMoveItemDialogOpened(isOpened => !isOpened);
-
-        }}
+    const editAction = <ContextMenu.Item className="ItemContextMenu__Item"
+        onClick={() => openUpdateItemModal(item)}
     >
-        <Dialog.Trigger asChild>
-            <ContextMenu.Item className="ItemContextMenu__Item"
-                // onClick={() => openUpdateItemModal(item)}
-                onSelect={(e) => {
-                    e.preventDefault();
-                    setIsMoveItemDialogOpened(true);
-                }}
-            >
-                <LabelWithIcon className="ItemContextMenu__Label"
-                    leftSection={<IconEdit {...menuIconProps} />}
-                >
-                    Edit
-                </LabelWithIcon>
-            </ContextMenu.Item>
-        </Dialog.Trigger>
-
-        <Dialog.Portal>
-            <Dialog.Overlay className="DialogOverlay" 
-                style={{
-                    position: "fixed",
-                    top: 0,
-                    left: 0,
-                    backgroundColor: "green",
-                    width: "100%",
-                    height: "100%",
-                }}
-            />
-            <Dialog.Content
-                style={{
-                    position: "fixed",
-                    top: 0,
-                    left: 0,
-                    backgroundColor: "red",
-                    width: "500px",
-                    height: "500px",
-                }}
-            >
-                <Dialog.Title>Edit Item</Dialog.Title>
-                <Dialog.Description>Change item title and content</Dialog.Description>
-                <div style={{
-                    height: 500,
-                    width: 500,
-                    backgroundColor: "blue",
-                }}>yadda</div>
-                <IconDownload />
-                
-            </Dialog.Content>
-        </Dialog.Portal>
-    </Dialog.Root>
+        <LabelWithIcon className="ItemContextMenu__Label"
+            leftSection={<IconEdit {...menuIconProps} />}
+        >
+            Edit
+        </LabelWithIcon>
+    </ContextMenu.Item>
 
     const moveAction = <ContextMenu.Item className="ItemContextMenu__Item"
         onClick={() => openMoveItemModal({item, collectionList: collections})}
@@ -216,30 +155,3 @@ export default function ItemComponentContextMenu(
         {canDeleteItem(item) && deleteAction}
     </ContextMenu.Content>
 }
-
-// const DialogItem = React.forwardRef((props, forwardedRef) => {
-//     const { triggerChildren, children, onSelect, onOpenChange, ...itemProps } = props;
-//     return (
-//         <Dialog.Root onOpenChange={onOpenChange}>
-//         <Dialog.Trigger asChild>
-//             <ContextMenu.Item
-//                 {...itemProps}
-//                 ref={forwardedRef}
-//                 className="DropdownMenuItem"
-//                 onSelect={(event) => {
-//                     event.preventDefault();
-//                     onSelect && onSelect();
-//                 }}
-//             >
-//                 {triggerChildren}
-//             </ContextMenu.Item>
-//         </Dialog.Trigger>
-//         <Dialog.Portal>
-//             <Dialog.Overlay className="DialogOverlay" />
-//             <Dialog.Content className="DialogContent">
-//                 {children}
-//             </Dialog.Content>
-//         </Dialog.Portal>
-//         </Dialog.Root>
-//     );
-// });
