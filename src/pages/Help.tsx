@@ -4,6 +4,7 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { APP_NAME } from "@/utils/constants";
 import { Anchor, Box, Code, Paper, Text, Title } from "@mantine/core";
 import { useContext, useEffect } from "react";
+import "./Pages.scss";
 
 export default function Help() {
     const { setCurrCollection } = useContext(CollectionsContext);
@@ -13,12 +14,12 @@ export default function Help() {
         document.title = `User Manual — ${APP_NAME}`;
     });
 
-    return <Paper className="cardlike cardlike--long-doc"
+    return <Paper className="Cardlike Cardlike--LongDoc"
         p="md"
     >
         <Title order={2}>User Manual</Title>
 
-        <Box className="cardlike__man-section"
+        <Box className="Cardlike__HelpSection"
             component="section"
             mb="xl"
         >
@@ -26,7 +27,7 @@ export default function Help() {
             <Text>This application should run on any computing device with a W3C-compliant web browser and a stable internet connection, including mobile devices. For the best experience, a keyboard-equipped desktop environment is recommended.</Text>
         </Box>
 
-        <Box className="cardlike__man-section"
+        <Box className="Cardlike__HelpSection"
             component="section"
             mb="xl"
         >
@@ -71,7 +72,7 @@ export default function Help() {
             </ul>
         </Box>
 
-        <Box className="cardlike__man-section"
+        <Box className="Cardlike__HelpSection"
             component="section"
             mb="xl"
         >
@@ -79,7 +80,7 @@ export default function Help() {
             <Text>Collate notes, bookmarks, and todos for different categories under your collections. Access them from the dropdown menu, numeric keys <kbd>1</kbd>...<kbd>0</kbd>, or <kbd>←</kbd> <kbd>→</kbd>. You must have at least one collection in your account.</Text>
         </Box>
 
-        <Box className="cardlike__man-section"
+        <Box className="Cardlike__HelpSection"
             component="section"
             mb="xl"
         >
@@ -88,7 +89,7 @@ export default function Help() {
             <Text>Prefix syntaxes are available to quickly create item with options. Helpers for syntaxes are accessible from the dropdown menu on right side the input.</Text>
         </Box>
 
-        <Box className="cardlike__man-section"
+        <Box className="Cardlike__HelpSection"
             component="section"
             mb="xl"
         >
@@ -106,7 +107,7 @@ export default function Help() {
             <Text>Leading and trailing whitespaces are always trimmed; the spaces between the prefix and your input do not matter.</Text>
         </Box>
 
-        <Box className="cardlike__man-section"
+        <Box className="Cardlike__HelpSection"
             component="section"
             mb="xl"
         >
@@ -125,7 +126,7 @@ export default function Help() {
             <Text>As a special subtype of note, a hex colour code, when detected, will be accompanied by a corresponding icon. The logic validates the last seven characters in the item's content. As a lifehack, append a hex colour code to your text note to notate it in your own way.</Text>
         </Box>
 
-        <Box className="cardlike__man-section"
+        <Box className="Cardlike__HelpSection"
             component="section"
             mb="xl"
         >
@@ -140,7 +141,7 @@ export default function Help() {
             <Text>Your changes are autosaved (with a short interval) during item edit. The autosave feature is unique to this user interface. Pressing <kbd>Esc</kbd> or <KbdMod/> <kbd>S</kbd> will pro-actively save progress, without waiting for the autosave interval, and close the modal.</Text>
         </Box>
 
-        <Box className="cardlike__man-section"
+        <Box className="Cardlike__HelpSection"
             component="section"
             mb="xl"
         >
@@ -154,7 +155,7 @@ export default function Help() {
             <Text>You can also toggle the primary action of notes between edit and copy, and likewise for links between open and copy, from the context menu.</Text>
         </Box>
 
-        <Box className="cardlike__man-section"
+        <Box className="Cardlike__HelpSection"
             component="section"
             mb="xl"
         >
@@ -167,7 +168,7 @@ export default function Help() {
             </ul>
         </Box>
 
-        <Box className="cardlike__man-section"
+        <Box className="Cardlike__HelpSection"
             component="section"
             mb="xl"
         >
@@ -199,7 +200,7 @@ export default function Help() {
 
         </Box>
 
-        <Box className="cardlike__man-section"
+        <Box className="Cardlike__HelpSection"
             component="section"
             mb="xl"
         >
@@ -214,7 +215,7 @@ export default function Help() {
             </ul>
         </Box>
 
-        <Box className="cardlike__man-section"
+        <Box className="Cardlike__HelpSection"
             component="section"
             mb="xl"
         >
@@ -228,7 +229,7 @@ export default function Help() {
             <Text>The best channel to start a conversation is via the GitHub issues, in either one of the two repositories (when in doubt, please post in the frontend repository).</Text>
         </Box>
 
-        <Box className="cardlike__man-section"
+        <Box className="Cardlike__HelpSection"
             component="section"
             mb="xl"
         >
@@ -236,7 +237,7 @@ export default function Help() {
             <Text>
                 JustJot was made possible thanks to the plethora of wonderful works from the open-source communities:
             </Text>
-            <ul className="cardlike__acknowledgement-ul">
+            <ul className="Cardlike__acknowledgement-ul">
                 <li>
                     <Anchor href="https://react.dev/" target='_blank' rel='noopener noreferrer'>React</Anchor>
                 </li>
