@@ -77,7 +77,8 @@
         }
 
         .Item__CopiedText {
-            animation-name: CopiedTextSlideIn
+            color: var(--colBlue);
+            animation-name: CopiedTextSlideIn;
         }
 
         @keyframes CopiedTextSlideIn {
