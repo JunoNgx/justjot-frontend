@@ -62,25 +62,6 @@ code {
     background-color: var(--colCodeBg);
 }
 
-.MainViewNoticeContainer {
-    padding: 60px 0 60px;
-
-    @include m.mobile {
-        padding: 40px 0 40px;
-    }
-}
-
-.main-view {
-    max-width: 720px;
-    margin: 0 auto 12px;
-
-    @include m.mobile { 
-        &__items-container {
-            padding-bottom: 5rem;
-        }
-    }
-}
-
 .info-modal-body {
     &__flex-wrapper {
         > svg {

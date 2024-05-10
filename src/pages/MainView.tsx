@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Box, Stack } from '@mantine/core';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import MainInput from "@/components/MainInput";
@@ -13,6 +12,8 @@ import useItemNavActions from "@/hooks/useItemNavActions";
 import MainContentList from "@/components/MainContentList";
 import KeyboardPromptDisplay from "@/components/KeyboardPromptDisplay";
 import MainViewNotice from "@/components/misc/MainViewNotice";
+
+import "./MainView.scss";
 
 export default function MainView() {
     const { isLoggedIn, isDemoUser } = useContext(BackendClientContext);
@@ -86,38 +87,33 @@ export default function MainView() {
         fetchItems(currCollection, setIsLoading);
     }, [currCollection]);
 
-    return <Box className="main-view-wrapper"
-        id="main-view-wrapper"
+    return <div className="MainView"
+        id="MainView"
     >
         {/* For non-item components */}
         <CollectionMenu isMobile={true} />
         <KeyboardPromptDisplay />
-        <Box className="MainViewNoticeContainer">
+        <div className="MainView__NoticeContainer">
             {isDemoUser && <MainViewNotice
                 content="You are using the test account. Data are periodically reset."
             />}
             {isTrashCollection && <MainViewNotice
                 content="Items in the trash bin are permanently deleted after 7 days."
             />}
-        </Box>
+        </div>
 
-        <Stack className="main-view"
-            gap="xl"
-            p="sm"
+        <div className="MainView__Main"
             onFocus={() => tryRoutineUpdate()}
         >
-            <MainInput
-                ref={mainInputRef}
-            />
-            <Stack className="main-view__items-container"
+            <MainInput ref={mainInputRef}/>
+            <div className="MainView__ItemList"
                 id="displayed-list"
-                gap="0.25rem"
             >
                 <MainContentList
                     isLoading={isLoading}
                     filteredItems={filteredItems}
                 />
-            </Stack>
-        </Stack>
-    </Box>
+            </div>
+        </div>
+    </div>
 }
