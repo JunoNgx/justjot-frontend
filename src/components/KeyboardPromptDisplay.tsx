@@ -2,7 +2,7 @@ import { ActionIcon, Box, Divider, Group, Kbd, Paper, Stack, Text } from "@manti
 import KbdMod from "./misc/KbdMod";
 import { useContext } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
-import { canMoveItem, canRestoreItem, computeItemActionString } from "@/utils/itemUtils";
+import { canConvertItemToTodo, canMoveItem, canRestoreItem, computeItemActionString } from "@/utils/itemUtils";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import {IconSquareChevronDown, IconSquareChevronUp } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
@@ -45,6 +45,7 @@ export default function KeyboardPromptDisplay() {
     const hasSelectedWithKeyboard = isMainInputFocused && hasSelectedItem;
     const primaryAction = selectedItem && computeItemPrimaryAction(selectedItem);
     const primaryActionStr = primaryAction && computeItemActionString(primaryAction);
+    const canConvertToTodo = selectedItem && canConvertItemToTodo(selectedItem);
 
     const expandedContent = 
         <Stack className="keyboard-prompt-display__list"
@@ -105,13 +106,13 @@ export default function KeyboardPromptDisplay() {
                 prompt={["mod", "Alt", "5"]}
                 desc="Refetch link metadata"
                 shouldDisplay={hasSelectedWithKeyboard && isLink}
-            />
+            /> */}
             <KeyboardPromptItem
                 prompt={["mod", "Alt", "6"]}
                 desc="Convert item to Todo"
                 shouldDisplay={hasSelectedWithKeyboard && canConvertToTodo}
             />
-            <KeyboardPromptItem
+            {/* <KeyboardPromptItem
                 prompt={[["Shift", "↑"], ["Shift", "↓"]]}
                 desc="Move by 5 items"
                 shouldDisplay={isMainInputFocused}
