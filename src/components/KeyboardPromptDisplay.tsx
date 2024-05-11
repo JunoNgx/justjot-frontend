@@ -232,12 +232,15 @@ const SingleKeyboardPrompt = (
 
 const CombinationBtn = ({btnLabelList}: {btnLabelList: Hotkey}) => {
     return <>
-        {btnLabelList.map((btnLabel, index) =>
-            <span key={index}>
+        {btnLabelList.map((btnLabel, index) => {
+            const isLastItem = index === btnLabelList.length - 1;
+
+            return <span key={index}>
                 <SingleBtn btnLabel={btnLabel}/>
                 {/* White space to separate each key */}
-                <span> </span>
+                {!isLastItem && <span> </span>}
             </span>
+        }
         )}
     </>
 }
