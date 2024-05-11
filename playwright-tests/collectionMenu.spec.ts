@@ -14,7 +14,7 @@ test.describe("Collection Menu", () => {
                 await route.fulfill({ json: fetchItemsEmpty });
             });
 
-            await page.locator("header .collection-menu-btn").click();
+            await page.locator("header .CollectionMenuBtn").click();
 
             await expect(page.getByRole('menuitem', { name: 'Create collection' })).toBeVisible();
             await expect(page.getByRole('menuitem', { name: 'Edit collection' })).toBeVisible();
@@ -23,8 +23,9 @@ test.describe("Collection Menu", () => {
         });
 
         test("Trash bin", async ({ page }) => {
-            await page.locator("header .collection-menu-btn").click();
+            await page.locator("header .CollectionMenuBtn").click();
             await page.getByRole('menuitem', { name: 'Trash bin' }).click();
+            await page.locator("header .CollectionMenuBtn").click();
 
             await expect(page.getByRole('menuitem', { name: 'Create collection' })).toBeVisible();
             await expect(page.getByRole('menuitem', { name: 'Edit collection' })).toBeVisible();
@@ -37,16 +38,16 @@ test.describe("Collection Menu", () => {
         test.beforeEach(loginWithMocks);
 
         test("Auto-navigates to first collection", async ({ page }) => {
-            await expect(page.locator("header .collection-menu-btn")).toContainText('Logbook');
+            await expect(page.locator('header')).toContainText('Logbook');
             await expect(page).toHaveURL("e2eTestAcc/logbook");
         });
 
         test("Switch collection", async ({ page }) => {
-            await page.locator("header .collection-menu-btn").click();
+            await page.locator("header .CollectionMenuBtn").click();
             await page.getByRole('menuitem', { name: 'Coll2' }).click();
 
             await expect(page).toHaveURL("e2eTestAcc/coll-2");
-            await expect(page.locator("header .collection-menu-btn")).toContainText('Coll2');
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText('Coll2');
         });
 
         test("Create collection", async ({ page }) => {
@@ -54,14 +55,14 @@ test.describe("Collection Menu", () => {
                 await route.fulfill({ json: collectionNew });
             });
 
-            await page.locator("header .collection-menu-btn").click();
+            await page.locator("header .CollectionMenuBtn").click();
             await page.getByRole('menuitem', { name: 'Create collection' }).click();
             await page.getByPlaceholder('My collection').fill('Coll3');
             await expect(page.getByPlaceholder('my-collection')).toHaveValue('coll-3');
             await page.getByRole('button', { name: 'Create collection' }).click();
 
             await expect(page).toHaveURL("e2eTestAcc/coll-3");
-            await expect(page.locator("header .collection-menu-btn")).toContainText('Coll3');
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText('Coll3');
         });
 
         test("Edit collection", async ({ page }) => {
@@ -69,7 +70,7 @@ test.describe("Collection Menu", () => {
                 await route.fulfill({ json: collectionEdit });
             });
 
-            await page.locator("header .collection-menu-btn").click();
+            await page.locator("header .CollectionMenuBtn").click();
             await page.getByRole('menuitem', { name: 'Edit collection' }).click();
     
             // Test: current values are correctly passed to modal
@@ -86,11 +87,11 @@ test.describe("Collection Menu", () => {
     
             // Test: url slug is updated
             await expect(page).toHaveURL("e2eTestAcc/logbook-edited");
-            await expect(page.locator("header .collection-menu-btn")).toContainText('Logbook-!#+$%^-edited');
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText('Logbook-!#+$%^-edited');
         });
 
         test("Sort collection", async ({ page }) => {
-            await page.locator("header .collection-menu-btn").click();
+            await page.locator("header .CollectionMenuBtn").click();
             await page.getByRole('menuitem', { name: 'Sort collections' }).click();
 
             await expect(page.locator('.mantine-Modal-header')).toContainText('Sort Collections');
@@ -103,7 +104,7 @@ test.describe("Collection Menu", () => {
                 await route.fulfill({status: 204});
             });
 
-            await page.locator("header .collection-menu-btn").click();
+            await page.locator("header .CollectionMenuBtn").click();
             await page.getByRole('menuitem', { name: 'Delete collection' }).click();
             await page.getByRole('button', { name: 'Delete collection' }).click();
 
