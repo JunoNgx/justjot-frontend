@@ -4,12 +4,8 @@
             opacity: 0.5;
         }
 
-        @include mantine.light {
-            background-color: var(--colPri);
-            color: var(--colBg);
-        }
-
-        @include mantine.dark {
+        [data-mantine-color-scheme="light"],
+        [data-mantine-color-scheme="dark"] & {
             background-color: var(--colPri);
             color: var(--colBg);
         }
