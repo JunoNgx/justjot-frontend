@@ -58,12 +58,28 @@
         .ButtonWithLoader__LabelContainer {
             transform: translateY(-100%);
         }
+
+        .ButtonWithLoader__LoaderContainer {
+            opacity: 0;
+        }
+
+        .ButtonWithLoader__LabelContainer {
+            opacity: 1;
+        }
     }
 
     &[data-loading="true"] {
         .ButtonWithLoader__LoaderContainer,
         .ButtonWithLoader__LabelContainer {
             transform: translateY(0);
+        }
+
+        .ButtonWithLoader__LoaderContainer {
+            opacity: 1;
+        }
+
+        .ButtonWithLoader__LabelContainer {
+            opacity: 0;
         }
     }
 
