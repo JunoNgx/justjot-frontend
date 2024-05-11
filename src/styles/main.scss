@@ -1,8 +1,8 @@
 
 @use 'sass:color';
-@use "./_variables.scss" as v;
-@use "./_mixins.scss" as m;
-@use "./_fonts.scss";
+@use "./variables" as v;
+@use "./mixins" as m;
+@use "./fonts";
 
 @use "./mantineComponents.scss";
 
