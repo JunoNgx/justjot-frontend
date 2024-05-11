@@ -5,17 +5,19 @@ type ButtonWithLoaderOptions = {
     variant?: "primary" |"secondary" | "danger" | undefined,
     type?: "submit" | "reset" | "button" | undefined,
     isLoading?: boolean,
+    onClick?: () => void,
     children?: React.ReactNode,
 }
 
 export default function ButtonWithLoader(
-    { className, variant, type, isLoading = false, children }: ButtonWithLoaderOptions
+    { className, variant, type, isLoading = false, onClick, children }: ButtonWithLoaderOptions
 ) {
     return <button className={`${className} ButtonWithLoader`}
         type={type}
         data-variant={variant}
         data-loading={isLoading}
         disabled={isLoading}
+        onClick={onClick}
     >
         <span className="ButtonWithLoader__LoaderContainer">
             <span className="ButtonWithLoader__Loader" />
