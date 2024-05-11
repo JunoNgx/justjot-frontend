@@ -53,7 +53,7 @@ export default function Request(
     const successNotice = <div className="Cardlike__SuccessNotice">
         <p>{computeSuccessNoticeFirstLine(pageType)}</p>
         <p>Please check your email inbox for the verification link.</p>
-        <p>Proceed to <NavLink to="login">Login</NavLink>.</p>
+        <p>Proceed to <NavLink to="/login">Login</NavLink>.</p>
     </div>
 
     const resetRequestForm = <>
@@ -87,7 +87,7 @@ export default function Request(
         }
 
         <div className="Cardlike__BottomTextContainer">
-            <p>Just in case you want to <NavLink to="login">Login</NavLink>.</p>
+            <p>Just in case you want to <NavLink to="/login">Login</NavLink>.</p>
         </div>
     </>
 

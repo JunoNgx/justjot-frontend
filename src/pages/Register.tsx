@@ -88,12 +88,12 @@ export default function Register() {
     const successNotice = <div className="Cardlike__SuccessNotice">
         <p>Registration request has been made.</p>
         <p>Please check your inbox for the verification email.</p>
-        <p>Proceed to <NavLink to="login">Login</NavLink></p>
+        <p>Proceed to <NavLink to="/login">Login</NavLink></p>
     </div>
 
     const registrationForm = <>
         <div className="Cardlike__Subtitle">
-            <p>Already have an account? <NavLink to="login">Login</NavLink></p>
+            <p>Already have an account? <NavLink to="/login">Login</NavLink></p>
         </div>
 
         <form onSubmit={form.onSubmit(attemptRegister)}>
