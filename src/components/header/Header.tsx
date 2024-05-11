@@ -3,7 +3,7 @@ import HeaderRightSide from "./HeaderRightSide";
 import "./Header.scss";
 
 function Header() {
-    return <div className="header">
+    return <div className="Header">
         <div className="Header__FlexWrapper">
             <HeaderLeftSide/>
             <HeaderRightSide/>
