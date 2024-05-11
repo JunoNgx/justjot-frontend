@@ -9,6 +9,12 @@ import BackendClientContextProvider from "@/contexts/BackendClientContext";
 import CollectionsContextProvider from "@/contexts/CollectionsContext";
 import ItemsContextProvider from "@/contexts/ItemsContext";
 
+import "@mantine/core/styles.css";
+import '@mantine/notifications/styles.css';
+import '@mantine/spotlight/styles.css';
+import '@mantine/core/styles.layer.css';
+import '@/styles/layers.css';
+
 import Header from "@/components/header/Header";
 import LandingPage from "@/pages/LandingPage";
 import Help from "@/pages/Help";
