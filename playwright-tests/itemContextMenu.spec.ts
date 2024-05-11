@@ -7,45 +7,45 @@ test.describe("Item context menu", () => {
         test.beforeEach(loginWithMocksAndFilledItems);
 
         test("Note without title", async ({ page }) => {
-            await page.locator('.item[data-id="yrcn8ax4fph01tx"]').click({ button: 'right' });
+            await page.locator('.Item[data-id="yrcn8ax4fph01tx"]').click({ button: 'right' });
 
-            await expect(page.getByRole('button', { name: 'Copy', exact: true })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Edit' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Move' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Trash' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Delete' })).not.toBeVisible();
-            await expect(page.getByRole('button', { name: 'Restore' })).not.toBeVisible();
-            await expect(page.getByRole('button', { name: 'Refetch' })).not.toBeVisible();
-            await expect(page.getByRole('button', { name: 'Convert to Todo' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'To copy' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Copy', exact: true })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Edit' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Move' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Trash' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Delete' })).not.toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Restore' })).not.toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Refetch' })).not.toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Convert to Todo' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'To copy' })).toBeVisible();
         });
 
         test("Note with title", async ({ page }) => {
-            await page.locator('.item[data-id="o9t5o6fpehcd0pw"]').click({ button: 'right' });
+            await page.locator('.Item[data-id="o9t5o6fpehcd0pw"]').click({ button: 'right' });
 
-            await expect(page.getByRole('button', { name: 'Copy', exact: true })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Edit' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Move' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Trash' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Delete' })).not.toBeVisible();
-            await expect(page.getByRole('button', { name: 'Restore' })).not.toBeVisible();
-            await expect(page.getByRole('button', { name: 'Refetch' })).not.toBeVisible();
-            await expect(page.getByRole('button', { name: 'Convert to Todo' })).not.toBeVisible();
-            await expect(page.getByRole('button', { name: 'To copy' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Copy', exact: true })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Edit' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Move' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Trash' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Delete' })).not.toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Restore' })).not.toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Refetch' })).not.toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Convert to Todo' })).not.toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'To copy' })).toBeVisible();
         });
 
         test("Link", async ({ page }) => {
-            await page.locator('.item[data-id="h0u9n1899aylwz4"]').click({ button: 'right' });
+            await page.locator('.Item[data-id="h0u9n1899aylwz4"]').click({ button: 'right' });
 
-            await expect(page.getByRole('button', { name: 'Copy', exact: true })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Edit' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Move' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Trash' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Delete' })).not.toBeVisible();
-            await expect(page.getByRole('button', { name: 'Restore' })).not.toBeVisible();
-            await expect(page.getByRole('button', { name: 'Refetch' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Convert to Todo' })).not.toBeVisible();
-            await expect(page.getByRole('button', { name: 'To copy' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Copy', exact: true })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Edit' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Move' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Trash' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Delete' })).not.toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Restore' })).not.toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Refetch' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Convert to Todo' })).not.toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'To copy' })).toBeVisible();
         });
 
         test("Trashed note", async ({ page }) => {
@@ -53,21 +53,21 @@ test.describe("Item context menu", () => {
 
             await page.goto("/e2eTestAcc/trash-bin")
             
-            await expect(page.locator("header .collection-menu-btn"))
+            await expect(page.locator("header .CollectionMenuBtn"))
                 .toContainText('Trash bin');
             await expect(page).toHaveURL("e2eTestAcc/trash-bin");
     
-            await page.locator('.item[data-id="7msw3d3jj1owyan"]').click({ button: 'right' });
+            await page.locator('.Item[data-id="7msw3d3jj1owyan"]').click({ button: 'right' });
     
-            await expect(page.getByRole('button', { name: 'Copy', exact: true })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Edit' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Move' })).not.toBeVisible();
-            await expect(page.getByRole('button', { name: 'Trash', exact: true })).not.toBeVisible();
-            await expect(page.getByRole('button', { name: 'Delete' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Restore' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Refetch' })).not.toBeVisible();
-            await expect(page.getByRole('button', { name: 'Convert to Todo' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'To copy' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Copy', exact: true })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Edit' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Move' })).not.toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Trash', exact: true })).not.toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Delete' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Restore' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Refetch' })).not.toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'Convert to Todo' })).toBeVisible();
+            await expect(page.getByRole('menuitem', { name: 'To copy' })).toBeVisible();
         })
     });
 
@@ -75,10 +75,10 @@ test.describe("Item context menu", () => {
         test.beforeEach(loginWithMocksAndFilledItems);
 
         test("Copy", async ({ page }) => {
-            await page.locator('.item[data-id="hxz3757cizrkzsl"]').click({ button: 'right' });
-            await page.getByRole('button', { name: 'Copy', exact: true }).click();
+            await page.locator('.Item[data-id="hxz3757cizrkzsl"]').click({ button: 'right' });
+            await page.getByRole('menuitem', { name: 'Copy', exact: true }).click();
 
-            await expect(page.locator('.item[data-id="hxz3757cizrkzsl"]')).toHaveText(/Content copied/);
+            await expect(page.locator('.Item[data-id="hxz3757cizrkzsl"]')).toHaveText(/Content copied/);
             await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
         });
 
@@ -106,8 +106,8 @@ test.describe("Item context menu", () => {
                 });
             });
 
-            await page.locator('.item[data-id="o9t5o6fpehcd0pw"]').click({ button: 'right' });
-            await page.getByRole('button', { name: 'Edit' }).click();
+            await page.locator('.Item[data-id="o9t5o6fpehcd0pw"]').click({ button: 'right' });
+            await page.getByRole('menuitem', { name: 'Edit' }).click();
 
             await expect(page.getByLabel('Title')).toBeVisible();
             await expect(page.getByLabel("Title", { exact: true })).toHaveValue('A normal text note');
@@ -122,8 +122,8 @@ test.describe("Item context menu", () => {
             await page.getByLabel("Content", { exact: true }).press("Escape");
             await page.waitForTimeout(500);
 
-            await expect(page.locator('.item[data-id="o9t5o6fpehcd0pw"] .item__primary-text')).toHaveText('Sample title edited');
-            await expect(page.locator('.item[data-id="o9t5o6fpehcd0pw"] .item__secondary-text')).toHaveText('Sample content edited');
+            await expect(page.locator('.Item[data-id="o9t5o6fpehcd0pw"] .Item__PrimaryText')).toHaveText('Sample title edited');
+            await expect(page.locator('.Item[data-id="o9t5o6fpehcd0pw"] .Item__SecondaryText')).toHaveText('Sample content edited');
         });
 
         test("Move", async ({ page }) => {
@@ -150,12 +150,13 @@ test.describe("Item context menu", () => {
                 });
             });
 
-            await page.locator('.item[data-id="hxz3757cizrkzsl"]').click({ button: 'right' });
-            await page.getByRole('button', { name: 'Move' }).click();
-            await expect(page.locator(".mantine-Modal-header")).toHaveText("Move to another collection");
+            await page.locator('.Item[data-id="hxz3757cizrkzsl"]').click({ button: 'right' });
+            await page.getByRole('menuitem', { name: 'Move' }).click();
+            await expect(page.getByLabel('Move to another collection').getByRole('banner'))
+                .toContainText('Move to another collection');
             await page.getByRole('button', { name: 'Coll2' }).click();
 
-            await expect(page.locator('.item[data-id="hxz3757cizrkzsl"]')).not.toBeVisible();
+            await expect(page.locator('.Item[data-id="hxz3757cizrkzsl"]')).not.toBeVisible();
         });
 
         test("Trash", async ({ page }) => {
@@ -182,10 +183,10 @@ test.describe("Item context menu", () => {
                 });
             });
 
-            await page.locator('.item[data-id="hxz3757cizrkzsl"]').click({ button: 'right' });
-            await page.getByRole('button', { name: 'Trash' }).click();
+            await page.locator('.Item[data-id="hxz3757cizrkzsl"]').click({ button: 'right' });
+            await page.getByRole('menuitem', { name: 'Trash' }).click();
 
-            await expect(page.locator('.item[data-id="hxz3757cizrkzsl"]')).not.toBeVisible();
+            await expect(page.locator('.Item[data-id="hxz3757cizrkzsl"]')).not.toBeVisible();
         });
 
         test("Delete", async ({ page }) => {
@@ -193,14 +194,14 @@ test.describe("Item context menu", () => {
 
             await page.goto("/e2eTestAcc/trash-bin")
             
-            await expect(page.locator("header .collection-menu-btn"))
+            await expect(page.locator("header .CollectionMenuBtn"))
                 .toContainText('Trash bin');
             await expect(page).toHaveURL("e2eTestAcc/trash-bin");
     
-            await page.locator('.item[data-id="7msw3d3jj1owyan"]').click({ button: 'right' });
-            await page.getByRole('button', { name: 'Delete' }).click();
+            await page.locator('.Item[data-id="7msw3d3jj1owyan"]').click({ button: 'right' });
+            await page.getByRole('menuitem', { name: 'Delete' }).click();
 
-            await expect(page.locator('.item[data-id="7msw3d3jj1owyan"]')).not.toBeVisible();
+            await expect(page.locator('.Item[data-id="7msw3d3jj1owyan"]')).not.toBeVisible();
         });
 
         test("Restore", async ({ page }) => {
@@ -208,14 +209,14 @@ test.describe("Item context menu", () => {
 
             await page.goto("/e2eTestAcc/trash-bin")
             
-            await expect(page.locator("header .collection-menu-btn"))
+            await expect(page.locator("header .CollectionMenuBtn"))
                 .toContainText('Trash bin');
             await expect(page).toHaveURL("e2eTestAcc/trash-bin");
     
-            await page.locator('.item[data-id="7msw3d3jj1owyan"]').click({ button: 'right' });
-            await page.getByRole('button', { name: 'Restore' }).click();
+            await page.locator('.Item[data-id="7msw3d3jj1owyan"]').click({ button: 'right' });
+            await page.getByRole('menuitem', { name: 'Restore' }).click();
 
-            await expect(page.locator('.item[data-id="7msw3d3jj1owyan"]')).not.toBeVisible();
+            await expect(page.locator('.Item[data-id="7msw3d3jj1owyan"]')).not.toBeVisible();
         });
 
         test("Refetch", async ({ page }) => {
@@ -241,11 +242,11 @@ test.describe("Item context menu", () => {
                 });
             });
 
-            await page.locator('.item[data-id="lzbedvc667m3r3r"]').click({ button: 'right' });
-            await page.getByRole('button', { name: 'Refetch' }).click();
+            await page.locator('.Item[data-id="lzbedvc667m3r3r"]').click({ button: 'right' });
+            await page.getByRole('menuitem', { name: 'Refetch' }).click();
 
-            await expect(page.locator('.item[data-id="lzbedvc667m3r3r"] .item__primary-text')).toHaveText(/xkcd/);
-            await expect(page.locator('.item[data-id="lzbedvc667m3r3r"] .item__secondary-text')).toHaveText(/xkcd.com/);
+            await expect(page.locator('.Item[data-id="lzbedvc667m3r3r"] .Item__PrimaryText')).toHaveText(/xkcd/);
+            await expect(page.locator('.Item[data-id="lzbedvc667m3r3r"] .Item__SecondaryText')).toHaveText(/xkcd.com/);
         });
 
         test("Convert to Todo", async ({ page }) => {
@@ -272,11 +273,11 @@ test.describe("Item context menu", () => {
                 });
             });
 
-            await page.locator('.item[data-id="yrcn8ax4fph01tx"]').click({ button: 'right' });
-            await page.getByRole('button', { name: 'Convert to Todo' }).click();
+            await page.locator('.Item[data-id="yrcn8ax4fph01tx"]').click({ button: 'right' });
+            await page.getByRole('menuitem', { name: 'Convert to Todo' }).click();
 
-            await expect(page.locator('.item[data-id="yrcn8ax4fph01tx"] .item__primary-text')).toHaveText("A note without title");
-            await expect(page.locator('.item[data-id="yrcn8ax4fph01tx"] .item__secondary-text')).not.toBeVisible();
+            await expect(page.locator('.Item[data-id="yrcn8ax4fph01tx"] .Item__PrimaryText')).toHaveText("A note without title");
+            await expect(page.locator('.Item[data-id="yrcn8ax4fph01tx"] .Item__SecondaryText')).not.toBeVisible();
         });
 
         test("Toggle should copy on click", async ({ page }) => {
@@ -303,12 +304,12 @@ test.describe("Item context menu", () => {
                 });
             });
 
-            await expect(page.locator('.item[data-id="7msw3d3jj1owyan"] .item__should-copy-icon')).not.toBeVisible();
+            await expect(page.locator('.Item[data-id="7msw3d3jj1owyan"] .Item__ShouldCopyIcon')).not.toBeVisible();
 
-            await page.locator('.item[data-id="7msw3d3jj1owyan"]').click({ button: 'right' });
-            await page.getByRole('button', { name: 'To copy' }).click();
+            await page.locator('.Item[data-id="7msw3d3jj1owyan"]').click({ button: 'right' });
+            await page.getByRole('menuitem', { name: 'To copy' }).click();
 
-            await expect(page.locator('.item[data-id="7msw3d3jj1owyan"] .item__should-copy-icon')).toBeVisible();
+            await expect(page.locator('.Item[data-id="7msw3d3jj1owyan"] .Item__ShouldCopyIcon')).toBeVisible();
         });
 
     });
