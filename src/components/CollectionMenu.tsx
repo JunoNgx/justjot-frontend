@@ -31,7 +31,7 @@ export default function CollectionMenu({isMobile}: {isMobile?: boolean}) {
 
     const collectionMenu = <DropdownMenu.Root>
         <DropdownMenu.Trigger
-            className={"CollectionMenuBtn " + (isMobile ? "CollectionMenuBtn--isMobile" : "")}
+            className={"CollectionMenuBtn " + (isMobile ? "CollectionMenuBtn--IsMobile" : "")}
         >
             <span className="CollectionMenuBtn__Label">
                 {currCollection?.name}
