@@ -2,11 +2,15 @@ import { ItemsContext } from "@/contexts/ItemsContext";
 import useIconProps from "@/hooks/useIconProps";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TODO_PREFIX } from "@/utils/constants";
-import { ActionIcon, Menu, MenuDivider } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { notifications } from "@mantine/notifications";
 import { spotlight } from "@mantine/spotlight";
 import { IconCheckbox, IconChevronDown, IconClipboardPlus, IconFocus, IconLayoutNavbar, IconX } from "@tabler/icons-react";
 import { useContext } from "react";
+import LabelWithIcon from "@/libs/components/LabelWithIcon";
+
+import "./MainInput.scss";
 
 type MainInputExtendedMenuOptions = {
     processMainInput: (input: string) => void,
@@ -48,11 +52,8 @@ export default function MainInputExtendedMenu(
             });
     }
 
-    return <Menu 
-        position="bottom-end"
-        offset={18}
-    >
-        <Menu.Target>
+    return <DropdownMenu.Root>
+        <DropdownMenu.Trigger>
             <ActionIcon variant="transparent"
                 className="main-input__menu-btn"
                 title="Main input extended options"
@@ -63,52 +64,73 @@ export default function MainInputExtendedMenu(
                     {...menuIconProps}
                 />
             </ActionIcon>
-        </Menu.Target>
+        </DropdownMenu.Trigger>
 
-        <Menu.Dropdown className="main-input__dropdown">
-            <Menu.Item
-                leftSection={<IconLayoutNavbar {...menuIconProps} />}
-                onClick={() => {
-                    setInputVal(curr => `${CREATE_TEXT_WITH_TITLE_PREFIX} ${curr}`);
-                    focusOnMainInput(mainInputRef);
-                }}
+        <DropdownMenu.Portal>
+            <DropdownMenu.Content className="MainInputDropdown"
+                align="end"
+                sideOffset={15}
+                // alignOffset={-1}
             >
-                with title
-            </Menu.Item>
-            <Menu.Item
-                leftSection={<IconCheckbox {...menuIconProps} />}
-                onClick={() => {
-                    setInputVal(curr => `${CREATE_TODO_PREFIX} ${curr}`);
-                    focusOnMainInput(mainInputRef);
-                }}
-            >
-                as todo
-            </Menu.Item>
-            <Menu.Item
-                leftSection={<IconClipboardPlus {...menuIconProps} />}
-                onClick={enterFromClipboard}
-            >
-                from clipboard
-            </Menu.Item>
+                <DropdownMenu.Item className="MainInputDropdown__Item"
+                    onClick={() => {
+                        setInputVal(curr => `${CREATE_TEXT_WITH_TITLE_PREFIX} ${curr}`);
+                        focusOnMainInput(mainInputRef);
+                    }}
+                >
+                    <LabelWithIcon
+                        leftSection={<IconLayoutNavbar {...menuIconProps} />}
+                    >
+                        with title
+                    </LabelWithIcon>
+                </DropdownMenu.Item>
+                <DropdownMenu.Item className="MainInputDropdown__Item"
+                    onClick={() => {
+                        setInputVal(curr => `${CREATE_TODO_PREFIX} ${curr}`);
+                        focusOnMainInput(mainInputRef);
+                    }}
+                >
+                    <LabelWithIcon 
+                        leftSection={<IconCheckbox {...menuIconProps} />}
+                    >
+                        as todo
+                    </LabelWithIcon>
+                </DropdownMenu.Item>
+                <DropdownMenu.Item className="MainInputDropdown__Item"
+                    onClick={enterFromClipboard}
+                >
+                    <LabelWithIcon 
+                        leftSection={<IconClipboardPlus {...menuIconProps} />}
+                    >
+                        from clipboard
+                    </LabelWithIcon>
+                </DropdownMenu.Item>
 
-            <Menu.Item
-                leftSection={<IconX {...menuIconProps} />}
-                onClick={() => {
-                    setInputVal("");
-                    focusOnMainInput(mainInputRef);
-                }}
-            >
-                clear input
-            </Menu.Item>
+                <DropdownMenu.Item className="MainInputDropdown__Item"
+                    onClick={() => {
+                        setInputVal("");
+                        focusOnMainInput(mainInputRef);
+                    }}
+                >
+                    <LabelWithIcon 
+                        leftSection={<IconX {...menuIconProps} />}
+                    >
+                        clear input
+                    </LabelWithIcon>
+                </DropdownMenu.Item>
 
-            <MenuDivider/>
+                <DropdownMenu.Separator className="MainInputDropdown__Separator" />
 
-            <Menu.Item
-                leftSection={<IconFocus {...menuIconProps} />}
-                onClick={() => {spotlight.open()}}
-            >
-                spotlight
-            </Menu.Item>
-        </Menu.Dropdown>
-    </Menu>
+                <DropdownMenu.Item className="MainInputDropdown__Item"
+                    onClick={() => {spotlight.open()}}
+                >
+                    <LabelWithIcon 
+                        leftSection={<IconFocus {...menuIconProps} />}
+                    >
+                        spotlight
+                    </LabelWithIcon>
+                </DropdownMenu.Item>
+            </DropdownMenu.Content>
+        </DropdownMenu.Portal>
+    </DropdownMenu.Root>
 }

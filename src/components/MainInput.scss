@@ -1,3 +1,5 @@
+@use "../styles/mixins" as m;
+
 .MainInput {
     display: flex;
     flex-direction: row;
@@ -42,4 +44,18 @@
     //     place-items: center;
     //     color: var(--mantine-color-dimmed);
     // }
+}
+
+.MainInputDropdown {
+    @include m.GlassBlur;
+    @include m.Menu;
+    @include m.AnimatedDropdown;
+
+    &__Item {
+        @include m.DropdownItem;
+    }
+
+    &__Separator {
+        @include m.DropdownSeparator;
+    }
 }
