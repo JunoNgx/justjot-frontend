@@ -36,4 +36,22 @@
     &__CollectionName {
         margin: 0;
     }
+
+    &__FlexWrapper {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 1rem;
+
+        > svg {
+            flex-shrink: 0;
+        }
+    }
+
+    &__BtnContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 2rem;
+    }
 }

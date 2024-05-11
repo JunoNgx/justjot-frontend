@@ -61,14 +61,6 @@ code {
     background-color: var(--colCodeBg);
 }
 
-.info-modal-body {
-    &__flex-wrapper {
-        > svg {
-            flex-shrink: 0;
-        }
-    }
-}
-
 .item-create-modal,
 .item-update-modal {
     &__input input,

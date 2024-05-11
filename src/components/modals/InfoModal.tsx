@@ -1,4 +1,4 @@
-import { Button, Group, Text, Box, Flex } from '@mantine/core';
+import ButtonWithLoader from '@/libs/components/ButtonWithLoader';
 import { ContextModalProps } from '@mantine/modals';
 
 const InfoModal = ({
@@ -6,21 +6,17 @@ const InfoModal = ({
     id,
     innerProps,
 }: ContextModalProps <{ leftSection: React.ReactNode, modalBody: string }>) => (
-    <Box className="info-modal-body">
-        <Flex className="info-modal-body__flex-wrapper"
-            justify="space-between"
-            gap="xl"
-            p="md"
-        >
+    <div className="Modal">
+        <div className="Modal__FlexWrapper">
             {innerProps.leftSection}
-            <Text>{innerProps.modalBody}</Text>
-        </Flex>
-        <Group justify="center" mt="xl">
-            <Button onClick={() => context.closeModal(id)}>
+            <p>{innerProps.modalBody}</p>
+        </div>
+        <div className="Modal__BtnContainer">
+            <ButtonWithLoader onClick={() => context.closeModal(id)}>
                 Close
-            </Button>
-        </Group>
-    </Box>
+            </ButtonWithLoader>
+        </div>
+    </div>
 );
 
 export default InfoModal;
