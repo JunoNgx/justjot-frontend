@@ -1,0 +1,43 @@
+.KeyboardPrompt {
+    position: fixed;
+    right: 0.25rem;
+    bottom: 0.25rem;
+    max-width: 320px;
+    border-color: var(--colPri);
+    padding: 0.5rem;
+
+    &__BtnContainer {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__ToggleDisplayButton,
+    &__ToggleDisplayButton:hover {
+        color: var(--colPri);
+    }
+
+    &__List {
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        gap: 0.5rem;
+        padding: var(--mantine-spacing-xs);
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--mantine-color-text);
+    }
+
+    &__Prompt {
+        max-width: 150px;
+    }
+
+    &__Desc {
+        text-align: right;
+        max-width: 150px;
+        font-size: 0.8rem;
+    }
+
+    @media screen and (max-width: 1279px) {
+        display: none;
+    }
+}

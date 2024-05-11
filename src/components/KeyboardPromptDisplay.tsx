@@ -1,4 +1,4 @@
-import { ActionIcon, Box, Divider, Group, Kbd, Paper, Stack, Text } from "@mantine/core";
+import { ActionIcon, Box, Divider, Group, Kbd, Text } from "@mantine/core";
 import KbdMod from "./misc/KbdMod";
 import { useContext } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
@@ -8,6 +8,8 @@ import {IconSquareChevronDown, IconSquareChevronUp } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
 import useItemActions from "@/hooks/useItemActions";
 import KbdAlt from "./misc/KbdAlt";
+
+import "./KeyboardPromptDisplay.scss";
 
 type Hotkey = string[];
 type KeyboardPrompt = Hotkey | Hotkey[];
@@ -48,7 +50,7 @@ export default function KeyboardPromptDisplay() {
     const canConvertToTodo = selectedItem && canConvertItemToTodo(selectedItem);
 
     const expandedContent = 
-        <Stack className="keyboard-prompt-display__list"
+        <div className="KeyboardPrompt__List"
             aria-hidden={!isExpanded}
         >
             <KeyboardPromptItem
@@ -148,10 +150,10 @@ export default function KeyboardPromptDisplay() {
                 prompt={[["mod", "/"]]}
                 desc="Toggle keyboard prompts display"
             />
-        </Stack>
+        </div>
 
     const expandButton = <ActionIcon
-        className="keyboard-prompt-display__button"
+        className="KeyboardPrompt__ToggleDisplayButton"
         variant="subtle"
         onClick={() => setIsExpanded(true)}
         title="Show keyboard prompts"
@@ -160,7 +162,7 @@ export default function KeyboardPromptDisplay() {
     </ActionIcon>
 
     const collapseButton = <ActionIcon
-        className="keyboard-prompt-display__button"
+        className="KeyboardPrompt__ToggleDisplayButton"
         variant="subtle"
         onClick={() => setIsExpanded(false)}
         title="Hide keyboard prompts"
@@ -169,16 +171,13 @@ export default function KeyboardPromptDisplay() {
         <IconSquareChevronDown {...keyboardPromptIconProps} />
     </ActionIcon>
 
-    return <Paper className="keyboard-prompt-display"
-        // withBorder
-        p="xs"
-    >
+    return <div className="KeyboardPrompt">
         {isExpanded && expandedContent}
 
-        <Group justify="flex-end">
+        <div className="KeyboardPrompt__BtnContainer">
             {isExpanded ? collapseButton : expandButton}
-        </Group>
-    </Paper>
+        </div>
+    </div>
 }
 
 // const CustomKeyboardPromptItem = (
@@ -190,8 +189,8 @@ export default function KeyboardPromptDisplay() {
 //     return <Group
 //         justify="space-between"
 //     >
-//         <Box className="keyboard-prompt-display__prompt">{leftSection}</Box>
-//         <Text className="keyboard-prompt-display__desc">{desc}</Text>
+//         <Box className="KeyboardPrompt__Prompt">{leftSection}</Box>
+//         <Text className="KeyboardPrompt__Desc">{desc}</Text>
 //     </Group>
 // }
 
@@ -205,7 +204,7 @@ const KeyboardPromptItem = (
         justify="space-between"
     >
         <SingleKeyboardPrompt prompt={prompt} />
-        <Text className="keyboard-prompt-display__desc">{desc}</Text>
+        <Text className="KeyboardPrompt__Desc">{desc}</Text>
     </Group>
 };
 
@@ -218,7 +217,7 @@ const SingleKeyboardPrompt = (
         ? prompt as Hotkey[]
         : [prompt as Hotkey];
 
-    return <Box className="keyboard-prompt-display__prompt">
+    return <Box className="KeyboardPrompt__Prompt">
         {promptList.map((prompt, index) => {
             const isLastItem = index === promptList.length - 1;
 

@@ -84,40 +84,6 @@ input[type="password"] {
     }
 }
 
-.keyboard-prompt-display {
-    position: fixed;
-    right: 0.25rem;
-    bottom: 0.25rem;
-    max-width: 320px;
-    border-color: var(--mantine-color-text);
-
-    &__button,
-    &__button:hover {
-        color: var(--mantine-color-text);
-    }
-
-    &__list {
-        padding: var(--mantine-spacing-xs);
-        border-width: 1px;
-        border-style: solid;
-        border-color: var(--mantine-color-text);
-    }
-
-    &__prompt {
-        max-width: 150px;
-    }
-
-    &__desc {
-        text-align: right;
-        max-width: 150px;
-        font-size: 0.8rem;
-    }
-
-    @media screen and (max-width: 1279px) {
-        display: none;
-    }
-}
-
 .item-context-menu {
     @include m.GlassBlur;
 }
