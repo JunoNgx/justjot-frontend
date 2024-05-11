@@ -72,7 +72,7 @@ describe("ItemComponentIcon", () => {
         const item: Item = {...items[7]};
         item.content += "#FF0000";
         renderItemComponentIcon(item);
-        const iconEl = document.querySelector(".item__icon-colour");
+        const iconEl = document.querySelector(".Item__IconColour");
 
         expect(iconEl?.getAttribute("style")).toBe("background-color: #FF0000;");
     });
