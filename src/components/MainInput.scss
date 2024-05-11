@@ -1,0 +1,45 @@
+.MainInput {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 3rem;
+    border: 1px solid var(--colPri);
+    box-sizing: content-box;
+
+    &:focus-within {
+        outline-offset: 4px;
+        outline-style: solid;
+        outline-width: 2px;
+        outline-color: var(--mantine-color-text);
+    }
+
+    &__LeftSide {
+        user-select: none;
+        width: 3rem;
+        display: grid;
+        place-items: center;
+    }
+
+    &__Input {
+        flex: 1;
+        border: none;
+        height: 100%;
+        min-width: 150px;
+
+        &:focus-visible {
+            outline: none;
+        }
+    }
+
+    // &__RightSide {
+    // }
+
+    // &__menu-btn {
+    //     cursor: pointer;
+    //     display: grid;
+    //     place-items: center;
+    //     color: var(--mantine-color-dimmed);
+    // }
+}

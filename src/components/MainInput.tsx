@@ -1,5 +1,4 @@
 import { forwardRef, useContext } from "react";
-import { Input, InputProps } from "@mantine/core";
 import { getHotkeyHandler } from "@mantine/hooks";
 import { IconCircleTriangle } from "@tabler/icons-react";
 
@@ -12,7 +11,9 @@ import useItemNavActions from "@/hooks/useItemNavActions";
 import MainInputExtendedMenu from "./MainInputExtendedMenu";
 import { CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TEXT_WITH_TITLE_PREFIX_ALT } from "@/utils/constants";
 
-const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+import "./MainInput.scss";
+
+const MainInput = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>((props, ref) => {
     const { collections, isTrashCollection } = useContext(CollectionsContext);
     const {
         setIsMainInputFocused,
@@ -132,48 +133,52 @@ const MainInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         convertToTodo({item: selectedItem});
     }
 
-    return <Input id="main-input" className="main-input"
-        ref={ref}
-        {...props}
-        size="lg"
-        leftSection={<IconCircleTriangle
-            {...mainInputIconProps}
-        />}
-        rightSectionPointerEvents="all"
-        rightSection={<MainInputExtendedMenu
-            processMainInput={processMainInput}
-            mainInputRef={ref as React.RefObject<HTMLInputElement>}
-        />}
-        type="text"
-        aria-label="Main input"
-        // placeholder="Add new item or search"
-        value={inputVal}
-        onChange={(event) => {
-            setInputVal(event.currentTarget.value);
-            setSelectedIndex(-1);
-        }}
-        onKeyDown={getHotkeyHandler([
-            ["ArrowUp", selectPrevItem],
-            ["ArrowDown", selectNextItem],
-            ["Shift+ArrowUp", selectPrevItemFarther, { preventDefault: true }],
-            ["Shift+ArrowDown", selectNextItemFarther, { preventDefault: true }],
-            ["mod+Shift+ArrowUp", scrollToTop, { preventDefault: true }],
-            ["mod+Shift+ArrowDown", scrollToBottom, { preventDefault: true }],
-            ["Enter", () => processMainInput(inputVal)],
-            ["Escape", blurMainInput],
-            ["mod+Enter", clickOnSelectedItem, { preventDefault: true }],
-            ["mod+Shift+C", hotkeyCopyContent, { preventDefault: true }],
-            ["mod+E", hotkeyOpenUpdateItemModal, { preventDefault: true }],
-            ["mod+M", hotkeyOpenMoveItemModal, { preventDefault: true }],
-            ["mod+Shift+Backspace", hotkeyDeleteItem, { preventDefault: true }],
-            ["mod+alt+R", hotkeyRestoreItem, { preventDefault: true }],
-            ["mod+alt+Digit4", hotkeyToggleItemShouldCopyOnClick, { preventDefault: true }],
-            ["mod+alt+Digit5", hotkeyRefetchTitleAndFavicon, { preventDefault: true }],
-            ["mod+alt+Digit6", hotkeyConvertToTodoItem, { preventDefault: true }],
-        ])}
-        onFocus={() => setIsMainInputFocused(true)}
-        onBlur={() => setIsMainInputFocused(false)}
-    />
+    return(
+        <div className="MainInput">
+            <div className="MainInput__LeftSide">
+                <IconCircleTriangle {...mainInputIconProps} />
+            </div>
+            <input id="main-input" className="MainInput__Input"
+                ref={ref}
+                {...props}
+                type="text"
+                aria-label="Main input"
+                // placeholder="Add new item or search"
+                value={inputVal}
+                onChange={(event) => {
+                    setInputVal(event.currentTarget.value);
+                    setSelectedIndex(-1);
+                }}
+                onKeyDown={getHotkeyHandler([
+                    ["ArrowUp", selectPrevItem],
+                    ["ArrowDown", selectNextItem],
+                    ["Shift+ArrowUp", selectPrevItemFarther, { preventDefault: true }],
+                    ["Shift+ArrowDown", selectNextItemFarther, { preventDefault: true }],
+                    ["mod+Shift+ArrowUp", scrollToTop, { preventDefault: true }],
+                    ["mod+Shift+ArrowDown", scrollToBottom, { preventDefault: true }],
+                    ["Enter", () => processMainInput(inputVal)],
+                    ["Escape", blurMainInput],
+                    ["mod+Enter", clickOnSelectedItem, { preventDefault: true }],
+                    ["mod+Shift+C", hotkeyCopyContent, { preventDefault: true }],
+                    ["mod+E", hotkeyOpenUpdateItemModal, { preventDefault: true }],
+                    ["mod+M", hotkeyOpenMoveItemModal, { preventDefault: true }],
+                    ["mod+Shift+Backspace", hotkeyDeleteItem, { preventDefault: true }],
+                    ["mod+alt+R", hotkeyRestoreItem, { preventDefault: true }],
+                    ["mod+alt+Digit4", hotkeyToggleItemShouldCopyOnClick, { preventDefault: true }],
+                    ["mod+alt+Digit5", hotkeyRefetchTitleAndFavicon, { preventDefault: true }],
+                    ["mod+alt+Digit6", hotkeyConvertToTodoItem, { preventDefault: true }],
+                ])}
+                onFocus={() => setIsMainInputFocused(true)}
+                onBlur={() => setIsMainInputFocused(false)}
+            />
+            <div className="MainInput__RightSide">
+                <MainInputExtendedMenu
+                    processMainInput={processMainInput}
+                    mainInputRef={ref as React.RefObject<HTMLInputElement>}
+                />
+            </div>
+        </div>
+    );
 });
 
 export default MainInput;
