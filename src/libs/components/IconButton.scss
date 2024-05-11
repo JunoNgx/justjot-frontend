@@ -8,4 +8,8 @@
         display: grid;
         place-items: center;
     }
+
+    &:active {
+        transform: translateY(1px);
+    }
 }
