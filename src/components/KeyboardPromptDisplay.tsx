@@ -1,4 +1,4 @@
-import { ActionIcon, Box, Divider, Group, Kbd, Text } from "@mantine/core";
+import { ActionIcon, Box, Group, Kbd, Text } from "@mantine/core";
 import KbdMod from "./misc/KbdMod";
 import { useContext } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
@@ -130,7 +130,7 @@ export default function KeyboardPromptDisplay() {
                 shouldDisplay={isMainInputFocused}
             /> */}
 
-            <Divider />
+            <div className="KeyboardPrompt__Divider" />
 
             {/* <CustomKeyboardPromptItem
                 leftSection={<><Kbd>1</Kbd>...<Kbd>0</Kbd></>}

@@ -37,6 +37,10 @@
         font-size: 0.8rem;
     }
 
+    &__Divider {
+        border-top: 1px solid var(--colGreyBg);
+    }
+
     @media screen and (max-width: 1279px) {
         display: none;
     }
