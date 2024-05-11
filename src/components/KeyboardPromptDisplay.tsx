@@ -1,4 +1,3 @@
-import { ActionIcon } from "@mantine/core";
 import KbdMod from "./misc/KbdMod";
 import { useContext } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
@@ -8,6 +7,7 @@ import {IconSquareChevronDown, IconSquareChevronUp } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
 import useItemActions from "@/hooks/useItemActions";
 import KbdAlt from "./misc/KbdAlt";
+import IconButton from "@/libs/components/IconButton";
 
 import "./KeyboardPromptDisplay.scss";
 
@@ -152,24 +152,21 @@ export default function KeyboardPromptDisplay() {
             />
         </div>
 
-    const expandButton = <ActionIcon
+    const expandButton = <IconButton
         className="KeyboardPrompt__ToggleDisplayButton"
-        variant="subtle"
         onClick={() => setIsExpanded(true)}
         title="Show keyboard prompts"
     >
         <IconSquareChevronUp {...keyboardPromptIconProps} />
-    </ActionIcon>
+    </IconButton>
 
-    const collapseButton = <ActionIcon
+    const collapseButton = <IconButton
         className="KeyboardPrompt__ToggleDisplayButton"
-        variant="subtle"
         onClick={() => setIsExpanded(false)}
         title="Hide keyboard prompts"
-        mt="xs"
     >
         <IconSquareChevronDown {...keyboardPromptIconProps} />
-    </ActionIcon>
+    </IconButton>
 
     return <div className="KeyboardPrompt">
         {isExpanded && expandedContent}
