@@ -1,3 +1,5 @@
+@use "../styles/mixins" as m;
+
 .MainInput {
     display: flex;
     flex-direction: row;

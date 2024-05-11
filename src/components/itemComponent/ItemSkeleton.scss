@@ -1,3 +1,5 @@
+@use "../../styles/mixins" as m;
+
 @mixin SkeletonBlock {
     height: 2rem;
     background-color: var(--colSkeleton);

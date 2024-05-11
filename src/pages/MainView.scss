@@ -1,3 +1,6 @@
+@use "../styles/mixins" as m;
+@use "../styles/variables" as v;
+
 .MainView {
     &__NoticeContainer {
         padding: 60px 0 60px;

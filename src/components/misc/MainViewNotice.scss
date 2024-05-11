@@ -1,3 +1,6 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
 .MainViewNotice {
     margin: auto;
     max-width: 720px;

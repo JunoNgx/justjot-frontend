@@ -1,3 +1,5 @@
+@use "../../styles/_mixins.scss" as m;
+
 .Item {
     display: flex;
     justify-content: space-between;
