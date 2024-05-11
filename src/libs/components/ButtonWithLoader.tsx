@@ -10,7 +10,7 @@ type ButtonWithLoaderOptions = {
 }
 
 export default function ButtonWithLoader(
-    { className, variant, type, isLoading = false, onClick, children }: ButtonWithLoaderOptions
+    { className, variant = "primary", type, isLoading = false, onClick, children }: ButtonWithLoaderOptions
 ) {
     return <button className={`${className} ButtonWithLoader`}
         type={type}
