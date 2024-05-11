@@ -34,6 +34,7 @@ export default function Profile() {
     return <div className="Cardlike Cardlike--WithBottomMargin">
         {isLoggedIn &&
             <>
+                <h2>Account management</h2>
                 <ProfileFaviconCookies />
                 <ProfileChangeDisplayName/>
                 {isDemoUser
