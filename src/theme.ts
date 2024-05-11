@@ -30,11 +30,7 @@ const overrideTheme = createTheme({
     fontFamilyMonospace: "Space Mono, Menlo, Consolas, monospace",
     defaultRadius: 0,
     other: {
-        colText: "#000", // --mantine-colortext; --mantine-color-black
-        colTextDark: "#C9C9C9", // --mantine-color-dark-0
         colLogo: "#86EAD4", // Mint
-        colBlack: "#000000",
-        colWhite: "#FFFFFF",
     },
     components: {
         Anchor: Anchor.extend({
