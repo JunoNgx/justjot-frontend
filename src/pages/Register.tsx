@@ -1,5 +1,5 @@
 import { useForm } from '@mantine/form';
-import { Paper, TextInput, Button, Title, Group, Text, PasswordInput, Box, Anchor } from "@mantine/core";
+import { TextInput, Button, PasswordInput } from "@mantine/core";
 import { NavLink } from 'react-router-dom';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useContext, useEffect, useState } from 'react';
@@ -84,16 +84,16 @@ export default function Register() {
         setIsLoading(false);
     }
 
-    const successNotice = <Box mt="lg" p="none">
-        <Text>Registration request has been made.</Text>
-        <Text>Please check your inbox for the verification email.</Text>
-        <Text mt="lg">Proceed to <Anchor component={NavLink} to="login">Login</Anchor></Text>
-    </Box>
+    const successNotice = <div className="Cardlike__SuccessNotice">
+        <p>Registration request has been made.</p>
+        <p>Please check your inbox for the verification email.</p>
+        <p className="Cardlike__NoticeLastLine">Proceed to <NavLink to="login">Login</NavLink></p>
+    </div>
 
     const registrationForm = <>
-        <Text>
-            Already have an account? <Anchor component={NavLink} to="login">Login</Anchor>
-        </Text>
+        <p>
+            Already have an account? <NavLink to="login">Login</NavLink>
+        </p>
 
         <form onSubmit={form.onSubmit(attemptRegister)}>
             <TextInput mt="md"
@@ -143,20 +143,18 @@ export default function Register() {
                 {...form.getInputProps('passwordConfirm')}
             />
 
-            <Text mt="md">
-                By registering, you acknowledge and agree to the <Anchor href="/terms" target='_blank'>terms and conditions</Anchor>.
-            </Text>
+            <div className='Cardlike__BottomTextContainer'>
+                <p>By registering, you acknowledge and agree to the <a href="/terms" target='_blank'>terms and conditions</a>.</p>
+            </div>
 
-            <Group mt="md"
-                justify="flex-end"
-            >
+            <div className="Cardlike__BtnContainer">
                 <Button
                     type="submit"
                     loading={isLoading}
                 >
                     Register
                 </Button>
-            </Group>
+            </div>
 
             {(hasAttempted && !isSuccessful) &&
                 <ErrorResponseDisplay errRes={errRes} />
@@ -164,16 +162,14 @@ export default function Register() {
         </form>
     </>
 
-    return <Paper className="cardlike cardlike--login">
-        <Title className="cardlike__title"
-            order={2}
-        >
+    return <div className="Cardlike Cardlike--IsLogin">
+        <h2 className="Cardlike__Title">
             Register
-        </Title>
+        </h2>
 
         {(hasAttempted && isSuccessful)
             ? successNotice
             : registrationForm
         }
-    </Paper>
+    </div>
 }
