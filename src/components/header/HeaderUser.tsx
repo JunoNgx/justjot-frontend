@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { IconChevronDown, IconHelp, IconLogout, IconUserCog } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
@@ -29,7 +29,7 @@ export default function HeaderUser() {
         <DropdownMenu.Portal>
             <DropdownMenu.Content className="Header__ProfileDropdown"
                 sideOffset={20}
-                alignOffset={5}
+                // alignOffset={0}
                 align="end"
             >
 
