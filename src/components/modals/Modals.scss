@@ -20,4 +20,20 @@
         justify-content: flex-end;
         align-items: center;
     }
+
+    &__SortCollectionList {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__CollectionItem {
+        margin: 0.5rem;
+        padding: 0.5rem 1.25rem;
+        border: 1px solid var(--colPri);
+    }
+    
+    &__CollectionName {
+        margin: 0;
+    }
 }

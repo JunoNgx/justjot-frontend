@@ -1,4 +1,3 @@
-import { Center, Paper, Text } from "@mantine/core";
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { useListState } from "@mantine/hooks";
 import { useContext, useEffect, useRef } from "react";
@@ -118,19 +117,12 @@ export default function CollectionsSortModal() {
                         provided.draggableProps.style.top = provided.draggableProps.style.offsetTop;
                     }
 
-                    return <div className="collections-sort-modal__collection-item"
+                    return <div className="Modal__CollectionItem"
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         ref={provided.innerRef}
                     >
-                        <Paper withBorder
-                            m="xs"
-                            px="lg"
-                            py="xs"
-                        >
-                            <Text>{collection.name}</Text>
-                        </Paper>
-
+                        <p className="Modal__CollectionName">{collection.name}</p>
                     </div>
                 }}
 
@@ -160,12 +152,12 @@ export default function CollectionsSortModal() {
     )
 
     return (
-        <div className="collections-sort-modal">
-            <Center>
-                <div className="collections-sort-modal__left-side">
+        <div className="Modal--IsCollectionSort">
+            <div className="Modal__SortCollectionList">
+                <div className="Modal__LeftSide">
                     {draggableArea}
                 </div>
-            </Center>
+            </div>
         </div>
     )
 }
