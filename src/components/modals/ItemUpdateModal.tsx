@@ -1,4 +1,4 @@
-import { Flex, Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
+import { TextInput, Textarea } from "@mantine/core";
 import { Item, ItemType } from "@/types";
 import { DateTime } from "luxon";
 import { getHotkeyHandler, useDebouncedCallback } from "@mantine/hooks";
@@ -200,38 +200,37 @@ export default function ItemUpdateModal(
 
     const isTodoItem = item.type === ItemType.TODO;
 
-    return <Stack className="item-update-modal">
-        <TextInput className="item-update-modal__input item-update-modal__input--title"
-            // Potential bug? `data-autofocus={false}` doesn't disable it, only `null` and `undefined` do
-            data-autofocus={!isTodoItem && null}
-            label={isTodoItem
-                ? "Todo task name"
-                : "Title"
-            }
-            description={`Optional, must be or fewer than ${MAX_TITLE_LENGTH} characters.`}
-            placeholder=""
-            type="text"
-            maxLength={MAX_TITLE_LENGTH}
-            value={titleVal}
-            onChange={handleTitleChange}
-            onKeyDown={getHotkeyHandler([
-                ["mod+S", handleActiveSave, {preventDefault: true}]
-            ])}
-            onFocus={() => setIsFocusedOnTitleInput(true)}
-            onBlur={() => setIsFocusedOnTitleInput(false)}
-        />
-        <Flex
-            direction="row-reverse"
-            justify="space-between"
-        >
-            <Text>{titleVal.length}/{MAX_TITLE_LENGTH}</Text>
-            {(isTodoItem && isFocusedOnTitleInput) &&
-                <Text><Kbd>Esc</Kbd> / <KbdMod/> <Kbd>S</Kbd> Save and close</Text>
-            }
-        </Flex>
+    return <div className="Modal Modal--Stackbox">
+        <div className="Modal__InputContainer">
+            <TextInput className="Modal__Input"
+                // Potential bug? `data-autofocus={false}` doesn't disable it, only `null` and `undefined` do
+                data-autofocus={!isTodoItem && null}
+                label={isTodoItem
+                    ? "Todo task name"
+                    : "Title"
+                }
+                description={`Optional, must be or fewer than ${MAX_TITLE_LENGTH} characters.`}
+                placeholder=""
+                type="text"
+                maxLength={MAX_TITLE_LENGTH}
+                value={titleVal}
+                onChange={handleTitleChange}
+                onKeyDown={getHotkeyHandler([
+                    ["mod+S", handleActiveSave, {preventDefault: true}]
+                ])}
+                onFocus={() => setIsFocusedOnTitleInput(true)}
+                onBlur={() => setIsFocusedOnTitleInput(false)}
+            />
+            <div className="Modal__SubInputFlexbox">
+                <p>{titleVal.length}/{MAX_TITLE_LENGTH}</p>
+                {(isTodoItem && isFocusedOnTitleInput) &&
+                    <p><kbd>Esc</kbd> / <KbdMod/> <kbd>S</kbd> Save and close</p>
+                }
+            </div>
+        </div>
 
-        {!isTodoItem && <>
-            <Textarea className="item-update-modal__input item-update-modal__input--content"
+        {!isTodoItem && <div className="Modal__InputContainer">
+            <Textarea className="Modal__Input"
                 data-autofocus={!isTodoItem}
                 label="Content"
                 description={`Optional, must be or fewer than ${MAX_CONTENT_LENGTH} characters.`}
@@ -247,21 +246,18 @@ export default function ItemUpdateModal(
                 onFocus={() => setIsFocusedOnContentInput(true)}
                 onBlur={() => setIsFocusedOnContentInput(false)}
             />
-            <Flex
-                direction="row-reverse"
-                justify="space-between"
-            >
-                <Text>{contentVal.length}/{MAX_CONTENT_LENGTH}</Text>
+            <div className="Modal__SubInputFlexbox">
+                <p>{contentVal.length}/{MAX_CONTENT_LENGTH}</p>
                 {(isFocusedOnTitleInput || isFocusedOnContentInput) &&
-                   <Text><Kbd>Esc</Kbd> / <KbdMod/> <Kbd>S</Kbd> Save and close</Text>
+                   <p><kbd>Esc</kbd> / <KbdMod/> <kbd>S</kbd> Save and close</p>
                 }
-            </Flex>
-        </>}
+            </div>
+        </div>}
 
-        <Group justify="flex-end">
+        <div className="Modal__SubInputFlexbox">
             {(hasSaved && relativeUpdatedTimeStr)
-                && <Text>Saved at {relativeUpdatedTimeStr}</Text>
+                && <p>Saved at {relativeUpdatedTimeStr}</p>
             }
-        </Group>
-    </Stack>
+        </div>
+    </div>
 }
