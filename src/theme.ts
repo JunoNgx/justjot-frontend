@@ -30,6 +30,8 @@ const overrideTheme = createTheme({
     fontFamilyMonospace: "Space Mono, Menlo, Consolas, monospace",
     defaultRadius: 0,
     other: {
+        colWhite: "#FFFFFF",
+        colBlack: "#000000",
         colLogo: "#86EAD4", // Mint
     },
     components: {
