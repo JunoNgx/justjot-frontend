@@ -65,13 +65,9 @@ input[type="password"] {
     border-style: solid;
     border-width: 1px;
 
-    @include mantine.light {
-        background-color: var(--mantine-color-body);
-        border-color: var(--mantine-color-text);
-    }
-
-    @include mantine.dark {
-        background-color: var(--mantine-color-body);
-        border-color: var(--mantine-color-text);
+    [data-mantine-color-scheme="dark"] &,
+    [data-mantine-color-scheme="light"] & {
+        background-color: var(--colBg);
+        border-color: var(--colPri);
     }
 }
