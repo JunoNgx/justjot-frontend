@@ -5,7 +5,6 @@
 @use "./_fonts.scss";
 
 @use "./mantineComponents.scss";
-// @use '@mantine/core/styles/global.css';
 
 html {
     -webkit-tap-highlight-color: transparent;
@@ -60,12 +59,6 @@ code {
     background-color: var(--colCodeBg);
 }
 
-.CollectionNumberPlaceholder {
-    width: 19.35px; // TODO: find a more reliable way to size this
-    height: 28.6px;
-}
-
-
 input,
 textarea,
 input[type="password"] {
@@ -81,8 +74,4 @@ input[type="password"] {
         background-color: var(--mantine-color-body);
         border-color: var(--mantine-color-text);
     }
-}
-
-.item-context-menu {
-    @include m.GlassBlur;
 }
