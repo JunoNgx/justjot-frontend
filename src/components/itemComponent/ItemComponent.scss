@@ -18,6 +18,11 @@
     text-decoration: none;
     color: var(--colPri);
 
+    &:hover,
+    &:visited {
+        color: var(--colPri);
+    }
+
     &--IsSelected {
         border-color: var(--colPri);
     }
