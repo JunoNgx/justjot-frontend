@@ -1,8 +1,14 @@
+@use "../styles/mixins" as m;
+
 .Cardlike {
     margin: 0 auto;
     margin-bottom: var(--mantine-spacing-xl);
     max-width: 320px;
     border-color: var(--mantine-color-text);
+
+    @include m.mobile {
+        margin-top: 0;
+    }
 
     &--LongDoc {
         max-width: 640px;
@@ -68,6 +74,10 @@
         margin-top: 1.25rem;
     }
 
+    &__TermsItem {
+        margin-top: 0.25rem;
+    }
+
     &--WithBottomMargin {
         margin-bottom: 2rem;
     }
@@ -76,4 +86,11 @@
         margin-top: 150px;
     }
 
+    &--IsRegister{
+        margin-bottom: 60px;
+    }
+
+    &--IsReset {
+        margin-top: 200px;
+    }
 }
