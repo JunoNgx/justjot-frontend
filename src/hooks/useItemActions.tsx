@@ -150,11 +150,6 @@ export default function useItemActions() {
         toggleItemShouldCopyOnClick({
             item,
             shouldCopyOnClick: newShouldCopyOnClickVal,
-            // successfulCallback: (record: Item) => {
-            //     const index = findIndexById(item.id, items)
-            //     if (index === -1) return;
-            //     itemsHandlers.replace(index, record);
-            // },
             errorCallback: (err: ClientResponseError) => {
                 fetchItems(currCollection);
                 console.error(err);
@@ -188,11 +183,6 @@ export default function useItemActions() {
         toggleItemIsTodoDone({
             item,
             isTodoDone: newIsTodoDoneVal,
-            // successfulCallback: (record: Item) => {
-            //     const index = findIndexById(item.id, items)
-            //     if (index === -1) return;
-            //     itemsHandlers.replace(index, record);
-            // },
             errorCallback: (err: ClientResponseError) => {
                 fetchItems(currCollection);
                 console.error(err);

@@ -2,13 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import { AppShell, ScrollArea } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from "@mantine/notifications";
-// import "@mantine/core/styles.css";
-// import '@mantine/notifications/styles.css';
-// import '@mantine/core/styles.layer.css';
-
-// import "mantine-contextmenu/styles.css";
-// import 'mantine-contextmenu/styles.layer.css';
-// import '@/styles/layers.css';
 
 import EventBusContextProvider from "./contexts/EventBusContext";
 import UserLocalSettingsContextProvider from "@/contexts/UserLocalSettingsContext";

@@ -43,8 +43,7 @@
 
 .mantine-Modal-overlay,
 .mantine-Spotlight-overlay {
-    // TODO: This is incorrect, but it works. Should find out why
-    background-color: var(--colBg) 0.5;
+    background-color: var(--colBg);
     backdrop-filter: blur(7px);
 }
 

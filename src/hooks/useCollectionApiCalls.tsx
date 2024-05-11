@@ -98,7 +98,6 @@ export default function useCollectionApiCalls() {
         await pbClient.collection(DbTable.COLLECTIONS)
             .update(collectionId,
                 { sortOrder: newSortOrderValue },
-                // { requestKey: "collection-sort" }
                 { requestKey: null } // Allow repeated request, no auto-cancelation
             )
             .then((record: ItemCollection) => {
