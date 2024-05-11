@@ -12,6 +12,10 @@
     height: 2rem;
     margin: 0.4rem;
 
+    @include m.Mobile {
+        gap: 0;
+    }
+
     &__LeftSide {
         display: flex;
         justify-content: flex-start;
