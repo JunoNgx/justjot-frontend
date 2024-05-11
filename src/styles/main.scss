@@ -61,14 +61,6 @@ code {
     background-color: var(--colCodeBg);
 }
 
-.item-create-modal,
-.item-update-modal {
-    &__input input,
-    &__input textarea {
-        font-family: var(--mantine-font-family-monospace);
-    }
-}
-
 .CollectionNumberPlaceholder {
     width: 19.35px; // TODO: find a more reliable way to size this
     height: 28.6px;

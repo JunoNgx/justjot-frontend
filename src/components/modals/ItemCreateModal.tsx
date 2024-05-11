@@ -1,12 +1,13 @@
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useItemActions from "@/hooks/useItemActions";
 import { MAX_TITLE_LENGTH, MAX_CONTENT_LENGTH } from "@/utils/constants";
-import { Button, Flex, Group, Kbd, Stack, Text, TextInput, Textarea } from "@mantine/core";
+import { Button, TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { getHotkeyHandler } from "@mantine/hooks";
 import { ContextModalProps } from '@mantine/modals';
 import { useContext, useState } from "react";
 import KbdMod from "../misc/KbdMod";
+import "./Modals.scss";
 
 const ItemCreateModal = ({
     context,
@@ -77,67 +78,68 @@ const ItemCreateModal = ({
         </Button>
     </>;
 
-    return <Stack className="item-create-modal">
-        <TextInput className="item-create-modal__input item-create-modal__input--title"
-            label="Title"
-            description={`Optional, must be or fewer than ${MAX_TITLE_LENGTH} characters.`}
-            placeholder=""
-            type="text"
-            maxLength={MAX_TITLE_LENGTH}
-            {...form.getInputProps("title")}
+    return <div className="Modal Modal--Stackbox">
+        <div className="Modal__InputContainer">
+            <TextInput className="Modal__Input"
+                label="Title"
+                description={`Optional, must be or fewer than ${MAX_TITLE_LENGTH} characters.`}
+                placeholder=""
+                type="text"
+                maxLength={MAX_TITLE_LENGTH}
+                {...form.getInputProps("title")}
 
-            // Overriding form.getInput `...form.getInputProps("title")`
-            onFocus={() => setIsFocusedOnTitleInput(true)}
-            onBlur={() => setIsFocusedOnTitleInput(false)}
-            onKeyDown={getHotkeyHandler([
-                ["mod+S", handleCreate, { preventDefault: true }],
-                ["Escape", handleExit, { preventDefault: true} ],
-            ])}
-        />
-        <Group justify="flex-end">
-            <Text>{form.values.title.length}/{MAX_TITLE_LENGTH}</Text>
-        </Group>
+                // Overriding form.getInput `...form.getInputProps("title")`
+                onFocus={() => setIsFocusedOnTitleInput(true)}
+                onBlur={() => setIsFocusedOnTitleInput(false)}
+                onKeyDown={getHotkeyHandler([
+                    ["mod+S", handleCreate, { preventDefault: true }],
+                    ["Escape", handleExit, { preventDefault: true} ],
+                ])}
+            />
+            <div className="Modal__SubInputFlexbox">
+                <p>{form.values.title.length}/{MAX_TITLE_LENGTH}</p>
+            </div>
+        </div>
 
-        <Textarea className="item-create-modal__input item-create-modal__input--content"
-            data-autofocus
-            label="Content"
-            description={`Optional, must be or fewer than ${MAX_CONTENT_LENGTH} characters.`}
-            placeholder="Enter your note content here"
-            autosize
-            maxLength={MAX_CONTENT_LENGTH}
-            minRows={5}
-            {...form.getInputProps("content")}
+        <div className="Modal__InputContainer">
+            <Textarea className="item-create-modal__input item-create-modal__input--content"
+                data-autofocus
+                label="Content"
+                description={`Optional, must be or fewer than ${MAX_CONTENT_LENGTH} characters.`}
+                placeholder="Enter your note content here"
+                autosize
+                maxLength={MAX_CONTENT_LENGTH}
+                minRows={5}
+                {...form.getInputProps("content")}
 
-            onFocus={() => setIsFocusedOnContentInput(true)}
-            onBlur={() => setIsFocusedOnContentInput(false)}
-            onKeyDown={getHotkeyHandler([
-                ["mod+S", handleCreate, { preventDefault: true }],
-                ["Escape", handleExit, { preventDefault: true} ],
-            ])}
-        />
-        <Flex
-            direction="row-reverse"
-            justify="space-between"
-        >
-            <Text>{form.values.content.length}/{MAX_CONTENT_LENGTH}</Text>
-            {(isFocusedOnTitleInput || isFocusedOnContentInput) &&
-                <Text><KbdMod/> <Kbd>S</Kbd> Create and close</Text>
-            }
-        </Flex>
+                onFocus={() => setIsFocusedOnContentInput(true)}
+                onBlur={() => setIsFocusedOnContentInput(false)}
+                onKeyDown={getHotkeyHandler([
+                    ["mod+S", handleCreate, { preventDefault: true }],
+                    ["Escape", handleExit, { preventDefault: true} ],
+                ])}
+            />
+            <div className="Modal__SubInputFlexbox">
+                <p>{form.values.content.length}/{MAX_CONTENT_LENGTH}</p>
+                {(isFocusedOnTitleInput || isFocusedOnContentInput) &&
+                    <p><KbdMod/> <kbd>S</kbd> Create and close</p>
+                }
+            </div>
+        </div>
 
         {isConfirmingExit &&
-            <Text ta="right">
+            <p className="Modal__ExitConfirm">
                 You have not saved. Exiting will abandon your changes.
-            </Text>
+            </p>
         }
-        <Group justify="flex-end">
+        <div className="Modal__BtnContainer Modal__BtnContainer--FlexEnd">
             {isConfirmingExit
                 ? confirmExitButtonGroup
                 : initialButtonGroup
             }
-        </Group>
+        </div>
 
-    </Stack>
+    </div>
 };
 
 export default ItemCreateModal;
