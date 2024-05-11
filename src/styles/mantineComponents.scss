@@ -14,7 +14,7 @@
 }
 
 .mantine-Card-root {
-    background-color: var(--mantine-color-body);
+    background-color: var(--colBg);
 }
 
 .mantine-ScrollArea-scrollbar {
@@ -36,13 +36,13 @@
 .mantine-Spotlight-content {
     border-style: solid;
     border-width: 1px;
-    border-color: var(--mantine-color-text);
+    border-color: var(--colPri);
 }
 
 .mantine-Modal-overlay,
 .mantine-Spotlight-overlay {
     // TODO: This is incorrect, but it works. Should find out why
-    background-color: var(--mantine-color-body) 0.5;
+    background-color: var(--colBg) 0.5;
     backdrop-filter: blur(7px);
 }
 
@@ -52,12 +52,12 @@
 
 .mantine-Spotlight-action {
     &[data-selected] {
-        background-color: var(--mantine-color-text);
+        background-color: var(--colPri);
 
         .mantine-Spotlight-actionSection,
         .mantine-Spotlight-actionLabel,
         .mantine-Spotlight-actionDescription {
-            color: var(--mantine-color-body);
+            color: var(--colBg);
         }
     }
 };
@@ -69,7 +69,7 @@
 }
 
 .mantine-Notifications-notification {
-    color: var(--mantine-color-text);
-    background-color: var(--mantine-color-body);
-    border: solid 1px var(--mantine-color-text);
+    color: var(--colPri);
+    background-color: var(--colBg);
+    border: solid 1px var(--colPri);
 }

@@ -5,13 +5,13 @@
         }
 
         @include mantine.light {
-            background-color: var(--mantine-color-text);
-            color: var(--mantine-color-body);
+            background-color: var(--colPri);
+            color: var(--colBg);
         }
 
         @include mantine.dark {
-            background-color: var(--mantine-color-text);
-            color: var(--mantine-color-body);
+            background-color: var(--colPri);
+            color: var(--colBg);
         }
     }
 }

@@ -23,7 +23,7 @@
     }
 
     &__LogoIcon {
-        color: var(--mantine-color-text);
+        color: var(--colPri);
     }
 
     &__RightSide {
@@ -80,11 +80,11 @@
     }
 
     &__theme-mode-btn {
-        color: var(--mantine-color-text);
+        color: var(--colPri);
 
         &:hover {
             background-color: transparent;
-            color: var(--mantine-color-text);
+            color: var(--colPri);
         }
     }
 
