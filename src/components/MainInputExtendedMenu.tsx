@@ -68,8 +68,11 @@ export default function MainInputExtendedMenu(
                 sideOffset={10}
                 // alignOffset={-1}
                 onCloseAutoFocus={(e) => {
-                    e.preventDefault();
-                    if (shouldFocusOnMainInput) focusOnMainInput(mainInputRef);
+                    if (shouldFocusOnMainInput) {
+                        e.preventDefault();
+                        focusOnMainInput(mainInputRef);
+                        setShouldFocusOnMainInput(false);
+                    };
                 }}
             >
                 <DropdownMenu.Item className="MainInputDropdown__Item"
