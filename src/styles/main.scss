@@ -1,9 +1,6 @@
 
 @use 'sass:color';
-@use "./_variables.scss" as v;
-@use "./_mixins.scss" as m;
 @use "./_fonts.scss";
-
 @use "./mantineComponents.scss";
 
 html {

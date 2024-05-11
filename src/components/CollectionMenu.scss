@@ -1,6 +1,3 @@
-@use "../styles/mixins" as m;
-@use "../styles/_variables.scss" as v;
-
 .CollectionMenuBtn {
     @include m.DropdownTrigger;
     @include m.FocusOutline;
