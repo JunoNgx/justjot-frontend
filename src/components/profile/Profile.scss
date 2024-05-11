@@ -9,7 +9,14 @@
         margin-bottom: 1rem;
     }
 
-    &__Title {
-        margin-bottom: 1rem;
+    &__BtnContainer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    &__SuccessNotice {
+        margin-top: 1.25rem;
     }
 }
