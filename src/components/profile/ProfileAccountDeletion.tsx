@@ -1,24 +1,19 @@
-import { Code, Paper, Text, Title } from "@mantine/core";
+import "./Profile.scss";
 
 export default function ProfileAccountDeletion() {
-    return <Paper className="cardlike"
-        withBorder
-        p="md"
-    >
-        <Title className="cardlike__title"
-            order={2}
-        >
+    return <section className="Profile">
+        <h3 className="Profile__Title">
             Account deletion
-        </Title>
+        </h3>
         
-        <Text>For account deletion (which will also result in the permanent and irreversible destruction of your data), please send an email request:</Text>
+        <p>For account deletion (which will also result in the permanent and irreversible destruction of your data), please send an email request:</p>
         <ul>
             <li>From the email address associated with the account to be deleted, as verification.</li>
             <li>To the developer email address.</li>
             <li>With the email subject:</li>
         </ul>
 
-        <Code>[JustJot] Account deletion request</Code>
+        <code>[JustJot] Account deletion request</code>
 
-    </Paper>
+    </section>
 }
