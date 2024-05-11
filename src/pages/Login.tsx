@@ -77,11 +77,12 @@ export default function Login(
 
     return <div className="Cardlike Cardlike--IsLogin">
         <h2 className="Cardlike__Title">Login</h2>
-
-        {isDemoMode
-            ? demoNotice
-            : normalNotice
-        }
+        <div className="Cardlike__Subtitle">
+            {isDemoMode
+                ? demoNotice
+                : normalNotice
+            }
+        </div>
 
         <form onSubmit={form.onSubmit(attemptLogin)}>
             <TextInput
