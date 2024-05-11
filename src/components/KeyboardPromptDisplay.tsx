@@ -1,4 +1,4 @@
-import { ActionIcon, Box, Group, Kbd, Text } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import KbdMod from "./misc/KbdMod";
 import { useContext } from "react";
 import { ItemsContext } from "@/contexts/ItemsContext";
@@ -200,12 +200,10 @@ const KeyboardPromptItem = (
     if (!shouldDisplay)
         return "";
 
-    return <Group
-        justify="space-between"
-    >
+    return <div className="KeyboardPrompt__Item">
         <SingleKeyboardPrompt prompt={prompt} />
-        <Text className="KeyboardPrompt__Desc">{desc}</Text>
-    </Group>
+        <p className="KeyboardPrompt__Desc">{desc}</p>
+    </div>
 };
 
 const SingleKeyboardPrompt = (
@@ -217,7 +215,7 @@ const SingleKeyboardPrompt = (
         ? prompt as Hotkey[]
         : [prompt as Hotkey];
 
-    return <Box className="KeyboardPrompt__Prompt">
+    return <div className="KeyboardPrompt__Prompt">
         {promptList.map((prompt, index) => {
             const isLastItem = index === promptList.length - 1;
 
@@ -227,7 +225,7 @@ const SingleKeyboardPrompt = (
                 {!isLastItem && <span> / </span>}
             </span>
         })}
-    </Box>
+    </div>
 };
 
 const CombinationBtn = ({btnLabelList}: {btnLabelList: Hotkey}) => {
@@ -252,6 +250,6 @@ const SingleBtn = ({btnLabel}: {btnLabel: string}) => {
     case ("alt"):
         return <KbdAlt/>;
     default:
-        return <Kbd>{btnLabel}</Kbd>;
+        return <kbd>{btnLabel}</kbd>;
     }
 };

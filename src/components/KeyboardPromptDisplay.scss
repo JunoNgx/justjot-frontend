@@ -27,6 +27,15 @@
         border-color: var(--mantine-color-text);
     }
 
+    &__Item {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
     &__Prompt {
         max-width: 150px;
     }
@@ -35,6 +44,7 @@
         text-align: right;
         max-width: 150px;
         font-size: 0.8rem;
+        margin: 0;
     }
 
     &__Divider {
