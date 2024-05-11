@@ -2,7 +2,6 @@ import { ItemsContext } from "@/contexts/ItemsContext";
 import useIconProps from "@/hooks/useIconProps";
 import useItemNavActions from "@/hooks/useItemNavActions";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TODO_PREFIX } from "@/utils/constants";
-import { ActionIcon } from "@mantine/core";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { notifications } from "@mantine/notifications";
 import { spotlight } from "@mantine/spotlight";
@@ -53,23 +52,19 @@ export default function MainInputExtendedMenu(
     }
 
     return <DropdownMenu.Root>
-        <DropdownMenu.Trigger>
-            <ActionIcon variant="transparent"
-                className="main-input__menu-btn"
+        <DropdownMenu.Trigger className="MainInputDropdown__Btn">
+            <div className="MainInputDropdown__BtnContent"
                 title="Main input extended options"
                 aria-label="Extra functions and options for main input"
-                w={64}
             >
-                <IconChevronDown
-                    {...menuIconProps}
-                />
-            </ActionIcon>
+                <IconChevronDown {...menuIconProps} />
+            </div>
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Portal>
             <DropdownMenu.Content className="MainInputDropdown"
                 align="end"
-                sideOffset={15}
+                sideOffset={10}
                 // alignOffset={-1}
             >
                 <DropdownMenu.Item className="MainInputDropdown__Item"

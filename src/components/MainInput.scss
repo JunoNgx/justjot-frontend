@@ -35,21 +35,28 @@
         }
     }
 
-    // &__RightSide {
-    // }
-
-    // &__menu-btn {
-    //     cursor: pointer;
-    //     display: grid;
-    //     place-items: center;
-    //     color: var(--mantine-color-dimmed);
-    // }
+    &__RightSide {
+        height: 100%;
+        display: grid;
+        place-items: center;
+    }
 }
 
 .MainInputDropdown {
     @include m.GlassBlur;
     @include m.Menu;
     @include m.AnimatedDropdown;
+
+    &__Btn {
+        height: 100%;
+        @include m.FocusOutline;
+    }
+
+    &__BtnContent {
+        width: 3rem;
+        display: grid;
+        place-items: center;
+    }
 
     &__Item {
         @include m.DropdownItem;
