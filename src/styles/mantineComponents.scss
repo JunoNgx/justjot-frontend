@@ -71,7 +71,7 @@
 };
 
 .mantine-Notifications-root {
-    @include m.mobile {
+    @include m.Mobile {
         bottom: 6rem;
     }
 }

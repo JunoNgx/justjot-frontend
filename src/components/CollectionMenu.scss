@@ -13,14 +13,14 @@
         text-overflow: ellipsis;
     }
 
-    @include m.mobile {
+    @include m.Mobile {
         display: none;
     }
 
     &--IsMobile {
         display: none;
 
-        @include m.mobile {
+        @include m.Mobile {
             @include m.GlassBlur;
 
             display: flex;

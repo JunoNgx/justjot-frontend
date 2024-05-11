@@ -4,7 +4,7 @@
     margin: 0 auto 2rem;
     max-width: 320px;
 
-    @include m.mobile {
+    @include m.Mobile {
         margin-top: 0;
     }
 

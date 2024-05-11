@@ -136,7 +136,7 @@
         color: var(--colPri);
         user-select: none;
 
-        @include m.mobile {
+        @include m.Mobile {
             display: none;
         }
     }

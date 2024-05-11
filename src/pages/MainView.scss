@@ -5,7 +5,7 @@
     &__NoticeContainer {
         padding: 60px 0 60px;
 
-        @include m.mobile {
+        @include m.Mobile {
             padding: 40px 0 40px;
         }
     }
@@ -20,7 +20,7 @@
         max-width: 720px;
         margin: 0 auto 12px;
     
-        @include m.mobile { 
+        @include m.Mobile { 
             &__items-container {
                 padding-bottom: 5rem;
             }
