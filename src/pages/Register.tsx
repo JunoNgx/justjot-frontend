@@ -91,9 +91,9 @@ export default function Register() {
     </div>
 
     const registrationForm = <>
-        <p>
-            Already have an account? <NavLink to="login">Login</NavLink>
-        </p>
+        <div className="Cardlike__Subtitle">
+            <p>Already have an account? <NavLink to="login">Login</NavLink></p>
+        </div>
 
         <form onSubmit={form.onSubmit(attemptRegister)}>
             <TextInput mt="md"
