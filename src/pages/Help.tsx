@@ -211,7 +211,10 @@ export default function Help() {
                 <li>
                     <a href="https://mantine.dev/" target='_blank' rel='noopener noreferrer'>Mantine UI Library</a></li>
                 <li>
-                    <a href="https://icflorescu.github.io/mantine-contextmenu/" target='_blank' rel='noopener noreferrer'>Mantine ContextMenu</a>
+                    <a href="https://icflorescu.github.io/mantine-contextmenu/" target='_blank' rel='noopener noreferrer'>Mantine ContextMenu (no longer used)</a>
+                </li>
+                <li>
+                    <a href="https://www.radix-ui.com/primitives" target='_blank' rel='noopener noreferrer'>Radix Primitives</a>
                 </li>
                 <li>
                     <a href="https://sass-lang.com/" target='_blank' rel='noopener noreferrer'>Sass</a>
