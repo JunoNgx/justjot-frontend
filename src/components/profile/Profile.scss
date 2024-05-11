@@ -1,0 +1,15 @@
+.Profile {
+    margin: 0 auto 2rem;
+    padding: 1rem;
+    max-width: 320px;
+    border: 1px solid var(--colPri);
+
+    &__Title {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    &__Title {
+        margin-bottom: 1rem;
+    }
+}
