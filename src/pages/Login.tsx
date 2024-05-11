@@ -1,6 +1,7 @@
 import { useForm } from '@mantine/form';
 import { TextInput, PasswordInput } from "@mantine/core";
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import useNavigateRoutes from '@/hooks/useNavigateRoutes';
 import { useContext, useEffect, useState } from 'react';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { DbTable, User } from '@/types';
@@ -24,6 +25,7 @@ export default function Login(
         }
     });
 
+    const { navigateToMainView } = useNavigateRoutes();
     useEffect(() => {
         if (isLoggedIn) {
             navigateToMainView();
@@ -33,12 +35,6 @@ export default function Login(
         document.title = `Login — ${APP_NAME}`;
     }, []);
 
-    const navigate = useNavigate();
-    const navigateToMainView = () => {
-        navigate(`/${pbClient.authStore.model?.username}`, {
-            replace: true
-        });
-    }
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
