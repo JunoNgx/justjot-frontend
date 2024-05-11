@@ -7,7 +7,6 @@ import { Notifications } from "@mantine/notifications";
 // import '@mantine/spotlight/styles.css';
 // import '@mantine/core/styles.layer.css';
 
-import { ContextMenuProvider } from 'mantine-contextmenu';
 // import "mantine-contextmenu/styles.css";
 // import 'mantine-contextmenu/styles.layer.css';
 // import '@/styles/layers.css';
@@ -62,52 +61,50 @@ function App() {
                                         itemCreateModal: ItemCreateModal
                                     }}
                                 >
-                                    <ContextMenuProvider>
 
-                                        <ScrollArea
-                                            // Mantine currently doesn't havea fade out transition; this looks very ugly
-                                            // TODO: submit PR to mantine to fix this
-                                            type="scroll"
-                                            h="100vh"
-                                            scrollbarSize={10}
-                                        >
+                                    <ScrollArea
+                                        // Mantine currently doesn't havea fade out transition; this looks very ugly
+                                        // TODO: submit PR to mantine to fix this
+                                        type="scroll"
+                                        h="100vh"
+                                        scrollbarSize={10}
+                                    >
 
-                                            <Notifications
-                                                limit={5}
-                                                position="bottom-center"
-                                                autoClose={1000}
-                                            />
+                                        <Notifications
+                                            limit={5}
+                                            position="bottom-center"
+                                            autoClose={1000}
+                                        />
 
-                                            <AppShell.Header>
-                                                <Header />
-                                            </AppShell.Header>
+                                        <AppShell.Header>
+                                            <Header />
+                                        </AppShell.Header>
 
-                                            <AppShell.Main>
-                                                <Routes>
-                                                    <Route path="/" element={<LandingPage />} />
-                                                    <Route path="/help" element={<Help />} />
-                                                    <Route path="/:username">
-                                                        <Route index element={<MainView />} />
-                                                        <Route path=":collectionSlug" element={<MainView />} />
-                                                    </Route>
-                                                    <Route path="/profile" element={<Profile />} />
-                                                    <Route path="/login" element={<Login />} />
-                                                    <Route path="/demo-login" element={<Login isDemoMode={true} />} />
-                                                    <Route path="/register" element={<Register />} />
-                                                    <Route path="/reset" element={
-                                                        <Request pageType={RequestPageType.PASSWORD_CHANGE} />
-                                                    } />
-                                                    <Route path="/verify" element={
-                                                        <Request pageType={RequestPageType.EMAIL_VERIFY} />
-                                                    } />
-                                                    <Route path="/terms" element={<Terms />} />
-                                                </Routes>
-                                                <SpotlightSearch />
+                                        <AppShell.Main>
+                                            <Routes>
+                                                <Route path="/" element={<LandingPage />} />
+                                                <Route path="/help" element={<Help />} />
+                                                <Route path="/:username">
+                                                    <Route index element={<MainView />} />
+                                                    <Route path=":collectionSlug" element={<MainView />} />
+                                                </Route>
+                                                <Route path="/profile" element={<Profile />} />
+                                                <Route path="/login" element={<Login />} />
+                                                <Route path="/demo-login" element={<Login isDemoMode={true} />} />
+                                                <Route path="/register" element={<Register />} />
+                                                <Route path="/reset" element={
+                                                    <Request pageType={RequestPageType.PASSWORD_CHANGE} />
+                                                } />
+                                                <Route path="/verify" element={
+                                                    <Request pageType={RequestPageType.EMAIL_VERIFY} />
+                                                } />
+                                                <Route path="/terms" element={<Terms />} />
+                                            </Routes>
+                                            <SpotlightSearch />
 
-                                            </AppShell.Main>
-                                        </ScrollArea>
+                                        </AppShell.Main>
+                                    </ScrollArea>
 
-                                    </ContextMenuProvider>
                                 </ModalsProvider>
                             </ItemsContextProvider>
                         </CollectionsContextProvider>
