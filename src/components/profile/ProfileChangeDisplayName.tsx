@@ -1,10 +1,13 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { DbTable, User } from "@/types";
-import { Button, Group, Paper, Text, TextInput, Title } from "@mantine/core";
+import { TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { ClientResponseError } from "pocketbase";
 import { useContext, useState } from "react";
 import ErrorResponseDisplay from "../ErrorResponseDisplay";
+import ButtonWithLoader from "@/libs/components/ButtonWithLoader";
+
+import "./Profile.scss";
 
 export default function ProfileChangeDisplayName() {
 
@@ -44,20 +47,15 @@ export default function ProfileChangeDisplayName() {
         setIsLoading(false);
     };
 
-    return <Paper className="cardlike"
-        withBorder
-        p="md"
-    >
+    return <div className="Profile">
         <form onSubmit={form.onSubmit(handleSubmission)}>
-            <Title className="cardlike__title"
-                order={2}
-            >
+            <h3 className="Profile__Title">
                 Change display name
-            </Title>
+            </h3>
 
             {user!.displayName
-                ? <Text>Your current display name is: <em>{user!.displayName}</em></Text>
-                : <Text>You account currently does not have a display name.</Text>
+                ? <p>Your current display name is: <em>{user!.displayName}</em></p>
+                : <p>You account currently does not have a display name.</p>
             }
 
             <TextInput mt="md"
@@ -67,26 +65,24 @@ export default function ProfileChangeDisplayName() {
                 {...form.getInputProps('displayName')}
             />
 
-            <Group
-                mt="md"
-                justify="flex-end"
-            >
-                <Button type="submit"
-                    loading={isLoading}
+            <div className="Profile__BtnContainer">
+                <ButtonWithLoader
+                    type="submit"
+                    isLoading={isLoading}
                 >
                     Submit
-                </Button>
-            </Group>
+                </ButtonWithLoader>
+            </div>
         </form>
 
         {(hasAttempted && isSuccessful) &&
-            <Text c="green" mt="xs">
+            <p className="Profile_SuccessNotice">
                 Display name updated successfully.
-            </Text>
+            </p>
         }
 
         {(hasAttempted && !isSuccessful) &&
             <ErrorResponseDisplay errRes={errRes} />
         }
-    </Paper>
+    </div>
 }
