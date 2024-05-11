@@ -10,6 +10,54 @@
         margin-top: 0;
     }
 
+    &__Title {
+        margin-bottom: 1rem;
+    }
+    
+    &__Subtitle {
+        margin: 1rem 0 1rem;
+    }
+
+    &__BtnContainer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    &__BottomTextContainer {
+        margin-top: 1rem;
+    }
+
+    &__SuccessNotice {
+        margin-top: 1.25rem;
+    }
+
+    &__NoticeLastline {
+        margin-top: 1.25rem;
+    }
+
+    &--WithBottomMargin {
+        margin-bottom: 2rem;
+    }
+
+    &--IsLogin {
+        margin-top: 150px;
+    }
+
+    &--IsRegister{
+        margin-bottom: 60px;
+    }
+
+    &--IsReset {
+        margin-top: 200px;
+    }
+
+    &__HelpSection {
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+
     &--LongDoc {
         max-width: 640px;
         hyphens: auto;
@@ -46,51 +94,7 @@
         }
     }
 
-    &__Title {
-        margin-bottom: 1rem;
-    }
-
-    &__BtnContainer {
-        display: flex;
-        justify-content: flex-end;
-        gap: 1rem;
-        margin-top: 1rem;
-    }
-
-    &__BottomTextContainer {
-        margin-top: 1rem;
-    }
-
-    &__HelpSection {
-        margin-top: 1rem;
-        margin-bottom: 2rem;
-    }
-
-    &__SuccessNotice {
-        margin-top: 1.25rem;
-    }
-
-    &__NoticeLastline {
-        margin-top: 1.25rem;
-    }
-
     &__TermsItem {
         margin-top: 0.25rem;
-    }
-
-    &--WithBottomMargin {
-        margin-bottom: 2rem;
-    }
-
-    &--IsLogin {
-        margin-top: 150px;
-    }
-
-    &--IsRegister{
-        margin-bottom: 60px;
-    }
-
-    &--IsReset {
-        margin-top: 200px;
     }
 }
