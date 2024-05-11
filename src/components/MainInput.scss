@@ -50,6 +50,10 @@
     &__Btn {
         height: 100%;
         @include m.FocusOutline;
+
+        &:hover {
+            background-color: var(--colGreyBg);
+        }
     }
 
     &__BtnLabel {
