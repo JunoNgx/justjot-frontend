@@ -11,6 +11,8 @@ import useCollectionActions from '@/hooks/useCollectionActions';
 import useNavigateRoutes from '@/hooks/useNavigateRoutes';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 
+import '@mantine/spotlight/styles.css';
+
 export default function SpotlightSearch() {
 
     const { isLoggedIn } = useContext(BackendClientContext);
