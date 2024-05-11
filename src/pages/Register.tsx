@@ -8,6 +8,7 @@ import { ClientResponseError } from 'pocketbase';
 import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
 import useNavigateRoutes from '@/hooks/useNavigateRoutes';
 import { APP_NAME } from '@/utils/constants';
+import ButtonWithLoader from '@/libs/components/ButtonWithLoader';
 
 type RegisterFormData = {
     email: string,
@@ -148,12 +149,12 @@ export default function Register() {
             </div>
 
             <div className="Cardlike__BtnContainer">
-                <Button
+                <ButtonWithLoader
                     type="submit"
-                    loading={isLoading}
+                    isLoading={isLoading}
                 >
                     Register
-                </Button>
+                </ButtonWithLoader>
             </div>
 
             {(hasAttempted && !isSuccessful) &&

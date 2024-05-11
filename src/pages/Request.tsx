@@ -1,5 +1,5 @@
 import { useForm } from '@mantine/form';
-import { TextInput, Button } from "@mantine/core";
+import { TextInput } from "@mantine/core";
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useContext, useEffect, useState } from 'react';
 import { DbTable, RequestPageType } from '@/types'
@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
 import { ClientResponseError } from 'pocketbase';
 import { APP_NAME } from '@/utils/constants';
+import ButtonWithLoader from '@/libs/components/ButtonWithLoader';
 
 export default function Request(
     { pageType }: { pageType: RequestPageType }
@@ -72,12 +73,12 @@ export default function Request(
             />
 
             <div className="Cardlike__BtnContainer">
-                <Button
+                <ButtonWithLoader
                     type="submit"
-                    loading={isLoading}
+                    isLoading={isLoading}
                 >
                     Request
-                </Button>
+                </ButtonWithLoader>
             </div>
         </form>
 
