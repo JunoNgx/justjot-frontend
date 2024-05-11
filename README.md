@@ -12,7 +12,11 @@ The application is currently deployed at [justjot.app](https://justjot.app/) via
 
 The project is powered by [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/) and [Vite](https://vitejs.dev/).
 
-Additionally, it also uses the [Mantine components library](https://mantine.dev/) and [Sass](https://sass-lang.com/).
+## UI Library
+
+The project is mainly driven by [Mantine components library](https://mantine.dev/) and [Sass](https://sass-lang.com/), with dropdown menu and context menu cherry picked from [Radix Primitives](https://www.radix-ui.com/primitives), which are well-known for being incredibly feature-rich. Native HTML elements are used when possible to minimise dependency on Mantine.
+
+The current state of the codebase is the outcome of attempts to take ownership of CSS without excessively re-inventing the wheel.
 
 ## Running locally
 
