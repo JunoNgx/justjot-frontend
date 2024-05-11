@@ -1,7 +1,7 @@
 .Loader {
     --colLoader: var(--colPri);
 
-    &[data-usePriCol="false"] {
+    &[data-use-primary-color="false"] {
         --colLoader: var(--colBg);
     }
 
