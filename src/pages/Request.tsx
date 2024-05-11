@@ -1,5 +1,5 @@
 import { useForm } from '@mantine/form';
-import { Paper, TextInput, Button, Title, Group, Text, Box, Anchor } from "@mantine/core";
+import { TextInput, Button } from "@mantine/core";
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useContext, useEffect, useState } from 'react';
 import { DbTable, RequestPageType } from '@/types'
@@ -49,16 +49,18 @@ export default function Request(
         setIsLoading(false);
     }
 
-    const successNotice = <Box mt="lg" p="none">
-        <Text>{computeSuccessNoticeFirstLine(pageType)}</Text>
-        <Text mt="md">Please check your email inbox for the verification link.</Text>
-        <Text mt="lg">Proceed to <Anchor component={NavLink} to="login">Login</Anchor>.</Text>
-    </Box>
+    const successNotice = <div className="Cardlike__SuccessNotice">
+        <p>{computeSuccessNoticeFirstLine(pageType)}</p>
+        <p>Please check your email inbox for the verification link.</p>
+        <p>Proceed to <NavLink to="login">Login</NavLink>.</p>
+    </div>
 
     const resetRequestForm = <>
-            <Text mt="lg">{computeCardInitialNotice(pageType)}</Text>
+        <div className="Cardlike__Subtitle">
+            <p>{computeSubtitle(pageType)}</p>
+        </div>
 
-            <form onSubmit={form.onSubmit(handleSubmission)}>
+        <form onSubmit={form.onSubmit(handleSubmission)}>
             <TextInput mt="md"
                 autoFocus
                 label="Email address"
@@ -69,40 +71,35 @@ export default function Request(
                 {...form.getInputProps('email')}
             />
 
-            <Group
-                mt="md"
-                justify="flex-end"
-            >
+            <div className="Cardlike__BtnContainer">
                 <Button
                     type="submit"
                     loading={isLoading}
                 >
                     Request
                 </Button>
-            </Group>
+            </div>
         </form>
 
         {(hasAttempted && !isSuccessful) &&
             <ErrorResponseDisplay errRes={errRes} />
         }
 
-        <Text mt="lg">
-            Just in case you want to <Anchor component={NavLink} to="login">Login</Anchor>.
-        </Text>
+        <div className="Cardlike__BottomTextContainer">
+            <p>Just in case you want to <NavLink to="login">Login</NavLink>.</p>
+        </div>
     </>
 
-    return <Paper className="cardlike cardlike--reset">
-        <Title className="cardlike__title"
-            order={2}
-        >
+    return <div className="Cardlike Cardlike--IsReset">
+        <h2 className="Cardlike__Title">
             {computeCardTitle(pageType)}
-        </Title>
+        </h2>
 
         {(hasAttempted && isSuccessful)
             ? successNotice
             : resetRequestForm
         }
-    </Paper>
+    </div>
 }
 
 const computePageTitle = (pageType: RequestPageType) => {
@@ -115,7 +112,7 @@ const computePageTitle = (pageType: RequestPageType) => {
     }
 }
 
-const computeCardInitialNotice = (pageType: RequestPageType) => {
+const computeSubtitle = (pageType: RequestPageType) => {
     switch (pageType) {
         case (RequestPageType.EMAIL_VERIFY):
             return "In the unfortunate event that you did not receive the email verification link, please re-request."
