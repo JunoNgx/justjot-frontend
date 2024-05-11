@@ -7,9 +7,10 @@ import ProfileTestAccountNotice from "@/components/profile/ProfileTestAccountNot
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { APP_NAME } from "@/utils/constants";
-import { Box } from "@mantine/core";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+import "./Pages.scss";
 
 export default function Profile() {
 
@@ -30,7 +31,7 @@ export default function Profile() {
         document.title = `Account — ${APP_NAME}`;
     }, []);
 
-    return <Box pb="xl">
+    return <div className="Cardlike Cardlike--WithBottomMargin">
         {isLoggedIn &&
             <>
                 <ProfileFaviconCookies />
@@ -44,5 +45,5 @@ export default function Profile() {
                 </>}
             </>
         }
-    </Box>
+    </div>
 }
