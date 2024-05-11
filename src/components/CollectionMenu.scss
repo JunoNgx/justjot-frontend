@@ -3,6 +3,7 @@
 
 .CollectionMenuBtn {
     @include m.DropdownTrigger;
+    @include m.FocusOutline;
 
     &__Label {
         user-select: none;
