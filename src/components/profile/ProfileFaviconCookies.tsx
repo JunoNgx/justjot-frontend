@@ -6,7 +6,7 @@ export default function ProfileFaviconCookies() {
 
     const { isFaviconEnabled, setIsFaviconEnabled } = useContext(UserLocalSettingsContext);
 
-    return <div className="Profile">
+    return <section className="Profile">
         <h3 className="Profile__Title">
             Favicons and third-party cookies
         </h3>
@@ -25,5 +25,5 @@ export default function ProfileFaviconCookies() {
             onChange={(event) => setIsFaviconEnabled(event.currentTarget.checked)}
             label="I would like to enable the display of favicons and related third-party cookies for this device"
         />
-    </div>
+    </section>
 }

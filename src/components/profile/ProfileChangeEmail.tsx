@@ -43,7 +43,7 @@ export default function ProfileChangeEmail() {
         setIsLoading(false);
     };
 
-    return <div className="Profile">
+    return <section className="Profile">
         <form onSubmit={form.onSubmit(handleSubmission)}>
             <h3 className="Profile__Title">
                 Change email
@@ -79,5 +79,5 @@ export default function ProfileChangeEmail() {
             <ErrorResponseDisplay errRes={errRes} />
         }
 
-    </div>
+    </section>
 }

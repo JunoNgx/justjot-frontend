@@ -47,7 +47,7 @@ export default function ProfileChangeDisplayName() {
         setIsLoading(false);
     };
 
-    return <div className="Profile">
+    return <section className="Profile">
         <form onSubmit={form.onSubmit(handleSubmission)}>
             <h3 className="Profile__Title">
                 Change display name
@@ -84,5 +84,5 @@ export default function ProfileChangeDisplayName() {
         {(hasAttempted && !isSuccessful) &&
             <ErrorResponseDisplay errRes={errRes} />
         }
-    </div>
+    </section>
 }
