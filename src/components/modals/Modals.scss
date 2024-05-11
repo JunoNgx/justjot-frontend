@@ -8,6 +8,10 @@
         gap: 1rem;
     }
 
+    &--ThickPadding {
+        padding: 1.25rem;
+    }
+
     &__SubInputFlexbox {
         display: flex;
         flex-direction: row;
@@ -79,5 +83,22 @@
     &__ExitConfirm {
         text-align: right;
         margin: 0;
+    }
+
+    &__MoveItemOption {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    &__MoveItemBtn {
+        width: 70%;
+    }
+
+    &__LoaderContainer {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center;
     }
 }

@@ -1,8 +1,7 @@
 import { useContext, useState } from "react";
-import { Box, Button, FocusTrap, Group, Loader, Stack } from "@mantine/core";
+import { FocusTrap } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { Item, ItemCollection } from "@/types";
-
 import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import CollectionHotkey from "@/components//misc/CollectionHotkey";
@@ -14,6 +13,10 @@ import useManageListState from "@/libs/useManageListState";
 import { getHotkeyHandler } from "@mantine/hooks";
 import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
+import ButtonWithLoader from "@/libs/components/ButtonWithLoader";
+import Loader from "@/libs/components/Loader";
+
+import "./Modals.scss";
 
 type ItemMoveModal = {
     item: Item,
@@ -87,8 +90,7 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
     console.log(collectionList)
 
     return <FocusTrap> 
-        <Stack className="item-move-modal"
-            p="lg"
+        <div className="Modal Modal--Stackbox Modal--ThickPadding"
             /**
              * Use this as initial focused element, so the numeric hotkeys
              * can work for keyboard users.
@@ -97,28 +99,27 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
             onKeyDown={getHotkeyHandler([...numericKeysHotkeyOptions])}
         >
             {collectionList?.filter(c => !c.isTrashBin)
-                .map((collection, index) => <Group
+                .map((collection, index) => <div
+                    className="Modal__MoveItemOption"
                     key={index}
-                    justify="center"
                 >
-                    <Button className="item-move-modal__move-btn"
-                        w="70%"
+                    <ButtonWithLoader className="Modal__MoveItemBtn"
                         onClick={() => moveItemToCollection({
                             itemId: item.id, collectionId: collection.id})
                         }
-                        disabled={isLoading || item?.collection === collection.id}
+                        isDisabled={isLoading || item?.collection === collection.id}
                     >
                         {collection.name}    
-                    </Button>
+                    </ButtonWithLoader>
 
-                    <Box className="item-move-modal__collection-hotkey">
+                    <div className="Modal__CollectionHotkey">
                         <CollectionHotkey index={index}/>
-                    </Box>
-                </Group>)}
+                    </div>
+                </div>)}
 
-            {isLoading && <Group mt="md" justify="center">
-                <Loader type="bars"/>
-            </Group>}
-        </Stack>
+            {isLoading && <div className="Modal__LoaderContainer">
+                <Loader/>
+            </div>}
+        </div>
     </FocusTrap>  
 }
