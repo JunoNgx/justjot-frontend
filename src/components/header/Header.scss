@@ -48,6 +48,10 @@
         display: flex;
         flex-direction: row;
         gap: 1rem;
+
+        @include m.mobile {
+            margin-right: 1rem;
+        }
     }
 
     &__ProfileDropdown {
