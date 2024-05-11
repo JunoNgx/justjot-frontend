@@ -20,7 +20,7 @@ export default function useItemNavActions() {
 
     const getSelectedItemElement = () => {
         return document.querySelector<HTMLElement>(
-            "#displayed-list .item--is-selected");
+            "#displayed-list .Item--IsSelected");
     };
 
     const focusOnMainInput = (mainInputRef: React.RefObject<HTMLInputElement>) => {
