@@ -4,7 +4,6 @@ import { notifications } from "@mantine/notifications";
 import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST } from "@/utils/constants";
 import { IconExclamationCircle } from "@tabler/icons-react";
 import { justJotTheme } from "@/theme";
-import { Text } from "@mantine/core";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
 import useCollectionApiCalls from "./useCollectionApiCalls";
 import { ClientResponseError } from "pocketbase";
@@ -102,9 +101,9 @@ export default function useCollectionDeletion() {
                 title: "Confirm collection deletion",
                 centered: true,
                 children: (<>
-                    <Text mt="xl">Are you sure you want to delete the collection "{currCollection!.name}"?</Text>
-                    <Text mt="md">This is irreversible and will also cascadingly delete all items stored in this collection. </Text>
-                    <Text mt="md">Please make sure that you would like to continue.</Text>
+                    <p>Are you sure you want to delete the collection "{currCollection!.name}"?</p>
+                    <p>This is irreversible and will also cascadingly delete all items stored in this collection. </p>
+                    <p>Please make sure that you would like to continue.</p>
                 </>),
                 labels: {
                     confirm: "Delete collection",
