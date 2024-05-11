@@ -2422,11 +2422,6 @@ magic-string@^0.30.5:
   dependencies:
     "@jridgewell/sourcemap-codec" "^1.4.15"
 
-mantine-contextmenu@^7.8.1:
-  version "7.8.1"
-  resolved "https://registry.yarnpkg.com/mantine-contextmenu/-/mantine-contextmenu-7.8.1.tgz#e54be367f94557167e7b91ceb7e6361fa30b89ad"
-  integrity sha512-ZWSOMSmi3T00MnBUja3x73946MUyRuXFgxcxh7UBxxQlOHktJvghEShH1Z+FhaLT4llBCBtrEJiH5SNiT/AhDA==
-
 memoize-one@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-6.0.0.tgz#b2591b871ed82948aee4727dc6abceeeac8c1045"
