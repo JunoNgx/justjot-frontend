@@ -116,3 +116,10 @@
     background-color: var(--colGreyBg);
     margin: 2px;
 }
+
+@mixin FocusOutline {
+    &:focus-visible {
+        outline: 2px solid var(--colPri);
+        outline-offset: 2px;
+    }
+}
