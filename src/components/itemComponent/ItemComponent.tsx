@@ -35,9 +35,13 @@ export default function ItemComponent(
 
         <div className="Item__RightSide">
             {item.shouldCopyOnClick &&
-                <IconClipboardCopy className="Item__ShouldCopyIcon"
-                    {...itemIconProps}
-                />
+                <div className="Item__ShouldCopyIndicator"
+                    title="This item has been set to copy on click"
+                >
+                    <IconClipboardCopy className="Item__ShouldCopyIcon"
+                        {...itemIconProps}
+                    />
+                </div>
             }
             <ItemComponentCreatedDate className="Item__Datetime"
                 createdDatetime={item.created}

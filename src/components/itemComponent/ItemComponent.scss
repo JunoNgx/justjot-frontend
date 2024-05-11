@@ -131,6 +131,11 @@
         flex-shrink: 0;
     }
 
+    &__ShouldCopyIndicator {
+        display: grid;
+        place-items: center;
+    }
+
     &__Datetime {
         color: var(--colPri);
         user-select: none;
