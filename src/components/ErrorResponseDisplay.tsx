@@ -1,5 +1,5 @@
-import { Stack, Text } from "@mantine/core";
 import { ClientResponseError } from "pocketbase";
+import "./ErrorResponseDisplay.scss";
 
 type ErrorResponse = {
     code?: number
@@ -29,7 +29,9 @@ export default function ErrorResponseDisplay(
     const hasMainError = !!errRes;
     const statusCode = errRes?.code || errRes?.status;
     const mainErrorDisplay = (
-        <Text c="orange" mt="xs">Code {statusCode}: {errRes?.message}</Text>
+        <p className="MainError">
+                Code {statusCode}: {errRes?.message}
+        </p>
     );
 
     /**
@@ -47,11 +49,11 @@ export default function ErrorResponseDisplay(
 
     const hasProblemList = !!problemList.length;
     const problemListDisplay = (
-        <Stack mt="lg">
+        <ul className="ErrorList">
             {problemList.map((problem, index) =>
-                <Text key={index} c="red">{problem}</Text>
+                <li className="ErrorList__Item" key={index}>{problem}</li>
             )}
-        </Stack>
+        </ul>
     );
 
     return <>

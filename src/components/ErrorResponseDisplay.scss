@@ -1,0 +1,13 @@
+.MainError {
+    color: var(--colYellow);
+    margin: 0.5rem 0 0.5rem;
+}
+
+.ErrorList {
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+
+    &__Item {
+        color: var(--colMagenta);
+    }
+}
