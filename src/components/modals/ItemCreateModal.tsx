@@ -1,13 +1,14 @@
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useItemActions from "@/hooks/useItemActions";
 import { MAX_TITLE_LENGTH, MAX_CONTENT_LENGTH } from "@/utils/constants";
-import { Button, TextInput, Textarea } from "@mantine/core";
+import { TextInput, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { getHotkeyHandler } from "@mantine/hooks";
 import { ContextModalProps } from '@mantine/modals';
 import { useContext, useState } from "react";
 import KbdMod from "../misc/KbdMod";
 import "./Modals.scss";
+import ButtonWithLoader from "@/libs/components/ButtonWithLoader";
 
 const ItemCreateModal = ({
     context,
@@ -46,36 +47,35 @@ const ItemCreateModal = ({
     };
 
     const initialButtonGroup = <>
-        <Button
-            variant="default"
-            color="grey"
+        <ButtonWithLoader
+            variant="secondary"
             onClick={handleExit}
         >
             Exit
-        </Button>
+        </ButtonWithLoader>
 
-        <Button
+        <ButtonWithLoader
+            variant="primary"
             onClick={handleCreate}
         >
             Create
-        </Button>
+        </ButtonWithLoader>
     </>;
 
     const confirmExitButtonGroup = <>
-        <Button
-            variant="default"
+        <ButtonWithLoader
+            variant="secondary"
             onClick={() => setIsConfirmExit(false)}
         >
             Back
-        </Button>
+        </ButtonWithLoader>
 
-        <Button
-            variant="filled"
-            color="red"
+        <ButtonWithLoader
+            variant="danger"
             onClick={() => context.closeModal(id)}
         >
             Confirm exit
-        </Button>
+        </ButtonWithLoader>
     </>;
 
     return <div className="Modal Modal--Stackbox">
