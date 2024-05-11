@@ -72,9 +72,13 @@
         @include m.DropdownSeparator;
     }
 
-    &__UserProfileBtn {
-        @include m.DropdownTrigger;
+    &__ProfileDropdownBtn {
+        @include m.FocusOutline;
         margin-right: 0.75rem;
+    }
+        
+    &__ProfileDropdownBtnLabel {
+        @include m.DropdownTrigger;
     }
 
     &__UsernameText {

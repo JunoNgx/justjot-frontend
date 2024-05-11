@@ -19,8 +19,8 @@ export default function HeaderUser() {
     const username = user?.displayName || user?.username;
 
     return <DropdownMenu.Root>
-        <DropdownMenu.Trigger>
-            <span className="Header__UserProfileBtn">
+        <DropdownMenu.Trigger className="Header__ProfileDropdownBtn">
+            <span className="Header__ProfileDropdownBtnLabel">
                 <span className="Header__UsernameText">{username}</span>
                 <IconChevronDown {...menuIconProps} />
             </span>
@@ -29,7 +29,7 @@ export default function HeaderUser() {
         <DropdownMenu.Portal>
             <DropdownMenu.Content className="Header__ProfileDropdown"
                 sideOffset={15}
-                alignOffset={18}
+                alignOffset={5}
                 align="end"
             >
 
