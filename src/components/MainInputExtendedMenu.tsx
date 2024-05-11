@@ -66,7 +66,7 @@ export default function MainInputExtendedMenu(
             <DropdownMenu.Content className="MainInputDropdown"
                 align="end"
                 sideOffset={10}
-                // alignOffset={-1}
+                // alignOffset={0}
                 onCloseAutoFocus={(e) => {
                     if (shouldFocusOnMainInput) {
                         e.preventDefault();
