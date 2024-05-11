@@ -6,7 +6,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { notifications } from "@mantine/notifications";
 import { spotlight } from "@mantine/spotlight";
 import { IconCheckbox, IconChevronDown, IconClipboardPlus, IconFocus, IconLayoutNavbar, IconX } from "@tabler/icons-react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import LabelWithIcon from "@/libs/components/LabelWithIcon";
 
 import "./MainInput.scss";
@@ -23,6 +23,7 @@ export default function MainInputExtendedMenu(
     const { menuIconProps } = useIconProps();
     const { setInputVal } = useContext(ItemsContext);
     const { focusOnMainInput } = useItemNavActions();
+    const [ shouldFocusOnMainInput, setShouldFocusOnMainInput ] = useState(false);
 
     const enterFromClipboard = () => {
         if (!navigator.clipboard.readText) {
@@ -66,11 +67,15 @@ export default function MainInputExtendedMenu(
                 align="end"
                 sideOffset={10}
                 // alignOffset={-1}
+                onCloseAutoFocus={(e) => {
+                    e.preventDefault();
+                    if (shouldFocusOnMainInput) focusOnMainInput(mainInputRef);
+                }}
             >
                 <DropdownMenu.Item className="MainInputDropdown__Item"
                     onClick={() => {
                         setInputVal(curr => `${CREATE_TEXT_WITH_TITLE_PREFIX} ${curr}`);
-                        focusOnMainInput(mainInputRef);
+                        setShouldFocusOnMainInput(true);
                     }}
                 >
                     <LabelWithIcon
@@ -82,7 +87,7 @@ export default function MainInputExtendedMenu(
                 <DropdownMenu.Item className="MainInputDropdown__Item"
                     onClick={() => {
                         setInputVal(curr => `${CREATE_TODO_PREFIX} ${curr}`);
-                        focusOnMainInput(mainInputRef);
+                        setShouldFocusOnMainInput(true);
                     }}
                 >
                     <LabelWithIcon 
@@ -104,7 +109,7 @@ export default function MainInputExtendedMenu(
                 <DropdownMenu.Item className="MainInputDropdown__Item"
                     onClick={() => {
                         setInputVal("");
-                        focusOnMainInput(mainInputRef);
+                        setShouldFocusOnMainInput(true);
                     }}
                 >
                     <LabelWithIcon 
