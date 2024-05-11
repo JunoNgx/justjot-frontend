@@ -40,7 +40,7 @@ test.describe("Main input", () => {
         //     await page.getByLabel('Extra functions and options').click();
         //     await page.getByRole('menuitem', { name: 'from clipboard' }).click();
         //     await expect(page.getByLabel('Main input', { exact: true })).toHaveValue('');
-        //     await expect(page.locator('#displayed-list')).toContainText('I was born in a prison');
+        //     await expect(page.locator('#DisplayedList')).toContainText('I was born in a prison');
         // });
 
         test("Extended menu: clear input", async ({ page }) => {
@@ -179,7 +179,7 @@ test.describe("Main input", () => {
             await page.locator('body').press('Control+Enter');
 
             await expect(page.locator('.Item[data-index="3"]')).toHaveText(/Content copied/);
-            await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
+            await expect(page.locator('#DisplayedList')).toContainText(/Content copied/);
         });
 
         test("Primary action: copy a link content that was marked to copy", async ({ page }) => {
@@ -190,7 +190,7 @@ test.describe("Main input", () => {
             await page.getByLabel('Main input', { exact: true }).press('Control+Enter');
 
             await expect(page.locator('.Item[data-index="2"]')).toHaveText(/Content copied/);
-            await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
+            await expect(page.locator('#DisplayedList')).toContainText(/Content copied/);
         });
 
         test("Primary action: toggling a todo isDone status", async ({ page }) => {
@@ -348,7 +348,7 @@ test.describe("Main input", () => {
                 .toContainText('Trash bin');
             await expect(page).toHaveURL("e2eTestAcc/trash-bin");
 
-            await expect(page.locator("#displayed-list")).not.toBeEmpty();
+            await expect(page.locator("#DisplayedList")).not.toBeEmpty();
 
             await page.locator('body').press('Control+F');
             await page.locator('body').press('ArrowDown');
@@ -357,7 +357,7 @@ test.describe("Main input", () => {
             // Dev note: locator will fail to find element, everything will fail.
             // await expect(page.locator('.Item[data-index="0"] .Item__PrimaryText'))
             //     .not.toHaveText("trashed");
-            await expect(page.locator("#displayed-list")).toBeEmpty();
+            await expect(page.locator("#DisplayedList")).toBeEmpty();
         });
 
         test("Item creation should be blocked from trash bin", async ({ page }) => {
@@ -374,7 +374,7 @@ test.describe("Main input", () => {
             await page.getByLabel('Main input', { exact: true }).press('Enter');
 
             await expect(page.getByLabel("Main input", { exact: true })).toHaveValue('New quick note in trash bin');
-            await expect(page.locator("#displayed-list")).toBeEmpty();
+            await expect(page.locator("#DisplayedList")).toBeEmpty();
         });
 
         test("Toggle shouldCopyOnClick", async ({ page }) => {

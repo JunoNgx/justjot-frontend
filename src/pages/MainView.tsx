@@ -107,7 +107,7 @@ export default function MainView() {
         >
             <MainInput ref={mainInputRef}/>
             <div className="MainView__ItemList"
-                id="displayed-list"
+                id="DisplayedList"
             >
                 <MainContentList
                     isLoading={isLoading}

@@ -79,7 +79,7 @@ test.describe("Item context menu", () => {
             await page.getByRole('menuitem', { name: 'Copy', exact: true }).click();
 
             await expect(page.locator('.Item[data-id="hxz3757cizrkzsl"]')).toHaveText(/Content copied/);
-            await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
+            await expect(page.locator('#DisplayedList')).toContainText(/Content copied/);
         });
 
         test("Edit", async ({ page }) => {
