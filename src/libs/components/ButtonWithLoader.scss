@@ -27,27 +27,6 @@
         font-weight: 600;
     }
 
-    &__Loader {
-        display: block;
-        height: 1rem;
-        width: 1rem;
-        border-radius: 50%;
-        border-style: solid;
-        border-width: 3px;
-        background-color: transparent;
-        border-color: white white white transparent;
-        animation: rotate 1.5s linear infinite;
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-    }
 
     transition-property: transform;
     transition-timing-function: ease-in-out;
@@ -89,7 +68,7 @@
         background-color: var(--colBg);
 
         .ButtonWithLoader__LabelContainer,
-        .ButtonWithLoader__Loader {
+        .ButtonWithLoader__LoaderContainer {
             color: var(--colPri);
         }
     }

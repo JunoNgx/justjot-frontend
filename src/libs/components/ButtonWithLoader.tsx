@@ -1,4 +1,5 @@
 import "./ButtonWithLoader.scss";
+import Loader from "./Loader";
 
 type ButtonWithLoaderOptions = {
     className?: string,
@@ -29,7 +30,7 @@ export default function ButtonWithLoader(
         onClick={onClick}
     >
         <span className="ButtonWithLoader__LoaderContainer">
-            <span className="ButtonWithLoader__Loader" />
+            <Loader />
         </span>
         <span className="ButtonWithLoader__LabelContainer">
             {children}
