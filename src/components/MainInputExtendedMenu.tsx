@@ -53,7 +53,7 @@ export default function MainInputExtendedMenu(
 
     return <DropdownMenu.Root>
         <DropdownMenu.Trigger className="MainInputDropdown__Btn">
-            <div className="MainInputDropdown__BtnContent"
+            <div className="MainInputDropdown__BtnLabel"
                 title="Main input extended options"
                 aria-label="Extra functions and options for main input"
             >
