@@ -6,7 +6,7 @@ type ButtonWithLoaderOptions = {
     variant?: "primary" |"secondary" | "danger" | undefined,
     type?: "submit" | "reset" | "button" | undefined,
     isLoading?: boolean,
-    isDisabled: boolean,
+    isDisabled?: boolean,
     onClick?: () => void,
     children?: React.ReactNode,
 }
