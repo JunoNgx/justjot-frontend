@@ -47,7 +47,7 @@ test.describe("Spotlight collection action", () => {
             await page.locator(spotlightTextboxSelector).press('Enter');
 
             await expect(page).toHaveURL("e2eTestAcc/coll-2");
-            await expect(page.locator("header .collection-menu-btn")).toContainText('Coll2');
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText('Coll2');
         });
 
         test("Create collection", async ({ page }) => {
@@ -65,7 +65,7 @@ test.describe("Spotlight collection action", () => {
             await page.getByPlaceholder('My collection').press('Enter');
 
             await expect(page).toHaveURL("e2eTestAcc/coll-3");
-            await expect(page.locator("header .collection-menu-btn")).toContainText('Coll3');
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText('Coll3');
         });
 
         test("Edit collection", async ({ page }) => {
@@ -90,7 +90,7 @@ test.describe("Spotlight collection action", () => {
 
             // Test: url slug is updated
             await expect(page).toHaveURL("e2eTestAcc/logbook-edited");
-            await expect(page.locator("header .collection-menu-btn")).toContainText('Logbook-!#+$%^-edited');
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText('Logbook-!#+$%^-edited');
         });
 
         test("Sort collection", async ({ page }) => {
@@ -118,7 +118,7 @@ test.describe("Spotlight collection action", () => {
             await page.getByRole('button', { name: 'Delete collection' }).click();
 
             // Test: auto-navigate tno current index, meaning the next collection
-            await expect(page.locator("header .collection-menu-btn")).toContainText('Coll2');
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText(/Coll2/);
             await expect(page).toHaveURL("e2eTestAcc/coll-2");
         });
     });
