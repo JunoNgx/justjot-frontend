@@ -1,10 +1,13 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { DbTable } from "@/types";
-import { Button, Group, Paper, Text, TextInput, Title } from "@mantine/core";
+import { TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useContext, useState } from "react";
 import ErrorResponseDisplay from "@/components/ErrorResponseDisplay";
 import { ClientResponseError } from "pocketbase";
+
+import "./Profile.scss";
+import ButtonWithLoader from "@/libs/components/ButtonWithLoader";
 
 export default function ProfileChangeEmail() {
 
@@ -40,18 +43,13 @@ export default function ProfileChangeEmail() {
         setIsLoading(false);
     };
 
-    return <Paper className="cardlike"
-        withBorder
-        p="md"
-    >
+    return <div className="Profile">
         <form onSubmit={form.onSubmit(handleSubmission)}>
-            <Title className="cardlike__title"
-                order={2}
-            >
+            <h3 className="Profile__Title">
                 Change email
-            </Title>
+            </h3>
 
-            <Text>Email change is only confirmed upon email verification with password.</Text>
+            <p>Email change is only confirmed upon email verification with password.</p>
 
             <TextInput mt="md"
                 label="New email"
@@ -61,27 +59,25 @@ export default function ProfileChangeEmail() {
                 {...form.getInputProps('newEmail')}
             />
 
-            <Group
-                mt="md"
-                justify="flex-end"
-            >
-                <Button type="submit"
-                    loading={isLoading}
+            <div className="Profile__BtnContainer">
+                <ButtonWithLoader
+                    type="submit"
+                    isLoading={isLoading}
                 >
                     Submit
-                </Button>
-            </Group>
+                </ButtonWithLoader>
+            </div>
         </form>
 
         {(hasAttempted && isSuccessful) &&
-            <Text c="green" mt="xs">
+            <p className="Profile_SuccessNotice">
                 Request successful. Please check the inbox of your new email address for a confirmation link.
-            </Text>
+            </p>
         }
 
         {(hasAttempted && !isSuccessful) &&
             <ErrorResponseDisplay errRes={errRes} />
         }
 
-    </Paper>
+    </div>
 }
