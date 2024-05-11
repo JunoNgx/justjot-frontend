@@ -7,17 +7,16 @@ export default function ItemComponentCreatedDate(
 
     const itemDatetime = DateTime.fromSQL(createdDatetime);
     const fullDateTime = itemDatetime.toLocaleString(DateTime.DATETIME_FULL);
-    const isOlderThanOneDay = itemDatetime <= DateTime.now().minus({days: 1});
+    const isOlderThanToday = itemDatetime <= DateTime.local().startOf("day");
     const isOlderThanOneYear = itemDatetime <= DateTime.now().minus({year: 1});
     
     const computeDisplayedDateTime = () => {
         switch(true) {
         case isOlderThanOneYear:
             return itemDatetime.toFormat("LLL dd yyyy");
-        case isOlderThanOneDay:
+        case isOlderThanToday:
             return itemDatetime.toFormat("LLL dd");
         default:
-            // return itemDatetime.toRelative({padding: 60000}); // Will not show less than a minute
             return itemDatetime.toFormat("HH:mm");
         }
     }
