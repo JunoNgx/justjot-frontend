@@ -62,32 +62,32 @@ test.describe("Main input", () => {
         test.beforeEach(loginWithMocksAndFilledItems);
 
         test("Navigate to adjacent collections with arrow keys", async ({ page }) => {
-            await expect(page.locator("header .collection-menu-btn")).toContainText('Logbook');
+            await expect(page.locator('header')).toContainText('Logbook');
             await expect(page).toHaveURL("e2eTestAcc/logbook");
 
             // Do nothing if already on the first collection
             await page.locator('body').press('ArrowLeft');
-            await expect(page.locator("header .collection-menu-btn")).toContainText('Logbook');
+            await expect(page.locator('header')).toContainText('Logbook');
             await expect(page).toHaveURL("e2eTestAcc/logbook");
 
             await page.locator('body').press('ArrowRight');
 
-            await expect(page.locator("header .collection-menu-btn")).toContainText('Coll2');
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText('Coll2');
             await expect(page).toHaveURL("e2eTestAcc/coll-2");
 
             // Do nothing if already on the last collection
             await page.locator('body').press('ArrowRight');
-            await expect(page.locator("header .collection-menu-btn")).toContainText('Trash bin');
+            await expect(page.locator('header')).toContainText('Trash bin');
             await expect(page).toHaveURL("e2eTestAcc/trash-bin");
 
             await page.locator('body').press('ArrowRight');
 
-            await expect(page.locator("header .collection-menu-btn")).toContainText('Trash bin');
+            await expect(page.locator('header')).toContainText('Trash bin');
             await expect(page).toHaveURL("e2eTestAcc/trash-bin");
 
             await page.locator('body').press('ArrowLeft');
 
-            await expect(page.locator("header .collection-menu-btn")).toContainText('Coll2');
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText('Coll2');
             await expect(page).toHaveURL("e2eTestAcc/coll-2");
         });
 
@@ -98,7 +98,7 @@ test.describe("Main input", () => {
             await page.locator('body').press('Escape');
             await page.locator('body').press('Digit3');
 
-            await expect(page.locator("header .collection-menu-btn"))
+            await expect(page.locator("header .CollectionMenuBtn"))
                 .toContainText('Trash bin');
             await expect(page).toHaveURL("e2eTestAcc/trash-bin");
         });
@@ -115,36 +115,36 @@ test.describe("Main input", () => {
             await page.locator('body').press('Control+F');
 
             await page.locator('body').press('ArrowDown');
-            expect(await page.$eval(".item[data-index='0']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+            expect(await page.$eval(".Item[data-index='0']", (el) => el.classList.contains("Item--IsSelected"))).toBeTruthy();
 
             // Doesn't wrap
             await page.locator('body').press('ArrowUp');
-            expect(await page.$eval(".item[data-index='0']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+            expect(await page.$eval(".Item[data-index='0']", (el) => el.classList.contains("Item--IsSelected"))).toBeTruthy();
 
             await page.locator('body').press('ArrowDown');
-            expect(await page.$eval(".item[data-index='1']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+            expect(await page.$eval(".Item[data-index='1']", (el) => el.classList.contains("Item--IsSelected"))).toBeTruthy();
 
             await page.locator('body').press('Shift+ArrowDown');
-            expect(await page.$eval(".item[data-index='6']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+            expect(await page.$eval(".Item[data-index='6']", (el) => el.classList.contains("Item--IsSelected"))).toBeTruthy();
 
             await page.locator('body').press('Control+Shift+ArrowDown');
-            expect(await page.$eval(".item[data-index='9']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+            expect(await page.$eval(".Item[data-index='9']", (el) => el.classList.contains("Item--IsSelected"))).toBeTruthy();
 
             // Doesn't wrap
             await page.locator('body').press('ArrowDown');
-            expect(await page.$eval(".item[data-index='9']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+            expect(await page.$eval(".Item[data-index='9']", (el) => el.classList.contains("Item--IsSelected"))).toBeTruthy();
 
             await page.locator('body').press('ArrowUp');
-            expect(await page.$eval(".item[data-index='8']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+            expect(await page.$eval(".Item[data-index='8']", (el) => el.classList.contains("Item--IsSelected"))).toBeTruthy();
 
             await page.locator('body').press('ArrowUp');
-            expect(await page.$eval(".item[data-index='7']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+            expect(await page.$eval(".Item[data-index='7']", (el) => el.classList.contains("Item--IsSelected"))).toBeTruthy();
 
             await page.locator('body').press('Shift+ArrowUp');
-            expect(await page.$eval(".item[data-index='2']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+            expect(await page.$eval(".Item[data-index='2']", (el) => el.classList.contains("Item--IsSelected"))).toBeTruthy();
 
             await page.locator('body').press('Shift+Control+ArrowUp');
-            expect(await page.$eval(".item[data-index='0']", (el) => el.classList.contains("item--is-selected"))).toBeTruthy();
+            expect(await page.$eval(".Item[data-index='0']", (el) => el.classList.contains("Item--IsSelected"))).toBeTruthy();
         });
 
         test("Primary action: edit a note", async ({ page }) => {
@@ -178,7 +178,7 @@ test.describe("Main input", () => {
             await page.locator('body').press('ArrowDown');
             await page.locator('body').press('Control+Enter');
 
-            await expect(page.locator('.item[data-index="3"]')).toHaveText(/Content copied/);
+            await expect(page.locator('.Item[data-index="3"]')).toHaveText(/Content copied/);
             await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
         });
 
@@ -189,7 +189,7 @@ test.describe("Main input", () => {
             await page.locator('body').press('ArrowDown');
             await page.locator('body').press('Control+Enter');
 
-            await expect(page.locator('.item[data-index="2"]')).toHaveText(/Content copied/);
+            await expect(page.locator('.Item[data-index="2"]')).toHaveText(/Content copied/);
             await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
         });
 
@@ -223,16 +223,16 @@ test.describe("Main input", () => {
             await page.locator('body').press('ArrowDown');
             await page.locator('body').press('ArrowDown');
 
-            await expect(page.locator('.item[data-index="1"] .item__primary-text')).not.toHaveCSS("text-decoration", /line-through/);
+            await expect(page.locator('.Item[data-index="1"] .Item__PrimaryText')).not.toHaveCSS("text-decoration", /line-through/);
             await page.locator('body').press('Control+Enter');
-            await expect(page.locator('.item[data-index="1"] .item__primary-text')).toHaveCSS("text-decoration", /line-through/);
+            await expect(page.locator('.Item[data-index="1"] .Item__PrimaryText')).toHaveCSS("text-decoration", /line-through/);
         });
 
         test("Create item", async ({ page }) => {
             await page.locator('body').press('Control+f');
             await page.getByLabel('Main input', { exact: true }).fill('New quick note');
             await page.getByLabel('Main input', { exact: true }).press('Enter');
-            await expect(page.locator('.item[data-index="0"] .item__secondary-text')).toHaveText('New quick note');
+            await expect(page.locator('.Item[data-index="0"] .Item__SecondaryText')).toHaveText('New quick note');
         });
 
         test("Edit item", async ({ page }) => {
@@ -269,8 +269,8 @@ test.describe("Main input", () => {
             await page.getByLabel("Content", { exact: true }).fill('Sample content edited');
             await page.locator('body').press('Control+S');
 
-            await expect(page.locator('.item[data-index="8"] .item__primary-text')).toHaveText('Sample title edited');
-            await expect(page.locator('.item[data-index="8"] .item__secondary-text')).toHaveText('Sample content edited');
+            await expect(page.locator('.Item[data-index="8"] .Item__PrimaryText')).toHaveText('Sample title edited');
+            await expect(page.locator('.Item[data-index="8"] .Item__SecondaryText')).toHaveText('Sample content edited');
         });
 
         test("Move item", async ({ page }) => {
@@ -301,9 +301,9 @@ test.describe("Main input", () => {
             await page.locator('body').press('ArrowDown');
             await page.locator('body').press('Control+M');
 
-            await page.locator('.item-move-modal').press("2");
+            await page.locator('.Modal').press("2");
 
-            await expect(page.locator('.item[data-index="7"] .item__primary-text'))
+            await expect(page.locator('.Item[data-index="7"] .Item__PrimaryText'))
                 .not.toHaveText(/A todo item that has been marked as completed/);
         });
 
@@ -335,7 +335,7 @@ test.describe("Main input", () => {
             await page.locator('body').press('ArrowDown');
             await page.locator('body').press('Control+Shift+Backspace');
 
-            await expect(page.locator('.item[data-index="0"] .item__primary-text'))
+            await expect(page.locator('.Item[data-index="0"] .Item__PrimaryText'))
                 .not.toHaveText(/A todo item that has been marked as completed/);
         });
 
@@ -344,7 +344,7 @@ test.describe("Main input", () => {
 
             await page.goto("/e2eTestAcc/trash-bin")
 
-            await expect(page.locator("header .collection-menu-btn"))
+            await expect(page.locator("header .CollectionMenuBtn"))
                 .toContainText('Trash bin');
             await expect(page).toHaveURL("e2eTestAcc/trash-bin");
 
@@ -355,7 +355,7 @@ test.describe("Main input", () => {
             await page.locator('body').press('Control+Alt+R');
 
             // Dev note: locator will fail to find element, everything will fail.
-            // await expect(page.locator('.item[data-index="0"] .item__primary-text'))
+            // await expect(page.locator('.Item[data-index="0"] .Item__PrimaryText'))
             //     .not.toHaveText("trashed");
             await expect(page.locator("#displayed-list")).toBeEmpty();
         });
@@ -365,7 +365,7 @@ test.describe("Main input", () => {
 
             await page.goto("/e2eTestAcc/trash-bin")
 
-            await expect(page.locator("header .collection-menu-btn"))
+            await expect(page.locator("header .CollectionMenuBtn"))
                 .toContainText('Trash bin');
             await expect(page).toHaveURL("e2eTestAcc/trash-bin");
 
@@ -401,13 +401,13 @@ test.describe("Main input", () => {
                 });
             });
 
-            await expect(page.locator('.item[data-index="9"] .item__should-copy-icon')).not.toBeVisible();
+            await expect(page.locator('.Item[data-index="9"] .Item__ShouldCopyIcon')).not.toBeVisible();
 
             await page.locator('body').press('Control+F');
             await page.locator('body').press('Control+Shift+ArrowDown');
             await page.locator('body').press('Control+Alt+Digit4');
 
-            await expect(page.locator('.item[data-index="9"] .item__should-copy-icon')).toBeVisible();
+            await expect(page.locator('.Item[data-index="9"] .Item__ShouldCopyIcon')).toBeVisible();
         });
 
         test("Refetch link metadata", async ({ page }) => {
@@ -437,8 +437,8 @@ test.describe("Main input", () => {
             await page.locator('body').press('Shift+ArrowDown');
             await page.locator('body').press('ArrowDown');
             await page.locator('body').press('Control+Alt+Digit5');
-            await expect(page.locator('.item[data-index="5"] .item__primary-text')).toHaveText(/xkcd/);
-            await expect(page.locator('.item[data-index="5"] .item__secondary-text')).toHaveText(/xkcd.com/);
+            await expect(page.locator('.Item[data-index="5"] .Item__PrimaryText')).toHaveText(/xkcd/);
+            await expect(page.locator('.Item[data-index="5"] .Item__SecondaryText')).toHaveText(/xkcd.com/);
         });
 
         test("Convert title-less note to todo", async ({ page }) => {
@@ -471,8 +471,8 @@ test.describe("Main input", () => {
             await page.locator('body').press('ArrowUp');
             await page.locator('body').press('Control+Alt+Digit6');
 
-            await expect(page.locator('.item[data-index="7"] .item__primary-text')).toHaveText('A note without title');
-            await expect(page.locator('.item[data-index="7"] .item__secondary-text')).not.toBeVisible();
+            await expect(page.locator('.Item[data-index="7"] .Item__PrimaryText')).toHaveText('A note without title');
+            await expect(page.locator('.Item[data-index="7"] .Item__SecondaryText')).not.toBeVisible();
         });
     });
 });
