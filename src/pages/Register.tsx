@@ -87,7 +87,7 @@ export default function Register() {
     const successNotice = <div className="Cardlike__SuccessNotice">
         <p>Registration request has been made.</p>
         <p>Please check your inbox for the verification email.</p>
-        <p className="Cardlike__NoticeLastLine">Proceed to <NavLink to="login">Login</NavLink></p>
+        <p>Proceed to <NavLink to="login">Login</NavLink></p>
     </div>
 
     const registrationForm = <>
