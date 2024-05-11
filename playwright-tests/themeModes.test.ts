@@ -11,7 +11,7 @@ test.describe("Theme modes", () => {
 
         test.describe("With header button", () => {
             test.beforeEach(async ({ page }) => {
-                await page.getByLabel('Switch theme mode to follow').click();
+                await page.getByRole('button', { name: 'Theme mode: System' }).click();
             });
     
             test("Light mode", async ({ page }) => {
@@ -48,7 +48,7 @@ test.describe("Theme modes", () => {
 
     test.describe("Light mode", () => {
         test("With header button", async ({ page }) => {
-            await page.getByLabel('Switch theme mode to light').click();
+            await page.getByRole('button', { name: 'Theme mode: Light' }).click();
             await expect(page.locator("body")).toHaveCSS("background-color", "rgb(255, 255, 255)");
         });
 
@@ -62,7 +62,7 @@ test.describe("Theme modes", () => {
 
     test.describe("Dark mode", () => {
         test("With header button", async ({ page }) => {
-            await page.getByLabel('Switch theme mode to dark').click();
+            await page.getByRole('button', { name: 'Theme mode: Dark' }).click();
             await expect(page.locator("body")).toHaveCSS("background-color", "rgb(0, 0, 0)");
         });
 
