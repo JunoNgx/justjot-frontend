@@ -22,6 +22,8 @@ export default function ButtonWithLoader(
         children
     }: ButtonWithLoaderOptions
 ) {
+    const shouldLoaderUsePriCol = variant === "secondary";
+
     return <button className={`${className} ButtonWithLoader`}
         type={type}
         data-variant={variant}
@@ -30,7 +32,7 @@ export default function ButtonWithLoader(
         onClick={onClick}
     >
         <span className="ButtonWithLoader__LoaderContainer">
-            <Loader />
+            <Loader shouldUsePriCol={shouldLoaderUsePriCol} />
         </span>
         <span className="ButtonWithLoader__LabelContainer">
             {children}

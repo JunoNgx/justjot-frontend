@@ -1,4 +1,10 @@
 .Loader {
+    --colLoader: var(--colPri);
+
+    &[data-usePriCol="false"] {
+        --colLoader: var(--colBg);
+    }
+
     display: block;
     height: 1rem;
     width: 1rem;
@@ -6,7 +12,11 @@
     border-style: solid;
     border-width: 3px;
     background-color: transparent;
-    border-color: white white white transparent;
+    border-color:
+        var(--colLoader)
+        var(--colLoader)
+        var(--colLoader)
+        transparent;
     animation: rotate 1.5s linear infinite;
 
     @keyframes rotate {
