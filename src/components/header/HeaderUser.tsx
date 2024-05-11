@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { IconChevronDown, IconHelp, IconLogout, IconUserCog } from "@tabler/icons-react";
 import useIconProps from "@/hooks/useIconProps";
