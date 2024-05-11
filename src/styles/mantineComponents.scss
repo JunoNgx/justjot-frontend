@@ -1,9 +1,3 @@
-// .mantine-AppShell-root {
-//     // Override unnecessary inline transition that causes visible movement upon
-//     // scrolling is locked (e.g. modal or spotlight)
-//     --app-shell-transition-duration: 0 !important;
-// }
-
 .mantine-AppShell-main {
     padding-top: 60px; // see: Header
 }
@@ -34,9 +28,9 @@
     }
 }
 
-.mantine-Menu-dropdown {
-    @include m.GlassBlur;
-}
+// .mantine-Menu-dropdown {
+//     @include m.GlassBlur;
+// }
 
 .mantine-Modal-content,
 .mantine-Spotlight-content {
@@ -78,23 +72,4 @@
     color: var(--mantine-color-text);
     background-color: var(--mantine-color-body);
     border: solid 1px var(--mantine-color-text);
-}
-
-.mantine-Kbd-root {
-    border-radius: 0;
-    font-weight: 400;
-
-    [data-mantine-color-scheme="light"] &,
-    [data-mantine-color-scheme="dark"] & {
-        color: var(--mantine-color-text);
-        background-color: var(--mantine-color-body);
-        border-color: var(--mantine-color-text);
-    }
-}
-
-.mantine-Code-root {
-    [data-mantine-color-scheme="light"] &,
-    [data-mantine-color-scheme="dark"] & {
-        background-color: var(--mantine-color-code-bg);
-    }
 }
