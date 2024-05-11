@@ -183,11 +183,11 @@ test.describe("Main input", () => {
         });
 
         test("Primary action: copy a link content that was marked to copy", async ({ page }) => {
-            await page.locator('body').press('Control+F');
-            await page.locator('body').press('ArrowDown');
-            await page.locator('body').press('ArrowDown');
-            await page.locator('body').press('ArrowDown');
-            await page.locator('body').press('Control+Enter');
+            await page.locator('body').press('Control+f');
+            await page.getByLabel('Main input', { exact: true }).press('ArrowDown');
+            await page.getByLabel('Main input', { exact: true }).press('ArrowDown');
+            await page.getByLabel('Main input', { exact: true }).press('ArrowDown');
+            await page.getByLabel('Main input', { exact: true }).press('Control+Enter');
 
             await expect(page.locator('.Item[data-index="2"]')).toHaveText(/Content copied/);
             await expect(page.locator('#displayed-list')).toContainText(/Content copied/);
