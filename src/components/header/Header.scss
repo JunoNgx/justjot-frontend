@@ -1,5 +1,4 @@
 @use "../../styles/mixins" as m;
-@use "../../styles/_variables.scss" as v;
 
 .Header {
     padding-left: 0;
@@ -45,10 +44,6 @@
         gap: 1rem;
     }
 
-    // &__ThemeModeBtn {
-    //     // 
-    // }
-
     &__LoginRegisterBox {
         display: flex;
         flex-direction: row;
@@ -59,9 +54,6 @@
         @include m.GlassBlur;
         @include m.Menu;
         @include m.AnimatedDropdown();
-        // &[data-side="bottom"] {
-        //     @include m.AnimatedDropdown;
-        // }
     }
 
     &__ProfileDropdownItem {
