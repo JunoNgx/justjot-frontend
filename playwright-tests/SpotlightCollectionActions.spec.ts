@@ -17,7 +17,7 @@ test.describe("Spotlight collection action", () => {
             await expect(page.getByRole('button', { name: 'Create new collection .create' })).toBeVisible();
             await expect(page.getByRole('button', { name: 'Edit current collection .edit' })).toBeVisible();
             await expect(page.getByRole('button', { name: 'Sort collections .sort-coll' })).toBeVisible();
-            await expect(page.getByRole('button', { name: 'Delete current collection .' })).toBeVisible();
+            await expect(page.getByRole('button', { name: 'Delete current collection' })).toBeVisible();
         });
 
         test("Trash bin", async ({ page }) => {
