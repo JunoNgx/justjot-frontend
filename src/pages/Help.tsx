@@ -91,8 +91,14 @@ export default function Help() {
 
         <section className="Cardlike__HelpSection">
             <h3>Filter incomplete todo tasks only</h3>
-            <p>To display only incomplete todo tasks, type <code>::itd::</code> into the Main finput, <strong>without entering, and without any leading or trailing whitespace</strong>. A shorthand menu for this is also accessible from the Main Input extended menu.</p>
-            <p>As a side effect, this will unfortunately negate the ability to search for this particular string, if you happen to use such content.</p>
+            <p>To display only incomplete todo tasks, type <code>::itd::</code> into the Main Input:</p>
+            <ul>
+                <li>Without entering.</li>
+                <li>Without any leading or trailing whitespace.</li>
+                <li>Without any other content.</li>
+            </ul>
+            <p>A shorthand for this is also accessible from the Main Input extended menu.</p>
+            <p>As a side effect, this special search parameter will unfortunately negate the ability to search for this particular string, if you happen to use such content.</p>
         </section>
 
         <section className="Cardlike__HelpSection">
