@@ -75,6 +75,7 @@ export default function MainInputExtendedMenu(
                     }
                 }}
             >
+
                 <DropdownMenu.Item className="MainInputDropdown__Item"
                     onClick={() => {
                         setInputVal(curr => `${CREATE_TEXT_WITH_TITLE_PREFIX} ${curr}`);
@@ -87,6 +88,7 @@ export default function MainInputExtendedMenu(
                         with title
                     </LabelWithIcon>
                 </DropdownMenu.Item>
+
                 <DropdownMenu.Item className="MainInputDropdown__Item"
                     onClick={() => {
                         setInputVal(curr => `${CREATE_TODO_PREFIX} ${curr}`);
@@ -99,6 +101,7 @@ export default function MainInputExtendedMenu(
                         as todo
                     </LabelWithIcon>
                 </DropdownMenu.Item>
+
                 <DropdownMenu.Item className="MainInputDropdown__Item"
                     onClick={() => {
                         setInputVal(curr => `${INCOMPLETE_TODOS_SYNTAX}${curr}`);
@@ -111,6 +114,7 @@ export default function MainInputExtendedMenu(
                         incomplete todos
                     </LabelWithIcon>
                 </DropdownMenu.Item>
+
                 <DropdownMenu.Item className="MainInputDropdown__Item"
                     onClick={enterFromClipboard}
                 >
@@ -145,6 +149,7 @@ export default function MainInputExtendedMenu(
                         spotlight
                     </LabelWithIcon>
                 </DropdownMenu.Item>
+
             </DropdownMenu.Content>
         </DropdownMenu.Portal>
     </DropdownMenu.Root>
