@@ -16,7 +16,7 @@ import MainViewNotice from "@/components/misc/MainViewNotice";
 import "./MainView.scss";
 
 export default function MainView() {
-    const { isLoggedIn, isDemoUser } = useContext(BackendClientContext);
+    const { isLoggedIn, isDemoUser, refreshAuth } = useContext(BackendClientContext);
     const { collections, currCollection, isTrashCollection } = useContext(CollectionsContext);
     const { fetchItems, filteredItems } = useContext(ItemsContext);
     const { focusOnMainInput } = useItemNavActions();
@@ -57,6 +57,8 @@ export default function MainView() {
             navigate(`/login`, { replace: true });
             return;
         }
+
+        refreshAuth();
 
         window.addEventListener("focus", tryRoutineUpdate);
         return () => {
