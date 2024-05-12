@@ -51,7 +51,7 @@ const overrideTheme = createTheme({
 
 export const justJotCssVarsResolver: CSSVariablesResolver = (theme) => ({
     variables: {
-        // None for now
+        "--input-font-family": theme.fontFamilyMonospace,
     },
     light: {
         "--mantine-color-text": theme.other.colBlack,
