@@ -23,7 +23,6 @@
     "@radix-ui/react-context-menu": "^2.1.5",
     "@radix-ui/react-dropdown-menu": "2.0.6",
     "@tabler/icons-react": "^2.47.0",
-    "@testing-library/react": "^15.0.5",
     "@types/lodash-es": "^4.17.12",
     "lodash-es": "^4.17.21",
     "luxon": "^3.4.4",
@@ -39,6 +38,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.43.1",
+    "@testing-library/react": "^15.0.5",
     "@types/luxon": "^3.4.2",
     "@types/node": "^20.12.7",
     "@types/react": "^18.3.1",
