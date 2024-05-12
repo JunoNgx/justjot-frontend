@@ -1,8 +1,9 @@
 import { ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from 'react';
-import { DbTable, Item, ItemCollection } from '@/types';
+import { DbTable, Item, ItemCollection, ItemType } from '@/types';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { findIndexById } from '@/utils/itemUtils';
 import useManageListState from '@/libs/useManageListState';
+import { INCOMPLETE_TODOS_SYNTAX } from '@/utils/constants';
 
 type UpdateQueueItem = {
     tempId: string,
@@ -84,6 +85,12 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
     const filteredItems = items.filter(item => {
 
         const searchTerm = inputVal.toLocaleLowerCase();
+
+        if (searchTerm === INCOMPLETE_TODOS_SYNTAX) {
+            return item.type === ItemType.TODO
+                && !item.isTodoDone;
+        }
+
         const hasTitleMatch = item.title?.toLowerCase()
             .indexOf(searchTerm) > -1;
         const hasContentMatch = item.content?.toLowerCase()
