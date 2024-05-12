@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { interceptApiRequestForTrashedItems, loginWithMocks, loginWithMocksAndFilledItems } from './_common';
+import { interceptApiRequestForItems, interceptApiRequestForTrashedItems, loginWithMocks, loginWithMocksAndFilledItems } from './_common';
 
 test.describe("Main input", () => {
 
@@ -28,6 +28,16 @@ test.describe("Main input", () => {
             await page.getByLabel('Extra functions and options').click();
             await page.getByRole('menuitem', { name: 'as todo' }).click();
             await expect(page.getByLabel('Main input', { exact: true })).toHaveValue(':td: Buy armor');
+        });
+
+        test("Extended menu: incomplete todos", async ({ page }) => {
+            interceptApiRequestForItems(page);
+
+            await page.getByLabel('Extra functions and options').click();
+            await page.getByRole('menuitem', { name: 'incomplete todos' }).click();
+
+            await expect(page.getByLabel('Main input', { exact: true })).toHaveValue('::itd::');
+            await expect(page.locator("#DisplayedList .Item__PrimaryText")).toContainText("A todo item");
         });
 
         // Requires clipboard access, to not run at the moment

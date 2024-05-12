@@ -19,7 +19,7 @@ const interceptBasicApiRequests = async (page: Page) => {
     });
 }
 
-const interceptApiRequestForItems = async (page: Page) => {
+export const interceptApiRequestForItems = async (page: Page) => {
     await page.route("*/**/api/collections/items/records?page=1&perPage=500&skipTotal=1&filter=collection%3D%226qt1usrvke0tuac%22%20%26%26%20isTrashed%3Dfalse&sort=-created", async route => {
         await route.fulfill({ json: fetchItemsFilled });
     });
