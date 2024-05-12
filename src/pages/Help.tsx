@@ -16,12 +16,16 @@ export default function Help() {
     return <div className="Cardlike Cardlike--LongDoc">
         <h2>User Manual</h2>
 
-        <section className="Cardlike__HelpSection">
+        <section className="Cardlike__HelpSection"
+            id="SystemRequirement"
+        >
             <h3>System requirement</h3>
             <p>This application should run on any computing device with a W3C-compliant web browser and a stable internet connection, including mobile devices. For the best experience, a keyboard-equipped desktop environment is recommended.</p>
         </section>
 
-        <section className="Cardlike__HelpSection">
+        <section className="Cardlike__HelpSection"
+            id="KeyboardShortcuts"
+        >
 
             <h3>Keyboard shortcuts</h3>
             <h4>Operating systems</h4>
@@ -63,18 +67,24 @@ export default function Help() {
             </ul>
         </section>
 
-        <section className="Cardlike__HelpSection">
+        <section className="Cardlike__HelpSection"
+            id="Collections"
+        >
             <h3>Collection</h3>
             <p>Collate notes, bookmarks, and todos for different categories under your collections. Access them from the dropdown menu, numeric keys <kbd>1</kbd>...<kbd>0</kbd>, or <kbd>←</kbd> <kbd>→</kbd>. You must have at least one collection in your account.</p>
         </section>
 
-        <section className="Cardlike__HelpSection">
+        <section className="Cardlike__HelpSection"
+            id="MainInput"
+        >
             <h3>Main Input</h3>
             <p>Serves both as a search bar and the interface for new item creation. To create new item, input your content and press <kbd>↵</kbd>.</p>
             <p>Prefix syntaxes are available to quickly create item with options. Helpers for syntaxes are accessible from the dropdown menu on right side the input.</p>
         </section>
 
-        <section className="Cardlike__HelpSection">
+        <section className="Cardlike__HelpSection"
+            id="PrefixSyntaxes"
+        >
             <h3>Prefix syntaxes</h3>
             <p>These always start and end with the colon character:</p>
             <ul>
@@ -89,7 +99,9 @@ export default function Help() {
             <p>Leading and trailing whitespaces are always trimmed; the spaces between the prefix and your input do not matter.</p>
         </section>
 
-        <section className="Cardlike__HelpSection">
+        <section className="Cardlike__HelpSection"
+            id="FilterIncompleteTodos"
+        >
             <h3>Filter incomplete todo tasks only</h3>
             <p>To display only incomplete todo tasks, type <code>::itd::</code> into the Main Input:</p>
             <ul>
@@ -101,7 +113,9 @@ export default function Help() {
             <p>As a side effect, this special search parameter will unfortunately negate the ability to search for this particular string, if you happen to use such content.</p>
         </section>
 
-        <section className="Cardlike__HelpSection">
+        <section className="Cardlike__HelpSection"
+            id="ItemTypes"
+        >
             <h3>Item Type</h3>
 
             <h4>Text note</h4>
@@ -117,7 +131,9 @@ export default function Help() {
             <p>As a special subtype of note, a hex colour code, when detected, will be accompanied by a corresponding icon. The logic validates the last seven characters in the item's content. As a lifehack, append a hex colour code to your text note to notate it in your own way.</p>
         </section>
 
-        <section className="Cardlike__HelpSection">
+        <section className="Cardlike__HelpSection"
+            id="ItemActions"
+        >
             <h3>Item actions</h3>
             <p>There are two ways to perform item actions:</p>
             <ul>
@@ -129,7 +145,9 @@ export default function Help() {
             <p>Your changes are autosaved (with a short interval) during item edit. The autosave feature is unique to this user interface. Pressing <kbd>Esc</kbd> or <KbdMod/> <kbd>S</kbd> will pro-actively save progress, without waiting for the autosave interval, and close the modal.</p>
         </section>
 
-        <section className="Cardlike__HelpSection">
+        <section className="Cardlike__HelpSection"
+            id="PrimaryActions"
+        >
             <h3>Primary action</h3>
             <p>An item's primary action is executed by clicking on it or pressing <kbd>Shift</kbd> <kbd>↵</kbd> while it is selected. This action varies depending on the item's type and settings:</p>
             <ul>
@@ -140,7 +158,9 @@ export default function Help() {
             <p>You can also toggle the primary action of notes between edit and copy, and likewise for links between open and copy, from the context menu.</p>
         </section>
 
-        <section className="Cardlike__HelpSection">
+        <section className="Cardlike__HelpSection"
+            id="Spotlight"
+        >
             <h3>Spotlight</h3>
             <p>Accessed by pressing <KbdMod/> <kbd>K</kbd> or <KbdMod/> <kbd>P</kbd> anywhere within the app, or from the Main Input extended menu.</p>
             <p>It serves as the global navigation menu. Use it to search for actions and collections quickly. For easy references:</p>
@@ -150,7 +170,9 @@ export default function Help() {
             </ul>
         </section>
 
-        <section className="Cardlike__HelpSection">
+        <section className="Cardlike__HelpSection"
+            id="faq"
+        >
             <h3>Frequently asked questions</h3>
 
             <h4>Why are my items not loaded?</h4>
@@ -179,7 +201,9 @@ export default function Help() {
 
         </section>
 
-        <section className="Cardlike__HelpSection">
+        <section className="Cardlike__HelpSection"
+            id="RoadMap"
+        >
             <h3>Features road map</h3>
             <p>The following features are under consideration for future developments, in descending order of priority:</p>
             <ul>
@@ -191,7 +215,9 @@ export default function Help() {
             </ul>
         </section>
 
-        <section className="Cardlike__HelpSection">
+        <section className="Cardlike__HelpSection"
+            id="Contributions"
+        >
             <h3>Contributions</h3>
             <p>JustJot is fully open-source:</p>
             <ul>
@@ -202,7 +228,9 @@ export default function Help() {
             <p>The best channel to start a conversation is via the GitHub issues, in either one of the two repositories (when in doubt, please post in the frontend repository).</p>
         </section>
 
-        <section className="Cardlike__HelpSection">
+        <section className="Cardlike__HelpSection"
+            id="Acknowledgement"
+        >
             <h3>Acknowledgement</h3>
             <p>
                 JustJot was made possible thanks to the plethora of wonderful works from the open-source communities:
