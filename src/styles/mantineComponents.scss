@@ -24,6 +24,9 @@
 }
 
 .mantine-ScrollArea-viewport {
+    // To take the header into account
+    scroll-padding-top: 45px;
+
     & > div {
         // Overriding some mind-boggling stupidity in Mantine
         display: block !important;
