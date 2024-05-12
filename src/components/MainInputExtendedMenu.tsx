@@ -1,11 +1,11 @@
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useIconProps from "@/hooks/useIconProps";
 import useItemNavActions from "@/hooks/useItemNavActions";
-import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TODO_PREFIX } from "@/utils/constants";
+import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TODO_PREFIX, INCOMPLETE_TODOS_SYNTAX } from "@/utils/constants";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { notifications } from "@mantine/notifications";
 import { spotlight } from "@mantine/spotlight";
-import { IconCheckbox, IconChevronDown, IconClipboardPlus, IconFocus, IconLayoutNavbar, IconX } from "@tabler/icons-react";
+import { IconCheckbox, IconChevronDown, IconClipboardPlus, IconFocus, IconLayoutNavbar, IconListCheck, IconX } from "@tabler/icons-react";
 import { useContext, useState } from "react";
 import LabelWithIcon from "@/libs/components/LabelWithIcon";
 
@@ -97,6 +97,18 @@ export default function MainInputExtendedMenu(
                         leftSection={<IconCheckbox {...menuIconProps} />}
                     >
                         as todo
+                    </LabelWithIcon>
+                </DropdownMenu.Item>
+                <DropdownMenu.Item className="MainInputDropdown__Item"
+                    onClick={() => {
+                        setInputVal(curr => `${INCOMPLETE_TODOS_SYNTAX}${curr}`);
+                        setShouldFocusOnMainInput(true);
+                    }}
+                >
+                    <LabelWithIcon 
+                        leftSection={<IconListCheck {...menuIconProps} />}
+                    >
+                        incomplete todos
                     </LabelWithIcon>
                 </DropdownMenu.Item>
                 <DropdownMenu.Item className="MainInputDropdown__Item"
