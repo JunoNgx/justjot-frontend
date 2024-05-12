@@ -216,9 +216,9 @@ export default function Help() {
         </section>
 
         <section className="Cardlike__HelpSection"
-            id="Contributions"
+            id="Contributing"
         >
-            <h3>Contributions</h3>
+            <h3>Contributing</h3>
             <p>JustJot is fully open-source:</p>
             <ul>
                 <li><a href="https://github.com/JunoNgx/justjot-frontend" target='_blank' rel='noopener noreferrer'>Frontend repository</a></li>
