@@ -72,7 +72,7 @@ export default function MainInputExtendedMenu(
                         e.preventDefault();
                         focusOnMainInput(mainInputRef);
                         setShouldFocusOnMainInput(false);
-                    };
+                    }
                 }}
             >
                 <DropdownMenu.Item className="MainInputDropdown__Item"
