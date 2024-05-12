@@ -159,6 +159,21 @@ export default function Help() {
         </section>
 
         <section className="Cardlike__HelpSection"
+            id="Trash bin"
+        >
+            <h3>Trash bin</h3>
+            <p>Trash bin is always displayed as your last collection, behind a separator, and indicated with an icon. Trashed items from normal collection can be accessed and restored from the trash bin.</p>
+            <p>Trash bin's name and slug are fully customisable like other collections. Some fun and good names for a trash bin are:</p>
+            <ul>
+                <li>River Styx</li>
+                <li>Valhalla</li>
+                <li>Things Betwixt</li>
+                <li>Umbral Realm</li>
+                <li>The Beach</li>
+            </ul>
+        </section>
+
+        <section className="Cardlike__HelpSection"
             id="Spotlight"
         >
             <h3>Spotlight</h3>
