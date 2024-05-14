@@ -93,7 +93,7 @@
     }
 
     @include m.Mobile {
-        &__username {
+        &__UsernameText {
             max-width: 120px;
         }
     }
