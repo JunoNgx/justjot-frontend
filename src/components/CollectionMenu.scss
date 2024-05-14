@@ -2,8 +2,7 @@
 
 .CollectionMenuBtn {
     @include m.DropdownTrigger;
-    @include m.FocusOutline;
-    @include m.BtnHoverState;
+    @include m.DropdownTriggerBtn;
 
     &__Label {
         user-select: none;
@@ -22,6 +21,7 @@
 
         @include m.Mobile {
             @include m.GlassBlur;
+            @include m.DropdownTriggerBtn;
 
             display: flex;
             z-index: 2;
@@ -31,7 +31,8 @@
     
             border: solid 1px var(--colPri);
             background-color: var(--colBg);
-            padding: 0.8rem 1rem;
+            padding: 0.75rem 1rem;
+            padding-right: 0.75rem;
         }
     }
 }
