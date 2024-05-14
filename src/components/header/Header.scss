@@ -46,6 +46,15 @@
         gap: 1rem;
     }
 
+    &__ThemeModeBtn {
+        color: var(--colPri);
+
+        &:hover {
+            background-color: transparent;
+            color: var(--colPri);
+        }
+    }
+
     &__LoginRegisterBox {
         display: flex;
         flex-direction: row;
@@ -81,15 +90,6 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-    }
-
-    &__ThemeModeBtn {
-        color: var(--colPri);
-
-        &:hover {
-            background-color: transparent;
-            color: var(--colPri);
-        }
     }
 
     @include m.Mobile {
