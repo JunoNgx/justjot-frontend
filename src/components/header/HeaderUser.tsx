@@ -29,7 +29,7 @@ export default function HeaderUser() {
         <DropdownMenu.Portal>
             <DropdownMenu.Content className="Header__ProfileDropdown"
                 sideOffset={20}
-                // alignOffset={0}
+                alignOffset={7}
                 align="end"
             >
 
