@@ -69,6 +69,7 @@
 
     &__ProfileDropdownBtn {
         @include m.FocusOutline;
+        @include m.BtnHoverState;
         margin-right: 0.75rem;
     }
         

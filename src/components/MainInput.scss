@@ -50,10 +50,7 @@
     &__Btn {
         height: 100%;
         @include m.FocusOutline;
-
-        &:hover {
-            background-color: var(--colGreyBg);
-        }
+        @include m.BtnHoverState;
 
         &:focus-visible {
             outline-offset: -5px;
