@@ -222,7 +222,6 @@ export default function Help() {
             <h3>Features road map</h3>
             <p>The following features are under consideration for future developments, in descending order of priority:</p>
             <ul>
-                <li><p>Development unit tests.</p></li>
                 <li><p>User data export to JSON format.</p></li>
                 <li><p>Self-serving user account deletion.</p></li>
                 <li><p>Offline operations.</p></li>
