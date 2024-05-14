@@ -109,6 +109,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
+    color: var(--colPri);
 }
 
 @mixin DropdownItem {
