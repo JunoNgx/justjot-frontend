@@ -125,3 +125,9 @@
         outline-offset: 2px;
     }
 }
+
+@mixin BtnHoverState {
+    &:hover {
+        background-color: var(--colGreyBg);
+    }
+}
