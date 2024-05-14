@@ -73,7 +73,7 @@
     }
         
     &__ProfileDropdownBtnLabel {
-        @include m.DropdownTrigger;
+        @include m.DropdownTriggerLabel;
     }
 
     &__UsernameText {

@@ -1,8 +1,8 @@
 @use "../styles/mixins" as m;
 
 .CollectionMenuBtn {
-    @include m.DropdownTrigger;
     @include m.DropdownTriggerBtn;
+    @include m.DropdownTriggerLabel;
 
     &__Label {
         user-select: none;
