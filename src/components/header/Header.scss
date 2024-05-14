@@ -43,15 +43,16 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        gap: 1rem;
+        gap: 0.5rem;
     }
 
     &__ThemeModeBtn {
         color: var(--colPri);
+        padding: 0.25rem;
+        border-radius: 1rem;
 
         &:hover {
-            background-color: transparent;
-            color: var(--colPri);
+            background-color: var(--colGreyBg);
         }
     }
 
