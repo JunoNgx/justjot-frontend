@@ -318,7 +318,7 @@ test.describe("Main input", () => {
         });
 
         test("Trash item", async ({ page }) => {
-            await page.route("*/**/items/trash/1x9diejq0lx6e0b/hxz3757cizrkzsl?authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3MTU4NjA3ODcsImlkIjoiaTJncXdveWRzZ3UxbTI0IiwidHlwZSI6ImF1dGhSZWNvcmQifQ.yGMpxtYyya7JYncmlbQXGxFgI5RKzKIDtlTqe_L1RbM", async route => {
+            await page.route("*/**/items/trash/1x9diejq0lx6e0b/*", async route => {
                 await route.fulfill({
                     status: 204,
                     json: {
@@ -421,7 +421,7 @@ test.describe("Main input", () => {
         });
 
         test("Refetch link metadata", async ({ page }) => {
-            await page.route("*/**/refetch/1x9diejq0lx6e0b/lzbedvc667m3r3r?authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2xsZWN0aW9uSWQiOiJfcGJfdXNlcnNfYXV0aF8iLCJleHAiOjE3MTU4NjA3ODcsImlkIjoiaTJncXdveWRzZ3UxbTI0IiwidHlwZSI6ImF1dGhSZWNvcmQifQ.yGMpxtYyya7JYncmlbQXGxFgI5RKzKIDtlTqe_L1RbM", async route => {
+            await page.route("*/**/refetch/1x9diejq0lx6e0b/*", async route => {
                 await route.fulfill({
                     json: {
                         "collection": "u9v6d9osqqzy6ml",
