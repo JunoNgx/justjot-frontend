@@ -181,7 +181,7 @@ export default function SpotlightSearch() {
             id: "coll-op-delete",
             label: "Delete current collection",
             description: ".delete-coll",
-            leftSection: <IconTrashX color="red" {...spotlightIconProps} />,
+            leftSection: <IconTrashX style={{color: "var(--colMagenta)"}} {...spotlightIconProps} />,
             onClick: confirmCollectionDeletion,
         });
     }
@@ -192,7 +192,7 @@ export default function SpotlightSearch() {
             label: `${collection.name}`,
             description: `/${collection.slug}`,
             leftSection: collection.isTrashBin
-                ? <IconTrash color="purple" {...spotlightIconProps} />
+                ? <IconTrash style={{color: "var(--colViolet)"}} {...spotlightIconProps} />
                 : <IconStack2 {...spotlightIconProps} />
             ,
             onClick: () => {trySwitchToCollectionById(collection.id)},
