@@ -26,6 +26,10 @@
         border-color: var(--colPri);
     }
 
+    @include m.Mobile {
+        gap: 0;
+    }
+
     &__IconWrapper {
         display: grid;
         place-items: center;
@@ -114,7 +118,11 @@
         overflow: hidden;
         text-overflow: ellipsis;
         user-select: none;
-        // max-width: calc(70%);
+        max-width: calc(100%);
+    }
+
+    &__PrimaryText {
+        flex-shrink: 0;
     }
 
     &__SecondaryText {
