@@ -18,6 +18,18 @@ The project is mainly driven by [Mantine components library](https://mantine.dev
 
 The current state of the codebase is the outcome of attempts to take ownership of CSS without excessively re-inventing the wheel.
 
+## CSS
+
+The project's CSS uses [BEM convention](https://getbem.com/naming/) for elements' classnames.
+
+Additionally, an experiment was performed to use `PascalCase` for classnames, instead of the more conventional `kebab-case`. The following block is an example for a typical classname:
+
+```
+.CollectionMenuDropdown__Item--IsSelected
+```
+
+This convention has improved (subjective) readility without any encountered issue. This remains in the codebase as of time of writing.
+
 ## Running locally
 
 ```
