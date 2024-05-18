@@ -14,6 +14,7 @@ test.describe("Collection Menu", () => {
                 await route.fulfill({ json: fetchItemsEmpty });
             });
 
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText('Logbook');
             await page.locator("header .CollectionMenuBtn").click();
 
             await expect(page.getByRole('menuitem', { name: 'Create collection' })).toBeVisible();
@@ -25,6 +26,7 @@ test.describe("Collection Menu", () => {
         test("Trash bin", async ({ page }) => {
             await page.locator("header .CollectionMenuBtn").click();
             await page.getByRole('menuitem', { name: 'Trash bin' }).click();
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText('Trash bin');
             await page.locator("header .CollectionMenuBtn").click();
 
             await expect(page.getByRole('menuitem', { name: 'Create collection' })).toBeVisible();
@@ -103,6 +105,8 @@ test.describe("Collection Menu", () => {
             await page.route("*/**/api/collections/itemCollections/records/6qt1usrvke0tuac", async route => {
                 await route.fulfill({status: 204});
             });
+
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText('Logbook');
 
             await page.locator("header .CollectionMenuBtn").click();
             await page.getByRole('menuitem', { name: 'Delete collection' }).click();

@@ -73,6 +73,8 @@ test.describe("Spotlight collection action", () => {
                 await route.fulfill({ json: collectionEdit });
             });
 
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText('Logbook');
+
             await page.locator('body').press('Control+k');
             await page.locator(spotlightTextboxSelector).fill('.edit');
             await page.locator(spotlightTextboxSelector).press('Enter');
