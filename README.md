@@ -45,8 +45,6 @@ Unit test passes are required for `yarn build` and deployment.
 
 Playwright tests are performed separately with each push to the `main` branch as a GitHub Actions workflow.
 
-It should be noted that Playwright tests are not performed in parallel to avoid the complication of test-specific endpoint interception.
-
 ### Environment variable
 
 This application requires the variable `VITE_BACKEND_URL`, which is an url pointing to an appropriate PocketBase instance.
