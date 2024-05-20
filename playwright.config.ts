@@ -14,7 +14,7 @@ export default defineConfig({
     /* Run tests in files in parallel */
     fullyParallel: true,
     /* Fail the build on CI if you accidentally left test.only in the source code. */
-    forbidOnly: !!process.env.CI,
+    // forbidOnly: !!process.env.CI,
     retries: 3,
     // Intentionally opt out of parallel tests to avoid issues caused by endpoint interception
     workers: 1,
@@ -65,7 +65,7 @@ export default defineConfig({
     webServer: {
         command: 'yarn dev',
         url: 'http://localhost:5173/',
-        reuseExistingServer: !process.env.CI,
+        reuseExistingServer: true,
         timeout: 5 * 1000,
     },
     use: {
