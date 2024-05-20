@@ -10,12 +10,12 @@ const interceptBasicApiRequests = async (page: Page) => {
         await route.fulfill({ json: authWithPasswordRes });
     });
 
-    await page.route("*/**/api/collections/trashBins/*", async route => {
-        await route.fulfill({ json: fetchTrashBin });
+    await page.route("*/**/api/collections/itemCollections/records*", async route => {
+        await route.fulfill({ json: fetchCollectionsInit });
     });
 
-    await page.route("*/**/api/collections/itemCollections/*", async route => {
-        await route.fulfill({ json: fetchCollectionsInit });
+    await page.route("*/**/api/collections/trashBins/records*", async route => {
+        await route.fulfill({ json: fetchTrashBin });
     });
 }
 
