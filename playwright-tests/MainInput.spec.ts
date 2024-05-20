@@ -7,6 +7,9 @@ test.describe("Main input", () => {
         test.beforeEach(loginWithMocks);
 
         test("Basic functionalities", async ({ page }) => {
+            // Confirm navigating to a non-trash bin collection
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText('Logbook');
+
             // Typing changes the input value
             await page.getByLabel('Main input', { exact: true }).fill('Seek greater souls');
             await expect(page.getByLabel('Main input', { exact: true })).toHaveValue("Seek greater souls");
