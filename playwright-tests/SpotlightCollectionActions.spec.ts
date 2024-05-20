@@ -9,6 +9,8 @@ test.describe("Spotlight collection action", () => {
         test.beforeEach(loginWithMocks);
 
         test("Normal collection", async ({ page }) => {
+            await expect(page.locator('header .CollectionMenuBtn')).toContainText('Logbook');
+
             await page.locator('body').press('Control+k');
 
             await expect(page.getByRole('button', { name: 'Logbook /logbook' })).toBeVisible();
