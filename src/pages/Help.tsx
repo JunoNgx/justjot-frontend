@@ -83,10 +83,10 @@ export default function Help() {
         </section>
 
         <section className="Cardlike__HelpSection"
-            id="PrefixSyntaxes"
+            id="CreateSyntaxes"
         >
-            <h3>Prefix syntaxes</h3>
-            <p>These always start and end with the colon character:</p>
+            <h3>Creation syntaxes</h3>
+            <p>Prefix syntaxes to create items with more features always start and end with the colon character:</p>
             <ul>
                 <li><code>:t:</code> or <code>:l:</code> — create a text note with title ("t" for title; "l" for long).</li>
                 <li><code>:td:</code> — create a todo item.</li>
