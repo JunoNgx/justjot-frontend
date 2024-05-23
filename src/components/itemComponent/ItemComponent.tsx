@@ -101,15 +101,14 @@ const ItemComponentInner = forwardRef<HTMLDivElement | HTMLAnchorElement, ItemCo
     };
 
     const finalProps = shouldRenderAsAnchor
-        ? {...standardProps, ...anchorProps}
-        : standardProps;
+        ? {...props, ...standardProps, ...anchorProps}
+        : {...props, ...standardProps};
 
     /**
      * Render type LINK as `<a>` to improve semantic
      */
     return shouldRenderAsAnchor
         ? <a
-            {...props}
             {...finalProps}
             ref={forwardedRef as ForwardedRef<HTMLAnchorElement>}
         >
@@ -117,7 +116,6 @@ const ItemComponentInner = forwardRef<HTMLDivElement | HTMLAnchorElement, ItemCo
         </a>
 
         : <div
-            {...props}
             {...finalProps}
             ref={forwardedRef as ForwardedRef<HTMLDivElement>}
         >
