@@ -57,6 +57,18 @@ test.describe("Main input", () => {
                 .toContainText("A link that should copy on click");
         });
 
+        test("Extended menu: filter by all todos", async ({ page }) => {
+            interceptApiRequestForItems(page);
+
+            await page.getByLabel('Extra functions and options').click();
+            await page.getByRole('menuitem', { name: 'all todos' }).click();
+
+            await expect(page.getByLabel('Main input', { exact: true })).toHaveValue('::td::');
+            expect(await page.locator("#DisplayedList .Item").count()).toBe(2);
+            await expect(page.locator("#DisplayedList .Item[data-index='0']"))
+                .toContainText("A todo item that has been marked as completed");
+        });
+
         test("Extended menu: filter by incomplete todos", async ({ page }) => {
             interceptApiRequestForItems(page);
 
