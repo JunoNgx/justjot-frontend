@@ -272,9 +272,9 @@ test.describe("Main input", () => {
             await page.locator('body').press('ArrowDown');
             await page.locator('body').press('ArrowDown');
 
-            await expect(page.locator('.Item[data-index="1"] .Item__PrimaryText')).not.toHaveCSS("text-decoration", /line-through/);
+            expect(await page.locator('.Item--IsTodoDone').count()).toBe(1);
             await page.locator('body').press('Control+Enter');
-            await expect(page.locator('.Item[data-index="1"] .Item__PrimaryText')).toHaveCSS("text-decoration", /line-through/);
+            expect(await page.locator('.Item--IsTodoDone').count()).toBe(2);
         });
 
         test("Create item", async ({ page }) => {
