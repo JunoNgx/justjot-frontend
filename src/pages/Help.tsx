@@ -97,19 +97,26 @@ export default function Help() {
                 <li>Entering <code>:td: Buy groceries</code> will create a todo item with content "Buy groceries".</li>
             </ul>
             <p>Leading and trailing whitespaces are always trimmed; the spaces between the prefix and your input do not matter.</p>
+            <p>Shorthands for syntaxes are also accessible from the Main Input extended menu.</p>
         </section>
 
         <section className="Cardlike__HelpSection"
-            id="FilterIncompleteTodos"
+            id="FilterSyntaxes"
         >
-            <h3>Filter incomplete todo tasks only</h3>
-            <p>To display only incomplete todo tasks, type <code>::itd::</code> into the Main Input:</p>
+            <h3>Filter syntaxes</h3>
+            <p>Syntaxes can also be used for filtering and displaying items of certain types or properties. Filter syntaxes start and end with double colon characters:</p>
+            <ul>
+                <li><code>::nt::</code> — texts/notes.</li>
+                <li><code>::link::</code> — links/bookmarks.</li>
+                <li><code>::td::</code> — all todos, regardless of completed status.</li>
+                <li><code>::itd::</code> — todos not marked as completed.</li>
+            </ul>
+            <p>For example, to display only incomplete todo tasks, type <code>::itd::</code> into the Main Input:</p>
             <ul>
                 <li>Without entering.</li>
                 <li>Without any leading or trailing whitespace.</li>
                 <li>Without any other content.</li>
             </ul>
-            <p>A shorthand for this is also accessible from the Main Input extended menu.</p>
             <p>As a side effect, this special search parameter will unfortunately negate the ability to search for this particular string, if you happen to use such content.</p>
         </section>
 
