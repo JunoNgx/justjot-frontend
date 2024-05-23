@@ -135,6 +135,7 @@
 
         &::before {
             content: "";
+            user-select: none;
             display: inline-block;
             width: 0;
             background-color: transparent;
