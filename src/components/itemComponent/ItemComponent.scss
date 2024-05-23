@@ -121,8 +121,34 @@
         max-width: calc(100%);
     }
 
+    --todoDuration: 300ms;
+    --todoFunc: ease-in-out;
+
     &__PrimaryText {
         flex-shrink: 0;
+
+        // For todo animation
+        will-change: color;
+        transition-property: color;
+        transition-duration: var(--todoDuration);
+        transition-timing-function: var(--todoFunc);
+
+        &::before {
+            content: "";
+            display: inline-block;
+            width: 0;
+            background-color: transparent;
+            position: absolute;
+            height: 50%;
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            border-bottom-color: var(--colPri);
+
+            will-change: width, border-bottom-color;
+            transition-property: width, border-bottom-color;
+            transition-duration: var(--todoDuration);
+            transition-timing-function: var(--todoFunc);
+        }
     }
 
     &__SecondaryText {
@@ -175,8 +201,13 @@
 
     &--IsTodoDone {
         .Item__PrimaryText {
-            text-decoration: line-through;
+            // text-decoration: line-through;
             color: var(--colGrey);
+
+            &:before {
+                width: 100%;
+                border-bottom-color: var(--colGrey);
+            }
         }
     }
 }
