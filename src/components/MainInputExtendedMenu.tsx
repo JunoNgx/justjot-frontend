@@ -1,11 +1,11 @@
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useIconProps from "@/hooks/useIconProps";
 import useItemNavActions from "@/hooks/useItemNavActions";
-import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TODO_PREFIX, FILTER_SYNTAX_INCOMPLETE_TODOS } from "@/utils/constants";
+import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TODO_PREFIX, FILTER_SYNTAX_INCOMPLETE_TODOS, FILTER_SYNTAX_LINKS, FILTER_SYNTAX_NOTES, FILTER_SYNTAX_TODOS } from "@/utils/constants";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { notifications } from "@mantine/notifications";
 import { spotlight } from "@mantine/spotlight";
-import { IconCheckbox, IconChevronDown, IconClipboardPlus, IconFocus, IconLayoutNavbar, IconListCheck, IconX } from "@tabler/icons-react";
+import { IconCheckbox, IconChevronDown, IconClipboardPlus, IconFileText, IconFocus, IconLayoutNavbar, IconList, IconListCheck, IconWorld, IconX } from "@tabler/icons-react";
 import { useContext, useState } from "react";
 import LabelWithIcon from "@/libs/components/LabelWithIcon";
 
@@ -125,10 +125,40 @@ export default function MainInputExtendedMenu(
                 </DropdownMenu.Label>
 
                 <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => prependSyntax(FILTER_SYNTAX_INCOMPLETE_TODOS, false)}
+                    onClick={() => prependSyntax(FILTER_SYNTAX_NOTES, false)}
+                >
+                    <LabelWithIcon 
+                        leftSection={<IconFileText {...menuIconProps} />}
+                    >
+                        notes
+                    </LabelWithIcon>
+                </DropdownMenu.Item>
+
+                <DropdownMenu.Item className="MainInputDropdown__Item"
+                    onClick={() => prependSyntax(FILTER_SYNTAX_LINKS, false)}
+                >
+                    <LabelWithIcon 
+                        leftSection={<IconWorld {...menuIconProps} />}
+                    >
+                        links
+                    </LabelWithIcon>
+                </DropdownMenu.Item>
+
+                <DropdownMenu.Item className="MainInputDropdown__Item"
+                    onClick={() => prependSyntax(FILTER_SYNTAX_TODOS, false)}
                 >
                     <LabelWithIcon 
                         leftSection={<IconListCheck {...menuIconProps} />}
+                    >
+                        all todos
+                    </LabelWithIcon>
+                </DropdownMenu.Item>
+
+                <DropdownMenu.Item className="MainInputDropdown__Item"
+                    onClick={() => prependSyntax(FILTER_SYNTAX_INCOMPLETE_TODOS, false)}
+                >
+                    <LabelWithIcon 
+                        leftSection={<IconList {...menuIconProps} />}
                     >
                         incomplete todos
                     </LabelWithIcon>

@@ -3,7 +3,7 @@ import { DbTable, Item, ItemCollection, ItemType } from '@/types';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { findIndexById } from '@/utils/itemUtils';
 import useManageListState from '@/libs/useManageListState';
-import { FILTER_SYNTAX_INCOMPLETE_TODOS } from '@/utils/constants';
+import { FILTER_SYNTAX_INCOMPLETE_TODOS, FILTER_SYNTAX_LINKS, FILTER_SYNTAX_NOTES, FILTER_SYNTAX_TODOS } from '@/utils/constants';
 
 type UpdateQueueItem = {
     tempId: string,
@@ -87,6 +87,15 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
         const searchTerm = inputVal.toLocaleLowerCase();
 
         switch (searchTerm) {
+
+        case FILTER_SYNTAX_NOTES:
+            return item.type === ItemType.TEXT;
+        
+        case FILTER_SYNTAX_LINKS:
+            return item.type === ItemType.LINK;
+
+        case FILTER_SYNTAX_TODOS:
+            return item.type === ItemType.TODO;
 
         case FILTER_SYNTAX_INCOMPLETE_TODOS:
             return item.type === ItemType.TODO
