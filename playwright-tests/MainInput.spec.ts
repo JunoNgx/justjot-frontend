@@ -33,7 +33,19 @@ test.describe("Main input", () => {
             await expect(page.getByLabel('Main input', { exact: true })).toHaveValue(':td: Buy armor');
         });
 
-        test("Extended menu: incomplete todos", async ({ page }) => {
+        test("Extended menu: filter by notes", async ({ page }) => {
+            interceptApiRequestForItems(page);
+
+            await page.getByLabel('Extra functions and options').click();
+            await page.getByRole('menuitem', { name: 'notes' }).click();
+
+            await expect(page.getByLabel('Main input', { exact: true })).toHaveValue('::nt::');
+            expect(await page.locator("#DisplayedList .Item").count()).toBe(5);
+            await expect(page.locator("#DisplayedList .Item[data-index='0']"))
+                .toContainText("A note that should copy on click");
+        });
+
+        test("Extended menu: filter by incomplete todos", async ({ page }) => {
             interceptApiRequestForItems(page);
 
             await page.getByLabel('Extra functions and options').click();
