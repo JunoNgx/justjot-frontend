@@ -86,17 +86,20 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
 
         const searchTerm = inputVal.toLocaleLowerCase();
 
-        if (searchTerm === FILTER_SYNTAX_INCOMPLETE_TODOS) {
+        switch (searchTerm) {
+
+        case FILTER_SYNTAX_INCOMPLETE_TODOS:
             return item.type === ItemType.TODO
                 && !item.isTodoDone;
+
+        default:
+            const hasTitleMatch = item.title?.toLowerCase()
+                .indexOf(searchTerm) > -1;
+            const hasContentMatch = item.content?.toLowerCase()
+                .indexOf(searchTerm) > -1;
+
+            return hasTitleMatch || hasContentMatch;
         }
-
-        const hasTitleMatch = item.title?.toLowerCase()
-            .indexOf(searchTerm) > -1;
-        const hasContentMatch = item.content?.toLowerCase()
-            .indexOf(searchTerm) > -1;
-
-        return hasTitleMatch || hasContentMatch;
     });
 
     const itemsHandlers = useManageListState(setItems);
