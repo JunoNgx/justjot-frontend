@@ -52,6 +52,14 @@ export default function MainInputExtendedMenu(
             });
     }
 
+    const prependSyntax = (str: string, hasSeparatorSpace = true) => {
+        setInputVal(curr => hasSeparatorSpace
+            ? `${str} ${curr}`
+            : `${str}${curr}`
+        );
+        setShouldFocusOnMainInput(true);
+    }
+
     return <DropdownMenu.Root>
         <DropdownMenu.Trigger className="MainInputDropdown__Btn">
             <div className="MainInputDropdown__BtnLabel"
@@ -81,10 +89,7 @@ export default function MainInputExtendedMenu(
                 </DropdownMenu.Label>
 
                 <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => {
-                        setInputVal(curr => `${CREATE_TEXT_WITH_TITLE_PREFIX} ${curr}`);
-                        setShouldFocusOnMainInput(true);
-                    }}
+                    onClick={() => prependSyntax(CREATE_TEXT_WITH_TITLE_PREFIX)}
                 >
                     <LabelWithIcon
                         leftSection={<IconLayoutNavbar {...menuIconProps} />}
@@ -94,10 +99,7 @@ export default function MainInputExtendedMenu(
                 </DropdownMenu.Item>
 
                 <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => {
-                        setInputVal(curr => `${CREATE_TODO_PREFIX} ${curr}`);
-                        setShouldFocusOnMainInput(true);
-                    }}
+                    onClick={() => prependSyntax(CREATE_TODO_PREFIX)}
                 >
                     <LabelWithIcon 
                         leftSection={<IconCheckbox {...menuIconProps} />}
@@ -123,10 +125,7 @@ export default function MainInputExtendedMenu(
                 </DropdownMenu.Label>
 
                 <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => {
-                        setInputVal(curr => `${FILTER_SYNTAX_INCOMPLETE_TODOS}${curr}`);
-                        setShouldFocusOnMainInput(true);
-                    }}
+                    onClick={() => prependSyntax(FILTER_SYNTAX_INCOMPLETE_TODOS, false)}
                 >
                     <LabelWithIcon 
                         leftSection={<IconListCheck {...menuIconProps} />}
