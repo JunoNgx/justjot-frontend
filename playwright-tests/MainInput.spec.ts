@@ -102,7 +102,7 @@ test.describe("Main input", () => {
         test("Extended menu: open spotlight", async ({ page }) => {
             await page.getByLabel('Main input', { exact: true }).fill('A good puppet');
             await page.getByLabel('Extra functions and options').click();
-            await page.getByRole('menuitem', { name: 'spotlight' }).click();
+            await page.getByRole('menuitem', { name: 'open spotlight' }).click();
             await expect(page.getByRole('dialog').getByRole('textbox')).toBeVisible();
         });
     });
