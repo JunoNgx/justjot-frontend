@@ -1,8 +1,14 @@
+@use "../styles/mixins" as m;
+
 .SelectIndicator {
-    background-color: aqua;
     position: absolute;
     pointer-events: none;
     height: 42px;
     width: 100%;
-    opacity: 0.2;
+    border: solid m.rem(1px) var(--colPri);
+
+    will-change: opacity, top;
+    transition-property: opacity, top;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
 }
