@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { ForwardedRef, forwardRef, useContext } from "react";
 import { Item, ItemType } from "@/types";
 import * as ContextMenu from '@radix-ui/react-context-menu';
 import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCreatedDate";
@@ -50,7 +50,7 @@ export default function ItemComponent(
     </ItemComponentInner>
 
     return <ContextMenu.Root>
-        <ContextMenu.Trigger>
+        <ContextMenu.Trigger asChild>
             {itemComponentInner}
         </ContextMenu.Trigger>
 
@@ -58,10 +58,16 @@ export default function ItemComponent(
     </ContextMenu.Root>
 }
 
-const ItemComponentInner = (
-    { item, index, children }:
-    { item: Item, index: number, children: React.ReactNode }
-) => {
+type ItemComponentInnerProps = {
+    item: Item,
+    index: number,
+    children: React.ReactNode,
+}
+
+// ForwardRef to receive props from Radix Composition with `asChild`
+const ItemComponentInner = forwardRef<HTMLDivElement | HTMLAnchorElement, ItemComponentInnerProps>(
+    ({ item, index, children, ...props }, forwardedRef) => {
+
     const { selectedIndex, setSelectedIndex } = useContext(ItemsContext);
     const { computeItemPrimaryAction, executeItemAction } = useItemActions();
 
@@ -102,9 +108,22 @@ const ItemComponentInner = (
      * Render type LINK as `<a>` to improve semantic
      */
     return shouldRenderAsAnchor
-        ? <a {...finalProps}>{children}</a>
-        : <div {...finalProps}>{children}</div>
-};
+        ? <a
+            {...props}
+            {...finalProps}
+            ref={forwardedRef as ForwardedRef<HTMLAnchorElement>}
+        >
+            {children}
+        </a>
+
+        : <div
+            {...props}
+            {...finalProps}
+            ref={forwardedRef as ForwardedRef<HTMLDivElement>}
+        >
+            {children}
+        </div>
+});
 
 const computeClassname = (item: Item, isSelected: boolean) => {
     const isSelectedModifier = isSelected
