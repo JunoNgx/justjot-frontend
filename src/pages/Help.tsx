@@ -104,7 +104,7 @@ export default function Help() {
             id="FilterSyntaxes"
         >
             <h3>Filter syntaxes</h3>
-            <p>Syntaxes can also be used for filtering and displaying items of certain types or properties. Filter syntaxes start and end with double colon characters:</p>
+            <p>Syntaxes can also be used for filtering and displaying items of certain types or properties. Filter syntaxes start and end with two colon characters:</p>
             <ul>
                 <li><code>::nt::</code> — texts/notes.</li>
                 <li><code>::link::</code> — links/bookmarks.</li>
