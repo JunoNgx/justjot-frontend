@@ -23,7 +23,7 @@ export default function SelectIndicator() {
         aria-hidden={true}
         style={{
             opacity: isSelecting ? 1 : 0,
-            top: `${prevOffset.current}px`,
+            transform: `translateY(${prevOffset.current}px)`,
         }}
     />
 }

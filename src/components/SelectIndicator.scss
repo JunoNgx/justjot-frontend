@@ -7,8 +7,8 @@
     width: 100%;
     border: solid m.rem(1px) var(--colPri);
 
-    will-change: opacity, top;
-    transition-property: opacity, top;
+    will-change: opacity, transform;
+    transition-property: opacity, transform;
     transition-duration: 0.15s;
     transition-timing-function: ease-in-out;
 }
