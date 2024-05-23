@@ -1,7 +1,7 @@
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useIconProps from "@/hooks/useIconProps";
 import useItemNavActions from "@/hooks/useItemNavActions";
-import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TODO_PREFIX, INCOMPLETE_TODOS_SYNTAX } from "@/utils/constants";
+import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TODO_PREFIX, FILTER_SYNTAX_INCOMPLETE_TODOS } from "@/utils/constants";
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { notifications } from "@mantine/notifications";
 import { spotlight } from "@mantine/spotlight";
@@ -124,7 +124,7 @@ export default function MainInputExtendedMenu(
 
                 <DropdownMenu.Item className="MainInputDropdown__Item"
                     onClick={() => {
-                        setInputVal(curr => `${INCOMPLETE_TODOS_SYNTAX}${curr}`);
+                        setInputVal(curr => `${FILTER_SYNTAX_INCOMPLETE_TODOS}${curr}`);
                         setShouldFocusOnMainInput(true);
                     }}
                 >
