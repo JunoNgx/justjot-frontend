@@ -10,10 +10,15 @@
     border: 1px solid var(--colPri);
     box-sizing: content-box;
 
+    outline-offset: 4px;
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: transparent;
+
+    will-change: outline-color;
+    transition: outline-color ease-in-out 300ms;
+    
     &:focus-within {
-        outline-offset: 4px;
-        outline-style: solid;
-        outline-width: 2px;
         outline-color: var(--colPri);
     }
 
