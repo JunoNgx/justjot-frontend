@@ -76,6 +76,10 @@ export default function MainInputExtendedMenu(
                 }}
             >
 
+                <DropdownMenu.Label className="MainInputDropdown__GroupLabel">
+                    New item
+                </DropdownMenu.Label>
+
                 <DropdownMenu.Item className="MainInputDropdown__Item"
                     onClick={() => {
                         setInputVal(curr => `${CREATE_TEXT_WITH_TITLE_PREFIX} ${curr}`);
@@ -103,6 +107,22 @@ export default function MainInputExtendedMenu(
                 </DropdownMenu.Item>
 
                 <DropdownMenu.Item className="MainInputDropdown__Item"
+                    onClick={enterFromClipboard}
+                >
+                    <LabelWithIcon 
+                        leftSection={<IconClipboardPlus {...menuIconProps} />}
+                    >
+                        from clipboard
+                    </LabelWithIcon>
+                </DropdownMenu.Item>
+
+                <DropdownMenu.Separator className="MainInputDropdown__Separator" />
+
+                <DropdownMenu.Label className="MainInputDropdown__GroupLabel">
+                    Filters
+                </DropdownMenu.Label>
+
+                <DropdownMenu.Item className="MainInputDropdown__Item"
                     onClick={() => {
                         setInputVal(curr => `${INCOMPLETE_TODOS_SYNTAX}${curr}`);
                         setShouldFocusOnMainInput(true);
@@ -115,15 +135,11 @@ export default function MainInputExtendedMenu(
                     </LabelWithIcon>
                 </DropdownMenu.Item>
 
-                <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={enterFromClipboard}
-                >
-                    <LabelWithIcon 
-                        leftSection={<IconClipboardPlus {...menuIconProps} />}
-                    >
-                        from clipboard
-                    </LabelWithIcon>
-                </DropdownMenu.Item>
+                <DropdownMenu.Separator className="MainInputDropdown__Separator" />
+
+                <DropdownMenu.Label className="MainInputDropdown__GroupLabel">
+                    Misc
+                </DropdownMenu.Label>
 
                 <DropdownMenu.Item className="MainInputDropdown__Item"
                     onClick={() => {
@@ -137,8 +153,6 @@ export default function MainInputExtendedMenu(
                         clear input
                     </LabelWithIcon>
                 </DropdownMenu.Item>
-
-                <DropdownMenu.Separator className="MainInputDropdown__Separator" />
 
                 <DropdownMenu.Item className="MainInputDropdown__Item"
                     onClick={() => {spotlight.open()}}

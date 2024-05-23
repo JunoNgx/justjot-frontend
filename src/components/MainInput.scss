@@ -68,6 +68,10 @@
         @include m.DropdownItem;
     }
 
+    &__GroupLabel {
+        @include m.DropdownGroupLabel;
+    }
+
     &__Separator {
         @include m.DropdownSeparator;
     }
