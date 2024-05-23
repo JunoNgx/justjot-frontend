@@ -45,6 +45,18 @@ test.describe("Main input", () => {
                 .toContainText("A note that should copy on click");
         });
 
+        test("Extended menu: filter by links", async ({ page }) => {
+            interceptApiRequestForItems(page);
+
+            await page.getByLabel('Extra functions and options').click();
+            await page.getByRole('menuitem', { name: 'links' }).click();
+
+            await expect(page.getByLabel('Main input', { exact: true })).toHaveValue('::link::');
+            expect(await page.locator("#DisplayedList .Item").count()).toBe(3);
+            await expect(page.locator("#DisplayedList .Item[data-index='0']"))
+                .toContainText("A link that should copy on click");
+        });
+
         test("Extended menu: filter by incomplete todos", async ({ page }) => {
             interceptApiRequestForItems(page);
 
