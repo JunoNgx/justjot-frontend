@@ -189,7 +189,7 @@ export default function MainInputExtendedMenu(
                     <LabelWithIcon 
                         leftSection={<IconFocus {...menuIconProps} />}
                     >
-                        spotlight
+                        open spotlight
                     </LabelWithIcon>
                 </DropdownMenu.Item>
 
