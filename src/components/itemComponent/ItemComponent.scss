@@ -151,6 +151,18 @@
         }
     }
 
+
+    &--IsTodoDone {
+        .Item__PrimaryText {
+            color: var(--colGrey);
+
+            &:before {
+                width: 100%;
+                border-bottom-color: var(--colGrey);
+            }
+        }
+    }
+
     &__SecondaryText {
         font-family: var(--monospaceFontFamily);
         color: var(--colGrey);
@@ -196,18 +208,6 @@
         
         .Item__SecondaryText {
             display: none;
-        }
-    }
-
-    &--IsTodoDone {
-        .Item__PrimaryText {
-            // text-decoration: line-through;
-            color: var(--colGrey);
-
-            &:before {
-                width: 100%;
-                border-bottom-color: var(--colGrey);
-            }
         }
     }
 }
