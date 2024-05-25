@@ -52,12 +52,24 @@ export default function MainInputExtendedMenu(
             });
     }
 
-    const prependSyntax = (str: string, hasSeparatorSpace = true) => {
-        setInputVal(curr => hasSeparatorSpace
-            ? `${str} ${curr}`
-            : `${str}${curr}`
+    type prependSyntaxOptions = {
+        content: string,
+        hasSpace?: boolean,
+        shouldRefocus?: boolean,
+    };
+
+    const prependSyntax = (
+        {
+            content,
+            hasSpace = false,
+            shouldRefocus = false,
+        }: prependSyntaxOptions
+    ) => {
+        setInputVal(curr => hasSpace
+            ? `${content} ${curr}`
+            : `${content}${curr}`
         );
-        setShouldFocusOnMainInput(true);
+        if (shouldRefocus) setShouldFocusOnMainInput(true);
     }
 
     return <DropdownMenu.Root>
@@ -89,7 +101,11 @@ export default function MainInputExtendedMenu(
                 </DropdownMenu.Label>
 
                 <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => prependSyntax(CREATE_TEXT_WITH_TITLE_PREFIX)}
+                    onClick={() => prependSyntax({
+                        content: CREATE_TEXT_WITH_TITLE_PREFIX,
+                        hasSpace: true,
+                        shouldRefocus: true,
+                    })}
                 >
                     <LabelWithIcon
                         leftSection={<IconLayoutNavbar {...menuIconProps} />}
@@ -99,7 +115,11 @@ export default function MainInputExtendedMenu(
                 </DropdownMenu.Item>
 
                 <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => prependSyntax(CREATE_TODO_PREFIX)}
+                    onClick={() => prependSyntax({
+                        content: CREATE_TODO_PREFIX,
+                        hasSpace: true,
+                        shouldRefocus: true,
+                    })}
                 >
                     <LabelWithIcon 
                         leftSection={<IconCheckbox {...menuIconProps} />}
@@ -125,7 +145,7 @@ export default function MainInputExtendedMenu(
                 </DropdownMenu.Label>
 
                 <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => prependSyntax(FILTER_SYNTAX_NOTES, false)}
+                    onClick={() => prependSyntax({ content: FILTER_SYNTAX_NOTES })}
                 >
                     <LabelWithIcon 
                         leftSection={<IconFileText {...menuIconProps} />}
@@ -135,7 +155,7 @@ export default function MainInputExtendedMenu(
                 </DropdownMenu.Item>
 
                 <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => prependSyntax(FILTER_SYNTAX_LINKS, false)}
+                    onClick={() => prependSyntax({ content: FILTER_SYNTAX_LINKS })}
                 >
                     <LabelWithIcon 
                         leftSection={<IconWorld {...menuIconProps} />}
@@ -145,7 +165,7 @@ export default function MainInputExtendedMenu(
                 </DropdownMenu.Item>
 
                 <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => prependSyntax(FILTER_SYNTAX_TODOS, false)}
+                    onClick={() => prependSyntax({ content: FILTER_SYNTAX_TODOS })}
                 >
                     <LabelWithIcon 
                         leftSection={<IconListCheck {...menuIconProps} />}
@@ -155,7 +175,7 @@ export default function MainInputExtendedMenu(
                 </DropdownMenu.Item>
 
                 <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => prependSyntax(FILTER_SYNTAX_INCOMPLETE_TODOS, false)}
+                    onClick={() => prependSyntax({ content: FILTER_SYNTAX_INCOMPLETE_TODOS })}
                 >
                     <LabelWithIcon 
                         leftSection={<IconList {...menuIconProps} />}
