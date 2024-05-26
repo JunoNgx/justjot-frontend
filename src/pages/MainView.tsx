@@ -12,7 +12,6 @@ import useItemNavActions from "@/hooks/useItemNavActions";
 import MainContentList from "@/components/MainContentList";
 import KeyboardPromptDisplay from "@/components/KeyboardPromptDisplay";
 import MainViewNotice from "@/components/misc/MainViewNotice";
-import SelectIndicator from "@/components/SelectIndicator";
 
 import "./MainView.scss";
 
@@ -112,7 +111,6 @@ export default function MainView() {
             <div className="MainView__ItemList"
                 id="DisplayedList"
             >
-                <SelectIndicator />
                 <MainContentList
                     isLoading={isLoading}
                     filteredItems={filteredItems}

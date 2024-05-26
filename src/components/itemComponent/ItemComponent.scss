@@ -22,9 +22,9 @@
         color: var(--colPri);
     }
 
-    // &--IsSelected {
-    //     border-color: var(--colPri);
-    // }
+    &--IsSelected {
+        border-color: var(--colPri);
+    }
 
     @include m.Mobile {
         gap: 0;
