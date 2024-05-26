@@ -6,6 +6,12 @@ import "./SelectIndicator.scss";
 const ITEM_HEIGHT_IN_PX = 42;
 const ITEM_GAP_IN_REM = 0.25;
 
+/**
+ * Component is unused due to performance issue.
+ * 
+ * To use this, use this item as the first item in the Item list, and remove
+ * the `border-color` in `.Item--IsSelected` state.
+ */
 export default function SelectIndicator() {
 
     const { selectedIndex } = useContext(ItemsContext);
