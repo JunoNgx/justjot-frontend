@@ -28,7 +28,7 @@ Additionally, an experiment was performed to use `PascalCase` for classnames, in
 .CollectionMenuDropdown__Item--IsSelected
 ```
 
-This convention has improved (subjective) readility without any encountered issue. This remains in the codebase as of time of writing.
+This convention has improved (subjective) readability without any encountered issue. This remains in the codebase as of time of writing.
 
 ## Running locally
 
