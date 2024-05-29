@@ -80,7 +80,7 @@ export default function LandingPage() {
         </section>
 
         <section className="LandingPage__Section">
-            <h2>Get started</h2>
+            <h2>Getting started</h2>
             <p><NavLink to="/register">Register</NavLink> a new account or <NavLink to="/login">login</NavLink> to your existing one.</p>
             <p>Also, you don't need to sign up just to see what this is all about. There is a <NavLink to="/demo-login">live demo</NavLink> using a test account, obligation-free.</p>
             <p>While we are at that, drop by to see <NavLink to="/terms">things you should know about</NavLink> and <NavLink to="/help">the manual</NavLink> before using JustJot.</p>
