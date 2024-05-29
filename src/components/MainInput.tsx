@@ -144,6 +144,7 @@ const MainInput = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInp
                 type="text"
                 aria-label="Main input"
                 // placeholder="Add new item or search"
+                autoComplete="off"
                 value={inputVal}
                 onChange={(event) => {
                     setInputVal(event.currentTarget.value);
