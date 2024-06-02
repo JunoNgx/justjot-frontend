@@ -2,8 +2,12 @@ name: Playwright Tests
 
 on:
   deployment_status:
+  push:
+    branches: [ main ]
   pull_request:
-    branches: [ main, dev/** ]
+    branches: [ main, release/** ]
+    types: [ opened, reopened ]
+
 jobs:
   run-e2es:
     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
