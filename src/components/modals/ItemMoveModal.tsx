@@ -96,25 +96,23 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
             data-autofocus={true} 
             onKeyDown={getHotkeyHandler([...numericKeysHotkeyOptions])}
         >
-            {/* TODO: remove filter trashbin logic */}
-            {collectionList?.filter(c => !c.isTrashBin)
-                .map((collection, index) => <div
-                    className="Modal__MoveItemOption"
-                    key={index}
+            {collectionList?.map((collection, index) => <div
+                className="Modal__MoveItemOption"
+                key={index}
+            >
+                <ButtonWithLoader className="Modal__MoveItemBtn"
+                    onClick={() => moveItemToCollection({
+                        itemId: item.id, collectionId: collection.id})
+                    }
+                    isDisabled={isLoading || item?.collection === collection.id}
                 >
-                    <ButtonWithLoader className="Modal__MoveItemBtn"
-                        onClick={() => moveItemToCollection({
-                            itemId: item.id, collectionId: collection.id})
-                        }
-                        isDisabled={isLoading || item?.collection === collection.id}
-                    >
-                        {collection.name}    
-                    </ButtonWithLoader>
+                    {collection.name}    
+                </ButtonWithLoader>
 
-                    <div className="Modal__CollectionHotkey">
-                        <CollectionHotkey index={index}/>
-                    </div>
-                </div>)}
+                <div className="Modal__CollectionHotkey">
+                    <CollectionHotkey index={index}/>
+                </div>
+            </div>)}
 
             {isLoading && <div className="Modal__LoaderContainer">
                 <Loader/>

@@ -101,35 +101,32 @@ export default function CollectionsSortModal() {
         hasChanged.current = true;
     }
 
-    // TODO: remove trashbin filter logic
     const draggableItemList = (
-        state.filter(collection => !collection.isTrashBin)
-            .map((collection, index) => <Draggable
-                key={collection.id}
-                index={index}
-                draggableId={collection.id}
-            >
-                {(provided, _snapshot) => {
-                    if (_snapshot.isDragging) {
-                        // Hackfix: https://github.com/atlassian/react-beautiful-dnd/issues/1881
-                        // @ts-expect-error: Manually fix offset caused by modal positioning
-                        provided.draggableProps.style.left = provided.draggableProps.style.offsetLeft;
-                        // @ts-expect-error: Manually fix offset caused by modal positioning
-                        provided.draggableProps.style.top = provided.draggableProps.style.offsetTop;
-                    }
+        state.map((collection, index) => <Draggable
+            key={collection.id}
+            index={index}
+            draggableId={collection.id}
+        >
+            {(provided, _snapshot) => {
+                if (_snapshot.isDragging) {
+                    // Hackfix: https://github.com/atlassian/react-beautiful-dnd/issues/1881
+                    // @ts-expect-error: Manually fix offset caused by modal positioning
+                    provided.draggableProps.style.left = provided.draggableProps.style.offsetLeft;
+                    // @ts-expect-error: Manually fix offset caused by modal positioning
+                    provided.draggableProps.style.top = provided.draggableProps.style.offsetTop;
+                }
 
-                    return <div className="Modal__CollectionItem"
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                    >
-                        <p className="Modal__CollectionName">{collection.name}</p>
-                    </div>
-                }}
+                return <div className="Modal__CollectionItem"
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    ref={provided.innerRef}
+                >
+                    <p className="Modal__CollectionName">{collection.name}</p>
+                </div>
+            }}
 
-            </Draggable>
-        )
-    )
+        </Draggable>
+    ))
 
     const draggableArea = (
         <DragDropContext
