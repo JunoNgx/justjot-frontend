@@ -60,7 +60,6 @@ export default function CollectionCreateUpdateModal(
     }, []);
 
     const handleSubmit = async (formData: CollectionCreateUpdateFormData) => {
-        console.log("handle submit")
         const { name, slug: originalSlug } = formData;
         const slug = kebabCase(originalSlug);
 
@@ -124,7 +123,7 @@ export default function CollectionCreateUpdateModal(
     }, [newlyCreatedCollection]);
 
     const handleErroredCreation = (err: ClientResponseError) => {
-        console.log(err);
+        console.error(err);
         notifications.show({
             message: "Error creating new collection",
             color: "red",
@@ -152,7 +151,7 @@ export default function CollectionCreateUpdateModal(
     };
 
     const handleErroredUpdate = (err: ClientResponseError) => {
-        console.log(err);
+        console.error(err);
         notifications.show({
             message: "Error updating collection",
             color: "red",

@@ -87,8 +87,6 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
         });
     };
 
-    console.log(collectionList)
-
     return <FocusTrap> 
         <div className="Modal Modal--Stackbox Modal--ThickPadding"
             /**
