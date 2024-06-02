@@ -51,7 +51,8 @@ test.describe("Item context menu", () => {
         test("Trashed note", async ({ page }) => {
             await interceptApiRequestForTrashedItems(page);
 
-            await page.goto("/e2eTestAcc/trash-bin")
+            await page.locator("header .CollectionMenuBtn").click();
+            await page.getByRole('menuitem', { name: 'Trash bin' }).click();
             
             await expect(page.locator("header .CollectionMenuBtn"))
                 .toContainText('Trash bin');
@@ -192,8 +193,9 @@ test.describe("Item context menu", () => {
         test("Delete", async ({ page }) => {
             await interceptApiRequestForTrashedItems(page);
 
-            await page.goto("/e2eTestAcc/trash-bin")
-            
+            await page.locator("header .CollectionMenuBtn").click();
+            await page.getByRole('menuitem', { name: 'Trash bin' }).click();
+
             await expect(page.locator("header .CollectionMenuBtn"))
                 .toContainText('Trash bin');
             await expect(page).toHaveURL("e2eTestAcc/trash-bin");
@@ -207,7 +209,8 @@ test.describe("Item context menu", () => {
         test("Restore", async ({ page }) => {
             await interceptApiRequestForTrashedItems(page);
 
-            await page.goto("/e2eTestAcc/trash-bin")
+            await page.locator("header .CollectionMenuBtn").click();
+            await page.getByRole('menuitem', { name: 'Trash bin' }).click();
             
             await expect(page.locator("header .CollectionMenuBtn"))
                 .toContainText('Trash bin');
