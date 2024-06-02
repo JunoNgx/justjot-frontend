@@ -39,7 +39,7 @@ test.describe("Collection Menu", () => {
     test.describe("Functionalities", () => {
         test.beforeEach(loginWithMocks);
 
-        test.fixme("Auto-navigates to first collection", async ({ page }) => {
+        test("Auto-navigates to first collection", async ({ page }) => {
             await expect(page.locator('header')).toContainText('Logbook');
             await expect(page).toHaveURL("e2eTestAcc/logbook");
         });
@@ -67,7 +67,7 @@ test.describe("Collection Menu", () => {
             await expect(page.locator('header .CollectionMenuBtn')).toContainText('Coll3');
         });
 
-        test.fixme("Edit collection", async ({ page }) => {
+        test("Edit collection", async ({ page }) => {
             await page.route("*/**/api/collections/itemCollections/records/6qt1usrvke0tuac", async route => {
                 await route.fulfill({ json: collectionEdit });
             });

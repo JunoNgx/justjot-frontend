@@ -110,7 +110,7 @@ test.describe("Main input", () => {
     test.describe("Test keyboard shortcuts", () => {
         test.beforeEach(loginWithMocksAndFilledItems);
 
-        test.fixme("Navigate to adjacent collections with arrow keys", async ({ page }) => {
+        test("Navigate to adjacent collections with arrow keys", async ({ page }) => {
             await expect(page.locator('header')).toContainText('Logbook');
             await expect(page).toHaveURL("e2eTestAcc/logbook");
 
