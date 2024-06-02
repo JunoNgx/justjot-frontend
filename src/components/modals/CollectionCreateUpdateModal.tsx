@@ -33,7 +33,8 @@ export default function CollectionCreateUpdateModal(
         initCollections,
         setInitCollections,
         currCollection,
-        collSelectedIndex
+        collSelectedIndex,
+        setTrashBin,
     } = useContext(CollectionsContext);
     const form = useForm({
         initialValues: {
@@ -144,8 +145,8 @@ export default function CollectionCreateUpdateModal(
     };
 
     const handleSuccessulTrashbinUpdate = (respondedTrashBin: TrashBin) => {
-        const processedTrashBin = {...respondedTrashBin, isTrashBin: true}
-        collectionsHandlers.replaceProps(collSelectedIndex, processedTrashBin);
+        const processedTrashBin: TrashBin = {...respondedTrashBin, isTrashBin: true};
+        setTrashBin(processedTrashBin);
         tryNavigateToCollection(processedTrashBin);
         modals.closeAll();
     };
