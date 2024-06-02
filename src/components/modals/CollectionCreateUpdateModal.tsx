@@ -30,8 +30,8 @@ export default function CollectionCreateUpdateModal(
 ) {
 
     const {
-        collections,
-        setCollections,
+        initCollections,
+        setInitCollections,
         currCollection,
         collSelectedIndex
     } = useContext(CollectionsContext);
@@ -43,7 +43,7 @@ export default function CollectionCreateUpdateModal(
     });
     const [isLoading, setIsLoading] = useState(false);
     const [newlyCreatedCollection, setNewlyCreatedCollection] = useState<ItemCollection | null>(null);
-    const collectionsHandlers = useManageListState(setCollections);
+    const collectionsHandlers = useManageListState(setInitCollections);
     const {
         trySwitchToCollectionById,
         tryNavigateToCollection,
@@ -85,7 +85,7 @@ export default function CollectionCreateUpdateModal(
             return;
         }
 
-        const currHighestSortOrder = getCurrHighestCollectionSortOrder(collections);
+        const currHighestSortOrder = getCurrHighestCollectionSortOrder(initCollections);
         await createCollection({
             name, slug, currHighestSortOrder,
             setLoadingState: setIsLoading,
@@ -110,8 +110,7 @@ export default function CollectionCreateUpdateModal(
     }
 
     const handleSuccessfulCreation = (newCollection: ItemCollection) => {
-        // Last position is Trash bin, so insert to second last
-        collectionsHandlers.insert(collections.length - 2, newCollection);
+        collectionsHandlers.append(newCollection);
         setNewlyCreatedCollection(newCollection);
 
         modals.closeAll();

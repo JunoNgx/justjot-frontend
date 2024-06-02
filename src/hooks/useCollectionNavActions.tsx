@@ -9,7 +9,7 @@ import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
 export default function useCollectionNavActions() {
     const { user } = useContext(BackendClientContext);
     const {
-        collections,
+        collectionList,
         setCurrCollection,
         collSelectedIndex,
     } = useContext(CollectionsContext);
@@ -18,7 +18,7 @@ export default function useCollectionNavActions() {
     const navigate = useNavigate();
 
     const trySwitchToCollectionById = (collectionId: string) => {
-        const targetCollection = collections.find(c => c.id === collectionId);
+        const targetCollection = collectionList.find(c => c?.id === collectionId);
         if (!targetCollection) return;
 
         tryNavigateToCollection(targetCollection);
@@ -31,7 +31,7 @@ export default function useCollectionNavActions() {
         if (!collectionSlug) return;
 
         const targetCollection =
-            collections.find(c => c.slug === collectionSlug);
+            collectionList.find(c => c?.slug === collectionSlug);
         if (!targetCollection) {
             trySwitchToCollectionByIndex(0);
             return;
@@ -54,7 +54,7 @@ export default function useCollectionNavActions() {
     }
 
     const trySwitchToNextCollection = () => {
-        if (collSelectedIndex === collections?.length - 1) return;
+        if (collSelectedIndex === collectionList?.length - 1) return;
 
         trySwitchToCollectionByIndex(collSelectedIndex + 1);
     }
@@ -62,7 +62,7 @@ export default function useCollectionNavActions() {
     const trySwitchToCollectionByIndex = (index: number) => {
         if (index < 0) return;
 
-        const targetCollection = collections?.[index];
+        const targetCollection = collectionList?.[index];
         if (!targetCollection) return;
         tryNavigateToCollection(targetCollection);
     };

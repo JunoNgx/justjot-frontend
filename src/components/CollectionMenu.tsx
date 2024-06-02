@@ -17,7 +17,7 @@ import LabelWithIcon from "@/libs/components/LabelWithIcon";
 
 export default function CollectionMenu({isMobile}: {isMobile?: boolean}) {
     const { isLoggedIn } = useContext(BackendClientContext);
-    const { collections, currCollection, isTrashCollection } = useContext(CollectionsContext);
+    const { collectionList, currCollection, isTrashCollection } = useContext(CollectionsContext);
 
     const { trySwitchToCollectionById } = useCollectionNavActions();
     const confirmCollectionDeletion = useCollectionDeletion();
@@ -45,12 +45,12 @@ export default function CollectionMenu({isMobile}: {isMobile?: boolean}) {
                 align={isWidthMobile ? "end" : "start"}
                 sideOffset={12}
             >
-                {collections?.map((collection: ItemCollection, index: number) =>
+                {collectionList?.map((collection: ItemCollection | undefined, index: number) =>
                     <CollectionMenuCollectionItem
-                        key={collection.id}
+                        key={collection?.id || index}
                         index={index}
                         collection={collection}
-                        isSelected={currCollection?.id === collection.id}
+                        isSelected={currCollection?.id === collection?.id}
                         onClickHandler={trySwitchToCollectionById}
                     />
                 )}
@@ -106,7 +106,7 @@ export default function CollectionMenu({isMobile}: {isMobile?: boolean}) {
 }
 
 type CollectionMenuCollectionItemProps = {
-    collection: ItemCollection,
+    collection: ItemCollection | undefined,
     index: number,
     isSelected: boolean,
     onClickHandler: (collectionId: string) => void;
@@ -115,6 +115,8 @@ type CollectionMenuCollectionItemProps = {
 const CollectionMenuCollectionItem = (
     { collection, index, isSelected, onClickHandler }: CollectionMenuCollectionItemProps
 ) => {
+    if (!collection) return;
+
     const { menuIconProps } = useIconProps();
     const isTrashBin = collection.isTrashBin
 

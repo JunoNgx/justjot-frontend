@@ -14,7 +14,7 @@ import { CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TEXT_WITH_TITLE_PREFIX_ALT } from
 import "./MainInput.scss";
 
 const MainInput = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>((props, ref) => {
-    const { collections, isTrashCollection } = useContext(CollectionsContext);
+    const { initCollections, isTrashCollection } = useContext(CollectionsContext);
     const {
         setIsMainInputFocused,
         inputVal,
@@ -87,7 +87,7 @@ const MainInput = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInp
         if (!selectedItem) return;
 
         if (canMoveItem(selectedItem)) {
-            openMoveItemModal({item: selectedItem, collectionList: collections});
+            openMoveItemModal({item: selectedItem, collectionList: initCollections });
         }
     }
 

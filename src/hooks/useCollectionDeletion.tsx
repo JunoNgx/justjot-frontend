@@ -13,13 +13,13 @@ import useManageListState from "@/libs/useManageListState";
 export default function useCollectionDeletion() {
     
     const {
-        collections,
-        setCollections,
+        initCollections,
+        setInitCollections,
         currCollection,
         collSelectedIndex,
     } = useContext(CollectionsContext);
     const { trySwitchToCollectionByIndex } = useCollectionNavActions();
-    const itemsHandlers = useManageListState(setCollections);
+    const itemsHandlers = useManageListState(setInitCollections);
 
     const [isLoading, setIsLoading] = useState(false);
     /**
@@ -63,12 +63,12 @@ export default function useCollectionDeletion() {
     useEffect(() => {
         if (navAwayIndex === -1) return;
 
-        if (navAwayIndex > collections.length - 1)
+        if (navAwayIndex > initCollections.length - 1)
             trySwitchToCollectionByIndex(navAwayIndex - 1);
         else trySwitchToCollectionByIndex(navAwayIndex);
 
         setNavAwayIndex(-1);
-    }, [collections, navAwayIndex]);
+    }, [initCollections, navAwayIndex]);
 
     const handleErroredDeletion = (err: ClientResponseError) => {
         console.error(err);
@@ -80,7 +80,7 @@ export default function useCollectionDeletion() {
         });
     };
 
-    const canDelete = collections.length > 1;
+    const canDelete = initCollections.length > 1;
     const confirmCollectionDeletion = () => {
 
         if (currCollection?.isTrashBin) {

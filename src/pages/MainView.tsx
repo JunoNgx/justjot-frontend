@@ -17,7 +17,7 @@ import "./MainView.scss";
 
 export default function MainView() {
     const { isLoggedIn, isDemoUser, refreshAuth } = useContext(BackendClientContext);
-    const { collections, currCollection, isTrashCollection } = useContext(CollectionsContext);
+    const { collectionList, currCollection, isTrashCollection } = useContext(CollectionsContext);
     const { fetchItems, filteredItems } = useContext(ItemsContext);
     const { focusOnMainInput } = useItemNavActions();
     const {
@@ -74,7 +74,7 @@ export default function MainView() {
     }
 
     useEffect(() => {
-        if (collections.length === 0) return;
+        if (collectionList.length === 0) return;
         if (!collectionSlug) {
             trySwitchToCollectionByIndex(0)
             return;
@@ -82,7 +82,7 @@ export default function MainView() {
         if (collectionSlug === currCollection?.slug) return;
 
         trySwitchToCollectionBySlug(collectionSlug);
-    }, [collections]);
+    }, [collectionList]);
 
     useEffect(() => {
         if (!currCollection) return;

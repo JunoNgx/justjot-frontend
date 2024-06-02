@@ -20,7 +20,7 @@ export default function useItemActions() {
 
     const { emitter } = useContext(EventBusContext);
     const { user } = useContext(BackendClientContext);
-    const { collections } = useContext(CollectionsContext);
+    const { initCollections } = useContext(CollectionsContext);
     const { currCollection } = useContext(CollectionsContext);
     const { items, setItems, setUpdateQueue, fetchItems } = useContext(ItemsContext);
     const {
@@ -388,7 +388,7 @@ export default function useItemActions() {
             item,
             successfulCallback: (_record: Item) => {
                 const originalCollection =
-                    collections.find(c => c.id === item.collection);
+                    initCollections.find(c => c?.id === item.collection);
                 if (!originalCollection) return;
 
                 notifications.show({
@@ -441,7 +441,7 @@ export default function useItemActions() {
                 break;
 
             case (ItemAction.MOVE):
-                openMoveItemModal({item, collectionList: collections});
+                openMoveItemModal({item, collectionList: initCollections});
                 break;
 
             case (ItemAction.DELETE):

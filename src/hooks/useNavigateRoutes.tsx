@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function useNavigateRoutes() {
 
     const { user, logout } = useContext(BackendClientContext);
-    const { setCurrCollection, setCollections } = useContext(CollectionsContext);
+    const { setCurrCollection, setInitCollections, setTrashBin } = useContext(CollectionsContext);
     const { setItems } = useContext(ItemsContext);
 
     const navigate = useNavigate();
@@ -34,7 +34,8 @@ export default function useNavigateRoutes() {
     };
 
     const logoutAndNavigateToLogin = () => {
-        setCollections([]);
+        setInitCollections([]);
+        setTrashBin(undefined);
         setCurrCollection(undefined)
         setItems([]);
         logout();

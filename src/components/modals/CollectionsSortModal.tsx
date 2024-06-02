@@ -9,8 +9,8 @@ import { notifications } from "@mantine/notifications";
 
 export default function CollectionsSortModal() {
 
-    const { collections, fetchCollections } = useContext(CollectionsContext);
-    const [state, itemsHandlers] = useListState(collections);
+    const { initCollections, fetchCollections } = useContext(CollectionsContext);
+    const [state, itemsHandlers] = useListState(initCollections);
     const { sortCollection } = useCollectionApiCalls();
     const hasChanged = useRef(false);
 
@@ -28,7 +28,7 @@ export default function CollectionsSortModal() {
             to: destination?.index || 0
         });
 
-        if (collections.length === 0) return;
+        if (initCollections.length === 0) return;
         if (destination?.index === undefined
             || destination?.index === null
             || destination?.index < 0
@@ -101,6 +101,7 @@ export default function CollectionsSortModal() {
         hasChanged.current = true;
     }
 
+    // TODO: remove trashbin filter logic
     const draggableItemList = (
         state.filter(collection => !collection.isTrashBin)
             .map((collection, index) => <Draggable

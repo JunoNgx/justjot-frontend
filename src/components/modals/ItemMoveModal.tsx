@@ -98,6 +98,7 @@ export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
             data-autofocus={true} 
             onKeyDown={getHotkeyHandler([...numericKeysHotkeyOptions])}
         >
+            {/* TODO: remove filter trashbin logic */}
             {collectionList?.filter(c => !c.isTrashBin)
                 .map((collection, index) => <div
                     className="Modal__MoveItemOption"
