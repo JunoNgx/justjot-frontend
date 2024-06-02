@@ -110,7 +110,7 @@ test.describe("Main input", () => {
     test.describe("Test keyboard shortcuts", () => {
         test.beforeEach(loginWithMocksAndFilledItems);
 
-        test.fixme("Navigate to adjacent collections with arrow keys", async ({ page }) => {
+        test("Navigate to adjacent collections with arrow keys", async ({ page }) => {
             await expect(page.locator('header')).toContainText('Logbook');
             await expect(page).toHaveURL("e2eTestAcc/logbook");
 
@@ -391,7 +391,9 @@ test.describe("Main input", () => {
         test("Restore trashed item", async ({ page }) => {
             interceptApiRequestForTrashedItems(page);
 
-            await page.goto("/e2eTestAcc/trash-bin")
+            // TODO look into navigate with url and slug
+            await page.locator("header .CollectionMenuBtn").click();
+            await page.getByRole('menuitem', { name: 'Trash bin' }).click();
 
             await expect(page.locator("header .CollectionMenuBtn"))
                 .toContainText('Trash bin');
@@ -412,7 +414,9 @@ test.describe("Main input", () => {
         test("Item creation should be blocked from trash bin", async ({ page }) => {
             interceptApiRequestForTrashedItems(page);
 
-            await page.goto("/e2eTestAcc/trash-bin")
+            // TODO look into navigate with url and slug
+            await page.locator("header .CollectionMenuBtn").click();
+            await page.getByRole('menuitem', { name: 'Trash bin' }).click();
 
             await expect(page.locator("header .CollectionMenuBtn"))
                 .toContainText('Trash bin');

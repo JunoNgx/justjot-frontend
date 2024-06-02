@@ -4,8 +4,9 @@ import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { ClientResponseError } from 'pocketbase';
 
 type CollectionsContextType = {
-    collections: ItemCollection[],
-    setCollections: React.Dispatch<React.SetStateAction<ItemCollection[]>>,
+    initCollections: ItemCollection[],
+    setInitCollections: React.Dispatch<React.SetStateAction<ItemCollection[]>>,
+    collectionList: (ItemCollection | undefined)[],
     currCollection: ItemCollection | undefined,
     setCurrCollection: React.Dispatch<React.SetStateAction<ItemCollection | undefined>>,
     trashBin: TrashBin | undefined,
@@ -19,17 +20,19 @@ export const CollectionsContext = createContext<CollectionsContextType>({} as Co
 
 export default function CollectionsContextProvider({ children }: { children: ReactNode }) {
     const { isLoggedIn, pbClient, user } = useContext(BackendClientContext);
-    const [collections, setCollections] = useState<ItemCollection[]>([]);
+    // Initial collection without Trash Bin
+    const [initCollections, setInitCollections] = useState<ItemCollection[]>([]);
     const [currCollection, setCurrCollection] = useState<ItemCollection>();
     const [trashBin, setTrashBin] = useState<TrashBin>();
 
     useEffect(() => {
-        fetchTrashBin();
-    }, [user]);
+        const fetchData = async () => {
+            await fetchCollections();
+            await fetchTrashBin();
+        }
 
-    useEffect(() => {
-        fetchCollections();
-    }, [trashBin]);
+        fetchData();
+    }, [user]);
 
     // // @ts-expect-error
     // const removeLoginStatusListener = pbClient.authStore.onChange((token, model) => {
@@ -67,7 +70,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
     const fetchCollections = async (
         {successfulCallback, errorCallback}: ApiRequestCallbackOptions = {}
     ) => {
-        if (!isLoggedIn || !trashBin) return;
+        if (!isLoggedIn) return;
 
         await pbClient
             .cancelRequest("collection-get-all")
@@ -78,7 +81,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
             })
             .then((records: ItemCollection[]) => {
                 successfulCallback?.();
-                setCollections([...records, trashBin]);
+                setInitCollections(records);
             })
             .catch((err: ClientResponseError) => {
                 errorCallback?.();
@@ -88,13 +91,15 @@ export default function CollectionsContextProvider({ children }: { children: Rea
             });
     };
 
-    const collSelectedIndex = collections.findIndex(c => c.id === currCollection?.id);
+    const collectionList = [...initCollections, trashBin];
+    const collSelectedIndex = collectionList.findIndex(c => c?.id === currCollection?.id);
     const isTrashCollection = currCollection?.isTrashBin;
 
     return <CollectionsContext.Provider value=
         {{
-            collections,
-            setCollections,
+            initCollections,
+            setInitCollections,
+            collectionList,
             currCollection,
             setCurrCollection,
             trashBin,
@@ -102,7 +107,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
 
             collSelectedIndex,
             isTrashCollection,
-            fetchCollections
+            fetchCollections,
         }}
     >
         {children}

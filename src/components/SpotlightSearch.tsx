@@ -15,7 +15,7 @@ export default function SpotlightSearch() {
 
     const { isLoggedIn } = useContext(BackendClientContext);
     const { setThemeMode } = useContext(UserLocalSettingsContext);
-    const { collections, isTrashCollection } = useContext(CollectionsContext);
+    const { collectionList, isTrashCollection } = useContext(CollectionsContext);
     const { spotlightIconProps } = useIconProps();
     const { trySwitchToCollectionById } = useCollectionNavActions();
     const confirmCollectionDeletion = useCollectionDeletion();
@@ -187,15 +187,18 @@ export default function SpotlightSearch() {
     }
 
     const buildCollectionNavActions = (): SpotlightActionData[] => {
-        return collections.map(collection => ({
-            id: `collection-${collection.id}`,
-            label: `${collection.name}`,
-            description: `/${collection.slug}`,
-            leftSection: collection.isTrashBin
+        return collectionList.map(collection => ({
+            id: `collection-${collection?.id}`,
+            label: `${collection?.name}`,
+            description: `/${collection?.slug}`,
+            leftSection: collection?.isTrashBin
                 ? <IconTrash style={{color: "var(--colViolet)"}} {...spotlightIconProps} />
                 : <IconStack2 {...spotlightIconProps} />
             ,
-            onClick: () => {trySwitchToCollectionById(collection.id)},
+            onClick: () => {
+                if (!collection) return;
+                trySwitchToCollectionById(collection.id);
+            },
         }));
     }
 

@@ -30,10 +30,11 @@ export default function CollectionCreateUpdateModal(
 ) {
 
     const {
-        collections,
-        setCollections,
+        initCollections,
+        setInitCollections,
         currCollection,
-        collSelectedIndex
+        collSelectedIndex,
+        setTrashBin,
     } = useContext(CollectionsContext);
     const form = useForm({
         initialValues: {
@@ -43,7 +44,7 @@ export default function CollectionCreateUpdateModal(
     });
     const [isLoading, setIsLoading] = useState(false);
     const [newlyCreatedCollection, setNewlyCreatedCollection] = useState<ItemCollection | null>(null);
-    const collectionsHandlers = useManageListState(setCollections);
+    const collectionsHandlers = useManageListState(setInitCollections);
     const {
         trySwitchToCollectionById,
         tryNavigateToCollection,
@@ -59,7 +60,6 @@ export default function CollectionCreateUpdateModal(
     }, []);
 
     const handleSubmit = async (formData: CollectionCreateUpdateFormData) => {
-        console.log("handle submit")
         const { name, slug: originalSlug } = formData;
         const slug = kebabCase(originalSlug);
 
@@ -85,7 +85,7 @@ export default function CollectionCreateUpdateModal(
             return;
         }
 
-        const currHighestSortOrder = getCurrHighestCollectionSortOrder(collections);
+        const currHighestSortOrder = getCurrHighestCollectionSortOrder(initCollections);
         await createCollection({
             name, slug, currHighestSortOrder,
             setLoadingState: setIsLoading,
@@ -110,8 +110,7 @@ export default function CollectionCreateUpdateModal(
     }
 
     const handleSuccessfulCreation = (newCollection: ItemCollection) => {
-        // Last position is Trash bin, so insert to second last
-        collectionsHandlers.insert(collections.length - 2, newCollection);
+        collectionsHandlers.append(newCollection);
         setNewlyCreatedCollection(newCollection);
 
         modals.closeAll();
@@ -124,7 +123,7 @@ export default function CollectionCreateUpdateModal(
     }, [newlyCreatedCollection]);
 
     const handleErroredCreation = (err: ClientResponseError) => {
-        console.log(err);
+        console.error(err);
         notifications.show({
             message: "Error creating new collection",
             color: "red",
@@ -145,14 +144,14 @@ export default function CollectionCreateUpdateModal(
     };
 
     const handleSuccessulTrashbinUpdate = (respondedTrashBin: TrashBin) => {
-        const processedTrashBin = {...respondedTrashBin, isTrashBin: true}
-        collectionsHandlers.replaceProps(collSelectedIndex, processedTrashBin);
+        const processedTrashBin: TrashBin = {...respondedTrashBin, isTrashBin: true};
+        setTrashBin(processedTrashBin);
         tryNavigateToCollection(processedTrashBin);
         modals.closeAll();
     };
 
     const handleErroredUpdate = (err: ClientResponseError) => {
-        console.log(err);
+        console.error(err);
         notifications.show({
             message: "Error updating collection",
             color: "red",

@@ -10,6 +10,10 @@ const interceptBasicApiRequests = async (page: Page) => {
         await route.fulfill({ json: authWithPasswordRes });
     });
 
+    await page.route("*/**/api/collections/users/auth-refresh", async route => {
+        await route.fulfill({ json: authWithPasswordRes });
+    });
+
     await page.route("*/**/api/collections/itemCollections/records*", async route => {
         await route.fulfill({ json: fetchCollectionsInit });
     });

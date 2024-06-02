@@ -14,7 +14,7 @@ import { ItemsContext } from '@/contexts/ItemsContext';
 export default function ItemComponentContextMenu(
     { item }: { item: Item }
 ) {
-    const { collections } = useContext(CollectionsContext);
+    const { initCollections } = useContext(CollectionsContext);
     const { setSelectedIndex } = useContext(ItemsContext);
 
     const { menuIconProps } = useIconProps();
@@ -51,7 +51,7 @@ export default function ItemComponentContextMenu(
     </ContextMenu.Item>
 
     const moveAction = <ContextMenu.Item className="ItemContextMenu__Item"
-        onClick={() => openMoveItemModal({item, collectionList: collections})}
+        onClick={() => openMoveItemModal({item, collectionList: initCollections})}
     >
         <LabelWithIcon className="ItemContextMenu__Label"
             leftSection={<IconFileSymlink {...menuIconProps} />}
