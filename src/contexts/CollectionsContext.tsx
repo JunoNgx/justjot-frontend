@@ -70,7 +70,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
     const fetchCollections = async (
         {successfulCallback, errorCallback}: ApiRequestCallbackOptions = {}
     ) => {
-        if (!isLoggedIn || !trashBin) return;
+        if (!isLoggedIn) return;
 
         await pbClient
             .cancelRequest("collection-get-all")
