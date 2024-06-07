@@ -125,7 +125,7 @@ export default function useCollectionDeletion() {
             centered: true,
             innerProps: {
                 leftSection: <IconExclamationCircle size={64} stroke={justJotTheme.other.iconStrokeWidth}/>,
-                modalBody: "You have only one collection at the movement. You cannot delete your last collection."
+                modalBody: "You have only one collection at the moment. You cannot delete your last collection."
             }
         });
     };
