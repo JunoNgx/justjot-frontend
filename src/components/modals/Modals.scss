@@ -12,6 +12,16 @@
         padding: 1.25rem;
     }
 
+    &--Info {
+        p {
+            margin: 0;
+        }
+
+        .Modal__BtnContainer {
+            margin-top: 1rem;
+        }
+    }
+
     &__ButtonsFlexbox {
         margin-top: 2rem;
         display: flex;
