@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { modals } from "@mantine/modals";
 import { getCurrHighestCollectionSortOrder } from "@/utils/collectionUtils";
 import { CollectionsContext } from "@/contexts/CollectionsContext";
-import slugify from "slugify";
+import { slugify } from "@/utils/miscUtils";
 import useCollectionApiCalls from "@/hooks/useCollectionApiCalls";
 import { ItemCollection, TrashBin } from "@/types";
 import { ClientResponseError } from "pocketbase";
