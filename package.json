@@ -23,8 +23,6 @@
     "@radix-ui/react-context-menu": "^2.1.5",
     "@radix-ui/react-dropdown-menu": "2.0.6",
     "@tabler/icons-react": "^2.47.0",
-    "@types/lodash-es": "^4.17.12",
-    "lodash-es": "^4.17.21",
     "luxon": "^3.4.4",
     "mitt": "^3.0.1",
     "pocketbase": "^0.21.2",
