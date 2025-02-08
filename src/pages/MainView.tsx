@@ -14,6 +14,7 @@ import KeyboardPromptDisplay from "@/components/KeyboardPromptDisplay";
 import MainViewNotice from "@/components/misc/MainViewNotice";
 
 import "./MainView.scss";
+import { APP_NAME } from "@/utils/constants";
 
 export default function MainView() {
     const { isLoggedIn, isDemoUser, refreshAuth } = useContext(BackendClientContext);
@@ -92,6 +93,8 @@ export default function MainView() {
     return <div className="MainView"
         id="MainView"
     >
+        <title>{`${currCollection?.name} — ${APP_NAME}`}</title>
+
         {/* For non-item components */}
         <CollectionMenu isMobile={true} />
         <KeyboardPromptDisplay />

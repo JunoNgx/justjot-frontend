@@ -28,10 +28,11 @@ export default function Profile() {
         refreshAuth();
 
         setCurrCollection(undefined);
-        document.title = `Account — ${APP_NAME}`;
     }, []);
 
     return <div className="Cardlike Cardlike--WithBottomMargin">
+        <title>{`Account — ${APP_NAME}`}</title>
+
         {isLoggedIn &&
             <>
                 <h2>Account management</h2>

@@ -1,7 +1,7 @@
 import { useForm } from '@mantine/form';
 import { TextInput } from "@mantine/core";
 import { BackendClientContext } from '@/contexts/BackendClientContext';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { DbTable, RequestPageType } from '@/types'
 import { NavLink } from 'react-router-dom';
 import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
@@ -19,10 +19,6 @@ export default function Request(
             email: "",
         }
     });
-
-    useEffect(() => {
-        document.title = computePageTitle(pageType);
-    }, []);
 
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
@@ -92,6 +88,8 @@ export default function Request(
     </>
 
     return <div className="Cardlike Cardlike--IsReset">
+        <title>{computePageTitle(pageType)}</title>
+        
         <h2 className="Cardlike__Title">
             {computeCardTitle(pageType)}
         </h2>

@@ -1,6 +1,10 @@
+import { APP_NAME } from "@/utils/constants";
+
 export default function Terms() {
 
     return <article className="Cardlike Cardlike--LongDoc">
+        <title>{`Terms and Conditions — ${APP_NAME}`}</title>
+
         <h2>Terms and Conditions</h2>
         <p>
             These are not exactly "terms and conditions" per se (I needed your attention nevertheless); more like things you should be aware of and acknowledge before signing up.

@@ -17,13 +17,13 @@ export default function LandingPage() {
             );
             return;
         }
-
-        document.title = `${APP_NAME} — A minimalist keyboard-first note-taking web application tailored for fast operations`;
     }, []);
 
     const navigate = useNavigate();
 
     return <div className="LandingPage">
+        <title>{`${APP_NAME} — A minimalist keyboard-first note-taking web application tailored for fast operations`}</title>
+
         <section className="LandingPage__Section">
             <div className="LandingPage__Banner">
                 <JustJotIcon size={72} stroke={"0.1"}/>

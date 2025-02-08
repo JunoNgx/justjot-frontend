@@ -31,8 +31,6 @@ export default function Login(
             navigateToMainView();
             return;
         }
-
-        document.title = `Login — ${APP_NAME}`;
     }, []);
 
     const [hasAttempted, setHasAttempted] = useState(false);
@@ -72,6 +70,8 @@ export default function Login(
     </>
 
     return <div className="Cardlike Cardlike--IsLogin">
+        <title>{`Login — ${APP_NAME}`}</title>
+        
         <h2 className="Cardlike__Title">Login</h2>
         <div className="Cardlike__Subtitle">
             {isDemoMode

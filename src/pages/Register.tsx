@@ -37,8 +37,6 @@ export default function Register() {
             navigateToMainView();
             return;
         }
-
-        document.title = `Register — ${APP_NAME}`;
     }, []);
 
     const [hasAttempted, setHasAttempted] = useState(false);
@@ -164,6 +162,8 @@ export default function Register() {
     </>
 
     return <div className="Cardlike Cardlike--IsLogin">
+        <title>{`Register — ${APP_NAME}`}</title>
+
         <h2 className="Cardlike__Title">
             Register
         </h2>

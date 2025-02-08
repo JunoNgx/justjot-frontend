@@ -3,7 +3,6 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { ItemCollection } from "@/types";
 import { useNavigate } from "react-router-dom";
 import { BackendClientContext } from "@/contexts/BackendClientContext";
-import { APP_NAME } from "@/utils/constants";
 import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
 
 export default function useCollectionNavActions() {
@@ -71,7 +70,6 @@ export default function useCollectionNavActions() {
         setCurrCollection(collection);
 
         navigate(`/${user?.username}/${collection.slug}`);
-        document.title = `${collection.name} — ${APP_NAME}`;
     };
 
     return {

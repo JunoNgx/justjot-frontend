@@ -10,10 +10,11 @@ export default function Help() {
 
     useEffect(() => {
         setCurrCollection(undefined);
-        document.title = `User Manual — ${APP_NAME}`;
     });
 
     return <div className="Cardlike Cardlike--LongDoc">
+        <title>{`User Manual — ${APP_NAME}`}</title>
+
         <h2>User Manual</h2>
 
         <section className="Cardlike__HelpSection"
