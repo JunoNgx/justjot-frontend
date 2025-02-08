@@ -12,7 +12,7 @@ export default function LandingPage() {
     useEffect(() => {
         if (isLoggedIn) {
             navigate(
-                `/${pbClient.authStore.model?.username}`,
+                `/${pbClient.authStore.record?.username}`,
                 { replace: true }
             );
             return;
