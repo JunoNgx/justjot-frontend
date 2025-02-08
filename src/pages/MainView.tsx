@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { BackendClientContext } from '@/contexts/BackendClientContext';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import MainInput from "@/components/MainInput";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { useHotkeys } from "@mantine/hooks";
@@ -17,7 +17,7 @@ import "./MainView.scss";
 import { APP_NAME } from "@/utils/constants";
 
 export default function MainView() {
-    const { isLoggedIn, isDemoUser, refreshAuth } = useContext(BackendClientContext);
+    const { isDemoUser, refreshAuth } = useContext(BackendClientContext);
     const { initCollections, currCollection, isTrashCollection } = useContext(CollectionsContext);
     const { fetchItems, filteredItems } = useContext(ItemsContext);
     const { focusOnMainInput } = useItemNavActions();
@@ -30,7 +30,6 @@ export default function MainView() {
     } = useCollectionNavActions();
     const { collectionSlug } = useParams();
     const { generateNumericHotkeyHandlers } = useNumericHotkeyUtils();
-    const navigate = useNavigate();
     const mainInputRef = useRef<HTMLInputElement>(null);
     const [ isLoading, setIsLoading ] = useState(false);
     const numericKeysHotkeyOptions = generateNumericHotkeyHandlers({
