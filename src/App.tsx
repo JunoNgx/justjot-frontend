@@ -3,11 +3,11 @@ import { AppShell, ScrollArea } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from "@mantine/notifications";
 
-import EventBusContextProvider from "./contexts/EventBusContext";
-import UserLocalSettingsContextProvider from "@/contexts/UserLocalSettingsContext";
-import BackendClientContextProvider from "@/contexts/BackendClientContext";
-import CollectionsContextProvider from "@/contexts/CollectionsContext";
-import ItemsContextProvider from "@/contexts/ItemsContext";
+import EventBusContext from "./contexts/EventBusContext";
+import UserLocalSettingsContext from "@/contexts/UserLocalSettingsContext";
+import BackendClientContext from "@/contexts/BackendClientContext";
+import CollectionsContext from "@/contexts/CollectionsContext";
+import ItemsContext from "@/contexts/ItemsContext";
 
 import "@mantine/core/styles.css";
 import '@mantine/notifications/styles.css';
@@ -47,11 +47,11 @@ function App() {
             header={{ height: 45 }}
             padding="none"
         >
-            <EventBusContextProvider>
-                <UserLocalSettingsContextProvider>
-                    <BackendClientContextProvider>
-                        <CollectionsContextProvider>
-                            <ItemsContextProvider>
+            <EventBusContext>
+                <UserLocalSettingsContext>
+                    <BackendClientContext>
+                        <CollectionsContext>
+                            <ItemsContext>
                                 <ModalsProvider
                                     modals={{
                                         infoModal: InfoModal,
@@ -103,11 +103,11 @@ function App() {
                                     </ScrollArea>
 
                                 </ModalsProvider>
-                            </ItemsContextProvider>
-                        </CollectionsContextProvider>
-                    </BackendClientContextProvider>
-                </UserLocalSettingsContextProvider>
-            </EventBusContextProvider>
+                            </ItemsContext>
+                        </CollectionsContext>
+                    </BackendClientContext>
+                </UserLocalSettingsContext>
+            </EventBusContext>
         </AppShell>
     )
 }
