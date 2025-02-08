@@ -43,7 +43,7 @@ export default function BackendClientContextProvider({ children }: { children: R
         setUser(pbClient.authStore.record as User);
     };
 
-    return <BackendClientContext.Provider value={{
+    return <BackendClientContext value={{
         pbClient,
         user,
         setUser,
@@ -53,5 +53,5 @@ export default function BackendClientContextProvider({ children }: { children: R
         refreshAuth,
     }}>
         {children}
-    </BackendClientContext.Provider>
+    </BackendClientContext>
 }

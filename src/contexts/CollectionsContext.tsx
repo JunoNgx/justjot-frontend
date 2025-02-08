@@ -95,7 +95,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
     const collSelectedIndex = collectionList.findIndex(c => c?.id === currCollection?.id);
     const isTrashCollection = currCollection?.isTrashBin;
 
-    return <CollectionsContext.Provider value=
+    return <CollectionsContext value=
         {{
             initCollections,
             setInitCollections,
@@ -111,5 +111,5 @@ export default function CollectionsContextProvider({ children }: { children: Rea
         }}
     >
         {children}
-    </CollectionsContext.Provider>
+    </CollectionsContext>
 }

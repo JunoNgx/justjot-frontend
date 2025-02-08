@@ -130,7 +130,7 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
 
     const selectedItem = filteredItems[selectedIndex];
 
-    return <ItemsContext.Provider value={{
+    return <ItemsContext value={{
         items,
         setItems,
         isMainInputFocused,
@@ -147,5 +147,5 @@ export default function ItemsContextProvider({ children }: { children: ReactNode
         selectedItem,
     }}>
         {children}
-    </ItemsContext.Provider>
+    </ItemsContext>
 }
