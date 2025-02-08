@@ -23,7 +23,9 @@ export default function useItemNavActions() {
             "#DisplayedList .Item--IsSelected");
     };
 
-    const focusOnMainInput = (mainInputRef: React.RefObject<HTMLInputElement>) => {
+    const focusOnMainInput = (
+        mainInputRef: React.RefObject<HTMLInputElement | null>
+    ) => {
         mainInputRef.current?.focus();
     }
 

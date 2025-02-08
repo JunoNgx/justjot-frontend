@@ -13,7 +13,7 @@ import "./MainInput.scss";
 
 type MainInputExtendedMenuOptions = {
     processMainInput: (input: string) => void,
-    mainInputRef: React.RefObject<HTMLInputElement>,
+    mainInputRef: React.RefObject<HTMLInputElement | null>,
 }
 
 export default function MainInputExtendedMenu(
