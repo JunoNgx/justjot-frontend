@@ -5,7 +5,7 @@ import useNavigateRoutes from '@/hooks/useNavigateRoutes';
 import { useContext, useEffect, useState } from 'react';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { DbTable, User } from '@/types';
-import { ClientResponseError } from 'pocketbase';
+import { ClientResponseError, RecordAuthResponse, RecordModel } from 'pocketbase';
 import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
 import { APP_NAME, TEST_ACC_PASSWORD, TEST_ACC_USERNAME } from '@/utils/constants';
 import ButtonWithLoader from '@/libs/components/ButtonWithLoader';
@@ -50,8 +50,8 @@ export default function Login(
                 loginForm.email,
                 loginForm.password
             )
-            .then((res: {token: string, record: User}) => {
-                setUser(res?.record)
+            .then((res: RecordAuthResponse<RecordModel>) => {
+                setUser(res?.record as User)
                 setIsSuccessful(true);
                 navigateToMainView();
             })
