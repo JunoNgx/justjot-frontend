@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "yarn test && vite build",
     "serve": "vite preview",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . \"src/**/*.{ts,tsx}\" --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "tsc && yarn vitest run",
     "intg-test": "yarn playwright test"
@@ -37,6 +37,7 @@
     "yarn": "^1.22.22"
   },
   "devDependencies": {
+    "@eslint/js": "^9.20.0",
     "@playwright/test": "^1.50.1",
     "@testing-library/react": "^16.2.0",
     "@types/luxon": "^3.4.2",
@@ -47,14 +48,17 @@
     "@typescript-eslint/parser": "^8.23.0",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.20.0",
+    "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.18",
+    "globals": "^15.14.0",
     "happy-dom": "^17.0.2",
     "postcss-load-config": "^6.0.1",
     "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1",
     "sass-embedded": "^1.83.4",
     "typescript": "^5.7.3",
+    "typescript-eslint": "^8.23.0",
     "vite": "^6.1.0",
     "vitest": "^3.0.5"
   }
