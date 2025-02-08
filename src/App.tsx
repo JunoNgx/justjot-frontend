@@ -1,19 +1,24 @@
+// Library imports
+import { ReactNode } from "react";
 import { Routes, Route } from "react-router-dom";
 import { AppShell, ScrollArea } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from "@mantine/notifications";
 
+// Contexts
 import EventBusContext from "./contexts/EventBusContext";
 import UserLocalSettingsContext from "@/contexts/UserLocalSettingsContext";
 import BackendClientContext from "@/contexts/BackendClientContext";
 import CollectionsContext from "@/contexts/CollectionsContext";
 import ItemsContext from "@/contexts/ItemsContext";
 
+// Library css
 import "@mantine/core/styles.css";
 import '@mantine/notifications/styles.css';
 import '@mantine/spotlight/styles.css';
 import '@mantine/core/styles.layer.css';
 
+// Route components
 import Header from "@/components/header/Header";
 import LandingPage from "@/pages/LandingPage";
 import Help from "@/pages/Help";
@@ -22,16 +27,18 @@ import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Request from "@/pages/Request";
 import Profile from "@/pages/Profile";
+import Terms from "./pages/Terms";
 
-import "@/styles/main.scss";
+// Other components and data
 import InfoModal from "@/components/modals/InfoModal";
 import ItemCreateModal from "./components/modals/ItemCreateModal";
 import SpotlightSearch from "./components/SpotlightSearch";
+
 import { RequestPageType } from "./types";
 import { useHotkeys } from "@mantine/hooks";
 import { openSpotlight } from "@mantine/spotlight";
-import Terms from "./pages/Terms";
-import { ReactNode } from "react";
+
+import "@/styles/main.scss";
 
 function App() {
 
