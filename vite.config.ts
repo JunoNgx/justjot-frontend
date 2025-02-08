@@ -6,16 +6,10 @@ import path from 'node:path'
 export default defineConfig({
    plugins: [react()],
    css: {
-      // preprocessorOptions: {
-      //    scss: {
-      //       // TODO: create PR to update Mantine doc, Usage with Sass
-      //       additionalData: `@use "./src/styles/_sassMantine" as mantine;`,
-      //    }
-      // }
       preprocessorOptions: {
          scss: {
            api: 'modern-compiler',
-           additionalData: `@use "${path.join(process.cwd(), 'src/_mantine').replace(/\\/g, '/')}" as mantine;`,
+           additionalData: `@use "${path.join(process.cwd(), 'src/styles/_sassMantine').replace(/\\/g, '/')}" as mantine;`,
          },
        },   
    },
