@@ -2,7 +2,7 @@ import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { DbTable, User } from "@/types";
 import { TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { ClientResponseError } from "pocketbase";
+import { ClientResponseError, RecordModel } from "pocketbase";
 import { useContext, useState } from "react";
 import ErrorResponseDisplay from "../ErrorResponseDisplay";
 import ButtonWithLoader from "@/libs/components/ButtonWithLoader";
@@ -35,8 +35,8 @@ export default function ProfileChangeDisplayName() {
             .update(user!.id, {
                 displayName
             })
-            .then((record: User) => {
-                setUser(record);
+            .then((record: RecordModel) => {
+                setUser(record as User);
                 setIsSuccessful(true);
                 form.setFieldValue("displayName", "");
             })
