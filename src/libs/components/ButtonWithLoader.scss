@@ -27,10 +27,11 @@
         font-weight: 600;
     }
 
-
-    transition-property: transform;
-    transition-timing-function: ease-in-out;
-    transition-duration: 150ms;
+    & {
+        transition-property: transform;
+        transition-timing-function: ease-in-out;
+        transition-duration: 150ms;
+    }
 
     &[data-loading="false"] {
         .ButtonWithLoader__LoaderContainer,

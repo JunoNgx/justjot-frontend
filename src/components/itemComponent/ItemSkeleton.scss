@@ -54,12 +54,14 @@
         }
     }
 
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-    animation-name: breathing;
-    will-change: opacity;
+    & {
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
+        animation-name: breathing;
+        will-change: opacity;
+    }
 
     @keyframes breathing {
         from {

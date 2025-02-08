@@ -42,11 +42,13 @@
     @include m.Menu;
     @include m.AnimatedDropdown;
 
-    width: max-content;
-    max-width: 300px;
-    max-height: 80vh;
-    overflow-y: auto;
-    scrollbar-width: thin;
+    & {
+        width: max-content;
+        max-width: 300px;
+        max-height: 80vh;
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
 
     &__Separator {
         @include m.DropdownSeparator;
