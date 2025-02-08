@@ -54,11 +54,6 @@ export default function MainView() {
     ]);
 
     useEffect(() => {
-        if (!isLoggedIn) {
-            navigate(`/login`, { replace: true });
-            return;
-        }
-
         refreshAuth();
 
         window.addEventListener("focus", tryRoutineUpdate);

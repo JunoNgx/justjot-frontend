@@ -37,6 +37,7 @@ import SpotlightSearch from "./components/SpotlightSearch";
 import { RequestPageType } from "./types";
 import { useHotkeys } from "@mantine/hooks";
 import { openSpotlight } from "@mantine/spotlight";
+import useHandleNavigation from "./hooks/useHandleNavigation";
 
 import "@/styles/main.scss";
 
@@ -56,6 +57,7 @@ function App() {
             padding="none"
         >
             <ContextProvider>
+                <NavigationHandler/>
                 <ScrollArea
                     // Mantine currently doesn't havea fade out transition; this looks very ugly
                     // TODO: submit PR to mantine to fix this
@@ -106,6 +108,11 @@ function App() {
 export default App;
 
 
+const NavigationHandler = () => {
+    useHandleNavigation();
+    return <></>;
+};
+
 const ContextProvider = ({
     children,
 }: {
@@ -131,4 +138,5 @@ const ContextProvider = ({
             </UserLocalSettingsContext>
         </EventBusContext>
     );
-}
+};
+

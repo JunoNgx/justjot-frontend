@@ -1,25 +1,10 @@
-import { useContext, useEffect } from "react"
-import { BackendClientContext } from "@/contexts/BackendClientContext";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { JustJotIcon } from "@/components/misc/JustJotIcon";
 import { APP_NAME } from "@/utils/constants";
 
 import "./LandingPage.scss";
 
 export default function LandingPage() {
-    const { pbClient, isLoggedIn } = useContext(BackendClientContext);
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            navigate(
-                `/${pbClient.authStore.record?.username}`,
-                { replace: true }
-            );
-            return;
-        }
-    }, []);
-
-    const navigate = useNavigate();
 
     return <div className="LandingPage">
         <title>{`${APP_NAME} — A minimalist keyboard-first note-taking web application tailored for fast operations`}</title>

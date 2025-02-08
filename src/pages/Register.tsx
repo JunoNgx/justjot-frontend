@@ -2,11 +2,10 @@ import { useForm } from '@mantine/form';
 import { TextInput, PasswordInput } from "@mantine/core";
 import { NavLink } from 'react-router-dom';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { UserType, DbTable } from '@/types'
 import { ClientResponseError } from 'pocketbase';
 import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
-import useNavigateRoutes from '@/hooks/useNavigateRoutes';
 import { APP_NAME } from '@/utils/constants';
 import ButtonWithLoader from '@/libs/components/ButtonWithLoader';
 
@@ -29,15 +28,7 @@ type RegisterSubmission = {
 };
 
 export default function Register() {
-    const { isLoggedIn, pbClient } = useContext(BackendClientContext);
-
-    const { navigateToMainView } = useNavigateRoutes();
-    useEffect(() => {
-        if (isLoggedIn) {
-            navigateToMainView();
-            return;
-        }
-    }, []);
+    const { pbClient } = useContext(BackendClientContext);
 
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);

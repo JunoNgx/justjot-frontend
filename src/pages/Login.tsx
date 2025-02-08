@@ -2,7 +2,7 @@ import { useForm } from '@mantine/form';
 import { TextInput, PasswordInput } from "@mantine/core";
 import { NavLink } from 'react-router-dom';
 import useNavigateRoutes from '@/hooks/useNavigateRoutes';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { DbTable, User } from '@/types';
 import { ClientResponseError, RecordAuthResponse, RecordModel } from 'pocketbase';
@@ -17,7 +17,7 @@ type LoginFormData = {email: string, password: string};
 export default function Login(
     {isDemoMode}: {isDemoMode?: boolean}
 ) {
-    const { pbClient, setUser, isLoggedIn } = useContext(BackendClientContext);
+    const { pbClient, setUser } = useContext(BackendClientContext);
     const form = useForm({
         initialValues: {
             email: isDemoMode ? TEST_ACC_USERNAME : "",
@@ -26,12 +26,6 @@ export default function Login(
     });
 
     const { navigateToMainView } = useNavigateRoutes();
-    useEffect(() => {
-        if (isLoggedIn) {
-            navigateToMainView();
-            return;
-        }
-    }, []);
 
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
