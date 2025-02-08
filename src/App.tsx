@@ -31,6 +31,7 @@ import { RequestPageType } from "./types";
 import { useHotkeys } from "@mantine/hooks";
 import { openSpotlight } from "@mantine/spotlight";
 import Terms from "./pages/Terms";
+import { ReactNode } from "react";
 
 function App() {
 
@@ -47,69 +48,80 @@ function App() {
             header={{ height: 45 }}
             padding="none"
         >
-            <EventBusContext>
-                <UserLocalSettingsContext>
-                    <BackendClientContext>
-                        <CollectionsContext>
-                            <ItemsContext>
-                                <ModalsProvider
-                                    modals={{
-                                        infoModal: InfoModal,
-                                        itemCreateModal: ItemCreateModal
-                                    }}
-                                >
+            <ContextProvider>
+                <ScrollArea
+                    // Mantine currently doesn't havea fade out transition; this looks very ugly
+                    // TODO: submit PR to mantine to fix this
+                    type="scroll"
+                    h="100vh"
+                    scrollbarSize={10}
+                >
 
-                                    <ScrollArea
-                                        // Mantine currently doesn't havea fade out transition; this looks very ugly
-                                        // TODO: submit PR to mantine to fix this
-                                        type="scroll"
-                                        h="100vh"
-                                        scrollbarSize={10}
-                                    >
+                    <Notifications
+                        limit={5}
+                        position="bottom-center"
+                        autoClose={1000}
+                    />
 
-                                        <Notifications
-                                            limit={5}
-                                            position="bottom-center"
-                                            autoClose={1000}
-                                        />
+                    <AppShell.Header>
+                        <Header />
+                    </AppShell.Header>
 
-                                        <AppShell.Header>
-                                            <Header />
-                                        </AppShell.Header>
+                    <AppShell.Main>
+                        <Routes>
+                            <Route path="/" element={<LandingPage />} />
+                            <Route path="/help" element={<Help />} />
+                            <Route path="/:username">
+                                <Route index element={<MainView />} />
+                                <Route path=":collectionSlug" element={<MainView />} />
+                            </Route>
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/demo-login" element={<Login isDemoMode={true} />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="/reset" element={
+                                <Request pageType={RequestPageType.PASSWORD_CHANGE} />
+                            } />
+                            <Route path="/verify" element={
+                                <Request pageType={RequestPageType.EMAIL_VERIFY} />
+                            } />
+                            <Route path="/terms" element={<Terms />} />
+                        </Routes>
+                        <SpotlightSearch />
 
-                                        <AppShell.Main>
-                                            <Routes>
-                                                <Route path="/" element={<LandingPage />} />
-                                                <Route path="/help" element={<Help />} />
-                                                <Route path="/:username">
-                                                    <Route index element={<MainView />} />
-                                                    <Route path=":collectionSlug" element={<MainView />} />
-                                                </Route>
-                                                <Route path="/profile" element={<Profile />} />
-                                                <Route path="/login" element={<Login />} />
-                                                <Route path="/demo-login" element={<Login isDemoMode={true} />} />
-                                                <Route path="/register" element={<Register />} />
-                                                <Route path="/reset" element={
-                                                    <Request pageType={RequestPageType.PASSWORD_CHANGE} />
-                                                } />
-                                                <Route path="/verify" element={
-                                                    <Request pageType={RequestPageType.EMAIL_VERIFY} />
-                                                } />
-                                                <Route path="/terms" element={<Terms />} />
-                                            </Routes>
-                                            <SpotlightSearch />
-
-                                        </AppShell.Main>
-                                    </ScrollArea>
-
-                                </ModalsProvider>
-                            </ItemsContext>
-                        </CollectionsContext>
-                    </BackendClientContext>
-                </UserLocalSettingsContext>
-            </EventBusContext>
+                    </AppShell.Main>
+                </ScrollArea>
+            </ContextProvider>
         </AppShell>
     )
 }
 
 export default App;
+
+
+const ContextProvider = ({
+    children,
+}: {
+    children: ReactNode,
+}) => {
+    return (
+        <EventBusContext>
+            <UserLocalSettingsContext>
+                <BackendClientContext>
+                    <CollectionsContext>
+                        <ItemsContext>
+                            <ModalsProvider
+                                modals={{
+                                    infoModal: InfoModal,
+                                    itemCreateModal: ItemCreateModal
+                                }}
+                            >
+                                {children}
+                            </ModalsProvider>
+                        </ItemsContext>
+                    </CollectionsContext>
+                </BackendClientContext>
+            </UserLocalSettingsContext>
+        </EventBusContext>
+    );
+}
