@@ -64,6 +64,7 @@ type ItemComponentInnerProps = {
     children: React.ReactNode,
 }
 
+// TODO: forwardRef has been deprecated by React 19, to remove this once Radix official guide is udpated
 // ForwardRef to receive props from Radix Composition with `asChild`
 const ItemComponentInner = forwardRef<HTMLDivElement | HTMLAnchorElement, ItemComponentInnerProps>(
     ({ item, index, children, ...props }, forwardedRef) => {
