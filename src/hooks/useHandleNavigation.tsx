@@ -12,12 +12,11 @@ export default function useHandleNavigation() {
     const navigate = useNavigate();
 
     const { pbClient, isLoggedIn } = useContext(BackendClientContext);
-    const { currCollection, setCurrCollection } = useContext(CollectionsContext);
+    const { setCurrCollection } = useContext(CollectionsContext);
 
     const { navigateToMainView } = useNavigateRoutes();
 
     useEffect(() => {
-        console.log(currCollection)
         const pathname = location.pathname;
         const username = pbClient.authStore.record?.username;
 
