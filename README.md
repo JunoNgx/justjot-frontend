@@ -8,6 +8,13 @@ Backend repository [here](https://github.com/JunoNgx/justjot-backend).
 
 The application is currently deployed at [justjot.app](https://justjot.app/) via Vercel.
 
+## Features
+
+* Keyboard-first design philosophy, heightening productivity performance ceiling for advanced users. Mobile devices and touchscreens are still fully supported for remote access to the data.
+* Collection-based note taking systems, supporting text notes, TODO tasks, and hyperlink bookmarks. Also supports colour marking via note content syntax.
+* Minimalist, simple and distraction-free user interface.
+* Account registration, login, verify, and password resetting.
+
 ## Tech stack
 
 The project is powered by [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/) and [Vite](https://vitejs.dev/).
