@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { useParams } from 'react-router-dom';
 import MainInput from "@/components/MainInput";
@@ -84,16 +84,16 @@ export default function MainView() {
         fetchItems(currCollection, setIsLoading);
     }, [currCollection]);
 
-    const computeMainViewTitle = () => {
+    const mainViewTitle = useMemo(() => {
         return currCollection?.name
             ? `${currCollection?.name} — ${APP_NAME}`
             : APP_NAME;
-    };
+    }, [currCollection]);
 
     return <div className="MainView"
         id="MainView"
     >
-        <title>{computeMainViewTitle()}</title>
+        <title>{mainViewTitle}</title>
 
         {/* For non-item components */}
         <CollectionMenu isMobile={true} />
