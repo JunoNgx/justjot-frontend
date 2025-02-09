@@ -84,10 +84,16 @@ export default function MainView() {
         fetchItems(currCollection, setIsLoading);
     }, [currCollection]);
 
+    const computeMainViewTitle = () => {
+        return currCollection?.name
+            ? `${currCollection?.name} — ${APP_NAME}`
+            : APP_NAME;
+    };
+
     return <div className="MainView"
         id="MainView"
     >
-        <title>{`${currCollection?.name} — ${APP_NAME}`}</title>
+        <title>{computeMainViewTitle()}</title>
 
         {/* For non-item components */}
         <CollectionMenu isMobile={true} />
