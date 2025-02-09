@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, RefObject } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { CollectionsContext } from "@/contexts/CollectionsContext";
@@ -6,7 +6,9 @@ import { BackendClientContext } from "@/contexts/BackendClientContext";
 
 import useNavigateRoutes from "./useNavigateRoutes";
 
-export default function useHandleNavigation() {
+export default function useHandleNavigation(
+    scrollAreaRef: RefObject<HTMLDivElement | null>
+) {
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -25,6 +27,9 @@ export default function useHandleNavigation() {
                 navigate(`/login`, { replace: true });
             }
         }
+
+        // Reset scrolling position after each route navigation
+        scrollAreaRef.current?.scrollTo(0, 0);
 
         switch (pathname) {
         case ("/"):

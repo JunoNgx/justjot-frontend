@@ -1,5 +1,5 @@
 // Library imports
-import { ReactNode } from "react";
+import { ReactNode, RefObject, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
 import { AppShell, ScrollArea } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
@@ -51,14 +51,17 @@ function App() {
         [] // Does not ignore; will work in `<input/>` and `<textarea/>`.
     );
 
+    const scrollAreaRef = useRef<HTMLDivElement>(null);
+
     return (
         <AppShell
             header={{ height: 45 }}
             padding="none"
         >
             <ContextProvider>
-                <NavigationHandler/>
+                <NavigationHandler scrollAreaRef={scrollAreaRef} />
                 <ScrollArea
+                    viewportRef={scrollAreaRef}
                     // Mantine currently doesn't havea fade out transition; this looks very ugly
                     // TODO: submit PR to mantine to fix this
                     type="scroll"
@@ -108,8 +111,12 @@ function App() {
 export default App;
 
 
-const NavigationHandler = () => {
-    useHandleNavigation();
+const NavigationHandler = ({
+    scrollAreaRef
+}: {
+    scrollAreaRef: RefObject<HTMLDivElement | null>
+}) => {
+    useHandleNavigation(scrollAreaRef);
     return <></>;
 };
 
