@@ -11,16 +11,15 @@ type ButtonWithLoaderOptions = {
     children?: React.ReactNode,
 }
 
-export default function ButtonWithLoader(
-    {
-        className,
-        variant = "primary",
-        type,
-        isLoading = false,
-        isDisabled = false,
-        onClick,
-        children
-    }: ButtonWithLoaderOptions
+export default function ButtonWithLoader({
+    className,
+    variant = "primary",
+    type,
+    isLoading = false,
+    isDisabled = false,
+    onClick,
+    children
+}: ButtonWithLoaderOptions
 ) {
     const shouldLoaderUsePriCol = variant === "secondary";
 

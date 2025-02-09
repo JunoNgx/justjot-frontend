@@ -5,7 +5,8 @@ const InfoModal = ({
     context,
     id,
     innerProps,
-}: ContextModalProps <{ leftSection: React.ReactNode, modalBody: string }>) => (
+}: ContextModalProps <{ leftSection: React.ReactNode, modalBody: string }>
+) => (
     <div className="Modal">
         <div className="Modal__FlexWrapper">
             {innerProps.leftSection}

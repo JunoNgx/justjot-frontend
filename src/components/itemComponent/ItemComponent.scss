@@ -17,6 +17,10 @@
     text-decoration: none;
     color: var(--colPri);
 
+    @include m.Mobile {
+        gap: 0;
+    }
+
     &:hover,
     &:visited {
         color: var(--colPri);
@@ -24,10 +28,6 @@
 
     &--IsSelected {
         border-color: var(--colPri);
-    }
-
-    @include m.Mobile {
-        gap: 0;
     }
 
     &__IconWrapper {
@@ -121,10 +121,10 @@
         max-width: calc(100%);
     }
 
-    --todoDuration: 300ms;
-    --todoFunc: ease-in-out;
-
     &__PrimaryText {
+        --todoDuration: 300ms;
+        --todoFunc: ease-in-out;
+
         flex-shrink: 0;
 
         // For todo animation

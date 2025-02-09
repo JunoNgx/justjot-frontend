@@ -21,9 +21,9 @@ export default function EventBusContextProvider(
         };
     }, []);
 
-    return <EventBusContext.Provider value={{
+    return <EventBusContext value={{
         emitter,
     }}>
         {children}
-    </EventBusContext.Provider>
+    </EventBusContext>
 }

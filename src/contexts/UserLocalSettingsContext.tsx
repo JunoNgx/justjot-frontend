@@ -31,12 +31,12 @@ export default function UserLocalSettingsContextProvider({children}: {children: 
         setMantineColorScheme(themeMode);
     }, [themeMode]);
 
-    return <UserLocalSettingsContext.Provider value={{
+    return <UserLocalSettingsContext value={{
         themeMode,
         setThemeMode,
         isFaviconEnabled,
         setIsFaviconEnabled,
     }}>
         {children}
-    </UserLocalSettingsContext.Provider>
+    </UserLocalSettingsContext>
 }

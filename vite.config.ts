@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'node:path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -7,14 +8,18 @@ export default defineConfig({
    css: {
       preprocessorOptions: {
          scss: {
-            // TODO: create PR to update Mantine doc, Usage with Sass
-            additionalData: `@use "./src/styles/_sassMantine" as mantine;`,
-         }
-      }
+           api: 'modern-compiler',
+           additionalData: `@use "${path.join(process.cwd(), 'src/styles/_sassMantine').replace(/\\/g, '/')}" as mantine;`,
+         },
+       },   
    },
    resolve: {
       alias: {
-         "@": "/src"
+         "@": "/src",
+         /**
+          * Work around for: https://github.com/tabler/tabler-icons/issues/1233#issuecomment-2428245119
+          */
+         "@tabler/icons-react": "@tabler/icons-react/dist/esm/icons/index.mjs",
       },
    },
 })

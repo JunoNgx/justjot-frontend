@@ -11,9 +11,11 @@ import { useContext } from 'react';
 import { CollectionsContext } from '@/contexts/CollectionsContext';
 import { ItemsContext } from '@/contexts/ItemsContext';
 
-export default function ItemComponentContextMenu(
-    { item }: { item: Item }
-) {
+export default function ItemComponentContextMenu({
+    item
+}: {
+    item: Item
+}) {
     const { initCollections } = useContext(CollectionsContext);
     const { setSelectedIndex } = useContext(ItemsContext);
 

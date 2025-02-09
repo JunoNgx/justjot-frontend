@@ -20,7 +20,7 @@ export const BackendClientContext = createContext<BackendClientContextType>(
 export default function BackendClientContextProvider({ children }: { children: ReactNode }) {
     const pbClient = new PocketBase(import.meta.env.VITE_BACKEND_URL);
 
-    const [user, setUser] = useState<User>(pbClient.authStore.model as User);
+    const [user, setUser] = useState<User>(pbClient.authStore.record as User);
 
     const logout = () => {
         pbClient.authStore.clear();
@@ -40,10 +40,10 @@ export default function BackendClientContextProvider({ children }: { children: R
                     });
                 }
             });
-        setUser(pbClient.authStore.model as User);
+        setUser(pbClient.authStore.record as User);
     };
 
-    return <BackendClientContext.Provider value={{
+    return <BackendClientContext value={{
         pbClient,
         user,
         setUser,
@@ -53,5 +53,5 @@ export default function BackendClientContextProvider({ children }: { children: R
         refreshAuth,
     }}>
         {children}
-    </BackendClientContext.Provider>
+    </BackendClientContext>
 }

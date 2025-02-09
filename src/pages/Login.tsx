@@ -2,10 +2,10 @@ import { useForm } from '@mantine/form';
 import { TextInput, PasswordInput } from "@mantine/core";
 import { NavLink } from 'react-router-dom';
 import useNavigateRoutes from '@/hooks/useNavigateRoutes';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { BackendClientContext } from '@/contexts/BackendClientContext';
 import { DbTable, User } from '@/types';
-import { ClientResponseError } from 'pocketbase';
+import { ClientResponseError, RecordAuthResponse, RecordModel } from 'pocketbase';
 import ErrorResponseDisplay from '@/components/ErrorResponseDisplay';
 import { APP_NAME, TEST_ACC_PASSWORD, TEST_ACC_USERNAME } from '@/utils/constants';
 import ButtonWithLoader from '@/libs/components/ButtonWithLoader';
@@ -17,7 +17,7 @@ type LoginFormData = {email: string, password: string};
 export default function Login(
     {isDemoMode}: {isDemoMode?: boolean}
 ) {
-    const { pbClient, setUser, isLoggedIn } = useContext(BackendClientContext);
+    const { pbClient, setUser } = useContext(BackendClientContext);
     const form = useForm({
         initialValues: {
             email: isDemoMode ? TEST_ACC_USERNAME : "",
@@ -26,14 +26,6 @@ export default function Login(
     });
 
     const { navigateToMainView } = useNavigateRoutes();
-    useEffect(() => {
-        if (isLoggedIn) {
-            navigateToMainView();
-            return;
-        }
-
-        document.title = `Login — ${APP_NAME}`;
-    }, []);
 
     const [hasAttempted, setHasAttempted] = useState(false);
     const [isSuccessful, setIsSuccessful] = useState(false);
@@ -50,8 +42,8 @@ export default function Login(
                 loginForm.email,
                 loginForm.password
             )
-            .then((res: {token: string, record: User}) => {
-                setUser(res?.record)
+            .then((res: RecordAuthResponse<RecordModel>) => {
+                setUser(res?.record as User)
                 setIsSuccessful(true);
                 navigateToMainView();
             })
@@ -72,6 +64,8 @@ export default function Login(
     </>
 
     return <div className="Cardlike Cardlike--IsLogin">
+        <title>{`Login — ${APP_NAME}`}</title>
+        
         <h2 className="Cardlike__Title">Login</h2>
         <div className="Cardlike__Subtitle">
             {isDemoMode

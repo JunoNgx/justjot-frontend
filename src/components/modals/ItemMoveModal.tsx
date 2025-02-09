@@ -23,7 +23,7 @@ type ItemMoveModal = {
     collectionList: ItemCollection[]
 };
 
-export default function ItemMoveModal({ item, collectionList}: ItemMoveModal) {
+export default function ItemMoveModal({ item, collectionList }: ItemMoveModal) {
 
     const { currCollection } = useContext(CollectionsContext);
     const { items, setItems } = useContext(ItemsContext);

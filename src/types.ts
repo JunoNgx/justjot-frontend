@@ -67,7 +67,7 @@ export enum RequestPageType {
     EMAIL_VERIFY = "emailVerify"
 }
 
-export type User = (RecordModel | {
+export type User = (RecordModel & {
     id: string,
     email: string,
     username: string,

@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from "react";
+import { InputHTMLAttributes, useContext, RefObject } from "react";
 import { getHotkeyHandler } from "@mantine/hooks";
 import { IconCircleTriangle } from "@tabler/icons-react";
 
@@ -13,7 +13,13 @@ import { CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TEXT_WITH_TITLE_PREFIX_ALT } from
 
 import "./MainInput.scss";
 
-const MainInput = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>((props, ref) => {
+export default function MainInput({
+    props,
+    ref,
+}: {
+    props?: InputHTMLAttributes<HTMLInputElement>
+    ref: RefObject<HTMLInputElement | null>
+}) {
     const { initCollections, isTrashCollection } = useContext(CollectionsContext);
     const {
         setIsMainInputFocused,
@@ -175,11 +181,9 @@ const MainInput = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInp
             <div className="MainInput__RightSide">
                 <MainInputExtendedMenu
                     processMainInput={processMainInput}
-                    mainInputRef={ref as React.RefObject<HTMLInputElement>}
+                    mainInputRef={ref}
                 />
             </div>
         </div>
     );
-});
-
-export default MainInput;
+};

@@ -1,19 +1,13 @@
 import KbdAlt from "@/components/misc/KbdAlt";
 import KbdMod from "@/components/misc/KbdMod";
-import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { APP_NAME } from "@/utils/constants";
-import { useContext, useEffect } from "react";
 import "./Pages.scss";
 
 export default function Help() {
-    const { setCurrCollection } = useContext(CollectionsContext);
-
-    useEffect(() => {
-        setCurrCollection(undefined);
-        document.title = `User Manual — ${APP_NAME}`;
-    });
 
     return <div className="Cardlike Cardlike--LongDoc">
+        <title>{`User Manual — ${APP_NAME}`}</title>
+
         <h2>User Manual</h2>
 
         <section className="Cardlike__HelpSection"

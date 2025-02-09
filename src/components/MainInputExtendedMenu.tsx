@@ -13,11 +13,13 @@ import "./MainInput.scss";
 
 type MainInputExtendedMenuOptions = {
     processMainInput: (input: string) => void,
-    mainInputRef: React.RefObject<HTMLInputElement>,
+    mainInputRef: React.RefObject<HTMLInputElement | null>,
 }
 
-export default function MainInputExtendedMenu(
-    {processMainInput, mainInputRef}: MainInputExtendedMenuOptions
+export default function MainInputExtendedMenu({
+    processMainInput,
+    mainInputRef
+}: MainInputExtendedMenuOptions
 ) {
 
     const { menuIconProps } = useIconProps();

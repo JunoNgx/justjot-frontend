@@ -13,10 +13,13 @@ export default function useNumericHotkeyUtils() {
         }
     };
 
-    const generateNumericHotkeyHandlers = (
-        { callback, preventDefault = false }:
-        { callback: (n: number) => void, preventDefault?: boolean }
-    ): HotkeyItem[] => {
+    const generateNumericHotkeyHandlers = ({
+        callback,
+        preventDefault = false
+    }: {
+        callback: (n: number) => void,
+        preventDefault?: boolean
+    }): HotkeyItem[] => {
         return Array.from(Array(9).keys())
             .map(n => [
                 n.toString(),

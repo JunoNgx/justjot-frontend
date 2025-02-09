@@ -10,9 +10,14 @@ type LabelWithIconOptions = {
     gap?: string,
 };
 
-export default function LabelWithIcon(
-    { className = "", children, onClick, leftSection, rightSection, gap = "0.5rem"}:
-    LabelWithIconOptions
+export default function LabelWithIcon({
+    className = "",
+    children,
+    onClick,
+    leftSection,
+    rightSection,
+    gap = "0.5rem",
+}: LabelWithIconOptions
 ) {
     return <span className={`${className} LabelWithIcon`}
         onClick={onClick}
