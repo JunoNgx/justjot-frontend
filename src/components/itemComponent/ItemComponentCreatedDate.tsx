@@ -1,9 +1,10 @@
 import { DateTime } from "luxon";
 
-export default function ItemComponentCreatedDate(
-    { createdDatetime, className }:
-    { createdDatetime: string, className?: string}
-) {
+export default function ItemComponentCreatedDate({
+    createdDatetime, className
+}: {
+    createdDatetime: string, className?: string
+}) {
 
     const itemDatetime = DateTime.fromSQL(createdDatetime);
     const fullDateTime = itemDatetime.toLocaleString(DateTime.DATETIME_FULL);

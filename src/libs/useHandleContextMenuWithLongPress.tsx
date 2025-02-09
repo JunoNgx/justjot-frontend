@@ -23,8 +23,11 @@ interface Options {
     delay?: number,
 }
 
-export default function useHandleContextMenuWithLongPress(
-    { onClick, onLongPress }: PressHandlers,
+export default function useHandleContextMenuWithLongPress({
+    onClick,
+    onLongPress,
+}:
+    PressHandlers,
     { delay = 300 } : Options = {},
 ) {
     const timeout = useRef<ReturnType<typeof setTimeout>>(null);

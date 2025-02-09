@@ -5,9 +5,11 @@ import useIconProps from "@/hooks/useIconProps";
 import { useContext, useState } from "react";
 import { UserLocalSettingsContext } from "@/contexts/UserLocalSettingsContext";
 
-export default function ItemComponentIcon(
-    { item }: { item: Item }
-) {
+export default function ItemComponentIcon({
+    item
+}: {
+    item: Item
+}) {
 
     const { isFaviconEnabled } = useContext(UserLocalSettingsContext);
     const { itemIconProps } = useIconProps();

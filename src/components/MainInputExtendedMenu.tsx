@@ -16,8 +16,10 @@ type MainInputExtendedMenuOptions = {
     mainInputRef: React.RefObject<HTMLInputElement | null>,
 }
 
-export default function MainInputExtendedMenu(
-    {processMainInput, mainInputRef}: MainInputExtendedMenuOptions
+export default function MainInputExtendedMenu({
+    processMainInput,
+    mainInputRef
+}: MainInputExtendedMenuOptions
 ) {
 
     const { menuIconProps } = useIconProps();

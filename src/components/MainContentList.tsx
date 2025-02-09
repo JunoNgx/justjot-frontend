@@ -2,10 +2,13 @@ import { Item } from "@/types";
 import ItemSkeleton from "./itemComponent/ItemSkeleton";
 import ItemComponent from "./itemComponent/ItemComponent";
 
-export default function MainContentList(
-    { isLoading, filteredItems }:
-    { isLoading: boolean, filteredItems: Item[] }
-) {
+export default function MainContentList({
+    isLoading,
+    filteredItems,
+}: {
+    isLoading: boolean,
+    filteredItems: Item[]
+}) {
 
     const skeletonList = Array(7).fill(null).map((_, index) => 
         <ItemSkeleton key={index}/>
