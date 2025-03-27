@@ -4,6 +4,8 @@ import { ComputedThemeMode, ThemeMode } from "@/types";
 import { useComputedColorScheme, useMantineColorScheme } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 
+import { justJotTheme } from '@/theme.ts';
+
 type UserLocalSettingsContextType = {
     themeMode: ThemeMode,
     setThemeMode: React.Dispatch<React.SetStateAction<ThemeMode>>,
@@ -41,7 +43,9 @@ export default function UserLocalSettingsContextProvider({children}: {children: 
 
         if (!themeColourMeta) return;
 
-        const themeColorValue = isComputedLightMode ? "#FFFFFF" : "#000000";
+        const themeColorValue = isComputedLightMode
+            ? justJotTheme.other.colWhite
+            : justJotTheme.other.colBlack;
         themeColourMeta.setAttribute("content", themeColorValue);
     }, [isComputedLightMode]);
 
