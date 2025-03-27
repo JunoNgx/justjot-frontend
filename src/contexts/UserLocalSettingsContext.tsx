@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useEffect } from "react";
 
-import { ThemeMode } from "@/types";
-import { useMantineColorScheme } from "@mantine/core";
+import { ComputedThemeMode, ThemeMode } from "@/types";
+import { useComputedColorScheme, useMantineColorScheme } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 
 type UserLocalSettingsContextType = {
@@ -27,9 +27,23 @@ export default function UserLocalSettingsContextProvider({children}: {children: 
         setColorScheme: setMantineColorScheme,
     } = useMantineColorScheme();
 
+    const isComputedLightMode = useComputedColorScheme(
+        ComputedThemeMode.LIGHT, { getInitialValueInEffect: true }
+    ) === ComputedThemeMode.LIGHT;
+
     useEffect(() => {
         setMantineColorScheme(themeMode);
     }, [themeMode]);
+
+    useEffect(() => {
+        const themeColourMeta = document
+            .querySelector("meta[name='theme-color']") as HTMLMetaElement;
+
+        if (!themeColourMeta) return;
+
+        const themeColorValue = isComputedLightMode ? "#FFFFFF" : "#000000";
+        themeColourMeta.setAttribute("content", themeColorValue);
+    }, [isComputedLightMode]);
 
     return <UserLocalSettingsContext value={{
         themeMode,
