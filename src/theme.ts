@@ -32,6 +32,8 @@ const overrideTheme = createTheme({
     other: {
         colWhite: "#FFFFFF",
         colBlack: "#000000",
+        colOffWhite: "#F2F0EF",
+        colOffBlack: "#0F0D0D",
         colLogo: "#86EAD4", // Mint
     },
     components: {
@@ -54,15 +56,15 @@ export const justJotCssVarsResolver: CSSVariablesResolver = (theme) => ({
         "--input-font-family": theme.fontFamilyMonospace,
     },
     light: {
-        "--mantine-color-text": theme.other.colBlack,
-        "--mantine-color-body": theme.other.colWhite,
+        "--mantine-color-text": theme.other.colOffBlack,
+        "--mantine-color-body": theme.other.colOffWhite,
         "--mantine-color-dimmed": "#444",
         "--mantine-color-anchor": "#444",
         "--mantine-color-code-bg": "#EEE",
     },
     dark: {
-        "--mantine-color-text": theme.other.colWhite,
-        "--mantine-color-body": theme.other.colBlack,
+        "--mantine-color-text": theme.other.colOffWhite,
+        "--mantine-color-body": theme.other.colOffBlack,
         "--mantine-color-dimmed": "#999",
         "--mantine-color-anchor": "#AAA",
         "--mantine-color-code-bg": "#222",
