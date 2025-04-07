@@ -40,7 +40,7 @@
 .mantine-Modal-content,
 .mantine-Spotlight-content {
     border-style: solid;
-    border-width: 1px;
+    border-width: 2px;
     border-color: var(--colPri);
 }
 
@@ -75,7 +75,7 @@
 .mantine-Notifications-notification {
     color: var(--colPri);
     background-color: var(--colBg);
-    border: solid 1px var(--colPri);
+    border: solid 2px var(--colPri);
 }
 
 .mantine-PasswordInput-input {

@@ -23,7 +23,7 @@
 @mixin Menu {
     position: relative;
     border-style: solid;
-    border-width: 1px;
+    border-width: 2px;
     border-color: var(--colPri);
     padding: 0.25rem;
     z-index: 10;

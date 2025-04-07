@@ -65,7 +65,6 @@ input,
 textarea,
 input[type=password] {
     border-style: solid;
-    border-width: 1px;
 
     [data-mantine-color-scheme="dark"] &,
     [data-mantine-color-scheme="light"] & {
