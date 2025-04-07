@@ -11,8 +11,8 @@
     --colYellow: #D57300;
     --colViolet: #9B70FF;
 
-    --colPri: #000;
-    --colBg: #fff;
+    --colPri: #0F0D0D;
+    --colBg: #F2F0EF;
     --colGrey: #444;
     --colGreyBg: #EEE;
     --colGreyLt: #AAA;
@@ -24,8 +24,8 @@
 :root[data-mantine-color-scheme="light"] {
     --colViolet: #794AFF;
     
-    --colPri: #000;
-    --colBg: #fff;
+    --colPri: #0F0D0D;
+    --colBg: #F2F0EF;
     --colGrey: #444;
     --colGreyBg: #EEE;
     --colGreyLt: #444;
@@ -37,8 +37,8 @@
 :root[data-mantine-color-scheme="dark"] {
     --colViolet: #9B70FF;
 
-    --colPri: #fff;
-    --colBg: #000;
+    --colPri: #F2F0EF;
+    --colBg: #0F0D0D;
     --colGrey: #999;
     --colGreyBg: #444;
     --colGreyLt: #999;
