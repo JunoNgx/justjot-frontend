@@ -66,6 +66,10 @@
     }
 };
 
+.mantine-Spotlight-actionsList {
+    border-top-width: 2px;
+};
+
 .mantine-Notifications-root[position="bottom-center"] {
     @include m.Mobile {
         bottom: 6rem;
