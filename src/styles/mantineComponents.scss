@@ -82,6 +82,11 @@
     border: solid 2px var(--colPri);
 }
 
+.mantine-TextInput-input,
+.mantine-PasswordInput-innerInput {
+    border-width: 2px;
+}
+
 .mantine-PasswordInput-input {
     border-width: 0;
 }
