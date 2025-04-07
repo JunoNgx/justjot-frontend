@@ -44,8 +44,8 @@ export default function UserLocalSettingsContextProvider({children}: {children: 
         if (!themeColourMeta) return;
 
         const themeColorValue = isComputedLightMode
-            ? justJotTheme.other.colWhite
-            : justJotTheme.other.colBlack;
+            ? justJotTheme.other.colOffWhite
+            : justJotTheme.other.colOffBlack;
         themeColourMeta.setAttribute("content", themeColorValue);
     }, [isComputedLightMode]);
 
