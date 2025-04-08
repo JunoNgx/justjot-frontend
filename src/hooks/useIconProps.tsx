@@ -2,27 +2,27 @@ export default function useIconProps() {
 
     const itemIconProps = {
         size: 24,
-        stroke: 1,
+        stroke: 1.5,
     };
 
     const themeModeIconProps = {
         size: 18,
-        stroke: 1.5,
+        stroke: 2,
     };
 
     const menuIconProps = {
         size: 18,
-        stroke: 1.5,
+        stroke: 2,
     };
 
     const mainInputIconProps = {
         size: 32,
-        stroke: 1,
+        stroke: 1.5,
     };
 
     const spotlightIconProps = {
         size: 32,
-        stroke: 1,
+        stroke: 1.5,
     };
 
     const logoIconProps = {
@@ -33,7 +33,7 @@ export default function useIconProps() {
 
     const keyboardPromptIconProps = {
         size: 24,
-        stroke: 1,
+        stroke: 1.5,
     }
 
     return {
