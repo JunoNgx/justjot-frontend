@@ -92,3 +92,7 @@
 .mantine-PasswordInput-input {
     border-width: 0;
 }
+
+.mantine-CloseButton-root:hover {
+    background-color: var(--colGreyBg);
+}
