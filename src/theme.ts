@@ -32,8 +32,8 @@ const overrideTheme = createTheme({
     other: {
         colWhite: "#FFFFFF",
         colBlack: "#000000",
-        colOffWhite: "#F2F0EF",
-        colOffBlack: "#0F0D0D",
+        colOffWhite: "#E0E0E0",
+        colOffBlack: "#121212",
         colLogo: "#86EAD4", // Mint
     },
     components: {

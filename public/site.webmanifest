@@ -5,8 +5,8 @@
     "categories": ["productivity", "utilities"],
     "orientation": "portrait-primary",
     "display": "standalone",
-    "theme_color": "#0F0D0D",
-    "background_color": "#0F0D0D",
+    "theme_color": "#121212",
+    "background_color": "#121212",
     "start_url": "https:/justjot.app",
     "prefer_related_applications": false,
     "icons": [
