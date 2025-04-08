@@ -49,6 +49,7 @@ const overrideTheme = createTheme({
                 variant: "mono",
             }
         }),
+        // Not working, bug in Mantine?
         Modal: {
             defaultProps: {
                 closeButtonProps: {
