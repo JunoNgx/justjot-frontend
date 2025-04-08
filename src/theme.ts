@@ -35,6 +35,7 @@ const overrideTheme = createTheme({
         colOffWhite: "#E0E0E0",
         colOffBlack: "#121212",
         colLogo: "#86EAD4", // Mint
+        infoModalIconStrokeWidth: 1.5, // Only used by `infoModal`
     },
     components: {
         Anchor: Anchor.extend({
