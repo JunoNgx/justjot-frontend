@@ -49,6 +49,20 @@ const overrideTheme = createTheme({
                 variant: "mono",
             }
         }),
+        Modal: {
+            defaultProps: {
+                closeButtonProps: {
+                    strokeWidth: 5,
+                }
+            }
+        },
+        Notification: {
+            defaultProps: {
+                closeButtonProps: {
+                    strokeWidth: 5,
+                }
+            }
+        }
     }
 });
 
