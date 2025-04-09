@@ -16,12 +16,12 @@ test.describe("Theme modes", () => {
     
             test("Light mode", async ({ page }) => {
                 await page.emulateMedia({ colorScheme: "light" });
-                await expect(page.locator("body")).toHaveCSS("background-color", "rgb(255, 255, 255)");
+                await expect(page.locator("body")).toHaveCSS("background-color", "rgb(224, 224, 224)");
             });
     
             test("Dark mode", async ({ page }) => {
                 await page.emulateMedia({ colorScheme: "dark" });
-                await expect(page.locator("body")).toHaveCSS("background-color", "rgb(0, 0, 0)");
+                await expect(page.locator("body")).toHaveCSS("background-color", "rgb(18, 18, 18)");
             });
         });
 
@@ -35,12 +35,12 @@ test.describe("Theme modes", () => {
     
             test("Light mode", async ({ page }) => {
                 await page.emulateMedia({ colorScheme: "light" });
-                await expect(page.locator("body")).toHaveCSS("background-color", "rgb(255, 255, 255)");
+                await expect(page.locator("body")).toHaveCSS("background-color", "rgb(224, 224, 224)");
             });
     
             test("Dark mode", async ({ page }) => {
                 await page.emulateMedia({ colorScheme: "dark" });
-                await expect(page.locator("body")).toHaveCSS("background-color", "rgb(0, 0, 0)");
+                await expect(page.locator("body")).toHaveCSS("background-color", "rgb(18, 18, 18)");
             });
         });
 
@@ -49,28 +49,28 @@ test.describe("Theme modes", () => {
     test.describe("Light mode", () => {
         test("With header button", async ({ page }) => {
             await page.getByRole('button', { name: 'Theme mode: Light' }).click();
-            await expect(page.locator("body")).toHaveCSS("background-color", "rgb(255, 255, 255)");
+            await expect(page.locator("body")).toHaveCSS("background-color", "rgb(224, 224, 224)");
         });
 
         test("With spotlight action", async ({ page }) => {
             await page.locator('body').press('Control+k');
             await page.locator(spotlightTextboxSelector).fill('.theme-light');
             await page.locator(spotlightTextboxSelector).press('Enter');
-            await expect(page.locator("body")).toHaveCSS("background-color", "rgb(255, 255, 255)");
+            await expect(page.locator("body")).toHaveCSS("background-color", "rgb(224, 224, 224)");
         });
     });
 
     test.describe("Dark mode", () => {
         test("With header button", async ({ page }) => {
             await page.getByRole('button', { name: 'Theme mode: Dark' }).click();
-            await expect(page.locator("body")).toHaveCSS("background-color", "rgb(0, 0, 0)");
+            await expect(page.locator("body")).toHaveCSS("background-color", "rgb(18, 18, 18)");
         });
 
         test("With spotlight action", async ({ page }) => {
             await page.locator('body').press('Control+k');
             await page.locator(spotlightTextboxSelector).fill('.theme-dark');
             await page.locator(spotlightTextboxSelector).press('Enter');
-            await expect(page.locator("body")).toHaveCSS("background-color", "rgb(0, 0, 0)");
+            await expect(page.locator("body")).toHaveCSS("background-color", "rgb(18, 18, 18)");
         });
     });
 });
