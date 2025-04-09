@@ -11,7 +11,7 @@
     padding: 0.5rem;
     cursor: pointer;
     user-select: none;
-    border: solid 1px transparent;
+    border: solid 2px transparent;
 
     // override the anchor styles
     text-decoration: none;
@@ -142,7 +142,7 @@
             position: absolute;
             height: 50%;
             border-bottom-style: solid;
-            border-bottom-width: 1px;
+            border-bottom-width: 2px;
             border-bottom-color: var(--colPri);
 
             will-change: width, border-bottom-color;

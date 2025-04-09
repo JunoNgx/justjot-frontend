@@ -32,7 +32,10 @@ const overrideTheme = createTheme({
     other: {
         colWhite: "#FFFFFF",
         colBlack: "#000000",
+        colOffWhite: "#E0E0E0",
+        colOffBlack: "#121212",
         colLogo: "#86EAD4", // Mint
+        infoModalIconStrokeWidth: 1.5, // Only used by `infoModal`
     },
     components: {
         Anchor: Anchor.extend({
@@ -46,6 +49,21 @@ const overrideTheme = createTheme({
                 variant: "mono",
             }
         }),
+        // Not working, bug in Mantine?
+        Modal: {
+            defaultProps: {
+                closeButtonProps: {
+                    strokeWidth: 5,
+                }
+            }
+        },
+        Notification: {
+            defaultProps: {
+                closeButtonProps: {
+                    strokeWidth: 5,
+                }
+            }
+        }
     }
 });
 
@@ -54,15 +72,15 @@ export const justJotCssVarsResolver: CSSVariablesResolver = (theme) => ({
         "--input-font-family": theme.fontFamilyMonospace,
     },
     light: {
-        "--mantine-color-text": theme.other.colBlack,
-        "--mantine-color-body": theme.other.colWhite,
+        "--mantine-color-text": theme.other.colOffBlack,
+        "--mantine-color-body": theme.other.colOffWhite,
         "--mantine-color-dimmed": "#444",
         "--mantine-color-anchor": "#444",
         "--mantine-color-code-bg": "#EEE",
     },
     dark: {
-        "--mantine-color-text": theme.other.colWhite,
-        "--mantine-color-body": theme.other.colBlack,
+        "--mantine-color-text": theme.other.colOffWhite,
+        "--mantine-color-body": theme.other.colOffBlack,
         "--mantine-color-dimmed": "#999",
         "--mantine-color-anchor": "#AAA",
         "--mantine-color-code-bg": "#222",

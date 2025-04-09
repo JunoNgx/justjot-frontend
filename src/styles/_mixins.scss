@@ -23,7 +23,7 @@
 @mixin Menu {
     position: relative;
     border-style: solid;
-    border-width: 1px;
+    border-width: 2px;
     border-color: var(--colPri);
     padding: 0.25rem;
     z-index: 10;
@@ -139,7 +139,7 @@
 }
 
 @mixin DropdownSeparator {
-    height: 1px;
+    height: 2px;
     background-color: var(--colGreyBg);
     margin: 2px;
 }

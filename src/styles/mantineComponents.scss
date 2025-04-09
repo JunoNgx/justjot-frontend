@@ -40,7 +40,7 @@
 .mantine-Modal-content,
 .mantine-Spotlight-content {
     border-style: solid;
-    border-width: 1px;
+    border-width: 2px;
     border-color: var(--colPri);
 }
 
@@ -66,6 +66,11 @@
     }
 };
 
+.mantine-Spotlight-actionsList {
+    border-top-width: 2px;
+    border-top-color: var(--colGreyBg);
+};
+
 .mantine-Notifications-root[position="bottom-center"] {
     @include m.Mobile {
         bottom: 6rem;
@@ -75,5 +80,20 @@
 .mantine-Notifications-notification {
     color: var(--colPri);
     background-color: var(--colBg);
-    border: solid 1px var(--colPri);
+    border: solid 2px var(--colPri);
+}
+
+.mantine-TextInput-input,
+.mantine-Textarea-input,
+.mantine-PasswordInput-innerInput {
+    border-width: 2px;
+    background-color: var(--colBg);
+}
+
+.mantine-PasswordInput-input {
+    border-width: 0;
+}
+
+.mantine-CloseButton-root:hover {
+    background-color: var(--colGreyBg);
 }

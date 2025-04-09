@@ -11,38 +11,38 @@
     --colYellow: #D57300;
     --colViolet: #9B70FF;
 
-    --colPri: #000;
-    --colBg: #fff;
+    --colPri: #121212;
+    --colBg: #E0E0E0;
     --colGrey: #444;
     --colGreyBg: #EEE;
     --colGreyLt: #AAA;
     --colCodeBg: #EEE;
     --colSkeleton: #DDD;
-    --colMenuBg: rgba(255, 255, 255, 0.1);
+
+    // Shared variables
+    --colMenuBg: rgba(var(--colBg), 0.1);
 }
 
 :root[data-mantine-color-scheme="light"] {
     --colViolet: #794AFF;
     
-    --colPri: #000;
-    --colBg: #fff;
+    --colPri: #121212;
+    --colBg: #E0E0E0;
     --colGrey: #444;
-    --colGreyBg: #EEE;
+    --colGreyBg: #CDCDCD;
     --colGreyLt: #444;
-    --colCodeBg: #EEE;
+    --colCodeBg: #CDCDCD;
     --colSkeleton: #DDD;
-    --colMenuBg: rgba(255, 255, 255, 0.1);
 }
 
 :root[data-mantine-color-scheme="dark"] {
     --colViolet: #9B70FF;
 
-    --colPri: #fff;
-    --colBg: #000;
+    --colPri: #E0E0E0;
+    --colBg: #121212;
     --colGrey: #999;
     --colGreyBg: #444;
     --colGreyLt: #999;
     --colCodeBg: #222;
     --colSkeleton: #222;
-    --colMenuBg: rgba(0, 0, 0, 0);
 }

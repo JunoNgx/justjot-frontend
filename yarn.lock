@@ -134,10 +134,17 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.25.9"
 
-"@babel/runtime@^7.12.5", "@babel/runtime@^7.20.13", "@babel/runtime@^7.25.6", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.12.5", "@babel/runtime@^7.20.13", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.7":
   version "7.26.7"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.26.7.tgz#f4e7fe527cd710f8dc0618610b61b4b060c3c341"
   integrity sha512-AOPI3D+a8dXnja+iwsUqGRjr1BbZIe771sXdapOtYI531gSqpi92vXivKcq2asu/DFpdl1ceFAKZyRzK2PCVcQ==
+  dependencies:
+    regenerator-runtime "^0.14.0"
+
+"@babel/runtime@^7.26.7":
+  version "7.27.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.27.0.tgz#fbee7cf97c709518ecc1f590984481d5460d4762"
+  integrity sha512-VtPOkrdPHZsKc/clNqyi9WUA8TINkZ4cGk63UUE3u4pmB2k+ZMQRDuIOagv8UVd6j7k0T3+RRIb7beKTebNbcw==
   dependencies:
     regenerator-runtime "^0.14.0"
 
@@ -405,18 +412,16 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.9.tgz#50dea3616bc8191fb8e112283b49eaff03e78429"
   integrity sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==
 
-"@hello-pangea/dnd@^17.0.0":
-  version "17.0.0"
-  resolved "https://registry.yarnpkg.com/@hello-pangea/dnd/-/dnd-17.0.0.tgz#2dede20fd6d8a9b53144547e6894fc482da3d431"
-  integrity sha512-LDDPOix/5N0j5QZxubiW9T0M0+1PR0rTDWeZF5pu1Tz91UQnuVK4qQ/EjY83Qm2QeX0eM8qDXANfDh3VVqtR4Q==
+"@hello-pangea/dnd@^18.0.1":
+  version "18.0.1"
+  resolved "https://registry.yarnpkg.com/@hello-pangea/dnd/-/dnd-18.0.1.tgz#7d5ef7fe8bddf195307b16e03635b1be582b7b8d"
+  integrity sha512-xojVWG8s/TGrKT1fC8K2tIWeejJYTAeJuj36zM//yEm/ZrnZUSFGS15BpO+jGZT1ybWvyXmeDJwPYb4dhWlbZQ==
   dependencies:
-    "@babel/runtime" "^7.25.6"
+    "@babel/runtime" "^7.26.7"
     css-box-model "^1.2.1"
-    memoize-one "^6.0.0"
     raf-schd "^4.0.3"
-    react-redux "^9.1.2"
+    react-redux "^9.2.0"
     redux "^5.0.1"
-    use-memo-one "^1.1.3"
 
 "@humanfs/core@^0.19.1":
   version "0.19.1"
@@ -478,55 +483,55 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@mantine/core@^7.16.3":
-  version "7.16.3"
-  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-7.16.3.tgz#a6e985ae3a2473ba238e0b748ab4d8cbe79e5ca2"
-  integrity sha512-cxhIpfd2i0Zmk9TKdejYAoIvWouMGhzK3OOX+VRViZ5HEjnTQCGl2h3db56ThqB6NfVPCno6BPbt5lwekTtmuQ==
+"@mantine/core@^7.17.4":
+  version "7.17.4"
+  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-7.17.4.tgz#a537cc673d3e052da5bbec01bdd77cd87cacd9e1"
+  integrity sha512-Ea4M/98jxgIWCuxCdM0YIotVYjfLTGQsfIA6zDg0LsClgjo/ZLnnh4zbi+bLNgM+GGjP4ju7gv4MZvaTKuLO8g==
   dependencies:
     "@floating-ui/react" "^0.26.28"
     clsx "^2.1.1"
     react-number-format "^5.4.3"
     react-remove-scroll "^2.6.2"
-    react-textarea-autosize "8.5.6"
+    react-textarea-autosize "8.5.9"
     type-fest "^4.27.0"
 
-"@mantine/form@^7.16.3":
-  version "7.16.3"
-  resolved "https://registry.yarnpkg.com/@mantine/form/-/form-7.16.3.tgz#76fce749e23cfc13dba582d8adf7ab83301b773e"
-  integrity sha512-GqomUG2Ri5adxYsTU1S5IhKRPcqTG5JkPvMERns8PQAcUz/lvzsnk3wY1v4K5CEbCAdpimle4bSsZTM9g697vg==
+"@mantine/form@^7.17.4":
+  version "7.17.4"
+  resolved "https://registry.yarnpkg.com/@mantine/form/-/form-7.17.4.tgz#e173ff71d233ec5102cb341cd6ad7d0affa59a91"
+  integrity sha512-faCz44IpvLSv8ekG962SIOtRQc4gfC+zeXasbycWNYMW0k8ge7ch689KIuSYN00gdZat2UOaCbrr+yrTYjeuCQ==
   dependencies:
     fast-deep-equal "^3.1.3"
     klona "^2.0.6"
 
-"@mantine/hooks@^7.16.3":
-  version "7.16.3"
-  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-7.16.3.tgz#b4873110acfe6e2dd76da274c623a11ccb86db48"
-  integrity sha512-B94FBWk5Sc81tAjV+B3dGh/gKzfqzpzVC/KHyBRWOOyJRqeeRbI/FAaJo4zwppyQo1POSl5ArdyjtDRrRIj2SQ==
+"@mantine/hooks@^7.17.4":
+  version "7.17.4"
+  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-7.17.4.tgz#45f7e6b0ca7d6ed80c91972f8eaa34358c7792e6"
+  integrity sha512-PBcJxDAfGm8k1/JJmaDcxzRVQ3JSE1iXGktbgGz+qEOJmCxwbbAYe+CtGFFgi1xX2bPZ+7dtRr/+XFhnKtt/aw==
 
-"@mantine/modals@^7.16.3":
-  version "7.16.3"
-  resolved "https://registry.yarnpkg.com/@mantine/modals/-/modals-7.16.3.tgz#8577fa7ec9960266a7c2120059902c77edd26624"
-  integrity sha512-BJuDzRugK6xLbuFTTo8NLJumVvVmSYsNVcEtmlXOWTE3NkDGktBXGKo8V1B0XfJ9/d/rZw7HCE0p4i76MtA+bQ==
+"@mantine/modals@^7.17.4":
+  version "7.17.4"
+  resolved "https://registry.yarnpkg.com/@mantine/modals/-/modals-7.17.4.tgz#28354fe51e1eb94d5da25ddb069bd0f2ee82c04e"
+  integrity sha512-KQYzLCQRBs9bq0svdpSda8fgxmqrwEy4tgvoXpmlr02srsyySvpOxhXmAUZsjPZapG+D97sYi7BscVZKZoIqgA==
 
-"@mantine/notifications@^7.16.3":
-  version "7.16.3"
-  resolved "https://registry.yarnpkg.com/@mantine/notifications/-/notifications-7.16.3.tgz#945cf242af1fe422dc4dfd7e61be099cc6edf29f"
-  integrity sha512-wtEME9kSYfXWYmAmQUZ8c+rwNmhdWRBaW1mlPdQsPkzMqkv4q6yy0IpgwcnuHStSG9EHaQBXazmVxMZJdEAWBQ==
+"@mantine/notifications@^7.17.4":
+  version "7.17.4"
+  resolved "https://registry.yarnpkg.com/@mantine/notifications/-/notifications-7.17.4.tgz#e82798cfa762c7e29306ff84a00abc34d53b5c7a"
+  integrity sha512-YxNmnZSfIG69lPMFItOZZsizYL3DsOLVUSPkkJILG5pW2F798dc4IA5mhRIbdmzDEx0ArWHJ7gsdd3Vmm5ubPg==
   dependencies:
-    "@mantine/store" "7.16.3"
+    "@mantine/store" "7.17.4"
     react-transition-group "4.4.5"
 
-"@mantine/spotlight@^7.16.3":
-  version "7.16.3"
-  resolved "https://registry.yarnpkg.com/@mantine/spotlight/-/spotlight-7.16.3.tgz#3af4bc9679a097b696e42979049ede577709d386"
-  integrity sha512-YZOmkNrMm5L/zQMsVmIaTts5avb5tlpMR+T2h23T19KehLRnfBQWWnsMOOqFa3PvadIG+Lzk5fXLRkP6VtmOOg==
+"@mantine/spotlight@^7.17.4":
+  version "7.17.4"
+  resolved "https://registry.yarnpkg.com/@mantine/spotlight/-/spotlight-7.17.4.tgz#7f8b2dc3ca65b880d5fb61eb16acc62b0161de2f"
+  integrity sha512-HAAK8svSoNLKtwVHEYL4t9cQgR/lKDdXRHTUjmkuqgW5QzpX6A1GYtkHnHlDuVHFdDvInPlk+N63BMysUzw4cg==
   dependencies:
-    "@mantine/store" "7.16.3"
+    "@mantine/store" "7.17.4"
 
-"@mantine/store@7.16.3":
-  version "7.16.3"
-  resolved "https://registry.yarnpkg.com/@mantine/store/-/store-7.16.3.tgz#4f464308803f844f555c2ea6f2f06e6a7a5e88fe"
-  integrity sha512-6M2M5+0BrRtnVv+PUmr04tY1RjPqyapaHplo90uK1NMhP/1EIqrwTL9KoEtCNCJ5pog1AQtu0bj0QPbqUvxwLg==
+"@mantine/store@7.17.4":
+  version "7.17.4"
+  resolved "https://registry.yarnpkg.com/@mantine/store/-/store-7.17.4.tgz#8930a29da9d9d1a59f4d7fe36e4fa805c11bcb16"
+  integrity sha512-a/EecHPtYVxhu3oMX9uTymGolmOBWxW8Qs4fLCjiazEJbS1ScI4lS71GK/SuOa2rGuuOJkaotpyritbx3paIRg==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -2643,11 +2648,6 @@ math-intrinsics@^1.1.0:
   resolved "https://registry.yarnpkg.com/math-intrinsics/-/math-intrinsics-1.1.0.tgz#a0dd74be81e2aa5c2f27e65ce283605ee4e2b7f9"
   integrity sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==
 
-memoize-one@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-6.0.0.tgz#b2591b871ed82948aee4727dc6abceeeac8c1045"
-  integrity sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==
-
 merge2@^1.3.0:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.4.1.tgz#4368892f885e907455a6fd7dc55c0c9d404990ae"
@@ -3002,7 +3002,7 @@ react-number-format@^5.4.3:
   resolved "https://registry.yarnpkg.com/react-number-format/-/react-number-format-5.4.3.tgz#e634df907da7742faf597afab3f25f9a59689d60"
   integrity sha512-VCY5hFg/soBighAoGcdE+GagkJq0230qN6jcS5sp8wQX1qy1fYN/RX7/BXkrs0oyzzwqR8/+eSUrqXbGeywdUQ==
 
-react-redux@^9.1.2:
+react-redux@^9.2.0:
   version "9.2.0"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-9.2.0.tgz#96c3ab23fb9a3af2cb4654be4b51c989e32366f5"
   integrity sha512-ROY9fvHhwOD9ySfrF0wmvu//bKCQ6AeZZq1nJNtbDC+kk5DuSuNX/n6YWYF/SYy7bSba4D4FSz8DJeKY/S/r+g==
@@ -3059,10 +3059,10 @@ react-style-singleton@^2.2.2, react-style-singleton@^2.2.3:
     get-nonce "^1.0.0"
     tslib "^2.0.0"
 
-react-textarea-autosize@8.5.6:
-  version "8.5.6"
-  resolved "https://registry.yarnpkg.com/react-textarea-autosize/-/react-textarea-autosize-8.5.6.tgz#e9205fb215eea7cbb6cba8f57dd874ab5d44a241"
-  integrity sha512-aT3ioKXMa8f6zHYGebhbdMD2L00tKeRX1zuVuDx9YQK/JLLRSaSxq3ugECEmUB9z2kvk6bFSIoRHLkkUv0RJiw==
+react-textarea-autosize@8.5.9:
+  version "8.5.9"
+  resolved "https://registry.yarnpkg.com/react-textarea-autosize/-/react-textarea-autosize-8.5.9.tgz#ab8627b09aa04d8a2f45d5b5cd94c84d1d4a8893"
+  integrity sha512-U1DGlIQN5AwgjTyOEnI1oCcMuEr1pv1qOtklB2l4nyMGbHzWrI0eFsYK0zos2YWqAolJyG0IWJaqWmWj5ETh0A==
   dependencies:
     "@babel/runtime" "^7.20.13"
     use-composed-ref "^1.3.0"
@@ -3763,11 +3763,6 @@ use-latest@^1.2.1:
   integrity sha512-mhg3xdm9NaM8q+gLT8KryJPnRFOz1/5XPBhmDEVZK1webPzDjrPk7f/mbpeLqTgB9msytYWANxgALOCJKnLvcQ==
   dependencies:
     use-isomorphic-layout-effect "^1.1.1"
-
-use-memo-one@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/use-memo-one/-/use-memo-one-1.1.3.tgz#2fd2e43a2169eabc7496960ace8c79efef975e99"
-  integrity sha512-g66/K7ZQGYrI6dy8GLpVcMsBp4s17xNkYJVSMvTEevGy3nDxHOfE6z8BVE22+5G5x7t3+bhzrlTDB7ObrEE0cQ==
 
 use-sidecar@^1.1.3:
   version "1.1.3"
