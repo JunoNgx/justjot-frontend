@@ -17,7 +17,7 @@
     --colGreyBg: #EEE;
     --colGreyLt: #AAA;
     --colCodeBg: #EEE;
-    --colSkeleton: #DDD;
+    --colSkeleton: #B2B2B2;
 
     // Shared variables
     --colMenuBg: rgba(var(--colBg), 0.1);
@@ -32,7 +32,7 @@
     --colGreyBg: #CDCDCD;
     --colGreyLt: #444;
     --colCodeBg: #CDCDCD;
-    --colSkeleton: #DDD;
+    --colSkeleton: #B2B2B2;
 }
 
 :root[data-mantine-color-scheme="dark"] {
@@ -44,5 +44,5 @@
     --colGreyBg: #444;
     --colGreyLt: #999;
     --colCodeBg: #222;
-    --colSkeleton: #222;
+    --colSkeleton: #333;
 }
