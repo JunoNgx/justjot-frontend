@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from "@playwright/test";
 
 /**
  * Read environment variables from file.
@@ -10,7 +10,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-    testDir: './playwright-tests',
+    testDir: "./playwright-tests",
     /* Run tests in files in parallel */
     fullyParallel: true,
     /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -18,19 +18,19 @@ export default defineConfig({
     retries: 3,
     workers: 6,
     /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-    reporter: 'list',
+    reporter: "list",
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 
     /* Configure projects for major browsers */
     projects: [
         {
-            name: 'chromium',
-            use: { ...devices['Desktop Chrome'] },
+            name: "chromium",
+            use: { ...devices["Desktop Chrome"] },
         },
 
         {
-            name: 'firefox',
-            use: { ...devices['Desktop Firefox'] },
+            name: "firefox",
+            use: { ...devices["Desktop Firefox"] },
         },
 
         // {
@@ -62,16 +62,16 @@ export default defineConfig({
 
     /* Run your local dev server before starting the tests */
     webServer: {
-        command: 'yarn dev',
-        url: 'http://localhost:5173/',
+        command: "yarn dev",
+        url: "http://localhost:5173/",
         reuseExistingServer: true,
         timeout: 5 * 1000,
     },
     use: {
         ignoreHTTPSErrors: true,
-        baseURL: 'http://localhost:5173/',
+        baseURL: "http://localhost:5173/",
 
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-        trace: 'on-first-retry',
+        trace: "on-first-retry",
     },
 });
