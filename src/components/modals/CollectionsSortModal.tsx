@@ -133,12 +133,8 @@ export default function CollectionsSortModal() {
             {(provided, _snapshot) => {
                 if (_snapshot.isDragging) {
                     // Hackfix: https://github.com/atlassian/react-beautiful-dnd/issues/1881
-                    // @ts-expect-error: Manually fix offset caused by modal positioning
-                    provided.draggableProps.style.left =
-                        provided.draggableProps.style.offsetLeft;
-                    // @ts-expect-error: Manually fix offset caused by modal positioning
-                    provided.draggableProps.style.top =
-                        provided.draggableProps.style.offsetTop;
+                    (provided.draggableProps as any).style.left = (provided.draggableProps as any).style.offsetLeft;
+                    (provided.draggableProps as any).style.top = (provided.draggableProps as any).style.offsetTop;
                 }
 
                 return (
