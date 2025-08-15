@@ -12,11 +12,7 @@
     border-style: solid;
     border-width: 3px;
     background-color: transparent;
-    border-color:
-        var(--colLoader)
-        var(--colLoader)
-        var(--colLoader)
-        transparent;
+    border-color: var(--colLoader) var(--colLoader) var(--colLoader) transparent;
     animation: rotate 1.5s linear infinite;
 
     @keyframes rotate {
