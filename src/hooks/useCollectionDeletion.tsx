@@ -107,8 +107,8 @@ export default function useCollectionDeletion() {
                 children: (
                     <>
                         <p>
-                            Are you sure you want to delete the collection "
-                            {currCollection!.name}"?
+                            {`Are you sure you want to delete the collection "
+                            {currCollection!.name}"?`}
                         </p>
                         <p>
                             This is irreversible and will also cascadingly

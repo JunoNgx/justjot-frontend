@@ -210,9 +210,11 @@ export default function useItemActions() {
 
     const clipboard = useClipboard();
     const copyItemContent = async ({ item }: { item: Item }) => {
-        item.type === ItemType.TODO
-            ? clipboard.copy(item.title)
-            : clipboard.copy(item.content);
+        if (item.type === ItemType.TODO) {
+            clipboard.copy(item.title);
+        } else {
+            clipboard.copy(item.content);
+        }
 
         emitter.emit("copyItemContent", item.id);
     };

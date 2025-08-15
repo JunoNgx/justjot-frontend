@@ -197,7 +197,7 @@ export default function Help() {
                 <ul>
                     <li>
                         <code>:t:</code> or <code>:l:</code> — create a text
-                        note with title ("t" for title; "l" for long).
+                        note with title {`("t" for title; "l" for long)`}.
                     </li>
                     <li>
                         <code>:td:</code> — create a todo item.
@@ -208,12 +208,12 @@ export default function Help() {
                     <li>
                         Entering <code>:t: Email draft 2</code> will open the
                         item create dialog, whose title input is pre-filled as
-                        "Email draft 2", allowing you to conveniently continue
-                        working on the content.
+                        {'"Email draft 2"'}, allowing you to conveniently
+                        continue working on the content.
                     </li>
                     <li>
                         Entering <code>:td: Buy groceries</code> will create a
-                        todo item with content "Buy groceries".
+                        todo item with content {'"Buy groceries"'}.
                     </li>
                 </ul>
                 <p>
