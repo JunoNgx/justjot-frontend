@@ -5,15 +5,15 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function useNavigateRoutes() {
-
     const { user, logout } = useContext(BackendClientContext);
-    const { setCurrCollection, setInitCollections, setTrashBin } = useContext(CollectionsContext);
+    const { setCurrCollection, setInitCollections, setTrashBin } =
+        useContext(CollectionsContext);
     const { setItems } = useContext(ItemsContext);
 
     const navigate = useNavigate();
     const navigateToMainView = () => {
         navigate(`/${user?.username}`, {
-            replace: true
+            replace: true,
         });
     };
 
@@ -23,7 +23,7 @@ export default function useNavigateRoutes() {
 
     const navigateToTerms = () => {
         navigate("/terms");
-    }
+    };
 
     const navigateToProfile = () => {
         navigate("/profile");
@@ -36,32 +36,32 @@ export default function useNavigateRoutes() {
     const logoutAndNavigateToLogin = () => {
         setInitCollections([]);
         setTrashBin(undefined);
-        setCurrCollection(undefined)
+        setCurrCollection(undefined);
         setItems([]);
         logout();
-        navigate("/login", { replace: true});
+        navigate("/login", { replace: true });
     };
 
     // For non-logged in status only
     const navigateToHome = () => {
         navigate("/");
-    }
+    };
 
     const navigateToLogin = () => {
         navigate("/login");
-    }
+    };
 
     const navigateToRegister = () => {
         navigate("/register");
-    }
+    };
 
     const navigateToVerify = () => {
         navigate("/verify");
-    }
+    };
 
     const navigateToDemoLogin = () => {
         navigate("/demo-login");
-    }
+    };
 
     return {
         navigateToHelp,
@@ -76,5 +76,5 @@ export default function useNavigateRoutes() {
         navigateToRegister,
         navigateToVerify,
         navigateToDemoLogin,
-    }
+    };
 }

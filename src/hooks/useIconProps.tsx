@@ -1,5 +1,4 @@
 export default function useIconProps() {
-
     const itemIconProps = {
         size: 24,
         stroke: 1.5,
@@ -34,7 +33,7 @@ export default function useIconProps() {
     const keyboardPromptIconProps = {
         size: 24,
         stroke: 1.5,
-    }
+    };
 
     return {
         itemIconProps,
