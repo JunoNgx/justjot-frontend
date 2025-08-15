@@ -7,9 +7,9 @@ export default function Terms() {
 
             <h2>Terms and Conditions</h2>
             <p>
-                These are not exactly "terms and conditions" per se (I needed
+                {`These are not exactly "terms and conditions" per se (I needed
                 your attention nevertheless); more like things you should be
-                aware of and acknowledge before signing up.
+                aware of and acknowledge before signing up.`}
             </p>
             <ul className="CardLike__TermList">
                 <li className="Cardlike__TermItem">
