@@ -41,7 +41,7 @@ export default function useHandleContextMenuWithLongPress(
     };
 
     const clear = (_e: React.MouseEvent | React.TouchEvent) => {
-        timeout.current && clearTimeout(timeout.current);
+        if (timeout.current) clearTimeout(timeout.current);
     };
 
     const handleContextMenu = (e: React.MouseEvent | React.TouchEvent) => {
