@@ -6,9 +6,7 @@ import pluginReact from "eslint-plugin-react";
 /** @type {import('eslint').Linter.Config[]} */
 export default [
     {
-        ignores: [
-            "postcss.config.cjs",
-        ],
+        ignores: ["postcss.config.cjs"],
     },
     {
         files: ["**/*.ts", "**/*.tsx"],
@@ -22,7 +20,7 @@ export default [
     {
         settings: {
             react: {
-                "version": "detect",
+                version: "detect",
             },
         },
         rules: {
@@ -30,7 +28,7 @@ export default [
             "react/no-unescaped-entities": [
                 "warn",
                 {
-                    "forbid": [ ">", "}", "\""]
+                    forbid: [">", "}", '"'],
                 },
             ],
             "@typescript-eslint/no-unused-vars": [
