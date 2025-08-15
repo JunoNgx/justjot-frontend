@@ -1,12 +1,11 @@
-import ButtonWithLoader from '@/libs/components/ButtonWithLoader';
-import { ContextModalProps } from '@mantine/modals';
+import ButtonWithLoader from "@/libs/components/ButtonWithLoader";
+import { ContextModalProps } from "@mantine/modals";
 
 const InfoModal = ({
     context,
     id,
     innerProps,
-}: ContextModalProps <{ leftSection: React.ReactNode, modalBody: string }>
-) => (
+}: ContextModalProps<{ leftSection: React.ReactNode; modalBody: string }>) => (
     <div className="Modal">
         <div className="Modal__FlexWrapper">
             {innerProps.leftSection}

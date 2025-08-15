@@ -19,22 +19,19 @@ import Loader from "@/libs/components/Loader";
 import "./Modals.scss";
 
 type ItemMoveModal = {
-    item: Item,
-    collectionList: ItemCollection[]
+    item: Item;
+    collectionList: ItemCollection[];
 };
 
 export default function ItemMoveModal({ item, collectionList }: ItemMoveModal) {
-
     const { currCollection } = useContext(CollectionsContext);
     const { items, setItems } = useContext(ItemsContext);
     const itemsHandlers = useManageListState(setItems);
     const { moveItem } = useItemApiCalls();
-    const {
-        computeIndexFromNumericKey,
-        generateNumericHotkeyHandlers,
-    } = useNumericHotkeyUtils();
+    const { computeIndexFromNumericKey, generateNumericHotkeyHandlers } =
+        useNumericHotkeyUtils();
 
-    const [ isLoading, setIsLoading ] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const moveItemToCollectionByNumericKey = (inputNumber: number) => {
         const targetIndex = computeIndexFromNumericKey(inputNumber);
         if (targetIndex === -1) return;
@@ -46,7 +43,7 @@ export default function ItemMoveModal({ item, collectionList }: ItemMoveModal) {
 
         moveItemToCollection({
             itemId: item.id,
-            collectionId: targetCollection.id
+            collectionId: targetCollection.id,
         });
     };
     const numericKeysHotkeyOptions = generateNumericHotkeyHandlers({
@@ -54,15 +51,19 @@ export default function ItemMoveModal({ item, collectionList }: ItemMoveModal) {
         preventDefault: true,
     });
 
-    const moveItemToCollection = (
-        { itemId, collectionId }: { itemId: string, collectionId: string }
-    ) => {
+    const moveItemToCollection = ({
+        itemId,
+        collectionId,
+    }: {
+        itemId: string;
+        collectionId: string;
+    }) => {
         moveItem({
             itemId,
             collectionId,
             setLoadingState: setIsLoading,
             successfulCallback: handleSuccessfulMove,
-            errorCallback: handleErroredMove
+            errorCallback: handleErroredMove,
         });
     };
 
@@ -87,36 +88,46 @@ export default function ItemMoveModal({ item, collectionList }: ItemMoveModal) {
         });
     };
 
-    return <FocusTrap> 
-        <div className="Modal Modal--Stackbox Modal--ThickPadding"
-            /**
-             * Use this as initial focused element, so the numeric hotkeys
-             * can work for keyboard users.
-             */
-            data-autofocus={true} 
-            onKeyDown={getHotkeyHandler([...numericKeysHotkeyOptions])}
-        >
-            {collectionList?.map((collection, index) => <div
-                className="Modal__MoveItemOption"
-                key={index}
+    return (
+        <FocusTrap>
+            <div
+                className="Modal Modal--Stackbox Modal--ThickPadding"
+                /**
+                 * Use this as initial focused element, so the numeric hotkeys
+                 * can work for keyboard users.
+                 */
+                data-autofocus={true}
+                onKeyDown={getHotkeyHandler([...numericKeysHotkeyOptions])}
             >
-                <ButtonWithLoader className="Modal__MoveItemBtn"
-                    onClick={() => moveItemToCollection({
-                        itemId: item.id, collectionId: collection.id})
-                    }
-                    isDisabled={isLoading || item?.collection === collection.id}
-                >
-                    {collection.name}    
-                </ButtonWithLoader>
+                {collectionList?.map((collection, index) => (
+                    <div className="Modal__MoveItemOption" key={index}>
+                        <ButtonWithLoader
+                            className="Modal__MoveItemBtn"
+                            onClick={() =>
+                                moveItemToCollection({
+                                    itemId: item.id,
+                                    collectionId: collection.id,
+                                })
+                            }
+                            isDisabled={
+                                isLoading || item?.collection === collection.id
+                            }
+                        >
+                            {collection.name}
+                        </ButtonWithLoader>
 
-                <div className="Modal__CollectionHotkey">
-                    <CollectionHotkey index={index}/>
-                </div>
-            </div>)}
+                        <div className="Modal__CollectionHotkey">
+                            <CollectionHotkey index={index} />
+                        </div>
+                    </div>
+                ))}
 
-            {isLoading && <div className="Modal__LoaderContainer">
-                <Loader/>
-            </div>}
-        </div>
-    </FocusTrap>  
+                {isLoading && (
+                    <div className="Modal__LoaderContainer">
+                        <Loader />
+                    </div>
+                )}
+            </div>
+        </FocusTrap>
+    );
 }
