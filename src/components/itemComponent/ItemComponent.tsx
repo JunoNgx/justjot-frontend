@@ -126,6 +126,7 @@ const ItemComponentInner = forwardRef<
         </div>
     );
 });
+ItemComponentInner.displayName = "ItemComponentInner";
 
 const computeClassname = (item: Item, isSelected: boolean) => {
     const isSelectedModifier = isSelected ? "Item--IsSelected " : " ";
