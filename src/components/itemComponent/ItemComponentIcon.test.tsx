@@ -1,32 +1,32 @@
-import { describe, expect, test, afterEach } from 'vitest';
+import { describe, expect, test, afterEach } from "vitest";
 import items from "@/__tests__/fixtures/items.json";
 import { render, cleanup } from "@testing-library/react";
-import { justJotCssVarsResolver, justJotTheme } from '@/theme.ts';
+import { justJotCssVarsResolver, justJotTheme } from "@/theme.ts";
 
-import { MantineProvider } from '@mantine/core';
-import ItemComponentIcon from '@/components/itemComponent/ItemComponentIcon';
-import { Item, ThemeMode } from '@/types';
-import { UserLocalSettingsContext } from '@/contexts/UserLocalSettingsContext';
+import { MantineProvider } from "@mantine/core";
+import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
+import { Item, ThemeMode } from "@/types";
+import { UserLocalSettingsContext } from "@/contexts/UserLocalSettingsContext";
 
 describe("ItemComponentIcon", () => {
-
-    const renderItemComponentIcon = (item: Item) => render(
-        <MantineProvider
-            theme={justJotTheme}
-            cssVariablesResolver={justJotCssVarsResolver}
-        >
-            <UserLocalSettingsContext.Provider
-                value={{
-                    themeMode: ThemeMode.LIGHT,
-                    isFaviconEnabled: true,
-                    setThemeMode: () => {},
-                    setIsFaviconEnabled: () => {},
-                }}
+    const renderItemComponentIcon = (item: Item) =>
+        render(
+            <MantineProvider
+                theme={justJotTheme}
+                cssVariablesResolver={justJotCssVarsResolver}
             >
-                <ItemComponentIcon item={item} />
-            </UserLocalSettingsContext.Provider>
-        </MantineProvider>
-    );
+                <UserLocalSettingsContext.Provider
+                    value={{
+                        themeMode: ThemeMode.LIGHT,
+                        isFaviconEnabled: true,
+                        setThemeMode: () => {},
+                        setIsFaviconEnabled: () => {},
+                    }}
+                >
+                    <ItemComponentIcon item={item} />
+                </UserLocalSettingsContext.Provider>
+            </MantineProvider>
+        );
 
     afterEach(() => {
         cleanup();
@@ -42,7 +42,7 @@ describe("ItemComponentIcon", () => {
     });
 
     test("Link icon without favicon", async () => {
-        const item = {...items[4]};
+        const item = { ...items[4] };
         item.faviconUrl = "";
         renderItemComponentIcon(item);
         const iconEl = document.querySelector(".tabler-icon");
@@ -59,7 +59,7 @@ describe("ItemComponentIcon", () => {
     });
 
     test("Pending icon", async () => {
-        const item: Item = {...items[0]};
+        const item: Item = { ...items[0] };
         item.isPending = true;
         renderItemComponentIcon(item);
         const iconEl = document.querySelector(".tabler-icon");
@@ -69,12 +69,14 @@ describe("ItemComponentIcon", () => {
     });
 
     test("Notated hex colour code icon", async () => {
-        const item: Item = {...items[7]};
+        const item: Item = { ...items[7] };
         item.content += "#FF0000";
         renderItemComponentIcon(item);
         const iconEl = document.querySelector(".Item__IconColour");
 
-        expect(iconEl?.getAttribute("style")).toBe("background-color: #FF0000;");
+        expect(iconEl?.getAttribute("style")).toBe(
+            "background-color: #FF0000;"
+        );
     });
 
     test("Todo icon, has NOT marked as completed", async () => {
@@ -94,5 +96,4 @@ describe("ItemComponentIcon", () => {
 
         expect(classList.includes("tabler-icon-checkbox")).toBe(true);
     });
-
 });

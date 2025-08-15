@@ -152,7 +152,6 @@
         }
     }
 
-
     &--IsTodoDone {
         .Item__PrimaryText {
             color: var(--colGrey);
@@ -206,7 +205,7 @@
         .Item__PrimaryText {
             max-width: calc(100%);
         }
-        
+
         .Item__SecondaryText {
             display: none;
         }
