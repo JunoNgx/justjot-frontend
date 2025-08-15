@@ -11,29 +11,33 @@ import { useContext, useEffect } from "react";
 import "./Pages.scss";
 
 export default function Profile() {
-
-    const { isLoggedIn, isDemoUser, refreshAuth } = useContext(BackendClientContext);
+    const { isLoggedIn, isDemoUser, refreshAuth } =
+        useContext(BackendClientContext);
 
     useEffect(() => {
         refreshAuth();
     }, []);
 
-    return <div className="Cardlike Cardlike--WithBottomMargin">
-        <title>{`Account — ${APP_NAME}`}</title>
+    return (
+        <div className="Cardlike Cardlike--WithBottomMargin">
+            <title>{`Account — ${APP_NAME}`}</title>
 
-        {isLoggedIn &&
-            <>
-                <h2>Account management</h2>
-                <ProfileFaviconCookies />
-                <ProfileChangeDisplayName/>
-                {isDemoUser
-                ? <ProfileTestAccountNotice />
-                : <>
-                    <ProfileChangeEmail/>
-                    <ProfileChangePassword/>
-                    <ProfileAccountDeletion/>
-                </>}
-            </>
-        }
-    </div>
+            {isLoggedIn && (
+                <>
+                    <h2>Account management</h2>
+                    <ProfileFaviconCookies />
+                    <ProfileChangeDisplayName />
+                    {isDemoUser ? (
+                        <ProfileTestAccountNotice />
+                    ) : (
+                        <>
+                            <ProfileChangeEmail />
+                            <ProfileChangePassword />
+                            <ProfileAccountDeletion />
+                        </>
+                    )}
+                </>
+            )}
+        </div>
+    );
 }

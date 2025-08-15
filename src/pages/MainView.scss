@@ -19,8 +19,8 @@
 
         max-width: 720px;
         margin: 0 auto 12px;
-    
-        @include m.Mobile { 
+
+        @include m.Mobile {
             &__items-container {
                 padding-bottom: 5rem;
             }
