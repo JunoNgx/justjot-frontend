@@ -3,16 +3,18 @@ import mitt, { Emitter } from "mitt";
 import { ReactNode, createContext, useEffect } from "react";
 
 type EventBusContextType = {
-    emitter: Emitter<CopyItemContentEvent>,
+    emitter: Emitter<CopyItemContentEvent>;
 };
 
 export const EventBusContext = createContext<EventBusContextType>(
-    {} as EventBusContextType);
+    {} as EventBusContextType
+);
 
-export default function EventBusContextProvider(
-    { children }: { children: ReactNode }
-) {
-
+export default function EventBusContextProvider({
+    children,
+}: {
+    children: ReactNode;
+}) {
     const emitter: Emitter<CopyItemContentEvent> = mitt<CopyItemContentEvent>();
 
     useEffect(() => {
@@ -21,9 +23,13 @@ export default function EventBusContextProvider(
         };
     }, []);
 
-    return <EventBusContext value={{
-        emitter,
-    }}>
-        {children}
-    </EventBusContext>
+    return (
+        <EventBusContext
+            value={{
+                emitter,
+            }}
+        >
+            {children}
+        </EventBusContext>
+    );
 }

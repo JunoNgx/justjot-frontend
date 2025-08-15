@@ -1,27 +1,51 @@
-import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
-import { ApiRequestCallbackOptions, DbTable, ItemCollection, TrashBin } from '@/types';
-import { BackendClientContext } from '@/contexts/BackendClientContext';
-import { ClientResponseError } from 'pocketbase';
+import {
+    ReactNode,
+    createContext,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
+import {
+    ApiRequestCallbackOptions,
+    DbTable,
+    ItemCollection,
+    TrashBin,
+} from "@/types";
+import { BackendClientContext } from "@/contexts/BackendClientContext";
+import { ClientResponseError } from "pocketbase";
 
 type CollectionsContextType = {
-    initCollections: ItemCollection[],
-    setInitCollections: React.Dispatch<React.SetStateAction<ItemCollection[]>>,
-    collectionList: (ItemCollection | undefined)[],
-    currCollection: ItemCollection | undefined,
-    setCurrCollection: React.Dispatch<React.SetStateAction<ItemCollection | undefined>>,
-    trashBin: TrashBin | undefined,
-    setTrashBin: React.Dispatch<React.SetStateAction<TrashBin | undefined>>,
-    isTrashCollection: boolean,
-    collSelectedIndex: number,
-    fetchCollections: ({successfulCallback, errorCallback}?: ApiRequestCallbackOptions) => void,
+    initCollections: ItemCollection[];
+    setInitCollections: React.Dispatch<React.SetStateAction<ItemCollection[]>>;
+    collectionList: (ItemCollection | undefined)[];
+    currCollection: ItemCollection | undefined;
+    setCurrCollection: React.Dispatch<
+        React.SetStateAction<ItemCollection | undefined>
+    >;
+    trashBin: TrashBin | undefined;
+    setTrashBin: React.Dispatch<React.SetStateAction<TrashBin | undefined>>;
+    isTrashCollection: boolean;
+    collSelectedIndex: number;
+    fetchCollections: ({
+        successfulCallback,
+        errorCallback,
+    }?: ApiRequestCallbackOptions) => void;
 };
 
-export const CollectionsContext = createContext<CollectionsContextType>({} as CollectionsContextType);
+export const CollectionsContext = createContext<CollectionsContextType>(
+    {} as CollectionsContextType
+);
 
-export default function CollectionsContextProvider({ children }: { children: ReactNode }) {
+export default function CollectionsContextProvider({
+    children,
+}: {
+    children: ReactNode;
+}) {
     const { isLoggedIn, pbClient, user } = useContext(BackendClientContext);
     // Initial collection without Trash Bin
-    const [initCollections, setInitCollections] = useState<ItemCollection[]>([]);
+    const [initCollections, setInitCollections] = useState<ItemCollection[]>(
+        []
+    );
     const [currCollection, setCurrCollection] = useState<ItemCollection>();
     const [trashBin, setTrashBin] = useState<TrashBin>();
 
@@ -29,7 +53,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
         const fetchData = async () => {
             await fetchCollections();
             await fetchTrashBin();
-        }
+        };
 
         fetchData();
     }, [user]);
@@ -46,9 +70,10 @@ export default function CollectionsContextProvider({ children }: { children: Rea
     //     setUser(null);
     // });
 
-    const fetchTrashBin = async (
-        {successfulCallback, errorCallback}: ApiRequestCallbackOptions = {}
-    ) => {
+    const fetchTrashBin = async ({
+        successfulCallback,
+        errorCallback,
+    }: ApiRequestCallbackOptions = {}) => {
         if (!isLoggedIn) return;
 
         await pbClient
@@ -56,7 +81,7 @@ export default function CollectionsContextProvider({ children }: { children: Rea
             .getFirstListItem(`owner="${user!.id}"`)
             .then((record) => {
                 successfulCallback?.();
-                setTrashBin({...record, isTrashBin: true});
+                setTrashBin({ ...record, isTrashBin: true });
             })
             .catch((err: ClientResponseError) => {
                 errorCallback?.();
@@ -64,12 +89,12 @@ export default function CollectionsContextProvider({ children }: { children: Rea
                     console.warn("Non cancellation error");
                 }
             });
-
     };
 
-    const fetchCollections = async (
-        {successfulCallback, errorCallback}: ApiRequestCallbackOptions = {}
-    ) => {
+    const fetchCollections = async ({
+        successfulCallback,
+        errorCallback,
+    }: ApiRequestCallbackOptions = {}) => {
         if (!isLoggedIn) return;
 
         await pbClient
@@ -92,24 +117,28 @@ export default function CollectionsContextProvider({ children }: { children: Rea
     };
 
     const collectionList = [...initCollections, trashBin];
-    const collSelectedIndex = collectionList.findIndex(c => c?.id === currCollection?.id);
+    const collSelectedIndex = collectionList.findIndex(
+        (c) => c?.id === currCollection?.id
+    );
     const isTrashCollection = currCollection?.isTrashBin;
 
-    return <CollectionsContext value=
-        {{
-            initCollections,
-            setInitCollections,
-            collectionList,
-            currCollection,
-            setCurrCollection,
-            trashBin,
-            setTrashBin,
+    return (
+        <CollectionsContext
+            value={{
+                initCollections,
+                setInitCollections,
+                collectionList,
+                currCollection,
+                setCurrCollection,
+                trashBin,
+                setTrashBin,
 
-            collSelectedIndex,
-            isTrashCollection,
-            fetchCollections,
-        }}
-    >
-        {children}
-    </CollectionsContext>
+                collSelectedIndex,
+                isTrashCollection,
+                fetchCollections,
+            }}
+        >
+            {children}
+        </CollectionsContext>
+    );
 }
