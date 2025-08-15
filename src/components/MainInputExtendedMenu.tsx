@@ -1,31 +1,49 @@
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useIconProps from "@/hooks/useIconProps";
 import useItemNavActions from "@/hooks/useItemNavActions";
-import { AUTO_CLOSE_DEFAULT, AUTO_CLOSE_ERROR_TOAST, CREATE_TEXT_WITH_TITLE_PREFIX, CREATE_TODO_PREFIX, FILTER_SYNTAX_INCOMPLETE_TODOS, FILTER_SYNTAX_LINKS, FILTER_SYNTAX_NOTES, FILTER_SYNTAX_TODOS } from "@/utils/constants";
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import {
+    AUTO_CLOSE_DEFAULT,
+    AUTO_CLOSE_ERROR_TOAST,
+    CREATE_TEXT_WITH_TITLE_PREFIX,
+    CREATE_TODO_PREFIX,
+    FILTER_SYNTAX_INCOMPLETE_TODOS,
+    FILTER_SYNTAX_LINKS,
+    FILTER_SYNTAX_NOTES,
+    FILTER_SYNTAX_TODOS,
+} from "@/utils/constants";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { notifications } from "@mantine/notifications";
 import { spotlight } from "@mantine/spotlight";
-import { IconCheckbox, IconChevronDown, IconClipboardPlus, IconFileText, IconFocus, IconLayoutNavbar, IconList, IconListCheck, IconWorld, IconX } from "@tabler/icons-react";
+import {
+    IconCheckbox,
+    IconChevronDown,
+    IconClipboardPlus,
+    IconFileText,
+    IconFocus,
+    IconLayoutNavbar,
+    IconList,
+    IconListCheck,
+    IconWorld,
+    IconX,
+} from "@tabler/icons-react";
 import { useContext, useState } from "react";
 import LabelWithIcon from "@/libs/components/LabelWithIcon";
 
 import "./MainInput.scss";
 
 type MainInputExtendedMenuOptions = {
-    processMainInput: (input: string) => void,
-    mainInputRef: React.RefObject<HTMLInputElement | null>,
-}
+    processMainInput: (input: string) => void;
+    mainInputRef: React.RefObject<HTMLInputElement | null>;
+};
 
 export default function MainInputExtendedMenu({
     processMainInput,
-    mainInputRef
-}: MainInputExtendedMenuOptions
-) {
-
+    mainInputRef,
+}: MainInputExtendedMenuOptions) {
     const { menuIconProps } = useIconProps();
     const { setInputVal } = useContext(ItemsContext);
     const { focusOnMainInput } = useItemNavActions();
-    const [ shouldFocusOnMainInput, setShouldFocusOnMainInput ] = useState(false);
+    const [shouldFocusOnMainInput, setShouldFocusOnMainInput] = useState(false);
 
     const enterFromClipboard = () => {
         if (!navigator.clipboard.readText) {
@@ -34,7 +52,7 @@ export default function MainInputExtendedMenu({
                 color: "none",
                 autoClose: AUTO_CLOSE_DEFAULT,
                 withCloseButton: true,
-            })
+            });
             return;
         }
 
@@ -43,7 +61,7 @@ export default function MainInputExtendedMenu({
             .then((clipboardContent: string) => {
                 processMainInput(clipboardContent);
             })
-            .catch(err => {
+            .catch((err) => {
                 console.error(err);
                 notifications.show({
                     message: "Error retrieving clipboard content",
@@ -52,170 +70,198 @@ export default function MainInputExtendedMenu({
                     withCloseButton: true,
                 });
             });
-    }
-
-    type prependSyntaxOptions = {
-        content: string,
-        hasSpace?: boolean,
-        shouldRefocus?: boolean,
     };
 
-    const prependSyntax = (
-        {
-            content,
-            hasSpace = false,
-            shouldRefocus = false,
-        }: prependSyntaxOptions
-    ) => {
-        setInputVal(curr => hasSpace
-            ? `${content} ${curr}`
-            : `${content}${curr}`
+    type prependSyntaxOptions = {
+        content: string;
+        hasSpace?: boolean;
+        shouldRefocus?: boolean;
+    };
+
+    const prependSyntax = ({
+        content,
+        hasSpace = false,
+        shouldRefocus = false,
+    }: prependSyntaxOptions) => {
+        setInputVal((curr) =>
+            hasSpace ? `${content} ${curr}` : `${content}${curr}`
         );
         if (shouldRefocus) setShouldFocusOnMainInput(true);
-    }
+    };
 
-    return <DropdownMenu.Root>
-        <DropdownMenu.Trigger className="MainInputDropdown__Btn">
-            <div className="MainInputDropdown__BtnLabel"
-                title="Main input extended options"
-                aria-label="Extra functions and options for main input"
-            >
-                <IconChevronDown {...menuIconProps} />
-            </div>
-        </DropdownMenu.Trigger>
-
-        <DropdownMenu.Portal>
-            <DropdownMenu.Content className="MainInputDropdown"
-                align="end"
-                sideOffset={10}
-                // alignOffset={0}
-                onCloseAutoFocus={(e) => {
-                    if (shouldFocusOnMainInput) {
-                        e.preventDefault();
-                        focusOnMainInput(mainInputRef);
-                        setShouldFocusOnMainInput(false);
-                    }
-                }}
-            >
-
-                <DropdownMenu.Label className="MainInputDropdown__GroupLabel">
-                    New item
-                </DropdownMenu.Label>
-
-                <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => prependSyntax({
-                        content: CREATE_TEXT_WITH_TITLE_PREFIX,
-                        hasSpace: true,
-                        shouldRefocus: true,
-                    })}
+    return (
+        <DropdownMenu.Root>
+            <DropdownMenu.Trigger className="MainInputDropdown__Btn">
+                <div
+                    className="MainInputDropdown__BtnLabel"
+                    title="Main input extended options"
+                    aria-label="Extra functions and options for main input"
                 >
-                    <LabelWithIcon
-                        leftSection={<IconLayoutNavbar {...menuIconProps} />}
-                    >
-                        with title
-                    </LabelWithIcon>
-                </DropdownMenu.Item>
+                    <IconChevronDown {...menuIconProps} />
+                </div>
+            </DropdownMenu.Trigger>
 
-                <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => prependSyntax({
-                        content: CREATE_TODO_PREFIX,
-                        hasSpace: true,
-                        shouldRefocus: true,
-                    })}
-                >
-                    <LabelWithIcon 
-                        leftSection={<IconCheckbox {...menuIconProps} />}
-                    >
-                        as todo
-                    </LabelWithIcon>
-                </DropdownMenu.Item>
-
-                <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={enterFromClipboard}
-                >
-                    <LabelWithIcon 
-                        leftSection={<IconClipboardPlus {...menuIconProps} />}
-                    >
-                        from clipboard
-                    </LabelWithIcon>
-                </DropdownMenu.Item>
-
-                <DropdownMenu.Separator className="MainInputDropdown__Separator" />
-
-                <DropdownMenu.Label className="MainInputDropdown__GroupLabel">
-                    Filters
-                </DropdownMenu.Label>
-
-                <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => prependSyntax({ content: FILTER_SYNTAX_NOTES })}
-                >
-                    <LabelWithIcon 
-                        leftSection={<IconFileText {...menuIconProps} />}
-                    >
-                        notes
-                    </LabelWithIcon>
-                </DropdownMenu.Item>
-
-                <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => prependSyntax({ content: FILTER_SYNTAX_LINKS })}
-                >
-                    <LabelWithIcon 
-                        leftSection={<IconWorld {...menuIconProps} />}
-                    >
-                        links
-                    </LabelWithIcon>
-                </DropdownMenu.Item>
-
-                <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => prependSyntax({ content: FILTER_SYNTAX_TODOS })}
-                >
-                    <LabelWithIcon 
-                        leftSection={<IconListCheck {...menuIconProps} />}
-                    >
-                        all todos
-                    </LabelWithIcon>
-                </DropdownMenu.Item>
-
-                <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => prependSyntax({ content: FILTER_SYNTAX_INCOMPLETE_TODOS })}
-                >
-                    <LabelWithIcon 
-                        leftSection={<IconList {...menuIconProps} />}
-                    >
-                        incomplete todos
-                    </LabelWithIcon>
-                </DropdownMenu.Item>
-
-                <DropdownMenu.Separator className="MainInputDropdown__Separator" />
-
-                <DropdownMenu.Label className="MainInputDropdown__GroupLabel">
-                    Misc
-                </DropdownMenu.Label>
-
-                <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => {
-                        setInputVal("");
-                        setShouldFocusOnMainInput(true);
+            <DropdownMenu.Portal>
+                <DropdownMenu.Content
+                    className="MainInputDropdown"
+                    align="end"
+                    sideOffset={10}
+                    // alignOffset={0}
+                    onCloseAutoFocus={(e) => {
+                        if (shouldFocusOnMainInput) {
+                            e.preventDefault();
+                            focusOnMainInput(mainInputRef);
+                            setShouldFocusOnMainInput(false);
+                        }
                     }}
                 >
-                    <LabelWithIcon 
-                        leftSection={<IconX {...menuIconProps} />}
-                    >
-                        clear input
-                    </LabelWithIcon>
-                </DropdownMenu.Item>
+                    <DropdownMenu.Label className="MainInputDropdown__GroupLabel">
+                        New item
+                    </DropdownMenu.Label>
 
-                <DropdownMenu.Item className="MainInputDropdown__Item"
-                    onClick={() => {spotlight.open()}}
-                >
-                    <LabelWithIcon 
-                        leftSection={<IconFocus {...menuIconProps} />}
+                    <DropdownMenu.Item
+                        className="MainInputDropdown__Item"
+                        onClick={() =>
+                            prependSyntax({
+                                content: CREATE_TEXT_WITH_TITLE_PREFIX,
+                                hasSpace: true,
+                                shouldRefocus: true,
+                            })
+                        }
                     >
-                        open spotlight
-                    </LabelWithIcon>
-                </DropdownMenu.Item>
+                        <LabelWithIcon
+                            leftSection={
+                                <IconLayoutNavbar {...menuIconProps} />
+                            }
+                        >
+                            with title
+                        </LabelWithIcon>
+                    </DropdownMenu.Item>
 
-            </DropdownMenu.Content>
-        </DropdownMenu.Portal>
-    </DropdownMenu.Root>
+                    <DropdownMenu.Item
+                        className="MainInputDropdown__Item"
+                        onClick={() =>
+                            prependSyntax({
+                                content: CREATE_TODO_PREFIX,
+                                hasSpace: true,
+                                shouldRefocus: true,
+                            })
+                        }
+                    >
+                        <LabelWithIcon
+                            leftSection={<IconCheckbox {...menuIconProps} />}
+                        >
+                            as todo
+                        </LabelWithIcon>
+                    </DropdownMenu.Item>
+
+                    <DropdownMenu.Item
+                        className="MainInputDropdown__Item"
+                        onClick={enterFromClipboard}
+                    >
+                        <LabelWithIcon
+                            leftSection={
+                                <IconClipboardPlus {...menuIconProps} />
+                            }
+                        >
+                            from clipboard
+                        </LabelWithIcon>
+                    </DropdownMenu.Item>
+
+                    <DropdownMenu.Separator className="MainInputDropdown__Separator" />
+
+                    <DropdownMenu.Label className="MainInputDropdown__GroupLabel">
+                        Filters
+                    </DropdownMenu.Label>
+
+                    <DropdownMenu.Item
+                        className="MainInputDropdown__Item"
+                        onClick={() =>
+                            prependSyntax({ content: FILTER_SYNTAX_NOTES })
+                        }
+                    >
+                        <LabelWithIcon
+                            leftSection={<IconFileText {...menuIconProps} />}
+                        >
+                            notes
+                        </LabelWithIcon>
+                    </DropdownMenu.Item>
+
+                    <DropdownMenu.Item
+                        className="MainInputDropdown__Item"
+                        onClick={() =>
+                            prependSyntax({ content: FILTER_SYNTAX_LINKS })
+                        }
+                    >
+                        <LabelWithIcon
+                            leftSection={<IconWorld {...menuIconProps} />}
+                        >
+                            links
+                        </LabelWithIcon>
+                    </DropdownMenu.Item>
+
+                    <DropdownMenu.Item
+                        className="MainInputDropdown__Item"
+                        onClick={() =>
+                            prependSyntax({ content: FILTER_SYNTAX_TODOS })
+                        }
+                    >
+                        <LabelWithIcon
+                            leftSection={<IconListCheck {...menuIconProps} />}
+                        >
+                            all todos
+                        </LabelWithIcon>
+                    </DropdownMenu.Item>
+
+                    <DropdownMenu.Item
+                        className="MainInputDropdown__Item"
+                        onClick={() =>
+                            prependSyntax({
+                                content: FILTER_SYNTAX_INCOMPLETE_TODOS,
+                            })
+                        }
+                    >
+                        <LabelWithIcon
+                            leftSection={<IconList {...menuIconProps} />}
+                        >
+                            incomplete todos
+                        </LabelWithIcon>
+                    </DropdownMenu.Item>
+
+                    <DropdownMenu.Separator className="MainInputDropdown__Separator" />
+
+                    <DropdownMenu.Label className="MainInputDropdown__GroupLabel">
+                        Misc
+                    </DropdownMenu.Label>
+
+                    <DropdownMenu.Item
+                        className="MainInputDropdown__Item"
+                        onClick={() => {
+                            setInputVal("");
+                            setShouldFocusOnMainInput(true);
+                        }}
+                    >
+                        <LabelWithIcon
+                            leftSection={<IconX {...menuIconProps} />}
+                        >
+                            clear input
+                        </LabelWithIcon>
+                    </DropdownMenu.Item>
+
+                    <DropdownMenu.Item
+                        className="MainInputDropdown__Item"
+                        onClick={() => {
+                            spotlight.open();
+                        }}
+                    >
+                        <LabelWithIcon
+                            leftSection={<IconFocus {...menuIconProps} />}
+                        >
+                            open spotlight
+                        </LabelWithIcon>
+                    </DropdownMenu.Item>
+                </DropdownMenu.Content>
+            </DropdownMenu.Portal>
+        </DropdownMenu.Root>
+    );
 }
