@@ -11,7 +11,7 @@
         "updated": "2024-03-26 01:57:56.780Z"
     },
     {
-       "collectionId": "hwgf8r58topmsju",
+        "collectionId": "hwgf8r58topmsju",
         "collectionName": "itemCollections",
         "created": "2024-03-18 16:38:18.102Z",
         "id": "u6wmh9hkxq1ql7q",
@@ -110,25 +110,25 @@
         "updated": "2024-04-07 10:02:42.909Z"
     },
     {
-      "collectionId": "hwgf8r58topmsju",
-      "collectionName": "itemCollections",
-      "created": "2024-04-27 10:04:40.162Z",
-      "id": "xtncm54bmxtvh1k",
-      "name": "Fixtures",
-      "owner": "jh96fp60mggt4m7",
-      "slug": "fixtures",
-      "sortOrder": 13000,
-      "updated": "2024-04-27 10:04:40.162Z"
+        "collectionId": "hwgf8r58topmsju",
+        "collectionName": "itemCollections",
+        "created": "2024-04-27 10:04:40.162Z",
+        "id": "xtncm54bmxtvh1k",
+        "name": "Fixtures",
+        "owner": "jh96fp60mggt4m7",
+        "slug": "fixtures",
+        "sortOrder": 13000,
+        "updated": "2024-04-27 10:04:40.162Z"
     },
     {
-      "collectionId": "mx2gu6c6yab83nr",
-      "collectionName": "trashBins",
-      "created": "2024-04-24 06:48:32.136Z",
-      "id": "h4vmwg5hklkwwmm",
-      "name": "Precious trash",
-      "owner": "jh96fp60mggt4m7",
-      "slug": "precious-trash",
-      "updated": "2024-04-24 07:57:19.342Z",
-      "isTrashBin": true
+        "collectionId": "mx2gu6c6yab83nr",
+        "collectionName": "trashBins",
+        "created": "2024-04-24 06:48:32.136Z",
+        "id": "h4vmwg5hklkwwmm",
+        "name": "Precious trash",
+        "owner": "jh96fp60mggt4m7",
+        "slug": "precious-trash",
+        "updated": "2024-04-24 07:57:19.342Z",
+        "isTrashBin": true
     }
 ]
