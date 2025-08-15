@@ -1,18 +1,24 @@
-import { describe, test, expect } from 'vitest';
-import { canConvertItemToTodo, canRefetchItem, canToggleItemShouldCopyOnClick, findIndexById, isValidHexColourCode } from "@/utils/itemUtils";
+import { describe, test, expect } from "vitest";
+import {
+    canConvertItemToTodo,
+    canRefetchItem,
+    canToggleItemShouldCopyOnClick,
+    findIndexById,
+    isValidHexColourCode,
+} from "@/utils/itemUtils";
 import items from "@/__tests__/fixtures/items.json";
 
 describe("itemUtils", () => {
     describe("isValidHexColourCode", () => {
         test("A valid hex colour code", () => {
             expect(isValidHexColourCode("#123ABC")).toBe(true);
-        })
+        });
         test("A blank string", () => {
             expect(isValidHexColourCode("")).toBe(false);
-        })
+        });
         test("An invalid hex colour code", () => {
             expect(isValidHexColourCode("#123ABG")).toBe(false);
-        })
+        });
     });
 
     describe("findIndexById", () => {
