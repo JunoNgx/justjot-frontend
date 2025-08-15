@@ -20,7 +20,7 @@
 }
 
 .mantine-ScrollArea-scrollbar {
-    z-index: 100; 
+    z-index: 100;
 }
 
 .mantine-ScrollArea-viewport {
@@ -64,12 +64,12 @@
             color: var(--colBg);
         }
     }
-};
+}
 
 .mantine-Spotlight-actionsList {
     border-top-width: 2px;
     border-top-color: var(--colGreyBg);
-};
+}
 
 .mantine-Notifications-root[position="bottom-center"] {
     @include m.Mobile {

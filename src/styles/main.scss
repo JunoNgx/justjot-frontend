@@ -1,5 +1,4 @@
-
-@use 'sass:color';
+@use "sass:color";
 @use "./variables" as v;
 @use "./mixins" as m;
 @use "./fonts";
@@ -14,7 +13,14 @@ html {
 }
 
 html * {
-    font-family: Space Grotesk, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif, Segoe UI Emoji;
+    font-family:
+        Space Grotesk,
+        -apple-system,
+        BlinkMacSystemFont,
+        Segoe UI,
+        Roboto,
+        sans-serif,
+        Segoe UI Emoji;
     font-variant-ligatures: none;
 }
 
@@ -63,7 +69,7 @@ code {
 
 input,
 textarea,
-input[type=password] {
+input[type="password"] {
     border-style: solid;
 
     [data-mantine-color-scheme="dark"] &,

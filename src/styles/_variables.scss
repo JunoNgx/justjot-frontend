@@ -6,39 +6,39 @@
     --fontSizeSm: 14px;
     --fontSizeXs: 12px;
     --ContainerWidth: 955px;
-    --colCyan: #0098A9;
-    --colMagenta: #FF426C;
-    --colYellow: #D57300;
-    --colViolet: #9B70FF;
+    --colCyan: #0098a9;
+    --colMagenta: #ff426c;
+    --colYellow: #d57300;
+    --colViolet: #9b70ff;
 
     --colPri: #121212;
-    --colBg: #E0E0E0;
+    --colBg: #e0e0e0;
     --colGrey: #444;
-    --colGreyBg: #EEE;
-    --colGreyLt: #AAA;
-    --colCodeBg: #EEE;
-    --colSkeleton: #B2B2B2;
+    --colGreyBg: #eee;
+    --colGreyLt: #aaa;
+    --colCodeBg: #eee;
+    --colSkeleton: #b2b2b2;
 
     // Shared variables
     --colMenuBg: rgba(var(--colBg), 0.1);
 }
 
 :root[data-mantine-color-scheme="light"] {
-    --colViolet: #794AFF;
-    
+    --colViolet: #794aff;
+
     --colPri: #121212;
-    --colBg: #E0E0E0;
+    --colBg: #e0e0e0;
     --colGrey: #444;
-    --colGreyBg: #CDCDCD;
+    --colGreyBg: #cdcdcd;
     --colGreyLt: #444;
-    --colCodeBg: #CDCDCD;
-    --colSkeleton: #B2B2B2;
+    --colCodeBg: #cdcdcd;
+    --colSkeleton: #b2b2b2;
 }
 
 :root[data-mantine-color-scheme="dark"] {
-    --colViolet: #9B70FF;
+    --colViolet: #9b70ff;
 
-    --colPri: #E0E0E0;
+    --colPri: #e0e0e0;
     --colBg: #121212;
     --colGrey: #999;
     --colGreyBg: #444;

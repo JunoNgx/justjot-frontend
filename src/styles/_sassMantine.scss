@@ -1,23 +1,23 @@
-@use 'sass:math';
+@use "sass:math";
 
-$mantine-breakpoint-xs: '36em';
-$mantine-breakpoint-sm: '48em';
-$mantine-breakpoint-md: '62em';
-$mantine-breakpoint-lg: '75em';
-$mantine-breakpoint-xl: '88em';
+$mantine-breakpoint-xs: "36em";
+$mantine-breakpoint-sm: "48em";
+$mantine-breakpoint-md: "62em";
+$mantine-breakpoint-lg: "75em";
+$mantine-breakpoint-xl: "88em";
 
 @function rem($value) {
     @return #{math.div(math.div($value, $value * 0 + 1), 16)}rem;
 }
 
 @mixin light {
-    [data-mantine-color-scheme='light'] & {
+    [data-mantine-color-scheme="light"] & {
         @content;
     }
 }
 
 @mixin dark {
-    [data-mantine-color-scheme='dark'] & {
+    [data-mantine-color-scheme="dark"] & {
         @content;
     }
 }
@@ -25,13 +25,13 @@ $mantine-breakpoint-xl: '88em';
 @mixin hover {
     @media (hover: hover) {
         &:hover {
-        @content;
+            @content;
         }
     }
 
     @media (hover: none) {
         &:active {
-        @content;
+            @content;
         }
     }
 }
@@ -50,13 +50,13 @@ $mantine-breakpoint-xl: '88em';
 
 // Add direction mixins if you need rtl support
 @mixin rtl {
-    [dir='rtl'] & {
+    [dir="rtl"] & {
         @content;
     }
 }
 
 @mixin ltr {
-    [dir='ltr'] & {
+    [dir="ltr"] & {
         @content;
     }
 }
