@@ -153,7 +153,11 @@ export default function MainInput({
         convertToTodo({ item: selectedItem });
     };
 
-    const hotkeyData: [string, (e: KeyboardEvent) => void, HotkeyItemOptions?][] = [
+    const hotkeyData: [
+        string,
+        (e: KeyboardEvent) => void,
+        HotkeyItemOptions?,
+    ][] = [
         ["ArrowUp", selectPrevItem],
         ["ArrowDown", selectNextItem],
         ["Shift+ArrowUp", selectPrevItemFarther, { preventDefault: true }],
