@@ -133,7 +133,9 @@ export default function CollectionsSortModal() {
             {(provided, _snapshot) => {
                 if (_snapshot.isDragging) {
                     // Hackfix: https://github.com/atlassian/react-beautiful-dnd/issues/1881
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     (provided.draggableProps as any).style.left = (provided.draggableProps as any).style.offsetLeft;
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     (provided.draggableProps as any).style.top = (provided.draggableProps as any).style.offsetTop;
                 }
 
