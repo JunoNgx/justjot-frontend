@@ -10,10 +10,10 @@ The application is currently deployed at [justjot.app](https://justjot.app/) via
 
 ## Features
 
-* Keyboard-first design philosophy, heightening productivity performance ceiling for advanced users. Mobile devices and touchscreens are still fully supported for remote access to the data.
-* Collection-based note taking systems, supporting text notes, TODO tasks, and hyperlink bookmarks. Also supports colour marking via note content syntax.
-* Minimalist, simple and distraction-free user interface.
-* Account registration, login, verify, and password resetting.
+- Keyboard-first design philosophy, heightening productivity performance ceiling for advanced users. Mobile devices and touchscreens are still fully supported for remote access to the data.
+- Collection-based note taking systems, supporting text notes, TODO tasks, and hyperlink bookmarks. Also supports colour marking via note content syntax.
+- Minimalist, simple and distraction-free user interface.
+- Account registration, login, verify, and password resetting.
 
 ## Tech stack
 
@@ -57,11 +57,13 @@ Playwright tests are performed separately with each push to the `main` branch as
 This application requires the variable `VITE_BACKEND_URL`, which is an url pointing to an appropriate PocketBase instance.
 
 ## Feature roadmap
-* Export user data to JSON format.
-* Offline operations.
-* Syntax highlighting and advanced keybindings with Monaco Editor.
+
+- Export user data to JSON format.
+- Offline operations.
+- Syntax highlighting and advanced keybindings with Monaco Editor.
 
 ## Contribution
+
 For bug reporting, issues, and design suggestions, please open new issues.
 
 Due to the highly personal nature of this, I am selective about what to be developed and merged into production. Please discuss with me prior to investing non-trivial efforts.

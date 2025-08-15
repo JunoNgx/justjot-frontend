@@ -1,8 +1,8 @@
 // Library imports
 import { ReactNode, RefObject, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
-import { AppShell, ScrollArea } from '@mantine/core';
-import { ModalsProvider } from '@mantine/modals';
+import { AppShell, ScrollArea } from "@mantine/core";
+import { ModalsProvider } from "@mantine/modals";
 import { Notifications } from "@mantine/notifications";
 
 // Contexts
@@ -14,9 +14,9 @@ import ItemsContext from "@/contexts/ItemsContext";
 
 // Library css
 import "@mantine/core/styles.css";
-import '@mantine/notifications/styles.css';
-import '@mantine/spotlight/styles.css';
-import '@mantine/core/styles.layer.css';
+import "@mantine/notifications/styles.css";
+import "@mantine/spotlight/styles.css";
+import "@mantine/core/styles.layer.css";
 
 // Route components
 import Header from "@/components/header/Header";
@@ -42,7 +42,6 @@ import useHandleNavigation from "./hooks/useHandleNavigation";
 import "@/styles/main.scss";
 
 function App() {
-
     useHotkeys(
         [
             ["mod+K", openSpotlight, { preventDefault: true }],
@@ -54,10 +53,7 @@ function App() {
     const scrollAreaRef = useRef<HTMLDivElement>(null);
 
     return (
-        <AppShell
-            header={{ height: 45 }}
-            padding="none"
-        >
+        <AppShell header={{ height: 45 }} padding="none">
             <ContextProvider>
                 <NavigationHandler scrollAreaRef={scrollAreaRef} />
                 <ScrollArea
@@ -68,7 +64,6 @@ function App() {
                     h="100vh"
                     scrollbarSize={10}
                 >
-
                     <Notifications
                         limit={5}
                         position="bottom-center"
@@ -85,46 +80,58 @@ function App() {
                             <Route path="/help" element={<Help />} />
                             <Route path="/:username">
                                 <Route index element={<MainView />} />
-                                <Route path=":collectionSlug" element={<MainView />} />
+                                <Route
+                                    path=":collectionSlug"
+                                    element={<MainView />}
+                                />
                             </Route>
                             <Route path="/profile" element={<Profile />} />
                             <Route path="/login" element={<Login />} />
-                            <Route path="/demo-login" element={<Login isDemoMode={true} />} />
+                            <Route
+                                path="/demo-login"
+                                element={<Login isDemoMode={true} />}
+                            />
                             <Route path="/register" element={<Register />} />
-                            <Route path="/reset" element={
-                                <Request pageType={RequestPageType.PASSWORD_CHANGE} />
-                            } />
-                            <Route path="/verify" element={
-                                <Request pageType={RequestPageType.EMAIL_VERIFY} />
-                            } />
+                            <Route
+                                path="/reset"
+                                element={
+                                    <Request
+                                        pageType={
+                                            RequestPageType.PASSWORD_CHANGE
+                                        }
+                                    />
+                                }
+                            />
+                            <Route
+                                path="/verify"
+                                element={
+                                    <Request
+                                        pageType={RequestPageType.EMAIL_VERIFY}
+                                    />
+                                }
+                            />
                             <Route path="/terms" element={<Terms />} />
                         </Routes>
                         <SpotlightSearch />
-
                     </AppShell.Main>
                 </ScrollArea>
             </ContextProvider>
         </AppShell>
-    )
+    );
 }
 
 export default App;
 
-
 const NavigationHandler = ({
-    scrollAreaRef
+    scrollAreaRef,
 }: {
-    scrollAreaRef: RefObject<HTMLDivElement | null>
+    scrollAreaRef: RefObject<HTMLDivElement | null>;
 }) => {
     useHandleNavigation(scrollAreaRef);
     return <></>;
 };
 
-const ContextProvider = ({
-    children,
-}: {
-    children: ReactNode,
-}) => {
+const ContextProvider = ({ children }: { children: ReactNode }) => {
     return (
         <EventBusContext>
             <UserLocalSettingsContext>
@@ -134,7 +141,7 @@ const ContextProvider = ({
                             <ModalsProvider
                                 modals={{
                                     infoModal: InfoModal,
-                                    itemCreateModal: ItemCreateModal
+                                    itemCreateModal: ItemCreateModal,
                                 }}
                             >
                                 {children}
@@ -146,4 +153,3 @@ const ContextProvider = ({
         </EventBusContext>
     );
 };
-

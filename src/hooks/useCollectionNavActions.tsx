@@ -7,17 +7,16 @@ import useNumericHotkeyUtils from "@/hooks/useNumericHotkeyUtils";
 
 export default function useCollectionNavActions() {
     const { user } = useContext(BackendClientContext);
-    const {
-        collectionList,
-        setCurrCollection,
-        collSelectedIndex,
-    } = useContext(CollectionsContext);
+    const { collectionList, setCurrCollection, collSelectedIndex } =
+        useContext(CollectionsContext);
     const { computeIndexFromNumericKey } = useNumericHotkeyUtils();
 
     const navigate = useNavigate();
 
     const trySwitchToCollectionById = (collectionId: string) => {
-        const targetCollection = collectionList.find(c => c?.id === collectionId);
+        const targetCollection = collectionList.find(
+            (c) => c?.id === collectionId
+        );
         if (!targetCollection) return;
 
         tryNavigateToCollection(targetCollection);
@@ -29,8 +28,9 @@ export default function useCollectionNavActions() {
     const trySwitchToCollectionBySlug = (collectionSlug?: string) => {
         if (!collectionSlug) return;
 
-        const targetCollection =
-            collectionList.find(c => c?.slug === collectionSlug);
+        const targetCollection = collectionList.find(
+            (c) => c?.slug === collectionSlug
+        );
         if (!targetCollection) {
             trySwitchToCollectionByIndex(0);
             return;
@@ -50,13 +50,13 @@ export default function useCollectionNavActions() {
         if (collSelectedIndex === 0) return;
 
         trySwitchToCollectionByIndex(collSelectedIndex - 1);
-    }
+    };
 
     const trySwitchToNextCollection = () => {
         if (collSelectedIndex === collectionList?.length - 1) return;
 
         trySwitchToCollectionByIndex(collSelectedIndex + 1);
-    }
+    };
 
     const trySwitchToCollectionByIndex = (index: number) => {
         if (index < 0) return;
@@ -80,5 +80,5 @@ export default function useCollectionNavActions() {
         trySwitchToNextCollection,
         trySwitchToCollectionByIndex,
         tryNavigateToCollection,
-    }
+    };
 }

@@ -4,18 +4,25 @@ import { ComputedThemeMode, ThemeMode } from "@/types";
 import { useComputedColorScheme, useMantineColorScheme } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 
-import { justJotTheme } from '@/theme.ts';
+import { justJotTheme } from "@/theme.ts";
 
 type UserLocalSettingsContextType = {
-    themeMode: ThemeMode,
-    setThemeMode: React.Dispatch<React.SetStateAction<ThemeMode>>,
-    isFaviconEnabled: boolean,
-    setIsFaviconEnabled: React.Dispatch<React.SetStateAction<boolean>>,
-}
+    themeMode: ThemeMode;
+    setThemeMode: React.Dispatch<React.SetStateAction<ThemeMode>>;
+    isFaviconEnabled: boolean;
+    setIsFaviconEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-export const UserLocalSettingsContext = createContext<UserLocalSettingsContextType>({} as UserLocalSettingsContextType);
+export const UserLocalSettingsContext =
+    createContext<UserLocalSettingsContextType>(
+        {} as UserLocalSettingsContextType
+    );
 
-export default function UserLocalSettingsContextProvider({children}: {children: ReactNode}) {
+export default function UserLocalSettingsContextProvider({
+    children,
+}: {
+    children: ReactNode;
+}) {
     const [themeMode, setThemeMode] = useLocalStorage<ThemeMode>({
         key: "color-scheme",
         defaultValue: ThemeMode.AUTO,
@@ -25,21 +32,21 @@ export default function UserLocalSettingsContextProvider({children}: {children: 
         defaultValue: true,
     });
 
-    const {
-        setColorScheme: setMantineColorScheme,
-    } = useMantineColorScheme();
+    const { setColorScheme: setMantineColorScheme } = useMantineColorScheme();
 
-    const isComputedLightMode = useComputedColorScheme(
-        ComputedThemeMode.LIGHT, { getInitialValueInEffect: true }
-    ) === ComputedThemeMode.LIGHT;
+    const isComputedLightMode =
+        useComputedColorScheme(ComputedThemeMode.LIGHT, {
+            getInitialValueInEffect: true,
+        }) === ComputedThemeMode.LIGHT;
 
     useEffect(() => {
         setMantineColorScheme(themeMode);
     }, [themeMode]);
 
     useEffect(() => {
-        const themeColourMeta = document
-            .querySelector("meta[name='theme-color']") as HTMLMetaElement;
+        const themeColourMeta = document.querySelector(
+            "meta[name='theme-color']"
+        ) as HTMLMetaElement;
 
         if (!themeColourMeta) return;
 
@@ -49,12 +56,16 @@ export default function UserLocalSettingsContextProvider({children}: {children: 
         themeColourMeta.setAttribute("content", themeColorValue);
     }, [isComputedLightMode]);
 
-    return <UserLocalSettingsContext value={{
-        themeMode,
-        setThemeMode,
-        isFaviconEnabled,
-        setIsFaviconEnabled,
-    }}>
-        {children}
-    </UserLocalSettingsContext>
+    return (
+        <UserLocalSettingsContext
+            value={{
+                themeMode,
+                setThemeMode,
+                isFaviconEnabled,
+                setIsFaviconEnabled,
+            }}
+        >
+            {children}
+        </UserLocalSettingsContext>
+    );
 }

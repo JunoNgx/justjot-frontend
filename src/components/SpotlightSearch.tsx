@@ -1,28 +1,52 @@
-import { CollectionsContext } from '@/contexts/CollectionsContext';
-import { UserLocalSettingsContext } from '@/contexts/UserLocalSettingsContext';
-import useCollectionNavActions from '@/hooks/useCollectionNavActions';
-import useIconProps from '@/hooks/useIconProps';
-import { ThemeMode } from '@/types';
-import { Spotlight, SpotlightActionData, SpotlightActionGroupData } from '@mantine/spotlight';
-import { IconEdit, IconExclamationCircle, IconHelp, IconHome2, IconLogin2, IconLogout, IconMailCheck, IconMoon, IconPassword, IconSettingsCog, IconSortAscendingShapes, IconStack2, IconStackPush, IconSun, IconTestPipe, IconTrash, IconTrashX, IconUserCog, IconUserPlus } from '@tabler/icons-react';
-import { useContext } from 'react';
-import useCollectionDeletion from '@/hooks/useCollectionDeletion';
-import useCollectionActions from '@/hooks/useCollectionActions';
-import useNavigateRoutes from '@/hooks/useNavigateRoutes';
-import { BackendClientContext } from '@/contexts/BackendClientContext';
+import { CollectionsContext } from "@/contexts/CollectionsContext";
+import { UserLocalSettingsContext } from "@/contexts/UserLocalSettingsContext";
+import useCollectionNavActions from "@/hooks/useCollectionNavActions";
+import useIconProps from "@/hooks/useIconProps";
+import { ThemeMode } from "@/types";
+import {
+    Spotlight,
+    SpotlightActionData,
+    SpotlightActionGroupData,
+} from "@mantine/spotlight";
+import {
+    IconEdit,
+    IconExclamationCircle,
+    IconHelp,
+    IconHome2,
+    IconLogin2,
+    IconLogout,
+    IconMailCheck,
+    IconMoon,
+    IconPassword,
+    IconSettingsCog,
+    IconSortAscendingShapes,
+    IconStack2,
+    IconStackPush,
+    IconSun,
+    IconTestPipe,
+    IconTrash,
+    IconTrashX,
+    IconUserCog,
+    IconUserPlus,
+} from "@tabler/icons-react";
+import { useContext } from "react";
+import useCollectionDeletion from "@/hooks/useCollectionDeletion";
+import useCollectionActions from "@/hooks/useCollectionActions";
+import useNavigateRoutes from "@/hooks/useNavigateRoutes";
+import { BackendClientContext } from "@/contexts/BackendClientContext";
 
 export default function SpotlightSearch() {
-
     const { isLoggedIn } = useContext(BackendClientContext);
     const { setThemeMode } = useContext(UserLocalSettingsContext);
-    const { collectionList, isTrashCollection } = useContext(CollectionsContext);
+    const { collectionList, isTrashCollection } =
+        useContext(CollectionsContext);
     const { spotlightIconProps } = useIconProps();
     const { trySwitchToCollectionById } = useCollectionNavActions();
     const confirmCollectionDeletion = useCollectionDeletion();
     const {
         openCreateCollectionModal,
         openUpdateCollectionModal,
-        openSortCollectionModal, 
+        openSortCollectionModal,
     } = useCollectionActions();
     const {
         navigateToHelp,
@@ -52,21 +76,27 @@ export default function SpotlightSearch() {
                 label: "Theme mode: System",
                 description: ".theme-system",
                 leftSection: <IconSettingsCog {...spotlightIconProps} />,
-                onClick: () => {setThemeMode(ThemeMode.AUTO)},
+                onClick: () => {
+                    setThemeMode(ThemeMode.AUTO);
+                },
             },
             {
                 id: "theme-mode-light",
                 label: "Theme mode: Light",
                 description: ".theme-light",
                 leftSection: <IconSun {...spotlightIconProps} />,
-                onClick: () => {setThemeMode(ThemeMode.LIGHT)}
+                onClick: () => {
+                    setThemeMode(ThemeMode.LIGHT);
+                },
             },
             {
                 id: "theme-mode-dark",
                 label: "Theme mode: Dark",
                 description: ".theme-dark",
                 leftSection: <IconMoon {...spotlightIconProps} />,
-                onClick: () => {setThemeMode(ThemeMode.DARK)}
+                onClick: () => {
+                    setThemeMode(ThemeMode.DARK);
+                },
             },
             {
                 id: "terms",
@@ -75,7 +105,7 @@ export default function SpotlightSearch() {
                 leftSection: <IconExclamationCircle {...spotlightIconProps} />,
                 onClick: navigateToTerms,
             },
-        ]
+        ],
     };
 
     const miscLoggedInActions = [
@@ -147,8 +177,8 @@ export default function SpotlightSearch() {
                 leftSection: <IconMailCheck {...spotlightIconProps} />,
                 onClick: navigateToVerify,
             },
-        ]
-    }; 
+        ],
+    };
 
     const collectionOperationActionGroup: SpotlightActionGroupData = {
         group: "Collection actions",
@@ -171,67 +201,78 @@ export default function SpotlightSearch() {
                 id: "coll-op-sort",
                 label: "Sort collections",
                 description: ".sort-coll",
-                leftSection: <IconSortAscendingShapes {...spotlightIconProps} />,
+                leftSection: (
+                    <IconSortAscendingShapes {...spotlightIconProps} />
+                ),
                 onClick: openSortCollectionModal,
             },
-        ]
+        ],
     };
     if (!isTrashCollection) {
         collectionOperationActionGroup.actions.push({
             id: "coll-op-delete",
             label: "Delete current collection",
             description: ".delete-coll",
-            leftSection: <IconTrashX style={{color: "var(--colMagenta)"}} {...spotlightIconProps} />,
+            leftSection: (
+                <IconTrashX
+                    style={{ color: "var(--colMagenta)" }}
+                    {...spotlightIconProps}
+                />
+            ),
             onClick: confirmCollectionDeletion,
         });
     }
 
     const buildCollectionNavActions = (): SpotlightActionData[] => {
-        return collectionList.map(collection => ({
+        return collectionList.map((collection) => ({
             id: `collection-${collection?.id}`,
             label: `${collection?.name}`,
             description: `/${collection?.slug}`,
-            leftSection: collection?.isTrashBin
-                ? <IconTrash style={{color: "var(--colViolet)"}} {...spotlightIconProps} />
-                : <IconStack2 {...spotlightIconProps} />
-            ,
+            leftSection: collection?.isTrashBin ? (
+                <IconTrash
+                    style={{ color: "var(--colViolet)" }}
+                    {...spotlightIconProps}
+                />
+            ) : (
+                <IconStack2 {...spotlightIconProps} />
+            ),
             onClick: () => {
                 if (!collection) return;
                 trySwitchToCollectionById(collection.id);
             },
         }));
-    }
+    };
 
     const collectionsNavActionGroup: SpotlightActionGroupData = {
         group: "Collections",
         actions: buildCollectionNavActions(),
     };
-        
-    const allActionList: (SpotlightActionGroupData | SpotlightActionData)[] = [];
+
+    const allActionList: (SpotlightActionGroupData | SpotlightActionData)[] =
+        [];
 
     if (isLoggedIn) {
         miscActionGroup.actions.push(...miscLoggedInActions);
         allActionList.push(
             collectionsNavActionGroup,
             collectionOperationActionGroup,
-            miscActionGroup,
+            miscActionGroup
         );
     } else {
-        allActionList.push(
-            publicNavigationActionGroup,
-            miscActionGroup,
-        );
+        allActionList.push(publicNavigationActionGroup, miscActionGroup);
     }
 
-    return <Spotlight
-        /**
-         * Disable component-scope hotkey, to allow App to handle this and
-         * not ignore `<input>` and `<textarea>`.
-         */
-        shortcut={[]}
-        actions={allActionList}
-        nothingFound="No action found."
-        highlightQuery
-        scrollable
-    />
+    return (
+        <Spotlight
+            /**
+             * Disable component-scope hotkey, to allow App to handle this and
+             * not ignore `<input>` and `<textarea>`.
+             */
+            shortcut={[]}
+            actions={allActionList}
+            nothingFound="No action found."
+            highlightQuery
+            scrollable
+        />
+    );
 }

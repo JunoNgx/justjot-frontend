@@ -11,7 +11,6 @@ import useCollectionNavActions from "./useCollectionNavActions";
 import useManageListState from "@/libs/useManageListState";
 
 export default function useCollectionDeletion() {
-    
     const {
         initCollections,
         setInitCollections,
@@ -56,7 +55,7 @@ export default function useCollectionDeletion() {
         notifications.show({
             message: "Collection has been deleted successfully.",
             color: "none",
-            autoClose: AUTO_CLOSE_DEFAULT
+            autoClose: AUTO_CLOSE_DEFAULT,
         });
     };
 
@@ -82,16 +81,21 @@ export default function useCollectionDeletion() {
 
     const canDelete = initCollections.length > 1;
     const confirmCollectionDeletion = () => {
-
         if (currCollection?.isTrashBin) {
             modals.openContextModal({
                 modal: "infoModal",
                 title: "Cannot delete",
                 centered: true,
                 innerProps: {
-                    leftSection: <IconExclamationCircle color="orange" size={64} stroke={justJotTheme.other.iconStrokeWidth}/>,
-                    modalBody: `Your only Trash Bin collection "${currCollection.name}" cannot be deleted.`
-                }
+                    leftSection: (
+                        <IconExclamationCircle
+                            color="orange"
+                            size={64}
+                            stroke={justJotTheme.other.iconStrokeWidth}
+                        />
+                    ),
+                    modalBody: `Your only Trash Bin collection "${currCollection.name}" cannot be deleted.`,
+                },
             });
             return;
         }
@@ -100,21 +104,29 @@ export default function useCollectionDeletion() {
             modals.openConfirmModal({
                 title: "Confirm collection deletion",
                 centered: true,
-                children: (<>
-                    <p>Are you sure you want to delete the collection "{currCollection!.name}"?</p>
-                    <p>This is irreversible and will also cascadingly delete all items stored in this collection. </p>
-                    <p>Please make sure that you would like to continue.</p>
-                </>),
+                children: (
+                    <>
+                        <p>
+                            Are you sure you want to delete the collection "
+                            {currCollection!.name}"?
+                        </p>
+                        <p>
+                            This is irreversible and will also cascadingly
+                            delete all items stored in this collection.{" "}
+                        </p>
+                        <p>Please make sure that you would like to continue.</p>
+                    </>
+                ),
                 labels: {
                     confirm: "Delete collection",
-                    cancel: "Cancel"
+                    cancel: "Cancel",
                 },
                 confirmProps: {
                     variant: "filled",
                     color: "red",
-                    loading: isLoading
+                    loading: isLoading,
                 },
-                onConfirm: proceedWithDeletion
+                onConfirm: proceedWithDeletion,
             });
             return;
         }
@@ -124,9 +136,16 @@ export default function useCollectionDeletion() {
             title: "Minimum data required",
             centered: true,
             innerProps: {
-                leftSection: <IconExclamationCircle color="orange" size={64} stroke={justJotTheme.other.infoModalIconStrokeWidth}/>,
-                modalBody: "You have only one collection at the movement. You cannot delete your last collection."
-            }
+                leftSection: (
+                    <IconExclamationCircle
+                        color="orange"
+                        size={64}
+                        stroke={justJotTheme.other.infoModalIconStrokeWidth}
+                    />
+                ),
+                modalBody:
+                    "You have only one collection at the movement. You cannot delete your last collection.",
+            },
         });
     };
 

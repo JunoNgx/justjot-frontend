@@ -7,13 +7,12 @@ import HeaderUser from "./HeaderUser";
 export default function HeaderLeftSide() {
     const { isLoggedIn } = useContext(BackendClientContext);
 
-    return <div className="Header__RightSide">
-        <HeaderThemeModeGroup/>
-        <div className="Header__UserCorner">
-            {isLoggedIn
-                ? <HeaderUser/>
-                : <HeaderLoginRegisterBox/>
-            }
+    return (
+        <div className="Header__RightSide">
+            <HeaderThemeModeGroup />
+            <div className="Header__UserCorner">
+                {isLoggedIn ? <HeaderUser /> : <HeaderLoginRegisterBox />}
+            </div>
         </div>
-    </div>
+    );
 }

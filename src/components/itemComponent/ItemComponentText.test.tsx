@@ -1,24 +1,24 @@
-import { describe, expect, test, afterEach } from 'vitest';
+import { describe, expect, test, afterEach } from "vitest";
 import items from "@/__tests__/fixtures/items.json";
 import { render, cleanup, screen } from "@testing-library/react";
-import { justJotCssVarsResolver, justJotTheme } from '@/theme.ts';
-import { MantineProvider } from '@mantine/core';
-import ItemComponentText from '@/components/itemComponent/ItemComponentText';
-import { Item } from '@/types';
-import EventBusContextProvider from '@/contexts/EventBusContext';
+import { justJotCssVarsResolver, justJotTheme } from "@/theme.ts";
+import { MantineProvider } from "@mantine/core";
+import ItemComponentText from "@/components/itemComponent/ItemComponentText";
+import { Item } from "@/types";
+import EventBusContextProvider from "@/contexts/EventBusContext";
 
 describe("ItemComponentText", () => {
-
-    const renderItemComponentText = (item: Item) => render(
-        <MantineProvider
-            theme={justJotTheme}
-            cssVariablesResolver={justJotCssVarsResolver}
-        >
-            <EventBusContextProvider>
-                <ItemComponentText item={item} />
-            </EventBusContextProvider>
-        </MantineProvider>
-    );
+    const renderItemComponentText = (item: Item) =>
+        render(
+            <MantineProvider
+                theme={justJotTheme}
+                cssVariablesResolver={justJotCssVarsResolver}
+            >
+                <EventBusContextProvider>
+                    <ItemComponentText item={item} />
+                </EventBusContextProvider>
+            </MantineProvider>
+        );
 
     afterEach(() => {
         cleanup();
@@ -60,7 +60,9 @@ describe("ItemComponentText", () => {
         const priTextEl = screen.queryByTestId("item-component-primary-text");
         const secTextEl = screen.queryByTestId("item-component-secondary-text");
 
-        expect(priTextEl?.textContent).toBe("Internet for people, not profit — Mozilla (US)");
+        expect(priTextEl?.textContent).toBe(
+            "Internet for people, not profit — Mozilla (US)"
+        );
         expect(secTextEl?.textContent).toBe("https://www.mozilla.org/en-US/");
     });
 
@@ -70,8 +72,9 @@ describe("ItemComponentText", () => {
         const priTextEl = screen.queryByTestId("item-component-primary-text");
         const secTextEl = screen.queryByTestId("item-component-secondary-text");
 
-        expect(priTextEl?.textContent).toBe("A todo item that has been marked as completed");
+        expect(priTextEl?.textContent).toBe(
+            "A todo item that has been marked as completed"
+        );
         expect(secTextEl).toBe(null);
     });
-
 });

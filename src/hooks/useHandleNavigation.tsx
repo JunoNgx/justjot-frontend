@@ -9,7 +9,6 @@ import useNavigateRoutes from "./useNavigateRoutes";
 export default function useHandleNavigation(
     scrollAreaRef: RefObject<HTMLDivElement | null>
 ) {
-
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -26,42 +25,40 @@ export default function useHandleNavigation(
             if (!isLoggedIn) {
                 navigate(`/login`, { replace: true });
             }
-        }
+        };
 
         // Reset scrolling position after each route navigation
         scrollAreaRef.current?.scrollTo(0, 0);
 
         switch (pathname) {
-        case ("/"):
-        case ("/login"):
-        case ("/demo-login"):
-        case ("/register"):
-            if (isLoggedIn) {
-                navigateToMainView();
-            }
-            return;
+            case "/":
+            case "/login":
+            case "/demo-login":
+            case "/register":
+                if (isLoggedIn) {
+                    navigateToMainView();
+                }
+                return;
 
-        case ("/profile"):
-            redirectIfNotLoggedIn();
-            setCurrCollection(undefined);
-            return;
-        
-        case ("/terms"):
-        case ("/help"):
-            setCurrCollection(undefined);
-            return;
-
-        case ("/request"):
-        case ("/verify"):
-            return;
-
-        default:
-            // Main view
-            if (pathname.startsWith(`/${username}`)) {
+            case "/profile":
                 redirectIfNotLoggedIn();
-            }
+                setCurrCollection(undefined);
+                return;
 
+            case "/terms":
+            case "/help":
+                setCurrCollection(undefined);
+                return;
+
+            case "/request":
+            case "/verify":
+                return;
+
+            default:
+                // Main view
+                if (pathname.startsWith(`/${username}`)) {
+                    redirectIfNotLoggedIn();
+                }
         }
-
     }, [location]);
-};
+}

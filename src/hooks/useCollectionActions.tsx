@@ -7,7 +7,7 @@ export default function useCollectionActions() {
         modals.open({
             centered: true,
             title: "Create New Collection",
-            children: (<CollectionCreateUpdateModal isEditMode={false}/>)
+            children: <CollectionCreateUpdateModal isEditMode={false} />,
         });
     };
 
@@ -15,15 +15,15 @@ export default function useCollectionActions() {
         modals.open({
             centered: true,
             title: "Edit Collection",
-            children: (<CollectionCreateUpdateModal isEditMode={true}/>)
+            children: <CollectionCreateUpdateModal isEditMode={true} />,
         });
     };
 
     const openSortCollectionModal = () => {
-         modals.open({
+        modals.open({
             centered: true,
             title: "Sort Collections",
-            children: <CollectionsSortModal/>
+            children: <CollectionsSortModal />,
         });
     };
 

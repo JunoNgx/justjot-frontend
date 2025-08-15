@@ -1,12 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import { BrowserRouter } from 'react-router-dom'
-import { MantineProvider } from '@mantine/core'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
+import { BrowserRouter } from "react-router-dom";
+import { MantineProvider } from "@mantine/core";
 
-import { justJotCssVarsResolver, justJotTheme } from './theme.ts';
+import { justJotCssVarsResolver, justJotTheme } from "./theme.ts";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
         <MantineProvider
             theme={justJotTheme}
@@ -17,4 +17,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             </React.StrictMode>
         </MantineProvider>
     </BrowserRouter>
-)
+);

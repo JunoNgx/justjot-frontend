@@ -1,6 +1,6 @@
 import { ForwardedRef, forwardRef, useContext } from "react";
 import { Item, ItemType } from "@/types";
-import * as ContextMenu from '@radix-ui/react-context-menu';
+import * as ContextMenu from "@radix-ui/react-context-menu";
 import ItemComponentCreatedDate from "@/components/itemComponent/ItemComponentCreatedDate";
 import ItemComponentIcon from "@/components/itemComponent/ItemComponentIcon";
 import useItemActions from "@/hooks/useItemActions";
@@ -9,72 +9,73 @@ import useIconProps from "@/hooks/useIconProps";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import ItemComponentText from "./ItemComponentText";
 
-import "./ItemComponent.scss"
+import "./ItemComponent.scss";
 import ItemComponentContextMenu from "./ItemComponentContextMenu";
 
 type ItemComponentParams = {
-    item: Item,
-    index: number,
-}
+    item: Item;
+    index: number;
+};
 
-export default function ItemComponent(
-    { item, index }: ItemComponentParams
-) {
+export default function ItemComponent({ item, index }: ItemComponentParams) {
     const { itemIconProps } = useIconProps();
 
-    const itemComponentInner = <ItemComponentInner
-        item={item}
-        index={index}
-    >
-        <div className="Item__LeftSide">
-            <div className="Item__IconWrapper">
-                <ItemComponentIcon item={item} />
-            </div>
-            <ItemComponentText item={item} />
-        </div>
-
-        <div className="Item__RightSide">
-            {item.shouldCopyOnClick &&
-                <div className="Item__ShouldCopyIndicator"
-                    title="This item has been set to copy on click"
-                >
-                    <IconClipboardCopy className="Item__ShouldCopyIcon"
-                        {...itemIconProps}
-                    />
+    const itemComponentInner = (
+        <ItemComponentInner item={item} index={index}>
+            <div className="Item__LeftSide">
+                <div className="Item__IconWrapper">
+                    <ItemComponentIcon item={item} />
                 </div>
-            }
-            <ItemComponentCreatedDate className="Item__Datetime"
-                createdDatetime={item.created}
-            />
-        </div>
-    </ItemComponentInner>
+                <ItemComponentText item={item} />
+            </div>
 
-    return <ContextMenu.Root>
-        <ContextMenu.Trigger asChild>
-            {itemComponentInner}
-        </ContextMenu.Trigger>
+            <div className="Item__RightSide">
+                {item.shouldCopyOnClick && (
+                    <div
+                        className="Item__ShouldCopyIndicator"
+                        title="This item has been set to copy on click"
+                    >
+                        <IconClipboardCopy
+                            className="Item__ShouldCopyIcon"
+                            {...itemIconProps}
+                        />
+                    </div>
+                )}
+                <ItemComponentCreatedDate
+                    className="Item__Datetime"
+                    createdDatetime={item.created}
+                />
+            </div>
+        </ItemComponentInner>
+    );
 
-        <ItemComponentContextMenu item={item} />
-    </ContextMenu.Root>
+    return (
+        <ContextMenu.Root>
+            <ContextMenu.Trigger asChild>
+                {itemComponentInner}
+            </ContextMenu.Trigger>
+
+            <ItemComponentContextMenu item={item} />
+        </ContextMenu.Root>
+    );
 }
 
 type ItemComponentInnerProps = {
-    item: Item,
-    index: number,
-    children: React.ReactNode,
-}
+    item: Item;
+    index: number;
+    children: React.ReactNode;
+};
 
 // TODO: forwardRef has been deprecated by React 19, to remove this once Radix official guide is udpated
 // ForwardRef to receive props from Radix Composition with `asChild`
-const ItemComponentInner = forwardRef<HTMLDivElement | HTMLAnchorElement, ItemComponentInnerProps>(
-    ({ item, index, children, ...props }, forwardedRef) => {
-
+const ItemComponentInner = forwardRef<
+    HTMLDivElement | HTMLAnchorElement,
+    ItemComponentInnerProps
+>(({ item, index, children, ...props }, forwardedRef) => {
     const { selectedIndex, setSelectedIndex } = useContext(ItemsContext);
     const { computeItemPrimaryAction, executeItemAction } = useItemActions();
 
-    const handlePrimaryAction = (
-        _e: React.MouseEvent | React.TouchEvent
-    ) => {
+    const handlePrimaryAction = (_e: React.MouseEvent | React.TouchEvent) => {
         const action = computeItemPrimaryAction(item);
         executeItemAction(item, action, true);
     };
@@ -87,11 +88,15 @@ const ItemComponentInner = forwardRef<HTMLDivElement | HTMLAnchorElement, ItemCo
         className: computeClassname(item, isSelected),
         "data-index": index,
         "data-id": item.id,
-        "role": isLink ? "link" : "button",
+        role: isLink ? "link" : "button",
         "aria-current": isSelected,
         onClick: handlePrimaryAction,
-        onMouseEnter: () => { setSelectedIndex(index) },
-        onMouseLeave: () => { setSelectedIndex(-1) }
+        onMouseEnter: () => {
+            setSelectedIndex(index);
+        },
+        onMouseLeave: () => {
+            setSelectedIndex(-1);
+        },
     };
 
     const anchorProps = {
@@ -102,47 +107,42 @@ const ItemComponentInner = forwardRef<HTMLDivElement | HTMLAnchorElement, ItemCo
     };
 
     const finalProps = shouldRenderAsAnchor
-        ? {...props, ...standardProps, ...anchorProps}
-        : {...props, ...standardProps};
+        ? { ...props, ...standardProps, ...anchorProps }
+        : { ...props, ...standardProps };
 
     /**
      * Render type LINK as `<a>` to improve semantic
      */
-    return shouldRenderAsAnchor
-        ? <a
+    return shouldRenderAsAnchor ? (
+        <a
             {...finalProps}
             ref={forwardedRef as ForwardedRef<HTMLAnchorElement>}
         >
             {children}
         </a>
-
-        : <div
-            {...finalProps}
-            ref={forwardedRef as ForwardedRef<HTMLDivElement>}
-        >
+    ) : (
+        <div {...finalProps} ref={forwardedRef as ForwardedRef<HTMLDivElement>}>
             {children}
         </div>
+    );
 });
 
 const computeClassname = (item: Item, isSelected: boolean) => {
-    const isSelectedModifier = isSelected
-        ? "Item--IsSelected "
-        : " ";
-    const noPrimaryTextModifier = item.title
-        ? " "
-        : "Item--HasNoPrimaryText ";
+    const isSelectedModifier = isSelected ? "Item--IsSelected " : " ";
+    const noPrimaryTextModifier = item.title ? " " : "Item--HasNoPrimaryText ";
     const noSecondaryTextModifier = item.content
         ? " "
         : "Item--HasNoSecondaryText ";
 
     const isTodoItem = item.type === ItemType.TODO;
-    const isTodoItemDoneModifier = isTodoItem && item.isTodoDone
-        ? "Item--IsTodoDone "
-        : " ";
+    const isTodoItemDoneModifier =
+        isTodoItem && item.isTodoDone ? "Item--IsTodoDone " : " ";
 
-    return "Item "
+    return (
+        "Item "
         + isSelectedModifier
         + noPrimaryTextModifier
         + noSecondaryTextModifier
-        + isTodoItemDoneModifier;
-}
+        + isTodoItemDoneModifier
+    );
+};

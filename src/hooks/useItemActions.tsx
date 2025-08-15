@@ -1,7 +1,14 @@
 import { BackendClientContext } from "@/contexts/BackendClientContext";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import useManageListState from "@/libs/useManageListState";
-import { CreateItemOptions, Item, ItemAction, ItemCollection, ItemType, UpdateItemTitleAndContentOptions } from "@/types";
+import {
+    CreateItemOptions,
+    Item,
+    ItemAction,
+    ItemCollection,
+    ItemType,
+    UpdateItemTitleAndContentOptions,
+} from "@/types";
 import { DateTime } from "luxon";
 import { useContext } from "react";
 import useItemApiCalls from "./useItemApiCalls";
@@ -17,12 +24,12 @@ import { CollectionsContext } from "@/contexts/CollectionsContext";
 import { EventBusContext } from "@/contexts/EventBusContext";
 
 export default function useItemActions() {
-
     const { emitter } = useContext(EventBusContext);
     const { user } = useContext(BackendClientContext);
     const { initCollections } = useContext(CollectionsContext);
     const { currCollection } = useContext(CollectionsContext);
-    const { items, setItems, setUpdateQueue, fetchItems } = useContext(ItemsContext);
+    const { items, setItems, setUpdateQueue, fetchItems } =
+        useContext(ItemsContext);
     const {
         createItem,
         deleteItem,
@@ -37,9 +44,13 @@ export default function useItemActions() {
     const itemsHandlers = useManageListState(setItems);
     const updateQueueHandlers = useManageListState(setUpdateQueue);
 
-    const generatePlaceholderItem = (
-        { title, content }: { title?: string, content?: string }
-    ): Item => {
+    const generatePlaceholderItem = ({
+        title,
+        content,
+    }: {
+        title?: string;
+        content?: string;
+    }): Item => {
         const currDateTime = DateTime.now().toFormat("yyyy-MM-dd HH:mm:ss");
 
         return {
@@ -68,11 +79,13 @@ export default function useItemActions() {
         });
     };
 
-    const createItemWithOptimisticUpdate = (
-        { title, content }: CreateItemOptions
-    ) => {
+    const createItemWithOptimisticUpdate = ({
+        title,
+        content,
+    }: CreateItemOptions) => {
         const newTempItem = generatePlaceholderItem({
-            title, content
+            title,
+            content,
         });
         itemsHandlers.prepend(newTempItem);
 
@@ -83,7 +96,7 @@ export default function useItemActions() {
                 updateQueueHandlers.append({
                     tempId: newTempItem.id,
                     item: record,
-                })
+                });
             },
             errorCallback: (err: ClientResponseError) => {
                 console.error(err);
@@ -97,15 +110,13 @@ export default function useItemActions() {
         });
     };
 
-    const deleteItemWithOptimisticUpdate = (
-        { item }: { item: Item }
-    ) => {
+    const deleteItemWithOptimisticUpdate = ({ item }: { item: Item }) => {
         if (item.isPending) {
             displayNotifItemNotReady();
             return;
         }
 
-        const index = findIndexById(item.id, items)
+        const index = findIndexById(item.id, items);
         if (index === -1) return;
         itemsHandlers.remove(index);
 
@@ -130,9 +141,11 @@ export default function useItemActions() {
         });
     };
 
-    const toggleItemShouldCopyOnClickWithOptimisticUpdate = (
-        { item }: { item: Item }
-    ) => {
+    const toggleItemShouldCopyOnClickWithOptimisticUpdate = ({
+        item,
+    }: {
+        item: Item;
+    }) => {
         if (item.isPending) {
             displayNotifItemNotReady();
             return;
@@ -140,12 +153,12 @@ export default function useItemActions() {
 
         const newShouldCopyOnClickVal = !item.shouldCopyOnClick;
 
-        const index = findIndexById(item.id, items)
+        const index = findIndexById(item.id, items);
         if (index === -1) return;
-        itemsHandlers.replace(
-            index,
-            {...item, shouldCopyOnClick: newShouldCopyOnClickVal}
-        );
+        itemsHandlers.replace(index, {
+            ...item,
+            shouldCopyOnClick: newShouldCopyOnClickVal,
+        });
 
         toggleItemShouldCopyOnClick({
             item,
@@ -160,12 +173,14 @@ export default function useItemActions() {
                     withCloseButton: true,
                 });
             },
-        })
+        });
     };
 
-    const toggleItemIsTodoDoneWithOptimisticUpdate = (
-        { item }: { item: Item }
-    ) => {
+    const toggleItemIsTodoDoneWithOptimisticUpdate = ({
+        item,
+    }: {
+        item: Item;
+    }) => {
         if (item.isPending) {
             displayNotifItemNotReady();
             return;
@@ -173,12 +188,9 @@ export default function useItemActions() {
 
         const newIsTodoDoneVal = !item.isTodoDone;
 
-        const index = findIndexById(item.id, items)
+        const index = findIndexById(item.id, items);
         if (index === -1) return;
-        itemsHandlers.replace(
-            index,
-            {...item, isTodoDone: newIsTodoDoneVal}
-        );
+        itemsHandlers.replace(index, { ...item, isTodoDone: newIsTodoDoneVal });
 
         toggleItemIsTodoDone({
             item,
@@ -193,20 +205,17 @@ export default function useItemActions() {
                     withCloseButton: true,
                 });
             },
-        })
+        });
     };
 
     const clipboard = useClipboard();
-    const copyItemContent = async (
-        { item }:
-        { item: Item }
-    ) => {
+    const copyItemContent = async ({ item }: { item: Item }) => {
         item.type === ItemType.TODO
             ? clipboard.copy(item.title)
             : clipboard.copy(item.content);
 
         emitter.emit("copyItemContent", item.id);
-    }
+    };
 
     const openUpdateItemModal = (item: Item) => {
         if (item.isPending) {
@@ -218,24 +227,22 @@ export default function useItemActions() {
             title: "Edit item",
             centered: true,
             size: "50rem",
-            children: (<ItemUpdateModal
-                item={item}
-            />),
+            children: <ItemUpdateModal item={item} />,
         });
     };
 
-    const updateItemTitleAndContentWithOptimisticUpdate = (
-        { itemId, title, content,
-            successfulCallback, errorCallback, setLoadingState
-        }: UpdateItemTitleAndContentOptions
-    ) => {
+    const updateItemTitleAndContentWithOptimisticUpdate = ({
+        itemId,
+        title,
+        content,
+        successfulCallback,
+        errorCallback,
+        setLoadingState,
+    }: UpdateItemTitleAndContentOptions) => {
         const index = findIndexById(itemId, items);
         if (index === -1) return;
         const item = items[index];
-        itemsHandlers.replace(
-            index,
-            {...item, title, content}
-        );
+        itemsHandlers.replace(index, { ...item, title, content });
 
         updateItemTitleAndContent({
             itemId,
@@ -257,14 +264,18 @@ export default function useItemActions() {
             closeOnClickOutside: false,
             withCloseButton: false,
             innerProps: {
-                passedTitle: title
-            }
+                passedTitle: title,
+            },
         });
     };
 
-    const openMoveItemModal = async (
-        {item, collectionList}: {item: Item, collectionList: ItemCollection[] }
-    ) => {
+    const openMoveItemModal = async ({
+        item,
+        collectionList,
+    }: {
+        item: Item;
+        collectionList: ItemCollection[];
+    }) => {
         if (item.isPending) {
             displayNotifItemNotReady();
             return;
@@ -284,12 +295,11 @@ export default function useItemActions() {
             centered: true,
             size: "sm",
             title: "Move to another collection",
-            children: <ItemMoveModal
-                item={item}
-                collectionList={collectionList}
-            />
+            children: (
+                <ItemMoveModal item={item} collectionList={collectionList} />
+            ),
         });
-    }
+    };
 
     const refetchLink = async (item: Item) => {
         if (item.isPending) {
@@ -300,14 +310,14 @@ export default function useItemActions() {
         refetchLinkTitleAndFavicon({
             item,
             successfulCallback: (record: Item) => {
-                const index = findIndexById(item.id, items)
+                const index = findIndexById(item.id, items);
                 if (index === -1) return;
                 itemsHandlers.replace(index, record);
             },
-        })
+        });
     };
 
-    const convertToTodo = async ({item}: {item: Item}) => {
+    const convertToTodo = async ({ item }: { item: Item }) => {
         if (item.isPending) {
             displayNotifItemNotReady();
             return;
@@ -316,7 +326,7 @@ export default function useItemActions() {
         convertItemToTodo({
             item,
             successfulCallback: (record: Item) => {
-                const index = findIndexById(item.id, items)
+                const index = findIndexById(item.id, items);
                 if (index === -1) return;
                 itemsHandlers.replace(index, record);
 
@@ -338,15 +348,13 @@ export default function useItemActions() {
         });
     };
 
-    const trashItemWithOptimisticUpdate = async (
-        { item }: { item: Item }
-    ) => {
+    const trashItemWithOptimisticUpdate = async ({ item }: { item: Item }) => {
         if (item.isPending) {
             displayNotifItemNotReady();
             return;
         }
 
-        const index = findIndexById(item.id, items)
+        const index = findIndexById(item.id, items);
         if (index === -1) return;
         itemsHandlers.remove(index);
 
@@ -372,23 +380,26 @@ export default function useItemActions() {
         });
     };
 
-    const untrashItemWithOptimisticUpdate = async (
-        { item }: { item: Item }
-    ) => {
+    const untrashItemWithOptimisticUpdate = async ({
+        item,
+    }: {
+        item: Item;
+    }) => {
         if (item.isPending) {
             displayNotifItemNotReady();
             return;
         }
 
-        const index = findIndexById(item.id, items)
+        const index = findIndexById(item.id, items);
         if (index === -1) return;
         itemsHandlers.remove(index);
 
         untrashItem({
             item,
             successfulCallback: (_record: Item) => {
-                const originalCollection =
-                    initCollections.find(c => c?.id === item.collection);
+                const originalCollection = initCollections.find(
+                    (c) => c?.id === item.collection
+                );
                 if (!originalCollection) return;
 
                 notifications.show({
@@ -412,26 +423,28 @@ export default function useItemActions() {
 
     const computeItemPrimaryAction = (item: Item): ItemAction => {
         switch (true) {
-        case (item.type === ItemType.TODO):
-            return ItemAction.TOGGLE_IS_DONE;
-        case (item.shouldCopyOnClick):
-            return ItemAction.COPY;
-        case (item.type === ItemType.LINK):
-            return ItemAction.OPEN_LINK;
-        default:
-            return ItemAction.EDIT;
+            case item.type === ItemType.TODO:
+                return ItemAction.TOGGLE_IS_DONE;
+            case item.shouldCopyOnClick:
+                return ItemAction.COPY;
+            case item.type === ItemType.LINK:
+                return ItemAction.OPEN_LINK;
+            default:
+                return ItemAction.EDIT;
         }
     };
 
     const executeItemAction = (
-        item: Item, action: ItemAction, isClickEvent: boolean = false
+        item: Item,
+        action: ItemAction,
+        isClickEvent: boolean = false
     ) => {
         switch (action) {
-            case (ItemAction.COPY):
-                copyItemContent({item});
+            case ItemAction.COPY:
+                copyItemContent({ item });
                 break;
-            
-            case (ItemAction.OPEN_LINK):
+
+            case ItemAction.OPEN_LINK:
                 /**
                  * Intentionally do nothing to let the browser handle the
                  * click on `<a>` event.
@@ -440,39 +453,39 @@ export default function useItemActions() {
                 // window.open(item.content, "_blank");
                 break;
 
-            case (ItemAction.MOVE):
-                openMoveItemModal({item, collectionList: initCollections});
+            case ItemAction.MOVE:
+                openMoveItemModal({ item, collectionList: initCollections });
                 break;
 
-            case (ItemAction.DELETE):
-                deleteItemWithOptimisticUpdate({item});
+            case ItemAction.DELETE:
+                deleteItemWithOptimisticUpdate({ item });
                 break;
 
-            case (ItemAction.TOGGLE_COPY):
-                toggleItemShouldCopyOnClickWithOptimisticUpdate({item});
+            case ItemAction.TOGGLE_COPY:
+                toggleItemShouldCopyOnClickWithOptimisticUpdate({ item });
                 break;
 
-            case (ItemAction.TOGGLE_IS_DONE):
-                toggleItemIsTodoDoneWithOptimisticUpdate({item});
+            case ItemAction.TOGGLE_IS_DONE:
+                toggleItemIsTodoDoneWithOptimisticUpdate({ item });
                 break;
 
-            case (ItemAction.REFETCH):
+            case ItemAction.REFETCH:
                 refetchLink(item);
                 break;
 
-            case (ItemAction.CONVERT_TO_TODO):
-                convertToTodo({item});
-                break;
-            
-            case (ItemAction.TRASH):
-                trashItem({item});
-                break;
-            
-            case (ItemAction.UNTRASH):
-                untrashItem({item});
+            case ItemAction.CONVERT_TO_TODO:
+                convertToTodo({ item });
                 break;
 
-            case (ItemAction.EDIT):
+            case ItemAction.TRASH:
+                trashItem({ item });
+                break;
+
+            case ItemAction.UNTRASH:
+                untrashItem({ item });
+                break;
+
+            case ItemAction.EDIT:
             default:
                 openUpdateItemModal(item);
         }
@@ -494,5 +507,5 @@ export default function useItemActions() {
         executeItemAction,
         trashItemWithOptimisticUpdate,
         untrashItemWithOptimisticUpdate,
-    }
+    };
 }

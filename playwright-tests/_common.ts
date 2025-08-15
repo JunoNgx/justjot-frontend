@@ -6,52 +6,68 @@ import fetchItemsFilled from "./mocks/fetchItemsFilled.json" assert { type: "jso
 import fetchItemsTrashed from "./mocks/fetchItemsTrashed.json" assert { type: "json" };
 
 const interceptBasicApiRequests = async (page: Page) => {
-    await page.route("*/**/api/collections/users/auth-with-password", async route => {
-        await route.fulfill({ json: authWithPasswordRes });
-    });
+    await page.route(
+        "*/**/api/collections/users/auth-with-password",
+        async (route) => {
+            await route.fulfill({ json: authWithPasswordRes });
+        }
+    );
 
-    await page.route("*/**/api/collections/users/auth-refresh", async route => {
-        await route.fulfill({ json: authWithPasswordRes });
-    });
+    await page.route(
+        "*/**/api/collections/users/auth-refresh",
+        async (route) => {
+            await route.fulfill({ json: authWithPasswordRes });
+        }
+    );
 
-    await page.route("*/**/api/collections/itemCollections/records*", async route => {
-        await route.fulfill({ json: fetchCollectionsInit });
-    });
+    await page.route(
+        "*/**/api/collections/itemCollections/records*",
+        async (route) => {
+            await route.fulfill({ json: fetchCollectionsInit });
+        }
+    );
 
-    await page.route("*/**/api/collections/trashBins/records*", async route => {
-        await route.fulfill({ json: fetchTrashBin });
-    });
-}
+    await page.route(
+        "*/**/api/collections/trashBins/records*",
+        async (route) => {
+            await route.fulfill({ json: fetchTrashBin });
+        }
+    );
+};
 
 export const interceptApiRequestForItems = async (page: Page) => {
-    await page.route("*/**/api/collections/items/*", async route => {
+    await page.route("*/**/api/collections/items/*", async (route) => {
         await route.fulfill({ json: fetchItemsFilled });
     });
-}
+};
 
 export const interceptApiRequestForTrashedItems = async (page: Page) => {
-    await page.route("*/**/api/collections/items/*", async route => {
+    await page.route("*/**/api/collections/items/*", async (route) => {
         await route.fulfill({ json: fetchItemsTrashed });
     });
-}
+};
 
 const navigateToLogin = async (page: Page) => {
-    await page.goto('/');
-    await page.getByRole('link', { name: 'Login', exact: true }).click();
-    await page.getByPlaceholder('lucatiel@mirrah.com').fill('e2eTestAcc');
-    await page.getByPlaceholder('BearSeekSeekLest').fill('testaccount');
-    await page.getByPlaceholder('BearSeekSeekLest').press('Enter');
-}
+    await page.goto("/");
+    await page.getByRole("link", { name: "Login", exact: true }).click();
+    await page.getByPlaceholder("lucatiel@mirrah.com").fill("e2eTestAcc");
+    await page.getByPlaceholder("BearSeekSeekLest").fill("testaccount");
+    await page.getByPlaceholder("BearSeekSeekLest").press("Enter");
+};
 
 export const loginWithMocks = async ({ page }: { page: Page }) => {
     await interceptBasicApiRequests(page);
     await navigateToLogin(page);
-}
+};
 
-export const loginWithMocksAndFilledItems = async ({ page }: { page: Page }) => {
+export const loginWithMocksAndFilledItems = async ({
+    page,
+}: {
+    page: Page;
+}) => {
     await interceptBasicApiRequests(page);
     await interceptApiRequestForItems(page);
     await navigateToLogin(page);
-}
+};
 
-export const spotlightTextboxSelector = 'input.mantine-Spotlight-search';
+export const spotlightTextboxSelector = "input.mantine-Spotlight-search";

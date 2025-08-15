@@ -5,9 +5,9 @@ import {
     CSSVariablesResolver,
     DEFAULT_THEME,
     mergeMantineTheme,
-} from '@mantine/core';
+} from "@mantine/core";
 
-import '@mantine/core/styles.css';
+import "@mantine/core/styles.css";
 import classes from "@/styles/theme.module.scss";
 
 const overrideTheme = createTheme({
@@ -22,11 +22,12 @@ const overrideTheme = createTheme({
             "#848484",
             "#717171",
             "#656565",
-            "#575757"
-        ]
+            "#575757",
+        ],
     },
     primaryColor: "gray",
-    fontFamily: "Space Grotesk, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif, Segoe UI Emoji",
+    fontFamily:
+        "Space Grotesk, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif, Segoe UI Emoji",
     fontFamilyMonospace: "Space Mono, Menlo, Consolas, monospace",
     defaultRadius: 0,
     other: {
@@ -47,24 +48,24 @@ const overrideTheme = createTheme({
             classNames: classes,
             defaultProps: {
                 variant: "mono",
-            }
+            },
         }),
         // Not working, bug in Mantine?
         Modal: {
             defaultProps: {
                 closeButtonProps: {
                     strokeWidth: 5,
-                }
-            }
+                },
+            },
         },
         Notification: {
             defaultProps: {
                 closeButtonProps: {
                     strokeWidth: 5,
-                }
-            }
-        }
-    }
+                },
+            },
+        },
+    },
 });
 
 export const justJotCssVarsResolver: CSSVariablesResolver = (theme) => ({
@@ -84,7 +85,7 @@ export const justJotCssVarsResolver: CSSVariablesResolver = (theme) => ({
         "--mantine-color-dimmed": "#999",
         "--mantine-color-anchor": "#AAA",
         "--mantine-color-code-bg": "#222",
-    }
+    },
 });
 
 export const justJotTheme = mergeMantineTheme(DEFAULT_THEME, overrideTheme);

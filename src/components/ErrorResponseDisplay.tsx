@@ -2,22 +2,23 @@ import { ClientResponseError } from "pocketbase";
 import "./ErrorResponseDisplay.scss";
 
 type ErrorResponse = {
-    code?: number
+    code?: number;
 } & ClientResponseError;
 
-export default function ErrorResponseDisplay(
-    { errRes }: { errRes: ErrorResponse | null }
-) {
+export default function ErrorResponseDisplay({
+    errRes,
+}: {
+    errRes: ErrorResponse | null;
+}) {
     const tryTranscribeDataToProblemList = (
         /* eslint-disable  @typescript-eslint/no-explicit-any */
         data: any
     ): string[] => {
-
         const problemList: string[] = [];
 
         if (data) {
             Object.entries(data).forEach((keyValArr, _index) => {
-                const value = keyValArr[1] as {code: string, message: string};
+                const value = keyValArr[1] as { code: string; message: string };
                 const errorMsg = value.message;
                 problemList.push(errorMsg);
             });
@@ -25,12 +26,12 @@ export default function ErrorResponseDisplay(
 
         return problemList;
     };
-    
+
     const hasMainError = !!errRes;
     const statusCode = errRes?.code || errRes?.status;
     const mainErrorDisplay = (
         <p className="MainError">
-                Code {statusCode}: {errRes?.message}
+            Code {statusCode}: {errRes?.message}
         </p>
     );
 
@@ -50,14 +51,18 @@ export default function ErrorResponseDisplay(
     const hasProblemList = !!problemList.length;
     const problemListDisplay = (
         <ul className="ErrorList">
-            {problemList.map((problem, index) =>
-                <li className="ErrorList__Item" key={index}>{problem}</li>
-            )}
+            {problemList.map((problem, index) => (
+                <li className="ErrorList__Item" key={index}>
+                    {problem}
+                </li>
+            ))}
         </ul>
     );
 
-    return <>
-        {hasMainError && mainErrorDisplay}
-        {hasProblemList && problemListDisplay}
-    </>
+    return (
+        <>
+            {hasMainError && mainErrorDisplay}
+            {hasProblemList && problemListDisplay}
+        </>
+    );
 }

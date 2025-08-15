@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
-import { BackendClientContext } from '@/contexts/BackendClientContext';
-import { useParams } from 'react-router-dom';
+import { BackendClientContext } from "@/contexts/BackendClientContext";
+import { useParams } from "react-router-dom";
 import MainInput from "@/components/MainInput";
 import { ItemsContext } from "@/contexts/ItemsContext";
 import { useHotkeys } from "@mantine/hooks";
@@ -18,7 +18,8 @@ import { APP_NAME } from "@/utils/constants";
 
 export default function MainView() {
     const { isDemoUser, refreshAuth } = useContext(BackendClientContext);
-    const { initCollections, currCollection, isTrashCollection } = useContext(CollectionsContext);
+    const { initCollections, currCollection, isTrashCollection } =
+        useContext(CollectionsContext);
     const { fetchItems, filteredItems } = useContext(ItemsContext);
     const { focusOnMainInput } = useItemNavActions();
     const {
@@ -31,14 +32,15 @@ export default function MainView() {
     const { collectionSlug } = useParams();
     const { generateNumericHotkeyHandlers } = useNumericHotkeyUtils();
     const mainInputRef = useRef<HTMLInputElement>(null);
-    const [ isLoading, setIsLoading ] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const numericKeysHotkeyOptions = generateNumericHotkeyHandlers({
         callback: (inputKey: number) => {
             /**
              * TODO: mildly hacky solution.
              * To consider refactor this with a context variable.
              */
-            const hasActiveModal = document.querySelectorAll(".mantine-Modal-overlay").length > 0;
+            const hasActiveModal =
+                document.querySelectorAll(".mantine-Modal-overlay").length > 0;
             if (hasActiveModal) return;
 
             trySwitchToCollectionByNumericKey(inputKey);
@@ -46,10 +48,14 @@ export default function MainView() {
     });
 
     useHotkeys([
-        ["mod+F", () => focusOnMainInput(mainInputRef), { preventDefault: true }],
+        [
+            "mod+F",
+            () => focusOnMainInput(mainInputRef),
+            { preventDefault: true },
+        ],
         ["ArrowLeft", trySwitchToPrevCollection],
         ["ArrowRight", trySwitchToNextCollection],
-        ...numericKeysHotkeyOptions
+        ...numericKeysHotkeyOptions,
     ]);
 
     useEffect(() => {
@@ -66,12 +72,12 @@ export default function MainView() {
             fetchItems(currCollection);
             lastRoutineUpdateTimestamp.current = Date.now();
         }
-    }
+    };
 
     useEffect(() => {
         if (initCollections.length === 0) return;
         if (!collectionSlug) {
-            trySwitchToCollectionByIndex(0)
+            trySwitchToCollectionByIndex(0);
             return;
         }
         if (collectionSlug === currCollection?.slug) return;
@@ -90,35 +96,31 @@ export default function MainView() {
             : APP_NAME;
     }, [currCollection]);
 
-    return <div className="MainView"
-        id="MainView"
-    >
-        <title>{mainViewTitle}</title>
+    return (
+        <div className="MainView" id="MainView">
+            <title>{mainViewTitle}</title>
 
-        {/* For non-item components */}
-        <CollectionMenu isMobile={true} />
-        <KeyboardPromptDisplay />
-        <div className="MainView__NoticeContainer">
-            {isDemoUser && <MainViewNotice
-                content="You are using the test account. Data are periodically reset."
-            />}
-            {isTrashCollection && <MainViewNotice
-                content="Items in the trash bin are permanently deleted after 7 days."
-            />}
-        </div>
+            {/* For non-item components */}
+            <CollectionMenu isMobile={true} />
+            <KeyboardPromptDisplay />
+            <div className="MainView__NoticeContainer">
+                {isDemoUser && (
+                    <MainViewNotice content="You are using the test account. Data are periodically reset." />
+                )}
+                {isTrashCollection && (
+                    <MainViewNotice content="Items in the trash bin are permanently deleted after 7 days." />
+                )}
+            </div>
 
-        <div className="MainView__Main"
-            onFocus={() => tryRoutineUpdate()}
-        >
-            <MainInput ref={mainInputRef}/>
-            <div className="MainView__ItemList"
-                id="DisplayedList"
-            >
-                <MainContentList
-                    isLoading={isLoading}
-                    filteredItems={filteredItems}
-                />
+            <div className="MainView__Main" onFocus={() => tryRoutineUpdate()}>
+                <MainInput ref={mainInputRef} />
+                <div className="MainView__ItemList" id="DisplayedList">
+                    <MainContentList
+                        isLoading={isLoading}
+                        filteredItems={filteredItems}
+                    />
+                </div>
             </div>
         </div>
-    </div>
+    );
 }

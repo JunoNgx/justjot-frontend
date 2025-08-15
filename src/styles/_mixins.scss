@@ -1,10 +1,10 @@
-@use 'sass:math';
+@use "sass:math";
 
 @function rem($value) {
     @return #{math.div(math.div($value, $value * 0 + 1), 16)}rem;
 }
 
-@mixin GlassBlur { 
+@mixin GlassBlur {
     backdrop-filter: blur(12px);
     // Attributes to overwrite specificity
     [data-mantine-color-scheme="light"] &,

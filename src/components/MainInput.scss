@@ -17,7 +17,7 @@
 
     will-change: outline-color;
     transition: outline-color ease-in-out 250ms;
-    
+
     &:focus-within {
         outline-color: var(--colPri);
     }
