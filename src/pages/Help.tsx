@@ -208,12 +208,12 @@ export default function Help() {
                     <li>
                         Entering <code>:t: Email draft 2</code> will open the
                         item create dialog, whose title input is pre-filled as
-                        {"\"Email draft 2\""}, allowing you to conveniently continue
-                        working on the content.
+                        {'"Email draft 2"'}, allowing you to conveniently
+                        continue working on the content.
                     </li>
                     <li>
                         Entering <code>:td: Buy groceries</code> will create a
-                        todo item with content {"\"Buy groceries\""}.
+                        todo item with content {'"Buy groceries"'}.
                     </li>
                 </ul>
                 <p>
