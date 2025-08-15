@@ -1,8 +1,5 @@
 import { test, expect } from "@playwright/test";
-import {
-    loginWithMocks,
-    spotlightTextboxSelector,
-} from "./_common";
+import { loginWithMocks, spotlightTextboxSelector } from "./_common";
 import collectionNew from "./mocks/collectionNew.json" assert { type: "json" };
 import collectionEdit from "./mocks/collectionEdit.json" assert { type: "json" };
 
