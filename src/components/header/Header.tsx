@@ -3,12 +3,14 @@ import HeaderRightSide from "./HeaderRightSide";
 import "./Header.scss";
 
 function Header() {
-    return <div className="Header">
-        <div className="Header__FlexWrapper">
-            <HeaderLeftSide/>
-            <HeaderRightSide/>
+    return (
+        <div className="Header">
+            <div className="Header__FlexWrapper">
+                <HeaderLeftSide />
+                <HeaderRightSide />
+            </div>
         </div>
-    </div>
+    );
 }
 
 export default Header;
