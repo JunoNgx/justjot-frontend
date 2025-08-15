@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, useContext, RefObject } from "react";
-import { getHotkeyHandler } from "@mantine/hooks";
+import { getHotkeyHandler, HotkeyItemOptions } from "@mantine/hooks";
 import { IconCircleTriangle } from "@tabler/icons-react";
 
 import { ItemsContext } from "@/contexts/ItemsContext";
@@ -153,6 +153,34 @@ export default function MainInput({
         convertToTodo({ item: selectedItem });
     };
 
+    const hotkeyData: [string, (event: any) => void, HotkeyItemOptions?][] = [
+        ["ArrowUp", selectPrevItem],
+        ["ArrowDown", selectNextItem],
+        ["Shift+ArrowUp", selectPrevItemFarther, { preventDefault: true }],
+        ["Shift+ArrowDown", selectNextItemFarther, { preventDefault: true }],
+        ["mod+Shift+ArrowUp", scrollToTop, { preventDefault: true }],
+        ["mod+Shift+ArrowDown", scrollToBottom, { preventDefault: true }],
+        ["Enter", () => processMainInput(inputVal)],
+        ["Escape", blurMainInput],
+        ["mod+Enter", clickOnSelectedItem, { preventDefault: true }],
+        ["mod+Shift+C", hotkeyCopyContent, { preventDefault: true }],
+        ["mod+E", hotkeyOpenUpdateItemModal, { preventDefault: true }],
+        ["mod+M", hotkeyOpenMoveItemModal, { preventDefault: true }],
+        ["mod+Shift+Backspace", hotkeyDeleteItem, { preventDefault: true }],
+        ["mod+alt+R", hotkeyRestoreItem, { preventDefault: true }],
+        [
+            "mod+alt+Digit4",
+            hotkeyToggleItemShouldCopyOnClick,
+            { preventDefault: true },
+        ],
+        [
+            "mod+alt+Digit5",
+            hotkeyRefetchTitleAndFavicon,
+            { preventDefault: true },
+        ],
+        ["mod+alt+Digit6", hotkeyConvertToTodoItem, { preventDefault: true }],
+    ];
+
     return (
         <div className="MainInput">
             <div className="MainInput__LeftSide">
@@ -172,73 +200,7 @@ export default function MainInput({
                     setInputVal(event.currentTarget.value);
                     setSelectedIndex(-1);
                 }}
-                onKeyDown={getHotkeyHandler([
-                    ["ArrowUp", selectPrevItem],
-                    ["ArrowDown", selectNextItem],
-                    [
-                        "Shift+ArrowUp",
-                        selectPrevItemFarther,
-                        { preventDefault: true },
-                    ],
-                    [
-                        "Shift+ArrowDown",
-                        selectNextItemFarther,
-                        { preventDefault: true },
-                    ],
-                    [
-                        "mod+Shift+ArrowUp",
-                        scrollToTop,
-                        { preventDefault: true },
-                    ],
-                    [
-                        "mod+Shift+ArrowDown",
-                        scrollToBottom,
-                        { preventDefault: true },
-                    ],
-                    ["Enter", () => processMainInput(inputVal)],
-                    ["Escape", blurMainInput],
-                    [
-                        "mod+Enter",
-                        clickOnSelectedItem,
-                        { preventDefault: true },
-                    ],
-                    [
-                        "mod+Shift+C",
-                        hotkeyCopyContent,
-                        { preventDefault: true },
-                    ],
-                    [
-                        "mod+E",
-                        hotkeyOpenUpdateItemModal,
-                        { preventDefault: true },
-                    ],
-                    [
-                        "mod+M",
-                        hotkeyOpenMoveItemModal,
-                        { preventDefault: true },
-                    ],
-                    [
-                        "mod+Shift+Backspace",
-                        hotkeyDeleteItem,
-                        { preventDefault: true },
-                    ],
-                    ["mod+alt+R", hotkeyRestoreItem, { preventDefault: true }],
-                    [
-                        "mod+alt+Digit4",
-                        hotkeyToggleItemShouldCopyOnClick,
-                        { preventDefault: true },
-                    ],
-                    [
-                        "mod+alt+Digit5",
-                        hotkeyRefetchTitleAndFavicon,
-                        { preventDefault: true },
-                    ],
-                    [
-                        "mod+alt+Digit6",
-                        hotkeyConvertToTodoItem,
-                        { preventDefault: true },
-                    ],
-                ])}
+                onKeyDown={getHotkeyHandler(hotkeyData)}
                 onFocus={() => setIsMainInputFocused(true)}
                 onBlur={() => setIsMainInputFocused(false)}
             />
