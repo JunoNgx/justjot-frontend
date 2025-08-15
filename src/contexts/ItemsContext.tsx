@@ -114,13 +114,14 @@ export default function ItemsContextProvider({
             case FILTER_SYNTAX_INCOMPLETE_TODOS:
                 return item.type === ItemType.TODO && !item.isTodoDone;
 
-            default:
+            default: {
                 const hasTitleMatch =
                     item.title?.toLowerCase().indexOf(searchTerm) > -1;
                 const hasContentMatch =
                     item.content?.toLowerCase().indexOf(searchTerm) > -1;
 
                 return hasTitleMatch || hasContentMatch;
+            }
         }
     });
 
