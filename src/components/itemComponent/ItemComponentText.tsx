@@ -37,7 +37,7 @@ export default function ItemComponentText({ item }: { item: Item }) {
             className="Item__PrimaryText"
             id={`item-primary-text-${item.id}`}
             title={item.title}
-            aria-label={`Primary text for item ${item.id}`}
+            aria-label={`Title of item ${item.id}`}
             data-testid="item-component-primary-text"
         >
             {item.title.substring(0, CHAR_DISPLAY_COUNT)}
@@ -49,7 +49,7 @@ export default function ItemComponentText({ item }: { item: Item }) {
             className="Item__SecondaryText"
             id={`item-secondary-text-${item.id}`}
             title={item.content}
-            aria-label={`Secondary text for item ${item.id}`}
+            aria-label={`Content of item ${item.id}`}
             data-testid="item-component-secondary-text"
         >
             {item.content.substring(0, CHAR_DISPLAY_COUNT)}
