@@ -116,6 +116,7 @@ export default function MainView() {
                 <MainInput ref={mainInputRef} />
                 <ul className="MainView__ItemList" id="DisplayItems"
                     role="listbox"
+                    tabIndex={-1}
                 >
                     <MainContentList
                         isLoading={isLoading}

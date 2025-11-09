@@ -80,20 +80,6 @@ const ItemComponentInner = forwardRef<
         executeItemAction(item, action, true);
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (e.key !== "Enter") {
-            return;
-        }
-
-        if (isLink) {
-            // Let browser take default action to open anchor link
-            return;
-        }
-        
-        e.preventDefault();
-        handlePrimaryAction();
-    }
-
     const isSelected = selectedIndex === index;
     const isLink = item.type === ItemType.LINK;
     const shouldRenderAsAnchor = isLink && !item.shouldCopyOnClick;
@@ -112,7 +98,6 @@ const ItemComponentInner = forwardRef<
                 | React.MouseEvent<Element, MouseEvent>
                 | React.TouchEvent<Element>
         ) => void;
-        onKeyDown: (e: React.KeyboardEvent) => void;
         onMouseEnter: () => void;
         onMouseLeave: () => void;
     };
@@ -127,9 +112,8 @@ const ItemComponentInner = forwardRef<
         "aria-labelledby": !!item.title
             ? `item-primary-text-${item.id}`
             : `item-secondary-text-${item.id}`,
-        tabIndex: 0,
+        tabIndex: -1,
         onClick: handlePrimaryAction,
-        onKeyDown: handleKeyDown,
         onMouseEnter: () => {
             setSelectedIndex(index);
         },
