@@ -98,7 +98,7 @@ const ItemComponentInner = forwardRef<
     const isLink = item.type === ItemType.LINK;
     const shouldRenderAsAnchor = isLink && !item.shouldCopyOnClick;
 
-    type standardPropsOptions = {
+    type standardPropsType = {
         className: string;
         "data-index": number;
         "data-id": string;
@@ -116,7 +116,7 @@ const ItemComponentInner = forwardRef<
         onMouseLeave: () => void;
     };
 
-    const standardProps: standardPropsOptions = {
+    const standardProps: standardPropsType = {
         className: computeClassname(item, isSelected),
         "data-index": index,
         "data-id": item.id,
