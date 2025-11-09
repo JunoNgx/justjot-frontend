@@ -84,12 +84,28 @@ const ItemComponentInner = forwardRef<
     const isLink = item.type === ItemType.LINK;
     const shouldRenderAsAnchor = isLink && !item.shouldCopyOnClick;
 
-    const standardProps = {
+    type standardPropsOptions = {
+        className: string;
+        "data-index": number;
+        "data-id": string;
+        role: string;
+        "aria-current": boolean;
+        "aria-labelledby"?: string;
+        tabIndex: number;
+        onClick: (_e: React.MouseEvent<Element, MouseEvent> | React.TouchEvent<Element>) => void;
+        onMouseEnter: () => void;
+        onMouseLeave: () => void;
+    };
+
+    const standardProps: standardPropsOptions = {
         className: computeClassname(item, isSelected),
         "data-index": index,
         "data-id": item.id,
         role: isLink ? "link" : "button",
         "aria-current": isSelected,
+        "aria-labelledby": !!item.title
+            ? `item-primary-text-${item.id}`
+            : `item-secondary-text-${item.id}`,
         "tabIndex": 0,
         onClick: handlePrimaryAction,
         onMouseEnter: () => {
@@ -99,6 +115,10 @@ const ItemComponentInner = forwardRef<
             setSelectedIndex(-1);
         },
     };
+
+    if (isLink) {
+        delete standardProps["aria-labelledby"];
+    }
 
     const anchorProps = {
         href: item.content,

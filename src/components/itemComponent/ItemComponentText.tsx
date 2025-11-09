@@ -35,6 +35,7 @@ export default function ItemComponentText({ item }: { item: Item }) {
     const primaryText = item.title && (
         <p
             className="Item__PrimaryText"
+            id={`item-primary-text-${item.id}`}
             title={item.title}
             data-testid="item-component-primary-text"
         >
@@ -45,6 +46,7 @@ export default function ItemComponentText({ item }: { item: Item }) {
     const secondaryText = item.content && (
         <p
             className="Item__SecondaryText"
+            id={`item-secondary-text-${item.id}`}
             title={item.content}
             data-testid="item-component-secondary-text"
         >
