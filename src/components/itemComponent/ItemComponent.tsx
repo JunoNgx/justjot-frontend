@@ -72,7 +72,7 @@ const ItemComponentInner = forwardRef<
     HTMLDivElement | HTMLAnchorElement,
     ItemComponentInnerProps
 >(({ item, index, children, ...props }, forwardedRef) => {
-    const { selectedIndex, setSelectedIndex } = useContext(ItemsContext);
+    const { selectedIndex } = useContext(ItemsContext);
     const { computeItemPrimaryAction, executeItemAction } = useItemActions();
 
     const handlePrimaryAction = (_e?: React.MouseEvent | React.TouchEvent) => {
@@ -96,8 +96,6 @@ const ItemComponentInner = forwardRef<
         onClick: (
             e: React.MouseEvent<Element, MouseEvent> | React.TouchEvent<Element>
         ) => void;
-        onMouseEnter: () => void;
-        onMouseLeave: () => void;
     };
 
     const standardProps: standardPropsType = {
@@ -112,12 +110,6 @@ const ItemComponentInner = forwardRef<
             : `item-${index}-content`,
         tabIndex: -1,
         onClick: handlePrimaryAction,
-        onMouseEnter: () => {
-            setSelectedIndex(index);
-        },
-        onMouseLeave: () => {
-            setSelectedIndex(-1);
-        },
     };
 
     if (isLink) {
