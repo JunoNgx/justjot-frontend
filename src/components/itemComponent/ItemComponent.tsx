@@ -92,7 +92,11 @@ const ItemComponentInner = forwardRef<
         "aria-current": boolean;
         "aria-labelledby"?: string;
         tabIndex: number;
-        onClick: (_e: React.MouseEvent<Element, MouseEvent> | React.TouchEvent<Element>) => void;
+        onClick: (
+            _e:
+                | React.MouseEvent<Element, MouseEvent>
+                | React.TouchEvent<Element>
+        ) => void;
         onMouseEnter: () => void;
         onMouseLeave: () => void;
     };
@@ -106,7 +110,7 @@ const ItemComponentInner = forwardRef<
         "aria-labelledby": !!item.title
             ? `item-primary-text-${item.id}`
             : `item-secondary-text-${item.id}`,
-        "tabIndex": 0,
+        tabIndex: 0,
         onClick: handlePrimaryAction,
         onMouseEnter: () => {
             setSelectedIndex(index);
