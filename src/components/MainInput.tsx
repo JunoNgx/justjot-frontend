@@ -153,6 +153,11 @@ export default function MainInput({
         convertToTodo({ item: selectedItem });
     };
 
+    const handleOnBlur = () => {
+        setIsMainInputFocused(false)
+        setSelectedIndex(-1);
+    };
+
     const hotkeyData: [
         string,
         (e: KeyboardEvent) => void,
@@ -213,8 +218,8 @@ export default function MainInput({
                     setSelectedIndex(-1);
                 }}
                 onKeyDown={getHotkeyHandler(hotkeyData)}
-                onFocus={() => setIsMainInputFocused(true)}
-                onBlur={() => setIsMainInputFocused(false)}
+                onFocus={() => { setIsMainInputFocused(true); }}
+                onBlur={handleOnBlur}
             />
             <div className="MainInput__RightSide">
                 <MainInputExtendedMenu
