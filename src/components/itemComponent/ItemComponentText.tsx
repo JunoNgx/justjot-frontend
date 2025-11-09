@@ -5,7 +5,13 @@ import { EventBusContext } from "@/contexts/EventBusContext";
 const CHAR_DISPLAY_COUNT = 150;
 const COPIED_DISPLAY_DURATION = 1500;
 
-export default function ItemComponentText({ item, index }: { item: Item, index: number }) {
+export default function ItemComponentText({
+    item,
+    index,
+}: {
+    item: Item;
+    index: number;
+}) {
     const { emitter } = useContext(EventBusContext);
 
     const [hasCopied, setHasCopied] = useState(false);

@@ -94,9 +94,7 @@ const ItemComponentInner = forwardRef<
         "aria-labelledby"?: string;
         tabIndex: number;
         onClick: (
-            e:
-                | React.MouseEvent<Element, MouseEvent>
-                | React.TouchEvent<Element>
+            e: React.MouseEvent<Element, MouseEvent> | React.TouchEvent<Element>
         ) => void;
         onMouseEnter: () => void;
         onMouseLeave: () => void;
@@ -157,7 +155,9 @@ ItemComponentInner.displayName = "ItemComponentInner";
 
 const computeClassname = (item: Item, isSelected: boolean) => {
     const modifierWithSelectedState = isSelected ? "Item--IsSelected " : " ";
-    const modifierWithoutPrimaryText = item.title ? " " : "Item--HasNoPrimaryText ";
+    const modifierWithoutPrimaryText = item.title
+        ? " "
+        : "Item--HasNoPrimaryText ";
     const modifierWithoutSecondaryText = item.content
         ? " "
         : "Item--HasNoSecondaryText ";
