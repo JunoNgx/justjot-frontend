@@ -75,10 +75,24 @@ const ItemComponentInner = forwardRef<
     const { selectedIndex, setSelectedIndex } = useContext(ItemsContext);
     const { computeItemPrimaryAction, executeItemAction } = useItemActions();
 
-    const handlePrimaryAction = (_e: React.MouseEvent | React.TouchEvent) => {
+    const handlePrimaryAction = (_e?: React.MouseEvent | React.TouchEvent) => {
         const action = computeItemPrimaryAction(item);
         executeItemAction(item, action, true);
     };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key !== "Enter") {
+            return;
+        }
+
+        if (isLink) {
+            // Let browser take default action to open anchor link
+            return;
+        }
+        
+        e.preventDefault();
+        handlePrimaryAction();
+    }
 
     const isSelected = selectedIndex === index;
     const isLink = item.type === ItemType.LINK;
@@ -93,10 +107,11 @@ const ItemComponentInner = forwardRef<
         "aria-labelledby"?: string;
         tabIndex: number;
         onClick: (
-            _e:
+            e:
                 | React.MouseEvent<Element, MouseEvent>
                 | React.TouchEvent<Element>
         ) => void;
+        onKeyDown: (e: React.KeyboardEvent) => void;
         onMouseEnter: () => void;
         onMouseLeave: () => void;
     };
@@ -112,6 +127,7 @@ const ItemComponentInner = forwardRef<
             : `item-secondary-text-${item.id}`,
         tabIndex: 0,
         onClick: handlePrimaryAction,
+        onKeyDown: handleKeyDown,
         onMouseEnter: () => {
             setSelectedIndex(index);
         },
