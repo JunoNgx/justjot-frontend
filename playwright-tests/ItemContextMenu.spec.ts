@@ -169,7 +169,7 @@ test.describe("Item context menu", () => {
             await expect(
                 page.locator('.Item[data-id="hxz3757cizrkzsl"]')
             ).toHaveText(/Content copied/);
-            await expect(page.locator("#DisplayedList")).toContainText(
+            await expect(page.locator("#DisplayItems")).toContainText(
                 /Content copied/
             );
         });
