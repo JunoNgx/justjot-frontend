@@ -5,7 +5,7 @@ import { EventBusContext } from "@/contexts/EventBusContext";
 const CHAR_DISPLAY_COUNT = 150;
 const COPIED_DISPLAY_DURATION = 1500;
 
-export default function ItemComponentText({ item }: { item: Item }) {
+export default function ItemComponentText({ item, index }: { item: Item, index: number }) {
     const { emitter } = useContext(EventBusContext);
 
     const [hasCopied, setHasCopied] = useState(false);
@@ -35,9 +35,8 @@ export default function ItemComponentText({ item }: { item: Item }) {
     const primaryText = item.title && (
         <p
             className="Item__PrimaryText"
-            id={`item-primary-text-${item.id}`}
+            id={`item-${index}-title`}
             title={item.title}
-            aria-label={`Title of item ${item.id}`}
             data-testid="item-component-primary-text"
         >
             {item.title.substring(0, CHAR_DISPLAY_COUNT)}
@@ -47,9 +46,8 @@ export default function ItemComponentText({ item }: { item: Item }) {
     const secondaryText = item.content && (
         <p
             className="Item__SecondaryText"
-            id={`item-secondary-text-${item.id}`}
+            id={`item-${index}-content`}
             title={item.content}
-            aria-label={`Content of item ${item.id}`}
             data-testid="item-component-secondary-text"
         >
             {item.content.substring(0, CHAR_DISPLAY_COUNT)}

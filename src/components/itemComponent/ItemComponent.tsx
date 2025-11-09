@@ -26,7 +26,7 @@ export default function ItemComponent({ item, index }: ItemComponentParams) {
                 <div className="Item__IconWrapper">
                     <ItemComponentIcon item={item} />
                 </div>
-                <ItemComponentText item={item} />
+                <ItemComponentText item={item} index={index} />
             </div>
 
             <div className="Item__RightSide">
@@ -110,8 +110,8 @@ const ItemComponentInner = forwardRef<
         role: "option",
         "aria-selected": isSelected,
         "aria-labelledby": !!item.title
-            ? `item-primary-text-${item.id}`
-            : `item-secondary-text-${item.id}`,
+            ? `item-${index}-title`
+            : `item-${index}-content`,
         tabIndex: -1,
         onClick: handlePrimaryAction,
         onMouseEnter: () => {
