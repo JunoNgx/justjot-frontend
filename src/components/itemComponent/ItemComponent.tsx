@@ -90,6 +90,7 @@ const ItemComponentInner = forwardRef<
         "data-id": item.id,
         role: isLink ? "link" : "button",
         "aria-current": isSelected,
+        "tabIndex": 0,
         onClick: handlePrimaryAction,
         onMouseEnter: () => {
             setSelectedIndex(index);
