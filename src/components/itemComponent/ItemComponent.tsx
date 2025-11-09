@@ -170,21 +170,21 @@ const ItemComponentInner = forwardRef<
 ItemComponentInner.displayName = "ItemComponentInner";
 
 const computeClassname = (item: Item, isSelected: boolean) => {
-    const isSelectedModifier = isSelected ? "Item--IsSelected " : " ";
-    const noPrimaryTextModifier = item.title ? " " : "Item--HasNoPrimaryText ";
-    const noSecondaryTextModifier = item.content
+    const modifierWithSelectedState = isSelected ? "Item--IsSelected " : " ";
+    const modifierWithoutPrimaryText = item.title ? " " : "Item--HasNoPrimaryText ";
+    const modifierWithoutSecondaryText = item.content
         ? " "
         : "Item--HasNoSecondaryText ";
 
     const isTodoItem = item.type === ItemType.TODO;
-    const isTodoItemDoneModifier =
+    const modifierWithTodoDoneState =
         isTodoItem && item.isTodoDone ? "Item--IsTodoDone " : " ";
 
     return (
         "Item "
-        + isSelectedModifier
-        + noPrimaryTextModifier
-        + noSecondaryTextModifier
-        + isTodoItemDoneModifier
+        + modifierWithSelectedState
+        + modifierWithoutPrimaryText
+        + modifierWithoutSecondaryText
+        + modifierWithTodoDoneState
     );
 };
