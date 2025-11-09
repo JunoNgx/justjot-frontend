@@ -30,6 +30,10 @@
         border-color: var(--colPri);
     }
 
+    &:hover {
+        background-color: var(--colGreyBg);
+    }
+
     &__IconWrapper {
         display: grid;
         place-items: center;
