@@ -120,7 +120,7 @@ const ItemComponentInner = forwardRef<
         className: computeClassname(item, isSelected),
         "data-index": index,
         "data-id": item.id,
-        role: isLink ? "link" : "button",
+        role: "option",
         "aria-selected": isSelected,
         "aria-labelledby": !!item.title
             ? `item-primary-text-${item.id}`
