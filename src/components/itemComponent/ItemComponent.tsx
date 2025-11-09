@@ -100,6 +100,7 @@ const ItemComponentInner = forwardRef<
 
     type standardPropsType = {
         className: string;
+        id: string;
         "data-index": number;
         "data-id": string;
         role: string;
@@ -118,6 +119,7 @@ const ItemComponentInner = forwardRef<
 
     const standardProps: standardPropsType = {
         className: computeClassname(item, isSelected),
+        id: `item-${index}`,
         "data-index": index,
         "data-id": item.id,
         role: "option",

@@ -197,6 +197,14 @@ export default function MainInput({
                 {...props}
                 type="text"
                 aria-label="Main input"
+                role="combobox"
+                aria-controls="DisplayItems"
+                aria-activedescendant={
+                    selectedIndex > -1
+                        ? `item-${selectedIndex}`
+                        : undefined
+                }
+                aria-autocomplete="list"
                 // placeholder="Add new item or search"
                 autoComplete="off"
                 value={inputVal}
