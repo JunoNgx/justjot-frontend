@@ -103,7 +103,7 @@ const ItemComponentInner = forwardRef<
         "data-index": number;
         "data-id": string;
         role: string;
-        "aria-current": boolean;
+        "aria-selected": boolean;
         "aria-labelledby"?: string;
         tabIndex: number;
         onClick: (
@@ -121,7 +121,7 @@ const ItemComponentInner = forwardRef<
         "data-index": index,
         "data-id": item.id,
         role: isLink ? "link" : "button",
-        "aria-current": isSelected,
+        "aria-selected": isSelected,
         "aria-labelledby": !!item.title
             ? `item-primary-text-${item.id}`
             : `item-secondary-text-${item.id}`,
