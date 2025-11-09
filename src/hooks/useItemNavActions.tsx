@@ -17,7 +17,7 @@ export default function useItemNavActions() {
 
     const getSelectedItemElement = () => {
         return document.querySelector<HTMLElement>(
-            "#DisplayedList .Item--IsSelected"
+            "#DisplayItems .Item--IsSelected"
         );
     };
 

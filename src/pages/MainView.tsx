@@ -114,12 +114,17 @@ export default function MainView() {
 
             <div className="MainView__Main" onFocus={() => tryRoutineUpdate()}>
                 <MainInput ref={mainInputRef} />
-                <div className="MainView__ItemList" id="DisplayedList">
+                <ul
+                    className="MainView__ItemList"
+                    id="DisplayItems"
+                    role="listbox"
+                    tabIndex={-1}
+                >
                     <MainContentList
                         isLoading={isLoading}
                         filteredItems={filteredItems}
                     />
-                </div>
+                </ul>
             </div>
         </div>
     );

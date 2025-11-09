@@ -26,7 +26,7 @@ export default function ItemComponent({ item, index }: ItemComponentParams) {
                 <div className="Item__IconWrapper">
                     <ItemComponentIcon item={item} />
                 </div>
-                <ItemComponentText item={item} />
+                <ItemComponentText item={item} index={index} />
             </div>
 
             <div className="Item__RightSide">
@@ -72,10 +72,10 @@ const ItemComponentInner = forwardRef<
     HTMLDivElement | HTMLAnchorElement,
     ItemComponentInnerProps
 >(({ item, index, children, ...props }, forwardedRef) => {
-    const { selectedIndex, setSelectedIndex } = useContext(ItemsContext);
+    const { selectedIndex } = useContext(ItemsContext);
     const { computeItemPrimaryAction, executeItemAction } = useItemActions();
 
-    const handlePrimaryAction = (_e: React.MouseEvent | React.TouchEvent) => {
+    const handlePrimaryAction = (_e?: React.MouseEvent | React.TouchEvent) => {
         const action = computeItemPrimaryAction(item);
         executeItemAction(item, action, true);
     };
@@ -84,20 +84,37 @@ const ItemComponentInner = forwardRef<
     const isLink = item.type === ItemType.LINK;
     const shouldRenderAsAnchor = isLink && !item.shouldCopyOnClick;
 
-    const standardProps = {
+    type standardPropsType = {
+        className: string;
+        id: string;
+        "data-index": number;
+        "data-id": string;
+        role: string;
+        "aria-selected": boolean;
+        "aria-labelledby"?: string;
+        tabIndex: number;
+        onClick: (
+            e: React.MouseEvent<Element, MouseEvent> | React.TouchEvent<Element>
+        ) => void;
+    };
+
+    const standardProps: standardPropsType = {
         className: computeClassname(item, isSelected),
+        id: `item-${index}`,
         "data-index": index,
         "data-id": item.id,
-        role: isLink ? "link" : "button",
-        "aria-current": isSelected,
+        role: "option",
+        "aria-selected": isSelected,
+        "aria-labelledby": !!item.title
+            ? `item-${index}-title`
+            : `item-${index}-content`,
+        tabIndex: -1,
         onClick: handlePrimaryAction,
-        onMouseEnter: () => {
-            setSelectedIndex(index);
-        },
-        onMouseLeave: () => {
-            setSelectedIndex(-1);
-        },
     };
+
+    if (isLink) {
+        delete standardProps["aria-labelledby"];
+    }
 
     const anchorProps = {
         href: item.content,
@@ -129,21 +146,23 @@ const ItemComponentInner = forwardRef<
 ItemComponentInner.displayName = "ItemComponentInner";
 
 const computeClassname = (item: Item, isSelected: boolean) => {
-    const isSelectedModifier = isSelected ? "Item--IsSelected " : " ";
-    const noPrimaryTextModifier = item.title ? " " : "Item--HasNoPrimaryText ";
-    const noSecondaryTextModifier = item.content
+    const modifierWithSelectedState = isSelected ? "Item--IsSelected " : " ";
+    const modifierWithoutPrimaryText = item.title
+        ? " "
+        : "Item--HasNoPrimaryText ";
+    const modifierWithoutSecondaryText = item.content
         ? " "
         : "Item--HasNoSecondaryText ";
 
     const isTodoItem = item.type === ItemType.TODO;
-    const isTodoItemDoneModifier =
+    const modifierWithTodoDoneState =
         isTodoItem && item.isTodoDone ? "Item--IsTodoDone " : " ";
 
     return (
         "Item "
-        + isSelectedModifier
-        + noPrimaryTextModifier
-        + noSecondaryTextModifier
-        + isTodoItemDoneModifier
+        + modifierWithSelectedState
+        + modifierWithoutPrimaryText
+        + modifierWithoutSecondaryText
+        + modifierWithTodoDoneState
     );
 };

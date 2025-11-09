@@ -153,6 +153,11 @@ export default function MainInput({
         convertToTodo({ item: selectedItem });
     };
 
+    const handleOnBlur = () => {
+        setIsMainInputFocused(false)
+        setSelectedIndex(-1);
+    };
+
     const hotkeyData: [
         string,
         (e: KeyboardEvent) => void,
@@ -197,6 +202,14 @@ export default function MainInput({
                 {...props}
                 type="text"
                 aria-label="Main input"
+                role="combobox"
+                aria-controls="DisplayItems"
+                aria-activedescendant={
+                    selectedIndex > -1
+                        ? `item-${selectedIndex}`
+                        : undefined
+                }
+                aria-autocomplete="list"
                 // placeholder="Add new item or search"
                 autoComplete="off"
                 value={inputVal}
@@ -205,8 +218,8 @@ export default function MainInput({
                     setSelectedIndex(-1);
                 }}
                 onKeyDown={getHotkeyHandler(hotkeyData)}
-                onFocus={() => setIsMainInputFocused(true)}
-                onBlur={() => setIsMainInputFocused(false)}
+                onFocus={() => { setIsMainInputFocused(true); }}
+                onBlur={handleOnBlur}
             />
             <div className="MainInput__RightSide">
                 <MainInputExtendedMenu

@@ -8,14 +8,20 @@ import { Item } from "@/types";
 import EventBusContextProvider from "@/contexts/EventBusContext";
 
 describe("ItemComponentText", () => {
-    const renderItemComponentText = (item: Item) =>
+    const renderItemComponentText = ({
+        item,
+        index,
+    }: {
+        item: Item,
+        index: number
+    }) =>
         render(
             <MantineProvider
                 theme={justJotTheme}
                 cssVariablesResolver={justJotCssVarsResolver}
             >
                 <EventBusContextProvider>
-                    <ItemComponentText item={item} />
+                    <ItemComponentText item={item} index={index} />
                 </EventBusContextProvider>
             </MantineProvider>
         );
@@ -26,7 +32,7 @@ describe("ItemComponentText", () => {
 
     test("Normal text note with title and content", async () => {
         const item = items[7];
-        renderItemComponentText(item);
+        renderItemComponentText({ item, index: 0 });
         const priTextEl = screen.queryByTestId("item-component-primary-text");
         const secTextEl = screen.queryByTestId("item-component-secondary-text");
 
@@ -36,7 +42,7 @@ describe("ItemComponentText", () => {
 
     test("Text note without title", async () => {
         const item = items[6];
-        renderItemComponentText(item);
+        renderItemComponentText({ item, index: 0 });
         const priTextEl = screen.queryByTestId("item-component-primary-text");
         const secTextEl = screen.queryByTestId("item-component-secondary-text");
 
@@ -46,7 +52,7 @@ describe("ItemComponentText", () => {
 
     test("Text note without content", async () => {
         const item = items[5];
-        renderItemComponentText(item);
+        renderItemComponentText({ item, index: 0 });
         const priTextEl = screen.queryByTestId("item-component-primary-text");
         const secTextEl = screen.queryByTestId("item-component-secondary-text");
 
@@ -56,7 +62,7 @@ describe("ItemComponentText", () => {
 
     test("A link", async () => {
         const item = items[4];
-        renderItemComponentText(item);
+        renderItemComponentText({ item, index: 0 });
         const priTextEl = screen.queryByTestId("item-component-primary-text");
         const secTextEl = screen.queryByTestId("item-component-secondary-text");
 
@@ -68,7 +74,7 @@ describe("ItemComponentText", () => {
 
     test("A todo item", () => {
         const item = items[0];
-        renderItemComponentText(item);
+        renderItemComponentText({ item, index: 0 });
         const priTextEl = screen.queryByTestId("item-component-primary-text");
         const secTextEl = screen.queryByTestId("item-component-secondary-text");
 

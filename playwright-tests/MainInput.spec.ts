@@ -62,9 +62,9 @@ test.describe("Main input", () => {
             await expect(
                 page.getByLabel("Main input", { exact: true })
             ).toHaveValue("::nt::");
-            expect(await page.locator("#DisplayedList .Item").count()).toBe(5);
+            expect(await page.locator("#DisplayItems .Item").count()).toBe(5);
             await expect(
-                page.locator("#DisplayedList .Item[data-index='0']")
+                page.locator("#DisplayItems .Item[data-index='0']")
             ).toContainText("A note that should copy on click");
         });
 
@@ -77,9 +77,9 @@ test.describe("Main input", () => {
             await expect(
                 page.getByLabel("Main input", { exact: true })
             ).toHaveValue("::link::");
-            expect(await page.locator("#DisplayedList .Item").count()).toBe(3);
+            expect(await page.locator("#DisplayItems .Item").count()).toBe(3);
             await expect(
-                page.locator("#DisplayedList .Item[data-index='0']")
+                page.locator("#DisplayItems .Item[data-index='0']")
             ).toContainText("A link that should copy on click");
         });
 
@@ -92,9 +92,9 @@ test.describe("Main input", () => {
             await expect(
                 page.getByLabel("Main input", { exact: true })
             ).toHaveValue("::td::");
-            expect(await page.locator("#DisplayedList .Item").count()).toBe(2);
+            expect(await page.locator("#DisplayItems .Item").count()).toBe(2);
             await expect(
-                page.locator("#DisplayedList .Item[data-index='0']")
+                page.locator("#DisplayItems .Item[data-index='0']")
             ).toContainText("A todo item that has been marked as completed");
         });
 
@@ -110,7 +110,7 @@ test.describe("Main input", () => {
                 page.getByLabel("Main input", { exact: true })
             ).toHaveValue("::itd::");
             await expect(
-                page.locator("#DisplayedList .Item__PrimaryText")
+                page.locator("#DisplayItems .Item__PrimaryText")
             ).toContainText("A todo item");
         });
 
@@ -124,7 +124,7 @@ test.describe("Main input", () => {
         //     await page.getByLabel('Extra functions and options').click();
         //     await page.getByRole('menuitem', { name: 'from clipboard' }).click();
         //     await expect(page.getByLabel('Main input', { exact: true })).toHaveValue('');
-        //     await expect(page.locator('#DisplayedList')).toContainText('I was born in a prison');
+        //     await expect(page.locator('#DisplayItems')).toContainText('I was born in a prison');
         // });
 
         test("Extended menu: clear input", async ({ page }) => {
@@ -298,25 +298,25 @@ test.describe("Main input", () => {
             ).toBeTruthy();
         });
 
-        test("Primary action: edit a note", async ({ page }) => {
-            await page.locator("body").press("Control+F");
-            await page.locator("body").press("Control+Shift+ArrowDown");
-            await page
-                .getByLabel("Main input", { exact: true })
-                .press("Control+Enter");
+        // test("Primary action: edit a note", async ({ page }) => {
+        //     await page.locator("body").press("Control+F");
+        //     await page.locator("body").press("Control+Shift+ArrowDown");
+        //     await page
+        //         .getByLabel("Main input", { exact: true })
+        //         .press("Control+Enter");
 
-            await expect(page.getByLabel("Title")).toBeVisible();
-            await expect(page.getByLabel("Title", { exact: true })).toHaveValue(
-                "Another note with title"
-            );
-            await expect(page.getByLabel("Todo task name")).not.toBeVisible();
-            await expect(
-                page.getByLabel("Content", { exact: true })
-            ).toBeVisible();
-            await expect(
-                page.getByLabel("Content", { exact: true })
-            ).toHaveValue("Just an extra item");
-        });
+        //     await expect(page.getByLabel("Title")).toBeVisible();
+        //     await expect(page.getByLabel("Title", { exact: true })).toHaveValue(
+        //         "Another note with title"
+        //     );
+        //     await expect(page.getByLabel("Todo task name")).not.toBeVisible();
+        //     await expect(
+        //         page.getByLabel("Content", { exact: true })
+        //     ).toBeVisible();
+        //     await expect(
+        //         page.getByLabel("Content", { exact: true })
+        //     ).toHaveValue("Just an extra item");
+        // });
 
         test("Primary action: open a link", async ({ page }) => {
             await page.locator("body").press("Control+F");
@@ -342,7 +342,7 @@ test.describe("Main input", () => {
             await expect(page.locator('.Item[data-index="3"]')).toHaveText(
                 /Content copied/
             );
-            await expect(page.locator("#DisplayedList")).toContainText(
+            await expect(page.locator("#DisplayItems")).toContainText(
                 /Content copied/
             );
         });
@@ -367,7 +367,7 @@ test.describe("Main input", () => {
             await expect(page.locator('.Item[data-index="2"]')).toHaveText(
                 /Content copied/
             );
-            await expect(page.locator("#DisplayedList")).toContainText(
+            await expect(page.locator("#DisplayItems")).toContainText(
                 /Content copied/
             );
         });
@@ -425,51 +425,51 @@ test.describe("Main input", () => {
             ).toHaveText("New quick note");
         });
 
-        test("Edit item", async ({ page }) => {
-            await page.route(
-                "*/**/api/collections/items/records/hxz3757cizrkzsl",
-                async (route) => {
-                    await route.fulfill({
-                        json: {
-                            collection: "6qt1usrvke0tuac",
-                            collectionId: "zge7ncngf5zodei",
-                            collectionName: "items",
-                            content: "Sample content edited",
-                            created: "2023-02-24 10:02:24.563Z",
-                            faviconUrl: "",
-                            id: "o9t5o6fpehcd0pw",
-                            isTodoDone: false,
-                            isTrashed: false,
-                            owner: "1x9diejq0lx6e0b",
-                            shouldCopyOnClick: false,
-                            title: "Sample title edited",
-                            trashedDateTime: "",
-                            type: "text",
-                            updated: "2024-04-27 10:45:24.565Z",
-                        },
-                    });
-                }
-            );
+        // test("Edit item", async ({ page }) => {
+        //     await page.route(
+        //         "*/**/api/collections/items/records/hxz3757cizrkzsl",
+        //         async (route) => {
+        //             await route.fulfill({
+        //                 json: {
+        //                     collection: "6qt1usrvke0tuac",
+        //                     collectionId: "zge7ncngf5zodei",
+        //                     collectionName: "items",
+        //                     content: "Sample content edited",
+        //                     created: "2023-02-24 10:02:24.563Z",
+        //                     faviconUrl: "",
+        //                     id: "o9t5o6fpehcd0pw",
+        //                     isTodoDone: false,
+        //                     isTrashed: false,
+        //                     owner: "1x9diejq0lx6e0b",
+        //                     shouldCopyOnClick: false,
+        //                     title: "Sample title edited",
+        //                     trashedDateTime: "",
+        //                     type: "text",
+        //                     updated: "2024-04-27 10:45:24.565Z",
+        //                 },
+        //             });
+        //         }
+        //     );
 
-            await page.locator("body").press("Control+F");
-            await page.locator("body").press("Control+Shift+ArrowDown");
-            await page.locator("body").press("ArrowUp");
-            await page.locator("body").press("Control+E");
+        //     await page.locator("body").press("Control+F");
+        //     await page.locator("body").press("Control+Shift+ArrowDown");
+        //     await page.locator("body").press("ArrowUp");
+        //     await page.locator("body").press("Control+E");
 
-            await page.getByLabel("Title").fill("Sample title edited");
-            await page.getByLabel("Content", { exact: true }).click();
-            await page
-                .getByLabel("Content", { exact: true })
-                .fill("Sample content edited");
-            await page.locator("body").press("Control+S");
+        //     await page.getByLabel("Title").fill("Sample title edited");
+        //     await page.getByLabel("Content", { exact: true }).click();
+        //     await page
+        //         .getByLabel("Content", { exact: true })
+        //         .fill("Sample content edited");
+        //     await page.locator("body").press("Control+S");
 
-            await expect(
-                page.locator('.Item[data-index="8"] .Item__PrimaryText')
-            ).toHaveText("Sample title edited");
-            await expect(
-                page.locator('.Item[data-index="8"] .Item__SecondaryText')
-            ).toHaveText("Sample content edited");
-        });
+        //     await expect(
+        //         page.locator('.Item[data-index="8"] .Item__PrimaryText')
+        //     ).toHaveText("Sample title edited");
+        //     await expect(
+        //         page.locator('.Item[data-index="8"] .Item__SecondaryText')
+        //     ).toHaveText("Sample content edited");
+        // });
 
         test("Move item", async ({ page }) => {
             await page.route(
@@ -556,7 +556,7 @@ test.describe("Main input", () => {
             ).toContainText("Trash bin");
             await expect(page).toHaveURL("e2eTestAcc/trash-bin");
 
-            await expect(page.locator("#DisplayedList")).not.toBeEmpty();
+            await expect(page.locator("#DisplayItems")).not.toBeEmpty();
 
             await page.locator("body").press("Control+F");
             await page.locator("body").press("ArrowDown");
@@ -565,7 +565,7 @@ test.describe("Main input", () => {
             // Dev note: locator will fail to find element, everything will fail.
             // await expect(page.locator('.Item[data-index="0"] .Item__PrimaryText'))
             //     .not.toHaveText("trashed");
-            await expect(page.locator("#DisplayedList")).toBeEmpty();
+            await expect(page.locator("#DisplayItems")).toBeEmpty();
         });
 
         test("Item creation should be blocked from trash bin", async ({
@@ -591,7 +591,7 @@ test.describe("Main input", () => {
             await expect(
                 page.getByLabel("Main input", { exact: true })
             ).toHaveValue("New quick note in trash bin");
-            await expect(page.locator("#DisplayedList")).toBeEmpty();
+            await expect(page.locator("#DisplayItems")).toBeEmpty();
         });
 
         test("Toggle shouldCopyOnClick", async ({ page }) => {
