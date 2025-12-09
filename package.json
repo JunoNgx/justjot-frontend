@@ -31,8 +31,8 @@
         "pocketbase": "^0.25.1",
         "postcss": "^8.5.1",
         "postcss-loader": "^8.1.1",
-        "react": "^19.0.0",
-        "react-dom": "^19.0.0",
+        "react": "^19.2.1",
+        "react-dom": "^19.2.1",
         "react-router-dom": "^7.1.5",
         "sass": "^1.84.0",
         "yarn": "^1.22.22"
