@@ -75,6 +75,14 @@
         p {
             margin: 0;
         }
+
+        &--SavedState {
+            visibility: hidden;
+
+            &.Modal__SubInputFlexbox--Visible {
+                visibility: visible;
+            }
+        }
     }
 
     &__ExitConfirm {
