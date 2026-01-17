@@ -204,6 +204,7 @@ export default function ItemUpdateModal({ item }: { item: Item }) {
     };
 
     const isTodoItem = item.type === ItemType.TODO;
+    const shouldShowSavedState = hasSaved && relativeUpdatedTimeStr;
 
     return (
         <div className="Modal Modal--Stackbox">
@@ -275,10 +276,14 @@ export default function ItemUpdateModal({ item }: { item: Item }) {
                 </div>
             )}
 
-            <div className="Modal__SubInputFlexbox">
-                {hasSaved && relativeUpdatedTimeStr && (
-                    <p>Saved at {relativeUpdatedTimeStr}</p>
-                )}
+            <div className={`
+                    Modal__SubInputFlexbox
+                    Modal__SubInputFlexbox--SavedState
+                    ${shouldShowSavedState ? "Modal__SubInputFlexbox--Visible" : ""}
+                `}
+                aria-hidden={!shouldShowSavedState}
+            >
+                <p>Saved at {relativeUpdatedTimeStr}</p>
             </div>
         </div>
     );
