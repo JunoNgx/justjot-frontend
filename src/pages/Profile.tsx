@@ -9,6 +9,7 @@ import { APP_NAME } from "@/utils/constants";
 import { useContext, useEffect } from "react";
 
 import "./Pages.scss";
+import ProfileExportData from "@/components/profile/ProfileExportData";
 
 export default function Profile() {
     const { isLoggedIn, isDemoUser, refreshAuth } =
@@ -33,6 +34,7 @@ export default function Profile() {
                         <>
                             <ProfileChangeEmail />
                             <ProfileChangePassword />
+                            <ProfileExportData />
                             <ProfileAccountDeletion />
                         </>
                     )}
